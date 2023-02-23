@@ -399,3 +399,4 @@ FodyWeavers.xsd
 
 # Test map
 Test/
+Test/UnitTest1.cs

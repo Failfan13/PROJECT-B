@@ -398,5 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 
 # Test map
-Test/
 Test/UnitTest1.cs

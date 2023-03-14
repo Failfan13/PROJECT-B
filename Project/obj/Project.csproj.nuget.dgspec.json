@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\ThreeLayerTemplate\\Project\\Project.csproj": {}
+    "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\Project.csproj": {}
   },
   "projects": {
-    "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\ThreeLayerTemplate\\Project\\Project.csproj": {
+    "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\ThreeLayerTemplate\\Project\\Project.csproj",
+        "projectUniqueName": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\Project.csproj",
         "projectName": "Project",
-        "projectPath": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\ThreeLayerTemplate\\Project\\Project.csproj",
+        "projectPath": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\Project.csproj",
         "packagesPath": "C:\\Users\\Max\\.nuget\\packages\\",
-        "outputPath": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\ThreeLayerTemplate\\Project\\obj\\",
+        "outputPath": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Max\\AppData\\Roaming\\NuGet\\NuGet.Config"

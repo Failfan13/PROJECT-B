@@ -1,8 +1,3 @@
-﻿public class Program
-{
- public static int tester;
- public Program(int test)
- {
-  tester = test + 1;
- }
-}
+﻿// See https://aka.ms/new-console-template for more information
+Console.WriteLine("Welcome to this amazing program");
+Menu.Start();

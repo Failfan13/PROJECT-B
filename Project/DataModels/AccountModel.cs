@@ -6,9 +6,6 @@ class AccountModel
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
-    [JsonPropertyName("admin")]
-    public bool Admin = false;
-
     [JsonPropertyName("emailAddress")]
     public string EmailAddress { get; set; }
 

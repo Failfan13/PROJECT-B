@@ -6352,7 +6352,8 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Max\\.nuget\\packages\\": {}
+    "C:\\Users\\max\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
@@ -6360,11 +6361,14 @@
       "projectUniqueName": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Test\\Test.csproj",
       "projectName": "Test",
       "projectPath": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Test\\Test.csproj",
-      "packagesPath": "C:\\Users\\Max\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\max\\.nuget\\packages\\",
       "outputPath": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Test\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Max\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\max\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"

@@ -9,6 +9,7 @@ class AccountsLogic
 {
     private List<AccountModel> _accounts;
 
+
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
     //private set, so this can only be set by the class itself
@@ -44,6 +45,11 @@ class AccountsLogic
         return _accounts.Find(i => i.Id == id);
     }
 
+    public int GetNewestId()
+    {
+        return (_accounts.OrderByDescending(item => item.Id).First().Id) + 1;
+    }
+
     public AccountModel? CheckLogin(string email, string password)
     {
         if (email == null || password == null)
@@ -53,6 +59,19 @@ class AccountsLogic
         CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
         return CurrentAccount;
     }
+
+    public void LogOut()
+    {
+        CurrentAccount = null;
+    }
+
+    public void NewAccount(string email, string name, string password)
+    {
+        int NewID = GetNewestId();
+        AccountModel account = new AccountModel(NewID, email, password, name);
+        UpdateList(account);
+    }
+
 }
 
 

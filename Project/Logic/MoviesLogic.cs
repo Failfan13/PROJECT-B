@@ -12,7 +12,6 @@ class MoviesLogic
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
     //private set, so this can only be set by the class itself
-    static public MovieModel? CurrentAccount { get; private set; }
 
     public MoviesLogic()
     {
@@ -51,7 +50,6 @@ class MoviesLogic
     public MovieModel NewMovie(string title, DateTime releaseDate, string director)
     {
         int NewID = GetNewestId();
-        Console.WriteLine(NewID);
         MovieModel movie = new MovieModel(NewID, title, releaseDate, director, "test");
         UpdateList(movie);
         return movie;

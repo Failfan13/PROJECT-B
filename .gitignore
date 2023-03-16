@@ -10,3 +10,6 @@ Test/bin/Debug/net6.0/CoverletSourceRootsMapping
 Test/obj
 Test/bin
 Project/bin
+Project/obj/Debug/net6.0/Project.assets.cache
+Project/obj/Debug/net6.0/Project.GeneratedMSBuildEditorConfig.editorconfig
+Test/obj/Debug/net6.0/Test.csproj.AssemblyReference.cache

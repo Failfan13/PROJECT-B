@@ -7,3 +7,6 @@ Test/bin/Debug/net6.0/CoverletSourceRootsMapping
 *.editorconfig
 *.pdb
 *.dll
+Test/obj
+Test/bin
+Project/bin

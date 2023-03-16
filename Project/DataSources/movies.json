@@ -4,5 +4,23 @@
     "title": "Peter pan",
     "release_date": "1998-10-10T00:00:00",
     "director": "JE moeder"
+  },
+  {
+    "id": 1,
+    "title": "Test",
+    "release_date": "2023-10-10T00:00:00",
+    "director": "tester"
+  },
+  {
+    "id": 2,
+    "title": "jaws",
+    "release_date": "0123-10-10T00:00:00",
+    "director": "test"
+  },
+  {
+    "id": 3,
+    "title": "Tester",
+    "release_date": "2010-10-10T00:00:00",
+    "director": "jajaja"
   }
 ]

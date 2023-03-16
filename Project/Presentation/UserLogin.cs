@@ -5,6 +5,16 @@ static class UserLogin
 
     public static void Start()
     {
+        Login();
+    }
+
+    public static void CreateNewUser()
+    {
+
+    }
+
+    public static void Login()
+    {
         Console.WriteLine("Welcome to the login page");
         Console.WriteLine("Please enter your email address");
         string email = Console.ReadLine();

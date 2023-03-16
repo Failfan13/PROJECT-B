@@ -52,7 +52,7 @@ class MoviesLogic
     {
         int NewID = GetNewestId();
         Console.WriteLine(NewID);
-        MovieModel movie = new MovieModel(NewID, title, releaseDate, director);
+        MovieModel movie = new MovieModel(NewID, title, releaseDate, director, "test");
         UpdateList(movie);
         return movie;
     }

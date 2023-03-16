@@ -3,24 +3,35 @@
     "id": 0,
     "title": "Peter pan",
     "release_date": "1998-10-10T00:00:00",
-    "director": "JE moeder"
+    "director": "JE moeder",
+    "description": null
   },
   {
     "id": 1,
     "title": "Test",
     "release_date": "2023-10-10T00:00:00",
-    "director": "tester"
+    "director": "tester",
+    "description": null
   },
   {
     "id": 2,
     "title": "jaws",
     "release_date": "0123-10-10T00:00:00",
-    "director": "test"
+    "director": "test",
+    "description": null
   },
   {
     "id": 3,
     "title": "Tester",
     "release_date": "2010-10-10T00:00:00",
-    "director": "jajaja"
+    "director": "jajaja",
+    "description": null
+  },
+  {
+    "id": 4,
+    "title": "test",
+    "release_date": "2012-10-10T00:00:00",
+    "director": "test",
+    "description": "test"
   }
 ]

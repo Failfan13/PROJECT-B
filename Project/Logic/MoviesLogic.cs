@@ -39,7 +39,7 @@ class MoviesLogic
 
     }
 
-    public MovieModel GetById(int id)
+    public MovieModel? GetById(int id)
     {
         return _movies.Find(i => i.Id == id);
     }

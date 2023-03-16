@@ -15,10 +15,28 @@ static class Movies
 
     public static void AddNewMovie()
     {
+        bool CorrectTitle = true;
         bool CorrectDate = true;
+        bool CorrectDirector = true;
+
+        string Title = "";
+        string Director = "";
         DateTime ReleaseDate = new DateTime();
-        Console.WriteLine("What is the title of the movie?: ");
-        string Title = Console.ReadLine();
+
+        while (CorrectTitle)
+        {
+            Console.WriteLine("What is the title of the movie?: ");
+            Title = Console.ReadLine();
+            if (Title != null)
+            {
+                CorrectTitle = false;
+            }
+            else
+            {
+                Console.WriteLine("Can't be empty");
+            }
+        }
+
         while (CorrectDate)
         {
             Console.WriteLine("What is the release date of the movie? (dd/mm/yyyy): ");
@@ -33,8 +51,20 @@ static class Movies
             }
         }
 
-        Console.WriteLine("Who is the director of the movie?: ");
-        string Director = Console.ReadLine();
+        while (CorrectDirector)
+        {
+            Console.WriteLine("Who is the director of the movie?: ");
+            Director = Console.ReadLine();
+            if (Director != null)
+            {
+                CorrectDirector = false;
+            }
+            else
+            {
+                Console.WriteLine("Can't be empty");
+            }
+        }
+
         MovieModel movie = MoviesLogic.NewMovie(Title, ReleaseDate, Director);
 
         Console.WriteLine("New movie added!");

@@ -9,7 +9,7 @@ static class Menu
         Console.WriteLine("Enter 1 to login");
         Console.WriteLine("Enter 2 add movie");
 
-        string input = Console.ReadLine();
+        string? input = Console.ReadLine();
         if (input == "1")
         {
             UserLogin.Start();

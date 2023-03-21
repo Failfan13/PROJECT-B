@@ -9,18 +9,18 @@ public class ReservationModel
     [JsonPropertyName("movie_id")]
     public int MovieId { get; set; }
 
-    [JsonPropertyName("seat_id")]
-    public int SeatId { get; set; }
+    [JsonPropertyName("seat_ids")]
+    public List<int> SeatIds { get; set; }
 
     [JsonPropertyName("account_id")]
     public int? AccountId { get; set; }
 
-    public ReservationModel(int id, int movieId, int seatId, int? accountId)
+    public ReservationModel(int id, int movieId, List<int> seatIds, int? accountId)
     {
         Id = id;
         MovieId = movieId;
         AccountId = accountId;
-        SeatId = seatId;
+        SeatIds = seatIds;
     }
 
 }

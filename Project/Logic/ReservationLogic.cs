@@ -44,7 +44,7 @@ public class ReservationLogic
 
     }
 
-    public void MakeReservation(int movieId, int seatId)
+    public void MakeReservation(int movieId, List<int> seatIds)
     {
         int? AccountId = null;
         try
@@ -55,7 +55,7 @@ public class ReservationLogic
         {   // not logged in
             AccountId = null;
         }
-        ReservationModel ress = new ReservationModel(GetNewestId(), movieId, seatId, AccountId);
+        ReservationModel ress = new ReservationModel(GetNewestId(), movieId, seatIds, AccountId);
         UpdateList(ress);
     }
 }

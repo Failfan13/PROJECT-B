@@ -60,7 +60,7 @@ static class UserLogin
                 Console.WriteLine("Invalid value");
             }
         }
-        
+
         while (CorrectPass)
         {
             Console.WriteLine("Please enter your password:");
@@ -99,11 +99,12 @@ static class UserLogin
                 Console.WriteLine("Your email number is " + acc.EmailAddress);
 
                 //Write some code to go back to the menu
-                Menu.Start();
+                Start();
             }
             else
             {
                 Console.WriteLine("No account found with that email and password");
+                Start();
             }
         }
         else

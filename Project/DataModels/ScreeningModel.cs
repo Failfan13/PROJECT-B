@@ -6,7 +6,7 @@ public class ScreeningModel
     [JsonPropertyName("movieid")]
     public int MovieId { get; set; }
     [JsonPropertyName("screeningtime")]
-    public int ScreeningTime { get; set; }
+    public DateTime ScreeningTime { get; set; }
     [JsonPropertyName("screenid")]
     public int ScreenId { get; set; }
     [JsonPropertyName("chairs")]
@@ -19,6 +19,5 @@ public class ScreeningModel
         ScreeningTime = screeningTime;
         ScreenId = screenId;
         Chairs = chairs;
-
     }
 }

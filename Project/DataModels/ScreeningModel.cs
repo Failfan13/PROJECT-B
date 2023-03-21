@@ -20,4 +20,9 @@ public class ScreeningModel
         ScreenId = screenId;
         Chairs = chairs;
     }
+    public void Info()
+    {
+        Console.WriteLine($"Screening time:\t{ScreeningTime}");
+        MoviesLogic.GetById(MovieId).Info();
+    }
 }

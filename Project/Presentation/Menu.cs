@@ -8,6 +8,7 @@ static class Menu
     {
         Console.WriteLine("Enter 1 to login options");
         Console.WriteLine("Enter 2 add movie");
+        Console.WriteLine("Enter 3 add snack");
 
         string? input = Console.ReadLine();
         if (input == "1")
@@ -16,7 +17,12 @@ static class Menu
         }
         else if (input == "2")
         {
-            Movies.AddNewMovie();
+            Movies.ShowAllMovies();
+        }
+        else if (input == "3")
+        {
+            Snacks.SelectASnack();
+            System.Environment.Exit(1);
         }
         else
         {

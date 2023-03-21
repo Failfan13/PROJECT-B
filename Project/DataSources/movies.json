@@ -4,41 +4,55 @@
     "title": "Peter pan",
     "release_date": "1998-10-10T00:00:00",
     "director": "JE moeder",
-    "description": null
+    "description": null,
+    "duration": 0
   },
   {
     "id": 1,
     "title": "Test",
     "release_date": "2023-10-10T00:00:00",
     "director": "tester",
-    "description": null
+    "description": null,
+    "duration": 0
   },
   {
     "id": 2,
     "title": "jaws",
     "release_date": "0123-10-10T00:00:00",
     "director": "test",
-    "description": null
+    "description": null,
+    "duration": 0
   },
   {
     "id": 3,
     "title": "Tester",
     "release_date": "2010-10-10T00:00:00",
     "director": "jajaja",
-    "description": null
+    "description": null,
+    "duration": 0
   },
   {
     "id": 4,
     "title": "test",
     "release_date": "2012-10-10T00:00:00",
     "director": "test",
-    "description": "test"
+    "description": "test",
+    "duration": 0
   },
   {
     "id": 5,
     "title": "test",
     "release_date": "0100-10-10T00:00:00",
     "director": "me",
-    "description": "test"
+    "description": "test",
+    "duration": 0
+  },
+  {
+    "id": 6,
+    "title": "Title",
+    "release_date": "2023-01-01T00:00:00",
+    "director": "me",
+    "description": "aweseome",
+    "duration": 134
   }
 ]

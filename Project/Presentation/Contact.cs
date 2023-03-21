@@ -4,7 +4,7 @@ public static class Contact
     {
         Console.Clear();
         Console.WriteLine("CONTACT INFO HERE\n");
-        Console.WriteLine("Press any key to return to the Main Menu");
+        Console.WriteLine("Press any key to return to the menu");
         Console.ReadLine();
         Menu.Start();
 

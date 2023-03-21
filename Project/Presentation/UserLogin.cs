@@ -5,9 +5,15 @@ static class UserLogin
 
     public static void Start()
     {
-        Console.WriteLine("Enter 1 to login");
-        Console.WriteLine("Enter 2 make new account");
-        Console.WriteLine("Enter 3 return to main menu");
+        Console.Clear();
+        Console.WriteLine("INFO TEXT");
+
+        Console.WriteLine("Make a choice from the menu by entering the number.\n");
+
+        Console.WriteLine("Main Menu:");
+        Console.WriteLine("1 Login");
+        Console.WriteLine("2 Create new account");
+        Console.WriteLine("3 Return to menu");
 
         string? input = Console.ReadLine();
         if (input == "1")
@@ -25,8 +31,8 @@ static class UserLogin
         else
         {
             Console.WriteLine("Invalid input");
+            Start();
         }
-        Start();
     }
 
     public static void CreateNewUser()
@@ -38,6 +44,7 @@ static class UserLogin
         string Email = "";
         string Name = "";
 
+        Console.Clear();
         while (CorrectEmail)
         {
             Console.WriteLine("Please enter your email address:");
@@ -52,6 +59,7 @@ static class UserLogin
             }
         }
 
+        Console.Clear();
         while (CorrectName)
         {
             Console.WriteLine("Please enter your full name:");
@@ -66,6 +74,7 @@ static class UserLogin
             }
         }
 
+        Console.Clear();
         while (CorrectPass)
         {
             Console.WriteLine("Please enter your password:");
@@ -92,7 +101,7 @@ static class UserLogin
     {
         if (AccountsLogic.CurrentAccount == null)
         {
-            Console.WriteLine("Welcome to the login page");
+            Console.Clear();
             Console.WriteLine("Please enter your email address");
             string email = Console.ReadLine();
             Console.WriteLine("Please enter your password");

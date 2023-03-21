@@ -6,15 +6,33 @@ static class Menu
     //You could edit this to show different menus depending on the user's role
     static public void Start()
     {
+        if (AccountsLogic.CurrentAccount == null)
+        {
+            // show not logged in menu
+            NoAccount();
+        }
+        else if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == false)
+        {
+            NormalAccount();
+        }
+        else if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
+        {
+            // show admin menu
+            AdminAccount();
+        }
+    }
+
+    public static void NoAccount()
+    {
         Console.Clear();
         Console.WriteLine("WELCOME MESSAGE\n");
         Console.WriteLine("Make a choice from the menu by entering the number.\n");
 
         Console.WriteLine("Main Menu:");
-        Console.WriteLine("1\tLogin");
-        Console.WriteLine("2\tMake a Reservation");
-        Console.WriteLine("3\tContact");
-        Console.WriteLine("4\tExit app");
+        Console.WriteLine("1 Login");
+        Console.WriteLine("2 Make a Reservation");
+        Console.WriteLine("3 Contact");
+        Console.WriteLine("4 Exit app");
 
         string? input = Console.ReadLine();
         if (input == "1")
@@ -38,6 +56,81 @@ static class Menu
             Console.WriteLine("Invalid input");
             Start();
         }
+    }
 
+    public static void NormalAccount()
+    {
+        Console.Clear();
+
+        Console.WriteLine($"WELCOME MESSAGE \nName:{AccountsLogic.CurrentAccount.FullName}\n");
+        Console.WriteLine($"Admin {AccountsLogic.CurrentAccount.Admin}\n");
+        Console.WriteLine("Make a choice from the menu by entering the number.\n");
+
+        Console.WriteLine("Main Menu:");
+        Console.WriteLine("1 Login");
+        Console.WriteLine("2 Make a Reservation");
+        Console.WriteLine("3 Contact");
+        Console.WriteLine("4 Exit app");
+
+        string? input = Console.ReadLine();
+        if (input == "1")
+        {
+            UserLogin.Start();
+        }
+        else if (input == "2")
+        {
+            Movies.AddNewMovie();
+        }
+        else if (input == "3")
+        {
+            Contact.start();
+        }
+        else if (input == "4")
+        {
+            Environment.Exit(1);
+        }
+        else
+        {
+            Console.WriteLine("Invalid input");
+            Start();
+        }
+    }
+
+    public static void AdminAccount()
+    {
+        Console.Clear();
+
+        Console.WriteLine($"WELCOME MESSAGE \nName:{AccountsLogic.CurrentAccount.FullName}\n");
+        Console.WriteLine($"Admin {AccountsLogic.CurrentAccount.Admin}\n");
+        Console.WriteLine("Make a choice from the menu by entering the number.\n");
+
+        Console.WriteLine("Main Menu:");
+        Console.WriteLine("1 Login");
+        Console.WriteLine("2 Make a Reservation");
+        Console.WriteLine("3 Contact");
+        Console.WriteLine("4 Exit app");
+
+        string? input = Console.ReadLine();
+        if (input == "1")
+        {
+            UserLogin.Start();
+        }
+        else if (input == "2")
+        {
+            Movies.AddNewMovie();
+        }
+        else if (input == "3")
+        {
+            Contact.start();
+        }
+        else if (input == "4")
+        {
+            Environment.Exit(1);
+        }
+        else
+        {
+            Console.WriteLine("Invalid input");
+            Start();
+        }
     }
 }

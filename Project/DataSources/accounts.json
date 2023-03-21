@@ -3,18 +3,42 @@
     "id": 1,
     "emailAddress": "n@b.c",
     "password": "xyz",
-    "fullName": "Nikola Tesla"
+    "fullName": "Nikola Tesla",
+    "admin": false
   },
   {
     "id": 2,
     "emailAddress": "t@b.c",
     "password": "xyz",
-    "fullName": "Thomas Edison"
+    "fullName": "Thomas Edison",
+    "admin": false
   },
   {
     "id": 3,
     "emailAddress": "max@cris",
     "password": "123",
-    "fullName": "max"
+    "fullName": "max",
+    "admin": true
+  },
+  {
+    "id": 4,
+    "emailAddress": "max@cris.nl",
+    "password": "123",
+    "fullName": "Max Geurtsen",
+    "admin": true
+  },
+  {
+    "id": 5,
+    "emailAddress": "1",
+    "password": "1",
+    "fullName": "1",
+    "admin": false
+  },
+  {
+    "id": 6,
+    "emailAddress": "2",
+    "password": "2",
+    "fullName": "2",
+    "admin": false
   }
 ]

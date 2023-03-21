@@ -3,7 +3,7 @@
         "id": 0,
         "movieid": 0,
         "screeningtime": "2023-10-10T00:00:00",
-        "screenid": "0",
+        "screenid": 0,
         "chairs": {
             "A1": false,
             "A2": false,
@@ -29,7 +29,7 @@
         "id": 1,
         "movieid": 1,
         "screeningtime": "2023-11-10T00:00:00",
-        "screenid": "0",
+        "screenid": 0,
         "chairs": {
             "A1": false,
             "A2": false,

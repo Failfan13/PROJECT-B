@@ -7,6 +7,7 @@ static class UserLogin
     {
         Console.WriteLine("Enter 1 to login");
         Console.WriteLine("Enter 2 make new account");
+        Console.WriteLine("Enter 3 return to main menu");
 
         string? input = Console.ReadLine();
         if (input == "1")
@@ -16,6 +17,10 @@ static class UserLogin
         else if (input == "2")
         {
             CreateNewUser();
+        }
+        else if (input == "3")
+        {
+            Menu.Start();
         }
         else
         {

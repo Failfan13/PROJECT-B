@@ -11,7 +11,7 @@ static class TimeSlots
         {
             if (input == mv.Title) // Movie exists in database
             {
-                ShowAllTimeSlotsForMovie(mv.Id);
+                ShowAllTimeSlotsForMovie(mv.Id,mv.Title);
             }
         }
         // Below is for when the movie does not exist in the database
@@ -19,21 +19,20 @@ static class TimeSlots
         WhatMovie();
     }
 
-    public static void ShowAllTimeSlotsForMovie(int movieid)
+    public static void ShowAllTimeSlotsForMovie(int movieid, string moviename)
     {
         List<TimeSlotModel> tsms = timeslotslogic.GetByMovieId(movieid);
         Console.Clear();
         if (tsms.Count == 0) // Movie exists but there is no timeslot for it
         {
             Console.WriteLine("There are no timeslots for that movie");
+            // should probably add delay here
             Menu.Start();
         }
+        Console.WriteLine($"Availible timeslots for {moviename}");
         foreach (TimeSlotModel tsm in tsms)
         {
-            tsm.Info();
-            Console.WriteLine("Enter any key to continue");
-            Console.ReadLine();
+            Console.WriteLine($"{tsm.Id}. {tsm.Start}");
         }
-        Menu.Start();
     }
 }

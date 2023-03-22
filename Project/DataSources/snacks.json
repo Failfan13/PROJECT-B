@@ -1,0 +1,12 @@
+[
+    {
+        "id": 0,
+        "snack": "Coca Cola",
+        "sizes": [
+            "S",
+            "M",
+            "L"
+        ],
+        "price": 5.0
+    }
+]

@@ -26,7 +26,8 @@ static class TimeSlots
         if (tsms.Count == 0) // Movie exists but there is no timeslot for it
         {
             Console.WriteLine("There are no timeslots for that movie");
-            // should probably add delay here
+            int milliseconds = 1500;
+            Thread.Sleep(milliseconds);
             Menu.Start();
         }
         Console.WriteLine($"Availible timeslots for {moviename}");

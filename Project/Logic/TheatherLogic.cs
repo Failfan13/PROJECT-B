@@ -34,18 +34,31 @@ public class TheatherLogic
     {
         return (_theathers.OrderByDescending(item => item.Id).First().Id) + 1;
     }
-    public void MakeTheather(int rows, int seatAmount)
+    public void MakeTheather(int rowAmount, int seatAmount)
     {
-        List<SeatModel> seats = new List<SeatModel>();
+        List<RowModel> rows = new List<RowModel>();
 
-        for (int i = 0; i < rows; i++)
+        for (int i = 0; i < rowAmount; i++)
         {
+
+            List<SeatModel> seats = new List<SeatModel>();
             for (int x = 0; x < seatAmount; x++)
             {
-                seats.Add(new SeatModel(x, 10, i, false, false));
+                seats.Add(new SeatModel(x, 10, false, false));
             }
+            rows.Add(new RowModel(i, seats));
         }
-        TheaterModel theater = new TheaterModel(GetNewestId(), seats, GetNewestId());
+
+        int newId = 0;
+        try
+        {
+            newId = GetNewestId();
+        }
+        catch (System.InvalidOperationException)
+        {
+            newId = 0;
+        }
+        TheaterModel theater = new TheaterModel(newId, rows, newId);
 
         UpdateList(theater);
     }

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-class TheaterModel
+public class TheaterModel
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }

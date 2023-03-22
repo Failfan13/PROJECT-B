@@ -4,8 +4,9 @@ namespace Test;
 public class UnitTest1
 {
     [TestMethod]
-    public void TestCreatingUser()
+    public void TestMakeTheather()
     {
-        
+        TheatherLogic logic = new TheatherLogic();
+        logic.MakeTheather(10, 10);
     }
 }

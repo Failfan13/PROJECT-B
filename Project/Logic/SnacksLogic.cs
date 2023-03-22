@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-class SnacksLogic
+class SnacksLogic : IReservational<SnackModel>
 {
     private List<SnackModel> _snacks;
-    public List<SnackModel> SelectedSnacks;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -16,6 +15,7 @@ class SnacksLogic
     {
         _snacks = SnackAccess.LoadAll();
     }
+
 
     public void UpdateList(SnackModel snack)
     {
@@ -45,7 +45,7 @@ class SnacksLogic
         return (_snacks.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
-    public SnackModel NewMovie(int id, string snackName, List<string> size, double price)
+    public SnackModel NewSnack(int id, string snackName, List<string> size, double price)
     {
         int NewID = GetNewestId();
         SnackModel snack = new SnackModel(id, snackName, size, price);
@@ -53,7 +53,7 @@ class SnacksLogic
         return snack;
     }
 
-    public List<SnackModel> AllMovies()
+    public List<SnackModel> AllModel()
     {
         return _snacks;
     }

@@ -21,7 +21,7 @@ static class Menu
         }
         else if (input == "3")
         {
-            Snacks.SelectASnack();
+            Snacks.Start();
             System.Environment.Exit(1);
         }
         else

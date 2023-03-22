@@ -13,11 +13,7 @@ static class Movies
 
     public static void AddNewMovie()
     {
-        bool CorrectTitle = true;
         bool CorrectDate = true;
-        bool CorrectDirector = true;
-        bool CorrectDuration = true;
-        bool CorrectDescript = true;
 
         int Duration = 0;
         string Title = "";
@@ -25,19 +21,7 @@ static class Movies
         string Description = "";
         DateTime ReleaseDate = new DateTime();
 
-        while (CorrectTitle)
-        {
-            Console.WriteLine("What is the title of the movie?: ");
-            Title = Console.ReadLine();
-            if (Title != null)
-            {
-                CorrectTitle = false;
-            }
-            else
-            {
-                Console.WriteLine("Can't be empty");
-            }
-        }
+        Title = QuestionLogic.AskString("What is the title of the movie?");
 
         while (CorrectDate)
         {
@@ -53,48 +37,10 @@ static class Movies
             }
         }
 
+        Description = QuestionLogic.AskString("What is the description of the movie? ");
+        Director = QuestionLogic.AskString("Who is the director of the movie?: ");
+        Duration = QuestionLogic.AskNumber("What is the duration? (minutes)");
 
-        while (CorrectDescript)
-        {
-            Console.WriteLine("What is the description of the movie? ");
-            Description = Console.ReadLine();
-            if (Description != null)
-            {
-                CorrectDescript = false;
-            }
-            else
-            {
-                Console.WriteLine("Can't be empty");
-            }
-        }
-
-        while (CorrectDirector)
-        {
-            Console.WriteLine("Who is the director of the movie?: ");
-            Director = Console.ReadLine();
-            if (Director != null)
-            {
-                CorrectDirector = false;
-            }
-            else
-            {
-                Console.WriteLine("Can't be empty");
-            }
-        }
-
-        while (CorrectDuration)
-        {
-            Console.WriteLine("What is the duration? (minutes)");
-            try
-            {
-                Duration = Convert.ToInt32(Console.ReadLine());
-                CorrectDuration = false;
-            }
-            catch (System.Exception)
-            {
-                Console.WriteLine("Must be number");
-            }
-        }
 
         MovieModel movie = MoviesLogic.NewMovie(Title, ReleaseDate, Director, Description, Duration);
 
@@ -105,4 +51,5 @@ static class Movies
 
         Menu.Start();
     }
+
 }

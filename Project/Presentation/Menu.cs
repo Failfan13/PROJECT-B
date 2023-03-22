@@ -41,7 +41,7 @@ static class Menu
         }
         else if (input == "2")
         {
-            Movies.AddNewMovie();
+            Reservation.start();
         }
         else if (input == "3")
         {
@@ -79,7 +79,7 @@ static class Menu
         }
         else if (input == "2")
         {
-            Movies.AddNewMovie();
+            Reservation.start();
         }
         else if (input == "3")
         {
@@ -117,7 +117,7 @@ static class Menu
         }
         else if (input == "2")
         {
-            Movies.AddNewMovie();
+            Reservation.start();
         }
         else if (input == "3")
         {

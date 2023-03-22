@@ -2,6 +2,20 @@ public class ReservationLogic
 {
     private List<ReservationModel> _reservations;
 
+    //Total reservation cost
+    private double _totalOrder = 0.0;
+    //Increases totalOrder
+    public double TotalOrder
+    {
+        get => Math.Round(_totalOrder, 2);
+        set => _totalOrder += value;
+    }
+    //Decreases totalOder
+    public double TotalOrderDecr
+    {
+        set => _totalOrder -= value;
+    }
+
     public ReservationLogic()
     {
         _reservations = ReservationAccess.LoadAll();

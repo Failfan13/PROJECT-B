@@ -11,12 +11,13 @@ class SnacksLogic : IReservational<SnackModel>
     //This can be used to get the current logged in account from anywhere in the program
     //private set, so this can only be set by the class itself
 
+    //Load all snacks from database
     public SnacksLogic()
     {
         _snacks = SnackAccess.LoadAll();
     }
 
-
+    //Write 
     public void UpdateList(SnackModel snack)
     {
         //Find if there is already an model with the same id
@@ -36,15 +37,17 @@ class SnacksLogic : IReservational<SnackModel>
 
     }
 
+    //Find if for id in loaded json
     public SnackModel? GetById(int id)
     {
         return _snacks.Find(i => i.Id == id);
     }
+    //Receive most recent id
     public int GetNewestId()
     {
         return (_snacks.OrderByDescending(item => item.Id).First().Id) + 1;
     }
-
+    //Add new to database
     public SnackModel NewSnack(int id, string snackName, List<string> size, double price)
     {
         int NewID = GetNewestId();
@@ -52,7 +55,7 @@ class SnacksLogic : IReservational<SnackModel>
         UpdateList(snack);
         return snack;
     }
-
+    //Get all snacks
     public List<SnackModel> AllModel()
     {
         return _snacks;

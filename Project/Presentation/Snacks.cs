@@ -10,6 +10,7 @@ static class Snacks
         }
     }
 
+    // Start request to user
     public static SnackModel Start()
     {
         System.Console.Clear();
@@ -21,6 +22,7 @@ associated by the snack name");
         ShowAll();
         while (true)
         {
+            // User input
             var awnser = Console.ReadLine();
             SnackModel snack = null;
             // try convert entree to int
@@ -39,6 +41,7 @@ associated by the snack name");
                 Console.WriteLine("Snack has been added");
                 return snack;
             }
+            // if snack is null
             else
             {
                 Console.WriteLine("Snack not found");

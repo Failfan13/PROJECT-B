@@ -9,11 +9,12 @@ static class TimeSlots
         MoviesLogic tempmvl = new MoviesLogic();
         foreach(MovieModel mv in tempmvl.AllMovies())
         {
-            if (input == mv.Title)
+            if (input == mv.Title) // Movie exists in database
             {
                 ShowAllTimeSlotsForMovie(mv.Id);
             }
         }
+        // Below is for when the movie does not exist in the database
         Console.WriteLine("Invalid input\nPlease enter a valid movie");
         WhatMovie();
     }
@@ -22,9 +23,16 @@ static class TimeSlots
     {
         List<TimeSlotModel> tsms = timeslotslogic.GetByMovieId(movieid);
         Console.Clear();
+        if (tsms.Count == 0) // Movie exists but there is no timeslot for it
+        {
+            Console.WriteLine("There are no timeslots for that movie");
+            Menu.Start();
+        }
         foreach (TimeSlotModel tsm in tsms)
         {
             tsm.Info();
+            Console.WriteLine("Enter any key to continue");
+            Console.ReadLine();
         }
         Menu.Start();
     }

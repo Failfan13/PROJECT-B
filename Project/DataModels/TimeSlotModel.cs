@@ -26,7 +26,7 @@ class TimeSlotModel
     {
         MoviesLogic tempMLogic = new MoviesLogic();
         MovieModel movie = tempMLogic.GetById(MovieId);
-        Console.WriteLine($"Start:\t{Start}");
+        Console.WriteLine($"Start:\t\t{Start}");
         Console.WriteLine($"Theater:\t{Theater}");
         movie.Info();
     }

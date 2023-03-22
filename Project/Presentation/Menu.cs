@@ -8,6 +8,7 @@ static class Menu
     {
         Console.WriteLine("Enter 1 to login options");
         Console.WriteLine("Enter 2 add movie");
+        Console.WriteLine("Enter 3 to see all timeslots for a movie");
 
         string? input = Console.ReadLine();
         if (input == "1")
@@ -17,6 +18,10 @@ static class Menu
         else if (input == "2")
         {
             Movies.AddNewMovie();
+        }
+        else if (input == "3")
+        {
+            TimeSlots.WhatMovie();
         }
         else
         {

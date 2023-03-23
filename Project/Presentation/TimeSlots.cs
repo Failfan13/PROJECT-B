@@ -26,14 +26,17 @@ static class TimeSlots
         if (tsms.Count == 0) // Movie exists but there is no timeslot for it
         {
             Console.WriteLine("There are no timeslots for that movie");
-            int milliseconds = 1500;
-            Thread.Sleep(milliseconds);
+            string a = Console.ReadLine();
             Menu.Start();
         }
-        Console.WriteLine($"Availible timeslots for {moviename}");
-        foreach (TimeSlotModel tsm in tsms)
+        else
         {
-            Console.WriteLine($"{tsm.Id}. {tsm.Start}");
+            Console.WriteLine($"Availible timeslots for {moviename}");
+            foreach (TimeSlotModel tsm in tsms)
+            {
+                Console.WriteLine($"{tsm.Id}. {tsm.Start}");
+            }
+            Menu.Start();
         }
     }
 }

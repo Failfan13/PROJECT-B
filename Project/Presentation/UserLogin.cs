@@ -5,6 +5,7 @@ static class UserLogin
 
     public static void Start()
     {
+        Console.Clear();
         Console.WriteLine("Welcome to the login page");
         Console.WriteLine("Please enter your email address");
         string email = Console.ReadLine();
@@ -17,7 +18,7 @@ static class UserLogin
             Console.WriteLine("Your email number is " + acc.EmailAddress);
 
             //Write some code to go back to the menu
-            Menu.Start();
+            Menu.LoggedIn();
         }
         else
         {

@@ -10,6 +10,14 @@ static class Movies
             Console.WriteLine($"Release Date: {movie.ReleaseDate.Date}");
             Console.WriteLine($"Director: {movie.Director}\n");
         }
+        // do something when any key is pressed
+        Console.WriteLine("Press any key to return to the main menu");
+        Console.ReadKey();
+        Console.Clear();
+        Menu.LoggedIn();
+
+    
+
     }
 
 

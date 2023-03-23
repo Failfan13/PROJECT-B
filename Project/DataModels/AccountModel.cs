@@ -22,7 +22,6 @@ class AccountModel
         Password = password;
         FullName = fullName;
     }
-
 }
 
 

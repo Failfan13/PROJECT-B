@@ -6,16 +6,20 @@ public class TheaterModel
     public int Id { get; set; }
 
     [JsonPropertyName("rows")]
-    public List<RowModel> Rows { get; set; }
+    public List<SeatModel> Seats { get; set; }
 
-    [JsonPropertyName("theaternumber")]
-    public int TheaterNumber { get; set; }
+    [JsonPropertyName("width")]
+    public int Width { get; set; }
+
+    [JsonPropertyName("height")]
+    public int Height { get; set; }
 
     [JsonConstructor]
-    public TheaterModel(int id, List<RowModel> rows, int theaterNumber)
+    public TheaterModel(int id, List<SeatModel> seats, int width, int height)
     {
         Id = id;
-        Rows = rows;
-        TheaterNumber = theaterNumber;
+        Seats = seats;
+        Width = width;
+        Height = height;
     }
 }

@@ -43,21 +43,6 @@ D:/OneDrive - Hogeschool Rotterdam/OP3/ThreeLayerTemplate/Project/obj/Debug/net6
 D:/OneDrive - Hogeschool Rotterdam/OP3/ThreeLayerTemplate/Project/obj/Debug/net6.0/Project.pdb
 D:/OneDrive - Hogeschool Rotterdam/OP3/ThreeLayerTemplate/Project/obj/Debug/net6.0/Project.genruntimeconfig.cache
 D:/OneDrive - Hogeschool Rotterdam/OP3/ThreeLayerTemplate/Project/obj/Debug/net6.0/ref/Project.dll
-D:/OneDrive - Hogeschool Rotterdam/OP3/PROJECT-B/project/obj/Debug/net6.0/PROJECT.csproj.AssemblyReference.cache
-D:/OneDrive - Hogeschool Rotterdam/OP3/PROJECT-B/project/obj/Debug/net6.0/PROJECT.GeneratedMSBuildEditorConfig.editorconfig
-D:/OneDrive - Hogeschool Rotterdam/OP3/PROJECT-B/project/obj/Debug/net6.0/PROJECT.AssemblyInfoInputs.cache
-D:/OneDrive - Hogeschool Rotterdam/OP3/PROJECT-B/project/obj/Debug/net6.0/PROJECT.AssemblyInfo.cs
-D:/OneDrive - Hogeschool Rotterdam/OP3/PROJECT-B/project/obj/Debug/net6.0/PROJECT.csproj.CoreCompileInputs.cache
-D:/OneDrive - Hogeschool Rotterdam/OP3/PROJECT-B/project/obj/Debug/net6.0/PROJECT.dll
-D:/OneDrive - Hogeschool Rotterdam/OP3/PROJECT-B/project/obj/Debug/net6.0/refint/PROJECT.dll
-D:/OneDrive - Hogeschool Rotterdam/OP3/PROJECT-B/project/obj/Debug/net6.0/PROJECT.pdb
-D:/OneDrive - Hogeschool Rotterdam/OP3/PROJECT-B/Project/bin/Debug/net6.0/Project.exe
-D:/OneDrive - Hogeschool Rotterdam/OP3/PROJECT-B/Project/bin/Debug/net6.0/Project.deps.json
-D:/OneDrive - Hogeschool Rotterdam/OP3/PROJECT-B/Project/bin/Debug/net6.0/Project.runtimeconfig.json
-D:/OneDrive - Hogeschool Rotterdam/OP3/PROJECT-B/Project/bin/Debug/net6.0/Project.dll
-D:/OneDrive - Hogeschool Rotterdam/OP3/PROJECT-B/Project/bin/Debug/net6.0/Project.pdb
-D:/OneDrive - Hogeschool Rotterdam/OP3/PROJECT-B/Project/obj/Debug/net6.0/Project.genruntimeconfig.cache
-D:/OneDrive - Hogeschool Rotterdam/OP3/PROJECT-B/Project/obj/Debug/net6.0/ref/Project.dll
 C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/bin/Debug/net6.0/Project.exe
 C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/bin/Debug/net6.0/Project.deps.json
 C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/bin/Debug/net6.0/Project.runtimeconfig.json
@@ -88,3 +73,18 @@ C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/obj/Debug/net
 /Users/emircayir/Downloads/PROJECT-B/Project/obj/Debug/net6.0/Project.pdb
 /Users/emircayir/Downloads/PROJECT-B/Project/obj/Debug/net6.0/Project.genruntimeconfig.cache
 /Users/emircayir/Downloads/PROJECT-B/Project/obj/Debug/net6.0/ref/Project.dll
+D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\bin\Debug\net6.0\Project.exe
+D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\bin\Debug\net6.0\Project.deps.json
+D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\bin\Debug\net6.0\Project.runtimeconfig.json
+D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\bin\Debug\net6.0\Project.dll
+D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\bin\Debug\net6.0\Project.pdb
+D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\obj\Debug\net6.0\Project.csproj.AssemblyReference.cache
+D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\obj\Debug\net6.0\Project.GeneratedMSBuildEditorConfig.editorconfig
+D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\obj\Debug\net6.0\Project.AssemblyInfoInputs.cache
+D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\obj\Debug\net6.0\Project.AssemblyInfo.cs
+D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\obj\Debug\net6.0\Project.csproj.CoreCompileInputs.cache
+D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\obj\Debug\net6.0\Project.dll
+D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\obj\Debug\net6.0\refint\Project.dll
+D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\obj\Debug\net6.0\Project.pdb
+D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\obj\Debug\net6.0\Project.genruntimeconfig.cache
+D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\obj\Debug\net6.0\ref\Project.dll

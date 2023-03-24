@@ -4,7 +4,7 @@ static class Snacks
 
     public static void ShowAll()
     {
-        foreach (SnackModel snack in SnacksLogic.AllModel())
+        foreach (SnackModel snack in SnacksLogic.AllSnacks())
         {
             Console.WriteLine($"{snack.Id} {snack.Name}");
         }

@@ -5,7 +5,7 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-public class MoviesLogic
+public class MoviesLogic : Order<MovieModel>
 {
     private List<MovieModel> _movies;
 
@@ -19,7 +19,7 @@ public class MoviesLogic
     }
 
 
-    public void UpdateList(MovieModel movie)
+    public override void UpdateList(MovieModel movie)
     {
         //Find if there is already an model with the same id
         int index = _movies.FindIndex(s => s.Id == movie.Id);
@@ -38,11 +38,11 @@ public class MoviesLogic
 
     }
 
-    public MovieModel? GetById(int id)
+    public override MovieModel? GetById(int id)
     {
         return _movies.Find(i => i.Id == id);
     }
-    public int GetNewestId()
+    public override int GetNewestId()
     {
         return (_movies.OrderByDescending(item => item.Id).First().Id) + 1;
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-class SnacksLogic : IReservational<SnackModel>
+class SnacksLogic : Order<SnackModel>//IReservational<SnackModel>
 {
     private List<SnackModel> _snacks;
 
@@ -18,7 +18,7 @@ class SnacksLogic : IReservational<SnackModel>
     }
 
     //Write 
-    public void UpdateList(SnackModel snack)
+    public override void UpdateList(SnackModel snack)
     {
         //Find if there is already an model with the same id
         int index = _snacks.FindIndex(s => s.Id == snack.Id);
@@ -38,12 +38,12 @@ class SnacksLogic : IReservational<SnackModel>
     }
 
     //Find if for id in loaded json
-    public SnackModel? GetById(int id)
+    public override SnackModel? GetById(int id)
     {
         return _snacks.Find(i => i.Id == id);
     }
     //Receive most recent id
-    public int GetNewestId()
+    public override int GetNewestId()
     {
         return (_snacks.OrderByDescending(item => item.Id).First().Id) + 1;
     }
@@ -56,7 +56,7 @@ class SnacksLogic : IReservational<SnackModel>
         return snack;
     }
     //Get all snacks
-    public List<SnackModel> AllModel()
+    public List<SnackModel> AllSnacks()
     {
         return _snacks;
     }

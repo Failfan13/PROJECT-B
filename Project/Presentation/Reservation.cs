@@ -11,12 +11,12 @@ public static class Reservation
         var movies = new MoviesLogic();
         foreach (MovieModel movie in movies.AllMovies())
         {
-            Console.WriteLine($"{movie.Id + 1}. {movie.Title}.");
+            Console.WriteLine($"{movie.Id + 1}. {movie.Title}");
         }
 
         while (CorrectInput)
         {
-            int awnser = QuestionLogic.AskNumber("\nEnter number to continue:");
+            int awnser = QuestionLogic.AskNumber("\nEnter number to continue:", true);
             try
             {
                 choice = movies.GetById(awnser);
@@ -28,6 +28,9 @@ public static class Reservation
                 Console.WriteLine("Incorrect number");
             }
         }
+
+        ReservationLogic.MakeReservation(2, new List<int>() { 1, 2, 3 });
+        EditReservation();
     }
 
     public static void ShowMovieTimeSlots(MovieModel movie)
@@ -51,5 +54,22 @@ public static class Reservation
         Console.OutputEncoding = System.Text.Encoding.Unicode;
         //Print total cost + if not containing "." add ",-" at end
         Console.WriteLine($"€ " + orderCost + (orderCost.Contains(".") ? "" : ",-"));
+    }
+
+    public static void EditReservation()
+    {
+        bool CorrectInput = true;
+        int awnser;
+
+        Console.Clear();
+        Console.WriteLine("Choose a reservation you want to edit from the menu.");
+
+        foreach (ReservationModel reservation in ReservationLogic.Reservations)
+        {
+            // 1. DD/MM/YY - HH:MM format (reservation.Id + 1 for indexing)
+            Console.WriteLine(reservation.DateTime);
+        }
+
+        awnser = QuestionLogic.AskNumber("\nEnter number to continue:", true);
     }
 }

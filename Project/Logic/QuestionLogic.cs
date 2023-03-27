@@ -21,16 +21,22 @@ public static class QuestionLogic
         return awnser;
     }
 
-    public static int AskNumber(string question)
+    public static int AskNumber(string question, bool menuType = false)
     {
         bool Correct = true;
         int awnser = -1;
+        // Guide for menuTypes
+        if (menuType)
+        {
+            Console.WriteLine("\n" + @"Make a choice from the menu by entering the
+number associated by the function.");
+        }
         while (Correct)
         {
             Console.WriteLine(question);
             try
             {
-                awnser = Convert.ToInt32(Console.ReadLine());
+                awnser += Convert.ToInt32(Console.ReadLine());
                 Correct = false;
             }
             catch (System.FormatException)

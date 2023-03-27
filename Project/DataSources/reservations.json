@@ -1,8 +1,13 @@
 [
   {
     "id": 1,
-    "movie_id": 1,
-    "seat_id": 1,
-    "account_id": null
+    "movie_id": 2,
+    "seat_ids": [
+      1,
+      2,
+      3
+    ],
+    "account_id": null,
+    "date_time": "2023-03-28T00:44:05.0254369+02:00"
   }
 ]

@@ -1,6 +1,6 @@
 public class ReservationLogic
 {
-    private List<ReservationModel> _reservations;
+    public List<ReservationModel> Reservations;
 
     //Total reservation cost
     private double _totalOrder = 0.0;
@@ -18,38 +18,38 @@ public class ReservationLogic
 
     public ReservationLogic()
     {
-        _reservations = ReservationAccess.LoadAll();
+        Reservations = ReservationAccess.LoadAll();
     }
 
 
     public void UpdateList(ReservationModel ress)
     {
         //Find if there is already an model with the same id
-        int index = _reservations.FindIndex(s => s.Id == ress.Id);
+        int index = Reservations.FindIndex(s => s.Id == ress.Id);
 
         if (index != -1)
         {
             //update existing model
-            _reservations[index] = ress;
+            Reservations[index] = ress;
         }
         else
         {
             //add new model
-            _reservations.Add(ress);
+            Reservations.Add(ress);
         }
-        ReservationAccess.WriteAll(_reservations);
+        ReservationAccess.WriteAll(Reservations);
 
     }
 
     public ReservationModel? GetById(int id)
     {
-        return _reservations.Find(i => i.Id == id);
+        return Reservations.Find(i => i.Id == id);
     }
     public int GetNewestId()
     {
         try
         {
-            return (_reservations.OrderByDescending(item => item.Id).First().Id) + 1;
+            return (Reservations.OrderByDescending(item => item.Id).First().Id) + 1;
         }
         catch (System.Exception)
         {
@@ -61,6 +61,7 @@ public class ReservationLogic
     public void MakeReservation(int movieId, List<int> seatIds)
     {
         int? AccountId = null;
+        DateTime currDate = DateTime.Now;
         try
         {
             AccountId = AccountsLogic.CurrentAccount.Id;
@@ -69,7 +70,7 @@ public class ReservationLogic
         {   // not logged in
             AccountId = null;
         }
-        ReservationModel ress = new ReservationModel(GetNewestId(), movieId, seatIds, AccountId);
+        ReservationModel ress = new ReservationModel(GetNewestId(), movieId, seatIds, AccountId, currDate);
         UpdateList(ress);
     }
 }

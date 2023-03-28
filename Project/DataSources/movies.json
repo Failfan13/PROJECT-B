@@ -46,13 +46,5 @@
     "director": "me",
     "description": "test",
     "duration": 0
-  },
-  {
-    "id": 6,
-    "title": "Title",
-    "release_date": "2023-01-01T00:00:00",
-    "director": "me",
-    "description": "aweseome",
-    "duration": 134
   }
 ]

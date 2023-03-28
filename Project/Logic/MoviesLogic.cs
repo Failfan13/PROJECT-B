@@ -59,6 +59,12 @@ public class MoviesLogic
     {
         return _movies;
     }
+
+    public void RemoveMovie(int MovieInt)
+    {
+        _movies.Remove(GetById(MovieInt));
+        MoviesAccess.WriteAll(_movies);
+    }
 }
 
 

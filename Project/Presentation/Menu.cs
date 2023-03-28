@@ -51,6 +51,10 @@ static class Menu
         {
             Environment.Exit(1);
         }
+        else if (input == "3")
+        {
+            TimeSlots.WhatMovie();
+        }
         else
         {
             Console.WriteLine("Invalid input");

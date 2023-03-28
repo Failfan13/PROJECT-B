@@ -70,7 +70,7 @@ public class TheatherLogic
     public void ShowSeats(TheaterModel theater)
     {
         var AllSeats = theater.Seats;
-        
+
         int i = 1;
         int selectedSeatIndex = 0;
 
@@ -82,14 +82,14 @@ public class TheatherLogic
 
             for (int j = 0; j < AllSeats.Count; j++)
             {
-                Seat seat = AllSeats[j];
+                SeatModel seat = AllSeats[j];
 
                 if (j == selectedSeatIndex)
                 {
                     Console.BackgroundColor = ConsoleColor.Yellow;
                     Console.ForegroundColor = ConsoleColor.Black;
                 }
-                else if (seat.Taken)
+                else if (seat.Reserved)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                 }
@@ -98,10 +98,10 @@ public class TheatherLogic
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
-                Console.Write($" {seat.Name} ");
+                Console.Write($" {seat.Id} ");
                 Console.ResetColor();
 
-                if (i == Width)
+                if (i == theater.Width)
                 {
                     Console.WriteLine();
                     i = 0;
@@ -114,10 +114,10 @@ public class TheatherLogic
             switch (keyInfo.Key)
             {
                 case ConsoleKey.UpArrow:
-                    selectedSeatIndex = Math.Max(0, selectedSeatIndex - Width);
+                    selectedSeatIndex = Math.Max(0, selectedSeatIndex - theater.Width);
                     break;
                 case ConsoleKey.DownArrow:
-                    selectedSeatIndex = Math.Min(AllSeats.Count - 1, selectedSeatIndex + Width);
+                    selectedSeatIndex = Math.Min(AllSeats.Count - 1, selectedSeatIndex + theater.Width);
                     break;
                 case ConsoleKey.LeftArrow:
                     selectedSeatIndex = Math.Max(0, selectedSeatIndex - 1);
@@ -126,16 +126,16 @@ public class TheatherLogic
                     selectedSeatIndex = Math.Min(AllSeats.Count - 1, selectedSeatIndex + 1);
                     break;
                 case ConsoleKey.Enter:
-                    Seat selectedSeat = AllSeats[selectedSeatIndex];
-                    if (selectedSeat.Taken)
+                    SeatModel selectedSeat = AllSeats[selectedSeatIndex];
+                    if (selectedSeat.Reserved)
                     {
                         Console.WriteLine("Seat is already taken. Press any key to continue.");
                         Console.ReadKey(true);
                     }
                     else
                     {
-                        selectedSeat.Taken = true;
-                        Console.WriteLine($"Seat {selectedSeat.Name} has been Selected. Press any key to continue.");
+                        selectedSeat.Reserved = true;
+                        Console.WriteLine($"Seat {selectedSeat.Id} has been Selected. Press any key to continue.");
                         Console.ReadKey(true);
                         return;
                     }
@@ -145,5 +145,4 @@ public class TheatherLogic
             }
         }
     }
-}
 }

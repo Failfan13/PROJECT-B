@@ -23,8 +23,10 @@ public static class Reservation
                 if (awnser == movies.AllMovies().Count + 1)
                 {
                    Menu.Start();
+                   break;
                 }
                 choice = movies.GetById(awnser - 1);
+                CorrectInput = false;
                 TimeSlots.ShowAllTimeSlotsForMovie(choice.Id, choice.Title);
                 break;
             }

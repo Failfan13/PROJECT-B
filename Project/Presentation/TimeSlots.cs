@@ -22,6 +22,7 @@ static class TimeSlots
     public static void ShowAllTimeSlotsForMovie(int movieid, string moviename)
     {
         List<TimeSlotModel> tsms = timeslotslogic.GetByMovieId(movieid);
+        TheatherLogic TL = new TheatherLogic();
         Console.Clear();
         if (tsms.Count == 0) // Movie exists but there is no timeslot for it
         {
@@ -41,8 +42,9 @@ static class TimeSlots
             {
                 if (tsm.Id == awnser)
                 {
+                    Console.WriteLine(tsm.Theater);
                     // De function om de stoelen te zien komt hier.
-                    // 
+                    TL.ShowSeats(TL.GetById(tsm.Theater));
                 }
             }
         }

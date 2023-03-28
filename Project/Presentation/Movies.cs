@@ -48,9 +48,18 @@ static class Movies
             int anothercat = QuestionLogic.AskNumber("Add another category?");
             if (anothercat == 1)
             {
-                List<CategoryModel> cats =CategoryLogic.AllCategories();
+                List<CategoryModel> cats = CategoryLogic.AllCategories();
                 Console.Clear();
-                // stil working on it
+                foreach(CategoryModel c in cats)
+                {
+                    Console.WriteLine($"{c.Id} {c.Name}");
+                }
+                int categorytoadd = QuestionLogic.AskNumber("What category do you want to add");
+                CategoryModel category = CategoryLogic.GetById(categorytoadd);
+                if (!Categories.Contains(category))
+                {
+                    Categories.Add(category);
+                }
             }
             else if (anothercat == 2)
             nomorecategories = true;

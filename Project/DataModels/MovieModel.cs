@@ -43,14 +43,21 @@ public class MovieModel
         Console.WriteLine($"Duration:   \t{Duration}");
         Console.WriteLine($"Director:   \t{Director}");
         Console.WriteLine($"ReleaseDate:\t{ReleaseDate.Day}-{ReleaseDate.Month}-{ReleaseDate.Year}");
-        foreach (CategoryModel c in Categories)
+        if (Categories.Count != 0)
         {
-            cats += $"{c.Name}, ";
+            foreach (CategoryModel c in Categories)
+            {
+                cats += $"{c.Name}, ";
+            }
+            cats = cats.Remove(cats.Length - 1);
+            cats = cats.Remove(cats.Length - 1);
+            Console.WriteLine($"Categories: \t{cats}");
+            Console.Write("\n");
         }
-        cats = cats.Remove(cats.Length - 1);
-        cats = cats.Remove(cats.Length - 1);
-        Console.WriteLine($"Categories: \t{cats}");
-        Console.Write("\n");
+        else
+        {
+            Console.WriteLine($"No categories are assinged to this movie");
+        }
     }
 
 }

@@ -65,7 +65,7 @@ public class MoviesLogic
     {
         Console.Clear();
         List<CategoryModel> AllCategories = CategoryLogic.AllCategories();
-        List<int> catids = new{};
+        List<int> catids = new List<int>{};
 
         foreach(CategoryModel cm in AllCategories)
         {

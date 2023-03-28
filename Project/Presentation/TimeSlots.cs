@@ -4,14 +4,14 @@ static class TimeSlots
 
     public static void WhatMovie()
     {
-        Console.WriteLine("What movie do you whant to see the timeslots for?");
+        Console.WriteLine("What movie do you want to see the timeslots for?");
         string input = Console.ReadLine();
         MoviesLogic tempmvl = new MoviesLogic();
-        foreach(MovieModel mv in tempmvl.AllMovies())
+        foreach (MovieModel mv in tempmvl.AllMovies())
         {
             if (input == mv.Title) // Movie exists in database
             {
-                ShowAllTimeSlotsForMovie(mv.Id,mv.Title);
+                ShowAllTimeSlotsForMovie(mv.Id, mv.Title);
             }
         }
         // Below is for when the movie does not exist in the database
@@ -25,18 +25,26 @@ static class TimeSlots
         Console.Clear();
         if (tsms.Count == 0) // Movie exists but there is no timeslot for it
         {
-            Console.WriteLine("There are no timeslots for that movie");
+            Console.WriteLine("There are no timeslots for that movie.\nPress a key to return");
             string a = Console.ReadLine();
-            Menu.Start();
+            Reservation.start();
         }
         else
         {
             Console.WriteLine($"Availible timeslots for {moviename}");
             foreach (TimeSlotModel tsm in tsms)
             {
-                Console.WriteLine($"{tsm.Id}. {tsm.Start}");
+                Console.WriteLine($"{tsm.Id + 1}. {tsm.Start}");
             }
-            Menu.Start();
+            int awnser = QuestionLogic.AskNumber("What timeslot would you like to see the seats for?") - 1;
+            foreach (TimeSlotModel tsm in tsms)
+            {
+                if (tsm.Id == awnser)
+                {
+                    // De function om de stoelen te zien komt hier.
+                    // 
+                }
+            }
         }
     }
 }

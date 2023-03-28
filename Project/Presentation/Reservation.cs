@@ -13,14 +13,19 @@ public static class Reservation
         {
             Console.WriteLine($"{movie.Id + 1}. {movie.Title}.");
         }
+        Console.WriteLine($"{movies.AllMovies().Count + 1}. Return");
 
         while (CorrectInput)
         {
             int awnser = QuestionLogic.AskNumber("\nEnter number to continue:");
             try
             {
-                choice = movies.GetById(awnser);
-                ShowMovieTimeSlots(choice);
+                if (awnser == movies.AllMovies().Count + 1)
+                {
+                   Menu.Start();
+                }
+                choice = movies.GetById(awnser - 1);
+                TimeSlots.ShowAllTimeSlotsForMovie(choice.Id, choice.Title);
                 break;
             }
             catch (System.NullReferenceException)
@@ -28,11 +33,6 @@ public static class Reservation
                 Console.WriteLine("Incorrect number");
             }
         }
-    }
-
-    public static void ShowMovieTimeSlots(MovieModel movie)
-    {
-        movie.Info();
     }
 
     // Increases total order amount

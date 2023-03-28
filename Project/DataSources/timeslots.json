@@ -1,8 +1,14 @@
 [
     {
-        "id" : 1,
-        "movieid" : 1,
-        "start" : "2023-10-10T00:00:00" ,
-        "theater" : 1
+        "id": 0,
+        "movieid": 1,
+        "start": "2023-10-10T00:00:00",
+        "theater": 1
+    },
+    {
+        "id": 1,
+        "movieid": 1,
+        "start": "2023-11-11T00:00:00",
+        "theater": 2
     }
 ]

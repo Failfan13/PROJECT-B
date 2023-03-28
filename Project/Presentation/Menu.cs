@@ -34,6 +34,9 @@ static class Menu
         Console.WriteLine("3 Contact");
         Console.WriteLine("4 Exit app");
 
+        var zaal = new Room(10,10);
+        zaal.ShowSeats();
+
         string? input = Console.ReadLine();
         if (input == "1")
         {

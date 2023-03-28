@@ -10,7 +10,7 @@ static class TheaterAccess
         return JsonSerializer.Deserialize<List<TheaterModel>>(json);
     }
 
-        public static void WriteAll(List<TheaterModel> accounts)
+    public static void WriteAll(List<TheaterModel> accounts)
     {
         var options = new JsonSerializerOptions { WriteIndented = true };
         string json = JsonSerializer.Serialize(accounts, options);

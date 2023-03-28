@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-class TimeSlotModel
+public class TimeSlotModel
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }

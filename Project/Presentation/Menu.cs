@@ -108,7 +108,8 @@ static class Menu
         Console.WriteLine("1 Login");
         Console.WriteLine("2 Make a Reservation");
         Console.WriteLine("3 Contact");
-        Console.WriteLine("4 Exit app");
+        Console.WriteLine("4 Change movie category");
+        Console.WriteLine("5 Exit app");
 
         string? input = Console.ReadLine();
         if (input == "1")
@@ -122,8 +123,12 @@ static class Menu
         else if (input == "3")
         {
             Contact.start();
+        }       
+         else if (input == "4")
+        {
+            Movies.ChangeCategory();
         }
-        else if (input == "4")
+        else if (input == "5")
         {
             Environment.Exit(1);
         }

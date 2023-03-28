@@ -61,6 +61,7 @@ public class MoviesLogic
     }
     public void AddCategory(MovieModel movie)
     {
+        Console.Clear();
         string category = QuestionLogic.AskString("What Category do you want to add?");
         if (movie.Categories != "")
         {
@@ -71,14 +72,32 @@ public class MoviesLogic
             movie.Categories = category;
         }
         UpdateList(movie);
+        Console.Clear();
+        Console.WriteLine("Current movie info:");
+        movie.Info();
+        Console.Writeline9("Press enter to continue");
+        Console.ReadLine();
+        Menu.Start();
     }
     public void RemoveCategory(MovieModel movie)
     {
+        Console.Clear();
         string category = QuestionLogic.AskString("What Category do you want to remove?");
         List<string> categoriesaslist = new List<string>(movie.Categories.Split(", "));
         categoriesaslist.Remove(category);
+        if (categoriesaslist.Count == 0)
+        {
+            movie.Categories = "";
+        }
         movie.Categories = string.Join(", ", categoriesaslist);
         UpdateList(movie);
+        Console.Clear();
+        Console.WriteLine("Current movie info:");
+        movie.Info();
+        Console.Writeline9("Press enter to continue");
+        Console.ReadLine();
+        Menu.Start();
+        Menu.Start();
     }
 }
 

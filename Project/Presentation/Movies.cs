@@ -55,4 +55,36 @@ static class Movies
         Menu.Start();
     }
 
+    public static void ChangeCategory()
+    {
+        Console.Clear();
+        string moviename = QuestionLogic.AskString("What movie do you want to change?");
+        foreach (MovieModel movie in MoviesLogic.AllMovies())
+        {
+            if (moviename == movie.Title)
+            {
+                bool validinput = true;
+                Console.Clear();
+                do
+                {
+                    int addoremove = QuestionLogic.AskNumber("What do you want to do?\n1 Add a category\n2 Remove a category");
+                    if (addoremove == 1)
+                    {
+                        MoviesLogic.AddCategory(movie);
+                    }
+                    else if (addoremove == 2)
+                    {
+                        MoviesLogic.RemoveCategory(movie);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input please enter 1 or 2");
+                        Console.Clear();
+                    }
+                }
+                while(validinput);
+            }
+        }
+    }
+
 }

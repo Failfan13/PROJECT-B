@@ -42,7 +42,7 @@ public class MovieModel
         Console.WriteLine($"Duration:   \t{Duration}");
         Console.WriteLine($"Director:   \t{Director}");
         Console.WriteLine($"ReleaseDate:\t{ReleaseDate.Day}-{ReleaseDate.Month}-{ReleaseDate.Year}");
-        Console.WriteLine($"Categories {Categories}");
+        Console.WriteLine($"Categories: \t{Categories}");
         Console.Write("\n");
     }
 

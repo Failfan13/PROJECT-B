@@ -75,7 +75,7 @@ public class MoviesLogic
         Console.Clear();
         Console.WriteLine("Current movie info:");
         movie.Info();
-        Console.Writeline9("Press enter to continue");
+        Console.WriteLine("Press enter to continue");
         Console.ReadLine();
         Menu.Start();
     }
@@ -94,7 +94,7 @@ public class MoviesLogic
         Console.Clear();
         Console.WriteLine("Current movie info:");
         movie.Info();
-        Console.Writeline9("Press enter to continue");
+        Console.WriteLine("Press enter to continue");
         Console.ReadLine();
         Menu.Start();
         Menu.Start();

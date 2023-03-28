@@ -85,6 +85,9 @@ static class Movies
                 while(validinput);
             }
         }
+        Consolo.WriteLine("That movie does not exist in the database.\nPress enter to continue");
+        Console.ReadLine();
+        Menu.Start();
     }
 
 }

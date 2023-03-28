@@ -5,7 +5,7 @@ public class TheaterModel
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
-    [JsonPropertyName("rows")]
+    [JsonPropertyName("seats")]
     public List<SeatModel> Seats { get; set; }
 
     [JsonPropertyName("width")]

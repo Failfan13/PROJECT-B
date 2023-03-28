@@ -43,8 +43,19 @@ static class TimeSlots
                 if (tsm.Id == awnser)
                 {
                     Console.WriteLine(tsm.Theater);
-                    // De function om de stoelen te zien komt hier.
+
+                    /* De function om de stoelen te zien komt hier.
                     TL.ShowSeats(TL.GetById(tsm.Theater));
+                    tijdelijk doorsturen:
+                    */
+                    ReservationLogic RL = new ReservationLogic();
+                    List<SeatModel> Seats = new List<SeatModel>() {
+                        new SeatModel(1,'A',10,true,false),
+                        new SeatModel(2,'A',10,true,false),
+                    };
+
+                    RL.MakeReservation(tsm.Id, Seats);
+
                 }
             }
         }

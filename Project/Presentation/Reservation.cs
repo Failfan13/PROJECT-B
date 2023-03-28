@@ -1,6 +1,7 @@
 public static class Reservation
 {
     static private ReservationLogic ReservationLogic = new();
+    static private MoviesLogic MoviesLogic = new();
     public static void start()
     {
         bool CorrectInput = true;
@@ -8,8 +9,7 @@ public static class Reservation
         MovieModel choice = null;
         Console.Clear();
         Console.WriteLine("Which movie would you like to see?");
-        var movies = new MoviesLogic();
-        foreach (MovieModel movie in movies.AllMovies())
+        foreach (MovieModel movie in MoviesLogic.AllMovies())
         {
             Console.WriteLine($"{movie.Id + 1}. {movie.Title}");
         }
@@ -19,7 +19,7 @@ public static class Reservation
             int awnser = QuestionLogic.AskNumber("\nEnter number to continue:", true);
             try
             {
-                choice = movies.GetById(awnser);
+                choice = MoviesLogic.GetById(awnser);
                 ShowMovieTimeSlots(choice);
                 break;
             }
@@ -29,7 +29,7 @@ public static class Reservation
             }
         }
 
-        ReservationLogic.MakeReservation(2, new List<int>() { 1, 2, 3 });
+        ReservationLogic.MakeReservation(1, new List<int>() { 1, 2, 3 });
         EditReservation();
     }
 
@@ -60,14 +60,17 @@ public static class Reservation
     {
         bool CorrectInput = true;
         int awnser;
+        string reservationDate;
+        string reservationMovie;
 
         Console.Clear();
         Console.WriteLine("Choose a reservation you want to edit from the menu.");
 
         foreach (ReservationModel reservation in ReservationLogic.Reservations)
         {
-            // 1. DD/MM/YY - HH:MM format (reservation.Id + 1 for indexing)
-            Console.WriteLine(reservation.DateTime);
+            reservationDate = reservation.DateTime.ToString("dd/MM/yy_HH:mm");
+            reservationMovie = MoviesLogic.GetById(reservation.MovieId - 1).Title;
+            Console.WriteLine($"{reservation.Id}. {reservationDate} - {reservationMovie}");
         }
 
         awnser = QuestionLogic.AskNumber("\nEnter number to continue:", true);

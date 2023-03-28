@@ -6,7 +6,7 @@
     "director": "JE moeder",
     "description": null,
     "duration": 0,
-    "categories": "action, adventure"
+    "categories": []
   },
   {
     "id": 1,
@@ -15,7 +15,10 @@
     "director": "tester",
     "description": null,
     "duration": 0,
-    "categories": "adventure, lol"
+    "categories": [
+      "action",
+      "adventure"
+    ]
   },
   {
     "id": 2,
@@ -24,7 +27,10 @@
     "director": "test",
     "description": null,
     "duration": 0,
-    "categories": "action, adventure"
+    "categories": [
+      "action",
+      "adventure"
+    ]
   },
   {
     "id": 3,
@@ -33,7 +39,10 @@
     "director": "jajaja",
     "description": null,
     "duration": 0,
-    "categories": "action, adventure"
+    "categories": [
+      "action",
+      "adventure"
+    ]
   },
   {
     "id": 4,
@@ -42,7 +51,10 @@
     "director": "test",
     "description": "test",
     "duration": 0,
-    "categories": "action, adventure"
+    "categories": [
+      "action",
+      "adventure"
+    ]
   },
   {
     "id": 5,
@@ -51,7 +63,10 @@
     "director": "me",
     "description": "test",
     "duration": 0,
-    "categories": "action, adventure"
+    "categories": [
+      "action",
+      "adventure"
+    ]
   },
   {
     "id": 6,
@@ -60,6 +75,9 @@
     "director": "me",
     "description": "aweseome",
     "duration": 134,
-    "categories": "action, adventure"
+    "categories": [
+      "action",
+      "adventure"
+    ]
   }
 ]

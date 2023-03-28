@@ -47,7 +47,7 @@ public class MoviesLogic
         return (_movies.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
-    public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript, int duration, string categories)
+    public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript, int duration, List<string> categories)
     {
         int NewID = GetNewestId();
         MovieModel movie = new MovieModel(NewID, title, releaseDate, director, desript, duration, categories);
@@ -63,13 +63,10 @@ public class MoviesLogic
     {
         Console.Clear();
         string category = QuestionLogic.AskString("What Category do you want to add?");
-        if (movie.Categories != "")
+        int incategories = movie.Categories.IndexOf(category.ToLower());
+        if (!movie.Categories.Contains(category.ToLower()))
         {
-            movie.Categories = movie.Categories + $", {category}";
-        }
-        else
-        {
-            movie.Categories = category;
+            movie.Categories.Add(category.ToLower());
         }
         UpdateList(movie);
         Console.Clear();
@@ -83,13 +80,9 @@ public class MoviesLogic
     {
         Console.Clear();
         string category = QuestionLogic.AskString("What Category do you want to remove?");
-        List<string> categoriesaslist = new List<string>(movie.Categories.Split(", "));
-        categoriesaslist.Remove(category);
-        if (categoriesaslist.Count == 0)
-        {
-            movie.Categories = "";
-        }
-        movie.Categories = string.Join(", ", categoriesaslist);
+        List<string> categoriesaslist = movie.Categories;
+        categoriesaslist.Remove(category.ToLower());
+        movie.Categories = categoriesaslist;
         UpdateList(movie);
         Console.Clear();
         Console.WriteLine("Current movie info:");

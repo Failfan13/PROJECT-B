@@ -22,9 +22,9 @@ public class MovieModel
     public int Duration { get; set; }
 
     [JsonPropertyName("categories")]
-    public string Categories{ get; set; }
+    public List<string> Categories{ get; set; }
 
-    public MovieModel(int id, string title, DateTime releaseDate, string director, string description, int duration, string categories)
+    public MovieModel(int id, string title, DateTime releaseDate, string director, string description, int duration, List<string> categories)
     {
         Id = id;
         Title = title;
@@ -42,7 +42,7 @@ public class MovieModel
         Console.WriteLine($"Duration:   \t{Duration}");
         Console.WriteLine($"Director:   \t{Director}");
         Console.WriteLine($"ReleaseDate:\t{ReleaseDate.Day}-{ReleaseDate.Month}-{ReleaseDate.Year}");
-        Console.WriteLine($"Categories: \t{Categories}");
+        Console.WriteLine($"Categories: \t{string.Join(", ", Categories)}");
         Console.Write("\n");
     }
 

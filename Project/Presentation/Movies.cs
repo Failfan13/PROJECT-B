@@ -20,7 +20,7 @@ static class Movies
         string Director = "";
         string Description = "";
         DateTime ReleaseDate = new DateTime();
-        string Categories = "";
+        List<string> Categories = new List<string>{};
 
         Title = QuestionLogic.AskString("What is the title of the movie?");
 
@@ -41,7 +41,18 @@ static class Movies
         Description = QuestionLogic.AskString("What is the description of the movie? ");
         Director = QuestionLogic.AskString("Who is the director of the movie?: ");
         Duration = QuestionLogic.AskNumber("What is the duration? (minutes)");
-        Categories = QuestionLogic.AskString("What is/are the categorie('s) of the movie");
+        bool nomorecategories = false;
+        do
+        {
+            int anothercat = QuestionLogic.AskNumber("Add another category?");
+            if (anothercat == 1)
+            {
+                Categories.Add(QuestionLogic.AskString("What is the next category of the movie"));
+            }
+            else if (anothercat == 2)
+            nomorecategories = true;
+        }
+        while (nomorecategories != false);
 
 
         MovieModel movie = MoviesLogic.NewMovie(Title, ReleaseDate, Director, Description, Duration, Categories);
@@ -50,7 +61,7 @@ static class Movies
         Console.WriteLine($"Title: {movie.Title}");
         Console.WriteLine($"Release Date: {movie.ReleaseDate.Date}");
         Console.WriteLine($"Director: {movie.Director}");
-        Console.WriteLine($"Categories: {movie.Categories}");
+        Console.WriteLine($"Categories: {string.Join(", ", movie.Categories)}");
 
         Menu.Start();
     }
@@ -85,7 +96,7 @@ static class Movies
                 while(validinput);
             }
         }
-        Consolo.WriteLine("That movie does not exist in the database.\nPress enter to continue");
+        Console.WriteLine("That movie does not exist in the database.\nPress enter to continue");
         Console.ReadLine();
         Menu.Start();
     }

@@ -59,6 +59,27 @@ public class MoviesLogic
     {
         return _movies;
     }
+    public void AddCategory(MovieModel movie)
+    {
+        string category = QuestionLogic.AskString("What Category do you want to add?");
+        if (movie.Categories != "")
+        {
+            movie.Categories = movie.Categories + $", {category}";
+        }
+        else
+        {
+            movie.Categories = category;
+        }
+        UpdateList(movie);
+    }
+    public void RemoveCategory(MovieModel movie)
+    {
+        string category = QuestionLogic.AskString("What Category do you want to remove?");
+        List<string> categoriesaslist = new List<string>(movie.Categories.Split(", "));
+        categoriesaslist.Remove(category);
+        movie.Categories = string.Join(", ", categoriesaslist);
+        UpdateList(movie);
+    }
 }
 
 

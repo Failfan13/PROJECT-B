@@ -14,7 +14,11 @@ static class UserLogin
         Console.WriteLine("1 Login");
         Console.WriteLine("2 Create new account");
         Console.WriteLine("3 Return to menu");
-        Console.WriteLine("4 Change password (Temporarily here only use after being logged in)");
+        if (AccountsLogic.CurrentAccount != null)
+        {
+            Console.WriteLine("4 Change password");
+        }
+
 
         string? input = Console.ReadLine();
         if (input == "1")
@@ -29,7 +33,7 @@ static class UserLogin
         {
             Menu.Start();
         }
-        else if (input == "4")
+        else if (input == "4" && AccountsLogic.CurrentAccount != null)
         {
             ChangePassword();
         }
@@ -98,8 +102,6 @@ static class UserLogin
         }
 
         accountsLogic.NewAccount(Email, Name, pass);
-
-
     }
 
     public static void Login()
@@ -145,7 +147,7 @@ static class UserLogin
     {
         Console.WriteLine("Please enter old password");
         string oldpws = Console.ReadLine();
-        if  (accountsLogic.CheckLogin(AccountsLogic.CurrentAccount.EmailAddress, oldpws) == null)
+        if (accountsLogic.CheckLogin(AccountsLogic.CurrentAccount.EmailAddress, oldpws) == null)
         {
             Console.WriteLine("Wrong password");
             ChangePassword();

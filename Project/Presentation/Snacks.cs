@@ -13,7 +13,7 @@ static class Snacks
     // Start request to user
     public static SnackModel Start()
     {
-        System.Console.Clear();
+        Console.Clear();
         Console.WriteLine(@"Here you will be able to select what you would like to
 eat or drink while watching the movie");
 

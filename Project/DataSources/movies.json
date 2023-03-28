@@ -54,5 +54,13 @@
     "director": "me",
     "description": "aweseome",
     "duration": 134
+  },
+  {
+    "id": 7,
+    "title": "r",
+    "release_date": "2010-10-10T00:00:00",
+    "director": "r",
+    "description": "r",
+    "duration": 9
   }
 ]

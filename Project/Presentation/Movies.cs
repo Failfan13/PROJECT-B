@@ -10,7 +10,6 @@ static class Movies
         }
     }
 
-
     public static void AddNewMovie()
     {
         bool CorrectDate = true;
@@ -21,6 +20,7 @@ static class Movies
         string Description = "";
         DateTime ReleaseDate = new DateTime();
 
+        Console.Clear();
         Title = QuestionLogic.AskString("What is the title of the movie?");
 
         while (CorrectDate)
@@ -52,4 +52,39 @@ static class Movies
         Menu.Start();
     }
 
+    public static MovieModel AskMovie()
+    {
+        bool CorrectInput = true;
+        MovieModel choice = null;
+
+        Console.Clear();
+        Console.WriteLine("Which movie would you like to see?");
+        foreach (MovieModel movie in MoviesLogic.AllMovies())
+        {
+            Console.WriteLine($"{movie.Id + 1}. {movie.Title}");
+        }
+
+        while (CorrectInput)
+        {
+            int awnser = QuestionLogic.AskNumber("\nEnter number to continue:", MoviesLogic.AllMovies().Count);
+            try
+            {
+                choice = MoviesLogic.GetById(awnser);
+                ShowMovieTimeSlots(choice);
+                return choice;
+            }
+            catch (System.NullReferenceException)
+            {
+                Console.WriteLine("Incorrect number");
+            }
+        }
+
+        return null;
+    }
+
+    public static DateTime ShowMovieTimeSlots(MovieModel movie)
+    {
+        movie.Info();
+        return DateTime.Now;
+    }
 }

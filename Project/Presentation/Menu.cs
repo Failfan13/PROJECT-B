@@ -41,7 +41,7 @@ static class Menu
         }
         else if (input == "2")
         {
-            Reservation.start();
+            Reservation.Start();
         }
         else if (input == "3")
         {
@@ -79,7 +79,7 @@ static class Menu
         }
         else if (input == "2")
         {
-            Reservation.start();
+            Reservation.Start();
         }
         else if (input == "3")
         {
@@ -117,7 +117,7 @@ static class Menu
         }
         else if (input == "2")
         {
-            Reservation.start();
+            Reservation.Start();
         }
         else if (input == "3")
         {
@@ -126,6 +126,10 @@ static class Menu
         else if (input == "4")
         {
             Environment.Exit(1);
+        }
+        else if (input == "5")
+        {
+            Reservation.EditReservation();
         }
         else
         {

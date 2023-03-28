@@ -2,11 +2,14 @@ public static class Reservation
 {
     static private ReservationLogic ReservationLogic = new();
     static private MoviesLogic MoviesLogic = new();
-    public static void start()
+    static public ReservationModel CurrReservation = null;
+
+    public static void Start()
     {
         bool CorrectInput = true;
+        MovieModel movieChoice = null;
+        DateTime movieTime = DateTime.MinValue;
 
-        MovieModel choice = null;
         Console.Clear();
         Console.WriteLine("Which movie would you like to see?");
         foreach (MovieModel movie in MoviesLogic.AllMovies())
@@ -16,11 +19,11 @@ public static class Reservation
 
         while (CorrectInput)
         {
-            int awnser = QuestionLogic.AskNumber("\nEnter number to continue:", true);
+            int awnser = QuestionLogic.AskNumber("\nEnter number to continue:", MoviesLogic.AllMovies().Count);
             try
             {
-                choice = MoviesLogic.GetById(awnser);
-                ShowMovieTimeSlots(choice);
+                movieChoice = MoviesLogic.GetById(awnser);
+                movieTime = Movies.ShowMovieTimeSlots(movieChoice);
                 break;
             }
             catch (System.NullReferenceException)
@@ -29,13 +32,25 @@ public static class Reservation
             }
         }
 
-        ReservationLogic.MakeReservation(1, new List<int>() { 1, 2, 3 });
-        EditReservation();
-    }
+        if (CurrReservation == null)
+        {
+            // Calling the next functions will not change the current reservation yet
+            // will need to fix before changing reservations.
 
-    public static void ShowMovieTimeSlots(MovieModel movie)
-    {
-        movie.Info();
+            // Call seats here
+            // Call snacks here
+            // Snacks.Start()
+            // Call discount here
+
+            // Make reservation
+        }
+        else
+        {
+            CurrReservation.MovieId = movieChoice.Id;
+            CurrReservation.DateTime = movieTime;
+            ReservationLogic.UpdateList(CurrReservation);
+        }
+
     }
 
     // Increases total order amount
@@ -58,21 +73,57 @@ public static class Reservation
 
     public static void EditReservation()
     {
-        bool CorrectInput = true;
         int awnser;
         string reservationDate;
         string reservationMovie;
 
-        Console.Clear();
+        //Console.Clear();
         Console.WriteLine("Choose a reservation you want to edit from the menu.");
 
+        // List all reservations with dateTime + movie name
         foreach (ReservationModel reservation in ReservationLogic.Reservations)
         {
-            reservationDate = reservation.DateTime.ToString("dd/MM/yy_HH:mm");
+            reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
             reservationMovie = MoviesLogic.GetById(reservation.MovieId - 1).Title;
+
             Console.WriteLine($"{reservation.Id}. {reservationDate} - {reservationMovie}");
         }
+        // Choose the reservation to edit
+        awnser = QuestionLogic.AskNumber("\nEnter number to continue:", ReservationLogic.Reservations.Count());
 
-        awnser = QuestionLogic.AskNumber("\nEnter number to continue:", true);
+        // Current reservation for changes
+        CurrReservation = ReservationLogic.Reservations[awnser];
+
+        // Call changeables
+        Console.Write("1. Choose movie & time & seats\n");
+        Console.Write("2. Choose seats\n");
+        Console.Write("3. Change side snack\n");
+        Console.Write("4. Apply discount\n");
+        Console.WriteLine("5. Return to previous menu");
+
+        awnser = QuestionLogic.AskNumber("\nEnter number to continue:", 5);
+
+        // Enter option for changes
+        switch (awnser)
+        {
+            case 0:
+                // to default reservation screen
+                Reservation.Start();
+                break;
+            case 1:
+                // to seats menu
+                break;
+            case 2:
+                //Snacks.Start();
+                break;
+            case 3:
+                // to dicount apply menu
+                break;
+            case 4:
+                Menu.Start();
+                break;
+            default:
+                break;
+        }
     }
 }

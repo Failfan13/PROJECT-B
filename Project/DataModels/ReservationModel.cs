@@ -6,11 +6,11 @@ public class ReservationModel
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
-    [JsonPropertyName("movie_id")]
-    public int MovieId { get; set; }
+    [JsonPropertyName("timeslot_id")]
+    public int TimeSLotId { get; set; }
 
-    [JsonPropertyName("seat_ids")]
-    public List<int> SeatIds { get; set; }
+    [JsonPropertyName("seats")]
+    public List<SeatModel> Seats { get; set; }
 
     [JsonPropertyName("account_id")]
     public int? AccountId { get; set; }
@@ -18,13 +18,13 @@ public class ReservationModel
     [JsonPropertyName("date_time")]
     public DateTime DateTime { get; set; }
 
-    public ReservationModel(int id, int movieId, List<int> seatIds, int? accountId, DateTime dateTime)
+    public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, int? accountId, DateTime dateTime)
     {
         Id = id;
-        MovieId = movieId;
+        TimeSLotId = timeSlotId;
         AccountId = accountId;
-        SeatIds = seatIds;
         DateTime = dateTime;
+        Seats = seats;
     }
 
 }

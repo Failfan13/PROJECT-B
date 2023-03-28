@@ -107,7 +107,7 @@ static class Menu
         Console.WriteLine("Main Menu:");
         Console.WriteLine("1 Login");
         Console.WriteLine("2 Make a Reservation");
-        Console.WriteLine("3 Contact");
+        Console.WriteLine("3 Change Movie");
         Console.WriteLine("4 Exit app");
 
         string? input = Console.ReadLine();

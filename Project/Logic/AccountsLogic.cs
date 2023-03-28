@@ -72,6 +72,11 @@ public class AccountsLogic
         UpdateList(account);
     }
 
+    public void NewPassword(string newpassword)
+    {
+        CurrentAccount.Password = newpassword;
+        UpdateList(CurrentAccount);
+    }
 }
 
 

@@ -59,6 +59,24 @@ public class MoviesLogic : Order<MovieModel>
     {
         return _movies;
     }
+
+    public void RemoveMovie(int MovieInt)
+    {
+        try
+        {
+            if (AccountsLogic.CurrentAccount.Admin == true)
+            {
+                _movies.Remove(GetById(MovieInt));
+                MoviesAccess.WriteAll(_movies);
+            }
+        }
+        catch (System.Exception)
+        {
+            Console.WriteLine("Not Admin");
+        }
+
+
+    }
 }
 
 

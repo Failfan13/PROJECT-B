@@ -55,4 +55,10 @@ number associated by the function.");
         }
         return awnser;
     }
+
+    public static void AskEnter()
+    {
+        Console.WriteLine("Press enter to return");
+        Console.ReadLine();
+    }
 }

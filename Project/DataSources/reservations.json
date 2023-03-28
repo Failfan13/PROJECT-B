@@ -1,13 +1,86 @@
 [
   {
     "id": 1,
-    "movie_id": 3,
-    "seat_ids": [
-      1,
-      2,
-      3
+    "timeslot_id": 1,
+    "seats": [
+      {
+        "id": 1,
+        "row": "A",
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 2,
+        "row": "A",
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
     ],
-    "account_id": null,
-    "date_time": "2023-03-28T16:54:33.2687677+02:00"
+    "account_id": null
+  },
+  {
+    "id": 2,
+    "timeslot_id": 1,
+    "seats": [
+      {
+        "id": 1,
+        "row": "A",
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 2,
+        "row": "A",
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "account_id": 4
+  },
+  {
+    "id": 3,
+    "timeslot_id": 1,
+    "seats": [
+      {
+        "id": 1,
+        "row": "A",
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 2,
+        "row": "A",
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "account_id": null
+  },
+  {
+    "id": 4,
+    "timeslot_id": 0,
+    "seats": [
+      {
+        "id": 1,
+        "row": "A",
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 2,
+        "row": "A",
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "account_id": null
   }
 ]

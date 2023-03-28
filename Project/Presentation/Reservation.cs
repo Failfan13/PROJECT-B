@@ -46,7 +46,7 @@ public static class Reservation
         }
         else
         {
-            CurrReservation.MovieId = movieChoice.Id;
+            CurrReservation.TimeSLotId = movieChoice.Id;
             CurrReservation.DateTime = movieTime;
             ReservationLogic.UpdateList(CurrReservation);
         }
@@ -84,7 +84,7 @@ public static class Reservation
         foreach (ReservationModel reservation in ReservationLogic.Reservations)
         {
             reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
-            reservationMovie = MoviesLogic.GetById(reservation.MovieId - 1).Title;
+            reservationMovie = MoviesLogic.GetById(reservation.TimeSLotId - 1).Title;
 
             Console.WriteLine($"{reservation.Id}. {reservationDate} - {reservationMovie}");
         }

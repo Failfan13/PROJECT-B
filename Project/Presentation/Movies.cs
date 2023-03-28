@@ -20,6 +20,7 @@ static class Movies
         string Director = "";
         string Description = "";
         DateTime ReleaseDate = new DateTime();
+        string Categories = "";
 
         Title = QuestionLogic.AskString("What is the title of the movie?");
 
@@ -40,14 +41,16 @@ static class Movies
         Description = QuestionLogic.AskString("What is the description of the movie? ");
         Director = QuestionLogic.AskString("Who is the director of the movie?: ");
         Duration = QuestionLogic.AskNumber("What is the duration? (minutes)");
+        Categories = QuestionLogic.AskString("What is/are the categorie('s) of the movie");
 
 
-        MovieModel movie = MoviesLogic.NewMovie(Title, ReleaseDate, Director, Description, Duration);
+        MovieModel movie = MoviesLogic.NewMovie(Title, ReleaseDate, Director, Description, Duration, Categories);
 
         Console.WriteLine("New movie added!");
         Console.WriteLine($"Title: {movie.Title}");
         Console.WriteLine($"Release Date: {movie.ReleaseDate.Date}");
         Console.WriteLine($"Director: {movie.Director}");
+        Console.WriteLine($"Categories: {movie.Categories}");
 
         Menu.Start();
     }

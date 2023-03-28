@@ -47,10 +47,10 @@ public class MoviesLogic
         return (_movies.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
-    public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript, int duration)
+    public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript, int duration, string categories)
     {
         int NewID = GetNewestId();
-        MovieModel movie = new MovieModel(NewID, title, releaseDate, director, desript, duration);
+        MovieModel movie = new MovieModel(NewID, title, releaseDate, director, desript, duration, categories);
         UpdateList(movie);
         return movie;
     }

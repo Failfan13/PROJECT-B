@@ -1,6 +1,7 @@
 static class Movies
 {
     static private MoviesLogic MoviesLogic = new MoviesLogic();
+    static private CategoryLogic CategoryLogic = new CategoryLogic();
 
     public static void ShowAllMovies()
     {
@@ -20,7 +21,7 @@ static class Movies
         string Director = "";
         string Description = "";
         DateTime ReleaseDate = new DateTime();
-        List<string> Categories = new List<string>{};
+        List<CategoryModel> Categories = new List<CategoryModel>{};
 
         Title = QuestionLogic.AskString("What is the title of the movie?");
 
@@ -47,7 +48,9 @@ static class Movies
             int anothercat = QuestionLogic.AskNumber("Add another category?");
             if (anothercat == 1)
             {
-                Categories.Add(QuestionLogic.AskString("What is the next category of the movie"));
+                List<CategoryModel> cats =CategoryLogic.AllCategories();
+                Console.Clear();
+                // stil working on it
             }
             else if (anothercat == 2)
             nomorecategories = true;

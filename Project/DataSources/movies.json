@@ -16,8 +16,14 @@
     "description": null,
     "duration": 0,
     "categories": [
-      "action",
-      "adventure"
+      {
+        "id" : 1,
+        "name" : "action"
+      },
+      {
+        "id" : 2,
+       "name" : "adventure"
+      }
     ]
   },
   {
@@ -28,8 +34,14 @@
     "description": null,
     "duration": 0,
     "categories": [
-      "action",
-      "adventure"
+      {
+        "id" : 1,
+        "name" : "action"
+      },
+      {
+        "id" : 2,
+       "name" : "adventure"
+      }
     ]
   },
   {
@@ -40,8 +52,14 @@
     "description": null,
     "duration": 0,
     "categories": [
-      "action",
-      "adventure"
+      {
+        "id" : 1,
+        "name" : "action"
+      },
+      {
+        "id" : 2,
+       "name" : "adventure"
+      }
     ]
   },
   {
@@ -52,8 +70,14 @@
     "description": "test",
     "duration": 0,
     "categories": [
-      "action",
-      "adventure"
+      {
+        "id" : 1,
+        "name" : "action"
+      },
+      {
+        "id" : 2,
+       "name" : "adventure"
+      }
     ]
   },
   {
@@ -64,8 +88,14 @@
     "description": "test",
     "duration": 0,
     "categories": [
-      "action",
-      "adventure"
+      {
+        "id" : 1,
+        "name" : "action"
+      },
+      {
+        "id" : 2,
+       "name" : "adventure"
+      }
     ]
   },
   {
@@ -76,8 +106,14 @@
     "description": "aweseome",
     "duration": 134,
     "categories": [
-      "action",
-      "adventure"
+      {
+        "id" : 1,
+        "name" : "action"
+      },
+      {
+        "id" : 2,
+       "name" : "adventure"
+      }
     ]
   }
 ]

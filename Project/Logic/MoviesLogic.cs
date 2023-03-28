@@ -7,6 +7,8 @@ using System.Text.Json;
 //This class is not static so later on we can use inheritance and interfaces
 public class MoviesLogic
 {
+    
+    static private CategoryLogic CategoryLogic = new CategoryLogic();
     private List<MovieModel> _movies;
 
     //Static properties are shared across all instances of the class
@@ -47,7 +49,7 @@ public class MoviesLogic
         return (_movies.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
-    public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript, int duration, List<string> categories)
+    public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript, int duration, List<CategoryModel> categories)
     {
         int NewID = GetNewestId();
         MovieModel movie = new MovieModel(NewID, title, releaseDate, director, desript, duration, categories);
@@ -62,11 +64,18 @@ public class MoviesLogic
     public void AddCategory(MovieModel movie)
     {
         Console.Clear();
-        string category = QuestionLogic.AskString("What Category do you want to add?");
-        int incategories = movie.Categories.IndexOf(category.ToLower());
-        if (!movie.Categories.Contains(category.ToLower()))
+        List<CategoryModel> AllCategories = CategoryLogic.AllCategories();
+        List<int> catids = new{};
+
+        foreach(CategoryModel cm in AllCategories)
         {
-            movie.Categories.Add(category.ToLower());
+            Console.WriteLine($"{cm.Id} {cm.Name}");
+        }
+        int catid = QuestionLogic.AskNumber("What Category do you want to add?\nPlease enter the number");
+        CategoryModel category = CategoryLogic.GetById(catid);
+        if (!movie.Categories.Contains(category))
+        {
+            movie.Categories.Add(category);
         }
         UpdateList(movie);
         Console.Clear();
@@ -79,17 +88,18 @@ public class MoviesLogic
     public void RemoveCategory(MovieModel movie)
     {
         Console.Clear();
-        string category = QuestionLogic.AskString("What Category do you want to remove?");
-        List<string> categoriesaslist = movie.Categories;
-        categoriesaslist.Remove(category.ToLower());
-        movie.Categories = categoriesaslist;
+        foreach(CategoryModel cm in movie.Categories)
+        {
+            Console.WriteLine($"{cm.Id} {cm.Name}");
+        }
+        int catid = QuestionLogic.AskNumber("What Category do you want to remove?");
+        movie.Categories.Remove(CategoryLogic.GetById(catid));
         UpdateList(movie);
         Console.Clear();
         Console.WriteLine("Current movie info:");
         movie.Info();
         Console.WriteLine("Press enter to continue");
         Console.ReadLine();
-        Menu.Start();
         Menu.Start();
     }
 }

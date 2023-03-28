@@ -62,8 +62,20 @@ public class MoviesLogic
 
     public void RemoveMovie(int MovieInt)
     {
-        _movies.Remove(GetById(MovieInt));
-        MoviesAccess.WriteAll(_movies);
+        try
+        {
+            if (AccountsLogic.CurrentAccount.Admin == true)
+            {
+                _movies.Remove(GetById(MovieInt));
+                MoviesAccess.WriteAll(_movies);
+            }
+        }
+        catch (System.Exception)
+        {
+            Console.WriteLine("Not Admin");
+        }
+
+
     }
 }
 

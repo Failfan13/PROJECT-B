@@ -34,6 +34,12 @@ static class Menu
         Console.WriteLine("3 Contact");
         Console.WriteLine("4 Exit app");
 
+        TheatherLogic logic = new TheatherLogic();
+        logic.MakeTheather(10, 10);
+        TheaterModel theater = logic.GetById(1); 
+        logic.ShowSeats(theater);
+
+
         string? input = Console.ReadLine();
         if (input == "1")
         {

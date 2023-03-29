@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Max\\.nuget\\packages\\": {}
+    "/Users/emircayir/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\Project.csproj",
+      "projectUniqueName": "/Users/emircayir/Downloads/PROJECT-B/Project/Project.csproj",
       "projectName": "Project",
-      "projectPath": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\Project.csproj",
-      "packagesPath": "C:\\Users\\Max\\.nuget\\packages\\",
-      "outputPath": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\obj\\",
+      "projectPath": "/Users/emircayir/Downloads/PROJECT-B/Project/Project.csproj",
+      "packagesPath": "/Users/emircayir/.nuget/packages/",
+      "outputPath": "/Users/emircayir/Downloads/PROJECT-B/Project/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Max\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/emircayir/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -59,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.405\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.405/RuntimeIdentifierGraph.json"
       }
     }
   }

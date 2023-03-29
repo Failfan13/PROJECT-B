@@ -70,6 +70,7 @@ public class TheatherLogic
     public void ShowSeats(TheaterModel theater)
     {
         var AllSeats = theater.Seats;
+        List<SeatModel> selectedSeats = new List<SeatModel>();
 
         int i = 1;
         int selectedSeatIndex = 0;
@@ -77,7 +78,7 @@ public class TheatherLogic
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Use arrow keys to navigate and press Enter to select a seat:");
+            Console.WriteLine("Use arrow keys to navigate and press Enter to select a seat:\nPress C to confirm and reserve selected seats, R to reset selections and start over:");
             Console.WriteLine();
 
             for (int j = 0; j < AllSeats.Count; j++)
@@ -89,6 +90,11 @@ public class TheatherLogic
                     Console.BackgroundColor = ConsoleColor.Yellow;
                     Console.ForegroundColor = ConsoleColor.Black;
                 }
+                else if (selectedSeats.Contains(seat))
+                {
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
                 else if (seat.Reserved)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -98,7 +104,7 @@ public class TheatherLogic
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
-                Console.Write($" {seat.Id} ");
+                Console.Write($" {seat.Row}{seat.Id} ");
                 Console.ResetColor();
 
                 if (i == theater.Width)
@@ -108,6 +114,9 @@ public class TheatherLogic
                 }
                 i += 1;
             }
+
+            Console.WriteLine();
+            Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.Row}{s.Id}"))}");
 
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
@@ -127,17 +136,48 @@ public class TheatherLogic
                     break;
                 case ConsoleKey.Enter:
                     SeatModel selectedSeat = AllSeats[selectedSeatIndex];
-                    if (selectedSeat.Reserved)
+                    if (selectedSeats.Contains(selectedSeat))
                     {
-                        Console.WriteLine("Seat is already taken. Press any key to continue.");
+                        selectedSeats.Remove(selectedSeat);
+                    }
+                    else if (selectedSeats.Count < 9 && !selectedSeat.Reserved)
+                    {
+                        selectedSeats.Add(selectedSeat);
+                    }
+                    break;
+                case ConsoleKey.R:
+                    selectedSeats.Clear();
+                    Console.WriteLine("Selection cleared.");
+                    Console.ReadKey(true);
+                    break;
+                case ConsoleKey.C:
+                    if (selectedSeats.Count == 0)
+                    {
+                        Console.WriteLine("Please select at least one seat.");
                         Console.ReadKey(true);
                     }
                     else
                     {
-                        selectedSeat.Reserved = true;
-                        Console.WriteLine($"Seat {selectedSeat.Id} has been Selected. Press any key to continue.");
-                        Console.ReadKey(true);
-                        return;
+                        Console.Clear();
+                        Console.WriteLine($"You have selected {selectedSeats.Count} seats: {string.Join(", ", selectedSeats.Select(s => $"{s.Row}{s.Id}"))}");
+                        Console.WriteLine("Press Y to confirm or any other key to cancel:");
+
+                        ConsoleKeyInfo confirmKeyInfo = Console.ReadKey(true);
+
+                        if (confirmKeyInfo.Key == ConsoleKey.Y)
+                        {
+                            foreach (var seat in selectedSeats)
+                            {
+                                seat.Reserved = true;
+                            }
+                            Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.Row}{s.Id}"))} have been reserved. Press any key to continue.");
+                            Console.ReadKey(true);
+                            return;
+                        }
+                        else
+                        {
+                            selectedSeats.Clear();
+                        }
                     }
                     break;
                 default:

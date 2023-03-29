@@ -34,8 +34,7 @@ public static class Reservation
 
         if (CurrReservation == null)
         {
-            // Calling the next functions will not change the current reservation yet
-            // will need to fix before changing reservations.
+            // Make reservation in here 💀
 
             // Call seats here
             // Call snacks here
@@ -46,6 +45,7 @@ public static class Reservation
         }
         else
         {
+            // Edit the chosen reservation
             CurrReservation.TimeSLotId = movieChoice.Id;
             CurrReservation.DateTime = movieTime;
             ReservationLogic.UpdateList(CurrReservation);
@@ -63,7 +63,7 @@ public static class Reservation
     public static void TotalReservationCost()
     {
         Console.Write("The total cost of your order will be:\n");
-        //Order as string
+
         string orderCost = ReservationLogic.TotalOrder.ToString();
         //Show euro symbol
         Console.OutputEncoding = System.Text.Encoding.Unicode;
@@ -77,10 +77,10 @@ public static class Reservation
         string reservationDate;
         string reservationMovie;
 
-        //Console.Clear();
+        Console.Clear();
         Console.WriteLine("Choose a reservation you want to edit from the menu.");
 
-        // List all reservations with dateTime + movie name
+        // List all reservations with date, time & movie name
         foreach (ReservationModel reservation in ReservationLogic.Reservations)
         {
             reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
@@ -88,11 +88,18 @@ public static class Reservation
 
             Console.WriteLine($"{reservation.Id}. {reservationDate} - {reservationMovie}");
         }
-        // Choose the reservation to edit
-        awnser = QuestionLogic.AskNumber("\nEnter number to continue:", ReservationLogic.Reservations.Count());
 
-        // Current reservation for changes
-        CurrReservation = ReservationLogic.Reservations[awnser];
+        awnser = QuestionLogic.AskNumber("\nEnter number to continue:", ReservationLogic.Reservations.Count());
+        // Set current reservation field
+        try
+        {
+            CurrReservation = ReservationLogic.Reservations[awnser];
+        }
+        catch (System.IndexOutOfRangeException)
+        {
+            Console.WriteLine("No existing reservation found");
+            return;
+        }
 
         // Call changeables
         Console.Write("1. Choose movie & time & seats\n");
@@ -120,10 +127,9 @@ public static class Reservation
                 // to dicount apply menu
                 break;
             case 4:
-                Menu.Start();
-                break;
+                return;
             default:
-                break;
+                return;
         }
     }
 }

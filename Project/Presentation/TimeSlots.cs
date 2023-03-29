@@ -28,7 +28,7 @@ static class TimeSlots
         {
             Console.WriteLine("There are no timeslots for that movie.\nPress a key to return");
             string a = Console.ReadLine();
-            Reservation.start();
+            Reservation.Start();
         }
         else
         {

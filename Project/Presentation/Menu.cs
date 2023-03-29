@@ -121,7 +121,7 @@ static class Menu
         }
         else if (input == "3")
         {
-            Contact.start();
+            Movies.ChangeMoviesMenu();
         }
         else if (input == "4")
         {

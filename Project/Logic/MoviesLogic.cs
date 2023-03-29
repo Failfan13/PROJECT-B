@@ -7,7 +7,7 @@ using System.Text.Json;
 //This class is not static so later on we can use inheritance and interfaces
 public class MoviesLogic
 {
-    
+
     static private CategoryLogic CategoryLogic = new CategoryLogic();
     private List<MovieModel> _movies;
 
@@ -76,15 +76,15 @@ public class MoviesLogic
         {
             Console.WriteLine("Not Admin");
         }
-
+    }
 
     public void AddCategory(MovieModel movie)
     {
         Console.Clear();
         List<CategoryModel> AllCategories = CategoryLogic.AllCategories();
-        List<int> catids = new List<int>{};
+        List<int> catids = new List<int> { };
 
-        foreach(CategoryModel cm in AllCategories)
+        foreach (CategoryModel cm in AllCategories)
         {
             Console.WriteLine($"{cm.Id} {cm.Name}");
         }
@@ -100,24 +100,24 @@ public class MoviesLogic
         movie.Info();
         Console.WriteLine("Press enter to continue");
         Console.ReadLine();
-        Menu.Start();
+        Movies.ChangeMovieMenu(movie);
     }
     public void RemoveCategory(MovieModel movie)
     {
         Console.Clear();
-        foreach(CategoryModel cm in movie.Categories)
+        for (int i = 0; i < movie.Categories.Count; i++)
         {
-            Console.WriteLine($"{cm.Id} {cm.Name}");
+            Console.WriteLine($"{i + 1} {movie.Categories[i].Name}");
         }
         int catid = QuestionLogic.AskNumber("What Category do you want to remove?");
-        movie.Categories.Remove(CategoryLogic.GetById(catid));
+        movie.Categories.RemoveAt(catid - 1);
         UpdateList(movie);
         Console.Clear();
         Console.WriteLine("Current movie info:");
         movie.Info();
         Console.WriteLine("Press enter to continue");
         Console.ReadLine();
-        Menu.Start();
+        Movies.ChangeMovieMenu(movie);
     }
 }
 

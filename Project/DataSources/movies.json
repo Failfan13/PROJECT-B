@@ -6,7 +6,12 @@
     "director": "JE moeder",
     "description": null,
     "duration": 0,
-    "categories": []
+    "categories": [
+      {
+        "id": 4,
+        "name": "comedy"
+      }
+    ]
   },
   {
     "id": 1,

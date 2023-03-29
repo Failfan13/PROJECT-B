@@ -21,7 +21,7 @@ static class Movies
         string Director = "";
         string Description = "";
         DateTime ReleaseDate = new DateTime();
-        List<CategoryModel> Categories = new List<CategoryModel>{};
+        List<CategoryModel> Categories = new List<CategoryModel> { };
 
         Title = QuestionLogic.AskString("What is the title of the movie?");
 
@@ -50,7 +50,7 @@ static class Movies
             {
                 List<CategoryModel> cats = CategoryLogic.AllCategories();
                 Console.Clear();
-                foreach(CategoryModel c in cats)
+                foreach (CategoryModel c in cats)
                 {
                     Console.WriteLine($"{c.Id} {c.Name}");
                 }
@@ -62,7 +62,7 @@ static class Movies
                 }
             }
             else if (anothercat == 2)
-            nomorecategories = true;
+                nomorecategories = true;
         }
         while (nomorecategories != false);
 
@@ -101,7 +101,7 @@ static class Movies
     {
         Console.Clear();
         Console.WriteLine("What would you like to do?");
-        List<string> options = new List<string>() { "Change title", "Change Director", "Change Date", "Change Description" };
+        List<string> options = new List<string>() { "Change title", "Change categories", "Change Director", "Change Date", "Change Description" };
         for (int i = 0; i < options.Count; i++)
         {
             Console.WriteLine($"{i + 1}. {options[i]}");
@@ -116,46 +116,37 @@ static class Movies
         }
         else if (awnser == 2)
         {
-            // change director
+            ChangeCategory(movie);
         }
         else if (awnser == options.Count + 1)
         {
             ChangeMoviesMenu();
         }
     }
-    public static void ChangeCategory()
+    public static void ChangeCategory(MovieModel movie)
     {
         Console.Clear();
-        string moviename = QuestionLogic.AskString("What movie do you want to change?");
-        foreach (MovieModel movie in MoviesLogic.AllMovies())
+        var validinput = true;
+        do
         {
-            if (moviename == movie.Title)
+            int addoremove = QuestionLogic.AskNumber("What do you want to do?\n1 Add a category\n2 Remove a category");
+            if (addoremove == 1)
             {
-                bool validinput = true;
+                MoviesLogic.AddCategory(movie);
+                validinput = false;
+                
+            }
+            else if (addoremove == 2)
+            {
+                MoviesLogic.RemoveCategory(movie);
+                validinput = false;
+            }
+            else
+            {
+                Console.WriteLine("Invalid input please enter 1 or 2");
                 Console.Clear();
-                do
-                {
-                    int addoremove = QuestionLogic.AskNumber("What do you want to do?\n1 Add a category\n2 Remove a category");
-                    if (addoremove == 1)
-                    {
-                        MoviesLogic.AddCategory(movie);
-                    }
-                    else if (addoremove == 2)
-                    {
-                        MoviesLogic.RemoveCategory(movie);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid input please enter 1 or 2");
-                        Console.Clear();
-                    }
-                }
-                while(validinput);
             }
         }
-        Console.WriteLine("That movie does not exist in the database.\nPress enter to continue");
-        Console.ReadLine();
-        Menu.Start();
+        while (validinput);
     }
-
 }

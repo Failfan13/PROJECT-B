@@ -119,6 +119,31 @@ public class MoviesLogic : Order<MovieModel>
         Console.ReadLine();
         Movies.ChangeMovieMenu(movie);
     }
+
+    public List<MovieModel> FilterOnCategories(List<int> CatIds)
+    {
+        List<MovieModel> FilteredList = new List<MovieModel>();
+        foreach (MovieModel movie in AllMovies())
+        {
+            bool add = false;
+            foreach (CategoryModel Cat in movie.Categories)
+            {
+                foreach (int CatId in CatIds)
+                {
+                    if (Cat.Id == CatId)
+                    {
+                        add = true;
+                    }
+                }
+            }
+            if (add)
+            {
+                FilteredList.Add(movie);
+            }
+        }
+
+        return FilteredList;
+    }
 }
 
 

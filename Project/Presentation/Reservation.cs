@@ -22,8 +22,16 @@ public static class Reservation
             int awnser = QuestionLogic.AskNumber("\nEnter number to continue:", MoviesLogic.AllMovies().Count);
             try
             {
-                movieChoice = MoviesLogic.GetById(awnser);
-                movieTime = Movies.ShowMovieTimeSlots(movieChoice);
+                //movieChoice = MoviesLogic.GetById(awnser);
+                //movieTime = Movies.ShowMovieTimeSlots(movieChoice);
+                if (awnser == movies.AllMovies().Count + 1)
+                {
+                    Menu.Start();
+                    break;
+                }
+                choice = movies.GetById(awnser - 1);
+                CorrectInput = false;
+                TimeSlots.ShowAllTimeSlotsForMovie(choice.Id, choice.Title);
                 break;
             }
             catch (System.NullReferenceException)

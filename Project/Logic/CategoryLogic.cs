@@ -52,4 +52,5 @@ public class CategoryLogic
     {
         return _categories;
     }
+
 }

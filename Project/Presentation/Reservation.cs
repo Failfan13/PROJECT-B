@@ -9,7 +9,7 @@ public static class Reservation
         bool CorrectInput = true;
         int movieInput;
         MovieModel movieChoice = null;
-        DateTime movieTime = DateTime.MinValue;
+        List<object> timeSeats = new();
 
         Console.Clear();
         string Question = "Which movie would you like to see?";
@@ -27,19 +27,25 @@ public static class Reservation
         while (CorrectInput)
         {
             movieInput = MenuLogic.Question(Question, Options);
-            //movieInput = Convert.ToInt32(movieInput.ToString());
-            Console.WriteLine(movieInput.ToString());
 
             try
             {
                 movieChoice = MoviesLogic.GetById(movieInput - 1);
-                TimeSlots.ShowAllTimeSlotsForMovie(movieChoice.Id, movieChoice.Title);
-                CorrectInput = false;
-                break;
+                timeSeats = TimeSlots.ShowAllTimeSlotsForMovie(movieChoice.Id, movieChoice.Title);
+
+                if (timeSeats.Count == 0)
+                {
+                    CorrectInput = true;
+                }
+                else
+                {
+                    CorrectInput = false;
+                    break;
+                }
+
             }
             catch (System.NullReferenceException)
             {
-                //Console.Clear();
                 Console.WriteLine("Incorrect number");
             }
         }
@@ -59,10 +65,56 @@ public static class Reservation
         {
             // Edit the chosen reservation
             CurrReservation.TimeSLotId = movieChoice.Id;
-            CurrReservation.DateTime = movieTime;
+            CurrReservation.DateTime = (DateTime)timeSeats[0];
+            // Add seats mf (SeatModel)timeSeats[1]
             ReservationLogic.UpdateList(CurrReservation);
         }
+    }
 
+    public static void EditReservation()
+    {
+        int awnser;
+        string reservationDate;
+        string reservationMovie;
+
+        Console.Clear();
+
+        // List all reservations with date, time & movie name
+        foreach (ReservationModel reservation in ReservationLogic.Reservations)
+        {
+            reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
+            reservationMovie = MoviesLogic.GetById(reservation.TimeSLotId).Title;
+
+            Console.WriteLine($"{reservation.Id}. {reservationDate} - {reservationMovie}");
+        }
+
+        awnser = QuestionLogic.AskNumber("\nEnter number to continue:", ReservationLogic.Reservations.Count());
+        // Set current reservation field
+        try
+        {
+            CurrReservation = ReservationLogic.Reservations[awnser];
+        }
+        catch (System.IndexOutOfRangeException)
+        {
+            Console.WriteLine("No existing reservation found");
+            return;
+        }
+
+        // Edit reservations menu
+        string question = "Choose a reservation you want to edit from the menu.";
+        List<string> options = new List<string>()
+        {
+            "Choose movie, time & seats",
+            "Choose seats",
+            "Change side snack",
+            "Apply discount",
+            "Return to previous menu"
+        };
+        // Actions reservations actions
+        List<Action> actions = new();
+        actions.Add(() => Reservation.Start());
+
+        MenuLogic.Question(question, options, actions);
     }
 
     // Increases total order amount
@@ -81,67 +133,5 @@ public static class Reservation
         Console.OutputEncoding = System.Text.Encoding.Unicode;
         //Print total cost + if not containing "." add ",-" at end
         Console.WriteLine($"€ " + orderCost + (orderCost.Contains(".") ? "" : ",-"));
-    }
-
-    public static void EditReservation()
-    {
-        int awnser;
-        string reservationDate;
-        string reservationMovie;
-
-        Console.Clear();
-        Console.WriteLine("Choose a reservation you want to edit from the menu.");
-
-        // List all reservations with date, time & movie name
-        foreach (ReservationModel reservation in ReservationLogic.Reservations)
-        {
-            reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
-            reservationMovie = MoviesLogic.GetById(reservation.TimeSLotId - 1).Title;
-
-            Console.WriteLine($"{reservation.Id}. {reservationDate} - {reservationMovie}");
-        }
-
-        awnser = QuestionLogic.AskNumber("\nEnter number to continue:", ReservationLogic.Reservations.Count());
-        // Set current reservation field
-        try
-        {
-            CurrReservation = ReservationLogic.Reservations[awnser];
-        }
-        catch (System.IndexOutOfRangeException)
-        {
-            Console.WriteLine("No existing reservation found");
-            return;
-        }
-
-        // Call changeables
-        Console.Write("1. Choose movie & time & seats\n");
-        Console.Write("2. Choose seats\n");
-        Console.Write("3. Change side snack\n");
-        Console.Write("4. Apply discount\n");
-        Console.WriteLine("5. Return to previous menu");
-
-        awnser = QuestionLogic.AskNumber("\nEnter number to continue:", 5);
-
-        // Enter option for changes
-        switch (awnser)
-        {
-            case 0:
-                // to default reservation screen
-                Reservation.Start();
-                break;
-            case 1:
-                // to seats menu
-                break;
-            case 2:
-                //Snacks.Start();
-                break;
-            case 3:
-                // to dicount apply menu
-                break;
-            case 4:
-                return;
-            default:
-                return;
-        }
     }
 }

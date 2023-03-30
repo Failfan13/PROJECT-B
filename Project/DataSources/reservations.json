@@ -18,69 +18,7 @@
         "handicapped": false
       }
     ],
-    "account_id": null
-  },
-  {
-    "id": 2,
-    "timeslot_id": 1,
-    "seats": [
-      {
-        "id": 1,
-        "row": "A",
-        "price": 10,
-        "reserved": true,
-        "handicapped": false
-      },
-      {
-        "id": 2,
-        "row": "A",
-        "price": 10,
-        "reserved": true,
-        "handicapped": false
-      }
-    ],
-    "account_id": 4
-  },
-  {
-    "id": 3,
-    "timeslot_id": 1,
-    "seats": [
-      {
-        "id": 1,
-        "row": "A",
-        "price": 10,
-        "reserved": true,
-        "handicapped": false
-      },
-      {
-        "id": 2,
-        "row": "A",
-        "price": 10,
-        "reserved": true,
-        "handicapped": false
-      }
-    ],
-    "account_id": null
-  },
-  {
-    "id": 4,
-    "timeslot_id": 0,
-    "seats": [
-      {
-        "id": 1,
-        "row": "A",
-        "price": 10,
-        "reserved": true,
-        "handicapped": false
-      },
-      {
-        "id": 2,
-        "row": "A",
-        "price": 10,
-        "reserved": true,
-        "handicapped": false
-      }
-    ],
-    "account_id": null
+    "account_id": null,
+    "date_time": "2023-11-11T00:00:00"
   }
 ]

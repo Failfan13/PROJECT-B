@@ -6,17 +6,17 @@ public static class Reservation
         NoFilterMenu();
     }
 
-    private static void NoFilterMenu()
+    public static void NoFilterMenu()
     {
         var movies = new MoviesLogic().AllMovies();
 
         string Question = "which movie would you like to see?";
         List<string> Movies = new List<string>();
         List<Action> Actions = new List<Action>();
-        /*
-              Movies.Add("Use Filter");
-              Actions.Add(()=> FILTER ACTION);
-              */
+
+        Movies.Add("Use Filter");
+        Actions.Add(() => Filter.Main());
+
 
         foreach (MovieModel movie in movies)
         {
@@ -29,12 +29,13 @@ public static class Reservation
         MenuLogic.Question(Question, Movies, Actions);
     }
 
-    private static void FilteredMenu(List<MovieModel> movies)
+    public static void FilteredMenu(List<MovieModel> movies)
     {
         string Question = "which movie would you like to see?";
         List<string> Movies = new List<string>();
         List<Action> Actions = new List<Action>();
-
+        Movies.Add("Use Filter");
+        Actions.Add(() => Filter.Main());
 
         foreach (MovieModel movie in movies)
         {

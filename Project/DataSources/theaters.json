@@ -6,14 +6,14 @@
         "id": 1,
         "row": "A",
         "price": 15,
-        "reserved": false,
+        "reserved": true,
         "handicapped": false
       },
       {
         "id": 2,
         "row": "A",
         "price": 15,
-        "reserved": false,
+        "reserved": true,
         "handicapped": false
       },
       {

@@ -5,13 +5,16 @@ using System.Text.Json;
 
 public static class MenuLogic
 {
-    public static void Question(string question, List<string> options, List<Action> actions)
+    public static int Question(string question, List<string> options, List<Action> actions = null)
     {
         System.Console.Clear();
         var option = WhatToDo(question, options);
         int opt = Convert.ToInt32(option.ToString());
-        actions[opt - 1]();
-
+        if (actions != null)
+        {
+            actions[opt - 1]();
+        }
+        return opt;
     }
 
     private static char WhatToDo(string question, List<string> options)

@@ -36,29 +36,7 @@ static class Menu
         Actions.Add(() => Contact.start());
         Actions.Add(() => Environment.Exit(1));
 
-        string? input = Console.ReadLine();
-        if (input == "1")
-        {
-            UserLogin.Start();
-        }
-        else if (input == "2")
-        {
-            Reservation.Start();
-        }
-        else if (input == "3")
-        {
-            Contact.start();
-        }
-        else if (input == "4")
-        {
-            Environment.Exit(1);
-        }
-        else
-        {
-            Console.WriteLine("Invalid input");
-            Start();
-        }
-        //MenuLogic.Question(Question,Options,Actions);
+        MenuLogic.Question(Question, Options, Actions);
     }
 
     public static void NormalAccount()
@@ -78,35 +56,7 @@ static class Menu
         Actions.Add(() => Contact.start());
         Actions.Add(() => Environment.Exit(1));
 
-        Console.WriteLine("Main Menu:");
-        Console.WriteLine("1 Login");
-        Console.WriteLine("2 Make a Reservation");
-        Console.WriteLine("3 Contact");
-        Console.WriteLine("4 Exit app");
-
-        string? input = Console.ReadLine();
-        if (input == "1")
-        {
-            UserLogin.Start();
-        }
-        else if (input == "2")
-        {
-            Reservation.Start();
-        }
-        else if (input == "3")
-        {
-            Contact.start();
-        }
-        else if (input == "4")
-        {
-            Environment.Exit(1);
-        }
-        else
-        {
-            Console.WriteLine("Invalid input");
-            Start();
-        }
-        //MenuLogic.Question(Question,Options,Actions);
+        MenuLogic.Question(Question, Options, Actions);
     }
 
     public static void AdminAccount()
@@ -126,38 +76,6 @@ static class Menu
         Actions.Add(() => Movies.ChangeMoviesMenu());
         Actions.Add(() => Environment.Exit(1));
 
-        Console.WriteLine("Main Menu:");
-        Console.WriteLine("1 Login");
-        Console.WriteLine("2 Make a Reservation");
-        Console.WriteLine("3 Change Movie");
-        Console.WriteLine("4 Exit app");
-
-        string? input = Console.ReadLine();
-        if (input == "1")
-        {
-            UserLogin.Start();
-        }
-        else if (input == "2")
-        {
-            Reservation.Start();
-        }
-        else if (input == "3")
-        {
-            Movies.ChangeMoviesMenu();
-        }
-        else if (input == "4")
-        {
-            Environment.Exit(1);
-        }
-        else if (input == "5")
-        {
-            Reservation.EditReservation();
-        }
-        else
-        {
-            Console.WriteLine("Invalid input");
-            Start();
-        }
-        //MenuLogic.Question(Question,Options,Actions);
+        MenuLogic.Question(Question, Options, Actions);
     }
 }

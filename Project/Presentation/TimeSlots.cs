@@ -19,7 +19,7 @@ static class TimeSlots
         WhatMovie();
     }
 
-    public static void ShowAllTimeSlotsForMovie(int movieid, string moviename)
+    public static List<object> ShowAllTimeSlotsForMovie(int movieid, string moviename)
     {
         List<TimeSlotModel> tsms = timeslotslogic.GetByMovieId(movieid);
         TheatherLogic TL = new TheatherLogic();
@@ -47,20 +47,21 @@ static class TimeSlots
                     TL.ShowSeats(TL.GetById(tsm.Theater));
                     tijdelijk doorsturen:
                     */
-                    ReservationLogic RL = new ReservationLogic();
+                    //ReservationLogic RL = new ReservationLogic();
                     List<SeatModel> Seats = new List<SeatModel>() {
                         new SeatModel(1,'A',10,true,false),
                         new SeatModel(2,'A',10,true,false),
                     };
 
 
-                    RL.MakeReservation(tsm.Id, Seats);
-
-                    Console.WriteLine("Press enter to return to main menu");
-                    Console.ReadLine();
-                    Menu.Start();
+                    //RL.MakeReservation(tsm.Id, Seats);
+                    return new List<object>() { tsm.Id, Seats };
+                    // Console.WriteLine("Press enter to return to main menu");
+                    // Console.ReadLine();
+                    //Menu.Start();
                 }
             }
         }
+        return null;
     }
 }

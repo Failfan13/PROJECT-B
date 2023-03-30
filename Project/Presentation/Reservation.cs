@@ -7,35 +7,39 @@ public static class Reservation
     public static void Start()
     {
         bool CorrectInput = true;
+        int movieInput;
         MovieModel movieChoice = null;
         DateTime movieTime = DateTime.MinValue;
 
         Console.Clear();
-        Console.WriteLine("Which movie would you like to see?");
+        string Question = "Which movie would you like to see?";
+        List<string> Options = new();
+
         foreach (MovieModel movie in MoviesLogic.AllMovies())
         {
-            Console.WriteLine($"{movie.Id + 1}. {movie.Title}");
+            Options.Add(movie.Title);
+            if (movie.Id == 9)
+            {
+                break;
+            }
         }
 
         while (CorrectInput)
         {
-            int awnser = QuestionLogic.AskNumber("\nEnter number to continue:", MoviesLogic.AllMovies().Count);
+            movieInput = MenuLogic.Question(Question, Options);
+            //movieInput = Convert.ToInt32(movieInput.ToString());
+            Console.WriteLine(movieInput.ToString());
+
             try
             {
-                //movieChoice = MoviesLogic.GetById(awnser);
-                //movieTime = Movies.ShowMovieTimeSlots(movieChoice);
-                if (awnser == MoviesLogic.AllMovies().Count + 1)
-                {
-                    Menu.Start();
-                    break;
-                }
-                movieChoice = MoviesLogic.GetById(awnser - 1);
-                CorrectInput = false;
+                movieChoice = MoviesLogic.GetById(movieInput - 1);
                 TimeSlots.ShowAllTimeSlotsForMovie(movieChoice.Id, movieChoice.Title);
+                CorrectInput = false;
                 break;
             }
             catch (System.NullReferenceException)
             {
+                //Console.Clear();
                 Console.WriteLine("Incorrect number");
             }
         }

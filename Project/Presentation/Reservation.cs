@@ -8,6 +8,7 @@ public static class Reservation
 
     public static void NoFilterMenu()
     {
+        Filter.CatIds = null;
         var movies = new MoviesLogic().AllMovies();
 
         string Question = "which movie would you like to see?";

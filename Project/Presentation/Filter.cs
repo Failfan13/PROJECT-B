@@ -56,16 +56,16 @@ static class Filter
 
         MenuLogic.Question(Question, Options, Actions);
 
-        List<MovieModel> movies;
         if (Filter.CatIds.Count != 0)
         {
-            movies = new MoviesLogic().FilterOnCategories(CatIds);
+            var movies = new MoviesLogic().FilterOnCategories(CatIds);
+            Reservation.FilteredMenu(movies);
         }
         else
         {
-            movies = new MoviesLogic().AllMovies();
+            Reservation.NoFilterMenu();
         }
 
-        Reservation.FilteredMenu(movies);
+
     }
 }

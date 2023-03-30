@@ -77,6 +77,30 @@ public class MoviesLogic
             Console.WriteLine("Not Admin");
         }
     }
+    public List<MovieModel> FilterOnCategories(List<int> CatIds)
+    {
+        List<MovieModel> FilteredList = new List<MovieModel>();
+        foreach (MovieModel movie in AllMovies())
+        {
+            bool add = false;
+            foreach (CategoryModel Cat in movie.Categories)
+            {
+                foreach (int CatId in CatIds)
+                {
+                    if (Cat.Id == CatId)
+                    {
+                        add = true;
+                    }
+                }
+            }
+            if (add)
+            {
+                FilteredList.Add(movie);
+            }
+        }
+
+        return FilteredList;
+    }
 
     public void ChangeTitle(MovieModel movie, string NewTitle)
     {

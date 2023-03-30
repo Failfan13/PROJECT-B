@@ -1,4 +1,4 @@
-static class Filter
+public static class Filter
 {
     public static List<int> CatIds = new List<int>();
     public static void Main()

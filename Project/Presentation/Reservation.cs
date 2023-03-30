@@ -18,10 +18,6 @@ public static class Reservation
         foreach (MovieModel movie in MoviesLogic.AllMovies())
         {
             Options.Add(movie.Title);
-            if (movie.Id == 9)
-            {
-                break;
-            }
         }
 
         while (CorrectInput)

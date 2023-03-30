@@ -101,7 +101,7 @@ static class Movies
     {
         Console.Clear();
         Console.WriteLine("What would you like to do?");
-        List<string> options = new List<string>() { "Change title", "Change Director", "Change Date", "Change Description" };
+        List<string> options = new List<string>() { "Change title", "Change Director", "Change Releasedate", "Change Description", "Change Categories", "Change Duration" };
         for (int i = 0; i < options.Count; i++)
         {
             Console.WriteLine($"{i + 1}. {options[i]}");
@@ -112,50 +112,99 @@ static class Movies
 
         if (awnser == 1)
         {
-            // Change title
+            ChangeTitle(movie);
         }
         else if (awnser == 2)
         {
-            // change director
+            ChangeDirector(movie);
+        }
+        else if (awnser == 3)
+        {
+            ChangeReleaseDate(movie);
+        }
+        else if (awnser == 4)
+        {
+            ChangeDescription(movie);
+        }
+        else if (awnser == 5)
+        {
+            ChangeCategory(movie);
+        }
+        else if (awnser == 6)
+        {
+            ChangeDuration(movie);
         }
         else if (awnser == options.Count + 1)
         {
             ChangeMoviesMenu();
         }
     }
-    public static void ChangeCategory()
+    public static void ChangeCategory(MovieModel movie)
     {
+        bool validinput = true;
         Console.Clear();
-        string moviename = QuestionLogic.AskString("What movie do you want to change?");
-        foreach (MovieModel movie in MoviesLogic.AllMovies())
+        do
         {
-            if (moviename == movie.Title)
+            int addoremove = QuestionLogic.AskNumber("What do you want to do?\n1 Add a category\n2 Remove a category");
+            if (addoremove == 1)
             {
-                bool validinput = true;
+                CategoryLogic.AddCategory(movie);
+            }
+            else if (addoremove == 2)
+            {
+                CategoryLogic.RemoveCategory(movie);
+            }
+            else
+            {
+                Console.WriteLine("Invalid input please enter 1 or 2");
                 Console.Clear();
-                do
-                {
-                    int addoremove = QuestionLogic.AskNumber("What do you want to do?\n1 Add a category\n2 Remove a category");
-                    if (addoremove == 1)
-                    {
-                        MoviesLogic.AddCategory(movie);
-                    }
-                    else if (addoremove == 2)
-                    {
-                        MoviesLogic.RemoveCategory(movie);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid input please enter 1 or 2");
-                        Console.Clear();
-                    }
-                }
-                while(validinput);
             }
         }
-        Console.WriteLine("That movie does not exist in the database.\nPress enter to continue");
-        Console.ReadLine();
-        Menu.Start();
+        while(validinput);
     }
 
+
+    public static void ChangeTitle(MovieModel movie)
+    {
+        string NewTitle = QuestionLogic.AskString("What do you want to change the title of this movie to?");
+        MoviesLogic.ChangeTitle(movie, NewTitle);
+        ChangeMovieMenu(movie);
+    }
+    public static void ChangeDirector(MovieModel movie)
+    {
+        string NewDirector = QuestionLogic.AskString("What do you want to change the director of this movie to?");
+        MoviesLogic.ChangeDirector(movie, NewDirector);
+        ChangeMovieMenu(movie);
+    }
+    public static void ChangeDescription(MovieModel movie)
+    {
+        string NewDescription = QuestionLogic.AskString("What do you want to change the description of this movie to?");
+        MoviesLogic.ChangeDescription(movie, NewDescription);
+        ChangeMovieMenu(movie);
+    }
+    public static void ChangeDuration(MovieModel movie)
+    {
+        int NewDuration = QuestionLogic.AskNumber("What do you want to change the duration of this movie to? (please enter the ammount of minutes)");
+        MoviesLogic.ChangeDuration(movie, NewDuration);
+        ChangeMovieMenu(movie);
+    }
+    public static void ChangeReleaseDate(MovieModel movie)
+    {
+        DateTime NewReleaseDate = new DateTime();
+        bool CorrectDate = true;
+        while (CorrectDate)
+        {
+            Console.WriteLine("What is the release date of the movie? (dd/mm/yyyy): ");
+            try
+            {
+                NewReleaseDate = Convert.ToDateTime(Console.ReadLine());
+                CorrectDate = false;
+            }
+            catch (System.Exception)
+            {
+                Console.WriteLine("Wrong date format!");
+            }
+        }
+        MoviesLogic.ChangeReleaseDate(movie, NewReleaseDate);
+    }
 }

@@ -76,49 +76,38 @@ public class MoviesLogic
         {
             Console.WriteLine("Not Admin");
         }
-
-
-    public void AddCategory(MovieModel movie)
-    {
-        Console.Clear();
-        List<CategoryModel> AllCategories = CategoryLogic.AllCategories();
-        List<int> catids = new List<int>{};
-
-        foreach(CategoryModel cm in AllCategories)
-        {
-            Console.WriteLine($"{cm.Id} {cm.Name}");
-        }
-        int catid = QuestionLogic.AskNumber("What Category do you want to add?\nPlease enter the number");
-        CategoryModel category = CategoryLogic.GetById(catid);
-        if (!movie.Categories.Contains(category))
-        {
-            movie.Categories.Add(category);
-        }
-        UpdateList(movie);
-        Console.Clear();
-        Console.WriteLine("Current movie info:");
-        movie.Info();
-        Console.WriteLine("Press enter to continue");
-        Console.ReadLine();
-        Menu.Start();
     }
-    public void RemoveCategory(MovieModel movie)
+
+    public void ChangeTitle(MovieModel movie, string NewTitle)
     {
-        Console.Clear();
-        foreach(CategoryModel cm in movie.Categories)
-        {
-            Console.WriteLine($"{cm.Id} {cm.Name}");
-        }
-        int catid = QuestionLogic.AskNumber("What Category do you want to remove?");
-        movie.Categories.Remove(CategoryLogic.GetById(catid));
+        movie.Title = NewTitle;
         UpdateList(movie);
-        Console.Clear();
-        Console.WriteLine("Current movie info:");
-        movie.Info();
-        Console.WriteLine("Press enter to continue");
-        Console.ReadLine();
-        Menu.Start();
     }
+
+    public void ChangeDirector(MovieModel movie, string NewDirector)
+    {
+        movie.Director = NewDirector;
+        UpdateList(movie);
+    }
+
+    public void ChangeDescription(MovieModel movie, string NewDescription)
+    {
+        movie.Description = NewDescription;
+        UpdateList(movie);
+    }
+
+    public void ChangeDuration(MovieModel movie, int NewDuration)
+    {
+        movie.Duration = NewDuration;
+        UpdateList(movie);
+    }
+
+    public void ChangeReleaseDate(MovieModel movie, DateTime NewDate)
+    {
+        movie.ReleaseDate = NewDate;
+        UpdateList(movie);
+    }
+
 }
 
 

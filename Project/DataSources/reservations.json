@@ -82,5 +82,26 @@
       }
     ],
     "account_id": null
+  },
+  {
+    "id": 5,
+    "timeslot_id": 1,
+    "seats": [
+      {
+        "id": 1,
+        "row": "A",
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 2,
+        "row": "A",
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "account_id": null
   }
 ]

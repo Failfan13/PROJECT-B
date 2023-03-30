@@ -168,24 +168,32 @@ static class Movies
     {
         string NewTitle = QuestionLogic.AskString("What do you want to change the title of this movie to?");
         MoviesLogic.ChangeTitle(movie, NewTitle);
+        Console.WriteLine($"Title is now: {NewTitle}");
+        QuestionLogic.AskEnter();
         ChangeMovieMenu(movie);
     }
     public static void ChangeDirector(MovieModel movie)
     {
         string NewDirector = QuestionLogic.AskString("What do you want to change the director of this movie to?");
         MoviesLogic.ChangeDirector(movie, NewDirector);
+        Console.WriteLine($"Director is now: {NewDirector}");
+        QuestionLogic.AskEnter();
         ChangeMovieMenu(movie);
     }
     public static void ChangeDescription(MovieModel movie)
     {
         string NewDescription = QuestionLogic.AskString("What do you want to change the description of this movie to?");
         MoviesLogic.ChangeDescription(movie, NewDescription);
+        Console.WriteLine($"Description is now: {NewDescription}");
+        QuestionLogic.AskEnter();
         ChangeMovieMenu(movie);
     }
     public static void ChangeDuration(MovieModel movie)
     {
         int NewDuration = QuestionLogic.AskNumber("What do you want to change the duration of this movie to? (please enter the ammount of minutes)");
         MoviesLogic.ChangeDuration(movie, NewDuration);
+        Console.WriteLine($"Duration is now: {NewDuration} minutes");
+        QuestionLogic.AskEnter();
         ChangeMovieMenu(movie);
     }
     public static void ChangeReleaseDate(MovieModel movie)
@@ -206,5 +214,8 @@ static class Movies
             }
         }
         MoviesLogic.ChangeReleaseDate(movie, NewReleaseDate);
+        Console.WriteLine($"Release date  is now: {NewReleaseDate.Date}");
+        QuestionLogic.AskEnter();
+        ChangeMovieMenu(movie);
     }
 }

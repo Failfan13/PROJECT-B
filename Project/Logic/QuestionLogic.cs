@@ -21,32 +21,18 @@ public static class QuestionLogic
         return awnser;
     }
 
-    public static int AskNumber(string question, int menuLength = 0)
+    public static int AskNumber(string question)
     {
         bool Correct = true;
         int awnser = -1;
-        // Guide for menuTypes
-        if (menuLength != 0)
-        {
-            Console.WriteLine("\n" + @"Make a choice from the menu by entering the
-number associated by the function.");
-        }
         while (Correct)
         {
             Console.WriteLine(question);
             try
             {
-                awnser += Convert.ToInt32(Console.ReadLine());
-                // if awnser 0 or less & awnser higher then menu if one appointed
-                if (awnser < 0 || (menuLength != 0 ? awnser > menuLength : false))
-                {
-                    Console.WriteLine("Not a menu option");
-                    awnser = -1;
-                }
-                else
-                {
-                    Correct = false;
-                }
+                awnser = Convert.ToInt32(Console.ReadLine());
+                Correct = false;
+
             }
             catch (System.FormatException)
             {

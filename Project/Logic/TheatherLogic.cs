@@ -70,6 +70,7 @@ public class TheatherLogic
     public void ShowSeats(TheaterModel theater)
     {
         var AllSeats = theater.Seats;
+        List<SeatModel> selectedSeats = new List<SeatModel>();
 
         int i = 1;
         int selectedSeatIndex = 0;

@@ -3,40 +3,49 @@ public static class Reservation
     static private ReservationLogic ReservationLogic = new();
     public static void start()
     {
-        bool CorrectInput = true;
-
-        MovieModel choice = null;
-        Console.Clear();
-        Console.WriteLine("Which movie would you like to see?");
-        var movies = new MoviesLogic();
-        foreach (MovieModel movie in movies.AllMovies())
-        {
-            Console.WriteLine($"{movie.Id + 1}. {movie.Title}.");
-        }
-        Console.WriteLine($"{movies.AllMovies().Count + 1}. Return");
-
-        while (CorrectInput)
-        {
-            int awnser = QuestionLogic.AskNumber("\nEnter number to continue:");
-            try
-            {
-                if (awnser == movies.AllMovies().Count + 1)
-                {
-                    Menu.Start();
-                    break;
-                }
-                choice = movies.GetById(awnser - 1);
-                CorrectInput = false;
-                TimeSlots.ShowAllTimeSlotsForMovie(choice.Id, choice.Title);
-                break;
-            }
-            catch (System.NullReferenceException)
-            {
-                Console.WriteLine("Incorrect number");
-            }
-        }
+        NoFilterMenu();
     }
 
+    private static void NoFilterMenu()
+    {
+        var movies = new MoviesLogic().AllMovies();
+
+        string Question = "which movie would you like to see?";
+        List<string> Movies = new List<string>();
+        List<Action> Actions = new List<Action>();
+        /*
+              Movies.Add("Use Filter");
+              Actions.Add(()=> FILTER ACTION);
+              */
+
+        foreach (MovieModel movie in movies)
+        {
+            Movies.Add(movie.Title);
+            Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, movie.Title));
+        }
+        Movies.Add("Return");
+        Actions.Add(() => Menu.Start());
+
+        MenuLogic.Question(Question, Movies, Actions);
+    }
+
+    private static void FilteredMenu(List<MovieModel> movies)
+    {
+        string Question = "which movie would you like to see?";
+        List<string> Movies = new List<string>();
+        List<Action> Actions = new List<Action>();
+
+
+        foreach (MovieModel movie in movies)
+        {
+            Movies.Add(movie.Title);
+            Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, movie.Title));
+        }
+        Movies.Add("Return");
+        Actions.Add(() => Menu.Start());
+
+        MenuLogic.Question(Question, Movies, Actions);
+    }
     // Increases total order amount
     //ReservationLogic.TotalOrder = 5.5;
 

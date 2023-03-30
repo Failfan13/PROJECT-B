@@ -32,7 +32,7 @@ static class Menu
         };
         List<Action> Actions = new List<Action>();
         Actions.Add(() => UserLogin.Start());
-        Actions.Add(() => Reservation.start());
+        Actions.Add(() => Reservation.Start());
         Actions.Add(() => Contact.start());
         Actions.Add(() => Environment.Exit(1));
 
@@ -74,7 +74,7 @@ static class Menu
         };
         List<Action> Actions = new List<Action>();
         Actions.Add(() => UserLogin.Start());
-        Actions.Add(() => Reservation.start());
+        Actions.Add(() => Reservation.Start());
         Actions.Add(() => Contact.start());
         Actions.Add(() => Environment.Exit(1));
 
@@ -122,7 +122,7 @@ static class Menu
         };
         List<Action> Actions = new List<Action>();
         Actions.Add(() => UserLogin.Start());
-        Actions.Add(() => Reservation.start());
+        Actions.Add(() => Reservation.Start());
         Actions.Add(() => Movies.ChangeMoviesMenu());
         Actions.Add(() => Environment.Exit(1));
 

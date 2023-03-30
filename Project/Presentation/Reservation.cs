@@ -24,14 +24,14 @@ public static class Reservation
             {
                 //movieChoice = MoviesLogic.GetById(awnser);
                 //movieTime = Movies.ShowMovieTimeSlots(movieChoice);
-                if (awnser == movies.AllMovies().Count + 1)
+                if (awnser == MoviesLogic.AllMovies().Count + 1)
                 {
                     Menu.Start();
                     break;
                 }
-                choice = movies.GetById(awnser - 1);
+                movieChoice = MoviesLogic.GetById(awnser - 1);
                 CorrectInput = false;
-                TimeSlots.ShowAllTimeSlotsForMovie(choice.Id, choice.Title);
+                TimeSlots.ShowAllTimeSlotsForMovie(movieChoice.Id, movieChoice.Title);
                 break;
             }
             catch (System.NullReferenceException)

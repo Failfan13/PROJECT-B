@@ -8,25 +8,25 @@ public static class MenuLogic
     public static void Question(string question, List<string> options, List<Action> actions)
     {
         System.Console.Clear();
-        var option = WhatWouldYouLikeToDo(question, options);
+        var option = WhatToDo(question, options);
         int opt = Convert.ToInt32(option.ToString());
         actions[opt - 1]();
 
     }
 
-    private static char WhatWouldYouLikeToDo(string question, List<string> options)
+    private static char WhatToDo(string question, List<string> options)
     {
-        char option = AskForAction(question, options);
+        char option = Actions(question, options);
         while (option < '1' || option > Convert.ToChar((options.Count).ToString()))
         {
             System.Console.Clear();
             Console.WriteLine("I do not understand");
-            option = AskForAction(question, options);
+            option = Actions(question, options);
         }
         return option;
     }
 
-    private static char AskForAction(string question, List<string> options)
+    private static char Actions(string question, List<string> options)
     {
         Console.WriteLine($"{question}");
         for (int i = 1; i < options.Count + 1; i++)

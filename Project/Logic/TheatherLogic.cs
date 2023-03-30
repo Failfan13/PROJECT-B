@@ -134,10 +134,38 @@ public class TheatherLogic
                     }
                     else
                     {
-                        selectedSeat.Reserved = true;
-                        Console.WriteLine($"Seat {selectedSeat.Id} has been Selected. Press any key to continue.");
-                        Console.ReadKey(true);
-                        return;
+                        Console.Clear();
+                        Console.WriteLine($"You have selected {selectedSeats.Count} seats: {string.Join(", ", selectedSeats.Select(s => $"{s.Row}{s.Id}"))}");
+                        Console.WriteLine("Press Y to confirm or any other key to cancel:");
+
+                        ConsoleKeyInfo confirmKeyInfo = Console.ReadKey(true);
+
+                        if (confirmKeyInfo.Key == ConsoleKey.Y)
+                        {
+                            foreach (var seat in selectedSeats)
+                            {
+                                seat.Reserved = true;
+                            }
+                            foreach (SeatModel seat in theater.Seats)
+                            {
+                                foreach (var seats in selectedSeats)
+                                {
+                                    if (seat.Id == seats.Id && seat.Row == seats.Row)
+                                    {
+                                        seat.Reserved = seats.Reserved;
+                                    }
+                                }
+                            }
+
+                            UpdateList(theater);
+                            Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.Row}{s.Id}"))} have been reserved. Press any key to continue.");
+                            Console.ReadKey(true);
+                            return;
+                        }
+                        else
+                        {
+                            selectedSeats.Clear();
+                        }
                     }
                     break;
                 default:

@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "0of4zpd98MCvxfT3Iwc/RJXoF9hKUDlA7QQGNzgbhEjAyN3NATtlJQULvQGUgtroKqXepCenmZ9jBOIQHO2EXQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\Project.csproj",
+=======
+  "dgSpecHash": "zKEnQWPW0PI5e/sNOy6USeEuUuQWqHAHq4GJloNca1auKzRgYPp2Nz7AELb9+BQ3uocNi/AYPeKuB5ul0HfQ3w==",
+  "success": true,
+  "projectFilePath": "/Users/emircayir/Downloads/PROJECT-B/Project/Project.csproj",
+>>>>>>> ACC4-finished
   "expectedPackageFiles": [],
   "logs": []
 }

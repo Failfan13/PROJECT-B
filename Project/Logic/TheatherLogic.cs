@@ -69,80 +69,136 @@ public class TheatherLogic
 
     public void ShowSeats(TheaterModel theater)
     {
-        var AllSeats = theater.Seats;
+        Console.CursorVisible = false;
+        ConsoleKeyInfo key;
+        int selectedOption = 0;
+        int numRows = theater.Width;
+        int numCols = theater.Height;
+        List<SeatModel> seats = theater.Seats;
 
-        int i = 1;
-        int selectedSeatIndex = 0;
+        // Populate the seats list
 
-        while (true)
+        List<int> selectedSeats = new List<int>();
+        List<SeatModel> selSeat = new List<SeatModel>();
+
+        do
         {
             Console.Clear();
-            Console.WriteLine("Use arrow keys to navigate and press Enter to select a seat:");
-            Console.WriteLine();
+            Console.WriteLine("Use arrow keys to navigate, press Enter to select a seat, and press Space to confirm:\n");
 
-            for (int j = 0; j < AllSeats.Count; j++)
+            int count = 0;
+            foreach (SeatModel seat in seats)
             {
-                SeatModel seat = AllSeats[j];
-
-                if (j == selectedSeatIndex)
+                if (selectedSeats.Contains(count))
                 {
-                    Console.BackgroundColor = ConsoleColor.Yellow;
                     Console.ForegroundColor = ConsoleColor.Black;
+                    Console.BackgroundColor = ConsoleColor.White;
                 }
-                else if (seat.Reserved)
+
+                Console.Write($"{seat.Row}{seat.Id,-5}");
+
+                Console.ResetColor();
+
+                if ((count + 1) % numCols == 0)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine();
+                }
+
+                count++;
+            }
+
+            key = Console.ReadKey();
+
+            if (key.Key == ConsoleKey.UpArrow)
+            {
+                if (selectedSeats.Count == 0)
+                {
+                    selectedSeats.Add(seats.Count - numCols + selectedSeats.Count);
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    selectedSeats[selectedSeats.Count - 1] -= numCols;
+                    if (selectedSeats[selectedSeats.Count - 1] < 0)
+                    {
+                        selectedSeats[selectedSeats.Count - 1] += numCols * numRows;
+                    }
                 }
-
-                Console.Write($" {seat.Id} ");
-                Console.ResetColor();
-
-                if (i == theater.Width)
-                {
-                    Console.WriteLine();
-                    i = 0;
-                }
-                i += 1;
             }
-
-            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-
-            switch (keyInfo.Key)
+            else if (key.Key == ConsoleKey.DownArrow)
             {
-                case ConsoleKey.UpArrow:
-                    selectedSeatIndex = Math.Max(0, selectedSeatIndex - theater.Width);
-                    break;
-                case ConsoleKey.DownArrow:
-                    selectedSeatIndex = Math.Min(AllSeats.Count - 1, selectedSeatIndex + theater.Width);
-                    break;
-                case ConsoleKey.LeftArrow:
-                    selectedSeatIndex = Math.Max(0, selectedSeatIndex - 1);
-                    break;
-                case ConsoleKey.RightArrow:
-                    selectedSeatIndex = Math.Min(AllSeats.Count - 1, selectedSeatIndex + 1);
-                    break;
-                case ConsoleKey.Enter:
-                    SeatModel selectedSeat = AllSeats[selectedSeatIndex];
-                    if (selectedSeat.Reserved)
+                if (selectedSeats.Count == 0)
+                {
+                    selectedSeats.Add(0);
+                }
+                else
+                {
+                    selectedSeats[selectedSeats.Count - 1] += numCols;
+                    if (selectedSeats[selectedSeats.Count - 1] >= numCols * numRows)
                     {
-                        Console.WriteLine("Seat is already taken. Press any key to continue.");
-                        Console.ReadKey(true);
+                        selectedSeats[selectedSeats.Count - 1] -= numCols * numRows;
                     }
-                    else
-                    {
-                        selectedSeat.Reserved = true;
-                        Console.WriteLine($"Seat {selectedSeat.Id} has been Selected. Press any key to continue.");
-                        Console.ReadKey(true);
-                        return;
-                    }
-                    break;
-                default:
-                    break;
+                }
             }
+            else if (key.Key == ConsoleKey.LeftArrow)
+            {
+                if (selectedSeats.Count > 0)
+                {
+                    selectedSeats[selectedSeats.Count - 1]--;
+                    if (selectedSeats[selectedSeats.Count - 1] < 0)
+                    {
+                        if (selectedSeats.Count == 1)
+                        {
+                            selectedSeats[selectedSeats.Count - 1] = seats.Count - 1;
+                        }
+                        else
+                        {
+                            selectedSeats.RemoveAt(selectedSeats.Count - 1);
+                        }
+                    }
+                }
+            }
+            else if (key.Key == ConsoleKey.RightArrow)
+            {
+                if (selectedSeats.Count > 0)
+                {
+                    selectedSeats[selectedSeats.Count - 1]++;
+                    if (selectedSeats[selectedSeats.Count - 1] >= numCols * numRows)
+                    {
+                        if (selectedSeats.Count == 1)
+                        {
+                            selectedSeats[selectedSeats.Count - 1] = 0;
+                        }
+                        else
+                        {
+                            selectedSeats.RemoveAt(selectedSeats.Count - 1);
+                        }
+                    }
+                }
+            }
+            else if (key.Key == ConsoleKey.Enter)
+            {
+                if (!selectedSeats.Contains(selectedSeats.Count))
+                {
+                    selectedSeats.Add(selectedSeats.Count);
+                }
+            }
+            else if (key.Key == ConsoleKey.Spacebar)
+            {
+                break;
+            }
+
+        } while (true);
+
+        Console.Clear();
+        for (int i = 0; i < selectedSeats.Count - 1; i++)
+        {
+            selSeat.Add(seats[selectedSeats[i]]);
+        }
+
+        foreach (var seat in selSeat)
+        {
+            Console.WriteLine($"{seat.Row}{seat.Id}");
         }
     }
 }
+

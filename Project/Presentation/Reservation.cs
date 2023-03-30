@@ -84,7 +84,7 @@ public static class Reservation
             Console.WriteLine($"{reservation.Id}. {reservationDate} - {reservationMovie}");
         }
 
-        awnser = QuestionLogic.AskNumber("\nEnter number to continue:", ReservationLogic.Reservations.Count());
+        awnser = QuestionLogic.AskNumber("\nEnter number to continue:");
         // Set current reservation field
         try
         {

@@ -1,37 +1,23 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\Project.csproj": {}
+    "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\Project.csproj": {
+    "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\Project.csproj",
+        "projectUniqueName": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\Project.csproj",
         "projectName": "Project",
-        "projectPath": "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\Project.csproj",
-        "packagesPath": "C:\\Users\\erikm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\obj\\",
+        "projectPath": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\Project.csproj",
+        "packagesPath": "C:\\Users\\max\\.nuget\\packages\\",
+        "outputPath": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\erikm\\AppData\\Roaming\\NuGet\\NuGet.Config"
-=======
-    "/Users/emircayir/Downloads/PROJECT-B/Project/Project.csproj": {}
-  },
-  "projects": {
-    "/Users/emircayir/Downloads/PROJECT-B/Project/Project.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/Users/emircayir/Downloads/PROJECT-B/Project/Project.csproj",
-        "projectName": "Project",
-        "projectPath": "/Users/emircayir/Downloads/PROJECT-B/Project/Project.csproj",
-        "packagesPath": "/Users/emircayir/.nuget/packages/",
-        "outputPath": "/Users/emircayir/Downloads/PROJECT-B/Project/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/Users/emircayir/.nuget/NuGet/NuGet.Config"
->>>>>>> ACC4-finished
+          "C:\\Users\\max\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -70,7 +56,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.405/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.405\\RuntimeIdentifierGraph.json"
         }
       }
     }

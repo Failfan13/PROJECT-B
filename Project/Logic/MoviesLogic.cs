@@ -78,72 +78,36 @@ public class MoviesLogic
         }
     }
 
-    public void AddCategory(MovieModel movie)
+    public void ChangeTitle(MovieModel movie, string NewTitle)
     {
-        Console.Clear();
-        List<CategoryModel> AllCategories = CategoryLogic.AllCategories();
-        List<int> catids = new List<int> { };
-
-        foreach (CategoryModel cm in AllCategories)
-        {
-            Console.WriteLine($"{cm.Id} {cm.Name}");
-        }
-        int catid = QuestionLogic.AskNumber("What Category do you want to add?\nPlease enter the number");
-        CategoryModel category = CategoryLogic.GetById(catid);
-        if (!movie.Categories.Contains(category))
-        {
-            movie.Categories.Add(category);
-        }
+        movie.Title = NewTitle;
         UpdateList(movie);
-        Console.Clear();
-        Console.WriteLine("Current movie info:");
-        movie.Info();
-        Console.WriteLine("Press enter to continue");
-        Console.ReadLine();
-        Movies.ChangeMovieMenu(movie);
     }
-    public void RemoveCategory(MovieModel movie)
+
+    public void ChangeDirector(MovieModel movie, string NewDirector)
     {
-        Console.Clear();
-        for (int i = 0; i < movie.Categories.Count; i++)
-        {
-            Console.WriteLine($"{i + 1} {movie.Categories[i].Name}");
-        }
-        int catid = QuestionLogic.AskNumber("What Category do you want to remove?");
-        movie.Categories.RemoveAt(catid - 1);
+        movie.Director = NewDirector;
         UpdateList(movie);
-        Console.Clear();
-        Console.WriteLine("Current movie info:");
-        movie.Info();
-        Console.WriteLine("Press enter to continue");
-        Console.ReadLine();
-        Movies.ChangeMovieMenu(movie);
     }
 
-    public List<MovieModel> FilterOnCategories(List<int> CatIds)
+    public void ChangeDescription(MovieModel movie, string NewDescription)
     {
-        List<MovieModel> FilteredList = new List<MovieModel>();
-        foreach (MovieModel movie in AllMovies())
-        {
-            bool add = false;
-            foreach (CategoryModel Cat in movie.Categories)
-            {
-                foreach (int CatId in CatIds)
-                {
-                    if (Cat.Id == CatId)
-                    {
-                        add = true;
-                    }
-                }
-            }
-            if (add)
-            {
-                FilteredList.Add(movie);
-            }
-        }
-
-        return FilteredList;
+        movie.Description = NewDescription;
+        UpdateList(movie);
     }
+
+    public void ChangeDuration(MovieModel movie, int NewDuration)
+    {
+        movie.Duration = NewDuration;
+        UpdateList(movie);
+    }
+
+    public void ChangeReleaseDate(MovieModel movie, DateTime NewDate)
+    {
+        movie.ReleaseDate = NewDate;
+        UpdateList(movie);
+    }
+
 }
 
 

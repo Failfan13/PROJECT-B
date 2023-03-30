@@ -170,6 +170,18 @@ public class TheatherLogic
                             {
                                 seat.Reserved = true;
                             }
+                            foreach (SeatModel seat in theater.Seats)
+                            {
+                                foreach (var seats in selectedSeats)
+                                {
+                                    if (seat.Id == seats.Id && seat.Row == seats.Row)
+                                    {
+                                        seat.Reserved = seats.Reserved;
+                                    }
+                                }
+                            }
+
+                            UpdateList(theater);
                             Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.Row}{s.Id}"))} have been reserved. Press any key to continue.");
                             Console.ReadKey(true);
                             return;

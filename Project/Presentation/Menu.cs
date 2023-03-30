@@ -32,11 +32,11 @@ static class Menu
         };
         List<Action> Actions = new List<Action>();
         Actions.Add(() => UserLogin.Start());
-        Actions.Add(() => Reservation.start());
+        Actions.Add(() => Reservation.Start());
         Actions.Add(() => Contact.start());
         Actions.Add(() => Environment.Exit(1));
 
-        MenuLogic.Question(Question,Options,Actions);
+        MenuLogic.Question(Question, Options, Actions);
     }
 
     public static void NormalAccount()
@@ -52,11 +52,11 @@ static class Menu
         };
         List<Action> Actions = new List<Action>();
         Actions.Add(() => UserLogin.Start());
-        Actions.Add(() => Reservation.start());
+        Actions.Add(() => Reservation.Start());
         Actions.Add(() => Contact.start());
         Actions.Add(() => Environment.Exit(1));
 
-        MenuLogic.Question(Question,Options,Actions);
+        MenuLogic.Question(Question, Options, Actions);
     }
 
     public static void AdminAccount()
@@ -72,10 +72,10 @@ static class Menu
         };
         List<Action> Actions = new List<Action>();
         Actions.Add(() => UserLogin.Start());
-        Actions.Add(() => Reservation.start());
+        Actions.Add(() => Reservation.Start());
         Actions.Add(() => Movies.ChangeMoviesMenu());
         Actions.Add(() => Environment.Exit(1));
 
-        MenuLogic.Question(Question,Options,Actions);
+        MenuLogic.Question(Question, Options, Actions);
     }
 }

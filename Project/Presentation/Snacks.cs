@@ -4,7 +4,7 @@ static class Snacks
 
     public static void ShowAll()
     {
-        foreach (SnackModel snack in SnacksLogic.AllModel())
+        foreach (SnackModel snack in SnacksLogic.AllSnacks())
         {
             Console.WriteLine($"{snack.Id} {snack.Name}");
         }
@@ -13,7 +13,7 @@ static class Snacks
     // Start request to user
     public static SnackModel Start()
     {
-        System.Console.Clear();
+        Console.Clear();
         Console.WriteLine(@"Here you will be able to select what you would like to
 eat or drink while watching the movie");
 

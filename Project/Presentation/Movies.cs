@@ -11,7 +11,6 @@ static class Movies
         }
     }
 
-
     public static void AddNewMovie()
     {
         bool CorrectDate = true;
@@ -23,6 +22,7 @@ static class Movies
         DateTime ReleaseDate = new DateTime();
         List<CategoryModel> Categories = new List<CategoryModel> { };
 
+        Console.Clear();
         Title = QuestionLogic.AskString("What is the title of the movie?");
 
         while (CorrectDate)
@@ -219,3 +219,4 @@ static class Movies
         ChangeMovieMenu(movie);
     }
 }
+

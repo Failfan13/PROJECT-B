@@ -19,48 +19,48 @@ static class TimeSlots
         WhatMovie();
     }
 
-    public static void ShowAllTimeSlotsForMovie(int movieid, string moviename)
+    public static List<object> ShowAllTimeSlotsForMovie(int movieid, string moviename)
     {
         List<TimeSlotModel> tsms = timeslotslogic.GetByMovieId(movieid);
         TheatherLogic TL = new TheatherLogic();
+        List<Object> TimeSeats = new List<object>();
+
         Console.Clear();
         if (tsms.Count == 0) // Movie exists but there is no timeslot for it
         {
             Console.WriteLine("There are no timeslots for that movie.\nPress a key to return");
             string a = Console.ReadLine();
-            Reservation.start();
         }
         else
         {
             Console.WriteLine($"Availible timeslots for {moviename}");
+            TimeSlotModel currTsm = null;
             foreach (TimeSlotModel tsm in tsms)
             {
                 Console.WriteLine($"{tsm.Id + 1}. {tsm.Start}");
             }
-            int awnser = QuestionLogic.AskNumber("What timeslot would you like to see the seats for?") - 1;
-            foreach (TimeSlotModel tsm in tsms)
-            {
-                if (tsm.Id == awnser)
-                {
 
-                    /* De function om de stoelen te zien komt hier.
-                    TL.ShowSeats(TL.GetById(tsm.Theater));
-                    tijdelijk doorsturen:
-                    */
-                    ReservationLogic RL = new ReservationLogic();
-                    List<SeatModel> Seats = new List<SeatModel>() {
+            int awnser = QuestionLogic.AskNumber("What timeslot would you like to see the seats for?");
+            try
+            {
+                currTsm = tsms[awnser];
+
+                List<SeatModel> Seats = new List<SeatModel>() {
                         new SeatModel(1,'A',10,true,false),
                         new SeatModel(2,'A',10,true,false),
                     };
-
-
-                    RL.MakeReservation(tsm.Id, Seats);
-
-                    Console.WriteLine("Press enter to return to main menu");
-                    Console.ReadLine();
-                    Menu.Start();
-                }
             }
+            catch (System.NullReferenceException)
+            {
+                Console.WriteLine("No time slot found");
+            }
+
+            TimeSeats.Add(currTsm.Start);
+
+            // Add seats obj to list
+
+            return TimeSeats;
         }
+        return null;
     }
 }

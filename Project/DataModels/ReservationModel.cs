@@ -15,11 +15,15 @@ public class ReservationModel
     [JsonPropertyName("account_id")]
     public int? AccountId { get; set; }
 
-    public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, int? accountId)
+    [JsonPropertyName("date_time")]
+    public DateTime DateTime { get; set; }
+
+    public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, int? accountId, DateTime dateTime)
     {
         Id = id;
         TimeSLotId = timeSlotId;
         AccountId = accountId;
+        DateTime = dateTime;
         Seats = seats;
     }
 

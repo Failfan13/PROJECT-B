@@ -43,21 +43,6 @@ D:/OneDrive - Hogeschool Rotterdam/OP3/ThreeLayerTemplate/Project/obj/Debug/net6
 D:/OneDrive - Hogeschool Rotterdam/OP3/ThreeLayerTemplate/Project/obj/Debug/net6.0/Project.pdb
 D:/OneDrive - Hogeschool Rotterdam/OP3/ThreeLayerTemplate/Project/obj/Debug/net6.0/Project.genruntimeconfig.cache
 D:/OneDrive - Hogeschool Rotterdam/OP3/ThreeLayerTemplate/Project/obj/Debug/net6.0/ref/Project.dll
-C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/bin/Debug/net6.0/Project.exe
-C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/bin/Debug/net6.0/Project.deps.json
-C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/bin/Debug/net6.0/Project.runtimeconfig.json
-C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/bin/Debug/net6.0/Project.dll
-C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/bin/Debug/net6.0/Project.pdb
-C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/obj/Debug/net6.0/Project.csproj.AssemblyReference.cache
-C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/obj/Debug/net6.0/Project.GeneratedMSBuildEditorConfig.editorconfig
-C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/obj/Debug/net6.0/Project.AssemblyInfoInputs.cache
-C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/obj/Debug/net6.0/Project.AssemblyInfo.cs
-C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/obj/Debug/net6.0/Project.csproj.CoreCompileInputs.cache
-C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/obj/Debug/net6.0/Project.dll
-C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/obj/Debug/net6.0/refint/Project.dll
-C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/obj/Debug/net6.0/Project.pdb
-C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/obj/Debug/net6.0/Project.genruntimeconfig.cache
-C:/Users/erikm/Documents/Opdrachten/OODP/Project/PROJECT-B/Project/obj/Debug/net6.0/ref/Project.dll
 /Users/emircayir/Downloads/PROJECT-B/Project/bin/Debug/net6.0/Project
 /Users/emircayir/Downloads/PROJECT-B/Project/bin/Debug/net6.0/Project.deps.json
 /Users/emircayir/Downloads/PROJECT-B/Project/bin/Debug/net6.0/Project.runtimeconfig.json
@@ -88,3 +73,18 @@ D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\obj\Debug\net6.0\refint
 D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\obj\Debug\net6.0\Project.pdb
 D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\obj\Debug\net6.0\Project.genruntimeconfig.cache
 D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\Project\obj\Debug\net6.0\ref\Project.dll
+C:\Users\erikm\Documents\Opdrachten\OODP\Project\PROJECT-B\Project\bin\Debug\net6.0\Project.exe
+C:\Users\erikm\Documents\Opdrachten\OODP\Project\PROJECT-B\Project\bin\Debug\net6.0\Project.deps.json
+C:\Users\erikm\Documents\Opdrachten\OODP\Project\PROJECT-B\Project\bin\Debug\net6.0\Project.runtimeconfig.json
+C:\Users\erikm\Documents\Opdrachten\OODP\Project\PROJECT-B\Project\bin\Debug\net6.0\Project.dll
+C:\Users\erikm\Documents\Opdrachten\OODP\Project\PROJECT-B\Project\bin\Debug\net6.0\Project.pdb
+C:\Users\erikm\Documents\Opdrachten\OODP\Project\PROJECT-B\Project\obj\Debug\net6.0\Project.csproj.AssemblyReference.cache
+C:\Users\erikm\Documents\Opdrachten\OODP\Project\PROJECT-B\Project\obj\Debug\net6.0\Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\erikm\Documents\Opdrachten\OODP\Project\PROJECT-B\Project\obj\Debug\net6.0\Project.AssemblyInfoInputs.cache
+C:\Users\erikm\Documents\Opdrachten\OODP\Project\PROJECT-B\Project\obj\Debug\net6.0\Project.AssemblyInfo.cs
+C:\Users\erikm\Documents\Opdrachten\OODP\Project\PROJECT-B\Project\obj\Debug\net6.0\Project.csproj.CoreCompileInputs.cache
+C:\Users\erikm\Documents\Opdrachten\OODP\Project\PROJECT-B\Project\obj\Debug\net6.0\Project.dll
+C:\Users\erikm\Documents\Opdrachten\OODP\Project\PROJECT-B\Project\obj\Debug\net6.0\refint\Project.dll
+C:\Users\erikm\Documents\Opdrachten\OODP\Project\PROJECT-B\Project\obj\Debug\net6.0\Project.pdb
+C:\Users\erikm\Documents\Opdrachten\OODP\Project\PROJECT-B\Project\obj\Debug\net6.0\Project.genruntimeconfig.cache
+C:\Users\erikm\Documents\Opdrachten\OODP\Project\PROJECT-B\Project\obj\Debug\net6.0\ref\Project.dll

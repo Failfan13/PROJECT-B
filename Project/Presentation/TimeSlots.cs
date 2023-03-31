@@ -1,10 +1,10 @@
 static class TimeSlots
 {
-    static private TimeSlotsLogic timeslotslogic = new TimeSlotsLogic();
 
     public static void ShowAllTimeSlotsForMovie(int movieid, bool IsEdited = false)
     {
-        List<TimeSlotModel> tsms = timeslotslogic.GetByMovieId(movieid);
+        TimeSlotsLogic timeSlotsLogic = new TimeSlotsLogic();
+        List<TimeSlotModel> tsms = timeSlotsLogic.GetByMovieId(movieid);
         MoviesLogic ML = new MoviesLogic();
         TheatherLogic TL = new TheatherLogic();
 

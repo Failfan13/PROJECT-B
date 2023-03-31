@@ -47,7 +47,7 @@ class TimeSlotsLogic
 
     public List<TimeSlotModel>? GetByMovieId(int movieid)
     {
-        List<TimeSlotModel> tsmlist = new List<TimeSlotModel> { };
+        List<TimeSlotModel> tsmlist = new List<TimeSlotModel>();
         foreach (TimeSlotModel tsm in _timeslots)
         {
             if (tsm.MovieId == movieid)

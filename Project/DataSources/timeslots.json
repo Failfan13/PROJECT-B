@@ -5577,19 +5577,19 @@
         {
           "id": 10,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
           "id": 11,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
           "id": 12,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {

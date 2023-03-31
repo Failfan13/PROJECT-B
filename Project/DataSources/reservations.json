@@ -508,5 +508,32 @@
     },
     "account_id": 2,
     "date_time": "2023-03-31T20:07:29.3471862+02:00"
+  },
+  {
+    "id": 17,
+    "timeslot_id": 9,
+    "seats": [
+      {
+        "id": 10,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 11,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 12,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "snacks": null,
+    "account_id": null,
+    "date_time": "2023-03-31T21:07:25.3439192+02:00"
   }
 ]

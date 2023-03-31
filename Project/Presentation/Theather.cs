@@ -6,7 +6,7 @@ public static class Theater
 
         var theater = timeSLot.Theater;
         var size = 9;
-        if (AccountsLogic.CurrentAccount.Admin)
+        if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin)
         {
             size = 10000;
         }

@@ -37,7 +37,7 @@
     "release_date": "0123-10-10T00:00:00",
     "director": "test",
     "description": null,
-    "duration": 0,
+    "duration": 100,
     "categories": [
       {
         "id": 1,

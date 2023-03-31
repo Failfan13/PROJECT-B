@@ -21,16 +21,17 @@ public static class QuestionLogic
         return awnser;
     }
 
-    public static int AskNumber(string question)
+    public static double AskNumber(string question)
     {
         bool Correct = true;
-        int awnser = -1;
+        double awnser = -1;
         while (Correct)
         {
             Console.WriteLine(question);
             try
             {
-                awnser = Convert.ToInt32(Console.ReadLine());
+                awnser = Convert.ToDouble(Console.ReadLine());
+
                 Correct = false;
 
             }

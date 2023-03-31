@@ -57,13 +57,13 @@ public class CategoryLogic
     {
         Console.Clear();
         List<CategoryModel> AllCategories = this.AllCategories();
-        List<int> catids = new List<int>{};
+        List<int> catids = new List<int> { };
 
-        foreach(CategoryModel cm in AllCategories)
+        foreach (CategoryModel cm in AllCategories)
         {
             Console.WriteLine($"{cm.Id} {cm.Name}");
         }
-        int catid = QuestionLogic.AskNumber("What Category do you want to add?\nPlease enter the number");
+        int catid = (int)QuestionLogic.AskNumber("What Category do you want to add?\nPlease enter the number");
         CategoryModel category = this.GetById(catid);
         if (!movie.Categories.Contains(category))
         {
@@ -79,11 +79,11 @@ public class CategoryLogic
     public void RemoveCategory(MovieModel movie) // Removes category to movie
     {
         Console.Clear();
-        foreach(CategoryModel cm in movie.Categories)
+        foreach (CategoryModel cm in movie.Categories)
         {
             Console.WriteLine($"{cm.Id} {cm.Name}");
         }
-        int catid = QuestionLogic.AskNumber("What Category do you want to remove?");
+        int catid = (int)QuestionLogic.AskNumber("What Category do you want to remove?");
         movie.Categories.Remove(this.GetById(catid));
         MoviesLogic.UpdateList(movie);
         Console.Clear();

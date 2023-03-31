@@ -49,7 +49,7 @@ public class MoviesLogic : Order<MovieModel>
         return (_movies.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
-    public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript, int duration, int price, List<CategoryModel> categories)
+    public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript, int duration, double price, List<CategoryModel> categories)
     {
         int NewID = GetNewestId();
         MovieModel movie = new MovieModel(NewID, title, releaseDate, director, desript, duration, price, categories);
@@ -126,7 +126,7 @@ public class MoviesLogic : Order<MovieModel>
         UpdateList(movie);
     }
 
-    public void ChangePrice(MovieModel movie, int NewPrice)
+    public void ChangePrice(MovieModel movie, double NewPrice)
     {
         movie.Price = NewPrice;
         UpdateList(movie);

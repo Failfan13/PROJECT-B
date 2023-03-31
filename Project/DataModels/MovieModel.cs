@@ -22,12 +22,12 @@ public class MovieModel
     public int Duration { get; set; }
 
     [JsonPropertyName("price")]
-    public int Price { get; set; }
+    public double Price { get; set; }
 
     [JsonPropertyName("categories")]
     public List<CategoryModel> Categories { get; set; }
 
-    public MovieModel(int id, string title, DateTime releaseDate, string director, string description, int duration, int price, List<CategoryModel> categories)
+    public MovieModel(int id, string title, DateTime releaseDate, string director, string description, int duration, double price, List<CategoryModel> categories)
     {
         Id = id;
         Title = title;

@@ -20,7 +20,7 @@ static class Movies
         string Director = "";
         string Description = "";
         DateTime ReleaseDate = new DateTime();
-        int Price = 0;
+        double Price = 0;
         List<CategoryModel> Categories = new List<CategoryModel> { };
 
         Console.Clear();
@@ -42,13 +42,13 @@ static class Movies
 
         Description = QuestionLogic.AskString("What is the description of the movie? ");
         Director = QuestionLogic.AskString("Who is the director of the movie?: ");
-        Duration = QuestionLogic.AskNumber("What is the duration? (minutes)");
-        Price = QuestionLogic.AskNumber("How expensive is the movie?: ");
+        Duration = (int)QuestionLogic.AskNumber("What is the duration? (minutes)");
+        Price = (int)QuestionLogic.AskNumber("How expensive is the movie?: ");
 
         bool nomorecategories = false;
         do
         {
-            int anothercat = QuestionLogic.AskNumber("Add another category?");
+            int anothercat = (int)QuestionLogic.AskNumber("Add another category?");
             if (anothercat == 1)
             {
                 List<CategoryModel> cats = CategoryLogic.AllCategories();
@@ -57,7 +57,7 @@ static class Movies
                 {
                     Console.WriteLine($"{c.Id} {c.Name}");
                 }
-                int categorytoadd = QuestionLogic.AskNumber("What category do you want to add");
+                int categorytoadd = (int)QuestionLogic.AskNumber("What category do you want to add");
                 CategoryModel category = CategoryLogic.GetById(categorytoadd);
                 if (!Categories.Contains(category))
                 {
@@ -90,7 +90,7 @@ static class Movies
             Console.WriteLine($"{i + 1}. {movies[i].Title}");
         }
         Console.WriteLine($"{movies.Count + 1}. Return");
-        int awnser = QuestionLogic.AskNumber("Enter the number to select the movie");
+        int awnser = (int)QuestionLogic.AskNumber("Enter the number to select the movie");
 
         if (awnser == movies.Count + 1)
         {
@@ -131,7 +131,7 @@ static class Movies
         Console.Clear();
         do
         {
-            int addoremove = QuestionLogic.AskNumber("What do you want to do?\n1 Add a category\n2 Remove a category");
+            double addoremove = (int)QuestionLogic.AskNumber("What do you want to do?\n1 Add a category\n2 Remove a category");
             if (addoremove == 1)
             {
                 CategoryLogic.AddCategory(movie);
@@ -175,7 +175,7 @@ static class Movies
     }
     private static void ChangeDuration(MovieModel movie)
     {
-        int NewDuration = QuestionLogic.AskNumber("What do you want to change the duration of this movie to? (please enter the ammount of minutes)");
+        int NewDuration = (int)QuestionLogic.AskNumber("What do you want to change the duration of this movie to? (please enter the ammount of minutes)");
         MoviesLogic.ChangeDuration(movie, NewDuration);
         Console.WriteLine($"Duration is now: {NewDuration} minutes");
         QuestionLogic.AskEnter();
@@ -183,7 +183,7 @@ static class Movies
     }
     private static void ChangePrice(MovieModel movie)
     {
-        int NewPrice = QuestionLogic.AskNumber("What do you want to change the price of this movie to?");
+        double NewPrice = QuestionLogic.AskNumber("What do you want to change the price of this movie to?");
         MoviesLogic.ChangePrice(movie, NewPrice);
         Console.WriteLine($"Price is now: {NewPrice}");
         QuestionLogic.AskEnter();

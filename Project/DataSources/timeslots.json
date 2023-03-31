@@ -3339,19 +3339,19 @@
         {
           "id": 45,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
           "id": 46,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
           "id": 47,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
@@ -4293,7 +4293,7 @@
         {
           "id": 0,
           "price": 10,
-          "reserved": true,
+          "reserved": false,
           "handicapped": false
         },
         {

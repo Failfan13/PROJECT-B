@@ -34,7 +34,13 @@ public class TheatherLogic
     {
         return (_theathers.OrderByDescending(item => item.Id).First().Id) + 1;
     }
-    public void MakeTheather(int width, int height)
+
+
+    public List<TheaterModel> AllTheaters()
+    {
+        return _theathers;
+    }
+    public void MakeTheather(int width, int height, int OldId = -1)
     {
         List<SeatModel> Seats = new List<SeatModel>();
 
@@ -42,26 +48,44 @@ public class TheatherLogic
         {
             Seats.Add(new SeatModel(i, 10));
         }
-
         int newId = 0;
-        try
+        if (OldId == -1)
         {
-            newId = GetNewestId();
+            try
+            {
+                newId = GetNewestId();
+            }
+            catch (System.InvalidOperationException)
+            {
+                newId = 0;
+            }
         }
-        catch (System.InvalidOperationException)
+        else
         {
-            newId = 0;
+            newId = OldId;
         }
+
         TheaterModel theater = new TheaterModel(newId, Seats, width, height);
 
         UpdateList(theater);
     }
-
-
-
-    public void ShowSeats(TimeSlotModel timeSLot, bool IsEdited = false)
+    // Class to store to values from the function below
+    public class Helper
     {
-        var theater = timeSLot.Theater;
+        public TheaterModel Theather { get; set; }
+        public List<SeatModel> Seats { get; set; }
+
+        public Helper(TheaterModel theater, List<SeatModel> seats)
+        {
+            Theather = theater;
+            Seats = seats;
+        }
+    }
+
+    // Function to show seats based on a theather model
+    // MaxLength is used to limit seat selection
+    public Helper? ShowSeats(TheaterModel theater, int MaxLength = 1000)
+    {
         var AllSeats = theater.Seats;
         List<SeatModel> selectedSeats = new List<SeatModel>();
 
@@ -71,7 +95,7 @@ public class TheatherLogic
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Use arrow keys to navigate and press Enter to select a seat:\nPress C to confirm and reserve selected seats, R to reset selections and start over:");
+            Console.WriteLine("Use arrow keys to navigate and press Enter to select a seat:\nPress C to confirm and reserve selected seats\nX to Cancel\nR to reset selections and start over:");
             Console.WriteLine();
 
             for (int j = 0; j < AllSeats.Count; j++)
@@ -133,11 +157,13 @@ public class TheatherLogic
                     {
                         selectedSeats.Remove(selectedSeat);
                     }
-                    else if (selectedSeats.Count < 9 && !selectedSeat.Reserved)
+                    else if (selectedSeats.Count < MaxLength && !selectedSeat.Reserved)
                     {
                         selectedSeats.Add(selectedSeat);
                     }
                     break;
+                case ConsoleKey.X:
+                    return null;
                 case ConsoleKey.R:
                     selectedSeats.Clear();
                     Console.WriteLine("Selection cleared.");
@@ -173,21 +199,7 @@ public class TheatherLogic
                                     }
                                 }
                             }
-
-                            new TimeSlotsLogic().UpdateList(timeSLot);
-                            Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.SeatRow(theater.Width)}"))} have been reserved.");
-                            string Question = "Would you like to order snacks?";
-                            List<string> Options = new List<string>() { "Yes", "No" };
-                            List<Action> Actions = new List<Action>();
-                            ReservationLogic RL = new ReservationLogic();
-
-
-                            Actions.Add(() => Snacks.Start(timeSLot.Id, selectedSeats, IsEdited));
-                            Actions.Add(() => RL.MakeReservation(timeSLot.Id, selectedSeats, IsEdited: IsEdited));
-
-
-                            MenuLogic.Question(Question, Options, Actions);
-                            return;
+                            return null;
                         }
                         else
                         {
@@ -199,5 +211,33 @@ public class TheatherLogic
                     break;
             }
         }
+    }
+
+    public void BlockSeats(TheaterModel theater)
+    {
+        var Help = ShowSeats(theater);
+        if (Help != null)
+        {
+            UpdateList(Help.Theather);
+        }
+
+    }
+
+    public void UnBlockSeats(TheaterModel theater)
+    {
+        foreach (var seat in theater.Seats)
+        {
+            seat.Reserved = false;
+        }
+        UpdateList(theater);
+        Console.WriteLine("All seats have been unblocked");
+        QuestionLogic.AskEnter();
+    }
+
+    public void ChangeTheaterSize(TheaterModel theater)
+    {
+        int width = QuestionLogic.AskNumber("Enter the width of the theater");
+        int height = QuestionLogic.AskNumber("Enter the height of the theater");
+        MakeTheather(width, height, theater.Id);
     }
 }

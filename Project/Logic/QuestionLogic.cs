@@ -2,6 +2,7 @@ public static class QuestionLogic
 {
     public static string AskString(string question)
     {
+        Console.Clear();
         bool Correct = true;
         string awnser = null;
 
@@ -23,6 +24,7 @@ public static class QuestionLogic
 
     public static double AskNumber(string question)
     {
+        Console.Clear();
         bool Correct = true;
         double awnser = -1;
         while (Correct)

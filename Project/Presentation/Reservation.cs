@@ -2,118 +2,66 @@ public static class Reservation
 {
     static private ReservationLogic ReservationLogic = new();
     static private MoviesLogic MoviesLogic = new();
+    static private TimeSlotsLogic TimeSlotsLogic = new();
+    static private TheatherLogic TheatherLogic = new();
     static public ReservationModel CurrReservation = null;
 
-    /*
-        public static void EditMenu()
+    public static void EditReservation()
+    {
+        int awnser;
+        string reservationDate;
+        MovieModel reservationMovie;
+
+        string Question = "Which reservation would you like to edit?";
+        List<string> Options = new List<string>();
+        // List all reservations with date, time & movie name
+        foreach (ReservationModel reservation in ReservationLogic.Reservations)
         {
-            bool CorrectInput = true;
-            int movieInput;
-            MovieModel movieChoice = null;
-            List<object> timeSeats = new();
+            reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
+            reservationMovie = MoviesLogic.GetById(reservation.TimeSLotId);
 
-            Console.Clear();
-            string Question = "Which movie would you like to see?";
-            List<string> Options = new();
-
-            foreach (MovieModel movie in MoviesLogic.AllMovies())
-            {
-                Options.Add(movie.Title);
-            }
-
-            while (CorrectInput)
-            {
-                movieInput = MenuLogic.Question(Question, Options);
-
-                try
-                {
-                    movieChoice = MoviesLogic.GetById(movieInput - 1);
-                    timeSeats = TimeSlots.ShowAllTimeSlotsForMovie<TimeSlotModel>(movieChoice.Id, movieChoice.Title);
-
-                    if (timeSeats.Count == 0)
-                    {
-                        CorrectInput = true;
-                    }
-                    else
-                    {
-                        CorrectInput = false;
-                        break;
-                    }
-
-                }
-                catch (System.NullReferenceException)
-                {
-                    Console.WriteLine("Incorrect number");
-                }
-            }
-
-            if (CurrReservation == null)
-            {
-                // Make reservation in here 💀
-
-                // Call seats here
-                // Call snacks here
-                // Snacks.Start()
-                // Call discount here
-
-                // Make reservation
-            }
-            else
-            {
-                // Edit the chosen reservation
-                CurrReservation.TimeSLotId = movieChoice.Id;
-                CurrReservation.DateTime = (DateTime)timeSeats[0];
-                // Add seats mf (SeatModel)timeSeats[1]
-                ReservationLogic.UpdateList(CurrReservation);
-            }
+            Options.Add($"{reservation.Id}. {reservationDate} - {reservationMovie.Title}");
         }
 
-        public static void EditReservation()
+        awnser = MenuLogic.Question(Question,Options);
+        // Set current reservation field
+        try
         {
-            int awnser;
-            string reservationDate;
-            string reservationMovie;
+            CurrReservation = ReservationLogic.Reservations[awnser];
+        }
+        catch (System.IndexOutOfRangeException)
+        {
+            Console.WriteLine("No existing reservation found");
+            return;
+        }
 
-            Console.Clear();
-
-            // List all reservations with date, time & movie name
-            foreach (ReservationModel reservation in ReservationLogic.Reservations)
-            {
-                reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
-                reservationMovie = MoviesLogic.GetById(reservation.TimeSLotId).Title;
-
-                Console.WriteLine($"{reservation.Id}. {reservationDate} - {reservationMovie}");
-            }
-
-            awnser = QuestionLogic.AskNumber("\nEnter number to continue:");
-            // Set current reservation field
-            try
-            {
-                CurrReservation = ReservationLogic.Reservations[awnser];
-            }
-            catch (System.IndexOutOfRangeException)
-            {
-                Console.WriteLine("No existing reservation found");
-                return;
-            }
-
-            // Edit reservations menu
-            string question = "Choose a reservation you want to edit from the menu.";
-            List<string> options = new List<string>()
+        // Edit reservations menu
+        string question = "Choose a reservation you want to edit from the menu.";
+        List<string> options = new List<string>()
             {
                 "Choose movie, time & seats",
+                "Choose time & seats",
                 "Choose seats",
                 "Change side snack",
                 "Apply discount",
                 "Return to previous menu"
             };
-            // Actions reservations actions
-            List<Action> actions = new();
-            actions.Add(() => Reservation.NoFilterMenu());
+        // Actions reservations actions
+        List<Action> actions = new();
+        TimeSlotModel timeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSLotId);
+        var movieid = timeSlot.MovieId;
+        // choose all
+        actions.Add(() => Reservation.NoFilterMenu(true));
 
-            MenuLogic.Question(question, options, actions);
-        }
-        */
+        //choose time & seats
+        actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movieid, true));
+
+        // choose seats
+        actions.Add(() => TheatherLogic.ShowSeats(TheatherLogic.GetById(timeSlot.Theater), timeSlot, true));
+
+        MenuLogic.Question(question, options, actions);
+    }
+
 
     public static void NoFilterMenu(bool IsEdited = false)
     {
@@ -131,7 +79,7 @@ public static class Reservation
         foreach (MovieModel movie in movies)
         {
             Movies.Add(movie.Title);
-                Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, movie.Title, IsEdited));
+            Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));
         }
         Movies.Add("Return");
         Actions.Add(() => Menu.Start());
@@ -149,7 +97,7 @@ public static class Reservation
 
         foreach (MovieModel movie in movies)
         {
-            Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, movie.Title, IsEdited));
+            Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));
         }
         Movies.Add("Return");
         Actions.Add(() => Menu.Start());

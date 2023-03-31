@@ -5,43 +5,30 @@ static class UserLogin
 
     public static void Start()
     {
-        Console.Clear();
-        Console.WriteLine("INFO TEXT");
-
-        Console.WriteLine("Make a choice from the menu by entering the number.\n");
-
-        Console.WriteLine("Main Menu:");
-        Console.WriteLine("1 Login");
-        Console.WriteLine("2 Create new account");
-        Console.WriteLine("3 Return to menu");
-        if (AccountsLogic.CurrentAccount != null)
+        string Question = "What would you like to do?";
+        List<string> Options = new List<string>() {
+            "Login"
+         };
+        List<Action> Actions = new List<Action>();
+        Actions.Add(() => Login());
+        if (AccountsLogic.CurrentAccount == null)
         {
-            Console.WriteLine("4 Change password");
-        }
-
-
-        string? input = Console.ReadLine();
-        if (input == "1")
-        {
-            Login();
-        }
-        else if (input == "2")
-        {
-            CreateNewUser();
-        }
-        else if (input == "3")
-        {
-            Menu.Start();
-        }
-        else if (input == "4" && AccountsLogic.CurrentAccount != null)
-        {
-            ChangePassword();
+            Options.Add("Create new account");
+            Actions.Add(() => CreateNewUser());
         }
         else
         {
-            Console.WriteLine("Invalid input");
-            Start();
+            Options.Add("Change password");
+            Actions.Add(() => ChangePassword());
+
+            Options.Add("Change reservations");
+            Actions.Add(() => Reservation.EditReservation());
         }
+
+        Options.Add("Return to main menu");
+        Actions.Add(() => Menu.Start());
+
+        MenuLogic.Question(Question, Options, Actions);
     }
 
     public static void CreateNewUser()

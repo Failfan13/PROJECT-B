@@ -203,5 +203,27 @@
     ],
     "account_id": null,
     "date_time": "2023-03-31T09:30:19.8210486+02:00"
+  },
+  {
+    "id": 10,
+    "timeslot_id": 1,
+    "seats": [
+      {
+        "id": 1,
+        "row": "C",
+        "price": 15,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 1,
+        "row": "D",
+        "price": 15,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "account_id": null,
+    "date_time": "2023-03-31T09:31:36.867384+02:00"
   }
 ]

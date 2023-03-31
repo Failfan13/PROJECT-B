@@ -1,23 +1,23 @@
 public static class Filter
 {
     public static List<int> CatIds = new List<int>();
-    public static void Main()
+    public static void Main(bool IsEdited = false)
     {
         string Question = "What would you like to do?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
         Options.Add("Add a filter");
-        Actions.Add(() => AddFilter());
+        Actions.Add(() => AddFilter(IsEdited));
         if (CatIds != null)
         {
             Options.Add("Remove a filter");
-            Actions.Add(() => RemoveFilter());
+            Actions.Add(() => RemoveFilter(IsEdited));
         }
         ;
         MenuLogic.Question(Question, Options, Actions);
     }
 
-    private static void AddFilter()
+    private static void AddFilter(bool IsEdited = false)
     {
         string Question = "What Filter would you like to add?";
         List<string> Options = new List<string>();
@@ -33,9 +33,9 @@ public static class Filter
         MenuLogic.Question(Question, Options, Actions);
 
         var movies = new MoviesLogic().FilterOnCategories(CatIds);
-        Reservation.FilteredMenu(movies);
+        Reservation.FilteredMenu(movies, IsEdited);
     }
-    private static void RemoveFilter()
+    private static void RemoveFilter(bool IsEdited = false)
     {
         string Question = "What Filter would you like to Remove?";
         List<string> Options = new List<string>();
@@ -59,11 +59,11 @@ public static class Filter
         if (Filter.CatIds.Count != 0)
         {
             var movies = new MoviesLogic().FilterOnCategories(CatIds);
-            Reservation.FilteredMenu(movies);
+            Reservation.FilteredMenu(movies, IsEdited);
         }
         else
         {
-            Reservation.NoFilterMenu();
+            Reservation.NoFilterMenu(IsEdited);
         }
 
 

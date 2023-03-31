@@ -853,7 +853,7 @@
         "id": 1,
         "row": "C",
         "price": 15,
-        "reserved": false,
+        "reserved": true,
         "handicapped": false
       },
       {
@@ -923,7 +923,7 @@
         "id": 1,
         "row": "D",
         "price": 15,
-        "reserved": false,
+        "reserved": true,
         "handicapped": false
       },
       {
@@ -1021,14 +1021,14 @@
         "id": 5,
         "row": "E",
         "price": 15,
-        "reserved": false,
+        "reserved": true,
         "handicapped": false
       },
       {
         "id": 6,
         "row": "E",
         "price": 15,
-        "reserved": false,
+        "reserved": true,
         "handicapped": false
       },
       {

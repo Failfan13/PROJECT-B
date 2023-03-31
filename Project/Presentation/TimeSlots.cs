@@ -2,9 +2,10 @@ static class TimeSlots
 {
     static private TimeSlotsLogic timeslotslogic = new TimeSlotsLogic();
 
-    public static void ShowAllTimeSlotsForMovie(int movieid, string moviename, bool IsEdited = false)
+    public static void ShowAllTimeSlotsForMovie(int movieid, bool IsEdited = false)
     {
         List<TimeSlotModel> tsms = timeslotslogic.GetByMovieId(movieid);
+        MoviesLogic ML = new MoviesLogic();
         TheatherLogic TL = new TheatherLogic();
 
         Console.Clear();
@@ -15,7 +16,7 @@ static class TimeSlots
         }
         else
         {
-            string Question = $"Availible timeslots for {moviename}";
+            string Question = $"Availible timeslots for {ML.GetById(movieid).Title}";
             List<string> Options = new List<string>();
             List<Action> Actions = new List<Action>();
 

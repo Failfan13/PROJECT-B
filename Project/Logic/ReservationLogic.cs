@@ -58,9 +58,10 @@ public class ReservationLogic
 
     }
 
-    public void MakeReservation(int timeSlotId, List<SeatModel> Seats)
+    public void MakeReservation(int timeSlotId, List<SeatModel> Seats, bool IsEdited = false)
     {
         int? AccountId = null;
+        ReservationModel ress = null;
         DateTime currDate = DateTime.Now;
         try
         {
@@ -70,7 +71,16 @@ public class ReservationLogic
         {   // not logged in
             AccountId = null;
         }
-        ReservationModel ress = new ReservationModel(GetNewestId(), timeSlotId, Seats, AccountId, currDate);
+
+        if (IsEdited)
+        {
+            ress = new ReservationModel(Reservation.CurrReservation.Id, timeSlotId, Seats, AccountId, currDate);
+
+        }
+        else
+        {
+            ress = new ReservationModel(GetNewestId(), timeSlotId, Seats, AccountId, currDate);
+        }
 
         UpdateList(ress);
     }

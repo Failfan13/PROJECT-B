@@ -190,16 +190,10 @@ public class TheatherLogic
 
 
                             Actions.Add(() => Snacks.Start());
-                            if (IsEdited)
-                            {
+                            Actions.Add(() => RL.MakeReservation(timeSLot.Id, selectedSeats,IsEdited));
 
-                            }
-                            else
-                            {
-                                Actions.Add(() => RL.MakeReservation(timeSLot.Id, selectedSeats));
-                            }
 
-                            MenuLogic.Question(Question,Options,Actions);
+                            MenuLogic.Question(Question, Options, Actions);
                             return;
                         }
                         else

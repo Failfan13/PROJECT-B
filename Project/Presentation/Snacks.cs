@@ -42,11 +42,11 @@ static class Snacks
             int Tabs = (int)Math.Ceiling((MaxLength - snack.Name.Length) / 8.0);
             if (SnacksLogic.CurrentResSnacks.ContainsKey(snack.Id))
             {
-                Options.Add($"{snack.Name}\t{new string('\t', Tabs)}{SnacksLogic.CurrentResSnacks[snack.Id]}");
+                Options.Add($"{snack.Name}\t{new string('\t', Tabs)}\t{snack.Price}\t{SnacksLogic.CurrentResSnacks[snack.Id]}");
             }
             else
             {
-                Options.Add($"{snack.Name}\t{new string('\t', Tabs)}0");
+                Options.Add($"{snack.Name}\t{new string('\t', Tabs)}\t{snack.Price}\t0");
             }
 
             // Add or Remove snacks from list
@@ -59,11 +59,21 @@ static class Snacks
                 Actions.Add(() => SnacksLogic.RemoveSnack(snack));
             }
         }
-        
+
         Options.Add("Add to reservation");
         Actions.Add(() => new ReservationLogic().MakeReservation(TimeSlotId, Seats, SnacksLogic.GetSelectedSnacks(), IsEdited));
+        double CurrentPrice = 0;
+        foreach (KeyValuePair<int, int> KeyValue in SnacksLogic.CurrentResSnacks)
+        {
+            var Snack = SnacksLogic.GetById(KeyValue.Key);
+            for (int i = 0; i < KeyValue.Value; i++)
+            {
+                CurrentPrice += Snack.Price;
+            }
+        }
 
-        MenuLogic.Question(Question, Options, Actions);
+        MenuLogic.Question(Question, Options, Actions, $"Total snack price: {CurrentPrice}");
+
 
         if (Continue)
         {

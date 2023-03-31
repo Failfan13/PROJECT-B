@@ -21,6 +21,7 @@
     "director": "tester",
     "description": null,
     "duration": 0,
+    "price": 4,
     "categories": [
       {
         "id": 1,
@@ -29,6 +30,10 @@
       {
         "id": 2,
         "name": "adventure"
+      },
+      {
+        "id": 3,
+        "name": "romance"
       }
     ]
   },
@@ -39,6 +44,7 @@
     "director": "test",
     "description": null,
     "duration": 100,
+    "price": 4,
     "categories": [
       {
         "id": 1,

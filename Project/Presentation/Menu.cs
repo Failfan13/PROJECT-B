@@ -26,11 +26,11 @@ static class Menu
         if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
         {
             Console.WriteLine($"Admin {AccountsLogic.CurrentAccount.Admin}\n");
-            Options.Add("Change movie data");
-            Actions.Add(() => Movies.ChangeMoviesMenu());
+            Options.Add("Change data");
+            Actions.Add(() => Admin.Start());
         }
 
-        Options.Add("Exit app");
+        Options.Add("\nExit app");
         Actions.Add(() => Environment.Exit(1));
 
         MenuLogic.Question(Question, Options, Actions);

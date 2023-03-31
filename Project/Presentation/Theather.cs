@@ -28,6 +28,24 @@ public static class Theater
         }
     }
 
+    public static void WhatTheather()
+    {
+        string Question = "What would you like to change?";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
+
+        foreach (var item in TL.AllTheaters())
+        {
+            Options.Add($"{item.Id}");
+            Actions.Add(() => EditMenu(item));
+        }
+
+        Options.Add("\nReturn");
+        Actions.Add(() => Admin.Start());
+
+        MenuLogic.Question(Question, Options, Actions);
+
+    }
     public static void EditMenu(TheaterModel theater)
     {
         string Question = "What would you like to change?";
@@ -40,8 +58,13 @@ public static class Theater
         Options.Add("Block seats");
         Actions.Add(() => TL.BlockSeats(theater));
 
-        Options.Add("Return");
-        Actions.Add(() => Menu.Start());
+        Options.Add("Unblock seats");
+        Actions.Add(() => TL.UnBlockSeats(theater));
+
+        Options.Add("\nReturn");
+        Actions.Add(() => WhatTheather());
         MenuLogic.Question(Question, Options, Actions);
+
+        EditMenu(theater);
     }
 }

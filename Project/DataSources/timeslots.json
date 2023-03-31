@@ -4293,7 +4293,7 @@
         {
           "id": 0,
           "price": 10,
-          "reserved": true,
+          "reserved": false,
           "handicapped": false
         },
         {

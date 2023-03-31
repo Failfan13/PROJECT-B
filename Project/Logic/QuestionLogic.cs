@@ -2,6 +2,7 @@ public static class QuestionLogic
 {
     public static string AskString(string question)
     {
+        Console.Clear();
         bool Correct = true;
         string awnser = null;
 

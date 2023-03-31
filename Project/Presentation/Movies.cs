@@ -93,8 +93,6 @@ static class Movies
             Options.Add(movie.Title);
             Actions.Add(() => ChangeMovieMenu(movie));
         }
-        Console.WriteLine($"{movies.Count + 1}. Return");
-        int awnser = (int)QuestionLogic.AskNumber("Enter the number to select the movie");
 
         Options.Add("Return");
         Actions.Add(() => Menu.Start());
@@ -113,7 +111,7 @@ static class Movies
             "Change title", "Change Director",
             "Change Releasedate", "Change Description",
             "Change Duration", "Change Price",
-            "Change Categories", "Return to previous menu"
+            "Change Categories",
         };
 
         List<Action> Actions = new List<Action>() { };

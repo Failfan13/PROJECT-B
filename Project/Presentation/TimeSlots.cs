@@ -23,7 +23,7 @@ static class TimeSlots
             foreach (TimeSlotModel time in tsms)
             {
                 Options.Add($"{time.Start}");
-                Actions.Add(() => TL.ShowSeats(time));
+                Actions.Add(() => TL.SelectSeats(time));
             }
 
             MenuLogic.Question(Question, Options, Actions);

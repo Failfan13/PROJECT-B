@@ -67,7 +67,7 @@ public class TheatherLogic
 
 
 
-    public void ShowSeats(TheaterModel theater)
+    public void ShowSeats(TheaterModel theater, TimeSlotModel timeSLot, bool IsEdited = false)
     {
         var AllSeats = theater.Seats;
         List<SeatModel> selectedSeats = new List<SeatModel>();
@@ -78,7 +78,7 @@ public class TheatherLogic
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Use arrow keys to navigate and press Enter to select a seat:");
+            Console.WriteLine("Use arrow keys to navigate and press Enter to select a seat:\nPress C to confirm and reserve selected seats, R to reset selections and start over:");
             Console.WriteLine();
 
             for (int j = 0; j < AllSeats.Count; j++)
@@ -90,6 +90,11 @@ public class TheatherLogic
                     Console.BackgroundColor = ConsoleColor.Yellow;
                     Console.ForegroundColor = ConsoleColor.Black;
                 }
+                else if (selectedSeats.Contains(seat))
+                {
+                    Console.BackgroundColor = ConsoleColor.Blue;
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
                 else if (seat.Reserved)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -99,7 +104,7 @@ public class TheatherLogic
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
-                Console.Write($" {seat.Id} ");
+                Console.Write($" {seat.Row}{seat.Id} ");
                 Console.ResetColor();
 
                 if (i == theater.Width)
@@ -109,6 +114,9 @@ public class TheatherLogic
                 }
                 i += 1;
             }
+
+            Console.WriteLine();
+            Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.Row}{s.Id}"))}");
 
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
@@ -128,9 +136,24 @@ public class TheatherLogic
                     break;
                 case ConsoleKey.Enter:
                     SeatModel selectedSeat = AllSeats[selectedSeatIndex];
-                    if (selectedSeat.Reserved)
+                    if (selectedSeats.Contains(selectedSeat))
                     {
-                        Console.WriteLine("Seat is already taken. Press any key to continue.");
+                        selectedSeats.Remove(selectedSeat);
+                    }
+                    else if (selectedSeats.Count < 9 && !selectedSeat.Reserved)
+                    {
+                        selectedSeats.Add(selectedSeat);
+                    }
+                    break;
+                case ConsoleKey.R:
+                    selectedSeats.Clear();
+                    Console.WriteLine("Selection cleared.");
+                    Console.ReadKey(true);
+                    break;
+                case ConsoleKey.C:
+                    if (selectedSeats.Count == 0)
+                    {
+                        Console.WriteLine("Please select at least one seat.");
                         Console.ReadKey(true);
                     }
                     else
@@ -159,8 +182,24 @@ public class TheatherLogic
                             }
 
                             UpdateList(theater);
-                            Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.Row}{s.Id}"))} have been reserved. Press any key to continue.");
-                            Console.ReadKey(true);
+                            Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.Row}{s.Id}"))} have been reserved.");
+                            string Question = "Would you like to order snacks?";
+                            List<string> Options = new List<string>() { "Yes", "No" };
+                            List<Action> Actions = new List<Action>();
+                            ReservationLogic RL = new ReservationLogic();
+
+
+                            Actions.Add(() => Snacks.Start());
+                            if (IsEdited)
+                            {
+
+                            }
+                            else
+                            {
+                                Actions.Add(() => RL.MakeReservation(timeSLot.Id, selectedSeats));
+                            }
+
+                            MenuLogic.Question(Question,Options,Actions);
                             return;
                         }
                         else

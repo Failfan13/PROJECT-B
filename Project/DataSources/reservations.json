@@ -18,7 +18,8 @@
         "handicapped": false
       }
     ],
-    "account_id": null
+    "account_id": null,
+    "date_time": "0001-01-01T00:00:00"
   },
   {
     "id": 2,
@@ -39,7 +40,8 @@
         "handicapped": false
       }
     ],
-    "account_id": 4
+    "account_id": 4,
+    "date_time": "0001-01-01T00:00:00"
   },
   {
     "id": 3,
@@ -60,7 +62,8 @@
         "handicapped": false
       }
     ],
-    "account_id": null
+    "account_id": null,
+    "date_time": "0001-01-01T00:00:00"
   },
   {
     "id": 4,
@@ -81,7 +84,8 @@
         "handicapped": false
       }
     ],
-    "account_id": null
+    "account_id": null,
+    "date_time": "0001-01-01T00:00:00"
   },
   {
     "id": 5,
@@ -102,7 +106,8 @@
         "handicapped": false
       }
     ],
-    "account_id": null
+    "account_id": null,
+    "date_time": "0001-01-01T00:00:00"
   },
   {
     "id": 6,
@@ -123,6 +128,80 @@
         "handicapped": false
       }
     ],
-    "account_id": null
+    "account_id": null,
+    "date_time": "0001-01-01T00:00:00"
+  },
+  {
+    "id": 7,
+    "timeslot_id": 1,
+    "seats": [
+      {
+        "id": 4,
+        "row": "B",
+        "price": 15,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 5,
+        "row": "B",
+        "price": 15,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "account_id": null,
+    "date_time": "2023-03-31T09:26:57.160182+02:00"
+  },
+  {
+    "id": 8,
+    "timeslot_id": 1,
+    "seats": [
+      {
+        "id": 6,
+        "row": "C",
+        "price": 15,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 7,
+        "row": "C",
+        "price": 15,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 8,
+        "row": "C",
+        "price": 15,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "account_id": null,
+    "date_time": "2023-03-31T09:28:41.4735387+02:00"
+  },
+  {
+    "id": 9,
+    "timeslot_id": 0,
+    "seats": [
+      {
+        "id": 1,
+        "row": "A",
+        "price": 15,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 2,
+        "row": "A",
+        "price": 15,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "account_id": null,
+    "date_time": "2023-03-31T09:30:19.8210486+02:00"
   }
 ]

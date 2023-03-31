@@ -58,7 +58,7 @@ public class ReservationLogic
 
     }
 
-    public void MakeReservation(int movieId, List<SeatModel> Seats)
+    public void MakeReservation(int timeSlotId, List<SeatModel> Seats)
     {
         int? AccountId = null;
         DateTime currDate = DateTime.Now;
@@ -70,7 +70,7 @@ public class ReservationLogic
         {   // not logged in
             AccountId = null;
         }
-        ReservationModel ress = new ReservationModel(GetNewestId(), movieId, Seats, AccountId, currDate);
+        ReservationModel ress = new ReservationModel(GetNewestId(), timeSlotId, Seats, AccountId, currDate);
 
         UpdateList(ress);
     }

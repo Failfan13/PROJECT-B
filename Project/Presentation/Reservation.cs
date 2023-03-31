@@ -131,15 +131,7 @@ public static class Reservation
         foreach (MovieModel movie in movies)
         {
             Movies.Add(movie.Title);
-            if (IsEdited)
-            {
                 Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, movie.Title, IsEdited));
-            }
-            else
-            {
-                Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, movie.Title));
-            }
-
         }
         Movies.Add("Return");
         Actions.Add(() => Menu.Start());
@@ -157,14 +149,7 @@ public static class Reservation
 
         foreach (MovieModel movie in movies)
         {
-            if (IsEdited)
-            {
-                Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, movie.Title, IsEdited));
-            }
-            else
-            {
-                Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, movie.Title));
-            }
+            Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, movie.Title, IsEdited));
         }
         Movies.Add("Return");
         Actions.Add(() => Menu.Start());

@@ -20,6 +20,7 @@ static class Menu
             // show admin menu
             AdminAccount();
         }
+        Menu.Start();
     }
 
     public static void NoAccount()
@@ -37,6 +38,7 @@ static class Menu
         Actions.Add(() => Environment.Exit(1));
 
         MenuLogic.Question(Question, Options, Actions);
+
     }
 
     public static void NormalAccount()

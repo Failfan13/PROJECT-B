@@ -7,8 +7,6 @@ public static class MenuLogic
 {
     public static int Question(string question, List<string> options, List<Action> actions = null)
     {
-        System.Console.Clear();
-        Console.WriteLine($"{question}");
         Console.CursorVisible = false;
         ConsoleKeyInfo key;
         int selectedOption = 0;
@@ -16,6 +14,7 @@ public static class MenuLogic
         {
             Console.Clear();
             Console.WriteLine("Use arrow keys to navigate and press Enter to select an option:\n");
+            Console.WriteLine(question);
 
             for (int i = 0; i < options.Count; i++)
             {

@@ -175,12 +175,12 @@ public static class Reservation
         }
 
 
-        Console.Write("\nThe total cost of your order will be:\n");
+        Console.Write("\nThe total cost of your order will be:");
         var priceString = Convert.ToString(FinalPrice);
         //Show euro symbol
-
         //Print total cost + if not containing "." add ",-" at end
-        Console.WriteLine($"€ " + FinalPrice + (priceString.Contains(".") ? "" : ",-"));
+        Console.Write($"€ " + FinalPrice + (priceString.Contains(".") ? "" : ",-"));
+        Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {ress.Id}\n");
         QuestionLogic.AskEnter();
 
     }

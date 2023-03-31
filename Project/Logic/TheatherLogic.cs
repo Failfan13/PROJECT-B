@@ -78,7 +78,7 @@ public class TheatherLogic
 
     // Function to show seats based on a theather model
     // MaxLength is used to limit seat selection
-    public Helper ShowSeats(TheaterModel theater, int MaxLength = 1000)
+    public Helper? ShowSeats(TheaterModel theater, int MaxLength = 1000)
     {
         var AllSeats = theater.Seats;
         List<SeatModel> selectedSeats = new List<SeatModel>();
@@ -89,7 +89,7 @@ public class TheatherLogic
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Use arrow keys to navigate and press Enter to select a seat:\nPress C to confirm and reserve selected seats, R to reset selections and start over:");
+            Console.WriteLine("Use arrow keys to navigate and press Enter to select a seat:\nPress C to confirm and reserve selected seats\nX to Cancel\nR to reset selections and start over:");
             Console.WriteLine();
 
             for (int j = 0; j < AllSeats.Count; j++)
@@ -156,6 +156,8 @@ public class TheatherLogic
                         selectedSeats.Add(selectedSeat);
                     }
                     break;
+                case ConsoleKey.X:
+                    return null;
                 case ConsoleKey.R:
                     selectedSeats.Clear();
                     Console.WriteLine("Selection cleared.");
@@ -209,6 +211,11 @@ public class TheatherLogic
     {
         var Help = ShowSeats(theater);
         UpdateList(Help.Theather);
+    }
+
+    public void UnBlockSeats(TheaterModel theater)
+    {
+        var help = ShowSeats(theater);
     }
 
     public void ChangeTheaterSize(TheaterModel theater)

@@ -23,6 +23,7 @@ public static class QuestionLogic
 
     public static int AskNumber(string question)
     {
+        Console.Clear();
         bool Correct = true;
         int awnser = -1;
         while (Correct)

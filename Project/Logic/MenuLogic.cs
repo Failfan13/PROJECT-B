@@ -28,10 +28,16 @@ public static class MenuLogic
 
                 Console.ResetColor();
             }
-            Console.WriteLine(BottomString);
+            if (BottomString != null)
+            {
+                Console.WriteLine(BottomString);
+            }
             key = Console.ReadKey();
-
-            if (key.Key == ConsoleKey.UpArrow)
+            if (key.Key == ConsoleKey.X)
+            {
+                Menu.Start();
+            }
+            else if (key.Key == ConsoleKey.UpArrow)
             {
                 selectedOption--;
                 if (selectedOption < 0)
@@ -47,20 +53,15 @@ public static class MenuLogic
                     selectedOption = 0;
                 }
             }
+        } while (key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.X);
 
-            if (BottomString != null)
-            {
-
-            }
-
-        } while (key.Key != ConsoleKey.Enter);
-
-        if (actions != null)
+        if (key.Key == ConsoleKey.Enter)
         {
-            actions[selectedOption]();
+            if (actions != null)
+            {
+                actions[selectedOption]();
+            }
         }
         return selectedOption;
-
-
     }
 }

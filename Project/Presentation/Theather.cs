@@ -6,19 +6,26 @@ public static class Theater
 
         var theater = timeSLot.Theater;
         var help = TL.ShowSeats(theater, 9);
-        var selectedSeats = help.Seats;
+        if (help != null)
+        {
+            var selectedSeats = help.Seats;
 
-        new TimeSlotsLogic().UpdateList(timeSLot);
-        string Question = "Would you like to order snacks?";
-        List<string> Options = new List<string>() { "Yes", "No" };
-        List<Action> Actions = new List<Action>();
-        ReservationLogic RL = new ReservationLogic();
+            new TimeSlotsLogic().UpdateList(timeSLot);
+            string Question = "Would you like to order snacks?";
+            List<string> Options = new List<string>() { "Yes", "No" };
+            List<Action> Actions = new List<Action>();
+            ReservationLogic RL = new ReservationLogic();
 
 
-        Actions.Add(() => Snacks.Start(timeSLot.Id, selectedSeats, IsEdited));
-        Actions.Add(() => RL.MakeReservation(timeSLot.Id, selectedSeats, IsEdited: IsEdited));
+            Actions.Add(() => Snacks.Start(timeSLot.Id, selectedSeats, IsEdited));
+            Actions.Add(() => RL.MakeReservation(timeSLot.Id, selectedSeats, IsEdited: IsEdited));
 
-        MenuLogic.Question(Question, Options, Actions);
+            MenuLogic.Question(Question, Options, Actions);
+        }
+        else
+        {
+            Menu.Start();
+        }
     }
 
     public static void EditMenu(TheaterModel theater)
@@ -30,7 +37,7 @@ public static class Theater
         Options.Add("Change size");
         Actions.Add(() => TL.ChangeTheaterSize(theater));
 
-        Options.Add("BlockSeats");
+        Options.Add("Block seats");
         Actions.Add(() => TL.BlockSeats(theater));
 
         Options.Add("Return");

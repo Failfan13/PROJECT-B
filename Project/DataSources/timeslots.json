@@ -33,13 +33,13 @@
         {
           "id": 4,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
           "id": 5,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {

@@ -37,18 +37,10 @@ public class TheatherLogic
     public void MakeTheather(int width, int height)
     {
         List<SeatModel> Seats = new List<SeatModel>();
-        List<char> chars = new List<char>() { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L' };
 
-
-        if (height > 0 && height <= chars.Count() && width > 0)
+        for (int i = 0; i < width * height; i++)
         {
-            for (int i = 0; i < height; i++)
-            {
-                for (int j = 1; j <= width; j++)
-                {
-                    Seats.Add(new SeatModel(j, chars[i], 15, false, false));
-                }
-            }
+            Seats.Add(new SeatModel(i, 10));
         }
 
         int newId = 0;
@@ -104,7 +96,7 @@ public class TheatherLogic
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
-                Console.Write($" {seat.Row}{seat.Id} ");
+                Console.Write($" {seat.SeatRow(theater.Width)} ");
                 Console.ResetColor();
 
                 if (i == theater.Width)
@@ -116,7 +108,7 @@ public class TheatherLogic
             }
 
             Console.WriteLine();
-            Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.Row}{s.Id}"))}");
+            Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.SeatRow(theater.Width)}"))}");
 
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
@@ -159,7 +151,7 @@ public class TheatherLogic
                     else
                     {
                         Console.Clear();
-                        Console.WriteLine($"You have selected {selectedSeats.Count} seats: {string.Join(", ", selectedSeats.Select(s => $"{s.Row}{s.Id}"))}");
+                        Console.WriteLine($"You have selected {selectedSeats.Count} seats: {string.Join(", ", selectedSeats.Select(s => $"{s.SeatRow(theater.Width)}"))}");
                         Console.WriteLine("Press Y to confirm or any other key to cancel:");
 
                         ConsoleKeyInfo confirmKeyInfo = Console.ReadKey(true);
@@ -174,7 +166,7 @@ public class TheatherLogic
                             {
                                 foreach (var seats in selectedSeats)
                                 {
-                                    if (seat.Id == seats.Id && seat.Row == seats.Row)
+                                    if (seat.Id == seats.Id)
                                     {
                                         seat.Reserved = seats.Reserved;
                                     }
@@ -182,7 +174,7 @@ public class TheatherLogic
                             }
 
                             UpdateList(theater);
-                            Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.Row}{s.Id}"))} have been reserved.");
+                            Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.SeatRow(theater.Width)}"))} have been reserved.");
                             string Question = "Would you like to order snacks?";
                             List<string> Options = new List<string>() { "Yes", "No" };
                             List<Action> Actions = new List<Action>();
@@ -190,7 +182,7 @@ public class TheatherLogic
 
 
                             Actions.Add(() => Snacks.Start());
-                            Actions.Add(() => RL.MakeReservation(timeSLot.Id, selectedSeats,IsEdited));
+                            Actions.Add(() => RL.MakeReservation(timeSLot.Id, selectedSeats, IsEdited));
 
 
                             MenuLogic.Question(Question, Options, Actions);

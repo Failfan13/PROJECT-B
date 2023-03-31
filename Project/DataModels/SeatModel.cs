@@ -5,9 +5,6 @@ public class SeatModel
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
-    [JsonPropertyName("row")]
-    public char Row { get; set; }
-
     [JsonPropertyName("price")]
     public double Price { get; set; }
 
@@ -19,12 +16,19 @@ public class SeatModel
 
 
     [JsonConstructor]
-    public SeatModel(int id, char row, double price, bool reserved, bool handicapped)
+    public SeatModel(int id, double price, bool reserved = false, bool handicapped = false)
     {
         Id = id;
         Price = price;
         Reserved = reserved;
-        Row = row;
         Handicapped = handicapped;
+    }
+    public string SeatRow(int width)
+    {
+        List<char> letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToList();
+        var Seat = (Id % width) + 1;
+        var Row = (Math.Floor((double)(Id / width)));
+
+        return $"{Seat}{letters[(int)Row]}";
     }
 }

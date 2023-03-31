@@ -5,14 +5,12 @@
     "seats": [
       {
         "id": 1,
-        "row": "A",
         "price": 10,
         "reserved": true,
         "handicapped": false
       },
       {
         "id": 2,
-        "row": "A",
         "price": 10,
         "reserved": true,
         "handicapped": false
@@ -27,14 +25,12 @@
     "seats": [
       {
         "id": 1,
-        "row": "A",
         "price": 10,
         "reserved": true,
         "handicapped": false
       },
       {
         "id": 2,
-        "row": "A",
         "price": 10,
         "reserved": true,
         "handicapped": false
@@ -49,14 +45,12 @@
     "seats": [
       {
         "id": 1,
-        "row": "A",
         "price": 10,
         "reserved": true,
         "handicapped": false
       },
       {
         "id": 2,
-        "row": "A",
         "price": 10,
         "reserved": true,
         "handicapped": false
@@ -71,14 +65,12 @@
     "seats": [
       {
         "id": 1,
-        "row": "A",
         "price": 10,
         "reserved": true,
         "handicapped": false
       },
       {
         "id": 2,
-        "row": "A",
         "price": 10,
         "reserved": true,
         "handicapped": false
@@ -93,14 +85,12 @@
     "seats": [
       {
         "id": 1,
-        "row": "A",
         "price": 10,
         "reserved": true,
         "handicapped": false
       },
       {
         "id": 2,
-        "row": "A",
         "price": 10,
         "reserved": true,
         "handicapped": false
@@ -115,14 +105,12 @@
     "seats": [
       {
         "id": 1,
-        "row": "A",
         "price": 10,
         "reserved": true,
         "handicapped": false
       },
       {
         "id": 2,
-        "row": "A",
         "price": 10,
         "reserved": true,
         "handicapped": false
@@ -137,14 +125,12 @@
     "seats": [
       {
         "id": 4,
-        "row": "B",
         "price": 15,
         "reserved": true,
         "handicapped": false
       },
       {
         "id": 5,
-        "row": "B",
         "price": 15,
         "reserved": true,
         "handicapped": false
@@ -159,21 +145,18 @@
     "seats": [
       {
         "id": 6,
-        "row": "C",
         "price": 15,
         "reserved": true,
         "handicapped": false
       },
       {
         "id": 7,
-        "row": "C",
         "price": 15,
         "reserved": true,
         "handicapped": false
       },
       {
         "id": 8,
-        "row": "C",
         "price": 15,
         "reserved": true,
         "handicapped": false
@@ -188,14 +171,12 @@
     "seats": [
       {
         "id": 1,
-        "row": "A",
         "price": 15,
         "reserved": true,
         "handicapped": false
       },
       {
         "id": 2,
-        "row": "A",
         "price": 15,
         "reserved": true,
         "handicapped": false
@@ -210,14 +191,12 @@
     "seats": [
       {
         "id": 1,
-        "row": "C",
         "price": 15,
         "reserved": true,
         "handicapped": false
       },
       {
         "id": 1,
-        "row": "D",
         "price": 15,
         "reserved": true,
         "handicapped": false
@@ -225,5 +204,25 @@
     ],
     "account_id": null,
     "date_time": "2023-03-31T09:31:36.867384+02:00"
+  },
+  {
+    "id": 11,
+    "timeslot_id": 1,
+    "seats": [
+      {
+        "id": 22,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 23,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "account_id": null,
+    "date_time": "2023-03-31T10:42:55.865642+02:00"
   }
 ]

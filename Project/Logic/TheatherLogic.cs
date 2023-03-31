@@ -182,8 +182,8 @@ public class TheatherLogic
                             ReservationLogic RL = new ReservationLogic();
 
 
-                            Actions.Add(() => Snacks.Start());
-                            Actions.Add(() => RL.MakeReservation(timeSLot.Id, selectedSeats, IsEdited));
+                            Actions.Add(() => Snacks.Start(timeSLot.Id, selectedSeats, IsEdited));
+                            Actions.Add(() => RL.MakeReservation(timeSLot.Id, selectedSeats, IsEdited: IsEdited));
 
 
                             MenuLogic.Question(Question, Options, Actions);

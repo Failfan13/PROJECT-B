@@ -1,12 +1,48 @@
 [
-    {
-        "id": 0,
-        "snack": "Coca Cola",
-        "sizes": [
-            "S",
-            "M",
-            "L"
-        ],
-        "price": 5.0
-    }
+  {
+    "id": 0,
+    "snack": "Coca Cola",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "price": 5
+  },
+  {
+    "id": 1,
+    "snack": "Popcorn",
+    "sizes": [
+      "1",
+      "2"
+    ],
+    "price": 10
+  },
+  {
+    "id": 2,
+    "snack": "Beer",
+    "sizes": [
+      "1",
+      "2"
+    ],
+    "price": 10
+  },
+  {
+    "id": 3,
+    "snack": "Candy",
+    "sizes": [
+      "1",
+      "2"
+    ],
+    "price": 10
+  },
+  {
+    "id": 4,
+    "snack": "Coffee",
+    "sizes": [
+      "1",
+      "2"
+    ],
+    "price": 10
+  }
 ]

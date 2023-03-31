@@ -78,8 +78,8 @@ public static class Reservation
         // choose seats
         actions.Add(() => TheatherLogic.ShowSeats(timeSlot, true));
 
-        // Change snack NEEDS CORRECT FUNTION
-        actions.Add(() => Menu.Start());
+        // Change snack
+        actions.Add(() => Snacks.Start(CurrReservation.TimeSLotId, CurrReservation.Seats, true));
 
         // Apply discount NEEDS CORRECT FUNTION
         actions.Add(() => Menu.Start());

@@ -6,6 +6,9 @@ using System.Text.Json;
 class SnacksLogic : Order<SnackModel>//IReservational<SnackModel>
 {
     private List<SnackModel> _snacks;
+    static public bool _addRemove = true;
+
+    public static Dictionary<int, int> CurrentResSnacks = new Dictionary<int, int>();
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -48,10 +51,10 @@ class SnacksLogic : Order<SnackModel>//IReservational<SnackModel>
         return (_snacks.OrderByDescending(item => item.Id).First().Id) + 1;
     }
     //Add new to database
-    public SnackModel NewSnack(int id, string snackName, List<string> size, double price)
+    public SnackModel NewSnack(string snackName, List<string> size, double price)
     {
         int NewID = GetNewestId();
-        SnackModel snack = new SnackModel(id, snackName, size, price);
+        SnackModel snack = new SnackModel(NewID, snackName, size, price);
         UpdateList(snack);
         return snack;
     }
@@ -59,5 +62,48 @@ class SnacksLogic : Order<SnackModel>//IReservational<SnackModel>
     public List<SnackModel> AllSnacks()
     {
         return _snacks;
+    }
+
+    public void AddSnack(SnackModel snack)
+    {
+        if (CurrentResSnacks.ContainsKey(snack.Id))
+        {
+            CurrentResSnacks[snack.Id]++;
+        }
+        else
+        {
+            CurrentResSnacks.Add(snack.Id, 1);
+        }
+    }
+
+    public void RemoveSnack(SnackModel snack)
+    {
+        if (CurrentResSnacks.ContainsKey(snack.Id))
+        {
+            CurrentResSnacks[snack.Id]--;
+            if (CurrentResSnacks[snack.Id] <= 0)
+            {
+                CurrentResSnacks.Remove(snack.Id);
+            }
+        }
+    }
+
+    public void AddToRess(bool IsEdited = false)
+    {
+        _addRemove = true;
+
+    }
+
+    public void SwapMode()
+    {
+        _addRemove = !_addRemove;
+    }
+
+    // Get and clears currentResSnacks
+    public static Dictionary<int, int> GetSelectedSnacks()
+    {
+        Dictionary<int, int> tempSnacks = new Dictionary<int, int>(CurrentResSnacks);
+        CurrentResSnacks.Clear();
+        return tempSnacks;
     }
 }

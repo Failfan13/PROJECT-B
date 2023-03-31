@@ -82,7 +82,10 @@ public class ReservationLogic
         {
             ress = new ReservationModel(GetNewestId(), timeSlotId, Seats, snacks, AccountId, currDate);
         }
-
+        
+        Reservation.TotalReservationCost(ress);
         UpdateList(ress);
+
+
     }
 }

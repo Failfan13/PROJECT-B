@@ -31,6 +31,18 @@ public class ReservationModel
         Snacks = snacks;
     }
 
+    public List<SnackModel> GetSnacks()
+    {
+        List<SnackModel> snacks = new List<SnackModel>();
+        SnacksLogic SL = new SnacksLogic();
+
+        foreach (var item in Snacks.Keys)
+        {
+            snacks.Add(SL.GetById(item));
+        }
+        return snacks;
+    }
+
 }
 
 

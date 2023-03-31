@@ -106,4 +106,16 @@ class SnacksLogic : Order<SnackModel>//IReservational<SnackModel>
         CurrentResSnacks.Clear();
         return tempSnacks;
     }
+
+
+    public double GetTotalPrice(List<SnackModel> snacks)
+    {
+        double SnackPrice = 0.00;
+
+        foreach (SnackModel snack in snacks)
+        {
+            SnackPrice += snack.Price;
+        }
+        return SnackPrice;
+    }
 }

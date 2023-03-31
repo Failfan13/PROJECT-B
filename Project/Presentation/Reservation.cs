@@ -139,15 +139,43 @@ public static class Reservation
     //ReservationLogic.TotalOrderDecr = 2.3;
 
     // Show total order amount
-    public static void TotalReservationCost()
+    public static void TotalReservationCost(ReservationModel ress)
     {
-        ReservationLogic ReservationLogic = new();
-        Console.Write("The total cost of your order will be:\n");
+        Console.Clear();
+        ReservationLogic ReservationLogic = new ReservationLogic();
+        double FinalPrice = 0.00;
 
-        string orderCost = ReservationLogic.TotalOrder.ToString();
+
+
+        Console.WriteLine($"Order overview:");
+        Console.WriteLine("\nSeats:");
+        foreach (SeatModel seat in ress.Seats)
+        {
+            Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theater.Width)}\tPrice: {seat.Price}");
+            FinalPrice += seat.Price;
+        }
+        if (ress.Snacks != null)
+        {
+            int MaxLength = ress.GetSnacks().Max(snack => snack.Name.Length);
+            Console.WriteLine("\nSnacks:");
+            foreach (KeyValuePair<int, int> keyValue in ress.Snacks)
+            {
+                var Snack = new SnacksLogic().GetById(keyValue.Key);
+                int Tabs = (int)Math.Ceiling((MaxLength - Snack.Name.Length) / 8.0);
+                var price = (Snack.Price) * keyValue.Value;
+                Console.WriteLine($"{keyValue.Value}x{Snack.Name}\t{new string('\t', Tabs)}Price: {price}");
+                FinalPrice += price;
+            }
+        }
+
+
+        Console.Write("\nThe total cost of your order will be:\n");
+        var priceString = Convert.ToString(FinalPrice);
         //Show euro symbol
-        Console.OutputEncoding = System.Text.Encoding.Unicode;
+
         //Print total cost + if not containing "." add ",-" at end
-        Console.WriteLine($"€ " + orderCost + (orderCost.Contains(".") ? "" : ",-"));
+        Console.WriteLine($"€ " + FinalPrice + (priceString.Contains(".") ? "" : ",-"));
+        QuestionLogic.AskEnter();
+
     }
 }

@@ -12,19 +12,35 @@ public class ReservationModel
     [JsonPropertyName("seats")]
     public List<SeatModel> Seats { get; set; }
 
+    [JsonPropertyName("snacks")]
+    public Dictionary<int, int>? Snacks { get; set; }
+
     [JsonPropertyName("account_id")]
     public int? AccountId { get; set; }
 
     [JsonPropertyName("date_time")]
     public DateTime DateTime { get; set; }
 
-    public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, int? accountId, DateTime dateTime)
+    public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime)
     {
         Id = id;
         TimeSLotId = timeSlotId;
         AccountId = accountId;
         DateTime = dateTime;
         Seats = seats;
+        Snacks = snacks;
+    }
+
+    public List<SnackModel> GetSnacks()
+    {
+        List<SnackModel> snacks = new List<SnackModel>();
+        SnacksLogic SL = new SnacksLogic();
+
+        foreach (var item in Snacks.Keys)
+        {
+            snacks.Add(SL.GetById(item));
+        }
+        return snacks;
     }
 
 }

@@ -5,7 +5,7 @@ using System.Text.Json;
 
 public static class MenuLogic
 {
-    public static int Question(string question, List<string> options, List<Action> actions = null)
+    public static int Question(string question, List<string> options, List<Action> actions = null, string BottomString = null)
     {
         Console.CursorVisible = false;
         ConsoleKeyInfo key;
@@ -28,7 +28,7 @@ public static class MenuLogic
 
                 Console.ResetColor();
             }
-
+            Console.WriteLine(BottomString);
             key = Console.ReadKey();
 
             if (key.Key == ConsoleKey.UpArrow)
@@ -46,6 +46,11 @@ public static class MenuLogic
                 {
                     selectedOption = 0;
                 }
+            }
+
+            if (BottomString != null)
+            {
+
             }
 
         } while (key.Key != ConsoleKey.Enter);

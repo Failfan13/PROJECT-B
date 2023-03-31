@@ -1,6 +1,6 @@
 public static class Reservation
 {
-    static private ReservationLogic ReservationLogic = new();
+
     static private MoviesLogic MoviesLogic = new();
     static private TimeSlotsLogic TimeSlotsLogic = new();
     static private TheatherLogic TheatherLogic = new();
@@ -8,6 +8,7 @@ public static class Reservation
 
     public static void EditReservation()
     {
+        ReservationLogic ReservationLogic = new ReservationLogic();
         int awnser;
         string reservationDate;
         MovieModel reservationMovie;
@@ -17,13 +18,18 @@ public static class Reservation
         // List all reservations with date, time & movie name
         foreach (ReservationModel reservation in ReservationLogic.Reservations)
         {
-            reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
-            reservationMovie = MoviesLogic.GetById(reservation.TimeSLotId);
+            if (AccountsLogic.CurrentAccount.Id == reservation.AccountId)
+            {
+                reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
+                var timeslotVar = TimeSlotsLogic.GetById(reservation.TimeSLotId);
+                reservationMovie = MoviesLogic.GetById(timeslotVar.MovieId);
 
-            Options.Add($"{reservation.Id}. {reservationDate} - {reservationMovie.Title}");
+                Options.Add($"{reservation.Id}. {reservationDate} - {reservationMovie.Title}");
+            }
+
         }
 
-        awnser = MenuLogic.Question(Question,Options);
+        awnser = MenuLogic.Question(Question, Options);
         // Set current reservation field
         try
         {
@@ -35,6 +41,19 @@ public static class Reservation
             return;
         }
 
+        // Make seats from reservation open again
+        var CurrSeat = CurrReservation.Seats;
+        var CurrTimeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSLotId);
+
+        foreach (SeatModel seat in CurrSeat)
+        {
+            var TheatherSeat = CurrTimeSlot.Theater.Seats.FirstOrDefault(s => s.Id == seat.Id);
+            TheatherSeat.Reserved = false;
+        }
+
+        TimeSlotsLogic.UpdateList(CurrTimeSlot);
+
+
         // Edit reservations menu
         string question = "Choose a reservation you want to edit from the menu.";
         List<string> options = new List<string>()
@@ -44,7 +63,7 @@ public static class Reservation
                 "Choose seats",
                 "Change side snack",
                 "Apply discount",
-                "Return to previous menu"
+                "Return to Login menu"
             };
         // Actions reservations actions
         List<Action> actions = new();
@@ -57,7 +76,16 @@ public static class Reservation
         actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movieid, true));
 
         // choose seats
-        actions.Add(() => TheatherLogic.ShowSeats(TheatherLogic.GetById(timeSlot.Theater), timeSlot, true));
+        actions.Add(() => TheatherLogic.ShowSeats(timeSlot, true));
+
+        // Change snack
+        actions.Add(() => Snacks.Start(CurrReservation.TimeSLotId, CurrReservation.Seats, true));
+
+        // Apply discount NEEDS CORRECT FUNTION
+        actions.Add(() => Menu.Start());
+
+        // Return to Login menu
+        actions.Add(() => UserLogin.Start());
 
         MenuLogic.Question(question, options, actions);
     }
@@ -111,14 +139,43 @@ public static class Reservation
     //ReservationLogic.TotalOrderDecr = 2.3;
 
     // Show total order amount
-    public static void TotalReservationCost()
+    public static void TotalReservationCost(ReservationModel ress)
     {
-        Console.Write("The total cost of your order will be:\n");
+        Console.Clear();
+        ReservationLogic ReservationLogic = new ReservationLogic();
+        double FinalPrice = 0.00;
 
-        string orderCost = ReservationLogic.TotalOrder.ToString();
+
+
+        Console.WriteLine($"Order overview:");
+        Console.WriteLine("\nSeats:");
+        foreach (SeatModel seat in ress.Seats)
+        {
+            Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theater.Width)}\tPrice: €{seat.Price}");
+            FinalPrice += seat.Price;
+        }
+        if (ress.Snacks != null)
+        {
+            int MaxLength = ress.GetSnacks().Max(snack => snack.Name.Length);
+            Console.WriteLine("\nSnacks:");
+            foreach (KeyValuePair<int, int> keyValue in ress.Snacks)
+            {
+                var Snack = new SnacksLogic().GetById(keyValue.Key);
+                int Tabs = (int)Math.Ceiling((MaxLength - Snack.Name.Length) / 8.0);
+                var price = (Snack.Price) * keyValue.Value;
+                Console.WriteLine($"{keyValue.Value}x{Snack.Name}\t{new string('\t', Tabs)}Price: €{price}");
+                FinalPrice += price;
+            }
+        }
+
+
+        Console.Write("\nThe total cost of your order will be:\n");
+        var priceString = Convert.ToString(FinalPrice);
         //Show euro symbol
-        Console.OutputEncoding = System.Text.Encoding.Unicode;
+
         //Print total cost + if not containing "." add ",-" at end
-        Console.WriteLine($"€ " + orderCost + (orderCost.Contains(".") ? "" : ",-"));
+        Console.WriteLine($"€ " + FinalPrice + (priceString.Contains(".") ? "" : ",-"));
+        QuestionLogic.AskEnter();
+
     }
 }

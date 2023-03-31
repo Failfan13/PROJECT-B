@@ -85,18 +85,21 @@ static class Movies
     {
         Console.Clear();
         List<MovieModel> movies = MoviesLogic.AllMovies();
-        for (int i = 0; i < movies.Count; i++)
+        string Question = "What movie would you like to change?";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
+        foreach (var movie in movies)
         {
-            Console.WriteLine($"{i + 1}. {movies[i].Title}");
+            Options.Add(movie.Title);
+            Actions.Add(() => ChangeMovieMenu(movie));
         }
         Console.WriteLine($"{movies.Count + 1}. Return");
         int awnser = (int)QuestionLogic.AskNumber("Enter the number to select the movie");
 
-        if (awnser == movies.Count + 1)
-        {
-            Menu.Start();
-        }
-        ChangeMovieMenu(movies[awnser - 1]);
+        Options.Add("Return");
+        Actions.Add(() => Menu.Start());
+
+        MenuLogic.Question(Question, Options, Actions);
 
     }
 
@@ -122,35 +125,27 @@ static class Movies
         Actions.Add(() => ChangePrice(movie));
         Actions.Add(() => ChangeCategory(movie));
 
+        Options.Add("Return");
+        Actions.Add(() => ChangeMoviesMenu());
+
         MenuLogic.Question(Question, Options, Actions);
     }
 
     public static void ChangeCategory(MovieModel movie)
     {
-        bool validinput = true;
-        Console.Clear();
-        do
-        {
-            double addoremove = (int)QuestionLogic.AskNumber("What do you want to do?\n1 Add a category\n2 Remove a category");
-            if (addoremove == 1)
-            {
-                CategoryLogic.AddCategory(movie);
-            }
-            else if (addoremove == 2)
-            {
-                CategoryLogic.RemoveCategory(movie);
-            }
-            else
-            {
-                Console.WriteLine("Invalid input please enter 1 or 2");
-                Console.Clear();
-            }
-        }
-        while (validinput);
+        string Question = "What would you like to do?";
+        List<string> Options = new List<string>() { "Add a category", "Remove a category" };
+        List<Action> Actions = new List<Action>();
+
+        Actions.Add(() => CategoryLogic.AddCategory(movie));
+        Actions.Add(() => CategoryLogic.RemoveCategory(movie));
+
+        MenuLogic.Question(Question, Options, Actions);
     }
 
     private static void ChangeTitle(MovieModel movie)
     {
+        Console.Clear();
         string NewTitle = QuestionLogic.AskString("What do you want to change the title of this movie to?");
         MoviesLogic.ChangeTitle(movie, NewTitle);
         Console.WriteLine($"Title is now: {NewTitle}");
@@ -159,6 +154,7 @@ static class Movies
     }
     private static void ChangeDirector(MovieModel movie)
     {
+        Console.Clear();
         string NewDirector = QuestionLogic.AskString("What do you want to change the director of this movie to?");
         MoviesLogic.ChangeDirector(movie, NewDirector);
         Console.WriteLine($"Director is now: {NewDirector}");
@@ -167,6 +163,7 @@ static class Movies
     }
     private static void ChangeDescription(MovieModel movie)
     {
+        Console.Clear();
         string NewDescription = QuestionLogic.AskString("What do you want to change the description of this movie to?");
         MoviesLogic.ChangeDescription(movie, NewDescription);
         Console.WriteLine($"Description is now: {NewDescription}");
@@ -191,6 +188,7 @@ static class Movies
     }
     private static void ChangeReleaseDate(MovieModel movie)
     {
+        Console.Clear();
         DateTime NewReleaseDate = new DateTime();
         bool CorrectDate = true;
         while (CorrectDate)

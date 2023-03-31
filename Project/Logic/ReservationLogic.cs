@@ -58,8 +58,9 @@ public class ReservationLogic
 
     }
 
-    public void MakeReservation(int timeSlotId, List<SeatModel> Seats, bool IsEdited = false)
+    public void MakeReservation(int timeSlotId, List<SeatModel> Seats, Dictionary<int, int> snacks = null, bool IsEdited = false)
     {
+        Snacks.Continue = false;
         int? AccountId = null;
         ReservationModel ress = null;
         DateTime currDate = DateTime.Now;
@@ -74,14 +75,17 @@ public class ReservationLogic
 
         if (IsEdited)
         {
-            ress = new ReservationModel(Reservation.CurrReservation.Id, timeSlotId, Seats, AccountId, currDate);
+            ress = new ReservationModel(Reservation.CurrReservation.Id, timeSlotId, Seats, snacks, AccountId, currDate);
 
         }
         else
         {
-            ress = new ReservationModel(GetNewestId(), timeSlotId, Seats, AccountId, currDate);
+            ress = new ReservationModel(GetNewestId(), timeSlotId, Seats, snacks, AccountId, currDate);
         }
-
+        
+        Reservation.TotalReservationCost(ress);
         UpdateList(ress);
+
+
     }
 }

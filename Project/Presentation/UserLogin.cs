@@ -128,7 +128,6 @@ static class UserLogin
                 Menu.Start();
             }
         }
-
     }
     public static void ChangePassword()
     {

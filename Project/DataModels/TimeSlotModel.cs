@@ -12,14 +12,14 @@ public class TimeSlotModel
     public DateTime Start { get; set; }
 
     [JsonPropertyName("theater")]
-    public int Theater { get; set; } 
+    public TheaterModel Theater { get; set; }
 
-    public TimeSlotModel(int id, int movieid, DateTime start, int theater)
+    public TimeSlotModel(int id, int movieid, DateTime start, TheaterModel theater)
     {
         Id = id;
         MovieId = movieid;
         Start = start;
-        Theater =theater;
+        Theater = theater;
     }
 
     public void Info()

@@ -2,6 +2,8 @@ static class Snacks
 {
     static private SnacksLogic SnacksLogic = new();
 
+    public static bool Continue = true;
+
     public static void ShowAll()
     {
         foreach (SnackModel snack in SnacksLogic.AllSnacks())
@@ -11,41 +13,72 @@ static class Snacks
     }
 
     // Start request to user
-    public static SnackModel Start()
+    public static void Start(int TimeSlotId, List<SeatModel> Seats, bool IsEdited = false)
     {
-        Console.Clear();
-        Console.WriteLine(@"Here you will be able to select what you would like to
-eat or drink while watching the movie");
-
-        Console.WriteLine(@"Make a choice from the menu by entering the number
-associated by the snack name");
-        ShowAll();
-        while (true)
+        Continue = true;
+        if (IsEdited)
         {
-            // User input
-            var awnser = Console.ReadLine();
-            SnackModel snack = null;
-            // try convert entree to int
-            try
+            SnacksLogic.CurrentResSnacks = Reservation.CurrReservation.Snacks;
+        }
+        string Question = "Make a Snack choice:";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
+
+        // Get length of longest Snack string
+        int MaxLength = SnacksLogic.AllSnacks().Max(snack => snack.Name.Length);
+
+        if (SnacksLogic._addRemove)
+        {
+            Options.Add("Swap Mode, Currently: Adding to list");
+        }
+        else
+        {
+            Options.Add("Swap Mode, Currently: Removing from list");
+        }
+        Actions.Add(() => SnacksLogic.SwapMode());
+
+        foreach (SnackModel snack in SnacksLogic.AllSnacks())
+        {
+            int Tabs = (int)Math.Ceiling((MaxLength - snack.Name.Length) / 8.0);
+            if (SnacksLogic.CurrentResSnacks.ContainsKey(snack.Id))
             {
-                // get snack from array
-                snack = SnacksLogic.GetById(Convert.ToInt32(awnser));
+                Options.Add($"{snack.Name}\t{new string('\t', Tabs)}\t{snack.Price}\t{SnacksLogic.CurrentResSnacks[snack.Id]}");
             }
-            catch (Exception)
-            {
-                Console.WriteLine("Invalid input");
-            }
-            // if snack not null
-            if (snack != null)
-            {
-                Console.WriteLine("Snack has been added");
-                return snack;
-            }
-            // if snack is null
             else
             {
-                Console.WriteLine("Snack not found");
+                Options.Add($"{snack.Name}\t{new string('\t', Tabs)}\t{snack.Price}\t0");
+            }
+
+            // Add or Remove snacks from list
+            if (SnacksLogic._addRemove)
+            {
+                Actions.Add(() => SnacksLogic.AddSnack(snack));
+            }
+            else
+            {
+                Actions.Add(() => SnacksLogic.RemoveSnack(snack));
             }
         }
+
+        Options.Add("Add to reservation");
+        Actions.Add(() => new ReservationLogic().MakeReservation(TimeSlotId, Seats, SnacksLogic.GetSelectedSnacks(), IsEdited));
+        double CurrentPrice = 0;
+        foreach (KeyValuePair<int, int> KeyValue in SnacksLogic.CurrentResSnacks)
+        {
+            var Snack = SnacksLogic.GetById(KeyValue.Key);
+            for (int i = 0; i < KeyValue.Value; i++)
+            {
+                CurrentPrice += Snack.Price;
+            }
+        }
+
+        MenuLogic.Question(Question, Options, Actions, $"Total snack price: {CurrentPrice}");
+
+
+        if (Continue)
+        {
+            Start(TimeSlotId, Seats, IsEdited);
+        }
+
     }
 }

@@ -21,10 +21,13 @@ public class MovieModel
     [JsonPropertyName("duration")]
     public int Duration { get; set; }
 
-    [JsonPropertyName("categories")]
-    public List<CategoryModel> Categories{ get; set; }
+    [JsonPropertyName("price")]
+    public int Price { get; set; }
 
-    public MovieModel(int id, string title, DateTime releaseDate, string director, string description, int duration, List<CategoryModel> categories)
+    [JsonPropertyName("categories")]
+    public List<CategoryModel> Categories { get; set; }
+
+    public MovieModel(int id, string title, DateTime releaseDate, string director, string description, int duration, int price, List<CategoryModel> categories)
     {
         Id = id;
         Title = title;
@@ -32,6 +35,7 @@ public class MovieModel
         Director = director;
         Description = description;
         Duration = duration;
+        Price = price;
         Categories = categories;
     }
 
@@ -43,6 +47,7 @@ public class MovieModel
         Console.WriteLine($"Duration:   \t{Duration}");
         Console.WriteLine($"Director:   \t{Director}");
         Console.WriteLine($"ReleaseDate:\t{ReleaseDate.Day}-{ReleaseDate.Month}-{ReleaseDate.Year}");
+        Console.WriteLine($"Price:   \t{Price}");
         if (Categories.Count != 0)
         {
             foreach (CategoryModel c in Categories)

@@ -224,5 +224,69 @@
     ],
     "account_id": null,
     "date_time": "2023-03-31T10:42:55.865642+02:00"
+  },
+  {
+    "id": 12,
+    "timeslot_id": 0,
+    "seats": [
+      {
+        "id": 41,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 42,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 43,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 44,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "account_id": null,
+    "date_time": "2023-03-31T16:34:00.6947871+02:00"
+  },
+  {
+    "id": 13,
+    "timeslot_id": 0,
+    "seats": [
+      {
+        "id": 61,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 62,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 63,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 64,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "account_id": null,
+    "date_time": "2023-03-31T16:45:55.3219352+02:00"
   }
 ]

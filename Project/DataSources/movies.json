@@ -6,6 +6,7 @@
     "director": "JE moeder",
     "description": null,
     "duration": 0,
+    "price": 4,
     "categories": [
       {
         "id": 4,
@@ -15,110 +16,12 @@
   },
   {
     "id": 1,
-    "title": "Test",
-    "release_date": "2023-10-10T00:00:00",
-    "director": "tester",
-    "description": null,
-    "duration": 0,
-    "categories": [
-      {
-        "id": 1,
-        "name": "action"
-      },
-      {
-        "id": 2,
-        "name": "adventure"
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "title": "jaws",
-    "release_date": "0123-10-10T00:00:00",
-    "director": "test",
-    "description": null,
-    "duration": 0,
-    "categories": [
-      {
-        "id": 1,
-        "name": "action"
-      },
-      {
-        "id": 2,
-        "name": "adventure"
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "title": "Tester",
+    "title": "bruh",
     "release_date": "2010-10-10T00:00:00",
-    "director": "jajaja",
-    "description": null,
-    "duration": 0,
-    "categories": [
-      {
-        "id": 1,
-        "name": "action"
-      },
-      {
-        "id": 2,
-        "name": "adventure"
-      }
-    ]
-  },
-  {
-    "id": 4,
-    "title": "test",
-    "release_date": "2012-10-10T00:00:00",
-    "director": "test",
-    "description": "test",
-    "duration": 0,
-    "categories": [
-      {
-        "id": 1,
-        "name": "action"
-      },
-      {
-        "id": 2,
-        "name": "adventure"
-      }
-    ]
-  },
-  {
-    "id": 5,
-    "title": "test",
-    "release_date": "0100-10-10T00:00:00",
-    "director": "me",
-    "description": "test",
-    "duration": 0,
-    "categories": [
-      {
-        "id": 1,
-        "name": "action"
-      },
-      {
-        "id": 2,
-        "name": "adventure"
-      }
-    ]
-  },
-  {
-    "id": 6,
-    "title": "Title",
-    "release_date": "2023-01-01T00:00:00",
-    "director": "me",
-    "description": "aweseome",
-    "duration": 134,
-    "categories": [
-      {
-        "id": 1,
-        "name": "action"
-      },
-      {
-        "id": 2,
-        "name": "adventure"
-      }
-    ]
+    "director": "piepo",
+    "description": "nani",
+    "duration": 5,
+    "price": 15,
+    "categories": []
   }
 ]

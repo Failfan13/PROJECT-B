@@ -69,7 +69,7 @@
         {
           "id": 10,
           "price": 10,
-          "reserved": true,
+          "reserved": false,
           "handicapped": false
         },
         {
@@ -4905,25 +4905,25 @@
         {
           "id": 0,
           "price": 10,
-          "reserved": true,
+          "reserved": false,
           "handicapped": false
         },
         {
           "id": 1,
           "price": 10,
-          "reserved": true,
+          "reserved": false,
           "handicapped": false
         },
         {
           "id": 2,
           "price": 10,
-          "reserved": true,
+          "reserved": false,
           "handicapped": false
         },
         {
           "id": 3,
           "price": 10,
-          "reserved": true,
+          "reserved": false,
           "handicapped": false
         },
         {

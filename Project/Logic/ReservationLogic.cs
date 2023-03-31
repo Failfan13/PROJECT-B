@@ -104,6 +104,14 @@ public class ReservationLogic
         Reservation.TotalReservationCost(ress);
         UpdateList(ress);
 
+    }
 
+    public void ChangeUserId(ReservationModel Ress)
+    {
+        AccountsLogic AL = new AccountsLogic();
+        int newUserId = AL.GetAccountIdFromList();
+
+        Ress.AccountId = newUserId;
+        UpdateList(Ress);
     }
 }

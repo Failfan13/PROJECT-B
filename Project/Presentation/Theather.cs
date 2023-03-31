@@ -5,7 +5,12 @@ public static class Theater
     {
 
         var theater = timeSLot.Theater;
-        var help = TL.ShowSeats(theater, 9);
+        var size = 9;
+        if (AccountsLogic.CurrentAccount.Admin)
+        {
+            size = 10000;
+        }
+        var help = TL.ShowSeats(theater, size);
         if (help != null)
         {
             var selectedSeats = help.Seats;

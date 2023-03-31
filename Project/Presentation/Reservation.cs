@@ -62,8 +62,7 @@ public static class Reservation
                 "Choose time & seats",
                 "Choose seats",
                 "Change side snack",
-                "Apply discount",
-                "Return to Login menu"
+                "Apply discount"
             };
         // Actions reservations actions
         List<Action> actions = new();
@@ -84,7 +83,14 @@ public static class Reservation
         // Apply discount NEEDS CORRECT FUNTION
         actions.Add(() => Menu.Start());
 
+        if (AccountsLogic.CurrentAccount.Admin && CurrReservation.AccountId == null)
+        {
+            options.Add("Add user ID");
+            actions.Add(() => ReservationLogic.ChangeUserId(CurrReservation));
+        }
+
         // Return to Login menu
+        options.Add("Return");
         actions.Add(() => UserLogin.Start());
 
         MenuLogic.Question(question, options, actions);

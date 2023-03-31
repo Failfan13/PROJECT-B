@@ -76,7 +76,7 @@ public static class Reservation
         actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movieid, true));
 
         // choose seats
-        actions.Add(() => TheatherLogic.SelectSeats(timeSlot, true));
+        actions.Add(() => Theater.SelectSeats(timeSlot, true));
 
         // Change snack
         actions.Add(() => Snacks.Start(CurrReservation.TimeSLotId, CurrReservation.Seats, true));

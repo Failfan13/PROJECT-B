@@ -205,33 +205,16 @@ public class TheatherLogic
         }
     }
 
-    public void SelectSeats(TimeSlotModel timeSLot, bool IsEdited = false)
-    {
-        var theater = timeSLot.Theater;
-        var help = ShowSeats(theater, 9);
-        var selectedSeats = help.Seats;
-
-        new TimeSlotsLogic().UpdateList(timeSLot);
-        string Question = "Would you like to order snacks?";
-        List<string> Options = new List<string>() { "Yes", "No" };
-        List<Action> Actions = new List<Action>();
-        ReservationLogic RL = new ReservationLogic();
-
-
-        Actions.Add(() => Snacks.Start(timeSLot.Id, selectedSeats, IsEdited));
-        Actions.Add(() => RL.MakeReservation(timeSLot.Id, selectedSeats, IsEdited: IsEdited));
-
-        MenuLogic.Question(Question, Options, Actions);
-    }
-
     public void BlockSeats(TheaterModel theater)
     {
         var Help = ShowSeats(theater);
         UpdateList(Help.Theather);
     }
 
-    public void ChangeTheaterSize(TheaterModel theater, int width, int height)
+    public void ChangeTheaterSize(TheaterModel theater)
     {
+        int width = QuestionLogic.AskNumber("Enter the width of the theater");
+        int height = QuestionLogic.AskNumber("Enter the height of the theater");
         MakeTheather(width, height, theater.Id);
     }
 }

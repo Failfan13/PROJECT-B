@@ -14,5 +14,9 @@
   {
     "id": 4,
     "name": "comedy"
+  },
+  {
+    "id": 5,
+    "name": "Horror"
   }
 ]

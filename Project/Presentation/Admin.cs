@@ -20,6 +20,9 @@ public static class Admin
         Options.Add("Change Categories");
         Actions.Add(() => Category.Start());
 
+        Options.Add("Change Reservations");
+        Actions.Add(() => Reservation.EditReservation(true));
+
 
         Options.Add("\nReturn");
         Actions.Add(() => Menu.Start());

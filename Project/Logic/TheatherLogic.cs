@@ -199,7 +199,7 @@ public class TheatherLogic
                                     }
                                 }
                             }
-                            return null;
+                            return new Helper(theater,selectedSeats);
                         }
                         else
                         {
@@ -220,7 +220,6 @@ public class TheatherLogic
         {
             UpdateList(Help.Theather);
         }
-
     }
 
     public void UnBlockSeats(TheaterModel theater)
@@ -236,8 +235,8 @@ public class TheatherLogic
 
     public void ChangeTheaterSize(TheaterModel theater)
     {
-        int width = QuestionLogic.AskNumber("Enter the width of the theater");
-        int height = QuestionLogic.AskNumber("Enter the height of the theater");
+        int width = (int)QuestionLogic.AskNumber("Enter the width of the theater");
+        int height = (int)QuestionLogic.AskNumber("Enter the height of the theater");
         MakeTheather(width, height, theater.Id);
     }
 }

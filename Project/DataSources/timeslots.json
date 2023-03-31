@@ -39,19 +39,19 @@
         {
           "id": 5,
           "price": 10,
-          "reserved": true,
+          "reserved": false,
           "handicapped": false
         },
         {
           "id": 6,
           "price": 10,
-          "reserved": true,
+          "reserved": false,
           "handicapped": false
         },
         {
           "id": 7,
           "price": 10,
-          "reserved": true,
+          "reserved": false,
           "handicapped": false
         },
         {
@@ -249,19 +249,19 @@
         {
           "id": 40,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
           "id": 41,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
           "id": 42,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
@@ -3129,7 +3129,7 @@
         {
           "id": 10,
           "price": 10,
-          "reserved": true,
+          "reserved": false,
           "handicapped": false
         },
         {
@@ -3147,13 +3147,13 @@
         {
           "id": 13,
           "price": 10,
-          "reserved": true,
+          "reserved": false,
           "handicapped": false
         },
         {
           "id": 14,
           "price": 10,
-          "reserved": true,
+          "reserved": false,
           "handicapped": false
         },
         {
@@ -4905,25 +4905,25 @@
         {
           "id": 0,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
           "id": 1,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
           "id": 2,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
           "id": 3,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
@@ -5145,13 +5145,13 @@
         {
           "id": 40,
           "price": 10,
-          "reserved": true,
+          "reserved": false,
           "handicapped": false
         },
         {
           "id": 41,
           "price": 10,
-          "reserved": true,
+          "reserved": false,
           "handicapped": false
         },
         {
@@ -5205,25 +5205,25 @@
         {
           "id": 50,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
           "id": 51,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
           "id": 52,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {
           "id": 53,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {

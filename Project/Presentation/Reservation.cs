@@ -6,7 +6,7 @@ public static class Reservation
     static private TheatherLogic TheatherLogic = new();
     static public ReservationModel CurrReservation = null;
 
-    public static void EditReservation()
+    public static void EditReservation(bool AsAdmim = false)
     {
         ReservationLogic ReservationLogic = new ReservationLogic();
         int awnser;
@@ -18,13 +18,13 @@ public static class Reservation
         // List all reservations with date, time & movie name
         foreach (ReservationModel reservation in ReservationLogic.Reservations)
         {
-            if (AccountsLogic.CurrentAccount.Id == reservation.AccountId)
+            if (AccountsLogic.CurrentAccount.Id == reservation.AccountId || AsAdmim)
             {
                 reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
                 var timeslotVar = TimeSlotsLogic.GetById(reservation.TimeSLotId);
                 reservationMovie = MoviesLogic.GetById(timeslotVar.MovieId);
 
-                Options.Add($"{reservation.Id}. {reservationDate} - {reservationMovie.Title}");
+                Options.Add($"{reservationDate} - {reservationMovie.Title}");
             }
 
         }

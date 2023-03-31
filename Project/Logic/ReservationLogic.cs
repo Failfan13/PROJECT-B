@@ -57,6 +57,20 @@ public class ReservationLogic
         }
 
     }
+    private int AsAdminId()
+    {
+        AccountsLogic AL = new AccountsLogic();
+        int returner = -1;
+        string Question = "Do you want to use your Admin Id or a User Id?";
+        List<string> Options = new List<string>() { "Admin", "User" };
+        List<Action> Actions = new List<Action>();
+        Actions.Add(() => returner = AccountsLogic.CurrentAccount.Id);
+        Actions.Add(() => returner = AL.GetAccountIdFromList());
+
+        MenuLogic.Question(Question, Options, Actions);
+
+        return returner;
+    }
 
     public void MakeReservation(int timeSlotId, List<SeatModel> Seats, Dictionary<int, int> snacks = null, bool IsEdited = false)
     {
@@ -67,6 +81,10 @@ public class ReservationLogic
         try
         {
             AccountId = AccountsLogic.CurrentAccount.Id;
+            if (AccountsLogic.CurrentAccount.Admin)
+            {
+                AccountId = AsAdminId();
+            }
         }
         catch (System.Exception)
         {   // not logged in
@@ -82,7 +100,7 @@ public class ReservationLogic
         {
             ress = new ReservationModel(GetNewestId(), timeSlotId, Seats, snacks, AccountId, currDate);
         }
-        
+
         Reservation.TotalReservationCost(ress);
         UpdateList(ress);
 

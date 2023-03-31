@@ -6,6 +6,8 @@ public static class Theater
 
         var theater = timeSLot.Theater;
         var help = TL.ShowSeats(theater, 9);
+        Console.WriteLine(help);
+        QuestionLogic.AskEnter();
         if (help != null)
         {
             var selectedSeats = help.Seats;

@@ -77,6 +77,24 @@ public class AccountsLogic
         CurrentAccount.Password = newpassword;
         UpdateList(CurrentAccount);
     }
+
+    public int GetAccountIdFromList()
+    {
+        int ReturnId = -1;
+        string Question = "What user do you want to use?";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
+
+        foreach (AccountModel acc in _accounts)
+        {
+            Options.Add(acc.FullName);
+            Actions.Add(() => ReturnId = acc.Id);
+        }
+
+        MenuLogic.Question(Question, Options, Actions);
+
+        return ReturnId;
+    }
 }
 
 

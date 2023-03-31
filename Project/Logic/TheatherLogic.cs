@@ -59,8 +59,9 @@ public class TheatherLogic
 
 
 
-    public void ShowSeats(TheaterModel theater, TimeSlotModel timeSLot, bool IsEdited = false)
+    public void ShowSeats(TimeSlotModel timeSLot, bool IsEdited = false)
     {
+        var theater = timeSLot.Theater;
         var AllSeats = theater.Seats;
         List<SeatModel> selectedSeats = new List<SeatModel>();
 
@@ -173,7 +174,7 @@ public class TheatherLogic
                                 }
                             }
 
-                            UpdateList(theater);
+                            new TimeSlotsLogic().UpdateList(timeSLot);
                             Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.SeatRow(theater.Width)}"))} have been reserved.");
                             string Question = "Would you like to order snacks?";
                             List<string> Options = new List<string>() { "Yes", "No" };

@@ -47,8 +47,8 @@ class TimeSlotsLogic
 
     public List<TimeSlotModel>? GetByMovieId(int movieid)
     {
-        List<TimeSlotModel> tsmlist = new List<TimeSlotModel>{};
-        foreach(TimeSlotModel tsm in _timeslots)
+        List<TimeSlotModel> tsmlist = new List<TimeSlotModel> { };
+        foreach (TimeSlotModel tsm in _timeslots)
         {
             if (tsm.MovieId == movieid)
             {
@@ -64,7 +64,7 @@ class TimeSlotsLogic
     }
 
 
-    public void NewTimeSlot(int movieid, DateTime start, int theater)
+    public void NewTimeSlot(int movieid, DateTime start, TheaterModel theater)
     {
         int NewID = GetNewestId();
         TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, theater);

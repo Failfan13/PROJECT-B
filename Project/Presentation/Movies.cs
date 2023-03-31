@@ -182,7 +182,7 @@ static class Movies
     {
         double NewPrice = QuestionLogic.AskNumber("What do you want to change the price of this movie to?");
         MoviesLogic.ChangePrice(movie, NewPrice);
-        Console.WriteLine($"Price is now: {NewPrice}");
+        Console.WriteLine($"Price is now: €{NewPrice}");
         QuestionLogic.AskEnter();
         ChangeMovieMenu(movie);
     }

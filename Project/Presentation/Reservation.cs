@@ -151,7 +151,7 @@ public static class Reservation
         Console.WriteLine("\nSeats:");
         foreach (SeatModel seat in ress.Seats)
         {
-            Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theater.Width)}\tPrice: {seat.Price}");
+            Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theater.Width)}\tPrice: €{seat.Price}");
             FinalPrice += seat.Price;
         }
         if (ress.Snacks != null)
@@ -163,7 +163,7 @@ public static class Reservation
                 var Snack = new SnacksLogic().GetById(keyValue.Key);
                 int Tabs = (int)Math.Ceiling((MaxLength - Snack.Name.Length) / 8.0);
                 var price = (Snack.Price) * keyValue.Value;
-                Console.WriteLine($"{keyValue.Value}x{Snack.Name}\t{new string('\t', Tabs)}Price: {price}");
+                Console.WriteLine($"{keyValue.Value}x{Snack.Name}\t{new string('\t', Tabs)}Price: €{price}");
                 FinalPrice += price;
             }
         }

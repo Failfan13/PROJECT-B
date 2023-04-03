@@ -1,6 +1,7 @@
 public static class Reservation
 {
     static private ReservationLogic ReservationLogic = new();
+    static private CategoryLogic CategoryLogic = new();
     public static void start()
     {
         NoFilterMenu();
@@ -19,10 +20,20 @@ public static class Reservation
         Actions.Add(() => Filter.Main());
 
 
+   
         foreach (MovieModel movie in movies)
         {
+  
+            //checks if the movie category is 18+ and if the user is not an adult so adult movies are not shown to underaged users
+            if (AccountsLogic.CurrentAccount.Adult == false && movie.Categories[0].Name == "18+")
+                {
+                    continue;
+                }
             Movies.Add(movie.Title);
-            Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, movie.Title));
+            Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, movie.Title));            
+                   
+            
+        
         }
         Movies.Add("Return");
         Actions.Add(() => Menu.Start());

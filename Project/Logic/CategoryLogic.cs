@@ -81,7 +81,7 @@ public class CategoryLogic
         Console.Clear();
         foreach(CategoryModel cm in movie.Categories)
         {
-            Console.WriteLine($"{cm.Id} {cm.Name}");
+            Console.WriteLine($"{cm.Id} {cm.Name} ");
         }
         int catid = QuestionLogic.AskNumber("What Category do you want to remove?");
         movie.Categories.Remove(this.GetById(catid));

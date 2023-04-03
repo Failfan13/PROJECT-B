@@ -65,10 +65,10 @@ public class AccountsLogic
         CurrentAccount = null;
     }
 
-    public void NewAccount(string email, string name, string password)
+    public void NewAccount(string email, string name, string password, bool adult)
     {
         int NewID = GetNewestId();
-        AccountModel account = new AccountModel(NewID, email, password, name);
+        AccountModel account = new AccountModel(NewID, email, password, name, adult);
         UpdateList(account);
     }
 
@@ -77,6 +77,7 @@ public class AccountsLogic
         CurrentAccount.Password = newpassword;
         UpdateList(CurrentAccount);
     }
+
 }
 
 

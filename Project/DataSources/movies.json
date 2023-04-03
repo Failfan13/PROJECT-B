@@ -8,8 +8,8 @@
     "duration": 0,
     "categories": [
       {
-        "id": 4,
-        "name": "comedy"
+        "id": 5,
+        "name": "18+"
       }
     ]
   },
@@ -51,7 +51,7 @@
   },
   {
     "id": 3,
-    "title": "Tester",
+    "title": "Tester18",
     "release_date": "2010-10-10T00:00:00",
     "director": "jajaja",
     "description": null,
@@ -62,8 +62,8 @@
         "name": "action"
       },
       {
-        "id": 2,
-        "name": "adventure"
+        "id": 5,
+        "name": "18+"
       }
     ]
   },

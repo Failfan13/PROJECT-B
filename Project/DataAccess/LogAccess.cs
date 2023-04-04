@@ -1,19 +1,18 @@
 static class LogAccess
 {
-    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/log.csv"));
-    private static StreamWriter _streamWriter = new StreamWriter(path, true);
 
-
-    public static void WriteLine(string logline, string headers)
+    public static void WriteLine(string logline, string headers, string path)
     {
-        if (_streamWriter.BaseStream.Position.Equals(0))
+        using (StreamWriter writer = new StreamWriter(path, true))
         {
-            _streamWriter.WriteLine(headers);
+            if (writer.BaseStream.Position.Equals(0))
+            {
+                writer.WriteLine(headers);
+            }
+            writer.WriteLine(logline);
         }
-        _streamWriter.WriteLine(logline);
-        _streamWriter.Close();
     }
-    public static List<Dictionary<string, string>> ReadCsv()
+    public static List<Dictionary<string, string>> ReadCsv(string path)
     {
         List<Dictionary<string, string>> data = new List<Dictionary<string, string>>();
 

@@ -20,6 +20,11 @@ public class AccountsLogic
         return AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FullName : null;
     }
 
+    public static int? UserId()
+    {
+        return AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.Id : null;
+    }
+
     public AccountsLogic()
     {
         _accounts = AccountsAccess.LoadAll();

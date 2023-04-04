@@ -5,7 +5,7 @@
     "password": "xyz",
     "fullName": "Nikola Tesla",
     "admin": false,
-    "Adult":  true
+    "Adult":  false
   },
   {
     "id": 2,

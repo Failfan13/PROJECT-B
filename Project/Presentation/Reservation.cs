@@ -25,7 +25,7 @@ public static class Reservation
         {
   
             //checks if the movie category is 18+ and if the user is not an adult so adult movies are not shown to underaged users
-            if (AccountsLogic.CurrentAccount.Adult == false && movie.Categories[0].Name == "18+")
+            if(movie.Categories.Any(i => i.Name == "18+" && AccountsLogic.CurrentAccount.Adult == false))
                 {
                     continue;
                 }

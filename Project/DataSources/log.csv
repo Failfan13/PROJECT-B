@@ -1,0 +1,3 @@
+timestamp,type,id,action,user_id
+2023-04-04 18:55:50,TimeSlotModel,0,Updated,
+2023-04-04 18:55:55,ReservationModel,18,Added,

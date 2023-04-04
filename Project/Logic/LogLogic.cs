@@ -1,28 +1,8 @@
 static class Logger
 {
-    private static string _pathReservation = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/logreservations.csv"));
-    private static string _pathData = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/logdata.csv"));
+    private static string pathData = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/logdata.csv"));
+    private static string pathSystem = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/logsystem.csv"));
 
-    public static List<Dictionary<string, string>> ReadLog(string path, string type = null)
-    {
-        List<Dictionary<string, string>> oldList = LogAccess.ReadCsv(path);
-        List<Dictionary<string, string>> newList = new List<Dictionary<string, string>>();
-        if (type != null)
-        {
-            foreach (var item in oldList)
-            {
-                if (item["type"] == type)
-                {
-                    newList.Add(item);
-                }
-            }
-            return newList;
-        }
-        else
-        {
-            return oldList;
-        }
-    }
     // call with a data change of a model
     public static void LogDataChange<T>(int modelId, string action)
     {
@@ -35,13 +15,13 @@ static class Logger
 
         string finalString = $"{timestamp},{typeString},{modelId},{action},{AccountsLogic.UserId()}";
 
-        LogAccess.WriteLine(finalString, headers, _pathData);
+        LogAccess.WriteLine(finalString, headers, pathData);
     }
 
     // call to get data based on a model
     public static List<Dictionary<string, string>> GetLogDataChange<T>()
     {
-        var list = LogAccess.ReadCsv(_pathData);
+        var list = LogAccess.ReadCsv(pathData);
         List<Dictionary<string, string>> newList = new List<Dictionary<string, string>>();
 
         foreach (var item in list)
@@ -55,19 +35,15 @@ static class Logger
         return newList;
     }
 
-    public static void LogReservation(ReservationModel ress)
+    // system logs
+    public static void SystemLog(string action)
     {
-        string headers = "timestamp,id,user_id";
+        string headers = "timestamp,action,user_id";
         string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
-        string finalString = $"{timestamp},{ress.Id},{ress.AccountId}";
+        string finalString = $"{timestamp},{action},{AccountsLogic.UserId()}";
 
-        LogAccess.WriteLine(finalString, headers, _pathReservation);
+        LogAccess.WriteLine(finalString, headers, pathSystem);
     }
 
-    public static List<Dictionary<string, string>> GetLogReservation()
-    {
-        var list = LogAccess.ReadCsv(_pathReservation);
-        return list;
-    }
 }

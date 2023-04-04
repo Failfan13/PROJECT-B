@@ -78,7 +78,7 @@ public static class Reservation
         actions.Add(() => Theater.SelectSeats(timeSlot, true));
 
         // Change snack
-        actions.Add(() => Snacks.Start(CurrReservation.TimeSLotId, CurrReservation.Seats, true));
+        actions.Add(() => Snacks.Start(timeSlot, CurrReservation.Seats, true));
 
         // Apply discount NEEDS CORRECT FUNTION
         actions.Add(() => Menu.Start());
@@ -182,6 +182,5 @@ public static class Reservation
         Console.Write($"€ " + FinalPrice + (priceString.Contains(".") ? "" : ",-"));
         Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {ress.Id}\n");
         QuestionLogic.AskEnter();
-
     }
 }

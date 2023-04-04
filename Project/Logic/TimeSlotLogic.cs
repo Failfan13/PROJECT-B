@@ -30,11 +30,13 @@ class TimeSlotsLogic
         {
             //update existing model
             _timeslots[index] = ts;
+            Logger.LogDataChange<TimeSlotModel>(ts.Id, "Updated");
         }
         else
         {
             //add new model
             _timeslots.Add(ts);
+            Logger.LogDataChange<TimeSlotModel>(ts.Id, "Added");
         }
         TimeSlotAccess.WriteAll(_timeslots);
 

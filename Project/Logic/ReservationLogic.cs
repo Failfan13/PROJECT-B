@@ -31,11 +31,13 @@ public class ReservationLogic
         {
             //update existing model
             Reservations[index] = ress;
+            Logger.LogDataChange<ReservationModel>(ress.Id, "Updated");
         }
         else
         {
             //add new model
             Reservations.Add(ress);
+            Logger.LogDataChange<ReservationModel>(ress.Id, "Added");
         }
         ReservationAccess.WriteAll(Reservations);
 
@@ -72,8 +74,9 @@ public class ReservationLogic
         return returner;
     }
 
-    public void MakeReservation(int timeSlotId, List<SeatModel> Seats, Dictionary<int, int> snacks = null, bool IsEdited = false)
+    public void MakeReservation(TimeSlotModel timeSlot, List<SeatModel> Seats, Dictionary<int, int> snacks = null, bool IsEdited = false)
     {
+
         Snacks.Continue = false;
         int? AccountId = null;
         ReservationModel ress = null;
@@ -93,17 +96,18 @@ public class ReservationLogic
 
         if (IsEdited)
         {
-            ress = new ReservationModel(Reservation.CurrReservation.Id, timeSlotId, Seats, snacks, AccountId, currDate);
+            ress = new ReservationModel(Reservation.CurrReservation.Id, timeSlot.Id, Seats, snacks, AccountId, currDate);
 
         }
         else
         {
-            ress = new ReservationModel(GetNewestId(), timeSlotId, Seats, snacks, AccountId, currDate);
+            ress = new ReservationModel(GetNewestId(), timeSlot.Id, Seats, snacks, AccountId, currDate);
         }
 
         Reservation.TotalReservationCost(ress);
         UpdateList(ress);
-
+        TimeSlotsLogic TL = new TimeSlotsLogic();
+        TL.UpdateList(timeSlot);
     }
 
     public void ChangeUserId(ReservationModel Ress)

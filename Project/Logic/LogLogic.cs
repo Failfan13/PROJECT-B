@@ -33,12 +33,21 @@ static class Logger
         }
     }
 
-    public static void LogDataChange(string title, string action)
+    // call with a data change
+    public static void LogDataChange<T>(int modelId, string action)
+    {
+        var type = typeof(T);
+        string typeString = type.ToString();
+        Console.WriteLine(typeString);
+    }
+
+    // call when a reservation is made
+    public static void LogReservation(ReservationModel ress)
     {
 
     }
 
-    public static void LogReservation()
+    public static void LogSystem(string log)
     {
 
     }

@@ -8,37 +8,23 @@
     "net6.0": []
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\max\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
-=======
-    "C:\\Users\\mmsb0\\.nuget\\packages\\": {}
->>>>>>> CAT4
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mmsb0\\OneDrive\\Documents\\GitHub\\PROJECT-B\\Project\\Project.csproj",
+      "projectUniqueName": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\Project.csproj",
       "projectName": "Project",
-<<<<<<< HEAD
       "projectPath": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\Project.csproj",
       "packagesPath": "C:\\Users\\max\\.nuget\\packages\\",
       "outputPath": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\obj\\",
-=======
-      "projectPath": "C:\\Users\\mmsb0\\OneDrive\\Documents\\GitHub\\PROJECT-B\\Project\\Project.csproj",
-      "packagesPath": "C:\\Users\\mmsb0\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mmsb0\\OneDrive\\Documents\\GitHub\\PROJECT-B\\Project\\obj\\",
->>>>>>> CAT4
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-<<<<<<< HEAD
         "C:\\Users\\max\\AppData\\Roaming\\NuGet\\NuGet.Config"
-=======
-        "C:\\Users\\mmsb0\\AppData\\Roaming\\NuGet\\NuGet.Config"
->>>>>>> CAT4
       ],
       "originalTargetFrameworks": [
         "net6.0"

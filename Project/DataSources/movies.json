@@ -9,8 +9,8 @@
     "price": 4,
     "categories": [
       {
-        "id": 5,
-        "name": "18+"
+        "id": 4,
+        "name": "comedy"
       }
     ]
   },
@@ -53,7 +53,6 @@
       {
         "id": 2,
         "name": "adventure"
-<<<<<<< HEAD
       }
     ]
   },
@@ -66,17 +65,5 @@
     "duration": 50,
     "price": 120,
     "categories": []
-=======
-      },
-      {
-        "id": 4,
-        "name": "drama"
-      },
-      {
-        "id": 5,
-        "name": "18+"
-      }
-    ]
->>>>>>> CAT4
   }
 ]

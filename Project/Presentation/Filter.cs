@@ -25,13 +25,18 @@ public static class Filter
         List<Action> Actions = new List<Action>();
 
         CategoryLogic CatL = new CategoryLogic();
-        foreach (CategoryModel cat in CatL.AllCategories())
-        {
-            Options.Add(cat.Name);
-            Actions.Add(() => Filter.CatIds.Add(cat.Id));
-        }
+        Options.Add("Movie name");
+        Options.Add("Movie time");
+        Options.Add("Movie category");
+        Options.Add("Movie price");
+
+        // foreach (CategoryModel cat in CatL.AllCategories())
+        // {
+        //     Options.Add(cat.Name);
+        //     Actions.Add(() => Filter.CatIds.Add(cat.Id));
+        // }
         Options.Add("Return");
-        Actions.Add(() => Main());
+        Actions.Add(() => Main(IsEdited));
         MenuLogic.Question(Question, Options, Actions);
 
         var movies = new MoviesLogic().FilterOnCategories(CatIds);

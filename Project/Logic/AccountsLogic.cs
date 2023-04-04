@@ -15,6 +15,11 @@ public class AccountsLogic
     //private set, so this can only be set by the class itself
     static public AccountModel? CurrentAccount { get; private set; }
 
+    public static string UserName()
+    {
+        return AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FullName : null;
+    }
+
     public AccountsLogic()
     {
         _accounts = AccountsAccess.LoadAll();

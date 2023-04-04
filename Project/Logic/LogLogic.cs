@@ -1,27 +1,47 @@
 static class Logger
 {
-    public static List<string> Types = new List<string>() { "Data Change", "User", "Reservation", "" };
 
-    public static void Log(string LogString, string type)
+    private static void Log(string LogString, string type)
     {
 
-        try
+        string[] headersL = { "Timestamp", "type", "log", "user" };
+        string headers = string.Join(",", headersL);
+
+        string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+        LogAccess.WriteLine($"{timestamp},{type},{LogString},{AccountsLogic.UserName()}", headers);
+    }
+
+    public static List<Dictionary<string, string>> ReadLog(string type = null)
+    {
+        List<Dictionary<string, string>> oldList = LogAccess.ReadCsv();
+        List<Dictionary<string, string>> newList = new List<Dictionary<string, string>>();
+        if (type != null)
         {
-
-            if (Types.Contains(type))
+            foreach (var item in oldList)
             {
-                string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-                LogAccess.WriteLine($"{timestamp},{type},{LogString}");
+                if (item["type"] == type)
+                {
+                    newList.Add(item);
+                }
             }
-            else
-            {
-                throw new Exception(searchStr + " is not present in the list.");
-            }
+            return newList;
         }
-        catch (Exception ex)
+        else
         {
-            Console.WriteLine(ex.Message);
+            return oldList;
         }
     }
+
+    public static void LogDataChange(string title, string action)
+    {
+
+    }
+
+    public static void LogReservation()
+    {
+
+    }
+
+
 }

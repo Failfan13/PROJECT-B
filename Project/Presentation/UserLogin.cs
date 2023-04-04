@@ -88,7 +88,19 @@ static class UserLogin
             }
         }
 
-        accountsLogic.NewAccount(Email, Name, pass);
+        Console.Clear();
+        Console.WriteLine("Are you an adult? Y/N");
+        string answer = Console.ReadLine();
+        if(answer == "Y" || answer == "y")
+        {
+        accountsLogic.NewAccount(Email, Name, pass, true);
+        }
+        else
+        {
+        accountsLogic.NewAccount(Email, Name, pass, false);
+        }
+        
+
     }
 
     public static void Login()

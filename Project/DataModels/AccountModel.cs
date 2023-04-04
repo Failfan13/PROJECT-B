@@ -17,13 +17,17 @@ public class AccountModel
     [JsonPropertyName("admin")]
     public bool Admin { get; set; }
 
-    public AccountModel(int id, string emailAddress, string password, string fullName)
+    [JsonPropertyName("Adult")]
+    public bool Adult { get; set; }
+
+    public AccountModel(int id, string emailAddress, string password, string fullName, bool adult)
     {
         Id = id;
         EmailAddress = emailAddress;
         Password = password;
         FullName = fullName;
         Admin = false;
+        Adult = adult;
     }
 
 }

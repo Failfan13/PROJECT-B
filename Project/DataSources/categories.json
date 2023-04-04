@@ -1,4 +1,5 @@
 [
+<<<<<<< HEAD
   {
     "id": 1,
     "name": "action"
@@ -20,3 +21,27 @@
     "name": "Horror"
   }
 ]
+=======
+    {
+        "id": 1,
+        "name": "action"
+    },
+    {
+        "id": 2,
+        "name": "adventure"
+    },
+    {
+        "id": 3,
+        "name": "romance"
+    },
+    {
+        "id": 4,
+        "name": "comedy"
+    },
+    {
+        "id": 5,
+        "name": "18+"
+    }
+
+  ]
+>>>>>>> CAT4

@@ -1,8 +1,12 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "3/y7sFbRHA3yiRZI5+WkQaIBB8fAdV9cDgpTSUCwGbdLJbvGV0XqM7dwc8E2U4kyRkxo2ilsDnQH2oBWNIci1w==",
+=======
+  "dgSpecHash": "FR2XNTJBjsKrsL9EMAYdY4DCkmJNCrjJfyln+Smjx8Tz9x7goTBVQkGhIhN4dx1x5gWCXKPMhhibAQXa7ciwGQ==",
+>>>>>>> CAT4
   "success": true,
-  "projectFilePath": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\Project.csproj",
+  "projectFilePath": "C:\\Users\\mmsb0\\OneDrive\\Documents\\GitHub\\PROJECT-B\\Project\\Project.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -30,11 +30,13 @@ class SnacksLogic : Order<SnackModel>//IReservational<SnackModel>
         {
             //update existing model
             _snacks[index] = snack;
+            Logger.LogDataChange<SnackModel>(snack.Id, "Updated");
         }
         else
         {
             //add new model
             _snacks.Add(snack);
+            Logger.LogDataChange<SnackModel>(snack.Id, "Added");
         }
         SnackAccess.WriteAll(_snacks);
 

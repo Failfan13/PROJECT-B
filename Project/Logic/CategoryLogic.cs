@@ -25,11 +25,13 @@ public class CategoryLogic
         {
             //update existing model
             _categories[index] = category;
+            Logger.LogDataChange<CategoryModel>(category.Id, "Updated");
         }
         else
         {
             //add new model
             _categories.Add(category);
+            Logger.LogDataChange<CategoryModel>(category.Id, "Added");
         }
         CategoryAccess.WriteAll(_categories);
     }

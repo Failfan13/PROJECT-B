@@ -15,6 +15,16 @@ public class AccountsLogic
     //private set, so this can only be set by the class itself
     static public AccountModel? CurrentAccount { get; private set; }
 
+    public static string UserName()
+    {
+        return AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FullName : null;
+    }
+
+    public static int? UserId()
+    {
+        return AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.Id : null;
+    }
+
     public AccountsLogic()
     {
         _accounts = AccountsAccess.LoadAll();
@@ -30,11 +40,13 @@ public class AccountsLogic
         {
             //update existing model
             _accounts[index] = acc;
+            Logger.LogDataChange<AccountModel>(acc.Id, "Updated");
         }
         else
         {
             //add new model
             _accounts.Add(acc);
+            Logger.LogDataChange<AccountModel>(acc.Id, "Added");
         }
         AccountsAccess.WriteAll(_accounts);
 
@@ -63,6 +75,7 @@ public class AccountsLogic
     public void LogOut()
     {
         CurrentAccount = null;
+        Logger.SystemLog("Logged out");
     }
 
     public void NewAccount(string email, string name, string password)

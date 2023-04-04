@@ -535,5 +535,147 @@
     "snacks": null,
     "account_id": null,
     "date_time": "2023-03-31T21:07:25.3439192+02:00"
+  },
+  {
+    "id": 18,
+    "timeslot_id": 0,
+    "seats": [
+      {
+        "id": 10,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "snacks": {
+      "0": 2
+    },
+    "account_id": null,
+    "date_time": "2023-04-04T18:55:54.4628473+02:00"
+  },
+  {
+    "id": 19,
+    "timeslot_id": 8,
+    "seats": [
+      {
+        "id": 0,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 1,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 2,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "snacks": {
+      "0": 1,
+      "1": 1
+    },
+    "account_id": null,
+    "date_time": "2023-04-04T19:08:01.7565991+02:00"
+  },
+  {
+    "id": 20,
+    "timeslot_id": 4,
+    "seats": [
+      {
+        "id": 11,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "snacks": null,
+    "account_id": null,
+    "date_time": "2023-04-04T19:11:09.3667362+02:00"
+  },
+  {
+    "id": 21,
+    "timeslot_id": 6,
+    "seats": [
+      {
+        "id": 1,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 2,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "snacks": null,
+    "account_id": null,
+    "date_time": "2023-04-04T19:11:23.043769+02:00"
+  },
+  {
+    "id": 22,
+    "timeslot_id": 7,
+    "seats": [
+      {
+        "id": 0,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 1,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 2,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "snacks": {
+      "0": 2,
+      "1": 1
+    },
+    "account_id": null,
+    "date_time": "2023-04-04T19:11:46.898099+02:00"
+  },
+  {
+    "id": 23,
+    "timeslot_id": 3,
+    "seats": [
+      {
+        "id": 0,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 1,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 2,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "snacks": {
+      "0": 2
+    },
+    "account_id": null,
+    "date_time": "2023-04-04T19:17:27.5274856+02:00"
   }
 ]

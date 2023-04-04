@@ -1,0 +1,14 @@
+timestamp,type,id,action,user_id
+2023-04-04 19:07:31,AccountModel,4,Updated,4
+2023-04-04 19:07:58,TimeSlotModel,8,Updated,
+2023-04-04 19:08:02,ReservationModel,19,Added,
+2023-04-04 19:09:41,TimeSlotModel,6,Updated,
+2023-04-04 19:11:08,TimeSlotModel,4,Updated,
+2023-04-04 19:11:12,ReservationModel,20,Added,
+2023-04-04 19:11:21,TimeSlotModel,6,Updated,
+2023-04-04 19:11:24,ReservationModel,21,Added,
+2023-04-04 19:11:43,TimeSlotModel,7,Updated,
+2023-04-04 19:11:47,ReservationModel,22,Added,
+2023-04-04 19:17:29,ReservationModel,23,Added,
+2023-04-04 19:17:29,TimeSlotModel,3,Updated,
+2023-04-04 19:20:31,AccountModel,4,Updated,4

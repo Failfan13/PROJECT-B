@@ -15,15 +15,14 @@ public static class Theater
         {
             var selectedSeats = help.Seats;
 
-            new TimeSlotsLogic().UpdateList(timeSLot);
             string Question = "Would you like to order snacks?";
             List<string> Options = new List<string>() { "Yes", "No" };
             List<Action> Actions = new List<Action>();
             ReservationLogic RL = new ReservationLogic();
 
 
-            Actions.Add(() => Snacks.Start(timeSLot.Id, selectedSeats, IsEdited));
-            Actions.Add(() => RL.MakeReservation(timeSLot.Id, selectedSeats, IsEdited: IsEdited));
+            Actions.Add(() => Snacks.Start(timeSLot, selectedSeats, IsEdited));
+            Actions.Add(() => RL.MakeReservation(timeSLot, selectedSeats, IsEdited: IsEdited));
 
             MenuLogic.Question(Question, Options, Actions);
         }

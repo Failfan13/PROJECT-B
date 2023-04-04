@@ -16,11 +16,13 @@ public class TheatherLogic
         {
             //update existing model
             _theathers[index] = theather;
+            Logger.LogDataChange<TheaterModel>(theather.Id, "Updated");
         }
         else
         {
             //add new model
             _theathers.Add(theather);
+            Logger.LogDataChange<TheaterModel>(theather.Id, "Added");
         }
         TheaterAccess.WriteAll(_theathers);
 
@@ -199,7 +201,7 @@ public class TheatherLogic
                                     }
                                 }
                             }
-                            return new Helper(theater,selectedSeats);
+                            return new Helper(theater, selectedSeats);
                         }
                         else
                         {

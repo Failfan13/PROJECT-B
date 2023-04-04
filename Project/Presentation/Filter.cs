@@ -13,7 +13,8 @@ public static class Filter
             Options.Add("Remove a filter");
             Actions.Add(() => RemoveFilter(IsEdited));
         }
-        ;
+        Options.Add("Return");
+        Actions.Add(() => Reservation.NoFilterMenu());
         MenuLogic.Question(Question, Options, Actions);
     }
 
@@ -29,7 +30,8 @@ public static class Filter
             Options.Add(cat.Name);
             Actions.Add(() => Filter.CatIds.Add(cat.Id));
         }
-
+        Options.Add("Return");
+        Actions.Add(() => Main());
         MenuLogic.Question(Question, Options, Actions);
 
         var movies = new MoviesLogic().FilterOnCategories(CatIds);

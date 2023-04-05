@@ -102,6 +102,11 @@ public class MoviesLogic : Order<MovieModel>
         return FilteredList;
     }
 
+    public static void FilterOnMovieName(string input)
+    {
+        Console.ReadKey();
+    }
+
     public void ChangeTitle(MovieModel movie, string NewTitle)
     {
         movie.Title = NewTitle;

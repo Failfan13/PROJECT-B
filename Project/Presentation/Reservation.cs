@@ -99,7 +99,7 @@ public static class Reservation
 
     public static void NoFilterMenu(bool IsEdited = false)
     {
-        Filter.CatIds = new List<int>();
+        //Filter.CatIds = new List<int>();
         var movies = new MoviesLogic().AllMovies();
 
         string Question = "which movie would you like to see?";
@@ -121,7 +121,8 @@ public static class Reservation
         MenuLogic.Question(Question, Movies, Actions);
     }
 
-    public static void FilteredMenu(List<MovieModel> movies, bool IsEdited = false)
+    // Not Used
+    public static void FilteredMenu()//List<MovieModel> movies, bool IsEdited = false)
     {
         string Question = "which movie would you like to see?";
         List<string> Movies = new List<string>();
@@ -129,12 +130,13 @@ public static class Reservation
         Movies.Add("Use Filter");
         Actions.Add(() => Filter.Main());
 
-        foreach (MovieModel movie in movies)
-        {
-            Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));
-        }
+        // foreach (MovieModel movie in movies)
+        // {
+        //     Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));
+        // }
+
         Movies.Add("Return");
-        Actions.Add(() => Menu.Start());
+        Actions.Add(() => Filter.Main());
 
         MenuLogic.Question(Question, Movies, Actions);
     }

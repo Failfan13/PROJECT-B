@@ -44,6 +44,11 @@ public class MoviesLogic : Order<MovieModel>
     {
         return _movies.Find(i => i.Id == id);
     }
+
+    public MovieModel? GetByTitle(string name)
+    {
+        return _movies.Find(i => i.Title.ToLower().Contains(name.ToLower()));
+    }
     public override int GetNewestId()
     {
         return (_movies.OrderByDescending(item => item.Id).First().Id) + 1;

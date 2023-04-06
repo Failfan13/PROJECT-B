@@ -45,6 +45,11 @@ class TimeSlotsLogic
         return _timeslots.Find(i => i.Id == id);
     }
 
+    public List<TimeSlotModel>? GetByTime(DateTime dateTime)
+    {
+        return _timeslots.FindAll(i => i.Start >= dateTime);
+    }
+
     public List<TimeSlotModel>? GetByMovieId(int movieid)
     {
         List<TimeSlotModel> tsmlist = new List<TimeSlotModel>();

@@ -10,14 +10,11 @@
         "projectUniqueName": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\Project.csproj",
         "projectName": "Project",
         "projectPath": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\Project.csproj",
-        "packagesPath": "C:\\Users\\max\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Max\\.nuget\\packages\\",
         "outputPath": "D:\\OneDrive - Hogeschool Rotterdam\\OP3\\PROJECT-B\\Project\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\max\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Max\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"

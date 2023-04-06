@@ -10,6 +10,7 @@ public static class Filter
         List<Action> Actions = new List<Action>();
         Options.Add("Add a filter");
         Actions.Add(() => Filter.AddFilter(IsEdited));
+
         if (AppliedFilters.Any())
         {
             Options.Add("Remove a filter");
@@ -17,11 +18,8 @@ public static class Filter
             Options.Add("Apply filters");
             Actions.Add(() => Reservation.FilteredMenu());
         }
-        else
-        {
-            Options.Add("Return");
-            Actions.Add(() => Reservation.NoFilterMenu());
-        }
+        Options.Add("Return");
+        Actions.Add(() => Reservation.NoFilterMenu());
 
         MenuLogic.Question(Question, Options, Actions);
     }
@@ -32,16 +30,16 @@ public static class Filter
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        // Options.Add("Movie name");
-        Options.Add("Movie time");
+        Options.Add("Movie title");
+        Options.Add("Movie date/time");
         Options.Add("Movie category");
         Options.Add("Movie price");
         Options.Add("Return");
 
-        // Actions.Add(() => Console.WriteLine("sus1"));
+        Actions.Add(() => FilterTitle());
         Actions.Add(() => FilterTimeSlot());
         Actions.Add(() => FilterCategory());
-        Actions.Add(() => Console.WriteLine("sus4"));
+        Actions.Add(() => FilterPrice());
         Actions.Add(() => Filter.Main(IsEdited));
 
         MenuLogic.Question(Question, Options, Actions);
@@ -56,21 +54,31 @@ public static class Filter
 
         foreach (object filter in AppliedFilters)
         {
-            // if (filter.GetType() == typeof(MovieModel))
-            // {
-            //     Options.Add(((MovieModel)filter).Title);
-            // }
-            // else 
-            if (filter.GetType() == typeof(CategoryModel))
+            if (filter.GetType() == typeof(MovieModel))
             {
-                Options.Add(((CategoryModel)filter).Name);
+                MovieModel movie = ((MovieModel)filter);
+                if (movie.Title != null)
+                {
+                    Options.Add($"Selected movie title: {movie.Title}");
+                    Actions.Add(() => ((MovieModel)Filter.AppliedFilters.Find(x => x.GetType() == typeof(MovieModel))).Title = "");
+                }
+                if (movie.Price != 0)
+                {
+                    Options.Add($"Selected movie price: {movie.Price}");
+                    Actions.Add(() => ((MovieModel)Filter.AppliedFilters.Find(x => x.GetType() == typeof(MovieModel))).Price = 0);
+                }
+            }
+            else if (filter.GetType() == typeof(CategoryModel))
+            {
+                Options.Add($"Selected category: {((CategoryModel)filter).Name}");
+                Actions.Add(() => Filter.AppliedFilters.Remove(filter));
             }
             else if (filter.GetType() == typeof(TimeSlotModel))
             {
                 DateTime timeSlotDT = ((TimeSlotModel)filter).Start;
-                Options.Add($"Time for Date: {timeSlotDT.ToString("dd/MM/yy")}, Time: {timeSlotDT.ToString("hh:mm")}");
+                Options.Add($"Selected movie Date/time Date: {timeSlotDT.ToString("dd/MM/yy")}, Time: {timeSlotDT.ToString("hh:mm")}");
+                Actions.Add(() => Filter.AppliedFilters.Remove(filter));
             }
-            Actions.Add(() => Filter.AppliedFilters.Remove(filter));
         }
         Options.Add("Return");
         Actions.Add(() => Filter.Main(IsEdited));
@@ -80,23 +88,23 @@ public static class Filter
         Filter.Main(IsEdited);
     }
 
-    // private static void FilterMovie()
-    // {
-    //     CategoryLogic MovieLogic = new();
-    //     string Question = "Enter the name of the movie";
-    //     List<string> Options = new List<string>();
-    //     List<Action> Actions = new List<Action>();
+    private static void FilterTitle()
+    {
+        MovieModel MovieModel = (MovieModel)Filter.AppliedFilters.Find(x => x.GetType() == typeof(MovieModel));
 
-    //     foreach (CategoryModel category in CategoryLogic.AllCategories())
-    //     {
-    //         Options.Add(category.Name);
-    //         Actions.Add(() => Filter.AppliedFilters.Add(category));
-    //     }
+        string ansTitle = QuestionLogic.AskString("Enter the name of the movie you are trying to find");
 
-    //     MenuLogic.Question(Question, Options, Actions);
+        if (MovieModel == null)
+        {
+            MovieModel = new(0, null, new DateTime(), null, null, 0, 0, null);
+            MovieModel.Title = ansTitle;
+            AppliedFilters.Add(MovieModel);
+            Filter.AddFilter();
+        }
 
-    //     Filter.AddFilter();
-    // }
+        MovieModel.Title = ansTitle;
+        Filter.AddFilter();
+    }
     private static void FilterTimeSlot()
     {
         // https://stackoverflow.com/questions/22060758/how-to-convert-string-to-datetime-in-c
@@ -107,8 +115,8 @@ public static class Filter
         DateTime parsedDateTime = DateTime.MinValue;
         while (parsedDateTime == DateTime.MinValue)
         {
-            string movieDate = QuestionLogic.AskString("Enter the date you would like to watch a movie on DD/MM/YY");
-            string movieTime = QuestionLogic.AskString("Now enter at what time you would like to start watching 00:00");
+            string movieDate = QuestionLogic.AskString("Enter the date you would like to watch a movie on ( DD/MM/YY )");
+            string movieTime = QuestionLogic.AskString("Now enter at what time you would like to start watching ( 00:00 )");
 
             movieDate.Replace(" ", "");
             movieTime.Replace(" ", "");
@@ -141,6 +149,23 @@ public static class Filter
 
         MenuLogic.Question(Question, Options, Actions);
 
+        Filter.AddFilter();
+    }
+    private static void FilterPrice()
+    {
+        MovieModel MovieModel = (MovieModel)Filter.AppliedFilters.Find(x => x.GetType() == typeof(MovieModel));
+
+        double ansPrice = QuestionLogic.AskNumber("Enter the price you want to spend at most ( 10,50 )");
+
+        if (MovieModel == null)
+        {
+            MovieModel = new(0, null, new DateTime(), null, null, 0, 0, null);
+            MovieModel.Price = ansPrice;
+            AppliedFilters.Add(MovieModel);
+            Filter.AddFilter();
+        }
+
+        MovieModel.Price = ansPrice;
         Filter.AddFilter();
     }
 }

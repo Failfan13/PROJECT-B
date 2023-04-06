@@ -32,7 +32,7 @@ public static class QuestionLogic
             Console.WriteLine(question);
             try
             {
-                awnser = Convert.ToDouble(Console.ReadLine());
+                awnser = Convert.ToDouble(Console.ReadLine().Replace(",", "."));
 
                 Correct = false;
 

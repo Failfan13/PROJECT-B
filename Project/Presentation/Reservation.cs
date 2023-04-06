@@ -69,7 +69,7 @@ public static class Reservation
         TimeSlotModel timeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSLotId);
         var movieid = timeSlot.MovieId;
         // choose all
-        actions.Add(() => Reservation.NoFilterMenu(true));
+        actions.Add(() => Reservation.FilterMenu(true));
 
         //choose time & seats
         actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movieid, true));
@@ -97,14 +97,19 @@ public static class Reservation
     }
 
 
-    public static void NoFilterMenu(bool IsEdited = false)
+    public static void FilterMenu(List<MovieModel> filteredList = null, bool IsEdited = false)
     {
-        //Filter.CatIds = new List<int>();
+
         var movies = new MoviesLogic().AllMovies();
 
         string Question = "which movie would you like to see?";
         List<string> Movies = new List<string>();
         List<Action> Actions = new List<Action>();
+
+        if (filteredList != null)
+        {
+            movies = filteredList;
+        }
 
         Movies.Add("Use Filter");
         Actions.Add(() => Filter.Main());
@@ -121,25 +126,10 @@ public static class Reservation
         MenuLogic.Question(Question, Movies, Actions);
     }
 
-    // Not Used
-    public static void FilteredMenu()//List<MovieModel> movies, bool IsEdited = false)
-    {
-        string Question = "which movie would you like to see?";
-        List<string> Movies = new List<string>();
-        List<Action> Actions = new List<Action>();
-        Movies.Add("Use Filter");
-        Actions.Add(() => Filter.Main());
+    public static void FilterMenu(bool IsEdited) => FilterMenu(null, IsEdited);
 
-        // foreach (MovieModel movie in movies)
-        // {
-        //     Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));
-        // }
+    // BELOW NOT USED __________________________________________________________//
 
-        Movies.Add("Return");
-        Actions.Add(() => Filter.Main());
-
-        MenuLogic.Question(Question, Movies, Actions);
-    }
     // Increases total order amount
     //ReservationLogic.TotalOrder = 5.5;
 

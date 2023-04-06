@@ -13,7 +13,7 @@ static class Menu
         };
         List<Action> Actions = new List<Action>();
         Actions.Add(() => UserLogin.Start());
-        Actions.Add(() => Reservation.NoFilterMenu());
+        Actions.Add(() => Reservation.FilterMenu());
         Actions.Add(() => Contact.start());
 
         // Only see if logged in

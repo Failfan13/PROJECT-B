@@ -13,13 +13,14 @@ public static class Filter
 
         if (AppliedFilters.Any())
         {
+            Console.ReadKey();
             Options.Add("Remove a filter");
             Actions.Add(() => Filter.RemoveFilter(IsEdited));
             Options.Add("Apply filters");
-            Actions.Add(() => Reservation.FilteredMenu());
+            Actions.Add(() => Reservation.FilterMenu(Filter.ApplyFilters()));
         }
         Options.Add("Return");
-        Actions.Add(() => Reservation.NoFilterMenu());
+        Actions.Add(() => Reservation.FilterMenu());
 
         MenuLogic.Question(Question, Options, Actions);
     }
@@ -52,15 +53,19 @@ public static class Filter
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
+
         foreach (object filter in AppliedFilters)
         {
             if (filter.GetType() == typeof(MovieModel))
             {
                 MovieModel movie = ((MovieModel)filter);
+                // MovieModel movieApply = ((MovieModel)Filter.AppliedFilters.Find(x => x.GetType() == typeof(MovieModel)));
+
                 if (movie.Title != null)
                 {
                     Options.Add($"Selected movie title: {movie.Title}");
-                    Actions.Add(() => ((MovieModel)Filter.AppliedFilters.Find(x => x.GetType() == typeof(MovieModel))).Title = "");
+                    ((MovieModel)Filter.AppliedFilters.Find(x => x.GetType() == typeof(MovieModel))).Title = null
+                    Actions.Add(() => );
                 }
                 if (movie.Price != 0)
                 {
@@ -76,7 +81,7 @@ public static class Filter
             else if (filter.GetType() == typeof(TimeSlotModel))
             {
                 DateTime timeSlotDT = ((TimeSlotModel)filter).Start;
-                Options.Add($"Selected movie Date/time Date: {timeSlotDT.ToString("dd/MM/yy")}, Time: {timeSlotDT.ToString("hh:mm")}");
+                Options.Add($"Selected Date/time Date: {timeSlotDT.ToString("dd/MM/yy")}, Time: {timeSlotDT.ToString("hh:mm")}");
                 Actions.Add(() => Filter.AppliedFilters.Remove(filter));
             }
         }
@@ -167,5 +172,20 @@ public static class Filter
 
         MovieModel.Price = ansPrice;
         Filter.AddFilter();
+    }
+
+    private static List<MovieModel> ApplyFilters()
+    {
+        MovieModel movieFilter = (MovieModel)Filter.AppliedFilters.Find(x => x.GetType() == typeof(MovieModel));
+        CategoryModel categoryFilter = (CategoryModel)Filter.AppliedFilters.Find(x => x.GetType() == typeof(CategoryModel));
+        TimeSlotModel timeslotFilter = (TimeSlotModel)Filter.AppliedFilters.Find(x => x.GetType() == typeof(TimeSlotModel));
+
+        //List<MovieModel> catFilter = MoviesLogic.FilterOnCategories(categoryFilter);
+        Console.WriteLine(movieFilter);
+        Console.WriteLine(categoryFilter);
+        Console.WriteLine(timeslotFilter);
+
+        Console.ReadKey();
+        return null;
     }
 }

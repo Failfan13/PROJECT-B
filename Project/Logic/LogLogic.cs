@@ -8,9 +8,11 @@ static class Logger
     {
         string headers = "timestamp,type,id,action,user_id";
 
+        // Make a string of model type
         var type = typeof(T);
         string typeString = type.ToString();
 
+        // time is now
         string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 
         string finalString = $"{timestamp},{typeString},{modelId},{action},{AccountsLogic.UserId()}";
@@ -31,7 +33,6 @@ static class Logger
                 newList.Add(item);
             }
         }
-
         return newList;
     }
 

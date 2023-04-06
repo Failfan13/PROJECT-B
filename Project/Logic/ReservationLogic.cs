@@ -86,6 +86,7 @@ public class ReservationLogic
             AccountId = AccountsLogic.CurrentAccount.Id;
             if (AccountsLogic.CurrentAccount.Admin)
             {
+                // asks if you want to use your own ID or that of an user
                 AccountId = AsAdminId();
             }
         }
@@ -94,6 +95,7 @@ public class ReservationLogic
             AccountId = null;
         }
 
+        // if this reservation is made by an edit, use the id of the current reservation
         if (IsEdited)
         {
             ress = new ReservationModel(Reservation.CurrReservation.Id, timeSlot.Id, Seats, snacks, AccountId, currDate);
@@ -104,6 +106,7 @@ public class ReservationLogic
             ress = new ReservationModel(GetNewestId(), timeSlot.Id, Seats, snacks, AccountId, currDate);
         }
 
+        // Make the new Reservation and update the Theather timeslot for the seats
         Reservation.TotalReservationCost(ress);
         UpdateList(ress);
         TimeSlotsLogic TL = new TimeSlotsLogic();

@@ -151,8 +151,7 @@ public static class Reservation
         ReservationLogic ReservationLogic = new ReservationLogic();
         double FinalPrice = 0.00;
 
-
-
+        // Seat Data
         Console.WriteLine($"Order overview:");
         Console.WriteLine("\nSeats:");
         foreach (SeatModel seat in ress.Seats)
@@ -160,6 +159,8 @@ public static class Reservation
             Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theater.Width)}\tPrice: €{seat.Price}");
             FinalPrice += seat.Price;
         }
+
+        // Snack data
         if (ress.Snacks != null)
         {
             int MaxLength = ress.GetSnacks().Max(snack => snack.Name.Length);
@@ -173,7 +174,6 @@ public static class Reservation
                 FinalPrice += price;
             }
         }
-
 
         Console.Write("\nThe total cost of your order will be:");
         var priceString = Convert.ToString(FinalPrice);

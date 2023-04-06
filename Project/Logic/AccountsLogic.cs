@@ -104,6 +104,7 @@ public class AccountsLogic
             Actions.Add(() => ReturnId = acc.Id);
         }
 
+        // lists all users and returns there id;
         MenuLogic.Question(Question, Options, Actions);
 
         return ReturnId;

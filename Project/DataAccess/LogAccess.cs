@@ -5,6 +5,7 @@ static class LogAccess
     {
         using (StreamWriter writer = new StreamWriter(path, true))
         {
+            // if the file is new, write headers;
             if (writer.BaseStream.Position.Equals(0))
             {
                 writer.WriteLine(headers);

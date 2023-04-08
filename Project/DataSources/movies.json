@@ -65,5 +65,20 @@
     "duration": 50,
     "price": 120,
     "categories": []
+  },
+  {
+    "id": 2,
+    "title": "javelin",
+    "release_date": "2000-10-10T00:00:00",
+    "director": "test",
+    "description": null,
+    "duration": 100,
+    "price": 9,
+    "categories": [
+      {
+        "id": 1,
+        "name": "action"
+      }
+    ]
   }
 ]

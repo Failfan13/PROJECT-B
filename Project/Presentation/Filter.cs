@@ -16,7 +16,7 @@ public static class Filter
             Options.Add("Remove a filter");
             Actions.Add(() => Filter.RemoveFilter(IsEdited));
             Options.Add("Apply filters");
-            Actions.Add(() => FilterLogic.ApplyFilters()); //Reservation.FilterMenu(FilterLogic.ApplyFilters()));
+            Actions.Add(() => Reservation.FilterMenu(FilterLogic.ApplyFilters()));
         }
         Options.Add("Return");
         Actions.Add(() => Reservation.FilterMenu());

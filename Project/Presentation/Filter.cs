@@ -2,7 +2,7 @@ using System.Globalization;
 
 public static class Filter
 {
-    public static MovieModel AppliedFilters = null;
+    public static MovieModel? AppliedFilters = null; // Selected movie date stored as AppliedFilters.ReleseDate
     public static void Main(bool IsEdited = false)
     {
         string Question = "What would you like to do?";
@@ -11,12 +11,12 @@ public static class Filter
         Options.Add("Add a filter");
         Actions.Add(() => Filter.AddFilter(IsEdited));
 
-        if (AppliedFilters != null)
+        if (FilterLogic.CheckAppliedFilters())
         {
             Options.Add("Remove a filter");
             Actions.Add(() => Filter.RemoveFilter(IsEdited));
             Options.Add("Apply filters");
-            //Actions.Add(() => Reservation.FilterMenu(Filter.ApplyFilters()));
+            Actions.Add(() => FilterLogic.ApplyFilters()); //Reservation.FilterMenu(FilterLogic.ApplyFilters()));
         }
         Options.Add("Return");
         Actions.Add(() => Reservation.FilterMenu());
@@ -46,60 +46,54 @@ public static class Filter
 
         Filter.Main();
     }
+
     private static void RemoveFilter(bool IsEdited = false)
     {
-        //     string Question = "What Filter would you like to Remove?";
-        //     List<string> Options = new List<string>();
-        //     List<Action> Actions = new List<Action>();
-        //     MovieModel movieApply = ((MovieModel)Filter.AppliedFilters.Find(x => x.GetType() == typeof(MovieModel)));
+        string Question = "What Filter would you like to Remove?";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
 
-        //     foreach (object filter in AppliedFilters)
-        //     {
-        //         if (filter.GetType() == typeof(MovieModel))
-        //         {
-        //             MovieModel movie = ((MovieModel)filter);
-        //             if (movie.Title != null)
-        //             {
-        //                 Options.Add($"Selected movie title: {movie.Title}");
-        //                 Actions.Add(() => movieApply.Title = null);
-        //             }
+        foreach (var p in AppliedFilters.GetType().GetProperties())
+        {
+            switch (p.Name)
+            {
+                case var x when (x == "Title" && AppliedFilters.Title != ""):
+                    Options.Add($"Selected movie title: {AppliedFilters.Title}");
+                    Actions.Add(() => Filter.AppliedFilters.Title = "");
+                    break;
+                case var x when (x == "ReleaseDate" && AppliedFilters.ReleaseDate != DateTime.MinValue):
+                    Options.Add($"Selected movie release date: {AppliedFilters.ReleaseDate}");
+                    Actions.Add(() => Filter.AppliedFilters.ReleaseDate = DateTime.MinValue);
+                    break;
+                case var x when (x == "Categories" && AppliedFilters.Categories.Count > 0):
+                    foreach (var category in AppliedFilters.Categories)
+                    {
+                        Options.Add($"Selected movie category: {category.Name}");
+                        Actions.Add(() => Filter.AppliedFilters.Categories.Remove(category));
+                    }
+                    break;
+                case var x when (x == "Price" && AppliedFilters.Price != 0.0):
+                    Options.Add($"Selected movie price: {AppliedFilters.Price}");
+                    Actions.Add(() => Filter.AppliedFilters.Price = 0.0);
+                    break;
+                default:
+                    break;
+            }
+        }
 
-        //             if (movie.Price != 0)
-        //             {
-        //                 Options.Add($"Selected movie price: {movie.Price}");
-        //                 Actions.Add(() => movieApply.Price = 0);
-        //             }
-        //         }
-        //         else if (filter.GetType() == typeof(CategoryModel))
-        //         {
-        //             Options.Add($"Selected category: {((CategoryModel)filter).Name}");
-        //             Actions.Add(() => Filter.AppliedFilters.Remove(filter));
-        //         }
-        //         else if (filter.GetType() == typeof(TimeSlotModel))
-        //         {
-        //             DateTime timeSlotDT = ((TimeSlotModel)filter).Start;
-        //             Options.Add($"Selected Date: {timeSlotDT.ToString("dd/MM/yy")}");
-        //             Actions.Add(() => Filter.AppliedFilters.Remove(filter));
-        //         }
-        //     }
-        //     Options.Add("Return");
-        //     Actions.Add(() => Filter.Main(IsEdited));
+        Options.Add("Return");
+        Actions.Add(() => Filter.Main(IsEdited));
 
-        //     MenuLogic.Question(Question, Options, Actions);
+        MenuLogic.Question(Question, Options, Actions);
 
-        //     if ((movieApply != null) && movieApply.Title == null && movieApply.Price == 0)
-        //     {
-        //         Filter.AppliedFilters.Remove(movieApply);
-        //     }
-
-        //     Filter.Main(IsEdited);
+        Filter.Main(IsEdited);
     }
 
     private static void FilterTitle()
     {
         Console.Clear();
         Console.WriteLine("Enter the name of the movie you are trying to find ( leave empty to return )");
-        string ansTitle = Console.ReadLine();
+        string? ansTitle = Console.ReadLine();
 
         if (ansTitle == "")
         {
@@ -107,9 +101,9 @@ public static class Filter
             return;
         }
 
-        CheckAppliedFilters();
+        FilterLogic.CheckAppliedFilters();
+        Filter.AppliedFilters.Title = ansTitle;
 
-        AppliedFilters.Title = ansTitle;
         Filter.AddFilter();
     }
     private static void FilterTimeSlot()
@@ -122,7 +116,7 @@ public static class Filter
         {
 
             Console.WriteLine("Enter the date you would like to watch a movie on ( DD/MM/YY or leave empty to return)");
-            string movieDate = Console.ReadLine();
+            string? movieDate = Console.ReadLine();
 
             if (movieDate == "")
             {
@@ -137,9 +131,9 @@ public static class Filter
             }
         }
 
-        CheckAppliedFilters();
+        FilterLogic.CheckAppliedFilters();
+        Filter.AppliedFilters.ReleaseDate = parsedDateTime;
 
-        AppliedFilters.ReleaseDate = parsedDateTime;
         Filter.AddFilter();
     }
     private static void FilterCategory()
@@ -155,15 +149,14 @@ public static class Filter
             Actions.Add(() => Filter.AppliedFilters.Categories.Add(category));
         }
 
-        CheckAppliedFilters();
-
+        FilterLogic.CheckAppliedFilters();
         MenuLogic.Question(Question, Options, Actions);
 
         Filter.AddFilter();
     }
     private static void FilterPrice()
     {
-        string ansPrice = "";
+        string? ansPrice = "";
         double toPrice = 0.0;
         bool Correct = false;
 
@@ -192,33 +185,9 @@ public static class Filter
             }
         }
 
-        CheckAppliedFilters();
+        FilterLogic.CheckAppliedFilters();
+        Filter.AppliedFilters.Price = toPrice;
 
-        AppliedFilters.Price = toPrice;
         Filter.AddFilter();
-    }
-
-    public /*private*/ static void /*List<MovieModel>*/ ApplyFilters()
-    {
-        // MovieModel movieFilter = (MovieModel)Filter.AppliedFilters.Find(x => x.GetType() == typeof(MovieModel));
-        // List<object> categoryFilter = (List<object>)Filter.AppliedFilters.FindAll(x => x.GetType() == typeof(CategoryModel));
-        // TimeSlotModel timeslotFilter = (TimeSlotModel)Filter.AppliedFilters.Find(x => x.GetType() == typeof(TimeSlotModel));
-
-        // //List<MovieModel> catFiltered = MoviesLogic.FilterOnCategories(categoryFilter);
-        // Console.WriteLine(movieFilter);
-        // Console.WriteLine(categoryFilter);
-        // Console.WriteLine(timeslotFilter);
-
-        // Console.ReadKey();
-        // return null;
-    }
-
-    private static void CheckAppliedFilters()
-    {
-        if (AppliedFilters == null)
-        {
-            MovieModel MovieModel = new(0, null, new DateTime(), null, null, 0, 0, new List<CategoryModel>());
-            AppliedFilters = MovieModel;
-        }
     }
 }

@@ -36,7 +36,6 @@ public class TheatherLogic
         return (_theathers.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
-
     public List<TheaterModel> AllTheaters()
     {
         return _theathers;
@@ -50,7 +49,7 @@ public class TheatherLogic
             // row luxury seats
             if (i < width)
             {
-                Seats.Add(new SeatModel(i, 20));
+                Seats.Add(new SeatModel(i, 20, false, false, true));
             }
             // standard seats
             else if (i < width * height - width)
@@ -111,24 +110,6 @@ public class TheatherLogic
         {
             Console.Clear();
             Console.WriteLine("Use arrow keys to navigate and press Enter to select a seat:\nPress C to confirm and reserve selected seats\nX to Cancel\nR to reset selections and start over:");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("■");
-            Console.ResetColor();
-            Console.Write(" Regular seat ");
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write("■");
-            Console.ResetColor();
-            Console.Write(" Handicap seat ");
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.Write("■");
-            Console.ResetColor();
-            Console.Write(" Luxury seat ");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("■");
-            Console.ResetColor();
-            Console.Write(" Taken seat\n");
-            Console.WriteLine();
-
             
             for (int j = 0; j < AllSeats.Count; j++)
             {
@@ -152,6 +133,10 @@ public class TheatherLogic
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
                 }
+                else if (seat.Luxury)
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -171,6 +156,24 @@ public class TheatherLogic
             Console.WriteLine();
             Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.SeatRow(theater.Width)}"))}");
 
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("■");
+            Console.ResetColor();
+            Console.Write(" Regular seat\n");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("■");
+            Console.ResetColor();
+            Console.Write(" Luxury seat\n");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("■");
+            Console.ResetColor();
+            Console.Write(" Handicap seat\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("■");
+            Console.ResetColor();
+            Console.Write(" Taken seat\n");
+            Console.WriteLine();
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
             switch (keyInfo.Key)

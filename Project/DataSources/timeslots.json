@@ -550,7 +550,7 @@
           "id": 90,
           "price": 10,
           "reserved": false,
-          "handicapped": true
+          "handicapped": false
         },
         {
           "id": 91,

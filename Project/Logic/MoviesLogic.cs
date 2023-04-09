@@ -51,11 +51,13 @@ public class MoviesLogic : Order<MovieModel>
     }
     public List<MovieModel> GetByPrice(double price, List<MovieModel> movies = null)
     {
+        TimeSlotsLogic tsl = new TimeSlotsLogic();
         if (movies == null)
         {
             movies = _movies;
         }
-        return movies.Where(i => i.Price <= price).ToList();
+
+        return movies.Where(i => tsl.GetByMovieId(i.Id).Any(t => t.Theater.Seats.Min(s => s.Price) + i.Price <= price)).ToList();
     }
     public List<MovieModel> GetByTimeSlots(DateTime date, List<MovieModel> movies = null)
     {

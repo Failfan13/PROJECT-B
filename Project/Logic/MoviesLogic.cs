@@ -30,11 +30,13 @@ public class MoviesLogic : Order<MovieModel>
         {
             //update existing model
             _movies[index] = movie;
+            Logger.LogDataChange<MovieModel>(movie.Id,"Updated");
         }
         else
         {
             //add new model
             _movies.Add(movie);
+            Logger.LogDataChange<MovieModel>(movie.Id,"Added");
         }
         MoviesAccess.WriteAll(_movies);
 

@@ -103,6 +103,7 @@ static class UserLogin
             AccountModel acc = accountsLogic.CheckLogin(email, password);
             if (acc != null)
             {
+                Logger.SystemLog("Logged in");
                 Console.WriteLine("Welcome back " + acc.FullName);
                 Console.WriteLine("Your email number is " + acc.EmailAddress);
 

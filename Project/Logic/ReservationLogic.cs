@@ -31,11 +31,13 @@ public class ReservationLogic
         {
             //update existing model
             Reservations[index] = ress;
+            Logger.LogDataChange<ReservationModel>(ress.Id, "Updated");
         }
         else
         {
             //add new model
             Reservations.Add(ress);
+            Logger.LogDataChange<ReservationModel>(ress.Id, "Added");
         }
         ReservationAccess.WriteAll(Reservations);
 
@@ -72,8 +74,9 @@ public class ReservationLogic
         return returner;
     }
 
-    public void MakeReservation(int timeSlotId, List<SeatModel> Seats, Dictionary<int, int> snacks = null, bool IsEdited = false)
+    public void MakeReservation(TimeSlotModel timeSlot, List<SeatModel> Seats, Dictionary<int, int> snacks = null, bool IsEdited = false)
     {
+
         Snacks.Continue = false;
         int? AccountId = null;
         ReservationModel ress = null;
@@ -83,6 +86,7 @@ public class ReservationLogic
             AccountId = AccountsLogic.CurrentAccount.Id;
             if (AccountsLogic.CurrentAccount.Admin)
             {
+                // asks if you want to use your own ID or that of an user
                 AccountId = AsAdminId();
             }
         }
@@ -91,19 +95,22 @@ public class ReservationLogic
             AccountId = null;
         }
 
+        // if this reservation is made by an edit, use the id of the current reservation
         if (IsEdited)
         {
-            ress = new ReservationModel(Reservation.CurrReservation.Id, timeSlotId, Seats, snacks, AccountId, currDate);
+            ress = new ReservationModel(Reservation.CurrReservation.Id, timeSlot.Id, Seats, snacks, AccountId, currDate);
 
         }
         else
         {
-            ress = new ReservationModel(GetNewestId(), timeSlotId, Seats, snacks, AccountId, currDate);
+            ress = new ReservationModel(GetNewestId(), timeSlot.Id, Seats, snacks, AccountId, currDate);
         }
 
+        // Make the new Reservation and update the Theather timeslot for the seats
         Reservation.TotalReservationCost(ress);
         UpdateList(ress);
-
+        TimeSlotsLogic TL = new TimeSlotsLogic();
+        TL.UpdateList(timeSlot);
     }
 
     public void ChangeUserId(ReservationModel Ress)

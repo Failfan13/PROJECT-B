@@ -12,8 +12,11 @@ public static class MenuLogic
         int selectedOption = 0;
         do
         {
+            // start of visual
             Console.Clear();
             Console.WriteLine("Use arrow keys to navigate and press Enter to select an option:\n");
+
+            // ask question
             Console.WriteLine(question);
 
             for (int i = 0; i < options.Count; i++)
@@ -28,11 +31,17 @@ public static class MenuLogic
 
                 Console.ResetColor();
             }
+
+            // if bottomstring display it
             if (BottomString != null)
             {
                 Console.WriteLine(BottomString);
             }
+
+            // read key
             key = Console.ReadKey();
+
+            // if key is x return to start;
             if (key.Key == ConsoleKey.X)
             {
                 Menu.Start();
@@ -55,13 +64,17 @@ public static class MenuLogic
             }
         } while (key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.X);
 
+
         if (key.Key == ConsoleKey.Enter)
         {
             if (actions != null)
             {
+                // if there is an action, use it
                 actions[selectedOption]();
             }
         }
+
+        // no action, return the index of the option
         return selectedOption;
     }
 }

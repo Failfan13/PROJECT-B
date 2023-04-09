@@ -13,7 +13,7 @@ static class Snacks
     }
 
     // Start request to user
-    public static void Start(int TimeSlotId, List<SeatModel> Seats, bool IsEdited = false)
+    public static void Start(TimeSlotModel TimeSlot, List<SeatModel> Seats, bool IsEdited = false)
     {
         Continue = true;
         if (IsEdited)
@@ -61,7 +61,7 @@ static class Snacks
         }
 
         Options.Add("Add to reservation");
-        Actions.Add(() => new ReservationLogic().MakeReservation(TimeSlotId, Seats, SnacksLogic.GetSelectedSnacks(), IsEdited));
+        Actions.Add(() => new ReservationLogic().MakeReservation(TimeSlot, Seats, SnacksLogic.GetSelectedSnacks(), IsEdited));
         double CurrentPrice = 0;
         foreach (KeyValuePair<int, int> KeyValue in SnacksLogic.CurrentResSnacks)
         {
@@ -77,7 +77,7 @@ static class Snacks
 
         if (Continue)
         {
-            Start(TimeSlotId, Seats, IsEdited);
+            Start(TimeSlot, Seats, IsEdited);
         }
 
     }

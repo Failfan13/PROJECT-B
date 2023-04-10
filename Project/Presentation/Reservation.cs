@@ -138,13 +138,6 @@ public static class Reservation
 
         MenuLogic.Question(Question, Movies, Actions);
     }
-    // Increases total order amount
-    //ReservationLogic.TotalOrder = 5.5;
-
-    // Decreases total order amount
-    //ReservationLogic.TotalOrderDecr = 2.3;
-
-    // Show total order amount
     public static void TotalReservationCost(ReservationModel ress)
     {
         Console.Clear();
@@ -181,6 +174,46 @@ public static class Reservation
         //Print total cost + if not containing "." add ",-" at end
         Console.Write($"€ " + FinalPrice + (priceString.Contains(".") ? "" : ",-"));
         Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {ress.Id}\n");
+        SignUpMails();
         QuestionLogic.AskEnter();
+    }
+    private static void SignUpMails()
+    {
+        EmailLogic EmailLogic = new EmailLogic();
+        AccountsLogic AccountsLogic = new AccountsLogic();
+
+        string email = "";
+        string subject;
+        string body;
+
+        bool corrEmail = false;
+
+        Console.WriteLine("Would you like to sign up for ad-mails? (y/n)");
+        var answer = Console.ReadLine();
+        if (answer == "y")
+        {
+            if (AccountsLogic.CurrentAccount == null)
+            {
+                while (!corrEmail)
+                {
+                    Console.WriteLine("Please enter your email address");
+                    email = Console.ReadLine();
+                    corrEmail = EmailLogic.ValidateEmail(email);
+                }
+            }
+            else
+            {
+                var account = AccountsLogic.GetById(AccountsLogic.CurrentAccount.Id);
+                account.AdMails = true;
+                email = account.EmailAddress;
+            }
+
+            subject = "Your account has been created";
+            body = @$"Hello {(AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FullName : "Guest")}\n
+You have subscibed to the ad-mails./n";
+
+            EmailLogic.SendEmail(email, subject, body);
+        }
+        return;
     }
 }

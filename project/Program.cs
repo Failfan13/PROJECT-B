@@ -1,2 +1,4 @@
 Console.OutputEncoding = System.Text.Encoding.Unicode;
-Menu.Start();
+//Menu.Start();
+
+Movies.AddNewMovie();

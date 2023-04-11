@@ -9,6 +9,8 @@ public class MoviesLogic : Order<MovieModel>
 {
 
     static private CategoryLogic CategoryLogic = new CategoryLogic();
+
+    private static List<string> _formats = new List<string>() { "standard", "imax", "imax 3d", "3d", "rpx" };
     private List<MovieModel> _movies;
 
     //Static properties are shared across all instances of the class
@@ -52,10 +54,10 @@ public class MoviesLogic : Order<MovieModel>
     }
 
     public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript,
-        int duration, double price, List<CategoryModel> categories, List<string> versions)
+        int duration, double price, List<CategoryModel> categories, List<string> formats)
     {
         int NewID = GetNewestId();
-        MovieModel movie = new MovieModel(NewID, title, releaseDate, director, desript, duration, price, categories, versions);
+        MovieModel movie = new MovieModel(NewID, title, releaseDate, director, desript, duration, price, categories, formats);
         UpdateList(movie);
         return movie;
     }
@@ -64,6 +66,15 @@ public class MoviesLogic : Order<MovieModel>
     {
         return _movies;
     }
+
+    public static List<string> AllFormats()
+    {
+        return _formats;
+    }
+
+    public static void AddFormat(MovieModel movie, string format) => movie.Formats.Add(format);
+
+    public static void RemoveFormat(MovieModel movie, string format) => movie.Formats.Remove(format);
 
     public void RemoveMovie(int MovieInt)
     {

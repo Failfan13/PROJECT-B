@@ -27,11 +27,11 @@ public class MovieModel
     [JsonPropertyName("categories")]
     public List<CategoryModel> Categories { get; set; }
 
-    [JsonPropertyName("versions")]
-    public List<string> Versions { get; set; }
+    [JsonPropertyName("availFormats")]
+    public List<string> Formats { get; set; }
 
     public MovieModel(int id, string title, DateTime releaseDate, string director, string description,
-        int duration, double price, List<CategoryModel> categories, List<string> versions)
+        int duration, double price, List<CategoryModel> categories, List<string> formats)
     {
         Id = id;
         Title = title;
@@ -41,7 +41,7 @@ public class MovieModel
         Duration = duration;
         Price = price;
         Categories = categories;
-        Versions = versions;
+        Formats = formats;
     }
 
     public void Info()
@@ -68,7 +68,7 @@ public class MovieModel
         {
             Console.WriteLine($"No categories are assinged to this movie");
         }
-        Console.WriteLine($"Versions:   \t{string.Join(", ", Versions)}");
+        Console.WriteLine($"Formats:   \t{string.Join(", ", Formats)}");
     }
 
 }

@@ -65,15 +65,14 @@ class TimeSlotsLogic
         return (_timeslots.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
-
-    public void NewTimeSlot(int movieid, DateTime start, TheaterModel theater)
+    public void NewTimeSlot(int movieid, DateTime start, TheaterModel theater, string format)
     {
         int NewID = GetNewestId();
-        TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, theater);
+        TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, theater, format);
         UpdateList(timeslot);
     }
 
-    public List<TimeSlotModel> AllTimSlots()
+    public List<TimeSlotModel> AllTimeSlots()
     {
         return _timeslots;
     }

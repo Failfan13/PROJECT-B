@@ -52,10 +52,10 @@ public class MoviesLogic : Order<MovieModel>
     }
 
     public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript,
-        int duration, double price, List<CategoryModel> categories, string extra)
+        int duration, double price, List<CategoryModel> categories, List<string> versions)
     {
         int NewID = GetNewestId();
-        MovieModel movie = new MovieModel(NewID, title, releaseDate, director, desript, duration, price, categories, extra);
+        MovieModel movie = new MovieModel(NewID, title, releaseDate, director, desript, duration, price, categories, versions);
         UpdateList(movie);
         return movie;
     }
@@ -138,12 +138,6 @@ public class MoviesLogic : Order<MovieModel>
     public void ChangeReleaseDate(MovieModel movie, DateTime NewDate)
     {
         movie.ReleaseDate = NewDate;
-        UpdateList(movie);
-    }
-
-    public void ChangeExtra(MovieModel movie, string NewExtra)
-    {
-        movie.Extra = NewExtra;
         UpdateList(movie);
     }
 }

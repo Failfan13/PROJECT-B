@@ -113,7 +113,7 @@ static class Movies
             "Change title", "Change Director",
             "Change Releasedate", "Change Description",
             "Change Duration", "Change Price",
-            "Change Categories", "Change Extra"
+            "Change Categories", "Change Versions"
         };
 
         List<Action> Actions = new List<Action>() { };
@@ -124,7 +124,7 @@ static class Movies
         Actions.Add(() => ChangeDuration(movie));
         Actions.Add(() => ChangePrice(movie));
         Actions.Add(() => ChangeCategory(movie));
-        Actions.Add(() => ChangeExtra(movie));
+        Actions.Add(() => ChangeVersions(movie));
 
         Options.Add("Return");
         Actions.Add(() => ChangeMoviesMenu());
@@ -142,6 +142,21 @@ static class Movies
         Actions.Add(() => CategoryLogic.RemoveCategory(movie));
 
         MenuLogic.Question(Question, Options, Actions);
+    }
+
+    public static void ChangeVersions(MovieModel movie)
+    {
+        string Question = "Would you like to change viewing methods? (y/n)";
+        if (Question == "y")
+        {
+            List<string> Options = new List<string>() { "Add a viewing method", "Remove a viewing method" };
+            List<Action> Actions = new List<Action>();
+
+            Actions.Add(() => Movies.AddViewVersion(movie));
+            Actions.Add(() => Movies.RemoveViewVersion(movie));
+
+            MenuLogic.Question(Question, Options, Actions);
+        }
     }
 
     private static void ChangeTitle(MovieModel movie)
@@ -210,13 +225,39 @@ static class Movies
         QuestionLogic.AskEnter();
         ChangeMovieMenu(movie);
     }
-    private static void ChangeExtra(MovieModel movie)
+
+    public static void AddViewVersion(MovieModel movie)
     {
-        string NewOption = QuestionLogic.AskString("What do you want to change the extra option of this movie to?");
-        MoviesLogic.ChangeExtra(movie, NewPrice);
-        Console.WriteLine($"Extra option is now: {NewOption}");
-        QuestionLogic.AskEnter();
-        ChangeMovieMenu(movie);
+        bool stopAsking = false;
+        string viewMethod;
+
+        while (!stopAsking)
+        {
+            Console.WriteLine("Enter the name of the viewing method you would like to add");
+            viewMethod = Console.ReadLine();
+            stopAsking = MoviesLogic.ValidateViewType(movie, viewMethod);
+            Console.Clear();
+            if (stopAsking == false) Console.WriteLine("Viewing method not availible!");
+        }
+
+        movie.Versions.Add(viewMethod);
+    }
+
+    public static void RemoveViewVersion(MovieModel movie)
+    {
+        bool stopAsking = false;
+        string viewMethod;
+
+        while (!stopAsking)
+        {
+            Console.WriteLine("Enter the name of the viewing method you would like to remove");
+            viewMethod = Console.ReadLine();
+            stopAsking = MoviesLogic.ValidateViewType(movie, viewMethod);
+            Console.Clear();
+            if (stopAsking == false) Console.WriteLine("Viewing method not availible!");
+        }
+
+        movie.Versions.Remove(viewMethod);
     }
 }
 

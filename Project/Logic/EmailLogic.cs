@@ -29,7 +29,7 @@ public class EmailLogic
             emailAddresses.Add(MailboxAddress.Parse(to));
         }
 
-        message.From.Add(new MailboxAddress("tester", "Hsr.ProjectB.TeamE@gmail.com"));
+        message.From.Add(new MailboxAddress("Project-B Team-E", "Hsr.ProjectB.TeamE@gmail.com"));
 
         foreach (MailboxAddress email in emailAddresses)
         {

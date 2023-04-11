@@ -2,7 +2,6 @@ static class UserLogin
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
 
-
     public static void Start()
     {
         string Question = "What would you like to do?";
@@ -23,6 +22,9 @@ static class UserLogin
 
             Options.Add("Change reservations");
             Actions.Add(() => Reservation.EditReservation());
+
+            Options.Add("Change advertation settings");
+            Actions.Add(() => ChangeAdvertation());
         }
 
         Options.Add("Return to main menu");
@@ -33,36 +35,35 @@ static class UserLogin
 
     public static void CreateNewUser()
     {
-        bool CorrectEmail = true;
-        bool CorrectName = true;
-        bool CorrectPass = true;
+        EmailLogic EmailLogic = new EmailLogic();
+        bool CorrectEmail = false;
+        bool CorrectName = false;
+        bool CorrectPass = false;
         string pass = "";
         string Email = "";
         string Name = "";
 
+        string subject = "";
+        string body = "";
+
         Console.Clear();
-        while (CorrectEmail)
+        while (!CorrectEmail)
         {
             Console.WriteLine("Please enter your email address:");
             Email = Console.ReadLine();
-            if (Email != "")
-            {
-                CorrectEmail = false;
-            }
-            else
-            {
-                Console.WriteLine("Invalid value");
-            }
+            CorrectEmail = EmailLogic.ValidateEmail(Email);
+            Console.Clear();
+            if (CorrectEmail == false) Console.WriteLine("Invalid email address");
         }
 
         Console.Clear();
-        while (CorrectName)
+        while (!CorrectName)
         {
             Console.WriteLine("Please enter your full name:");
             Name = Console.ReadLine();
             if (Name != "")
             {
-                CorrectName = false;
+                CorrectName = true;
             }
             else
             {
@@ -71,7 +72,7 @@ static class UserLogin
         }
 
         Console.Clear();
-        while (CorrectPass)
+        while (!CorrectPass)
         {
             Console.WriteLine("Please enter your password:");
             string pass1 = Console.ReadLine();
@@ -80,13 +81,26 @@ static class UserLogin
             if (pass1 == pass2 && pass1 != "")
             {
                 pass = pass1;
-                CorrectPass = false;
+                CorrectPass = true;
             }
             else
             {
                 Console.WriteLine("Passwords dont match");
             }
         }
+
+        SignUpMails(Email);
+
+        subject = "User account has been created";
+        body = @$"Hello {Name},
+        
+An account with this email address has been created.
+
+If this wasent a mistake, please contact the administrator.
+
+Thank you.";
+
+        EmailLogic.SendEmail(Email, subject, body);
 
         accountsLogic.NewAccount(Email, Name, pass);
     }
@@ -145,5 +159,71 @@ static class UserLogin
             string newpassword = Console.ReadLine();
             accountsLogic.NewPassword(newpassword);
         }
+    }
+
+    public static void ChangeAdvertation()
+    {
+        Console.WriteLine($"Would you like to {(AccountsLogic.CurrentAccount.AdMails ? "still" : "")} receive ad-mails? (y/n)");
+        string adChoice = Console.ReadLine();
+
+        if (adChoice.ToLower() == "n") AccountsLogic.CurrentAccount.AdMails = false;
+
+        Console.WriteLine("The ad-mails will be " + (AccountsLogic.CurrentAccount.AdMails ? "enabled" : "disabled"));
+
+        Start();
+    }
+
+    public static void SignUpMails(string existingEmail = "")
+    {
+        EmailLogic EmailLogic = new EmailLogic();
+        AccountsLogic AccountsLogic = new AccountsLogic();
+
+        string email = "";
+        string subject;
+        string body;
+
+        bool corrEmail = false;
+
+        Console.WriteLine("Would you like to sign up for ad-mails? (y/n)");
+        var answer = Console.ReadLine();
+        if (answer == "y")
+        {
+            if (AccountsLogic.CurrentAccount == null)
+            {
+                while (!corrEmail)
+                {
+                    if (existingEmail == "")
+                    {
+                        Console.WriteLine("Please enter your email address");
+                        email = Console.ReadLine();
+                    }
+                    else
+                    {
+                        email = existingEmail;
+                    }
+                    corrEmail = EmailLogic.ValidateEmail(email);
+                    Console.Clear();
+                    if (corrEmail == false) Console.WriteLine("Invalid email address");
+                }
+            }
+            else
+            {
+                var account = AccountsLogic.GetById(AccountsLogic.CurrentAccount.Id);
+                account.AdMails = true;
+                email = account.EmailAddress;
+            }
+
+            subject = "Subscribed to ad-mails";
+            body = @$"Hello {(AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FullName : "Guest")},
+    
+Thank you for subscribing to the cinema ads.
+
+You will receive deals and information about upcomming movies with this subscription.
+
+To unsubscribe from these emails, please log into your account and turn off the add option.";
+
+            EmailLogic.SendEmail(email, subject, body);
+        }
+        return;
     }
 }

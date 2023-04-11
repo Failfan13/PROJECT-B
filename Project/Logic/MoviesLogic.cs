@@ -30,13 +30,13 @@ public class MoviesLogic : Order<MovieModel>
         {
             //update existing model
             _movies[index] = movie;
-            Logger.LogDataChange<MovieModel>(movie.Id,"Updated");
+            Logger.LogDataChange<MovieModel>(movie.Id, "Updated");
         }
         else
         {
             //add new model
             _movies.Add(movie);
-            Logger.LogDataChange<MovieModel>(movie.Id,"Added");
+            Logger.LogDataChange<MovieModel>(movie.Id, "Added");
         }
         MoviesAccess.WriteAll(_movies);
 
@@ -51,10 +51,11 @@ public class MoviesLogic : Order<MovieModel>
         return (_movies.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
-    public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript, int duration, double price, List<CategoryModel> categories)
+    public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript,
+        int duration, double price, List<CategoryModel> categories, string extra)
     {
         int NewID = GetNewestId();
-        MovieModel movie = new MovieModel(NewID, title, releaseDate, director, desript, duration, price, categories);
+        MovieModel movie = new MovieModel(NewID, title, releaseDate, director, desript, duration, price, categories, extra);
         UpdateList(movie);
         return movie;
     }
@@ -140,6 +141,11 @@ public class MoviesLogic : Order<MovieModel>
         UpdateList(movie);
     }
 
+    public void ChangeExtra(MovieModel movie, string NewExtra)
+    {
+        movie.Extra = NewExtra;
+        UpdateList(movie);
+    }
 }
 
 

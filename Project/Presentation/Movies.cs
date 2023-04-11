@@ -44,6 +44,7 @@ static class Movies
         Director = QuestionLogic.AskString("Who is the director of the movie?: ");
         Duration = (int)QuestionLogic.AskNumber("What is the duration? (minutes)");
         Price = (int)QuestionLogic.AskNumber("How expensive is the movie?: ");
+        Extra = QuestionLogic.AskString("What extra options would you like to add?: ");
 
         bool nomorecategories = false;
         do
@@ -69,7 +70,7 @@ static class Movies
         }
         while (nomorecategories != false);
 
-        MovieModel movie = MoviesLogic.NewMovie(Title, ReleaseDate, Director, Description, Duration, Price, Categories);
+        MovieModel movie = MoviesLogic.NewMovie(Title, ReleaseDate, Director, Description, Duration, Price, Categories, Extra);
 
         Console.WriteLine("New movie added!");
         Console.WriteLine($"Title: {movie.Title}");
@@ -77,6 +78,7 @@ static class Movies
         Console.WriteLine($"Director: {movie.Director}");
         Console.WriteLine($"Price: {movie.Price}");
         Console.WriteLine($"Categories: {string.Join(", ", movie.Categories)}");
+        Console.WriteLine($"Extra: {movie.Extra}");
 
         Menu.Start();
     }
@@ -111,7 +113,7 @@ static class Movies
             "Change title", "Change Director",
             "Change Releasedate", "Change Description",
             "Change Duration", "Change Price",
-            "Change Categories",
+            "Change Categories", "Change Extra"
         };
 
         List<Action> Actions = new List<Action>() { };
@@ -122,6 +124,7 @@ static class Movies
         Actions.Add(() => ChangeDuration(movie));
         Actions.Add(() => ChangePrice(movie));
         Actions.Add(() => ChangeCategory(movie));
+        Actions.Add(() => ChangeExtra(movie));
 
         Options.Add("Return");
         Actions.Add(() => ChangeMoviesMenu());
@@ -204,6 +207,14 @@ static class Movies
         }
         MoviesLogic.ChangeReleaseDate(movie, NewReleaseDate);
         Console.WriteLine($"Release date  is now: {NewReleaseDate.Date}");
+        QuestionLogic.AskEnter();
+        ChangeMovieMenu(movie);
+    }
+    private static void ChangeExtra(MovieModel movie)
+    {
+        string NewOption = QuestionLogic.AskString("What do you want to change the extra option of this movie to?");
+        MoviesLogic.ChangeExtra(movie, NewPrice);
+        Console.WriteLine($"Extra option is now: {NewOption}");
         QuestionLogic.AskEnter();
         ChangeMovieMenu(movie);
     }

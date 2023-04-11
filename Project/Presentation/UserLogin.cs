@@ -47,14 +47,7 @@ static class UserLogin
         string body = "";
 
         Console.Clear();
-        while (!CorrectEmail)
-        {
-            Console.WriteLine("Please enter your email address:");
-            Email = Console.ReadLine();
-            CorrectEmail = EmailLogic.ValidateEmail(Email);
-            Console.Clear();
-            if (CorrectEmail == false) Console.WriteLine("Invalid email address");
-        }
+        Email = AskEmail();
 
         Console.Clear();
         while (!CorrectName)
@@ -225,5 +218,26 @@ To unsubscribe from these emails, please log into your account and turn off the 
             EmailLogic.SendEmail(email, subject, body);
         }
         return;
+    }
+    public static string AskEmail()
+    {
+        EmailLogic EmailLogic = new EmailLogic();
+        bool CorrectEmail = false;
+        string Email = "";
+
+        if (AccountsLogic.CurrentAccount == null)
+        {
+            while (!CorrectEmail)
+            {
+                Console.WriteLine("Please enter your email address:");
+                Email = Console.ReadLine();
+                CorrectEmail = EmailLogic.ValidateEmail(Email);
+                Console.Clear();
+                if (CorrectEmail == false) Console.WriteLine("Invalid email address");
+            }
+            return Email;
+        }
+        Email = AccountsLogic.CurrentAccount.EmailAddress;
+        return Email;
     }
 }

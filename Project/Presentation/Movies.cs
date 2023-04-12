@@ -73,7 +73,7 @@ static class Movies
 
         MovieModel movie = MoviesLogic.NewMovie(Title, ReleaseDate, Director, Description, Duration, Price, Categories, Formats);
 
-        Format.ChangeFormats<MovieModel>(movie);
+        Format.ChangeFormats(movie);
 
         Console.Clear();
         Console.WriteLine("New movie added!");
@@ -128,7 +128,7 @@ static class Movies
         Actions.Add(() => ChangeDuration(movie));
         Actions.Add(() => ChangePrice(movie));
         Actions.Add(() => ChangeCategory(movie));
-        Actions.Add(() => Format.ChangeFormats<MovieModel>(movie, () => ChangeMovieMenu(movie)));
+        Actions.Add(() => Format.ChangeFormats(movie, () => ChangeMovieMenu(movie)));
 
         Options.Add("Return");
         Actions.Add(() => ChangeMoviesMenu());

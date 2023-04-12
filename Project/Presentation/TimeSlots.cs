@@ -1,3 +1,5 @@
+using System.Globalization;
+
 static class TimeSlots
 {
 
@@ -32,42 +34,42 @@ static class TimeSlots
 
     public static void NewTimeSlot(int movieid, bool IsEdited = false)
     {
-        TimeSlotsLogic timeSlotsLogic = new TimeSlotsLogic();
+        TimeSlotsLogic TimeSlotsLogic = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
         MovieModel movie = ML.GetById(movieid);
-        TheatherLogic TL = new TheatherLogic();
-        TheatherModel TM = new TheatherModel();
+        TimeSlotModel TM = new TimeSlotModel();
         TM.MovieId = movie.Id;
-        DateTime DT = DateTime.MinValue;
 
-        while (DT == DateTime.MinValue)
+        Console.Clear();
+
+        while (TM.Start == new DateTime())
         {
             Console.WriteLine("Enter a new time slot: dd/mm/yy hh:mm");
             string time = Console.ReadLine();
             try
             {
-                DT = DateTime.ParseExact(time, "dd/MM/yyyy HH:mm", new CultureInfo("nl-NL"));
+                TM.Start = DateTime.ParseExact(time, "dd/MM/yy HH:mm", CultureInfo.InvariantCulture);
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
                 Console.Clear();
+                Console.WriteLine(ex.Message);
                 Console.WriteLine("Wrong date format, try again");
             }
         }
-        while (TL == new TheatherLogic())
+
+        Console.WriteLine("Would you like to change the seat layout? (y/n)");
+        if (Console.ReadLine() == "y")
         {
-            Console.WriteLine("Would you like to change the seat layout? (y/n)");
-            if (Console.ReadLine() == "y")
-            {
-                Theater.EditMenu(TL);
-            }
-            break;
+            Theater.EditMenu(TM.Theater);
         }
 
         Console.WriteLine("Would you like to add a new format? (y/n)");
         if (Console.ReadLine() == "y")
         {
-
+            Format.ChangeFormats(TM);
         }
+
+        TimeSlotsLogic.NewTimeSlot(TM.MovieId, TM.Start, TM.Theater, TM.Format);
     }
 }

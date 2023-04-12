@@ -17,13 +17,15 @@ public class TimeSlotModel
     [JsonPropertyName("format")]
     public string Format { get; set; }
 
+    [JsonConstructor]
+    public TimeSlotModel() : this(0, 0, new DateTime(), new TheaterModel(), "") { }
     public TimeSlotModel(int id, int movieid, DateTime start, TheaterModel theater, string format)
     {
         Id = id;
         MovieId = movieid;
         Start = start;
         Theater = theater;
-        Format = Format;
+        Format = format;
     }
 
     public void Info()

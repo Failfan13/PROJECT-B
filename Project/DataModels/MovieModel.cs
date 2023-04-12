@@ -27,8 +27,17 @@ public class MovieModel
     [JsonPropertyName("categories")]
     public List<CategoryModel> Categories { get; set; }
 
-    [JsonPropertyName("availFormats")]
-    public List<string> Formats { get; set; }
+    [JsonPropertyName("Formats")]
+    private List<string> _formats;
+    public List<string> Formats
+    {
+        get => _formats;
+        set
+        {
+            if (!value.Contains("standard")) value.Add("standard");
+            _formats = value;
+        }
+    }
 
     public MovieModel(int id, string title, DateTime releaseDate, string director, string description,
         int duration, double price, List<CategoryModel> categories, List<string> formats)

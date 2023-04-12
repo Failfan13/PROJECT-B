@@ -10,7 +10,7 @@ public class MoviesLogic : Order<MovieModel>
 
     static private CategoryLogic CategoryLogic = new CategoryLogic();
 
-    private static List<string> _formats = new List<string>() { "standard", "imax", "imax 3d", "3d", "rpx" };
+    private static List<string> _formats = new List<string>() { "imax", "imax 3d", "3d", "rpx" };
     private List<MovieModel> _movies;
 
     //Static properties are shared across all instances of the class
@@ -72,9 +72,17 @@ public class MoviesLogic : Order<MovieModel>
         return _formats;
     }
 
-    public static void AddFormat(MovieModel movie, string format) => movie.Formats.Add(format);
+    public static void AddFormat(MovieModel movie, string format)
+    {
+        if (!movie.Formats.Contains(format))
+            movie.Formats.Add(format);
+    }
 
-    public static void RemoveFormat(MovieModel movie, string format) => movie.Formats.Remove(format);
+    public static void RemoveFormat(MovieModel movie, string format)
+    {
+        if (movie.Formats.Contains(format))
+            movie.Formats.Remove(format);
+    }
 
     public void RemoveMovie(int MovieInt)
     {

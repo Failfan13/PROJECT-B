@@ -13,7 +13,9 @@
         "name": "comedy"
       }
     ],
-    "Extra": ""
+    "Formats": [
+      "standard"
+    ]
   },
   {
     "id": 1,
@@ -37,7 +39,9 @@
         "name": "romance"
       }
     ],
-    "Extra": ""
+    "Formats": [
+      "standard"
+    ]
   },
   {
     "id": 2,
@@ -57,7 +61,9 @@
         "name": "adventure"
       }
     ],
-    "Extra": ""
+    "Formats": [
+      "standard"
+    ]
   },
   {
     "id": 3,
@@ -68,6 +74,8 @@
     "duration": 50,
     "price": 120,
     "categories": [],
-    "Extra": ""
+    "Formats": [
+      "standard"
+    ]
   }
 ]

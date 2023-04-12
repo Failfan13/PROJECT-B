@@ -75,6 +75,8 @@ static class Movies
 
         ChangeFormats(movie);
 
+
+        Console.Clear();
         Console.WriteLine("New movie added!");
         Console.WriteLine($"Title: {movie.Title}");
         Console.WriteLine($"Release Date: {movie.ReleaseDate.Date}");
@@ -127,7 +129,7 @@ static class Movies
         Actions.Add(() => ChangeDuration(movie));
         Actions.Add(() => ChangePrice(movie));
         Actions.Add(() => ChangeCategory(movie));
-        Actions.Add(() => ChangeFormats(movie));
+        Actions.Add(() => ChangeFormats(movie, () => ChangeMovieMenu(movie)));
 
         Options.Add("Return");
         Actions.Add(() => ChangeMoviesMenu());
@@ -147,7 +149,7 @@ static class Movies
         MenuLogic.Question(Question, Options, Actions);
     }
 
-    public static void ChangeFormats(MovieModel movie)
+    public static void ChangeFormats(MovieModel movie, Action Action = null)
     {
         string Question = "Would you like to change viewing methods?";
         List<string> Options = new List<string>() { "Add a viewing method", "Remove a viewing method" };
@@ -160,6 +162,8 @@ static class Movies
         Actions.Add(() => Console.WriteLine(""));
 
         MenuLogic.Question(Question, Options, Actions);
+
+        Action?.Invoke();
     }
 
     private static void ChangeTitle(MovieModel movie)
@@ -246,6 +250,8 @@ static class Movies
             MenuLogic.Question(Question, Options, Actions);
         }
 
+        MoviesLogic.UpdateList(movie);
+
         ChangeFormats(movie);
     }
 
@@ -268,6 +274,8 @@ static class Movies
         {
             Console.WriteLine("There are no formats to remove");
         }
+
+        MoviesLogic.UpdateList(movie);
 
         ChangeFormats(movie);
     }

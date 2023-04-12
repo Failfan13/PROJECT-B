@@ -29,4 +29,45 @@ static class TimeSlots
             MenuLogic.Question(Question, Options, Actions);
         }
     }
+
+    public static void NewTimeSlot(int movieid, bool IsEdited = false)
+    {
+        TimeSlotsLogic timeSlotsLogic = new TimeSlotsLogic();
+        MoviesLogic ML = new MoviesLogic();
+        MovieModel movie = ML.GetById(movieid);
+        TheatherLogic TL = new TheatherLogic();
+        TheatherModel TM = new TheatherModel();
+        TM.MovieId = movie.Id;
+        DateTime DT = DateTime.MinValue;
+
+        while (DT == DateTime.MinValue)
+        {
+            Console.WriteLine("Enter a new time slot: dd/mm/yy hh:mm");
+            string time = Console.ReadLine();
+            try
+            {
+                DT = DateTime.ParseExact(time, "dd/MM/yyyy HH:mm", new CultureInfo("nl-NL"));
+            }
+            catch (System.Exception)
+            {
+                Console.Clear();
+                Console.WriteLine("Wrong date format, try again");
+            }
+        }
+        while (TL == new TheatherLogic())
+        {
+            Console.WriteLine("Would you like to change the seat layout? (y/n)");
+            if (Console.ReadLine() == "y")
+            {
+                Theater.EditMenu(TL);
+            }
+            break;
+        }
+
+        Console.WriteLine("Would you like to add a new format? (y/n)");
+        if (Console.ReadLine() == "y")
+        {
+
+        }
+    }
 }

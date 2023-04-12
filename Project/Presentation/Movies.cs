@@ -73,8 +73,7 @@ static class Movies
 
         MovieModel movie = MoviesLogic.NewMovie(Title, ReleaseDate, Director, Description, Duration, Price, Categories, Formats);
 
-        ChangeFormats(movie);
-
+        Format.ChangeFormats<MovieModel>(movie);
 
         Console.Clear();
         Console.WriteLine("New movie added!");
@@ -129,7 +128,7 @@ static class Movies
         Actions.Add(() => ChangeDuration(movie));
         Actions.Add(() => ChangePrice(movie));
         Actions.Add(() => ChangeCategory(movie));
-        Actions.Add(() => ChangeFormats(movie, () => ChangeMovieMenu(movie)));
+        Actions.Add(() => Format.ChangeFormats<MovieModel>(movie, () => ChangeMovieMenu(movie)));
 
         Options.Add("Return");
         Actions.Add(() => ChangeMoviesMenu());
@@ -147,23 +146,6 @@ static class Movies
         Actions.Add(() => CategoryLogic.RemoveCategory(movie));
 
         MenuLogic.Question(Question, Options, Actions);
-    }
-
-    public static void ChangeFormats(MovieModel movie, Action Action = null)
-    {
-        string Question = "Would you like to change viewing methods?";
-        List<string> Options = new List<string>() { "Add a viewing method", "Remove a viewing method" };
-        List<Action> Actions = new List<Action>();
-
-        Actions.Add(() => Movies.AddViewFormat(movie));
-        Actions.Add(() => Movies.RemoveViewFormat(movie));
-
-        Options.Add("Return");
-        Actions.Add(() => Console.WriteLine(""));
-
-        MenuLogic.Question(Question, Options, Actions);
-
-        Action?.Invoke();
     }
 
     private static void ChangeTitle(MovieModel movie)
@@ -231,53 +213,6 @@ static class Movies
         Console.WriteLine($"Release date  is now: {NewReleaseDate.Date}");
         QuestionLogic.AskEnter();
         ChangeMovieMenu(movie);
-    }
-
-    public static void AddViewFormat(MovieModel movie)
-    {
-        string Question = "Select the format you want to add";
-        List<string> Options = new List<string>();
-        List<Action> Actions = new List<Action>();
-
-        if (MoviesLogic.AllFormats().Any())
-        {
-            foreach (var format in MoviesLogic.AllFormats())
-            {
-                Options.Add(format);
-                Actions.Add(() => MoviesLogic.AddFormat(movie, format));
-            }
-
-            MenuLogic.Question(Question, Options, Actions);
-        }
-
-        MoviesLogic.UpdateList(movie);
-
-        ChangeFormats(movie);
-    }
-
-    public static void RemoveViewFormat(MovieModel movie)
-    {
-        string Question = "Select the format you want to remove";
-        List<string> Options = new List<string>();
-        List<Action> Actions = new List<Action>();
-
-        if (movie.Formats.Any())
-        {
-            foreach (var format in movie.Formats)
-            {
-                Options.Add(format);
-                Actions.Add(() => MoviesLogic.RemoveFormat(movie, format));
-            }
-            MenuLogic.Question(Question, Options, Actions);
-        }
-        else
-        {
-            Console.WriteLine("There are no formats to remove");
-        }
-
-        MoviesLogic.UpdateList(movie);
-
-        ChangeFormats(movie);
     }
 }
 

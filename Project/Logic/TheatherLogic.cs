@@ -215,16 +215,18 @@ public class TheatherLogic
         }
     }
 
-    public void BlockSeats(TheaterModel theater)
+    public void BlockSeats(TheaterModel theater, bool returnBack)
     {
         var Help = ShowSeats(theater);
         if (Help != null)
         {
             UpdateList(Help.Theather);
         }
+
+        Theater.EditMenu(theater, returnBack);
     }
 
-    public void UnBlockSeats(TheaterModel theater)
+    public void UnBlockSeats(TheaterModel theater, bool returnBack)
     {
         foreach (var seat in theater.Seats)
         {
@@ -233,12 +235,16 @@ public class TheatherLogic
         UpdateList(theater);
         Console.WriteLine("All seats have been unblocked");
         QuestionLogic.AskEnter();
+
+        Theater.EditMenu(theater, returnBack);
     }
 
-    public void ChangeTheaterSize(TheaterModel theater)
+    public void ChangeTheaterSize(TheaterModel theater, bool returnBack)
     {
         int width = (int)QuestionLogic.AskNumber("Enter the width of the theater");
         int height = (int)QuestionLogic.AskNumber("Enter the height of the theater");
         MakeTheather(width, height, theater.Id);
+
+        Theater.EditMenu(theater, returnBack);
     }
 }

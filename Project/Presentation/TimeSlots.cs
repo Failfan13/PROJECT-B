@@ -6,19 +6,19 @@ static class TimeSlots
     public static void ShowAllTimeSlotsForMovie(int movieid, bool IsEdited = false)
     {
         TimeSlotsLogic timeSlotsLogic = new TimeSlotsLogic();
-        List<TimeSlotModel> tsms = timeSlotsLogic.GetByMovieId(movieid);
+        List<TimeSlotModel>? tsms = timeSlotsLogic.GetByMovieId(movieid);
         MoviesLogic ML = new MoviesLogic();
         TheatherLogic TL = new TheatherLogic();
 
         Console.Clear();
-        if (tsms.Count == 0) // Movie exists but there is no timeslot for it
+        if (tsms?.Count == 0) // Movie exists but there is no timeslot for it
         {
             Console.WriteLine("There are no timeslots for that movie.\nPress Enter to return");
-            string a = Console.ReadLine();
+            string? a = Console.ReadLine();
         }
         else
         {
-            string Question = $"Availible timeslots for {ML.GetById(movieid).Title}";
+            string Question = $"Availible timeslots for {ML.GetById(movieid)?.Title}";
             List<string> Options = new List<string>();
             List<Action> Actions = new List<Action>();
 
@@ -36,32 +36,38 @@ static class TimeSlots
     {
         TimeSlotsLogic TimeSlotsLogic = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
-        MovieModel movie = ML.GetById(movieid);
+        MovieModel? movie = ML.GetById(movieid);
         TimeSlotModel TM = new TimeSlotModel();
+        TheatherLogic TL = new TheatherLogic();
+
         TM.MovieId = movie.Id;
+        TM.Theater.Id = TL.GetNewestId();
 
         Console.Clear();
 
         while (TM.Start == new DateTime())
         {
-            Console.WriteLine("Enter a new time slot: dd/mm/yy hh:mm");
-            string time = Console.ReadLine();
             try
             {
-                TM.Start = DateTime.ParseExact(time, "dd/MM/yy HH:mm", CultureInfo.InvariantCulture);
+                Console.WriteLine("Enter a new start date: dd/mm/yy");
+                string? date = Console.ReadLine()?.Replace(" ", "");
+
+                Console.WriteLine("Enter a new start time: hh:mm");
+                string? time = Console.ReadLine()?.Replace(" ", "");
+
+                TM.Start = DateTime.ParseExact((date + " " + time), "dd/MM/yy HH:mm", CultureInfo.InvariantCulture);
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 Console.Clear();
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("Wrong date format, try again");
+                Console.WriteLine("Wrong date/time format, try again");
             }
         }
 
         Console.WriteLine("Would you like to change the seat layout? (y/n)");
         if (Console.ReadLine() == "y")
         {
-            Theater.EditMenu(TM.Theater);
+            Theater.EditMenu(TM.Theater, false);
         }
 
         Console.WriteLine("Would you like to add a new format? (y/n)");

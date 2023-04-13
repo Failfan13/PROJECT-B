@@ -50,25 +50,31 @@ public static class Theater
         MenuLogic.Question(Question, Options, Actions);
 
     }
-    public static void EditMenu(TheaterModel theater)
+    public static void EditMenu(TheaterModel theater, bool returnToMenu = true)
     {
         string Question = "What would you like to change?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
         Options.Add("Change size");
-        Actions.Add(() => TL.ChangeTheaterSize(theater));
+        Actions.Add(() => TL.ChangeTheaterSize(theater, returnToMenu));
 
         Options.Add("Block seats");
-        Actions.Add(() => TL.BlockSeats(theater));
+        Actions.Add(() => TL.BlockSeats(theater, returnToMenu));
 
         Options.Add("Unblock seats");
-        Actions.Add(() => TL.UnBlockSeats(theater));
+        Actions.Add(() => TL.UnBlockSeats(theater, returnToMenu));
 
         Options.Add("\nReturn");
-        Actions.Add(() => WhatTheather());
-        MenuLogic.Question(Question, Options, Actions);
+        if (returnToMenu)
+        {
+            Actions.Add(() => WhatTheather());
+        }
+        else
+        {
+            Actions.Add(() => Console.WriteLine());
+        }
 
-        EditMenu(theater);
+        MenuLogic.Question(Question, Options, Actions);
     }
 }

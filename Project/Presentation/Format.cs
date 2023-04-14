@@ -1,6 +1,24 @@
 // Format/formats will be the extra options as IMAX, 3D, REX etc.
 public static class Format
 {
+    public static void Start(TimeSlotModel tsm, List<SeatModel> Seats) => Start(tsm, Seats, null!, false);
+    public static void Start(TimeSlotModel tsm, List<SeatModel> Seats, Dictionary<int, int> snacks = null!, bool IsEdited = false)
+    {
+        ReservationLogic ReservationLogic = new ReservationLogic();
+        Console.Clear();
+        FormatDetails? formatDt = FormatsLogic.GetByFormat(tsm.Format);
+
+        Console.WriteLine(@$"For this movie there are certain viewing formats available, For the timeslot you choose
+The following format is applied: {tsm.Format}
+
+{(formatDt?.Item != "" ? @$"The movie format will require: {formatDt?.Item} for the optimal viewing experience
+The total price for the extra requirements will be: {formatDt?.Item} x {Seats.Count()} - Price: € {formatDt?.Price * Seats.Count()}" : "")}");
+
+        QuestionLogic.AskEnter();
+
+        new ReservationLogic().MakeReservation(tsm, Seats, snacks, tsm.Format, IsEdited);
+    }
+
     public static void ChangeFormats(object formatModel, Action returnTo = null!)
     {
         string Question = "Would you like to change viewing methods?";
@@ -45,9 +63,9 @@ public static class Format
         else if (formatModel is MovieModel)
         {
             MovieModel? model = formatModel as MovieModel;
-            if (MoviesLogic.AllFormats().Any())
+            if (FormatsLogic.AllFormats().Any())
             {
-                foreach (var format in MoviesLogic.AllFormats())
+                foreach (var format in FormatsLogic.AllFormats())
                 {
                     Options.Add(format);
                     Actions.Add(() => MoviesLogic.AddFormat(model!, format));

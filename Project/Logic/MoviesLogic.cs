@@ -10,7 +10,6 @@ public class MoviesLogic : Order<MovieModel>
 
     static private CategoryLogic CategoryLogic = new CategoryLogic();
 
-    private static List<string> _formats = new List<string>() { "imax", "imax 3d", "3d", "rpx" };
     private List<MovieModel> _movies;
 
     //Static properties are shared across all instances of the class
@@ -65,11 +64,6 @@ public class MoviesLogic : Order<MovieModel>
     public List<MovieModel> AllMovies()
     {
         return _movies;
-    }
-
-    public static List<string> AllFormats()
-    {
-        return _formats;
     }
 
     public static void AddFormat(MovieModel movie, string format)
@@ -160,7 +154,3 @@ public class MoviesLogic : Order<MovieModel>
         UpdateList(movie);
     }
 }
-
-
-
-

@@ -24,8 +24,16 @@ static class TimeSlots
 
             foreach (TimeSlotModel time in tsms)
             {
-                Options.Add($"{time.Start} {(time.Format != "" ? $"-Type : {time.Format}" : "")}");
-                Actions.Add(() => Theater.SelectSeats(time));
+                if (time.Format != "" && time.Format != "standard")
+                {
+                    Options.Add($"{time.Start} -Type : {time.Format}");
+                    Actions.Add(() => Reservation.FormatPrompt(() => Theater.SelectSeats(time)));
+                }
+                else
+                {
+                    Options.Add($"{time.Start}");
+                    Actions.Add(() => Theater.SelectSeats(time));
+                }
             }
 
             MenuLogic.Question(Question, Options, Actions);

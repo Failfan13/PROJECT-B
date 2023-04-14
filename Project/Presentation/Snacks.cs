@@ -60,8 +60,17 @@ static class Snacks
             }
         }
 
-        Options.Add("Add to reservation");
-        Actions.Add(() => new ReservationLogic().MakeReservation(TimeSlot, Seats, SnacksLogic.GetSelectedSnacks(), IsEdited));
+        Options.Add($"Add to reservation");
+        if (FormatsLogic.GetByFormat(TimeSlot.Format) != null)
+        {
+            Actions.Add(() => Format.Start(TimeSlot, Seats, SnacksLogic.GetSelectedSnacks(), IsEdited));
+        }
+        else
+        {
+            Actions.Add(() => new ReservationLogic().MakeReservation(TimeSlot, Seats, SnacksLogic.GetSelectedSnacks(), "", IsEdited));
+        }
+
+
         double CurrentPrice = 0;
         foreach (KeyValuePair<int, int> KeyValue in SnacksLogic.CurrentResSnacks)
         {
@@ -74,11 +83,9 @@ static class Snacks
 
         MenuLogic.Question(Question, Options, Actions, $"Total snack price: {CurrentPrice}");
 
-
         if (Continue)
         {
             Start(TimeSlot, Seats, IsEdited);
         }
-
     }
 }

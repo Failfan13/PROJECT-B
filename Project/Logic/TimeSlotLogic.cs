@@ -77,7 +77,15 @@ class TimeSlotsLogic
         return _timeslots;
     }
 
-    public void AddFormat(TimeSlotModel formatModel, string format) => formatModel.Format = format;
+    public void AddFormat(TimeSlotModel formatModel, string format)
+    {
+        formatModel.Format = format;
+        UpdateList(formatModel);
+    }
 
-    public void RemoveFormat(TimeSlotModel formatModel) => formatModel.Format = "";
+    public void RemoveFormat(TimeSlotModel formatModel)
+    {
+        formatModel.Format = "";
+        UpdateList(formatModel);
+    }
 }

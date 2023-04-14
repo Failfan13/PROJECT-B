@@ -1,7 +1,7 @@
 // Format/formats will be the extra options as IMAX, 3D, REX etc.
 public static class Format
 {
-    public static void ChangeFormats(object formatModel, Action Action = null)
+    public static void ChangeFormats(object formatModel, Action returnTo = null!)
     {
         string Question = "Would you like to change viewing methods?";
         List<string> Options = new List<string>() { "Add a viewing method", "Remove a viewing method" };
@@ -15,7 +15,7 @@ public static class Format
 
         MenuLogic.Question(Question, Options, Actions);
 
-        Action?.Invoke();
+        if (returnTo != null) returnTo();
     }
 
     public static void AddViewFormat(object formatModel)
@@ -30,7 +30,7 @@ public static class Format
         if (formatModel is TimeSlotModel)
         {
             TimeSlotModel? model = formatModel as TimeSlotModel;
-            MovieModel? movieFormats = MoviesLogic.GetById(model.MovieId);
+            MovieModel movieFormats = MoviesLogic.GetById(model!.MovieId)!;
             if (movieFormats.Formats.Any())
             {
                 foreach (var format in movieFormats.Formats)
@@ -50,7 +50,7 @@ public static class Format
                 foreach (var format in MoviesLogic.AllFormats())
                 {
                     Options.Add(format);
-                    Actions.Add(() => MoviesLogic.AddFormat(model, format));
+                    Actions.Add(() => MoviesLogic.AddFormat(model!, format));
                 }
 
                 Options.Add("Return");
@@ -58,7 +58,7 @@ public static class Format
 
                 MenuLogic.Question(Question, Options, Actions);
             }
-            MoviesLogic.UpdateList(model);
+            MoviesLogic.UpdateList(model!);
         }
 
         ChangeFormats(formatModel);
@@ -76,7 +76,7 @@ public static class Format
         if (formatModel is TimeSlotModel)
         {
             TimeSlotModel? model = formatModel as TimeSlotModel;
-            if (model.Format != "")
+            if (model!.Format != "")
             {
                 Options.Add(model.Format);
                 Actions.Add(() => TimeSlotsLogic.RemoveFormat(model));
@@ -86,7 +86,7 @@ public static class Format
         else
         {
             MovieModel? model = formatModel as MovieModel;
-            if (model.Formats.Any())
+            if (model!.Formats.Any())
             {
                 foreach (var format in model.Formats)
                 {

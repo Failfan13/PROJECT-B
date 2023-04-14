@@ -37,10 +37,18 @@ public class TheatherLogic
         return (_theathers.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
-
     public List<TheaterModel> AllTheaters()
     {
         return _theathers;
+    }
+
+    public void UpdateToTheater(TimeSlotModel timeSlot)
+    {
+        TheaterModel? theater = GetById(timeSlot.Theater.Id);
+        if (theater != null)
+        {
+            timeSlot.Theater = theater;
+        }
     }
     public void MakeTheather(int width, int height, int OldId = -1)
     {
@@ -215,19 +223,21 @@ public class TheatherLogic
         }
     }
 
-    public void BlockSeats(TheaterModel theater, bool returnBack)
+    public void BlockSeats(TheaterModel theater, Action returnTo = null!)
     {
+        TheatherLogic TL = new TheatherLogic();
         var Help = ShowSeats(theater);
         if (Help != null)
         {
             UpdateList(Help.Theather);
         }
 
-        Theater.EditMenu(theater, returnBack);
+        returnTo();
     }
 
-    public void UnBlockSeats(TheaterModel theater, bool returnBack)
+    public void UnBlockSeats(TheaterModel theater, Action returnTo = null!)
     {
+        TheatherLogic TL = new TheatherLogic();
         foreach (var seat in theater.Seats)
         {
             seat.Reserved = false;
@@ -236,15 +246,17 @@ public class TheatherLogic
         Console.WriteLine("All seats have been unblocked");
         QuestionLogic.AskEnter();
 
-        Theater.EditMenu(theater, returnBack);
+        returnTo();
     }
 
-    public void ChangeTheaterSize(TheaterModel theater, bool returnBack)
+    public void ChangeTheaterSize(TheaterModel theater, Action returnTo = null!)
     {
+        TheatherLogic TL = new TheatherLogic();
         int width = (int)QuestionLogic.AskNumber("Enter the width of the theater");
         int height = (int)QuestionLogic.AskNumber("Enter the height of the theater");
         MakeTheather(width, height, theater.Id);
 
-        Theater.EditMenu(theater, returnBack);
+        returnTo();
     }
+
 }

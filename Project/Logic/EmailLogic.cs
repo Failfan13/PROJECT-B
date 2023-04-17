@@ -1,10 +1,3 @@
-/* Gmail info
-    E-mail: HSR.ProjectB.TeamE@gmail.com
-    Pass: Tim&Max~Makayru~Emir&Erik
-    smpt address: smpt.gmail.com
-    smpt pass: igtmcrhmlfymuagb
-    smpt port: 465
-*/
 using System;
 using MailKit.Net.Smtp;
 using MailKit;

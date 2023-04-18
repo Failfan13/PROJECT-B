@@ -14,14 +14,18 @@ public class SeatModel
     [JsonPropertyName("handicapped")]
     public bool Handicapped { get; set; }
 
+    [JsonPropertyName("luxury")]
+    public bool Luxury { get; set; }
+
 
     [JsonConstructor]
-    public SeatModel(int id, double price, bool reserved = false, bool handicapped = false)
+    public SeatModel(int id, double price, bool reserved = false, bool handicapped = false, bool luxury = false)
     {
         Id = id;
         Price = price;
         Reserved = reserved;
         Handicapped = handicapped;
+        Luxury = luxury;
     }
     public string SeatRow(int width)
     {

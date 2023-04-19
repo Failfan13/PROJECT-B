@@ -51,15 +51,54 @@ public class PromoLogic
         }
     }
 
+    public int GetPromoId(string code)
+    {
+        return _promos.FindIndex(i => i.Code == code) + 1;
+    }
+
     public List<PromoModel> AllPromos()
     {
         return _promos;
     }
 
-    public void NewPromo(string code)
+    public PromoModel NewPromo(string code)
     {
-
-        PromoModel newPromo = new PromoModel(GetNewestId(),code);
+        PromoModel newPromo = new PromoModel(GetNewestId(), code);
         UpdateList(newPromo);
+        return newPromo;
+    }
+
+    public void RemovePromo(string code)
+    {
+        PromoModel PromoModel = GetById(GetPromoId(code));
+        int index = _promos.FindIndex(i => i.Code == code);
+        _promos.RemoveAt(index);
+        PromoAccess.WriteAll(_promos);
+    }
+
+    public void TurnPromo(string code)
+    {
+        int index = _promos.FindIndex(i => i.Code == code);
+        _promos[index].Active = !_promos[index].Active;
+    }
+
+    public bool FindPromo(string code)
+    {
+        return _promos.Exists(i => i.Code == code);
+    }
+
+    public bool VerifyCode(string code)
+    {
+        if (!FindPromo(code))
+        {
+            if (code.Length <= 4 || code.Length > 10)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

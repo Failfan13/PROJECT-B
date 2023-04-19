@@ -10,7 +10,10 @@ public class PromoModel
     public string Code { get; set; }
 
     [JsonPropertyName("active")]
-    public bool Active = true;
+    public bool Active { get; set; } = true;
+
+    [JsonPropertyName("Condition")]
+    public List<object>? Condition { get; set; }
 
     public PromoModel(int id, string code)
     {

@@ -1,6 +1,46 @@
 [
   {
-    "id": 1,
-    "code": "TEST20"
+    "id": 2,
+    "code": "TEST20",
+    "active": true,
+    "Condition": null
+  },
+  {
+    "id": 3,
+    "code": "TEST22",
+    "active": false,
+    "Condition": null
+  },
+  {
+    "id": 4,
+    "code": "SUSSY",
+    "active": true,
+    "Condition": null
+  },
+  {
+    "id": 5,
+    "code": "BASSS",
+    "active": true,
+    "Condition": [
+      [
+        {
+          "discount": 4,
+          "flat": true
+        }
+      ]
+    ]
+  },
+  {
+    "id": 6,
+    "code": "TSTERS",
+    "active": true,
+    "Condition": [
+      [
+        {
+          "discount": 3,
+          "flat": false
+        }
+      ]
+    ]
   }
 ]

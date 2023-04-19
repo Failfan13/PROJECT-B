@@ -65,10 +65,27 @@ class TimeSlotsLogic
         return (_timeslots.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
+
     public void NewTimeSlot(int movieid, DateTime start, TheaterModel theater, string format)
     {
         int NewID = GetNewestId();
         TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, theater, format);
+
+    //public void NewTimeSlot(int movieid, DateTime start)
+    //{
+        //int NewID = GetNewestId();
+        //var theater = new TheatherLogic();
+
+        // Creating the Theather for every timeslot, 
+        //Console.WriteLine("Please give the height of the theather");
+        //int height = int.Parse(Console.ReadLine());
+        //Console.WriteLine("Please give the width of the theather");
+        //int width = int.Parse(Console.ReadLine());
+
+        //TheaterModel realth = theater.MakeTheather(width,height);
+
+        //TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, realth);
+
         UpdateList(timeslot);
     }
 

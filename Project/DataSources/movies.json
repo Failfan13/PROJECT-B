@@ -12,6 +12,9 @@
         "id": 4,
         "name": "comedy"
       }
+    ],
+    "Formats": [
+      "standard"
     ]
   },
   {
@@ -35,6 +38,9 @@
         "id": 3,
         "name": "romance"
       }
+    ],
+    "Formats": [
+      "standard"
     ]
   },
   {
@@ -54,6 +60,9 @@
         "id": 2,
         "name": "adventure"
       }
+    ],
+    "Formats": [
+      "standard"
     ]
   },
   {
@@ -64,6 +73,9 @@
     "description": "nani",
     "duration": 50,
     "price": 120,
-    "categories": []
+    "categories": [],
+    "Formats": [
+      "standard"
+    ]
   }
 ]

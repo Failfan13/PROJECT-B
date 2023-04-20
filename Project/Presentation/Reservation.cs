@@ -61,7 +61,8 @@ public static class Reservation
                 "Choose movie, time & seats",
                 "Choose time & seats",
                 "Choose seats",
-                "Change side snack",
+                "Choose side snack",
+                "Choose format",
                 "Apply discount"
             };
         // Actions reservations actions
@@ -79,6 +80,8 @@ public static class Reservation
 
         // Change snack
         actions.Add(() => Snacks.Start(timeSlot, CurrReservation.Seats, true));
+
+        actions.Add(() => Format.Start(timeSlot, CurrReservation.Seats));
 
         // Apply discount NEEDS CORRECT FUNTION
         actions.Add(() => Menu.Start());
@@ -179,9 +182,27 @@ public static class Reservation
             }
         }
 
+        // Format data
+        if (FormatsLogic.GetByFormat(ress.Format) != null) // Same list in MovieLogic _formats
+        {
+            FormatDetails? formatDt = FormatsLogic.GetByFormat(ress.Format);
+
+            string required = formatDt.Item;
+            double requiredPrice = formatDt.Price;
+
+            Console.WriteLine($"\nThe ordered movie plays in {ress.Format} format therefore there is an extra fee");
+            if (required != "")
+            {
+                Console.Write("Requirements:");
+                Console.WriteLine($"\n{required}x{ress.Seats.Count}\tPrice: €{requiredPrice * ress.Seats.Count}");
+
+                FinalPrice += requiredPrice * ress.Seats.Count;
+            }
+        }
+
         Console.Write("\nThe total cost of your order will be: ");
-        body += "\nThe total cost of your order is: ";
-        var priceString = Convert.ToString(FinalPrice); ;
+        var priceString = Convert.ToString(FinalPrice);
+
         //Show euro symbol
         //Print total cost + if not containing "." add ",-" at end
         Console.Write($"€" + FinalPrice + (priceString.Contains(".") ? "" : ",-"));
@@ -195,5 +216,32 @@ public static class Reservation
 
         UserLogin.SignUpMails();
         QuestionLogic.AskEnter();
+    }
+
+    public static void ClearReservation(Action returnTo)
+    {
+        Console.Clear();
+        string Question = @"Are you sure you want to delete this reservation?
+This will reset all your progress for this reservation";
+        List<string> Options = new List<string>() { "Yes", "No" };
+        List<Action> Actions = new List<Action>() { };
+
+        Actions.Add(() => Reservation.NoFilterMenu(true));
+        Actions.Add(() => returnTo());
+
+        MenuLogic.Question(Question, Options, Actions);
+    }
+
+    public static void FormatPrompt(Action goTo)
+    {
+        string question = $@"This movie timeslot requires a special viewing method, 
+Would you still like to order for this timeslot?";
+        List<string> options = new List<string>() { "Yes", "No" };
+        List<Action> actions = new List<Action>();
+
+        actions.Add(() => goTo());
+        actions.Add(() => NoFilterMenu());
+
+        MenuLogic.Question(question, options, actions);
     }
 }

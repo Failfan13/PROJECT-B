@@ -126,9 +126,10 @@ public static class Reservation
 
     public static void FilteredMenu(List<MovieModel> movies, bool IsEdited = false)
     {
-        string Question = "which movie would you like to see?";
         List<string> Movies = new List<string>();
         List<Action> Actions = new List<Action>();
+        string Question = "which movie would you like to see?";
+
         Movies.Add("Use Filter");
         Actions.Add(() => Filter.Main());
 
@@ -141,25 +142,26 @@ public static class Reservation
 
         MenuLogic.Question(Question, Movies, Actions);
     }
-    // Increases total order amount
-    //ReservationLogic.TotalOrder = 5.5;
-
-    // Decreases total order amount
-    //ReservationLogic.TotalOrderDecr = 2.3;
-
-    // Show total order amount
     public static void TotalReservationCost(ReservationModel ress)
     {
         Console.Clear();
         ReservationLogic ReservationLogic = new ReservationLogic();
+        EmailLogic EmailLogic = new EmailLogic();
         double FinalPrice = 0.00;
+
+        string subject = "Order summary";
+        string body = "";
+        string email = "";
 
         // Seat Data
         Console.WriteLine($"Order overview:");
+        body += "Order overview:\n";
         Console.WriteLine("\nSeats:");
+        body += $"\nChosen seats:\n\n";
         foreach (SeatModel seat in ress.Seats)
         {
             Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theater.Width)}\tPrice: €{seat.Price}");
+            body += $"Nr: {seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theater.Width)}\tPrice: €{seat.Price}\n";
             FinalPrice += seat.Price;
         }
 
@@ -168,12 +170,14 @@ public static class Reservation
         {
             int MaxLength = ress.GetSnacks().Max(snack => snack.Name.Length);
             Console.WriteLine("\nSnacks:");
+            body += $"\nChosen snacks:\n\n";
             foreach (KeyValuePair<int, int> keyValue in ress.Snacks)
             {
                 var Snack = new SnacksLogic().GetById(keyValue.Key);
                 int Tabs = (int)Math.Ceiling((MaxLength - Snack.Name.Length) / 8.0);
                 var price = (Snack.Price) * keyValue.Value;
                 Console.WriteLine($"{keyValue.Value}x{Snack.Name}\t{new string('\t', Tabs)}Price: €{price}");
+                body += $"{keyValue.Value}x {Snack.Name}\t{new string('\t', Tabs)}Price: €{price}\n";
                 FinalPrice += price;
             }
         }
@@ -198,10 +202,19 @@ public static class Reservation
 
         Console.Write("\nThe total cost of your order will be: ");
         var priceString = Convert.ToString(FinalPrice);
+
         //Show euro symbol
         //Print total cost + if not containing "." add ",-" at end
-        Console.Write($"€ " + FinalPrice + (priceString.Contains(".") ? "" : ",-"));
+        Console.Write($"€" + FinalPrice + (priceString.Contains(".") ? "" : ",-"));
+        body += $"€" + FinalPrice + (priceString.Contains(".") ? "" : ",-") + "\n";
         Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {ress.Id}\n");
+        body += $"\nIMPORTANT\nYour order number is: {ress.Id}";
+
+        email = UserLogin.AskEmail();
+
+        EmailLogic.SendEmail(email, subject, body);
+
+        UserLogin.SignUpMails();
         QuestionLogic.AskEnter();
     }
 

@@ -622,7 +622,7 @@
         {
           "id": 0,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false
         },
         {

@@ -22,10 +22,12 @@ static class Movies
         DateTime ReleaseDate = new DateTime();
         double Price = 0;
         List<CategoryModel> Categories = new List<CategoryModel> { };
+        List<string> Formats = new List<string> { };
 
         Console.Clear();
         Title = QuestionLogic.AskString("What is the title of the movie?");
 
+        Console.Clear();
         while (CorrectDate)
         {
             Console.WriteLine("What is the release date of the movie? (dd/mm/yyyy): ");
@@ -69,16 +71,20 @@ static class Movies
         }
         while (nomorecategories != false);
 
-        MovieModel movie = MoviesLogic.NewMovie(Title, ReleaseDate, Director, Description, Duration, Price, Categories);
+        MovieModel movie = MoviesLogic.NewMovie(Title, ReleaseDate, Director, Description, Duration, Price, Categories, Formats);
 
+        Format.ChangeFormats(movie);
+
+        Console.Clear();
         Console.WriteLine("New movie added!");
         Console.WriteLine($"Title: {movie.Title}");
         Console.WriteLine($"Release Date: {movie.ReleaseDate.Date}");
         Console.WriteLine($"Director: {movie.Director}");
         Console.WriteLine($"Price: {movie.Price}");
         Console.WriteLine($"Categories: {string.Join(", ", movie.Categories)}");
+        Console.WriteLine($"Formats: {string.Join(", ", movie.Formats)}");
 
-        Menu.Start();
+        //Menu.Start();
     }
 
     public static void ChangeMoviesMenu()
@@ -111,7 +117,7 @@ static class Movies
             "Change title", "Change Director",
             "Change Releasedate", "Change Description",
             "Change Duration", "Change Price",
-            "Change Categories",
+            "Change Categories", "Change Formats"
         };
 
         List<Action> Actions = new List<Action>() { };
@@ -122,6 +128,7 @@ static class Movies
         Actions.Add(() => ChangeDuration(movie));
         Actions.Add(() => ChangePrice(movie));
         Actions.Add(() => ChangeCategory(movie));
+        Actions.Add(() => Format.ChangeFormats(movie, () => ChangeMovieMenu(movie)));
 
         Options.Add("Return");
         Actions.Add(() => ChangeMoviesMenu());

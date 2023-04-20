@@ -66,26 +66,43 @@ class TimeSlotsLogic
     }
 
 
-    public void NewTimeSlot(int movieid, DateTime start)
+    public void NewTimeSlot(int movieid, DateTime start, TheaterModel theater, string format)
     {
         int NewID = GetNewestId();
-        var theater = new TheatherLogic();
+        TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, theater, format);
+
+    //public void NewTimeSlot(int movieid, DateTime start)
+    //{
+        //int NewID = GetNewestId();
+        //var theater = new TheatherLogic();
 
         // Creating the Theather for every timeslot, 
-        Console.WriteLine("Please give the height of the theather");
-        int height = int.Parse(Console.ReadLine());
-        Console.WriteLine("Please give the width of the theather");
-        int width = int.Parse(Console.ReadLine());
+        //Console.WriteLine("Please give the height of the theather");
+        //int height = int.Parse(Console.ReadLine());
+        //Console.WriteLine("Please give the width of the theather");
+        //int width = int.Parse(Console.ReadLine());
 
-        TheaterModel realth = theater.MakeTheather(width,height);
+        //TheaterModel realth = theater.MakeTheather(width,height);
 
-        TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, realth);
+        //TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, realth);
+
         UpdateList(timeslot);
     }
 
-    public List<TimeSlotModel> AllTimSlots()
+    public List<TimeSlotModel> AllTimeSlots()
     {
         return _timeslots;
     }
 
+    public void AddFormat(TimeSlotModel formatModel, string format)
+    {
+        formatModel.Format = format;
+        UpdateList(formatModel);
+    }
+
+    public void RemoveFormat(TimeSlotModel formatModel)
+    {
+        formatModel.Format = "";
+        UpdateList(formatModel);
+    }
 }

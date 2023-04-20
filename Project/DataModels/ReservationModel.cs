@@ -21,7 +21,10 @@ public class ReservationModel
     [JsonPropertyName("date_time")]
     public DateTime DateTime { get; set; }
 
-    public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime)
+    [JsonPropertyName("format")]
+    public string Format { get; set; }
+
+    public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime, string format)
     {
         Id = id;
         TimeSLotId = timeSlotId;
@@ -29,6 +32,7 @@ public class ReservationModel
         DateTime = dateTime;
         Seats = seats;
         Snacks = snacks;
+        Format = format;
     }
 
     public List<SnackModel> GetSnacks()

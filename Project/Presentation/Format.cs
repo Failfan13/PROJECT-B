@@ -29,11 +29,14 @@ The total price for the extra requirements will be: {formatDt?.Item} x {Seats.Co
         Actions.Add(() => Format.RemoveViewFormat(formatModel));
 
         Options.Add("Return");
-        Actions.Add(() => Console.WriteLine(""));
+        if (returnTo != null)
+        {
+            Actions.Add(() => returnTo());
+        }
+        else Actions.Add(() => Console.WriteLine());
+
 
         MenuLogic.Question(Question, Options, Actions);
-
-        if (returnTo != null) returnTo();
     }
 
     public static void AddViewFormat(object formatModel)

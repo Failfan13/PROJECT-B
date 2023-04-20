@@ -75,6 +75,8 @@ static class Movies
 
         Format.ChangeFormats(movie);
 
+        TimeSlots.NewTimeSlot(movie.Id);
+
         Console.Clear();
         Console.WriteLine("New movie added!");
         Console.WriteLine($"Title: {movie.Title}");

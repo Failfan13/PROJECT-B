@@ -13,23 +13,8 @@
   },
   {
     "id": 4,
-    "code": "SUSSY",
+    "code": "BRUPIES",
     "active": true,
     "Condition": null
-  },
-  {
-    "id": 5,
-    "code": "TESTERT",
-    "active": true,
-    "Condition": [
-      [
-        {
-          "snackId": 0,
-          "snack": "test",
-          "discount": 0,
-          "flat": true
-        }
-      ]
-    ]
   }
 ]

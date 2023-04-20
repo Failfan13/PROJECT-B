@@ -63,6 +63,7 @@ public class PromoLogic
 
     public PromoModel NewPromo(string code)
     {
+        code = code.Replace(" ", "");
         PromoModel newPromo = new PromoModel(GetNewestId(), code);
         UpdateList(newPromo);
         return newPromo;

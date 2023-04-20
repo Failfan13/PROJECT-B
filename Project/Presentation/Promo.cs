@@ -122,7 +122,7 @@ public static class Promo
             string Question = "What would you like to change?";
             List<string> Options = new List<string>();
             List<Action> Actions = new List<Action>();
-            PromoModel? promo = PromoLogic.GetById(PromoLogic.GetPromoId(code));
+            PromoModel? promo = PromoLogic.GetById(PromoLogic.GetPromoId(code) + 1);
 
             Options.Add("Promo code");
             Actions.Add(() => ChangeCode(promo));
@@ -132,6 +132,10 @@ public static class Promo
             Actions.Add(() => ChangeSeat(promo));
             Options.Add("Total order price");
             Actions.Add(() => ChangeTotal(promo));
+            Options.Add("Remove previous conditions");
+            Actions.Add(() => Parallel.Invoke(
+                () => PromoLogic.GetById(promo.Id).Condition = null,
+                () => PromoLogic.UpdateList(promo)));
             Options.Add("Return");
             Actions.Add(() => EditPromoMenu());
 
@@ -146,6 +150,8 @@ public static class Promo
         string code;
         bool CorrectCode = false;
 
+        Console.WriteLine("Enter the new Promo code");
+
         code = Console.ReadLine()!.ToUpper();
         CorrectCode = PromoLogic.VerifyCode(code);
 
@@ -156,12 +162,14 @@ public static class Promo
 
         PromoLogic.UpdateList(promo);
 
-        EditPromo();
+        AddPromo(promo);
     }
     private static void ChangeSnack(PromoModel promo)
     {
         SnacksLogic SnacksLogic = new SnacksLogic();
         List<SnackPromoModel> snackPromos = new List<SnackPromoModel>();
+        SnackPromoModel? SnackModel = null;
+
         int MaxLength = SnacksLogic.AllSnacks().Max(snack => snack.Name.Length);
 
         string Question = "Choose the snack that fits the promotion";
@@ -179,7 +187,7 @@ public static class Promo
             {
                 Options.Add($"{snack.Name}\t{new string('\t', Tabs)}\t{snack.Price}\t0");
             }
-            //Actions.Add(() => )// needs to create SnackPromoModel, And Ask for discount & flat);
+            Actions.Add(() => SnackModel = new SnackPromoModel(snack.Id, snack.Name, ChangeDiscount(snack.Price), ChangeFlat()));
         }
 
         Options.Add("Return");
@@ -187,11 +195,10 @@ public static class Promo
 
         MenuLogic.Question(Question, Options, Actions);
 
-        if (promo.Condition == null)
-        {
-            promo.Condition = new List<object>();
-        }
-        //snackPromos.Add( HERE ADD NEW SNACKPROMOMODEl);
+        if (promo.Condition == null) promo.Condition = new List<object>();
+
+        if (SnackModel != null) snackPromos.Add(SnackModel);
+
         promo.Condition.Add(snackPromos);
         PromoLogic.UpdateList(promo);
 
@@ -199,23 +206,30 @@ public static class Promo
     }
     private static void ChangeSeat(PromoModel promo) { Console.WriteLine("sus2"); }
     private static void ChangeTotal(PromoModel promo) { Console.WriteLine("sus3"); }
-    private static void ChangeDiscount(double discount, bool flat)
+    private static double ChangeDiscount(double oldPrice)
     {
         Console.WriteLine($"Enter the new discount price");
-        discount = int.Parse(Console.ReadLine()!);
-
-        Console.WriteLine("Is the discount in percentaile or euros? (P/E)");
-        switch (Console.ReadKey().Key.ToString())
+        try
         {
-            case "P":
-                flat = false;
-                break;
-            case "E":
-                flat = true;
-                break;
-            default:
-                break;
+            double newPrice = double.Parse(Console.ReadLine()!);
+
+            if (newPrice < oldPrice) return newPrice;
+            else return oldPrice;
         }
+        catch (Exception)
+        {
+            return oldPrice;
+        }
+    }
+    private static bool ChangeFlat()
+    {
+        Console.WriteLine("Is the discount in percentaile or euros? (P/E)");
+        return (Console.ReadKey().Key.ToString()) switch
+        {
+            "P" => true,
+            "E" => false,
+            _ => false
+        };
 
     }
 }

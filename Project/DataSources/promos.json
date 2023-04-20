@@ -19,26 +19,15 @@
   },
   {
     "id": 5,
-    "code": "BASSS",
+    "code": "TESTERT",
     "active": true,
     "Condition": [
       [
         {
-          "discount": 4,
+          "snackId": 0,
+          "snack": "test",
+          "discount": 0,
           "flat": true
-        }
-      ]
-    ]
-  },
-  {
-    "id": 6,
-    "code": "TSTERS",
-    "active": true,
-    "Condition": [
-      [
-        {
-          "discount": 3,
-          "flat": false
         }
       ]
     ]

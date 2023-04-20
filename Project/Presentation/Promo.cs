@@ -55,18 +55,21 @@ public static class Promo
         // where to return default
     }
 
-    private static void AddPromo()
+    private static void AddPromo(PromoModel promo = null)
     {
         string code;
         bool corrCode = false;
 
-        Console.WriteLine("Enter the new Promo code");
-        code = Console.ReadLine()!.ToUpper();
+        if (promo == null)
+        {
+            Console.WriteLine("Enter the new Promo code");
+            code = Console.ReadLine()!.ToUpper();
 
-        corrCode = PromoLogic.VerifyCode(code);
-        if (!corrCode) AddPromo(); // if code is not valid, ask again
+            corrCode = PromoLogic.VerifyCode(code);
+            if (!corrCode) AddPromo(); // if code is not valid, ask again
 
-        PromoModel promo = PromoLogic.NewPromo(code);
+            promo = PromoLogic.NewPromo(code);
+        }
 
         string Question = "What are the conditions you want to apply";
         List<string> Options = new List<string>();
@@ -158,7 +161,7 @@ public static class Promo
     private static void ChangeSnack(PromoModel promo)
     {
         SnacksLogic SnacksLogic = new SnacksLogic();
-        List<PricePromoModel> snackPromos = new List<PricePromoModel>();
+        List<SnackPromoModel> snackPromos = new List<SnackPromoModel>();
         int MaxLength = SnacksLogic.AllSnacks().Max(snack => snack.Name.Length);
 
         string Question = "Choose the snack that fits the promotion";
@@ -176,7 +179,7 @@ public static class Promo
             {
                 Options.Add($"{snack.Name}\t{new string('\t', Tabs)}\t{snack.Price}\t0");
             }
-            Actions.Add(() => ChangeDiscount<SnackPromoModel>(new SnackPromoModel(snack.Id, snack.Name, snack.Price), snackPromos));
+            //Actions.Add(() => )// needs to create SnackPromoModel, And Ask for discount & flat);
         }
 
         Options.Add("Return");
@@ -188,30 +191,31 @@ public static class Promo
         {
             promo.Condition = new List<object>();
         }
+        //snackPromos.Add( HERE ADD NEW SNACKPROMOMODEl);
         promo.Condition.Add(snackPromos);
         PromoLogic.UpdateList(promo);
 
-        EditPromo();
+        AddPromo(promo);
     }
     private static void ChangeSeat(PromoModel promo) { Console.WriteLine("sus2"); }
     private static void ChangeTotal(PromoModel promo) { Console.WriteLine("sus3"); }
-    private static void ChangeDiscount<T>(T promo, List<PricePromoModel> promos)
+    private static void ChangeDiscount(double discount, bool flat)
     {
-        Console.WriteLine($"Enter the new discount price (Old price: {promo.Discount})");
-        promo.Discount = int.Parse(Console.ReadLine()!);
+        Console.WriteLine($"Enter the new discount price");
+        discount = int.Parse(Console.ReadLine()!);
+
         Console.WriteLine("Is the discount in percentaile or euros? (P/E)");
         switch (Console.ReadKey().Key.ToString())
         {
             case "P":
-                promo.Flat = false;
+                flat = false;
                 break;
             case "E":
-                promo.Flat = true;
+                flat = true;
                 break;
             default:
                 break;
         }
 
-        promos.Add(promo);
     }
 }

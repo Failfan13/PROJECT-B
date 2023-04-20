@@ -190,14 +190,10 @@ public static class Reservation
             if (required != "")
             {
                 Console.Write("Requirements:");
-                Console.WriteLine($"\n{required}x{ress.Seats.Count}\tPrice: €{requiredPrice}");
-            }
-            else
-            {
-                Console.WriteLine($"\nPrice: €{requiredPrice}");
-            }
+                Console.WriteLine($"\n{required}x{ress.Seats.Count}\tPrice: €{requiredPrice * ress.Seats.Count}");
 
-            FinalPrice += requiredPrice;
+                FinalPrice += requiredPrice * ress.Seats.Count;
+            }
         }
 
         Console.Write("\nThe total cost of your order will be: ");

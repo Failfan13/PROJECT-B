@@ -104,9 +104,8 @@ public class PromoLogic
         return false;
     }
 
-    public List<T> AllConditions<T>(PromoModel promo)
+    public List<T> AllConditions<T>(PromoModel promo) where T : PricePromoModel
     {
-
         try
         {
             // Get possible condition by type
@@ -128,10 +127,16 @@ public class PromoLogic
             }
             return new List<T>();
         }
-        catch (System.Exception ex)
+        catch (System.Exception)
         {
-            Console.WriteLine(ex);
+
             return new List<T>();
         }
     }
+
+    public List<PricePromoModel> AllPrices(PromoModel promo) => AllConditions<PricePromoModel>(promo);
+    public List<MoviePromoModel> AllMovies(PromoModel promo) => AllConditions<MoviePromoModel>(promo);
+    public List<SnackPromoModel> AllSnacks(PromoModel promo) => AllConditions<SnackPromoModel>(promo);
+    public List<SeatPromoModel> AllSeats(PromoModel promo) => AllConditions<SeatPromoModel>(promo);
+
 }

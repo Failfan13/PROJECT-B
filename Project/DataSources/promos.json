@@ -26,10 +26,9 @@
       ],
       "snackDict": [
         {
-          "movieId": 2,
-          "title": "jaws",
-          "specific": true,
-          "discount": 4,
+          "snackId": 2,
+          "snack": "Beer",
+          "discount": 1,
           "flat": false
         }
       ]
@@ -37,26 +36,37 @@
   },
   {
     "id": 5,
-    "code": "SUSSYBARH",
+    "code": "NANII",
     "active": true,
     "Condition": {
       "movieDict": [
         {
-          "snackId": 2,
-          "snack": "Beer",
-          "discount": 3,
-          "flat": false
-        }
-      ],
-      "snackDict": [
-        {
           "movieId": 2,
           "title": "jaws",
           "specific": true,
-          "discount": 4,
+          "discount": 3,
+          "flat": false
+        },
+        {
+          "movieId": 0,
+          "title": "PIETERTJE",
+          "specific": false,
+          "discount": 1,
           "flat": false
         }
       ]
     }
+  },
+  {
+    "id": 6,
+    "code": "SUSSY",
+    "active": true,
+    "Condition": null
+  },
+  {
+    "id": 7,
+    "code": "TESTER",
+    "active": true,
+    "Condition": null
   }
 ]

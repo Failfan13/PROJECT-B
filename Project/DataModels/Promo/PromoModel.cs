@@ -13,7 +13,7 @@ public class PromoModel
     public bool Active { get; set; } = true;
 
     [JsonPropertyName("Condition")]
-    public Dictionary<string, List<object>>? Condition { get; set; }
+    public Dictionary<string, IEnumerable<object>>? Condition { get; set; }
 
     public PromoModel(int id, string code)
     {

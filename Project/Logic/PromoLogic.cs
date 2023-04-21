@@ -103,4 +103,35 @@ public class PromoLogic
 
         return false;
     }
+
+    public List<T> AllConditions<T>(PromoModel promo)
+    {
+
+        try
+        {
+            // Get possible condition by type
+            string condition = (typeof(T)) switch
+            {
+                var x when x == typeof(PricePromoModel) => "priceDict",
+                var x when x == typeof(MoviePromoModel) => "movieDict",
+                var x when x == typeof(SnackPromoModel) => "snackDict",
+                var x when x == typeof(SeatPromoModel) => "seatDict",
+                _ => throw new ArgumentOutOfRangeException()
+            };
+
+            if (promo.Condition != null)
+            {
+                // Serialize condition (remove from stream into el)
+                JsonElement el = JsonSerializer.SerializeToElement(promo.Condition[condition]);
+                // Deserialize unstreamed el of condition
+                return JsonSerializer.Deserialize<List<T>>(el)!;
+            }
+            return new List<T>();
+        }
+        catch (System.Exception ex)
+        {
+            Console.WriteLine(ex);
+            return new List<T>();
+        }
+    }
 }

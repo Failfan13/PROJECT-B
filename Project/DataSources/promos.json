@@ -15,33 +15,8 @@
     "id": 4,
     "code": "OKSOK",
     "active": false,
-    "Condition": [
-      [
-        {
-          "movieId": 2,
-          "title": "jaws",
-          "specific": true,
-          "discount": 4,
-          "flat": false
-        }
-      ],
-      [
-        {
-          "movieId": 2,
-          "title": "jaws",
-          "specific": false,
-          "discount": 2,
-          "flat": false
-        }
-      ]
-    ]
-  },
-  {
-    "id": 5,
-    "code": "SUSSYBARH",
-    "active": true,
-    "Condition": [
-      [
+    "Condition": {
+      "movieDict": [
         {
           "snackId": 2,
           "snack": "Beer",
@@ -49,7 +24,7 @@
           "flat": false
         }
       ],
-      [
+      "snackDict": [
         {
           "movieId": 2,
           "title": "jaws",
@@ -58,6 +33,30 @@
           "flat": false
         }
       ]
-    ]
+    }
+  },
+  {
+    "id": 5,
+    "code": "SUSSYBARH",
+    "active": true,
+    "Condition": {
+      "movieDict": [
+        {
+          "snackId": 2,
+          "snack": "Beer",
+          "discount": 3,
+          "flat": false
+        }
+      ],
+      "snackDict": [
+        {
+          "movieId": 2,
+          "title": "jaws",
+          "specific": true,
+          "discount": 4,
+          "flat": false
+        }
+      ]
+    }
   }
 ]

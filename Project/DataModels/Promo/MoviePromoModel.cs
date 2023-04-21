@@ -13,10 +13,10 @@ public class MoviePromoModel : PricePromoModel
     [JsonPropertyName("specific")]
     public bool Specific { get; set; } = false;
 
-    public MoviePromoModel(int movieId, string movieTitle, double discount, bool flat = true)
+    public MoviePromoModel(int movieId, string title, double discount, bool flat = true)
         : base(discount, flat)
     {
         MovieId = movieId;
-        Title = movieTitle;
+        Title = title;
     }
 }

@@ -13,8 +13,51 @@
   },
   {
     "id": 4,
-    "code": "BRUPIES",
+    "code": "OKSOK",
+    "active": false,
+    "Condition": [
+      [
+        {
+          "movieId": 2,
+          "title": "jaws",
+          "specific": true,
+          "discount": 4,
+          "flat": false
+        }
+      ],
+      [
+        {
+          "movieId": 2,
+          "title": "jaws",
+          "specific": false,
+          "discount": 2,
+          "flat": false
+        }
+      ]
+    ]
+  },
+  {
+    "id": 5,
+    "code": "SUSSYBARH",
     "active": true,
-    "Condition": null
+    "Condition": [
+      [
+        {
+          "snackId": 2,
+          "snack": "Beer",
+          "discount": 3,
+          "flat": false
+        }
+      ],
+      [
+        {
+          "movieId": 2,
+          "title": "jaws",
+          "specific": true,
+          "discount": 4,
+          "flat": false
+        }
+      ]
+    ]
   }
 ]

@@ -81,6 +81,7 @@ public class PromoLogic
     {
         int index = _promos.FindIndex(i => i.Code == code);
         _promos[index].Active = !_promos[index].Active;
+        UpdateList(_promos[index]);
     }
 
     public bool FindPromo(string code)

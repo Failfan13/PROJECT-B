@@ -30,13 +30,13 @@ public class MoviesLogic : Order<MovieModel>
         {
             //update existing model
             _movies[index] = movie;
-            Logger.LogDataChange<MovieModel>(movie.Id,"Updated");
+            Logger.LogDataChange<MovieModel>(movie.Id, "Updated");
         }
         else
         {
             //add new model
             _movies.Add(movie);
-            Logger.LogDataChange<MovieModel>(movie.Id,"Added");
+            Logger.LogDataChange<MovieModel>(movie.Id, "Added");
         }
         MoviesAccess.WriteAll(_movies);
 
@@ -45,6 +45,10 @@ public class MoviesLogic : Order<MovieModel>
     public override MovieModel? GetById(int id)
     {
         return _movies.Find(i => i.Id == id);
+    }
+    public MovieModel? FindTitle(string movieName)
+    {
+        return _movies.Find(i => i.Title.ToLower() == movieName.ToLower());
     }
     public override int GetNewestId()
     {

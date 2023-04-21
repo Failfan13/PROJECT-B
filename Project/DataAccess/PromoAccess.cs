@@ -15,4 +15,20 @@ static class PromoAccess
         string json = JsonSerializer.Serialize(categories, options);
         File.WriteAllText(path, json);
     }
+
+    // public static class LoadAllCondition
+    // {
+    //     public static List<object> Conditions { get; private set; }
+
+    //     public static List<object>? LoadAll(PromoModel promo)
+    //     {
+    //         var el = promo.Condition;
+
+    //         foreach (var element in el)
+    //         {
+
+    //         }
+    //         return null;
+    //     }
+    // }
 }

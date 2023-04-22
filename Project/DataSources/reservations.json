@@ -16,7 +16,8 @@
       "3": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T16:09:34.9773108+02:00"
+    "date_time": "2023-03-31T16:09:34.9773108+02:00",
+    "discountCode": ""
   },
   {
     "id": 2,
@@ -34,7 +35,8 @@
       "2": 2
     },
     "account_id": 4,
-    "date_time": "2023-03-31T19:28:31.0164436+02:00"
+    "date_time": "2023-03-31T19:28:31.0164436+02:00",
+    "discountCode": ""
   },
   {
     "id": 3,
@@ -76,7 +78,8 @@
       "1": 1
     },
     "account_id": 2,
-    "date_time": "2023-03-31T20:01:32.9848765+02:00"
+    "date_time": "2023-03-31T20:01:32.9848765+02:00",
+    "discountCode": ""
   },
   {
     "id": 4,
@@ -109,7 +112,8 @@
     ],
     "snacks": null,
     "account_id": 1,
-    "date_time": "2023-03-31T20:04:03.6364957+02:00"
+    "date_time": "2023-03-31T20:04:03.6364957+02:00",
+    "discountCode": ""
   },
   {
     "id": 5,
@@ -140,7 +144,8 @@
       "2": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:06:35.2027284+02:00"
+    "date_time": "2023-03-31T17:06:35.2027284+02:00",
+    "discountCode": ""
   },
   {
     "id": 6,
@@ -171,7 +176,8 @@
       "2": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:07:03.6944268+02:00"
+    "date_time": "2023-03-31T17:07:03.6944268+02:00",
+    "discountCode": ""
   },
   {
     "id": 7,
@@ -208,7 +214,8 @@
       "2": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:08:03.5927828+02:00"
+    "date_time": "2023-03-31T17:08:03.5927828+02:00",
+    "discountCode": ""
   },
   {
     "id": 8,
@@ -244,7 +251,8 @@
       "1": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:09:46.6971198+02:00"
+    "date_time": "2023-03-31T17:09:46.6971198+02:00",
+    "discountCode": ""
   },
   {
     "id": 9,
@@ -280,7 +288,8 @@
       "2": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:10:10.9494494+02:00"
+    "date_time": "2023-03-31T17:10:10.9494494+02:00",
+    "discountCode": ""
   },
   {
     "id": 10,
@@ -318,7 +327,8 @@
       "3": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:13:19.3442274+02:00"
+    "date_time": "2023-03-31T17:13:19.3442274+02:00",
+    "discountCode": ""
   },
   {
     "id": 11,
@@ -354,7 +364,8 @@
       "2": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:14:18.5209844+02:00"
+    "date_time": "2023-03-31T17:14:18.5209844+02:00",
+    "discountCode": ""
   },
   {
     "id": 12,
@@ -391,7 +402,8 @@
       "2": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:14:48.5168754+02:00"
+    "date_time": "2023-03-31T17:14:48.5168754+02:00",
+    "discountCode": ""
   },
   {
     "id": 13,
@@ -412,7 +424,8 @@
     ],
     "snacks": null,
     "account_id": null,
-    "date_time": "0001-01-01T00:00:00"
+    "date_time": "0001-01-01T00:00:00",
+    "discountCode": ""
   },
   {
     "id": 2,
@@ -433,7 +446,8 @@
     ],
     "snacks": null,
     "account_id": 4,
-    "date_time": "0001-01-01T00:00:00"
+    "date_time": "0001-01-01T00:00:00",
+    "discountCode": ""
   },
   {
     "id": 3,
@@ -454,7 +468,8 @@
     ],
     "snacks": null,
     "account_id": null,
-    "date_time": "2023-03-31T17:16:40.6728531+02:00"
+    "date_time": "2023-03-31T17:16:40.6728531+02:00",
+    "discountCode": ""
   },
   {
     "id": 15,
@@ -484,7 +499,8 @@
       "2": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:55:19.5168472+02:00"
+    "date_time": "2023-03-31T17:55:19.5168472+02:00",
+    "discountCode": ""
   },
   {
     "id": 16,
@@ -507,7 +523,8 @@
       "0": 1
     },
     "account_id": 2,
-    "date_time": "2023-03-31T20:07:29.3471862+02:00"
+    "date_time": "2023-03-31T20:07:29.3471862+02:00",
+    "discountCode": ""
   },
   {
     "id": 17,
@@ -534,7 +551,8 @@
     ],
     "snacks": null,
     "account_id": null,
-    "date_time": "2023-03-31T21:07:25.3439192+02:00"
+    "date_time": "2023-03-31T21:07:25.3439192+02:00",
+    "discountCode": ""
   },
   {
     "id": 18,
@@ -551,7 +569,8 @@
       "0": 2
     },
     "account_id": null,
-    "date_time": "2023-04-04T18:55:54.4628473+02:00"
+    "date_time": "2023-04-04T18:55:54.4628473+02:00",
+    "discountCode": ""
   },
   {
     "id": 19,
@@ -581,7 +600,8 @@
       "1": 1
     },
     "account_id": null,
-    "date_time": "2023-04-04T19:08:01.7565991+02:00"
+    "date_time": "2023-04-04T19:08:01.7565991+02:00",
+    "discountCode": ""
   },
   {
     "id": 20,
@@ -596,7 +616,8 @@
     ],
     "snacks": null,
     "account_id": null,
-    "date_time": "2023-04-04T19:11:09.3667362+02:00"
+    "date_time": "2023-04-04T19:11:09.3667362+02:00",
+    "discountCode": ""
   },
   {
     "id": 21,
@@ -617,7 +638,8 @@
     ],
     "snacks": null,
     "account_id": null,
-    "date_time": "2023-04-04T19:11:23.043769+02:00"
+    "date_time": "2023-04-04T19:11:23.043769+02:00",
+    "discountCode": ""
   },
   {
     "id": 22,
@@ -647,7 +669,8 @@
       "1": 1
     },
     "account_id": null,
-    "date_time": "2023-04-04T19:11:46.898099+02:00"
+    "date_time": "2023-04-04T19:11:46.898099+02:00",
+    "discountCode": ""
   },
   {
     "id": 23,
@@ -676,6 +699,105 @@
       "0": 2
     },
     "account_id": null,
-    "date_time": "2023-04-04T19:17:27.5274856+02:00"
+    "date_time": "2023-04-04T19:17:27.5274856+02:00",
+    "discountCode": ""
+  },
+  {
+    "id": 24,
+    "timeslot_id": 0,
+    "seats": [
+      {
+        "id": 25,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 26,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "snacks": {
+      "2": 2,
+      "3": 1
+    },
+    "account_id": null,
+    "date_time": "2023-04-22T20:47:27.5070954+02:00",
+    "discountCode": ""
+  },
+  {
+    "id": 25,
+    "timeslot_id": 2,
+    "seats": [
+      {
+        "id": 21,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 22,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "snacks": {
+      "2": 1
+    },
+    "account_id": null,
+    "date_time": "2023-04-22T20:51:53.2442339+02:00",
+    "discountCode": ""
+  },
+  {
+    "id": 26,
+    "timeslot_id": 3,
+    "seats": [
+      {
+        "id": 3,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 4,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "snacks": {
+      "2": 1
+    },
+    "account_id": null,
+    "date_time": "2023-04-22T20:52:37.4985087+02:00",
+    "discountCode": ""
+  },
+  {
+    "id": 27,
+    "timeslot_id": 1,
+    "seats": [
+      {
+        "id": 1,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      },
+      {
+        "id": 2,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false
+      }
+    ],
+    "snacks": {
+      "2": 1,
+      "3": 1
+    },
+    "account_id": null,
+    "date_time": "2023-04-22T21:15:28.589557+02:00",
+    "discountCode": ""
   }
 ]

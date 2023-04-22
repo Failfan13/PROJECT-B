@@ -4,4 +4,4 @@
 // PromoLogic PL = new PromoLogic();
 // PL.NewPromo("TEST20");
 
-Promo.EditPromoMenu();
+Menu.Start();

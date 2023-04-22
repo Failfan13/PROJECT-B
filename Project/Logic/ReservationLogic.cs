@@ -151,7 +151,10 @@ public class ReservationLogic
                 double newPrice = PL.CalcAfterDiscount(Ress.Movie.Price, movie.Discount, movie.Flat);
                 Ress.FinalPrice += newPrice - Ress.Movie.Price;
                 Ress.Movie.Price = newPrice;
+
             }
+
+            if (movie == null) return Ress;
         }
 
         // Seat check

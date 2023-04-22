@@ -9,6 +9,7 @@ public class MoviesLogic : Order<MovieModel>
 {
 
     static private CategoryLogic CategoryLogic = new CategoryLogic();
+
     private List<MovieModel> _movies;
 
     //Static properties are shared across all instances of the class
@@ -55,10 +56,11 @@ public class MoviesLogic : Order<MovieModel>
         return (_movies.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
-    public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript, int duration, double price, List<CategoryModel> categories)
+    public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript,
+        int duration, double price, List<CategoryModel> categories, List<string> formats)
     {
         int NewID = GetNewestId();
-        MovieModel movie = new MovieModel(NewID, title, releaseDate, director, desript, duration, price, categories);
+        MovieModel movie = new MovieModel(NewID, title, releaseDate, director, desript, duration, price, categories, formats);
         UpdateList(movie);
         return movie;
     }
@@ -66,6 +68,18 @@ public class MoviesLogic : Order<MovieModel>
     public List<MovieModel> AllMovies()
     {
         return _movies;
+    }
+
+    public static void AddFormat(MovieModel movie, string format)
+    {
+        if (!movie.Formats.Contains(format))
+            movie.Formats.Add(format);
+    }
+
+    public static void RemoveFormat(MovieModel movie, string format)
+    {
+        if (movie.Formats.Contains(format))
+            movie.Formats.Remove(format);
     }
 
     public void RemoveMovie(int MovieInt)
@@ -143,9 +157,4 @@ public class MoviesLogic : Order<MovieModel>
         movie.ReleaseDate = NewDate;
         UpdateList(movie);
     }
-
 }
-
-
-
-

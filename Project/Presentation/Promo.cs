@@ -15,7 +15,6 @@ public static class Promo
         if (wantPromo != "Y") return -1;
 
         codeId = EnterPromoCode();
-        Console.WriteLine(codeId);
         if (codeId != 0)
         {
             return codeId;
@@ -26,6 +25,7 @@ public static class Promo
     // if promo code is valid, return promo id or 0 if not
     private static int EnterPromoCode()
     {
+        Console.Clear();
         string code;
         Console.WriteLine("Enter your promo code");
         code = Console.ReadLine()!.ToUpper();

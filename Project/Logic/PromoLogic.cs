@@ -124,7 +124,7 @@ public class PromoLogic
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-            if (promo.Condition != null)
+            if (promo.Condition != null && promo.Condition.ContainsKey(condition))
             {
                 // Serialize condition (remove from stream into el)
                 JsonElement el = JsonSerializer.SerializeToElement(promo.Condition[condition]);

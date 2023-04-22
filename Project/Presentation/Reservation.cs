@@ -163,6 +163,7 @@ public static class Reservation
             ReservationLogic.UpdateList(Ress);
         }
 
+        Console.Clear();
         // Movie Data
         Console.WriteLine("\nMovie:");
         Console.WriteLine($"Title: {TotalRess.Movie.Title}\tPrice: €{TotalRess.Movie.Price}");

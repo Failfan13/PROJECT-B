@@ -39,34 +39,20 @@
     "code": "NANII",
     "active": true,
     "Condition": {
-      "movieDict": [
+      "SeatDict": [
         {
-          "movieId": 2,
-          "title": "jaws",
-          "specific": true,
-          "discount": 3,
+          "seatType": "normal",
+          "seatAmount": "all",
+          "discount": 6,
           "flat": false
-        },
+        }
+      ],
+      "priceDict": [
         {
-          "movieId": 0,
-          "title": "PIETERTJE",
-          "specific": false,
-          "discount": 1,
-          "flat": false
+          "discount": 2,
+          "flat": true
         }
       ]
     }
-  },
-  {
-    "id": 6,
-    "code": "SUSSY",
-    "active": true,
-    "Condition": null
-  },
-  {
-    "id": 7,
-    "code": "TESTER",
-    "active": true,
-    "Condition": null
   }
 ]

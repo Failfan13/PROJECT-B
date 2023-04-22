@@ -4,12 +4,15 @@ using System.Text.Json.Serialization;
 public class SeatPromoModel : PricePromoModel
 {
 
-    [JsonPropertyName("seat")]
-    public string Seat { get; set; }
+    [JsonPropertyName("seatType")]
+    public string SeatType { get; set; }
+    [JsonPropertyName("seatAmount")]
+    public string SeatAmount { get; set; }
 
-    public SeatPromoModel(string seat, double discount, bool flat = true)
+    public SeatPromoModel(string seatType, string seatAmount, double discount, bool flat = true)
         : base(discount, flat)
     {
-        Seat = seat;
+        SeatType = seatType;
+        SeatAmount = seatAmount;
     }
 }

@@ -74,6 +74,9 @@ public static class Promo
             promo = PromoLogic.NewPromo(code);
         }
 
+        if (promo.Condition == null)
+            promo.Condition = new Dictionary<string, IEnumerable<object>>();
+
         string Question = "What are the conditions you want to apply";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
@@ -145,8 +148,10 @@ public static class Promo
             List<string> Options = new List<string>();
             List<Action> Actions = new List<Action>();
 
-
             if (promo == null) return;
+
+            if (promo.Condition == null)
+                promo.Condition = new Dictionary<string, IEnumerable<object>>();
 
             Options.Add("Promo code");
             Actions.Add(() => ChangeCode(promo, true));
@@ -210,11 +215,6 @@ public static class Promo
 
             // specific movie for promo code
             if (specific) moviePromo.Specific = true;
-
-            // if promo doesn't have condition movieDict
-            if (promo.Condition == null)
-                promo.Condition = new Dictionary<string, IEnumerable<object>>();
-
             if (moviePromos.Any(m => m.MovieId == movie.Id))
             {
                 moviePromos.RemoveAll(m => m.MovieId == movie.Id);
@@ -232,6 +232,7 @@ public static class Promo
                 promo.Condition["movieDict"] = moviePromos;
             }
 
+
             PromoLogic.UpdateList(promo);
         }
 
@@ -242,8 +243,7 @@ public static class Promo
     {
         Console.Clear();
         SnacksLogic SnacksLogic = new SnacksLogic();
-        // load all pre existing in snackDict
-        List<SnackPromoModel> snackPromos = PromoLogic.AllSnacks(promo);
+        List<SnackPromoModel> snackPromos = PromoLogic.AllSnacks(promo);// load all pre existing in snackDict
         SnackPromoModel? SnackModel = null;
 
         string Question = "Choose the snack that fits the promotion";
@@ -273,10 +273,7 @@ public static class Promo
 
         if (SnackModel != null)
         {
-            if (promo.Condition == null)
-                promo.Condition = new Dictionary<string, IEnumerable<object>>();
-
-
+            // if condition null or condition already contains same
             if (snackPromos.Any(s => s.SnackId == SnackModel.SnackId))
             {
                 snackPromos.RemoveAll(s => s.SnackId == SnackModel.SnackId);
@@ -301,16 +298,81 @@ public static class Promo
     }
     private static void ChangeSeat(PromoModel promo, bool isEdited = false)
     {
+        Console.Clear();
+
+        List<SeatPromoModel> SeatPromos = PromoLogic.AllSeats(promo);// load all pre existing in SeatDict
+
+        string seatType;
+        string amountSeats;
+        double discountSeat;
+        bool flatSeat;
+
+
+        Console.WriteLine("Will the code work for all seats or luxury (N/L)");
+        seatType = (Console.ReadKey().KeyChar.ToString().ToUpper()) switch
+        {
+            "N" => "normal",
+            "L" => "luxury",
+            _ => "normal"
+        };
+
+        Console.WriteLine("For how many seats does the promotion apply enter: 'all' or specific amount");
+        amountSeats = Console.ReadLine()!.ToLower();
+        if (amountSeats != "all" && !Int32.TryParse(amountSeats, out _))
+        {
+            Console.WriteLine("The input is not 'all' or a number, promotion set for all seats");
+            amountSeats = "all";
+        }
+
+        discountSeat = ChangeDiscount();
+        flatSeat = ChangeFlat();
+
+        SeatPromoModel SeatModel = new SeatPromoModel(seatType, amountSeats, discountSeat, flatSeat);
+
+        // if condition null or condition already contains same
+        if (SeatPromos.Any(s => s.SeatType == SeatModel.SeatType))
+        {
+            SeatPromos.RemoveAll(s => s.SeatType == SeatModel.SeatType);
+        }
+
+        SeatPromos.Add(SeatModel);
+
+        // if Condition has SeatDict
+        try
+        {
+            promo.Condition.Add("SeatDict", SeatPromos);
+        }
+        catch
+        {
+            promo.Condition["SeatDict"] = SeatPromos;
+        }
+        PromoLogic.UpdateList(promo);
 
         if (isEdited) EditPromo(promo);
         AddPromo(promo);
     }
     private static void ChangeTotal(PromoModel promo, bool isEdited = false)
     {
+        double discount = ChangeDiscount();
+        bool flat = ChangeFlat();
+
+        List<PricePromoModel> pricePromos = new List<PricePromoModel>() { new PricePromoModel(discount, flat) };
+
+        // if Condition has priceDict
+        try
+        {
+            promo.Condition.Add("priceDict", pricePromos);
+        }
+        catch
+        {
+            promo.Condition["priceDict"] = pricePromos;
+        }
+        PromoLogic.UpdateList(promo);
+
         if (isEdited) EditPromo(promo);
         AddPromo(promo);
     }
-    private static double ChangeDiscount(double oldPrice)
+    private static double ChangeDiscount(double oldPrice = int.MaxValue)
     {
         Console.WriteLine($"Enter the new discount price");
         try

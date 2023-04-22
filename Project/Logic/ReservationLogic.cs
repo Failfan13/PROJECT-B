@@ -166,7 +166,18 @@ public class ReservationLogic
         seat = Ress.Seats;
         snack = Ress.Snacks.ToDictionary(x => x.Value, x => SL.GetById(x.Key));
 
+        finalPrice += movie.Price;
+        foreach (var item in seat)
+        {
+            finalPrice += item.Price;
+        }
+        foreach (var item in snack)
+        {
+            finalPrice += item.Value.Price;
+        }
+
         var total = new TotalPriceModel(movie, seat, snack);
+        total.FinalPrice = finalPrice;
         return total;
     }
 

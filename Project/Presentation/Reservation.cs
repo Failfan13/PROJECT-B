@@ -172,38 +172,57 @@ public static class Reservation
         }
 
         // Movie Data
-        Console.WriteLine($"Order overview:");
-        MovieModel movie = ReservationLogic.GetMovieFromRess(ress);
-        Console.WriteLine($"\nMovie: {movie.Title}\tPrice: €{movie.Price}");
+        Console.WriteLine("\nMovie:");
+        Console.WriteLine($"Title: {TotalRess.Movie.Title}\tPrice: €{TotalRess.Movie.Price}");
+
+        // Seat Data
+        // Console.WriteLine("\nSeats:");
+        // foreach (SeatModel seat in ress.Seats)
+        // {
+        //     Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSlotId).Theater.Width)}\tPrice: €{seat.Price}");
+        //     FinalPrice += seat.Price;
+        // }
+
+        // // Snack data
+        // if (ress.Snacks != null)
+        // {
+        //     int MaxLength = ress.GetSnacks().Max(snack => snack.Name.Length);
+        //     Console.WriteLine("\nSnacks:");
+        //     foreach (KeyValuePair<int, int> keyValue in ress.Snacks)
+        //     {
+        //         var Snack = new SnacksLogic().GetById(keyValue.Key);
+        //         int Tabs = (int)Math.Ceiling((MaxLength - Snack.Name.Length) / 8.0);
+        //         var price = (Snack.Price) * keyValue.Value;
+        //         Console.WriteLine($"{keyValue.Value}x{Snack.Name}\t{new string('\t', Tabs)}Price: €{price}");
+        //         FinalPrice += price;
+        //     }
+        // }
+
+        // Console.Write("\nThe total cost of your order will be:");
+        // var priceString = Convert.ToString(FinalPrice);
+        // //Show euro symbol
+        // //Print total cost + if not containing "." add ",-" at end
+        // Console.Write($"€ " + FinalPrice + (priceString.Contains(".") ? "" : ",-"));
 
         // Seat Data
         Console.WriteLine("\nSeats:");
-        foreach (SeatModel seat in ress.Seats)
+        foreach (SeatModel seat in TotalRess.Seats)
         {
             Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSlotId).Theater.Width)}\tPrice: €{seat.Price}");
-            FinalPrice += seat.Price;
         }
 
         // Snack data
+        Console.WriteLine("\nSnacks:");
         if (ress.Snacks != null)
         {
             int MaxLength = ress.GetSnacks().Max(snack => snack.Name.Length);
-            Console.WriteLine("\nSnacks:");
-            foreach (KeyValuePair<int, int> keyValue in ress.Snacks)
+            foreach (KeyValuePair<int, SnackModel> keyValue in TotalRess.Snacks)
             {
-                var Snack = new SnacksLogic().GetById(keyValue.Key);
-                int Tabs = (int)Math.Ceiling((MaxLength - Snack.Name.Length) / 8.0);
-                var price = (Snack.Price) * keyValue.Value;
-                Console.WriteLine($"{keyValue.Value}x{Snack.Name}\t{new string('\t', Tabs)}Price: €{price}");
-                FinalPrice += price;
+                int Tabs = (int)Math.Ceiling((MaxLength - keyValue.Value.Name.Length) / 8.0);
+                var price = (keyValue.Value.Price) * keyValue.Key;
+                Console.WriteLine($"{keyValue.Key}x{keyValue.Value.Name}\t{new string('\t', Tabs)}Price: €{price}");
             }
         }
-
-        Console.Write("\nThe total cost of your order will be:");
-        var priceString = Convert.ToString(FinalPrice);
-        //Show euro symbol
-        //Print total cost + if not containing "." add ",-" at end
-        Console.Write($"€ " + FinalPrice + (priceString.Contains(".") ? "" : ",-"));
         Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {ress.Id}\n");
         QuestionLogic.AskEnter();
     }

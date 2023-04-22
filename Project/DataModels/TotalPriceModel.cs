@@ -1,14 +1,14 @@
 public class TotalPriceModel
 {
     public MovieModel Movie { get; set; }
-    public List<SeatModel> Seat { get; set; }
-    public Dictionary<int, SnackModel> Snack { get; set; }
+    public List<SeatModel> Seats { get; set; }
+    public Dictionary<int, SnackModel> Snacks { get; set; }
     public double FinalPrice { get; set; }
 
-    public TotalPriceModel(MovieModel movie, List<SeatModel> seat, Dictionary<int, SnackModel> snack)
+    public TotalPriceModel(MovieModel movie, List<SeatModel> seats, Dictionary<int, SnackModel> snacks)
     {
         Movie = movie;
-        Seat = seat;
-        Snack = snack;
+        Seats = seats;
+        Snacks = snacks;
     }
 }

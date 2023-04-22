@@ -158,25 +158,25 @@ public class ReservationLogic
         SnacksLogic SL = new SnacksLogic();
 
         MovieModel movie = null;
-        List<SeatModel> seat = null;
-        Dictionary<int, SnackModel> snack = null;
+        List<SeatModel> seats = null;
+        Dictionary<int, SnackModel> snacks = null;
         double finalPrice = 0.0;
 
         movie = ML.GetById(Ress.TimeSlotId);
-        seat = Ress.Seats;
-        snack = Ress.Snacks.ToDictionary(x => x.Value, x => SL.GetById(x.Key));
+        seats = Ress.Seats;
+        snacks = Ress.Snacks.ToDictionary(x => x.Value, x => SL.GetById(x.Key));
 
         finalPrice += movie.Price;
-        foreach (var item in seat)
+        foreach (var seat in seats)
         {
-            finalPrice += item.Price;
+            finalPrice += seat.Price;
         }
-        foreach (var item in snack)
+        foreach (var snack in snacks)
         {
-            finalPrice += item.Value.Price;
+            finalPrice += snack.Value.Price;
         }
 
-        var total = new TotalPriceModel(movie, seat, snack);
+        var total = new TotalPriceModel(movie, seats, snacks);
         total.FinalPrice = finalPrice;
         return total;
     }

@@ -152,22 +152,11 @@ public static class Reservation
 
         double FinalPrice = 0.00;
 
-        // Discount code
-        Console.WriteLine("Do you have a discount code? (y/n)");
-        if (Console.ReadKey().Key == ConsoleKey.Y)
+        int promoId = Promo.Start();
+
+        if (promoId != -1)
         {
-            string DiscountCode = "";
-
-            while (PromoLogic.FindPromo(DiscountCode))
-            {
-                if (DiscountCode != "")
-                {
-                    Console.WriteLine("\nDiscount has not been found please try again.");
-                }
-                Console.WriteLine("\nDiscount code:");
-                DiscountCode = Console.ReadLine();
-            }
-
+            string DiscountCode = PromoLogic.GetById(promoId)!.Code;
             TotalRess = ReservationLogic.ApplyDiscount(DiscountCode, TotalRess);
 
             Ress.DiscountCode = DiscountCode;

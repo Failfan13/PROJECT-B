@@ -130,6 +130,7 @@ public class ReservationLogic
         MoviesLogic ML = new MoviesLogic();
 
         List<PricePromoModel> PPM = PL.AllPrices(PM);
+        PricePromoModel RPM = null!;
         List<MoviePromoModel> MPM = PL.AllMovies(PM);
         List<SeatPromoModel> SPM = PL.AllSeats(PM);
         SeatPromoModel RSPM = null!;
@@ -140,6 +141,7 @@ public class ReservationLogic
 
         // Movie check
         MoviePromoModel movie = MPM.Find(m => m.MovieId == Ress.Movie.Id && m.Specific);
+
         if (movie == null) movie = MPM.Find(m => m.Title == "all");
 
         if (movie != null)
@@ -147,8 +149,10 @@ public class ReservationLogic
             Ress.Movie.Price = PL.CalcAfterDiscount(Ress.Movie.Price, movie.Discount, movie.Flat);
         }
 
-        if (RSPM != null)
+        // Seat check
+        if (SPM.Count() != 0 && Ress.Seats.Count() != 0)
         {
+            RSPM = SPM[0];
             bool luxury = true;
             bool allSeats = true;
             int loopFor = 0;
@@ -159,26 +163,51 @@ public class ReservationLogic
             if (allSeats) loopFor = Ress.Seats.Count;
             else loopFor = int.Parse(RSPM.SeatAmount);
 
+            // To little seats for index
             try
             {
                 for (int i = 0; i < loopFor; i++)
                 {
-                    if (luxury /*&& Ress.Seats[i].Luxury == "luxury"*/)
+                    if (luxury /*&& Ress.Seats[i].Luxury == true*/)
+                    {
+                        Ress.Seats[i].Price = PL.CalcAfterDiscount(Ress.Seats[i].Price, RSPM.Discount, RSPM.Flat);
+                    }
+                    else // apply to all seats in range loopFor
                     {
                         Ress.Seats[i].Price = PL.CalcAfterDiscount(Ress.Seats[i].Price, RSPM.Discount, RSPM.Flat);
                     }
                 }
             }
-            catch (System.Exception) { }
+            catch (System.Exception) { } // to little seats for loopFor
+
+            foreach (var seat in Ress.Seats)
+            {
+                Console.WriteLine(seat.Price);
+            }
+            Console.WriteLine();
         }
-        // Seat check
-
-
 
         // Snack check
+        if (SP.Count != 0 && Ress.Seats.Count != 0)
+        {
+            // No Seats
+            try
+            {
+                foreach (var snack in SP)
+                {
+                    var snackie = Ress.Snacks.FirstOrDefault(s => s.Key.Id == snack.SnackId);
+                    snackie.Key.Price = PL.CalcAfterDiscount(snackie.Key.Price, snack.Discount, snack.Flat);
+                }
+            }
+            catch { }
+        }
 
         // Total check
-
+        if (PPM.Count != 0)
+        {
+            RPM = PPM[0];
+            Ress.FinalPrice = PL.CalcAfterDiscount(Ress.FinalPrice, RPM.Discount, RPM.Flat);
+        }
 
         return Ress;
     }

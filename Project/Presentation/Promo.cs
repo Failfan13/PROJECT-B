@@ -3,7 +3,7 @@ public static class Promo
 {
     public static PromoLogic PromoLogic = new PromoLogic();
 
-    public static int? Start()
+    public static int Start()
     {
         Console.Clear();
         string wantPromo;
@@ -12,7 +12,7 @@ public static class Promo
         Console.WriteLine("Do you have a Promo code?(Y/N)");
         wantPromo = Console.ReadKey().Key.ToString();
 
-        if (wantPromo != "Y") return null;
+        if (wantPromo != "Y") return -1;
 
         codeId = EnterPromoCode();
         Console.WriteLine(codeId);
@@ -21,7 +21,7 @@ public static class Promo
             return codeId;
         }
 
-        return null;
+        return -1;
     }
     // if promo code is valid, return promo id or 0 if not
     private static int EnterPromoCode()
@@ -212,6 +212,8 @@ public static class Promo
         // specific movie for promo code
         if (specific)
         {
+            moviePromo.Specific = true;
+
             Console.WriteLine("Enter the name of the movie");
 
             movie = MoviesLogic.FindTitle(Console.ReadLine()!);
@@ -342,11 +344,11 @@ public static class Promo
         // if Condition has SeatDict
         try
         {
-            promo.Condition.Add("SeatDict", SeatPromos);
+            promo.Condition.Add("seatDict", SeatPromos);
         }
         catch
         {
-            promo.Condition["SeatDict"] = SeatPromos;
+            promo.Condition["seatDict"] = SeatPromos;
         }
         PromoLogic.UpdateList(promo);
 

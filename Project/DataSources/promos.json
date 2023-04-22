@@ -13,44 +13,32 @@
   },
   {
     "id": 4,
-    "code": "OKSOK",
-    "active": false,
+    "code": "SUSSY",
+    "active": true,
     "Condition": {
       "movieDict": [
         {
-          "snackId": 2,
-          "snack": "Beer",
+          "movieId": 2,
+          "title": "jaws",
+          "specific": true,
           "discount": 3,
           "flat": false
         }
       ],
       "snackDict": [
         {
-          "snackId": 2,
-          "snack": "Beer",
-          "discount": 1,
-          "flat": false
-        }
-      ]
-    }
-  },
-  {
-    "id": 5,
-    "code": "NANII",
-    "active": true,
-    "Condition": {
-      "SeatDict": [
-        {
-          "seatType": "normal",
-          "seatAmount": "all",
-          "discount": 6,
-          "flat": false
+          "snackId": 0,
+          "snack": "Coca Cola",
+          "discount": 30,
+          "flat": true
         }
       ],
-      "priceDict": [
+      "seatDict": [
         {
-          "discount": 2,
-          "flat": true
+          "seatType": "normal",
+          "seatAmount": "2",
+          "discount": 3,
+          "flat": false
         }
       ]
     }

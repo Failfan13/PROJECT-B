@@ -53,7 +53,7 @@ public class PromoLogic
 
     public int GetPromoId(string code)
     {
-        return _promos.FindIndex(i => i.Code == code) + 1;
+        return _promos.FindIndex(i => i.Code == code) + 2;
     }
 
     public List<PromoModel> AllPromos()
@@ -133,9 +133,9 @@ public class PromoLogic
             }
             return new List<T>();
         }
-        catch (System.Exception)
+        catch (System.Exception ex)
         {
-
+            Console.WriteLine(ex.Message);
             return new List<T>();
         }
     }

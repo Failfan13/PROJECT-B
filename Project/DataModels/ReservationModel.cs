@@ -7,7 +7,7 @@ public class ReservationModel
     public int Id { get; set; }
 
     [JsonPropertyName("timeslot_id")]
-    public int TimeSLotId { get; set; }
+    public int TimeSlotId { get; set; }
 
     [JsonPropertyName("seats")]
     public List<SeatModel> Seats { get; set; }
@@ -21,10 +21,13 @@ public class ReservationModel
     [JsonPropertyName("date_time")]
     public DateTime DateTime { get; set; }
 
+    [JsonPropertyName("discountCode")]
+    public string DiscountCode { get; set; } = "";
+
     public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime)
     {
         Id = id;
-        TimeSLotId = timeSlotId;
+        TimeSlotId = timeSlotId;
         AccountId = accountId;
         DateTime = dateTime;
         Seats = seats;

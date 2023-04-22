@@ -21,7 +21,7 @@ public static class Reservation
             if (AccountsLogic.CurrentAccount.Id == reservation.AccountId || AsAdmim)
             {
                 reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
-                var timeslotVar = TimeSlotsLogic.GetById(reservation.TimeSLotId);
+                var timeslotVar = TimeSlotsLogic.GetById(reservation.TimeSlotId);
                 reservationMovie = MoviesLogic.GetById(timeslotVar.MovieId);
 
                 Options.Add($"{reservationDate} - {reservationMovie.Title}");
@@ -43,7 +43,7 @@ public static class Reservation
 
         // Make seats from reservation open again
         var CurrSeat = CurrReservation.Seats;
-        var CurrTimeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSLotId);
+        var CurrTimeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSlotId);
 
         foreach (SeatModel seat in CurrSeat)
         {
@@ -62,11 +62,11 @@ public static class Reservation
                 "Choose time & seats",
                 "Choose seats",
                 "Change side snack",
-                "Apply discount"
+                "Change discount code"
             };
         // Actions reservations actions
         List<Action> actions = new();
-        TimeSlotModel timeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSLotId);
+        TimeSlotModel timeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSlotId);
         var movieid = timeSlot.MovieId;
         // choose all
         actions.Add(() => Reservation.NoFilterMenu(true));
@@ -138,25 +138,49 @@ public static class Reservation
 
         MenuLogic.Question(Question, Movies, Actions);
     }
-    // Increases total order amount
-    //ReservationLogic.TotalOrder = 5.5;
-
-    // Decreases total order amount
-    //ReservationLogic.TotalOrderDecr = 2.3;
 
     // Show total order amount
     public static void TotalReservationCost(ReservationModel ress)
     {
         Console.Clear();
+
+        PromoLogic PromoLogic = new();
         ReservationLogic ReservationLogic = new ReservationLogic();
+        TimeSlotsLogic TimeSlotsLogic = new();
+
+        TotalPriceModel TotalRess = ReservationLogic.GetTotalRess(ress);
+
         double FinalPrice = 0.00;
 
-        // Seat Data
+        // Discount code
+        Console.WriteLine("Do you have a discount code? (y/n)");
+        if (Console.ReadKey().Key == ConsoleKey.Y)
+        {
+            string DiscountCode = "";
+
+            while (PromoLogic.FindPromo(DiscountCode))
+            {
+                if (DiscountCode != "")
+                {
+                    Console.WriteLine("\nDiscount has not been found please try again.");
+                }
+                Console.WriteLine("\nDiscount code:");
+                DiscountCode = Console.ReadLine();
+            }
+
+            ress = ReservationLogic.ApplyDiscount(DiscountCode, TotalRess);
+        }
+
+        // Movie Data
         Console.WriteLine($"Order overview:");
+        MovieModel movie = ReservationLogic.GetMovieFromRess(ress);
+        Console.WriteLine($"\nMovie: {movie.Title}\tPrice: €{movie.Price}");
+
+        // Seat Data
         Console.WriteLine("\nSeats:");
         foreach (SeatModel seat in ress.Seats)
         {
-            Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theater.Width)}\tPrice: €{seat.Price}");
+            Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSlotId).Theater.Width)}\tPrice: €{seat.Price}");
             FinalPrice += seat.Price;
         }
 

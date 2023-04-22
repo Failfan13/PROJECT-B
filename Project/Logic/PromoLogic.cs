@@ -69,6 +69,12 @@ public class PromoLogic
         return newPromo;
     }
 
+    public double CalcAfterDiscount(double ogPrice, double discount, bool flat)
+    {
+        if (flat) discount = ogPrice * (discount / 100);
+        return ogPrice - discount;
+    }
+
     public void RemovePromo(string code)
     {
         PromoModel PromoModel = GetById(GetPromoId(code));

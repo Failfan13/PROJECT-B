@@ -205,36 +205,38 @@ public static class Promo
         MoviesLogic MoviesLogic = new MoviesLogic();
         // load all pre existing in movieDict
         List<MoviePromoModel> moviePromos = PromoLogic.AllMovies(promo);
+        // set default moviePromo (all movies)
+        MoviePromoModel moviePromo = new MoviePromoModel(0, "all", ChangeDiscount(), ChangeFlat());
+        MovieModel movie = null;
 
-        Console.WriteLine("Enter the name of the movie");
-
-        MovieModel? movie = MoviesLogic.FindTitle(Console.ReadLine()!);
-        if (movie != null)
+        // specific movie for promo code
+        if (specific)
         {
-            MoviePromoModel moviePromo = new MoviePromoModel(movie.Id, movie.Title, ChangeDiscount(movie.Price), ChangeFlat());
+            Console.WriteLine("Enter the name of the movie");
 
-            // specific movie for promo code
-            if (specific) moviePromo.Specific = true;
+            movie = MoviesLogic.FindTitle(Console.ReadLine()!);
+            if (movie == null) return;
+
+            moviePromo = new MoviePromoModel(movie.Id, movie.Title, ChangeDiscount(movie.Price), ChangeFlat());
+
             if (moviePromos.Any(m => m.MovieId == movie.Id))
             {
                 moviePromos.RemoveAll(m => m.MovieId == movie.Id);
             }
-
-            moviePromos.Add(moviePromo);
-
-            // if Condition has MovieDict
-            try
-            {
-                promo.Condition.Add("movieDict", moviePromos);
-            }
-            catch
-            {
-                promo.Condition["movieDict"] = moviePromos;
-            }
-
-
-            PromoLogic.UpdateList(promo);
         }
+
+        moviePromos.Add(moviePromo);
+        // if Condition has MovieDict
+        try
+        {
+            promo.Condition.Add("movieDict", moviePromos);
+        }
+        catch
+        {
+            promo.Condition["movieDict"] = moviePromos;
+        }
+
+        PromoLogic.UpdateList(promo);
 
         if (isEdited) EditPromo(promo);
         AddPromo(promo);

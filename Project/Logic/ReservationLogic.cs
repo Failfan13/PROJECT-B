@@ -200,7 +200,7 @@ public class ReservationLogic
                 {
                     var snackie = Ress.Snacks.FirstOrDefault(s => s.Key.Id == snack.SnackId);
                     double newPrice = PL.CalcAfterDiscount(snackie.Key.Price, snack.Discount, snack.Flat);
-                    Ress.FinalPrice += newPrice - snackie.Key.Price;
+                    Ress.FinalPrice += (newPrice - snackie.Key.Price) * snackie.Value;
                     snackie.Key.Price = newPrice;
                 }
             }

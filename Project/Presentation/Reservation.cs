@@ -142,10 +142,11 @@ public static class Reservation
 
         MenuLogic.Question(Question, Movies, Actions);
     }
-    public static void TotalReservationCost(ReservationModel ress)
+    public static void TotalReservationCost(ReservationModel ress, int AccountId = -1)
     {
         Console.Clear();
         ReservationLogic ReservationLogic = new ReservationLogic();
+        AccountsLogic AccountsLogic = new();
         EmailLogic EmailLogic = new EmailLogic();
         double FinalPrice = 0.00;
 
@@ -210,8 +211,16 @@ public static class Reservation
         Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {ress.Id}\n");
         body += $"\nIMPORTANT\nYour order number is: {ress.Id}";
 
-        email = UserLogin.AskEmail();
 
+
+        if (AccountId != -1)
+        {
+            email = AccountsLogic.GetById(AccountId).EmailAddress;
+        }
+        else
+        {
+            email = UserLogin.AskEmail();
+        }
         EmailLogic.SendEmail(email, subject, body);
 
         UserLogin.SignUpMails();

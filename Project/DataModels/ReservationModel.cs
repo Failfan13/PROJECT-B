@@ -27,20 +27,7 @@ public class ReservationModel
     [JsonPropertyName("discountCode")]
     public string DiscountCode { get; set; } = "";
 
-<<<<<<< HEAD
     public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime, string format)
-
-||||||| 0649431
-    public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime)
-=======
-    public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime)
-    
-    [JsonPropertyName("format")]
-    public string Format { get; set; }
-
-    public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime, string format)
-
->>>>>>> 7566dff4801c1e6fbba4d299f3306c837571812c
     {
         Id = id;
         TimeSlotId = timeSlotId;

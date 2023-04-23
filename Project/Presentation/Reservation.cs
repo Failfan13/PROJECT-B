@@ -64,8 +64,6 @@ public static class Reservation
                 "Change side snack",
                 "Choose format",
                 "Change discount code"
-                "Choose format",
-                "Apply discount"
             };
         // Actions reservations actions
         List<Action> actions = new();
@@ -86,7 +84,7 @@ public static class Reservation
         actions.Add(() => Format.Start(timeSlot, CurrReservation.Seats));
 
         // Apply discount NEEDS CORRECT FUNTION
-        actions.Add(() => Menu.Start());
+        actions.Add(() => Promo.Start());
 
         if (AccountsLogic.CurrentAccount.Admin && CurrReservation.AccountId == null)
         {
@@ -266,7 +264,6 @@ public static class Reservation
 
         PromoLogic PromoLogic = new();
         ReservationLogic ReservationLogic = new ReservationLogic();
-
         TimeSlotsLogic TimeSlotsLogic = new();
 
         TotalPriceModel TotalRess = ReservationLogic.GetTotalRess(Ress);
@@ -294,31 +291,13 @@ public static class Reservation
         foreach (SeatModel seat in TotalRess.Seats)
         {
             Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(Ress.TimeSlotId).Theater.Width)}\tPrice: €{seat.Price}");
-
-        EmailLogic EmailLogic = new EmailLogic();
-        double FinalPrice = 0.00;
-
-        string subject = "Order summary";
-        string body = "";
-        string email = "";
-
-        // Seat Data
-        Console.WriteLine($"Order overview:");
-        body += "Order overview:\n";
-        Console.WriteLine("\nSeats:");
-        body += $"\nChosen seats:\n\n";
-        foreach (SeatModel seat in ress.Seats)
-        {
-            Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theater.Width)}\tPrice: €{seat.Price}");
-            body += $"Nr: {seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theater.Width)}\tPrice: €{seat.Price}\n";
-            FinalPrice += seat.Price;
         }
 
         // Snack data
         if (Ress.Snacks != null)
         {
             Console.WriteLine("\nSnacks:");
-            
+
             int MaxLength = Ress.GetSnacks().Max(snack => snack.Name.Length);
             foreach (KeyValuePair<SnackModel, int> keyValue in TotalRess.Snacks)
             {
@@ -333,47 +312,8 @@ public static class Reservation
         Console.Write($"€ " + FinalPrice + (FinalPrice.ToString().Contains(".") ? "" : ",-"));
 
         Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {Ress.Id}\n");
-            body += $"\nChosen snacks:\n\n";
-            foreach (KeyValuePair<int, int> keyValue in ress.Snacks)
-            {
-                var Snack = new SnacksLogic().GetById(keyValue.Key);
-                int Tabs = (int)Math.Ceiling((MaxLength - Snack.Name.Length) / 8.0);
-                var price = (Snack.Price) * keyValue.Value;
-                Console.WriteLine($"{keyValue.Value}x{Snack.Name}\t{new string('\t', Tabs)}Price: €{price}");
-                body += $"{keyValue.Value}x {Snack.Name}\t{new string('\t', Tabs)}Price: €{price}\n";
-                FinalPrice += price;
-            }
-        }
-
-        // Format data
-        if (FormatsLogic.GetByFormat(ress.Format) != null) // Same list in MovieLogic _formats
-        {
-            FormatDetails? formatDt = FormatsLogic.GetByFormat(ress.Format);
-
-            string required = formatDt.Item;
-            double requiredPrice = formatDt.Price;
-
-            Console.WriteLine($"\nThe ordered movie plays in {ress.Format} format therefore there is an extra fee");
-            if (required != "")
-            {
-                Console.Write("Requirements:");
-                Console.WriteLine($"\n{required}x{ress.Seats.Count}\tPrice: €{requiredPrice * ress.Seats.Count}");
-
-                FinalPrice += requiredPrice * ress.Seats.Count;
-            }
-        }
-
-        email = UserLogin.AskEmail();
-
-        EmailLogic.SendEmail(email, subject, body);
-
-        UserLogin.SignUpMails();
-
         QuestionLogic.AskEnter();
     }
-<<<<<<< HEAD
-
-
     public static void ClearReservation(Action returnTo)
     {
         Console.Clear();
@@ -400,34 +340,4 @@ Would you still like to order for this timeslot?";
 
         MenuLogic.Question(question, options, actions);
     }
-||||||| 0649431
-=======
-
-    public static void ClearReservation(Action returnTo)
-    {
-        Console.Clear();
-        string Question = @"Are you sure you want to delete this reservation?
-This will reset all your progress for this reservation";
-        List<string> Options = new List<string>() { "Yes", "No" };
-        List<Action> Actions = new List<Action>() { };
-
-        Actions.Add(() => Reservation.NoFilterMenu(true));
-        Actions.Add(() => returnTo());
-
-        MenuLogic.Question(Question, Options, Actions);
-    }
-
-    public static void FormatPrompt(Action goTo)
-    {
-        string question = $@"This movie timeslot requires a special viewing method, 
-Would you still like to order for this timeslot?";
-        List<string> options = new List<string>() { "Yes", "No" };
-        List<Action> actions = new List<Action>();
-
-        actions.Add(() => goTo());
-        actions.Add(() => NoFilterMenu());
-
-        MenuLogic.Question(question, options, actions);
-    }
->>>>>>> 7566dff4801c1e6fbba4d299f3306c837571812c
 }

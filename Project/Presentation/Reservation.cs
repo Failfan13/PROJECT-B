@@ -128,14 +128,6 @@ public static class Reservation
 
     public static void FilterMenu(bool IsEdited) => FilterMenu(null, IsEdited);
 
-    // BELOW NOT USED __________________________________________________________//
-
-    // Increases total order amount
-    //ReservationLogic.TotalOrder = 5.5;
-
-    // Decreases total order amount
-    //ReservationLogic.TotalOrderDecr = 2.3;
-
     // Show total order amount
     public static void TotalReservationCost(ReservationModel ress)
     {

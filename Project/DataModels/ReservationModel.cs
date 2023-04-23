@@ -21,13 +21,11 @@ public class ReservationModel
     [JsonPropertyName("date_time")]
     public DateTime DateTime { get; set; }
 
-    [JsonPropertyName("discountCode")]
-    public string DiscountCode { get; set; } = "";
-
-    public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime)
-    
     [JsonPropertyName("format")]
     public string Format { get; set; }
+
+    [JsonPropertyName("discountCode")]
+    public string DiscountCode { get; set; } = "";
 
     public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime, string format)
 

@@ -17,6 +17,9 @@ public static class Admin
         Options.Add("Change Movies");
         Actions.Add(() => Movies.ChangeMoviesMenu());
 
+        // Options.Add("Change Tileslots");
+        // Actions.Add(() => TimeSlots.ChangeTimeSlotsMenu());
+
         Options.Add("Change Categories");
         Actions.Add(() => Category.Start());
 

@@ -16,6 +16,22 @@ static class Menu
         Actions.Add(() => Reservation.FilterMenu());
         Actions.Add(() => Contact.start());
 
+
+        // Movies.AddNewMovie();
+        TheatherLogic room = new TheatherLogic();
+        room.MakeTheather(10,10);
+        
+
+        // // adding movies to check new functions
+        // List<CategoryModel> genres = new List<CategoryModel>();
+        // DateTime start = new DateTime(2000, 1, 1);
+        // MovieModel movie = new MovieModel(0, "Batman", start, "geronimo", "Batman and the joker", 69, 20, genres);
+
+    
+        // foreach (MovieModel film in movie.AllMovies()
+
+
+
         // Only see if logged in
         if (AccountsLogic.CurrentAccount != null)
         {

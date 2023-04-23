@@ -74,7 +74,7 @@ public class ReservationLogic
         return returner;
     }
 
-    public void MakeReservation(TimeSlotModel timeSlot, List<SeatModel> Seats, Dictionary<int, int> snacks = null, bool IsEdited = false)
+    public void MakeReservation(TimeSlotModel timeSlot, List<SeatModel> Seats, Dictionary<int, int> snacks = null!, string format = "", bool IsEdited = false)
     {
 
         Snacks.Continue = false;
@@ -98,12 +98,12 @@ public class ReservationLogic
         // if this reservation is made by an edit, use the id of the current reservation
         if (IsEdited)
         {
-            ress = new ReservationModel(Reservation.CurrReservation.Id, timeSlot.Id, Seats, snacks, AccountId, currDate);
+            ress = new ReservationModel(Reservation.CurrReservation.Id, timeSlot.Id, Seats, snacks, AccountId, currDate, format);
 
         }
         else
         {
-            ress = new ReservationModel(GetNewestId(), timeSlot.Id, Seats, snacks, AccountId, currDate);
+            ress = new ReservationModel(GetNewestId(), timeSlot.Id, Seats, snacks, AccountId, currDate, format);
         }
 
         // Make the new Reservation and update the Theather timeslot for the seats

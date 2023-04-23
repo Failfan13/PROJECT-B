@@ -229,24 +229,6 @@ public static class Reservation
     //         }
     //     }
 
-    //     // Format data
-    //     if (FormatsLogic.GetByFormat(ress.Format) != null) // Same list in MovieLogic _formats
-    //     {
-    //         FormatDetails? formatDt = FormatsLogic.GetByFormat(ress.Format);
-
-    //         string required = formatDt.Item;
-    //         double requiredPrice = formatDt.Price;
-
-    //         Console.WriteLine($"\nThe ordered movie plays in {ress.Format} format therefore there is an extra fee");
-    //         if (required != "")
-    //         {
-    //             Console.Write("Requirements:");
-    //             Console.WriteLine($"\n{required}x{ress.Seats.Count}\tPrice: €{requiredPrice * ress.Seats.Count}");
-
-    //             FinalPrice += requiredPrice * ress.Seats.Count;
-    //         }
-    //     }
-
     //     email = UserLogin.AskEmail();
 
     //     EmailLogic.SendEmail(email, subject, body);
@@ -307,7 +289,26 @@ public static class Reservation
             }
         }
 
-        FinalPrice = TotalRess.FinalPrice;
+        // Format data
+        if (FormatsLogic.GetByFormat(Ress.Format) != null) // Same list in MovieLogic _formats
+        {
+            FormatDetails? formatDt = FormatsLogic.GetByFormat(Ress.Format);
+
+            string required = formatDt.Item;
+            double requiredPrice = formatDt.Price;
+
+            Console.WriteLine($"\nThe ordered movie plays in {Ress.Format} format therefore there is an extra fee");
+            if (required != "")
+            {
+                Console.Write("Requirements:");
+                Console.WriteLine($"\n{required}x{Ress.Seats.Count}\tPrice: €{requiredPrice * Ress.Seats.Count}");
+
+                FinalPrice += requiredPrice * Ress.Seats.Count;
+            }
+        }
+
+        // Total price
+        FinalPrice += TotalRess.FinalPrice;
         Console.Write("\nThe total cost of your order will be:");
         Console.Write($"€ " + FinalPrice + (FinalPrice.ToString().Contains(".") ? "" : ",-"));
 

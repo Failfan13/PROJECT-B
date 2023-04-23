@@ -14,12 +14,18 @@ public class TimeSlotModel
     [JsonPropertyName("theater")]
     public TheaterModel Theater { get; set; }
 
-    public TimeSlotModel(int id, int movieid, DateTime start, TheaterModel theater)
+    [JsonPropertyName("format")]
+    public string Format { get; set; }
+
+    [JsonConstructor]
+    public TimeSlotModel() : this(0, 0, new DateTime(), new TheaterModel(), "") { }
+    public TimeSlotModel(int id, int movieid, DateTime start, TheaterModel theater, string format)
     {
         Id = id;
         MovieId = movieid;
         Start = start;
         Theater = theater;
+        Format = format;
     }
 
     public void Info()
@@ -28,6 +34,7 @@ public class TimeSlotModel
         MovieModel movie = tempMLogic.GetById(MovieId);
         Console.WriteLine($"Start:\t\t{Start}");
         Console.WriteLine($"Theater:\t{Theater}");
+        Console.WriteLine($"Format:\t\t{Format}");
         movie.Info();
     }
 }

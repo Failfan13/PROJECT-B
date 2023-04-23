@@ -1,3 +1,4 @@
+using System;
 public class TheatherLogic
 {
     private List<TheaterModel> _theathers;
@@ -37,18 +38,41 @@ public class TheatherLogic
         return (_theathers.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
-
     public List<TheaterModel> AllTheaters()
     {
         return _theathers;
     }
-    public void MakeTheather(int width, int height, int OldId = -1)
+
+    public void UpdateToTheater(TimeSlotModel timeSlot)
+    {
+        TheaterModel? theater = GetById(timeSlot.Theater.Id);
+        if (theater != null)
+        {
+            timeSlot.Theater = theater;
+        }
+    }
+    
+    public TheaterModel MakeTheather(int width, int height, int OldId = -1)
     {
         List<SeatModel> Seats = new List<SeatModel>();
 
         for (int i = 0; i < width * height; i++)
         {
-            Seats.Add(new SeatModel(i, 10));
+            // row luxury seats
+            if (i < width)
+            {
+                Seats.Add(new SeatModel(i, 20, false, false, true));
+            }
+            // standard seats
+            else if (i < width * height - width)
+            {
+                Seats.Add(new SeatModel(i, 10));
+            }
+            // handicap seats
+            else
+            {
+                Seats.Add(new SeatModel(i, 10, false, true));
+            }
         }
         int newId = 0;
         if (OldId == -1)
@@ -69,7 +93,7 @@ public class TheatherLogic
 
         TheaterModel theater = new TheaterModel(newId, Seats, width, height);
 
-        UpdateList(theater);
+        return theater;
     }
     // Class to store to values from the function below
     public class Helper
@@ -98,8 +122,7 @@ public class TheatherLogic
         {
             Console.Clear();
             Console.WriteLine("Use arrow keys to navigate and press Enter to select a seat:\nPress C to confirm and reserve selected seats\nX to Cancel\nR to reset selections and start over:");
-            Console.WriteLine();
-
+            
             for (int j = 0; j < AllSeats.Count; j++)
             {
                 SeatModel seat = AllSeats[j];
@@ -117,6 +140,14 @@ public class TheatherLogic
                 else if (seat.Reserved)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
+                }
+                else if (seat.Handicapped)
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                }
+                else if (seat.Luxury)
+                {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
                 }
                 else
                 {
@@ -137,6 +168,24 @@ public class TheatherLogic
             Console.WriteLine();
             Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.SeatRow(theater.Width)}"))}");
 
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("■");
+            Console.ResetColor();
+            Console.Write(" Regular seat\n");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.Write("■");
+            Console.ResetColor();
+            Console.Write(" Luxury seat\n");
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("■");
+            Console.ResetColor();
+            Console.Write(" Handicap seat\n");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("■");
+            Console.ResetColor();
+            Console.Write(" Taken seat\n");
+            Console.WriteLine();
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
             switch (keyInfo.Key)
@@ -215,17 +264,21 @@ public class TheatherLogic
         }
     }
 
-    public void BlockSeats(TheaterModel theater)
+    public void BlockSeats(TheaterModel theater, Action returnTo = null!)
     {
+        TheatherLogic TL = new TheatherLogic();
         var Help = ShowSeats(theater);
         if (Help != null)
         {
             UpdateList(Help.Theather);
         }
+
+        returnTo();
     }
 
-    public void UnBlockSeats(TheaterModel theater)
+    public void UnBlockSeats(TheaterModel theater, Action returnTo = null!)
     {
+        TheatherLogic TL = new TheatherLogic();
         foreach (var seat in theater.Seats)
         {
             seat.Reserved = false;
@@ -233,12 +286,18 @@ public class TheatherLogic
         UpdateList(theater);
         Console.WriteLine("All seats have been unblocked");
         QuestionLogic.AskEnter();
+
+        returnTo();
     }
 
-    public void ChangeTheaterSize(TheaterModel theater)
+    public void ChangeTheaterSize(TheaterModel theater, Action returnTo = null!)
     {
+        TheatherLogic TL = new TheatherLogic();
         int width = (int)QuestionLogic.AskNumber("Enter the width of the theater");
         int height = (int)QuestionLogic.AskNumber("Enter the height of the theater");
         MakeTheather(width, height, theater.Id);
+
+        returnTo();
     }
+
 }

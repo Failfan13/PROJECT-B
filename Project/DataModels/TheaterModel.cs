@@ -15,6 +15,8 @@ public class TheaterModel
     public int Height { get; set; }
 
     [JsonConstructor]
+
+    public TheaterModel() : this(0, new List<SeatModel>(), 0, 0) { }
     public TheaterModel(int id, List<SeatModel> seats, int width, int height)
     {
         Id = id;

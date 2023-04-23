@@ -6,19 +6,27 @@ public static class Reservation
     static private TheatherLogic TheatherLogic = new();
     static public ReservationModel CurrReservation = null;
 
-    public static void EditReservation(bool AsAdmim = false)
+    public static void EditReservation(bool AsAdmin = false)
     {
         ReservationLogic ReservationLogic = new ReservationLogic();
+        AccountsLogic AccountsLogic = new AccountsLogic();
         int awnser;
         string reservationDate;
         MovieModel reservationMovie;
+        int currAcc = AccountsLogic.CurrentAccount.Id;
+
+        // admin logged in ask account
+        if (AsAdmin)
+        {
+            currAcc = AccountsLogic.GetAccountIdFromList();
+        }
 
         string Question = "Which reservation would you like to edit?";
         List<string> Options = new List<string>();
         // List all reservations with date, time & movie name
         foreach (ReservationModel reservation in ReservationLogic.Reservations)
         {
-            if (AccountsLogic.CurrentAccount.Id == reservation.AccountId || AsAdmim)
+            if (currAcc == reservation.AccountId || AsAdmin)
             {
                 reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
                 var timeslotVar = TimeSlotsLogic.GetById(reservation.TimeSlotId);
@@ -240,7 +248,7 @@ public static class Reservation
 
 
     // Show total order amount
-    public static void TotalReservationCost(ReservationModel Ress)
+    public static void TotalReservationCost(ReservationModel ress, int AccountId = -1)
     {
         Console.Clear();
 
@@ -249,6 +257,8 @@ public static class Reservation
         TimeSlotsLogic TimeSlotsLogic = new();
 
         TotalPriceModel TotalRess = ReservationLogic.GetTotalRess(Ress);
+        AccountsLogic AccountsLogic = new();
+        EmailLogic EmailLogic = new EmailLogic();
 
         double FinalPrice = 0.00;
 
@@ -311,8 +321,20 @@ public static class Reservation
         FinalPrice += TotalRess.FinalPrice;
         Console.Write("\nThe total cost of your order will be:");
         Console.Write($"€ " + FinalPrice + (FinalPrice.ToString().Contains(".") ? "" : ",-"));
-
         Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {Ress.Id}\n");
+
+        if (AccountId != -1)
+        {
+            email = AccountsLogic.GetById(AccountId).EmailAddress;
+        }
+        else
+        {
+            email = UserLogin.AskEmail();
+        }
+        EmailLogic.SendEmail(email, subject, body);
+
+        UserLogin.SignUpMails();
+
         QuestionLogic.AskEnter();
     }
     public static void ClearReservation(Action returnTo)

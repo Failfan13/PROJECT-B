@@ -6,19 +6,27 @@ public static class Reservation
     static private TheatherLogic TheatherLogic = new();
     static public ReservationModel CurrReservation = null;
 
-    public static void EditReservation(bool AsAdmim = false)
+    public static void EditReservation(bool AsAdmin = false)
     {
         ReservationLogic ReservationLogic = new ReservationLogic();
+        AccountsLogic AccountsLogic = new AccountsLogic();
         int awnser;
         string reservationDate;
         MovieModel reservationMovie;
+        int currAcc = AccountsLogic.CurrentAccount.Id;
+
+        // admin logged in ask account
+        if (AsAdmin)
+        {
+            currAcc = AccountsLogic.GetAccountIdFromList();
+        }
 
         string Question = "Which reservation would you like to edit?";
         List<string> Options = new List<string>();
         // List all reservations with date, time & movie name
         foreach (ReservationModel reservation in ReservationLogic.Reservations)
         {
-            if (AccountsLogic.CurrentAccount.Id == reservation.AccountId || AsAdmim)
+            if (currAcc == reservation.AccountId || AsAdmin)
             {
                 reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
                 var timeslotVar = TimeSlotsLogic.GetById(reservation.TimeSLotId);

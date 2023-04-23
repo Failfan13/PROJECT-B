@@ -84,7 +84,7 @@ public static class Reservation
         actions.Add(() => Format.Start(timeSlot, CurrReservation.Seats));
 
         // Apply discount NEEDS CORRECT FUNTION
-        actions.Add(() => Menu.Start());
+        actions.Add(() => Promo.Start());
 
         if (AccountsLogic.CurrentAccount.Admin && CurrReservation.AccountId == null)
         {
@@ -314,8 +314,6 @@ public static class Reservation
         Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {Ress.Id}\n");
         QuestionLogic.AskEnter();
     }
-
-
     public static void ClearReservation(Action returnTo)
     {
         Console.Clear();

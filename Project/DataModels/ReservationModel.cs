@@ -28,7 +28,6 @@ public class ReservationModel
     public string DiscountCode { get; set; } = "";
 
     public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime, string format)
-
     {
         Id = id;
         TimeSlotId = timeSlotId;

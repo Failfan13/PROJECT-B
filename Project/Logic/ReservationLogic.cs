@@ -78,7 +78,7 @@ public class ReservationLogic
     {
 
         Snacks.Continue = false;
-        int AccountId = -1;
+        int? AccountId = null;
         ReservationModel ress = null;
         DateTime currDate = DateTime.Now;
         try
@@ -92,7 +92,7 @@ public class ReservationLogic
         }
         catch (System.Exception)
         {   // not logged in
-            AccountId = -1;
+            AccountId = null;
         }
 
         // if this reservation is made by an edit, use the id of the current reservation
@@ -107,7 +107,7 @@ public class ReservationLogic
         }
 
         // Make the new Reservation and update the Theather timeslot for the seats
-        Reservation.TotalReservationCost(ress, AccountId);
+        Reservation.TotalReservationCost(ress);
         UpdateList(ress);
         TimeSlotsLogic TL = new TimeSlotsLogic();
         TL.UpdateList(timeSlot);

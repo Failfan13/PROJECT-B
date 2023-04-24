@@ -6,27 +6,19 @@ public static class Reservation
     static private TheatherLogic TheatherLogic = new();
     static public ReservationModel CurrReservation = null;
 
-    public static void EditReservation(bool AsAdmin = false)
+    public static void EditReservation(bool AsAdmim = false)
     {
         ReservationLogic ReservationLogic = new ReservationLogic();
-        AccountsLogic AccountsLogic = new AccountsLogic();
         int awnser;
         string reservationDate;
         MovieModel reservationMovie;
-        int currAcc = AccountsLogic.CurrentAccount.Id;
-
-        // admin logged in ask account
-        if (AsAdmin)
-        {
-            currAcc = AccountsLogic.GetAccountIdFromList();
-        }
 
         string Question = "Which reservation would you like to edit?";
         List<string> Options = new List<string>();
         // List all reservations with date, time & movie name
         foreach (ReservationModel reservation in ReservationLogic.Reservations)
         {
-            if (currAcc == reservation.AccountId || AsAdmin)
+            if (AccountsLogic.CurrentAccount.Id == reservation.AccountId || AsAdmim)
             {
                 reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
                 var timeslotVar = TimeSlotsLogic.GetById(reservation.TimeSLotId);
@@ -149,10 +141,10 @@ public static class Reservation
     public static void FilterMenu(bool IsEdited) => FilterMenu(null, IsEdited);
 
     // Show total order amount
-    public static void TotalReservationCost(ReservationModel ress){
+    public static void TotalReservationCost(ReservationModel ress)
+    {
         Console.Clear();
         ReservationLogic ReservationLogic = new ReservationLogic();
-        AccountsLogic AccountsLogic = new();
         EmailLogic EmailLogic = new EmailLogic();
         double FinalPrice = 0.00;
 
@@ -217,16 +209,8 @@ public static class Reservation
         Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {ress.Id}\n");
         body += $"\nIMPORTANT\nYour order number is: {ress.Id}";
 
+        email = UserLogin.AskEmail();
 
-
-        if (AccountId != -1)
-        {
-            email = AccountsLogic.GetById(AccountId).EmailAddress;
-        }
-        else
-        {
-            email = UserLogin.AskEmail();
-        }
         EmailLogic.SendEmail(email, subject, body);
 
         UserLogin.SignUpMails();

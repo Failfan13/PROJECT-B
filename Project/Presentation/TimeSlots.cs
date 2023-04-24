@@ -27,12 +27,12 @@ static class TimeSlots
                 if (time.Format != "" && time.Format != "standard")
                 {
                     Options.Add($"{time.Start} -Type : {time.Format}");
-                    Actions.Add(() => Reservation.FormatPrompt(() => Theater.SelectSeats(time)));
+                    Actions.Add(() => Reservation.FormatPrompt(() => Theater.SelectSeats(time, IsEdited)));
                 }
                 else
                 {
                     Options.Add($"{time.Start}");
-                    Actions.Add(() => Theater.SelectSeats(time));
+                    Actions.Add(() => Theater.SelectSeats(time, IsEdited));
                 }
             }
 

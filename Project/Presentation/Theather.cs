@@ -1,7 +1,7 @@
 public static class Theater
 {
     private static TheatherLogic TL = new TheatherLogic();
-    public static void SelectSeats(TimeSlotModel TimeSlot, bool IsEdited = false, bool change = false)
+    public static void SelectSeats(TimeSlotModel TimeSlot, bool IsEdited = false)
     {
         TimeSlotsLogic TS = new TimeSlotsLogic();
         var theater = TimeSlot.Theater;
@@ -11,14 +11,15 @@ public static class Theater
             size = 10000;
         }
         var help = TL.ShowSeats(theater, size);
-        if (help != null && !change)
+        ReservationLogic RL = new ReservationLogic();
+
+        if (help != null)
         {
             var selectedSeats = help.Seats;
 
             string Question = "Would you like to order snacks?";
             List<string> Options = new List<string>() { "Yes", "No" };
             List<Action> Actions = new List<Action>();
-            ReservationLogic RL = new ReservationLogic();
 
             if (FormatsLogic.GetByFormat(TimeSlot.Format) != null)
             {
@@ -32,10 +33,6 @@ public static class Theater
             }
 
             MenuLogic.Question(Question, Options, Actions);
-        }
-        else if (change)
-        {
-            TS.UpdateList(TimeSlot);
         }
         else
         {

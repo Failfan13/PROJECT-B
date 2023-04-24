@@ -48,7 +48,7 @@ public static class Reservation
         // Set current reservation field
         try
         {
-            CurrReservation = ReservationLogic.Reservations[awnser];
+            CurrReservation = ReservationLogic.Reservations.FindAll(r => r.AccountId == currAccId)[awnser];
         }
         catch (System.IndexOutOfRangeException)
         {
@@ -91,7 +91,7 @@ public static class Reservation
         actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movieid, true));
 
         // choose seats
-        actions.Add(() => Theater.SelectSeats(CurrTimeSlot, true, change: true));
+        actions.Add(() => Theater.SelectSeats(CurrTimeSlot, true));
 
         // Change snack
         actions.Add(() => Snacks.Start(CurrTimeSlot, CurrReservation.Seats, true));
@@ -157,7 +157,7 @@ public static class Reservation
 
         MenuLogic.Question(Question, Movies, Actions);
     }
-    public static void TotalReservationCost(ReservationModel ress, int AccountId = -1)
+    public static void TotalReservationCost(ReservationModel ress, int AccountId = -1, bool IsEdited = false)
     {
         Console.Clear();
         ReservationLogic ReservationLogic = new ReservationLogic();
@@ -255,14 +255,14 @@ This will reset all your progress for this reservation";
         MenuLogic.Question(Question, Options, Actions);
     }
 
-    public static void FormatPrompt(Action goTo)
+    public static void FormatPrompt(Action returnTo)
     {
         string question = $@"This movie timeslot requires a special viewing method, 
 Would you still like to order for this timeslot?";
         List<string> options = new List<string>() { "Yes", "No" };
         List<Action> actions = new List<Action>();
 
-        actions.Add(() => goTo());
+        actions.Add(() => returnTo());
         actions.Add(() => NoFilterMenu());
 
         MenuLogic.Question(question, options, actions);

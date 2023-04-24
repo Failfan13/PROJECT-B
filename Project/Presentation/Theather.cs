@@ -1,9 +1,9 @@
 public static class Theater
 {
     private static TheatherLogic TL = new TheatherLogic();
-    public static void SelectSeats(TimeSlotModel TimeSlot, bool IsEdited = false)
+    public static void SelectSeats(TimeSlotModel TimeSlot, bool IsEdited = false, bool change = false)
     {
-
+        TimeSlotsLogic TS = new TimeSlotsLogic();
         var theater = TimeSlot.Theater;
         var size = 9;
         if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin)
@@ -11,7 +11,7 @@ public static class Theater
             size = 10000;
         }
         var help = TL.ShowSeats(theater, size);
-        if (help != null)
+        if (help != null && !change)
         {
             var selectedSeats = help.Seats;
 
@@ -32,6 +32,10 @@ public static class Theater
             }
 
             MenuLogic.Question(Question, Options, Actions);
+        }
+        else if (change)
+        {
+            TS.UpdateList(TimeSlot);
         }
         else
         {

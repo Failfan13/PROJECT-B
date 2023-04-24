@@ -4,16 +4,16 @@ public static class Reservation
     static private MoviesLogic MoviesLogic = new();
     static private TimeSlotsLogic TimeSlotsLogic = new();
     static private TheatherLogic TheatherLogic = new();
+    static private ReservationLogic ReservationLogic = new ReservationLogic();
     static public ReservationModel CurrReservation = null;
 
     public static void EditReservation(bool AsAdmin = false)
     {
-        ReservationLogic ReservationLogic = new ReservationLogic();
         AccountsLogic AccountsLogic = new AccountsLogic();
         int awnser;
         string reservationDate;
         MovieModel reservationMovie;
-        int currAcc = AccountsLogic.CurrentAccount.Id;
+        int currAcc = AccountsLogic.CurrentAccount!.Id;
 
         // admin logged in ask account
         if (AsAdmin)
@@ -34,7 +34,6 @@ public static class Reservation
 
                 Options.Add($"{reservationDate} - {reservationMovie.Title}");
             }
-
         }
 
         awnser = MenuLogic.Question(Question, Options);
@@ -75,8 +74,8 @@ public static class Reservation
             };
         // Actions reservations actions
         List<Action> actions = new();
-        TimeSlotModel timeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSLotId);
-        var movieid = timeSlot.MovieId;
+        // TimeSlotModel timeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSLotId);
+        var movieid = CurrTimeSlot.MovieId;
         // choose all
         actions.Add(() => Reservation.NoFilterMenu(true));
 
@@ -84,12 +83,12 @@ public static class Reservation
         actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movieid, true));
 
         // choose seats
-        actions.Add(() => Theater.SelectSeats(timeSlot, true));
+        actions.Add(() => Theater.SelectSeats(CurrTimeSlot, true, change: true));
 
         // Change snack
-        actions.Add(() => Snacks.Start(timeSlot, CurrReservation.Seats, true));
+        actions.Add(() => Snacks.Start(CurrTimeSlot, CurrReservation.Seats, true));
 
-        actions.Add(() => Format.Start(timeSlot, CurrReservation.Seats));
+        actions.Add(() => Format.Start(CurrTimeSlot, CurrReservation.Seats));
 
         // Apply discount NEEDS CORRECT FUNTION
         actions.Add(() => Menu.Start());
@@ -105,8 +104,8 @@ public static class Reservation
         actions.Add(() => UserLogin.Start());
 
         MenuLogic.Question(question, options, actions);
+        ReservationLogic.UpdateList(CurrReservation);
     }
-
 
     public static void NoFilterMenu(bool IsEdited = false)
     {

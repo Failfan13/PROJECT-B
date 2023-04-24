@@ -4,21 +4,29 @@ public static class Reservation
     static private MoviesLogic MoviesLogic = new();
     static private TimeSlotsLogic TimeSlotsLogic = new();
     static private TheatherLogic TheatherLogic = new();
-    static private ReservationLogic ReservationLogic = new ReservationLogic();
     static public ReservationModel CurrReservation = null;
 
     public static void EditReservation(bool AsAdmin = false)
     {
+        ReservationLogic ReservationLogic = new ReservationLogic();
         AccountsLogic AccountsLogic = new AccountsLogic();
         int awnser;
         string reservationDate;
         MovieModel reservationMovie;
-        int currAcc = AccountsLogic.CurrentAccount!.Id;
+        int currAccId = AccountsLogic.CurrentAccount!.Id;
 
         // admin logged in ask account
         if (AsAdmin)
         {
-            currAcc = AccountsLogic.GetAccountIdFromList();
+            currAccId = AccountsLogic.GetAccountIdFromList();
+        }
+
+        if (!ReservationLogic.Reservations.Any(r => r.AccountId == currAccId))
+        {
+            Console.Clear();
+            Console.WriteLine("No reservations found for this account\n");
+            QuestionLogic.AskEnter();
+            return;
         }
 
         string Question = "Which reservation would you like to edit?";
@@ -26,7 +34,7 @@ public static class Reservation
         // List all reservations with date, time & movie name
         foreach (ReservationModel reservation in ReservationLogic.Reservations)
         {
-            if (currAcc == reservation.AccountId || AsAdmin)
+            if (currAccId == reservation.AccountId || AsAdmin)
             {
                 reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
                 var timeslotVar = TimeSlotsLogic.GetById(reservation.TimeSLotId);
@@ -231,7 +239,6 @@ public static class Reservation
         EmailLogic.SendEmail(email, subject, body);
 
         UserLogin.SignUpMails();
-        QuestionLogic.AskEnter();
     }
 
     public static void ClearReservation(Action returnTo)

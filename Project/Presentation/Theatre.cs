@@ -1,6 +1,6 @@
 public static class Theater
 {
-    private static TheatherLogic TL = new TheatherLogic();
+    private static TheatreLogic TL = new TheatreLogic();
     public static void SelectSeats(TimeSlotModel TimeSlot, bool IsEdited = false)
     {
         TimeSlotsLogic TS = new TimeSlotsLogic();
@@ -40,7 +40,7 @@ public static class Theater
         }
     }
 
-    public static void WhatTheather()
+    public static void WhatTheatre()
     {
         string Question = "What would you like to change?";
         List<string> Options = new List<string>();
@@ -60,7 +60,7 @@ public static class Theater
     }
     public static void EditMenu(TheaterModel theater, Action returnTo = null!)
     {
-        TheatherLogic TL = new TheatherLogic();
+        TheatreLogic TL = new TheatreLogic();
 
         string Question = "What would you like to change?";
         List<string> Options = new List<string>();

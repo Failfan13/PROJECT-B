@@ -41,8 +41,8 @@ static class Menu
         }
 
         // Movies.AddNewMovie();
-        TheatherLogic room = new TheatherLogic();
-        room.MakeTheather(10, 10);
+        TheatreLogic room = new TheatreLogic();
+        room.MakeTheatre(10, 10);
 
 
         // // adding movies to check new functions

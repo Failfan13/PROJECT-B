@@ -3,7 +3,7 @@ public static class Reservation
 
     static private MoviesLogic MoviesLogic = new();
     static private TimeSlotsLogic TimeSlotsLogic = new();
-    static private TheatherLogic TheatherLogic = new();
+    static private TheatreLogic TheatreLogic = new();
     static public ReservationModel CurrReservation = null;
 
     public static void EditReservation(bool AsAdmin = false)
@@ -62,8 +62,8 @@ public static class Reservation
 
         foreach (SeatModel seat in CurrSeat)
         {
-            var TheatherSeat = CurrTimeSlot.Theater.Seats.FirstOrDefault(s => s.Id == seat.Id);
-            TheatherSeat.Reserved = false;
+            var TheatreSeat = CurrTimeSlot.Theater.Seats.FirstOrDefault(s => s.Id == seat.Id);
+            TheatreSeat.Reserved = false;
         }
 
         TimeSlotsLogic.UpdateList(CurrTimeSlot);

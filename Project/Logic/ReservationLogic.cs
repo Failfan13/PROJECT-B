@@ -130,7 +130,7 @@ public class ReservationLogic
             UpdateList(ress);
         }
 
-        // Make the new Reservation and update the Theather timeslot for the seats
+        // Make the new Reservation and update the Theatre timeslot for the seats
         TimeSlotsLogic TL = new TimeSlotsLogic();
         TL.UpdateList(timeSlot);
     }

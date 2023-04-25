@@ -1,46 +1,46 @@
 using System;
-public class TheatherLogic
+public class TheatreLogic
 {
-    private List<TheaterModel> _theathers;
+    private List<TheaterModel> _Theatres;
 
-    public TheatherLogic()
+    public TheatreLogic()
     {
-        _theathers = TheaterAccess.LoadAll();
+        _Theatres = TheaterAccess.LoadAll();
     }
 
-    public void UpdateList(TheaterModel theather)
+    public void UpdateList(TheaterModel Theatre)
     {
         //Find if there is already an model with the same id
-        int index = _theathers.FindIndex(s => s.Id == theather.Id);
+        int index = _Theatres.FindIndex(s => s.Id == Theatre.Id);
 
         if (index != -1)
         {
             //update existing model
-            _theathers[index] = theather;
-            Logger.LogDataChange<TheaterModel>(theather.Id, "Updated");
+            _Theatres[index] = Theatre;
+            Logger.LogDataChange<TheaterModel>(Theatre.Id, "Updated");
         }
         else
         {
             //add new model
-            _theathers.Add(theather);
-            Logger.LogDataChange<TheaterModel>(theather.Id, "Added");
+            _Theatres.Add(Theatre);
+            Logger.LogDataChange<TheaterModel>(Theatre.Id, "Added");
         }
-        TheaterAccess.WriteAll(_theathers);
+        TheaterAccess.WriteAll(_Theatres);
 
     }
 
     public TheaterModel? GetById(int id)
     {
-        return _theathers.Find(i => i.Id == id);
+        return _Theatres.Find(i => i.Id == id);
     }
     public int GetNewestId()
     {
-        return (_theathers.OrderByDescending(item => item.Id).First().Id) + 1;
+        return (_Theatres.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
     public List<TheaterModel> AllTheaters()
     {
-        return _theathers;
+        return _Theatres;
     }
 
     public void UpdateToTheater(TimeSlotModel timeSlot)
@@ -52,7 +52,7 @@ public class TheatherLogic
         }
     }
     
-    public TheaterModel MakeTheather(int width, int height, int OldId = -1)
+    public TheaterModel MakeTheatre(int width, int height, int OldId = -1)
     {
         List<SeatModel> Seats = new List<SeatModel>();
 
@@ -98,17 +98,17 @@ public class TheatherLogic
     // Class to store to values from the function below
     public class Helper
     {
-        public TheaterModel Theather { get; set; }
+        public TheaterModel Theatre { get; set; }
         public List<SeatModel> Seats { get; set; }
 
         public Helper(TheaterModel theater, List<SeatModel> seats)
         {
-            Theather = theater;
+            Theatre = theater;
             Seats = seats;
         }
     }
 
-    // Function to show seats based on a theather model
+    // Function to show seats based on a Theatre model
     // MaxLength is used to limit seat selection
     public Helper? ShowSeats(TheaterModel theater, int MaxLength = 1000)
     {
@@ -266,11 +266,11 @@ public class TheatherLogic
 
     public void BlockSeats(TheaterModel theater, Action returnTo = null!)
     {
-        TheatherLogic TL = new TheatherLogic();
+        TheatreLogic TL = new TheatreLogic();
         var Help = ShowSeats(theater);
         if (Help != null)
         {
-            UpdateList(Help.Theather);
+            UpdateList(Help.Theatre);
         }
 
         returnTo();
@@ -278,7 +278,7 @@ public class TheatherLogic
 
     public void UnBlockSeats(TheaterModel theater, Action returnTo = null!)
     {
-        TheatherLogic TL = new TheatherLogic();
+        TheatreLogic TL = new TheatreLogic();
         foreach (var seat in theater.Seats)
         {
             seat.Reserved = false;
@@ -292,10 +292,10 @@ public class TheatherLogic
 
     public void ChangeTheaterSize(TheaterModel theater, Action returnTo = null!)
     {
-        TheatherLogic TL = new TheatherLogic();
+        TheatreLogic TL = new TheatreLogic();
         int width = (int)QuestionLogic.AskNumber("Enter the width of the theater");
         int height = (int)QuestionLogic.AskNumber("Enter the height of the theater");
-        MakeTheather(width, height, theater.Id);
+        MakeTheatre(width, height, theater.Id);
 
         returnTo();
     }

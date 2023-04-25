@@ -10,7 +10,7 @@ static class TimeSlots
         MoviesLogic ML = new MoviesLogic();
         TheatreLogic TL = new TheatreLogic();
 
-        Console.Clear();
+        Console.ReadKey();
         if (tsms?.Count == 0) // Movie exists but there is no timeslot for it
         {
             Console.WriteLine("There are no timeslots for that movie.\nPress Enter to return");
@@ -27,12 +27,12 @@ static class TimeSlots
                 if (time.Format != "" && time.Format != "standard")
                 {
                     Options.Add($"{time.Start} -Type : {time.Format}");
-                    Actions.Add(() => Reservation.FormatPrompt(() => Theatre.SelectSeats(time)));
+                    Actions.Add(() => Reservation.FormatPrompt(() => Theatre.SelectSeats(time, IsEdited)));
                 }
                 else
                 {
                     Options.Add($"{time.Start}");
-                    Actions.Add(() => Theatre.SelectSeats(time));
+                    Actions.Add(() => Theatre.SelectSeats(time, IsEdited));
                 }
             }
 

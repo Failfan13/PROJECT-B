@@ -21,7 +21,7 @@ What would you like to do?";
             Options.Add("Change password");
             Actions.Add(() => ChangePassword());
 
-            Options.Add("Change advertation settings");
+            Options.Add("Change advertisement settings");
             Actions.Add(() => ChangeAdvertation());
         }
 

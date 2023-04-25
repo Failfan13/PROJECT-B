@@ -20,7 +20,6 @@ public static class Theater
             string Question = "Would you like to order snacks?";
             List<string> Options = new List<string>() { "Yes", "No" };
             List<Action> Actions = new List<Action>();
-            ReservationLogic RL = new ReservationLogic();
 
             if (FormatsLogic.GetByFormat(TimeSlot.Format) != null)
             {
@@ -41,15 +40,15 @@ public static class Theater
         }
     }
 
-    public static void WhatTheather()
+    public static void WhatTheatre()
     {
-        string Question = "What theatre room would you like to change?";
+        string Question = "What would you like to change?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
         foreach (var item in TL.AllTheaters())
         {
-            Options.Add($"Theatre room {item.Id}");
+            Options.Add($"{item.Id}");
             Actions.Add(() => EditMenu(item));
         }
 

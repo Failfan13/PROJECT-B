@@ -84,15 +84,15 @@ class TimeSlotsLogic
     //public void NewTimeSlot(int movieid, DateTime start)
     //{
         //int NewID = GetNewestId();
-        //var theater = new TheatherLogic();
+        //var theater = new TheatreLogic();
 
-        // Creating the Theather for every timeslot, 
-        //Console.WriteLine("Please give the height of the theather");
+        // Creating the Theatre for every timeslot, 
+        //Console.WriteLine("Please give the height of the Theatre");
         //int height = int.Parse(Console.ReadLine());
-        //Console.WriteLine("Please give the width of the theather");
+        //Console.WriteLine("Please give the width of the Theatre");
         //int width = int.Parse(Console.ReadLine());
 
-        //TheaterModel realth = theater.MakeTheather(width,height);
+        //TheaterModel realth = theater.MakeTheatre(width,height);
 
         //TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, realth);
 

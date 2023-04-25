@@ -1,9 +1,9 @@
 public static class Theater
 {
-    private static TheatherLogic TL = new TheatherLogic();
+    private static TheatreLogic TL = new TheatreLogic();
     public static void SelectSeats(TimeSlotModel TimeSlot, bool IsEdited = false)
     {
-
+        TimeSlotsLogic TS = new TimeSlotsLogic();
         var theater = TimeSlot.Theater;
         var size = 9;
         if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin)
@@ -11,6 +11,8 @@ public static class Theater
             size = 10000;
         }
         var help = TL.ShowSeats(theater, size);
+        ReservationLogic RL = new ReservationLogic();
+
         if (help != null)
         {
             var selectedSeats = help.Seats;
@@ -59,7 +61,7 @@ public static class Theater
     }
     public static void EditMenu(TheaterModel theater, Action returnTo = null!)
     {
-        TheatherLogic TL = new TheatherLogic();
+        TheatreLogic TL = new TheatreLogic();
 
         string Question = "What would you like to change?";
         List<string> Options = new List<string>();

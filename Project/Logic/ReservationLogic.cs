@@ -21,7 +21,6 @@ public class ReservationLogic
         Reservations = ReservationAccess.LoadAll();
     }
 
-
     public void UpdateList(ReservationModel ress)
     {
         //Find if there is already an model with the same id
@@ -74,16 +73,33 @@ public class ReservationLogic
         return returner;
     }
 
+    public bool UpdateReservation(int ressId, ReservationModel newRess)
+    {
+        try
+        {
+            ReservationModel currRess = GetById(ressId)!;
+            currRess.TimeSLotId = newRess.TimeSLotId;
+            currRess.Seats = newRess.Seats;
+            if (newRess.Snacks != null) currRess.Snacks = newRess.Snacks;
+            if (newRess.Format != "") currRess.Format = newRess.Format;
+            UpdateList(currRess);
+            return true;
+        }
+        catch (System.Exception)
+        {
+            return false;
+        }
+    }
+
     public void MakeReservation(TimeSlotModel timeSlot, List<SeatModel> Seats, Dictionary<int, int> snacks = null!, string format = "", bool IsEdited = false)
     {
-
         Snacks.Continue = false;
         int? AccountId = null;
         ReservationModel ress = null;
         DateTime currDate = DateTime.Now;
         try
         {
-            AccountId = AccountsLogic.CurrentAccount.Id;
+            AccountId = AccountsLogic.CurrentAccount!.Id;
             if (AccountsLogic.CurrentAccount.Admin)
             {
                 // asks if you want to use your own ID or that of an user
@@ -98,17 +114,23 @@ public class ReservationLogic
         // if this reservation is made by an edit, use the id of the current reservation
         if (IsEdited)
         {
+            // Make the new Reservation and update the Theather timeslot for the seats
             ress = new ReservationModel(Reservation.CurrReservation.Id, timeSlot.Id, Seats, snacks, AccountId, currDate, format);
+            UpdateReservation(Reservation.CurrReservation.Id, ress);
 
+            Console.Clear();
+            Console.WriteLine("Reservation edited");
+            QuestionLogic.AskEnter();
+            Menu.Start();
+            //Reservation.TotalReservationCost(ress, AccountId, IsEdited);
         }
         else
         {
             ress = new ReservationModel(GetNewestId(), timeSlot.Id, Seats, snacks, AccountId, currDate, format);
+            Reservation.TotalReservationCost(ress, AccountId);
+            UpdateList(ress);
         }
 
-        // Make the new Reservation and update the Theather timeslot for the seats
-        Reservation.TotalReservationCost(ress);
-        UpdateList(ress);
         TimeSlotsLogic TL = new TimeSlotsLogic();
         TL.UpdateList(timeSlot);
     }

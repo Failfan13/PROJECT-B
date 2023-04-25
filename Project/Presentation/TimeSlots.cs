@@ -8,7 +8,7 @@ static class TimeSlots
         TimeSlotsLogic timeSlotsLogic = new TimeSlotsLogic();
         List<TimeSlotModel>? tsms = timeSlotsLogic.GetByMovieId(movieid);
         MoviesLogic ML = new MoviesLogic();
-        TheatherLogic TL = new TheatherLogic();
+        TheatreLogic TL = new TheatreLogic();
 
         if (Filter.AppliedFilters != null && Filter.AppliedFilters.ReleaseDate != null)
         {
@@ -81,7 +81,7 @@ static class TimeSlots
         MoviesLogic ML = new MoviesLogic();
         MovieModel? movie = ML.GetById(movieid);
         TimeSlotModel TM = new TimeSlotModel();
-        TheatherLogic TL = new TheatherLogic();
+        TheatreLogic TL = new TheatreLogic();
 
         TM.MovieId = movie.Id;
         TM.Theater.Id = TL.GetNewestId();
@@ -124,7 +124,7 @@ static class TimeSlots
 
     public static void EditTimeSlotChangeMenu(TimeSlotModel tsm, bool IsEdited = false)
     {
-        TheatherLogic TheatherLogic = new TheatherLogic();
+        TheatreLogic TheatreLogic = new TheatreLogic();
         TimeSlotsLogic TimeSlotsLogic = new TimeSlotsLogic();
 
         string Question = "What would you like to change?";
@@ -133,14 +133,14 @@ static class TimeSlots
 
         Options.Add("Change start time");
         Actions.Add(() => TimeSlotStartTime(tsm, () => EditTimeSlotChangeMenu(tsm)));
-        Options.Add("Change theather arrangement");
+        Options.Add("Change theatre arrangement");
         Actions.Add(() => Theater.EditMenu(tsm.Theater, () => EditTimeSlotChangeMenu(tsm)));
         Options.Add("Change view format");
         Actions.Add(() => Format.ChangeFormats(tsm, () => EditTimeSlotChangeMenu(tsm)));
 
         Options.Add("Return");
         Actions.Add(() => Parallel.Invoke(
-            () => TheatherLogic.UpdateToTheater(tsm),
+            () => TheatreLogic.UpdateToTheater(tsm),
             () => TimeSlotsLogic.UpdateList(tsm)
         ));
 

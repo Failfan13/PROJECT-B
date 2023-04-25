@@ -6,7 +6,7 @@ public static class FilterLogic
     {
         if (Filter.AppliedFilters == null)
         {
-            MovieModel MovieModel = new(0, "", new DateTime(), "", "", 0, 0, new List<CategoryModel>());
+            MovieModel MovieModel = new(0, "", new DateTime(), "", "", 0, 0, new List<CategoryModel>(), new List<string>());
             Filter.AppliedFilters = MovieModel;
             return false;
         }

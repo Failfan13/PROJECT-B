@@ -225,7 +225,7 @@ This will reset all your progress for this reservation";
         List<string> Options = new List<string>() { "Yes", "No" };
         List<Action> Actions = new List<Action>() { };
 
-        Actions.Add(() => Reservation.NoFilterMenu(true));
+        Actions.Add(() => Reservation.FilterMenu(true));
         Actions.Add(() => returnTo());
 
         MenuLogic.Question(Question, Options, Actions);
@@ -239,7 +239,7 @@ Would you still like to order for this timeslot?";
         List<Action> actions = new List<Action>();
 
         actions.Add(() => goTo());
-        actions.Add(() => NoFilterMenu());
+        actions.Add(() => FilterMenu());
 
         MenuLogic.Question(question, options, actions);
     }

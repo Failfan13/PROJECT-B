@@ -41,13 +41,13 @@ public static class Theater
 
     public static void WhatTheather()
     {
-        string Question = "What would you like to change?";
+        string Question = "What theatre room would you like to change?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
         foreach (var item in TL.AllTheaters())
         {
-            Options.Add($"{item.Id}");
+            Options.Add($"Theatre room {item.Id}");
             Actions.Add(() => EditMenu(item));
         }
 

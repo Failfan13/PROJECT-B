@@ -1,16 +1,16 @@
 using System.Text.Json;
 
-static class TheaterAccess
+static class TheatreAccess
 {
-    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/theaters.json"));
+    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Theatres.json"));
 
-    public static List<TheaterModel> LoadAll()
+    public static List<TheatreModel> LoadAll()
     {
         string json = File.ReadAllText(path);
-        return JsonSerializer.Deserialize<List<TheaterModel>>(json);
+        return JsonSerializer.Deserialize<List<TheatreModel>>(json);
     }
 
-    public static void WriteAll(List<TheaterModel> accounts)
+    public static void WriteAll(List<TheatreModel> accounts)
     {
         var options = new JsonSerializerOptions { WriteIndented = true };
         string json = JsonSerializer.Serialize(accounts, options);

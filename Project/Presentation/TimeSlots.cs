@@ -27,12 +27,12 @@ static class TimeSlots
                 if (time.Format != "" && time.Format != "standard")
                 {
                     Options.Add($"{time.Start} -Type : {time.Format}");
-                    Actions.Add(() => Reservation.FormatPrompt(() => Theater.SelectSeats(time)));
+                    Actions.Add(() => Reservation.FormatPrompt(() => Theatre.SelectSeats(time)));
                 }
                 else
                 {
                     Options.Add($"{time.Start}");
-                    Actions.Add(() => Theater.SelectSeats(time));
+                    Actions.Add(() => Theatre.SelectSeats(time));
                 }
             }
 
@@ -61,7 +61,7 @@ static class TimeSlots
             foreach (TimeSlotModel time in tsms)
             {
                 Options.Add($"{time.Start}");
-                Actions.Add(() => Theater.SelectSeats(time));
+                Actions.Add(() => Theatre.SelectSeats(time));
             }
 
             return MenuLogic.Question(Question, Options);
@@ -78,7 +78,7 @@ static class TimeSlots
         TheatreLogic TL = new TheatreLogic();
 
         TM.MovieId = movie.Id;
-        TM.Theater.Id = TL.GetNewestId();
+        TM.Theatre.Id = TL.GetNewestId();
 
         Console.Clear();
 
@@ -87,7 +87,7 @@ static class TimeSlots
         Console.WriteLine("Would you like to change the seat layout? (y/n)");
         if (Console.ReadLine() == "y")
         {
-            Theater.EditMenu(TM.Theater);
+            Theatre.EditMenu(TM.Theatre);
         }
 
         Console.WriteLine("Would you like to add a new format? (y/n)");
@@ -96,7 +96,7 @@ static class TimeSlots
             Format.ChangeFormats(TM);
         }
 
-        TimeSlotsLogic.NewTimeSlot(TM.MovieId, TM.Start, TM.Theater, TM.Format);
+        TimeSlotsLogic.NewTimeSlot(TM.MovieId, TM.Start, TM.Theatre, TM.Format);
     }
 
     public static void EditTimeSlot(int movieid, bool IsEdited = false)
@@ -127,14 +127,14 @@ static class TimeSlots
 
         Options.Add("Change start time");
         Actions.Add(() => TimeSlotStartTime(tsm, () => EditTimeSlotChangeMenu(tsm)));
-        Options.Add("Change theatre arrangement");
-        Actions.Add(() => Theater.EditMenu(tsm.Theater, () => EditTimeSlotChangeMenu(tsm)));
+        Options.Add("Change Theatre arrangement");
+        Actions.Add(() => Theatre.EditMenu(tsm.Theatre, () => EditTimeSlotChangeMenu(tsm)));
         Options.Add("Change view format");
         Actions.Add(() => Format.ChangeFormats(tsm, () => EditTimeSlotChangeMenu(tsm)));
 
         Options.Add("Return");
         Actions.Add(() => Parallel.Invoke(
-            () => TheatreLogic.UpdateToTheater(tsm),
+            () => TheatreLogic.UpdateToTheatre(tsm),
             () => TimeSlotsLogic.UpdateList(tsm)
         ));
 

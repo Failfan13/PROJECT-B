@@ -11,20 +11,20 @@ public class TimeSlotModel
     [JsonPropertyName("start")]
     public DateTime Start { get; set; }
 
-    [JsonPropertyName("theater")]
-    public TheaterModel Theater { get; set; }
+    [JsonPropertyName("theatre")]
+    public TheatreModel Theatre { get; set; }
 
     [JsonPropertyName("format")]
     public string Format { get; set; }
 
     [JsonConstructor]
-    public TimeSlotModel() : this(0, 0, new DateTime(), new TheaterModel(), "") { }
-    public TimeSlotModel(int id, int movieid, DateTime start, TheaterModel theater, string format)
+    public TimeSlotModel() : this(0, 0, new DateTime(), new TheatreModel(), "") { }
+    public TimeSlotModel(int id, int movieid, DateTime start, TheatreModel Theatre, string format)
     {
         Id = id;
         MovieId = movieid;
         Start = start;
-        Theater = theater;
+        Theatre = Theatre;
         Format = format;
     }
 
@@ -33,7 +33,7 @@ public class TimeSlotModel
         MoviesLogic tempMLogic = new MoviesLogic();
         MovieModel movie = tempMLogic.GetById(MovieId);
         Console.WriteLine($"Start:\t\t{Start}");
-        Console.WriteLine($"Theater:\t{Theater}");
+        Console.WriteLine($"Theatre:\t{Theatre}");
         Console.WriteLine($"Format:\t\t{Format}");
         movie.Info();
     }

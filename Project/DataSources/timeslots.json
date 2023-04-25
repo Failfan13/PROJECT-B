@@ -3,7 +3,7 @@
     "id": 0,
     "movieid": 7,
     "start": "2020-12-10T10:50:00",
-    "theater": {
+    "theatre": {
       "id": 7,
       "seats": [],
       "width": 0,
@@ -15,7 +15,7 @@
     "id": 1,
     "movieid": 1,
     "start": "2023-04-01T11:26:52.512505+02:00",
-    "theater": {
+    "theatre": {
       "id": 0,
       "seats": [
         {
@@ -728,7 +728,7 @@
     "id": 2,
     "movieid": 2,
     "start": "2023-04-02T11:26:52.5133767+02:00",
-    "theater": {
+    "theatre": {
       "id": 0,
       "seats": [
         {
@@ -1441,7 +1441,7 @@
     "id": 3,
     "movieid": 3,
     "start": "2023-04-03T11:26:52.5141487+02:00",
-    "theater": {
+    "theatre": {
       "id": 0,
       "seats": [
         {
@@ -2154,7 +2154,7 @@
     "id": 4,
     "movieid": 0,
     "start": "2023-04-04T11:26:52.5149277+02:00",
-    "theater": {
+    "theatre": {
       "id": 0,
       "seats": [
         {
@@ -2867,7 +2867,7 @@
     "id": 5,
     "movieid": 1,
     "start": "2023-04-05T11:26:52.5158242+02:00",
-    "theater": {
+    "theatre": {
       "id": 0,
       "seats": [
         {
@@ -3580,7 +3580,7 @@
     "id": 6,
     "movieid": 2,
     "start": "2023-04-06T11:26:52.5166235+02:00",
-    "theater": {
+    "theatre": {
       "id": 0,
       "seats": [
         {
@@ -4293,7 +4293,7 @@
     "id": 7,
     "movieid": 3,
     "start": "2023-04-07T11:26:52.5175869+02:00",
-    "theater": {
+    "theatre": {
       "id": 0,
       "seats": [
         {
@@ -5006,7 +5006,7 @@
     "id": 8,
     "movieid": 0,
     "start": "2023-04-08T11:26:52.5184462+02:00",
-    "theater": {
+    "theatre": {
       "id": 0,
       "seats": [
         {
@@ -5033,28 +5033,28 @@
         {
           "id": 3,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false,
           "luxury": false
         },
         {
           "id": 4,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false,
           "luxury": false
         },
         {
           "id": 5,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false,
           "luxury": false
         },
         {
           "id": 6,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false,
           "luxury": false
         },
@@ -5719,7 +5719,7 @@
     "id": 9,
     "movieid": 1,
     "start": "2023-04-09T11:26:52.5192283+02:00",
-    "theater": {
+    "theatre": {
       "id": 0,
       "seats": [
         {

@@ -1,16 +1,16 @@
-public static class Theater
+public static class Theatre
 {
     private static TheatreLogic TL = new TheatreLogic();
     public static void SelectSeats(TimeSlotModel TimeSlot, bool IsEdited = false)
     {
         TimeSlotsLogic TS = new TimeSlotsLogic();
-        var theater = TimeSlot.Theater;
+        var theatre = TimeSlot.Theatre;
         var size = 9;
         if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin)
         {
             size = 10000;
         }
-        var help = TL.ShowSeats(theater, size);
+        var help = TL.ShowSeats(theatre, size);
         ReservationLogic RL = new ReservationLogic();
 
         if (help != null)
@@ -46,7 +46,7 @@ public static class Theater
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        foreach (var item in TL.AllTheaters())
+        foreach (var item in TL.AllTheatres())
         {
             Options.Add($"{item.Id}");
             Actions.Add(() => EditMenu(item));
@@ -58,7 +58,7 @@ public static class Theater
         MenuLogic.Question(Question, Options, Actions);
 
     }
-    public static void EditMenu(TheaterModel theater, Action returnTo = null!)
+    public static void EditMenu(TheatreModel theatre, Action returnTo = null!)
     {
         TheatreLogic TL = new TheatreLogic();
 
@@ -67,13 +67,13 @@ public static class Theater
         List<Action> Actions = new List<Action>();
 
         Options.Add("Change size");
-        Actions.Add(() => TL.ChangeTheaterSize(theater, () => Theater.EditMenu(theater, returnTo)));
+        Actions.Add(() => TL.ChangeTheatreSize(theatre, () => Theatre.EditMenu(theatre, returnTo)));
 
         Options.Add("Block seats");
-        Actions.Add(() => TL.BlockSeats(theater, () => Theater.EditMenu(theater, returnTo)));
+        Actions.Add(() => TL.BlockSeats(theatre, () => Theatre.EditMenu(theatre, returnTo)));
 
         Options.Add("Unblock seats");
-        Actions.Add(() => TL.UnBlockSeats(theater, () => Theater.EditMenu(theater, returnTo)));
+        Actions.Add(() => TL.UnBlockSeats(theatre, () => Theatre.EditMenu(theatre, returnTo)));
 
         Options.Add("\nReturn");
         if (returnTo != null)

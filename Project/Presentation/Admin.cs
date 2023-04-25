@@ -12,7 +12,7 @@ public static class Admin
         List<Action> Actions = new List<Action>();
 
         Options.Add("Change Theatre");
-        Actions.Add(() => Theater.WhatTheatre());
+        Actions.Add(() => Theatre.WhatTheatre());
 
         Options.Add("Change Movies");
         Actions.Add(() => Movies.ChangeMoviesMenu());

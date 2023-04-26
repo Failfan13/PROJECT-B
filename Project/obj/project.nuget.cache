@@ -1,16 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "B/JlP4mOuBXOAmMV5K8Vk+a1dhRXM3n3ovo65uxcjvuEFWmNTkDOUg4hYDrQ0DrwV3VPY1MHk1wI6j3Qz7LEWg==",
+  "dgSpecHash": "c3Qy7MLGYSjpFQiMrY1VeT+GXe6qNyjoEllXszd64s3H4Bk8SoIVK4IMKSRzD3svW4fexmel0088C6fmaUeNLA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\Project.csproj",
+  "projectFilePath": "C:\\Users\\mmsb0\\OneDrive\\Documents\\GitHub\\PROJECT-B\\Project\\Project.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\erikm\\.nuget\\packages\\mailkit\\3.6.0\\mailkit.3.6.0.nupkg.sha512",
-    "C:\\Users\\erikm\\.nuget\\packages\\mimekit\\3.6.0\\mimekit.3.6.0.nupkg.sha512",
-    "C:\\Users\\erikm\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
-    "C:\\Users\\erikm\\.nuget\\packages\\system.formats.asn1\\6.0.0\\system.formats.asn1.6.0.0.nupkg.sha512",
-    "C:\\Users\\erikm\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
-    "C:\\Users\\erikm\\.nuget\\packages\\system.security.cryptography.pkcs\\6.0.0\\system.security.cryptography.pkcs.6.0.0.nupkg.sha512",
-    "C:\\Users\\erikm\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512"
+    "C:\\Users\\mmsb0\\.nuget\\packages\\mailkit\\3.6.0\\mailkit.3.6.0.nupkg.sha512",
+    "C:\\Users\\mmsb0\\.nuget\\packages\\mimekit\\3.6.0\\mimekit.3.6.0.nupkg.sha512",
+    "C:\\Users\\mmsb0\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
+    "C:\\Users\\mmsb0\\.nuget\\packages\\system.formats.asn1\\6.0.0\\system.formats.asn1.6.0.0.nupkg.sha512",
+    "C:\\Users\\mmsb0\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\mmsb0\\.nuget\\packages\\system.security.cryptography.pkcs\\6.0.0\\system.security.cryptography.pkcs.6.0.0.nupkg.sha512",
+    "C:\\Users\\mmsb0\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -67,6 +67,9 @@ static class Menu
             Console.WriteLine($"Admin {AccountsLogic.CurrentAccount.Admin}\n");
             Options.Add("Change data");
             Actions.Add(() => Admin.Start());
+ 
+            Options.Add("View data");
+            Actions.Add(() => Admin.View());
         }
 
         Options.Add("\nExit app");

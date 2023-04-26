@@ -62,8 +62,8 @@ public static class Reservation
 
         foreach (SeatModel seat in CurrSeat)
         {
-            var TheatreSeat = CurrTimeSlot.Theatre.Seats.FirstOrDefault(s => s.Id == seat.Id);
-            TheatreSeat.Reserved = false;
+            //var TheatreSeat = CurrTimeSlot.Theatre.Seats.FirstOrDefault(s => s.Id == seat.Id);
+            //TheatreSeat.Reserved = false;
         }
 
         TimeSlotsLogic.UpdateList(CurrTimeSlot);
@@ -176,8 +176,8 @@ public static class Reservation
         body += $"\nChosen seats:\n\n";
         foreach (SeatModel seat in ress.Seats)
         {
-            Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theatre.Width)}\tPrice: €{seat.Price}");
-            body += $"Nr: {seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theatre.Width)}\tPrice: €{seat.Price}\n";
+            //Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theatre.Width)}\tPrice: €{seat.Price}");
+            //body += $"Nr: {seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theatre.Width)}\tPrice: €{seat.Price}\n";
             FinalPrice += seat.Price;
         }
 

@@ -84,5 +84,22 @@
     "account_id": -1,
     "date_time": "2023-04-25T11:47:38.389569+02:00",
     "format": ""
+  },
+  {
+    "id": 4,
+    "timeslot_id": 4,
+    "seats": [
+      {
+        "id": 19,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false,
+        "luxury": false
+      }
+    ],
+    "snacks": null,
+    "account_id": 1,
+    "date_time": "2023-04-25T20:25:42.2929167+02:00",
+    "format": ""
   }
 ]

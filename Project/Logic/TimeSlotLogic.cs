@@ -20,7 +20,6 @@ class TimeSlotsLogic
         _timeslots = TimeSlotAccess.LoadAll();
     }
 
-
     public void UpdateList(TimeSlotModel ts)
     {
         //Find if there is already an model with the same id
@@ -69,10 +68,10 @@ class TimeSlotsLogic
     public void NewTimeSlot(int movieid, DateTime start, TheatreModel theatre, string format)
     {
         int NewID = GetNewestId();
-        TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, theatre, format);
+        //TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, theatre, format);
 
-    //public void NewTimeSlot(int movieid, DateTime start)
-    //{
+        //public void NewTimeSlot(int movieid, DateTime start)
+        //{
         //int NewID = GetNewestId();
         //var Theatre = new TheatreLogic();
 
@@ -86,7 +85,7 @@ class TimeSlotsLogic
 
         //TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, realth);
 
-        UpdateList(timeslot);
+        //UpdateList(timeslot);
     }
 
     public List<TimeSlotModel> AllTimeSlots()

@@ -5,22 +5,21 @@ public class TheatreModel
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
-    [JsonPropertyName("seats")]
-    public List<SeatModel> Seats { get; set; }
+    [JsonPropertyName("predefinedSeats")]
+    public List<SeatModel> PreDefSeats { get; set; } = null!;
 
-    [JsonPropertyName("width")]
+    [JsonPropertyName("roomWidth")]
     public int Width { get; set; }
 
-    [JsonPropertyName("height")]
+    [JsonPropertyName("roomHeight")]
     public int Height { get; set; }
 
     [JsonConstructor]
 
-    public TheatreModel() : this(0, new List<SeatModel>(), 0, 0) { }
-    public TheatreModel(int id, List<SeatModel> seats, int width, int height)
+    public TheatreModel() : this(0, 0, 0) { }
+    public TheatreModel(int id, int width, int height)
     {
         Id = id;
-        Seats = seats;
         Width = width;
         Height = height;
     }

@@ -8,6 +8,15 @@ public class TheatreModel
     [JsonPropertyName("predefinedSeats")]
     public List<SeatModel> PreDefSeats { get; set; } = null!;
 
+    [JsonPropertyName("outerSeatPrice")]
+    public double OuterSeatPrice { get; set; }
+
+    [JsonPropertyName("middSeatPrice")]
+    public double MiddleSeatPrice { get; set; }
+
+    [JsonPropertyName("innerSeatPrice")]
+    public double InnerSeatprice { get; set; }
+
     [JsonPropertyName("roomWidth")]
     public int Width { get; set; }
 
@@ -16,10 +25,13 @@ public class TheatreModel
 
     [JsonConstructor]
 
-    public TheatreModel() : this(0, 0, 0) { }
-    public TheatreModel(int id, int width, int height)
+    public TheatreModel() : this(0, 0, 0, 0) { }
+    public TheatreModel(int id, double SeatPrice, int width, int height)
     {
         Id = id;
+        OuterSeatPrice = SeatPrice;
+        MiddleSeatPrice = SeatPrice * 1.5;
+        OuterSeatPrice = SeatPrice * 2;
         Width = width;
         Height = height;
     }

@@ -77,4 +77,27 @@ public static class MenuLogic
         // no action, return the index of the option
         return selectedOption;
     }
+
+    public static void ClearLastLines(int linesToClear, bool threadDelay = false)
+    {
+        if (threadDelay) Thread.Sleep(3000);
+
+        // current cursor position
+        int currentLine = Console.CursorTop;
+
+        Console.SetCursorPosition(0, currentLine - linesToClear);
+
+        // Clear lines replace with empty strings
+        Console.Write(new string(' ', Console.WindowWidth * linesToClear));
+
+        Console.SetCursorPosition(0, currentLine - linesToClear);
+    }
+
+    public static void ColorString(string str, ConsoleColor color = ConsoleColor.DarkBlue, bool wholeLine = true)
+    {
+        Console.ForegroundColor = color;
+        if (wholeLine) Console.WriteLine(str); // takes whole line
+        else Console.Write(str); // used inline
+        Console.ResetColor();
+    }
 }

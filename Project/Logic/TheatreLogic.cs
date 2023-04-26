@@ -1,5 +1,6 @@
 using System;
 using System.Text.Json;
+using System.Data;
 public class TheatreLogic
 {
     private List<TheatreModel> _theatres;
@@ -11,7 +12,9 @@ public class TheatreLogic
 
     public void AddTheatre(TheatreModel theatre)
     {
-        _theatres.Add(theatre);
+        // update if exists else add
+        if (ExistingId(theatre.Id)) _theatres[_theatres.FindIndex(i => i.Id == theatre.Id)] = theatre;
+        else _theatres.Add(theatre);
         UpdateList(theatre);
     }
 
@@ -20,6 +23,32 @@ public class TheatreLogic
         _theatres.RemoveAll(t => t.Id == id);
         UpdateList();
     }
+
+    public string SeatNumber(int width, int seatNum)
+    {
+        List<char> letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToList();
+        var Seat = (seatNum % width) + 1;
+        var Row = (Math.Floor((double)(seatNum / width)));
+
+        return $"{Seat}{letters[(int)Row]}";
+    }
+
+    // public Dictionary<int, string> SeatPositions(int width, int height)
+    // {
+    //     Dictionary<int, string> seatPos = new Dictionary<int, string>();
+
+    //     double median = (double)(width * height) / 2;
+    //     if (median % 1 == 0)
+    //     {
+
+    //     }
+    //     else
+    //     {
+    //         Console.WriteLine(median);
+    //     }
+
+    //     return null;
+    // }
 
     public void UpdateList() => this.UpdateList(null!);
     public void UpdateList(TheatreModel theatre)
@@ -49,7 +78,9 @@ public class TheatreLogic
     {
         return _theatres.Find(i => i.Id == id);
     }
+
     public bool ExistingId(int id) => AllTheatres().Exists(i => i.Id == id);
+
     public int GetNewestId()
     {
         return (_theatres.OrderByDescending(item => item.Id).First().Id) + 1;
@@ -60,7 +91,7 @@ public class TheatreLogic
         return _theatres;
     }
 
-    public int MakeTheatre(int width, int height, int OldId = -1)
+    public int MakeTheatre(double outSeatPrice, int width, int height, int OldId = -1, double midSeatPrice = 0, double innSeatPrice = 0)
     {
         int newId = 0;
         if (OldId == -1)
@@ -79,7 +110,17 @@ public class TheatreLogic
             newId = OldId;
         }
 
-        TheatreModel theatre = new TheatreModel(newId, width, height);
+        TheatreModel theatre = new TheatreModel(newId, outSeatPrice, width, height);
+
+        if (midSeatPrice != 0)
+        {
+            theatre.MiddleSeatPrice = midSeatPrice;
+        }
+        if (innSeatPrice != 0)
+        {
+            theatre.InnerSeatprice = innSeatPrice;
+        }
+
         AddTheatre(theatre);
 
         return theatre.Id;
@@ -111,144 +152,165 @@ public class TheatreLogic
     // MaxLength is used to limit seat selection
     public void ShowSeats(TimeSlotModel currTimeSlot, bool select = false)
     {
-        int theatreId = 0;
+        //         int theatreId = 0;
 
-        SeatModel seatM = new SeatModel(0, 0);
+        //         SeatModel seatM = new SeatModel(0, 0);
 
-        TheatreModel currRessTheatre = null!;
-        List<SeatModel> currRessSeats = null!;
+        //         TheatreModel currRessTheatre = null!;
+        //         List<SeatModel> currRessSeats = null!;
 
-        // Desect theatre properties current time slot
-        try
-        {
-            theatreId = currTimeSlot.Theatre.TheatreId;
-            currRessTheatre = GetById(theatreId)!;
-            currRessSeats = currTimeSlot.Theatre.Seats;
-        }
-        catch (System.InvalidCastException)
-        {
-            return;
-        }
+        //         // Desect theatre properties current time slot
+        //         try
+        //         {
+        //             theatreId = currTimeSlot.Theatre.TheatreId;
+        //             currRessTheatre = GetById(theatreId)!;
+        //             currRessSeats = currTimeSlot.Theatre.Seats;
+        //         }
+        //         catch (System.InvalidCastException)
+        //         {
+        //             return;
+        //         }
 
-        // // build theatre
-        int seatAmount = currRessTheatre.Width * currRessTheatre.Height;
-        List<Tuple<string, object>> AllSeats = new List<Tuple<string, object>>() { };
+        //         // // build theatre
+        //         int seatAmount = currRessTheatre.Width * currRessTheatre.Height;
+        //         List<SeatModel> AllSeats = new List<SeatModel>() { };
 
-        // Creates AllSeats on time slot order
-        // (object)1 bv is allocated placeholder
-        // AllSeats: List<("A1", (object)1), ("A2", SeatModel) etc.>
-        for (int i = 0; i < seatAmount; i++)
-        {
-            if (currRessSeats.Exists(s => s.Id == i))
-            {
-                AllSeats.Add(new Tuple<string, object>(
-                    seatM.SeatRow(currRessTheatre.Width),
-                    currRessSeats.Find(s => s.Id == i)!));
-            }
-            else
-            {
-                AllSeats.Add(new Tuple<string, object>(
-                    seatM.SeatRow(currRessTheatre.Width),
-                    i));
-            }
-        }
+        //         // Creates AllSeats on time slot order
+        //         for (int i = 0; i < seatAmount; i++)
+        //         {
+        //             if (currRessSeats.Exists(s => s.Id == i))
+        //             {
+        //                 AllSeats.Add(currRessSeats.Find(s => s.Id == i)!);
+        //             }
+        //             else
+        //             {
+        //                 AllSeats.Add(new SeatModel(i, currRessTheatre));
+        //             }
+        //         }
 
-        // Writes all seats or sends to selector
-        if (select)
-        {
-            SeatSelector();
-        }
-        else
-        {
-            foreach (var seat in AllSeats)
-            {
-                Console.WriteLine($"seatNum: {seat.Item1}, type: {seat.Item2}");
-            }
-        }
+        //         // Writes all seats or sends to selector
+        //         if (select)
+        //         {
+        //             SeatSelector(AllSeats, currRessTheatre);
+        //         }
+        //         else
+        //         {
+        //             foreach (var seat in AllSeats)
+        //             {
+        //                 Console.WriteLine($"seatNum: {seat.Item1}, type: {seat.Item2}");
+        //             }
+        //         }
+        //     }
+
+        //     public void SeatSelector(List<SeatModel> seatList, TheatreModel theatre)
+        //     {
+        //         TimeSlotsLogic timeSlotsLogic = new TimeSlotsLogic();
+        //         List<SeatModel> selectedSeats = new List<SeatModel>() { };
+
+        //         int selectedSeatIndex = 0;
+        //         int i = 1;
+
+        //         while (true)
+        //         {
+        //             Console.Clear();
+        //             // instruction and long lines in between
+        //             Console.WriteLine(@$"Use arrow keys to navigate and press Enter to select a seat
+        // {new String('˭', 59) + "\r"}
+        // Press [ C ] to confirm and reserve selected seats
+        // Press [ R ] to reset selections and start over
+        // Press [ X ] to Cancel and return to main menu
+        // {new String('‗', 59) + "\r"}
+        // ");
+
+        //             foreach (var seat in seatList)
+        //             {
+        //                 if (seat.Item2 is int)
+        //                 {
+        //                     if ((int)seat.Item2 == selectedSeatIndex) // select block sNum
+        //                     {
+        //                         Console.BackgroundColor = ConsoleColor.Yellow;
+        //                         Console.ForegroundColor = ConsoleColor.Black;
+        //                     }
+        //                     Console.ForegroundColor = ConsoleColor.Green;
+        //                 }
+        //                 else if (seat.Item2 is SeatModel)
+        //                 {
+        //                     if ((seat.Item2 as SeatModel)!.Id == selectedSeatIndex)  // select block sMod
+        //                     {
+        //                         Console.BackgroundColor = ConsoleColor.Yellow;
+        //                         Console.ForegroundColor = ConsoleColor.Black;
+        //                     }
+        //                     switch (seat.Item2 as SeatModel)
+        //                     {
+        //                         case var s when selectedSeats.Contains(seat.Item2):
+        //                             Console.BackgroundColor = ConsoleColor.Blue;
+        //                             Console.ForegroundColor = ConsoleColor.White;
+        //                             break;
+        //                         case var s when s!.Reserved:
+        //                             Console.ForegroundColor = ConsoleColor.Red;
+        //                             break;
+        //                         case var s when s!.Handicapped:
+        //                             Console.ForegroundColor = ConsoleColor.Blue;
+        //                             break;
+        //                         case var s when s!.Luxury:
+        //                             Console.ForegroundColor = ConsoleColor.Magenta;
+        //                             break;
+        //                         default:
+        //                             Console.ForegroundColor = ConsoleColor.Green;
+        //                             break;
+        //                     };
+        //                 }
+
+
+        //                 Console.Write($" {seat.Item1} ");
+        //                 Console.ResetColor();
+
+        //                 if (i == theatre.Width)
+        //                 {
+        //                     Console.WriteLine();
+        //                     i = 0;
+        //                 }
+        //                 i += 1;
+        //             }
+
+        //             Console.WriteLine($"\nSelected Seats: {string.Join(", ", selectedSeats.Select(s => $"{SeatNumber(theatre.Width, s.Id)}"))}");
+
+        //             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+        //             switch (keyInfo.Key)
+        //             {
+        //                 case ConsoleKey.UpArrow:
+        //                     selectedSeatIndex = Math.Max(0, selectedSeatIndex - theatre.Width);
+        //                     break;
+        //                 case ConsoleKey.DownArrow:
+        //                     selectedSeatIndex = Math.Min(seatList.Count - 1, selectedSeatIndex + theatre.Width);
+        //                     break;
+        //                 case ConsoleKey.LeftArrow:
+        //                     selectedSeatIndex = Math.Max(0, selectedSeatIndex - 1);
+        //                     break;
+        //                 case ConsoleKey.RightArrow:
+        //                     selectedSeatIndex = Math.Min(seatList.Count - 1, selectedSeatIndex + 1);
+        //                     break;
+        //                 case ConsoleKey.Enter:
+        //                     SeatModel selectedSeat = seatList[selectedSeatIndex].Item2 as SeatModel;
+        //                     if (selectedSeats.Contains(selectedSeat))
+        //                     {
+        //                         selectedSeats.Remove(selectedSeat);
+        //                     }
+        //                     else if (!selectedSeat.Reserved)
+        //                     {
+        //                         selectedSeats.Add(selectedSeat);
+        //                     }
+        //                     break;
+        //                 default:
+        //                     Console.WriteLine("sus");
+        //                     break;
+        //             }
+        //         }
+        // show seats with right color applied
+
     }
 
-    public void SeatSelector()
-    {
-
-    }
-    // public Helper? ShowSeats(TheatreModel theatre, int MaxLength = 1000)
-    // {
-    //     var AllSeats = theatre.Seats;
-    //     List<SeatModel> selectedSeats = new List<SeatModel>();
-
-    //     int i = 1;
-    //     int selectedSeatIndex = 0;
-
-    //     while (true)
-    //     {
-    //         Console.Clear();
-    //         Console.WriteLine("Use arrow keys to navigate and press Enter to select a seat:\nPress C to confirm and reserve selected seats\nX to Cancel\nR to reset selections and start over:");
-
-    //         for (int j = 0; j < AllSeats.Count; j++)
-    //         {
-    //             SeatModel seat = AllSeats[j];
-
-    //             if (j == selectedSeatIndex)
-    //             {
-    //                 Console.BackgroundColor = ConsoleColor.Yellow;
-    //                 Console.ForegroundColor = ConsoleColor.Black;
-    //             }
-    //             else if (selectedSeats.Contains(seat))
-    //             {
-    //                 Console.BackgroundColor = ConsoleColor.Blue;
-    //                 Console.ForegroundColor = ConsoleColor.White;
-    //             }
-    //             else if (seat.Reserved)
-    //             {
-    //                 Console.ForegroundColor = ConsoleColor.Red;
-    //             }
-    //             else if (seat.Handicapped)
-    //             {
-    //                 Console.ForegroundColor = ConsoleColor.Blue;
-    //             }
-    //             else if (seat.Luxury)
-    //             {
-    //                 Console.ForegroundColor = ConsoleColor.Magenta;
-    //             }
-    //             else
-    //             {
-    //                 Console.ForegroundColor = ConsoleColor.Green;
-    //             }
-
-    //             Console.Write($" {seat.SeatRow(theatre.Width)} ");
-    //             Console.ResetColor();
-
-    //             if (i == theatre.Width)
-    //             {
-    //                 Console.WriteLine();
-    //                 i = 0;
-    //             }
-    //             i += 1;
-    //         }
-
-    //         Console.WriteLine();
-    //         Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.SeatRow(theatre.Width)}"))}");
-
-    //         Console.WriteLine();
-    //         Console.ForegroundColor = ConsoleColor.Green;
-    //         Console.Write("■");
-    //         Console.ResetColor();
-    //         Console.Write(" Regular seat\n");
-    //         Console.ForegroundColor = ConsoleColor.Magenta;
-    //         Console.Write("■");
-    //         Console.ResetColor();
-    //         Console.Write(" Luxury seat\n");
-    //         Console.ForegroundColor = ConsoleColor.Blue;
-    //         Console.Write("■");
-    //         Console.ResetColor();
-    //         Console.Write(" Handicap seat\n");
-    //         Console.ForegroundColor = ConsoleColor.Red;
-    //         Console.Write("■");
-    //         Console.ResetColor();
-    //         Console.Write(" Taken seat\n");
-    //         Console.WriteLine();
     //         ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-
     //         switch (keyInfo.Key)
     //         {
     //             case ConsoleKey.UpArrow:
@@ -325,6 +387,82 @@ public class TheatreLogic
     //     }
     // }
 
+
+    // public Helper? ShowSeats(TheatreModel theatre, int MaxLength = 1000)
+    // {
+    //     var AllSeats = theatre.Seats;
+    //     List<SeatModel> selectedSeats = new List<SeatModel>();
+
+    //     int i = 1;
+    //     int selectedSeatIndex = 0;
+
+    //     while (true)
+    //     {
+    //         Console.Clear();
+    //         Console.WriteLine("Use arrow keys to navigate and press Enter to select a seat:\nPress C to confirm and reserve selected seats\nX to Cancel\nR to reset selections and start over:");
+
+    //         for (int j = 0; j < AllSeats.Count; j++)
+    //         {
+    //             SeatModel seat = AllSeats[j];
+
+    //             if (j == selectedSeatIndex)
+    //             {
+    //                 Console.BackgroundColor = ConsoleColor.Yellow;
+    //                 Console.ForegroundColor = ConsoleColor.Black;
+    //             }
+    //             else if (selectedSeats.Contains(seat))
+    //             {
+    //                 Console.BackgroundColor = ConsoleColor.Blue;
+    //                 Console.ForegroundColor = ConsoleColor.White;
+    //             }
+    //             else if (seat.Reserved)
+    //             {
+    //                 Console.ForegroundColor = ConsoleColor.Red;
+    //             }
+    //             else if (seat.Handicapped)
+    //             {
+    //                 Console.ForegroundColor = ConsoleColor.Blue;
+    //             }
+    //             else if (seat.Luxury)
+    //             {
+    //                 Console.ForegroundColor = ConsoleColor.Magenta;
+    //             }
+    //             else
+    //             {
+    //                 Console.ForegroundColor = ConsoleColor.Green;
+    //             }
+
+    //             Console.Write($" {seat.SeatRow(theatre.Width)} ");
+    //             Console.ResetColor();
+
+    //             if (i == theatre.Width)
+    //             {
+    //                 Console.WriteLine();
+    //                 i = 0;
+    //             }
+    //             i += 1;
+    //         }
+
+    public void ShowLegend()
+    {
+        Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write("■");
+        Console.ResetColor();
+        Console.Write(" Regular seat\n");
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        Console.Write("■");
+        Console.ResetColor();
+        Console.Write(" Luxury seat\n");
+        Console.ForegroundColor = ConsoleColor.Blue;
+        Console.Write("■");
+        Console.ResetColor();
+        Console.Write(" Handicap seat\n");
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write("■");
+        Console.ResetColor();
+        Console.Write(" Taken seat\n");
+    }
     // public void BlockSeats(TheatreModel theatre, Action returnTo = null!)
     // {
     //     TheatreLogic TL = new TheatreLogic();
@@ -362,3 +500,22 @@ public class TheatreLogic
     // }
 
 }
+
+
+// (object)1 bv is placeholder
+// AllSeats: List<("A1", (object)1), ("A2", SeatModel) etc.>
+// for (int i = 0; i < seatAmount; i++)
+// {
+//     if (currRessSeats.Exists(s => s.Id == i))
+//     {
+//         AllSeats.Add(new Tuple<string, object>(
+//             SeatNumber(currRessTheatre.Width, i),
+//             currRessSeats.Find(s => s.Id == i)!));
+//     }
+//     else
+//     {
+//         AllSeats.Add(new Tuple<string, object>(
+//             SeatNumber(currRessTheatre.Width, i),
+//             i));
+//     }
+// }

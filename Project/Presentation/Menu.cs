@@ -42,7 +42,7 @@ static class Menu
 
         // Movies.AddNewMovie();
         TheatreLogic room = new TheatreLogic();
-        room.MakeTheatre(10, 10);
+        room.MakeTheatre(10, 10, 10);
 
 
         // // adding movies to check new functions

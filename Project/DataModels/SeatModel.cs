@@ -17,6 +17,8 @@ public class SeatModel
     [JsonPropertyName("luxury")]
     public bool Luxury { get; set; }
 
+    [JsonPropertyName("visible")]
+    public bool Visiable { get; set; } = true;
 
     [JsonConstructor]
     public SeatModel(int id, double price, bool reserved = false, bool handicapped = false, bool luxury = false)
@@ -26,13 +28,5 @@ public class SeatModel
         Reserved = reserved;
         Handicapped = handicapped;
         Luxury = luxury;
-    }
-    public string SeatRow(int width)
-    {
-        List<char> letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToList();
-        var Seat = (Id % width) + 1;
-        var Row = (Math.Floor((double)(Id / width)));
-
-        return $"{Seat}{letters[(int)Row]}";
     }
 }

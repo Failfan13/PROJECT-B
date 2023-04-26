@@ -12,4 +12,5 @@ TimeSlotModel tmsm = timeSlotsLogic.GetById(0);
 
 TheatreLogic theatreLogic = new TheatreLogic();
 
-theatreLogic.ShowSeats(tmsm);
+//theatreLogic.ShowSeats(tmsm, true);
+Theatre.MakeNewTheatre();

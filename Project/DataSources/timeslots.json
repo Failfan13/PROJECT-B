@@ -7,11 +7,12 @@
       "id": 0,
       "seats": [
         {
-          "id": 0,
+          "id": 1,
           "price": 10,
           "reserved": false,
           "handicapped": false,
-          "luxury": false
+          "luxury": false,
+          "visible": true
         }
       ]
     },

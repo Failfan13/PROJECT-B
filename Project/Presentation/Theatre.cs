@@ -88,12 +88,13 @@ public static class Theatre
     {
         int width = 0;
         int height = 0;
-        double outSeatPrice = 0;
-        double midSeatPrice = 0;
-        double innSeatPrice = 0;
+        double baseSeatPrice = 0; // basic
+        double stanSeatPrice = 0; // standard
+        double luxeSeatPrice = 0; // luxury
 
         Console.Clear();
         TheatreLogic TL = new TheatreLogic();
+        TimeSlotsLogic TSL = new TimeSlotsLogic();
 
         Console.WriteLine($"Welcome to the Theatre creator!\n\nPlease enter the requested information below");
         MenuLogic.ColorString(new String('˭', 59)); // prints colored string
@@ -102,8 +103,9 @@ public static class Theatre
         string SizeInp = "";
 
         Console.WriteLine("The theatre Width & Height ( in seats ex: 12x16 )");
-        MenuLogic.ColorString(">>", wholeLine: false);
-        Console.WriteLine(" Enter between 10x10 and 100x100, usage of x is required");
+        MenuLogic.ColorString(">>", newLine: false);
+        Console.WriteLine(" Enter between 10x10 and 26x26, usage of x is required"); // command the user
+
         // while Size is not available for theatre
         while (SizeInp == "")
         {
@@ -113,7 +115,7 @@ public static class Theatre
             {
                 if (input.Contains('x') && // input contains x
                 Int32.Parse(splitInput[0]) >= 10 && Int32.Parse(splitInput[1]) >= 10 &&// check if numbers more then 10
-                Int32.Parse(splitInput[0]) <= 100 && Int32.Parse(splitInput[1]) <= 100) // check if numbers less then 100
+                Int32.Parse(splitInput[0]) <= 26 && Int32.Parse(splitInput[1]) <= 26) // check if numbers less then 100
                 {
                     SizeInp = input;
                     width = Int32.Parse(splitInput[0]);
@@ -121,76 +123,115 @@ public static class Theatre
                     break;
                 }
                 Console.WriteLine("This is not a valid input, please try again");
-                MenuLogic.ClearLastLines(2, true); // clear last 3 lines
+                MenuLogic.ClearLastLines(2, true);
             }
             catch (System.Exception)
             {
                 Console.WriteLine("This is not a valid input, please try again");
-                MenuLogic.ClearLastLines(2, true); // clear last 2 lines
+                MenuLogic.ClearLastLines(2, true);
             }
         }
 
-        // Outer seat prices
-        Console.WriteLine("\nTheatre outer seat price");
-        while (outSeatPrice == 0)
+        // basic seat prices
+        Console.WriteLine("\nTheatre basic seat price");
+        MenuLogic.ColorString(">>", newLine: false);
+        Console.WriteLine(" Enter number between 0 and 999"); // command the user
+        while (baseSeatPrice == 0)
         {
             var input = Console.ReadLine()!.ToLower();
             try
             {
-                outSeatPrice = Double.Parse(input);
+                var seatPrice = Double.Parse(input);
+                if (seatPrice >= 0 && seatPrice <= 999) baseSeatPrice = seatPrice; // between 0 and 999
                 break;
             }
             catch (System.Exception)
             {
                 Console.WriteLine("This is not a valid input, please try again");
-                MenuLogic.ClearLastLines(2, true); // clear last 2 lines
+                MenuLogic.ClearLastLines(2, true);
             }
         }
 
-        // Middle seat prices (between outer and inner)
-        Console.WriteLine("Theatre middle seat price");
-        while (midSeatPrice == 0)
+        // standard seat prices (between basic and luxury)
+        Console.WriteLine("Theatre standard seat price");
+        MenuLogic.ColorString(">>", newLine: false);
+        Console.WriteLine($" Enter number between {baseSeatPrice} and 999"); // command the user
+        while (stanSeatPrice == 0)
         {
             var input = Console.ReadLine()!.ToLower();
             try
             {
-                midSeatPrice = Double.Parse(input);
-                if (midSeatPrice >= outSeatPrice) break; // check if price less then outer seat
-                midSeatPrice = 0;
+                stanSeatPrice = Double.Parse(input);
+                if (stanSeatPrice >= baseSeatPrice) break; // check if price less then outer seat
+                stanSeatPrice = 0;
 
                 Console.WriteLine("The input is lower then the outer seat, please try again");
-                MenuLogic.ClearLastLines(2, true); // clear last 2 lines
+                MenuLogic.ClearLastLines(2, true);
             }
             catch (System.Exception)
             {
                 Console.WriteLine("This is not a valid input, please try again");
-                MenuLogic.ClearLastLines(2, true); // clear last 2 lines
+                MenuLogic.ClearLastLines(2, true);
             }
         }
 
-        // Inner seat prices
-        Console.WriteLine("Theatre inner seat price");
-        while (innSeatPrice == 0)
+        // luxury seat prices
+        Console.WriteLine("Theatre luxury seat price");
+        MenuLogic.ColorString(">>", newLine: false);
+        Console.WriteLine($" Enter number between {stanSeatPrice} and 999"); // command the user
+        while (luxeSeatPrice == 0)
         {
             var input = Console.ReadLine()!.ToLower();
             try
             {
-                innSeatPrice = Double.Parse(input);
-                if (innSeatPrice >= midSeatPrice) break;// check if price less then middle seat
-                innSeatPrice = 0;
+                luxeSeatPrice = Double.Parse(input);
+                if (luxeSeatPrice >= stanSeatPrice) break;// check if price less then middle seat
+                luxeSeatPrice = 0;
 
                 Console.WriteLine("The input is lower then the middle seat, please try again");
-                MenuLogic.ClearLastLines(2, true); // clear last 2 lines
+                MenuLogic.ClearLastLines(2, true);
             }
             catch (System.Exception)
             {
                 Console.WriteLine("This is not a valid input, please try again");
-                MenuLogic.ClearLastLines(2, true); // clear last 2 lines
+                MenuLogic.ClearLastLines(2, true);
             }
         }
 
+        //TheatreModel newTheatre = TL.MakeTheatre(width, height, baseSeatPrice, stanSeatPrice, luxeSeatPrice);
 
-        // To draw theatre and remove the seats where needed
+        Console.WriteLine("\nWould you like to change seat configuration? (y/n)");
+        ConsoleKeyInfo inputKey = Console.ReadKey(true);
+        // Y key to config menu
+        if (inputKey.Key == ConsoleKey.Y)
+        {
+            // Colored instruction menu
+            MenuLogic.ClearLastLines(12);
+            Console.Write(@$"In the following screen you can change the seat configuration
+Press the following buttons to apply changes:
+         
+Press [ ");
+            MenuLogic.ColorString("↑ → ↓ ←", newLine: false);
+            Console.Write(" ] Keys to move around the menu\r\nPress [ ");
+            MenuLogic.ColorString("Enter", newLine: false);
+            Console.Write(" ] Key to select a seat\r\nPress [ ");
+            MenuLogic.ColorString("E", newLine: false);
+            Console.Write(" ] Key to remove seat position\r\nPress [ ");
+            MenuLogic.ColorString("A", newLine: false);
+            Console.Write(" ] Key to add seat position\r\nPress [ ");
+            MenuLogic.ColorString("P", newLine: false);
+            Console.Write(" ] Key to add pathway\r\nPress [ ");
+            MenuLogic.ColorString("R", newLine: false);
+            Console.Write(" ] Key to remove pathway\r\nPress [ ");
+            MenuLogic.ColorString("Q", newLine: false);
+            Console.Write(" ] Key to quit\r\n");
+            MenuLogic.ColorString(new String('‗', 59));
+
+            TL.ShowSeats(TL.GetById(2)!, TSL.GetById(0)!);
+        }
+
+
+        // To draw theatre and remove the seats are not needed
         // These seat indexes need to be added to theatre model
 
         // The show seats will need to able to be added as new theatre or choose seats from it

@@ -82,8 +82,9 @@ public static class MenuLogic
     {
         if (threadDelay) Thread.Sleep(3000);
 
+        linesToClear += 1; // adds new input to clear
         // current cursor position
-        int currentLine = Console.CursorTop;
+        int currentLine = Console.CursorTop + 1; // sets top one line lower for input
 
         Console.SetCursorPosition(0, currentLine - linesToClear);
 
@@ -93,10 +94,10 @@ public static class MenuLogic
         Console.SetCursorPosition(0, currentLine - linesToClear);
     }
 
-    public static void ColorString(string str, ConsoleColor color = ConsoleColor.DarkBlue, bool wholeLine = true)
+    public static void ColorString(string str, ConsoleColor color = ConsoleColor.DarkBlue, bool newLine = true)
     {
         Console.ForegroundColor = color;
-        if (wholeLine) Console.WriteLine(str); // takes whole line
+        if (newLine) Console.WriteLine(str); // takes whole line
         else Console.Write(str); // used inline
         Console.ResetColor();
     }

@@ -178,3 +178,6 @@ timestamp,type,id,action,user_id
 2023-04-25 20:25:57,TimeSlotModel,4,Updated,1
 2023-04-25 20:26:18,ReservationModel,4,Updated,1
 2023-04-25 20:55:45,TheatreModel,1,Updated,
+2023-04-27 16:35:04,TheatreModel,2,Updated,
+2023-04-27 16:44:02,TheatreModel,2,Updated,
+2023-04-27 21:23:45,TheatreModel,3,Updated,

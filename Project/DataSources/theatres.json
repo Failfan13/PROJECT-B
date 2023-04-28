@@ -1,18 +1,54 @@
 [
   {
     "id": 0,
-    "outSeatPrice": 10,
-    "midSeatPrice": 15,
-    "innSeatPrice": 20,
+    "layoutSpecs": {
+      "pathwaysIndex": [],
+      "nulledSeats": []
+    },
+    "outerSeatPrice": 0,
+    "middSeatPrice": 0,
+    "innerSeatPrice": 0,
     "roomWidth": 10,
     "roomHeight": 10
   },
   {
     "id": 1,
-    "outSeatPrice": 10,
-    "midSeatPrice": 15,
-    "innSeatPrice": 20,
+    "layoutSpecs": {
+      "pathwaysIndex": [],
+      "nulledSeats": []
+    },
+    "outerSeatPrice": 0,
+    "middSeatPrice": 0,
+    "innerSeatPrice": 0,
     "roomWidth": 5,
     "roomHeight": 5
+  },
+  {
+    "id": 2,
+    "layoutSpecs": {
+      "pathwaysIndex": [
+        1,
+        5
+      ],
+      "blockedSeats": [
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "handicapSeats": [
+        15,
+        23,
+        55,
+        122
+      ]
+    },
+    "outerSeatPrice": 9,
+    "middSeatPrice": 9,
+    "innerSeatPrice": 10,
+    "roomWidth": 15,
+    "roomHeight": 15
   }
 ]

@@ -6,11 +6,12 @@ Console.OutputEncoding = System.Text.Encoding.Unicode;
 
 // Menu.Start();
 
-TimeSlotsLogic timeSlotsLogic = new TimeSlotsLogic();
+TimeSlotsLogic TSL = new TimeSlotsLogic();
 
-TimeSlotModel tmsm = timeSlotsLogic.GetById(0);
+TimeSlotModel tmsm = TSL.GetById(0);
 
 TheatreLogic theatreLogic = new TheatreLogic();
 
 //theatreLogic.ShowSeats(tmsm, true);
-Theatre.MakeNewTheatre();
+// Theatre.MakeNewTheatre();
+theatreLogic.ShowSeats(theatreLogic.GetById(2)!, tmsm!);

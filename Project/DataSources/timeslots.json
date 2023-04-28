@@ -5,13 +5,40 @@
     "start": "2020-12-10T10:50:00",
     "theatre": {
       "id": 0,
-      "seats": [
+      "reservedSeats": [
         {
           "id": 1,
           "price": 10,
-          "reserved": false,
           "handicapped": false,
           "luxury": false,
+          "visible": true
+        },
+        {
+          "id": 8,
+          "price": 10,
+          "handicapped": false,
+          "luxury": false,
+          "visible": true
+        },
+        {
+          "id": 18,
+          "price": 10,
+          "handicapped": false,
+          "luxury": false,
+          "visible": true
+        },
+        {
+          "id": 144,
+          "price": 10,
+          "handicapped": false,
+          "luxury": false,
+          "visible": true
+        },
+        {
+          "id": 108,
+          "price": 10,
+          "handicapped": false,
+          "luxury": true,
           "visible": true
         }
       ]

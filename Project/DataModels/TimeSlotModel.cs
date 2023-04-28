@@ -45,7 +45,7 @@ public class TimeSlotModel
         [JsonPropertyName("id")]
         public int TheatreId { get; set; }
 
-        [JsonPropertyName("seats")]
+        [JsonPropertyName("reservedSeats")]
         public List<SeatModel> Seats { get; set; }
 
         [JsonConstructor]

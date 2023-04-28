@@ -5,17 +5,17 @@ public class TheatreModel
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
-    [JsonPropertyName("predefinedSeats")]
-    public List<SeatModel> PreDefSeats { get; set; } = null!;
+    [JsonPropertyName("layoutSpecs")]
+    public SeatBuilderHelper LayoutSpecs { get; set; } = new SeatBuilderHelper();
 
-    [JsonPropertyName("outerSeatPrice")]
-    public double OuterSeatPrice { get; set; }
+    [JsonPropertyName("baseSeatPrice")]
+    public double BasicSeatPrice { get; set; }
 
-    [JsonPropertyName("middSeatPrice")]
-    public double MiddleSeatPrice { get; set; }
+    [JsonPropertyName("stanSeatPrice")]
+    public double StandardSeatPrice { get; set; }
 
-    [JsonPropertyName("innerSeatPrice")]
-    public double InnerSeatprice { get; set; }
+    [JsonPropertyName("luxeSeatPrice")]
+    public double LuxurySeatPrice { get; set; }
 
     [JsonPropertyName("roomWidth")]
     public int Width { get; set; }
@@ -29,10 +29,22 @@ public class TheatreModel
     public TheatreModel(int id, double SeatPrice, int width, int height)
     {
         Id = id;
-        OuterSeatPrice = SeatPrice;
-        MiddleSeatPrice = SeatPrice * 1.5;
-        OuterSeatPrice = SeatPrice * 2;
+        BasicSeatPrice = SeatPrice;
+        StandardSeatPrice = SeatPrice * 1.5;
+        LuxurySeatPrice = SeatPrice * 2;
         Width = width;
         Height = height;
+    }
+
+    public class SeatBuilderHelper
+    {
+        [JsonPropertyName("pathwaysIndex")]
+        public List<int> PathwayIndexes { get; set; } = new List<int>() { };
+
+        [JsonPropertyName("blockedSeats")]
+        public List<int> BlockedSeatIndexes { get; set; } = new List<int>() { };
+
+        [JsonPropertyName("handicapSeats")]
+        public List<int> HandiSeatIndexes { get; set; } = new List<int>() { };
     }
 }

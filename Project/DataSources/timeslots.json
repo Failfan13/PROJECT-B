@@ -7,39 +7,29 @@
       "id": 0,
       "reservedSeats": [
         {
-          "id": 1,
-          "price": 10,
+          "id": 2,
           "handicapped": false,
-          "luxury": false,
-          "visible": true
+          "luxury": false
         },
         {
           "id": 8,
-          "price": 10,
           "handicapped": false,
-          "luxury": false,
-          "visible": true
+          "luxury": false
         },
         {
           "id": 18,
-          "price": 10,
           "handicapped": false,
-          "luxury": false,
-          "visible": true
+          "luxury": false
         },
         {
           "id": 144,
-          "price": 10,
           "handicapped": false,
-          "luxury": false,
-          "visible": true
+          "luxury": false
         },
         {
           "id": 108,
-          "price": 10,
           "handicapped": false,
-          "luxury": true,
-          "visible": true
+          "luxury": true
         }
       ]
     },

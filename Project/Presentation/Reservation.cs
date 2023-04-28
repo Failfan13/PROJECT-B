@@ -178,7 +178,7 @@ public static class Reservation
         {
             //Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theatre.Width)}\tPrice: €{seat.Price}");
             //body += $"Nr: {seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theatre.Width)}\tPrice: €{seat.Price}\n";
-            FinalPrice += seat.Price;
+            //FinalPrice += seat.Price;
         }
 
         // Snack data

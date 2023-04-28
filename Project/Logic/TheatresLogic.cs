@@ -145,7 +145,7 @@ public class TheatreLogic
         List<SeatModel> reservedSeats = timeSlot.Theatre.Seats;
 
         List<SeatModel> selectedSeats = new List<SeatModel>();
-        int selectedSeatIndex = 0;
+        int selectedSeat = 1;
 
         // screen position
         Console.Write("   ");
@@ -162,12 +162,12 @@ public class TheatreLogic
         int seatAmount = theatre.Width * theatre.Height;
         int charIndex = 0;
 
-        for (int i = 0; i < seatAmount; i++)
+        for (int i = 1; i < seatAmount + 1; i++)
         {
             ConsoleColor seatColor = ConsoleColor.White;
             string seatIcon = "▮";
 
-            if (i == 0 || i % theatre.Width == 0) MenuLogic.ColorString($"{(char)(charIndex + 65)} ", newLine: false); // Adds row letters
+            if (i == 1 || (i - 1) % theatre.Width == 0) MenuLogic.ColorString($"{(char)(charIndex + 65)} ", newLine: false); // Adds row letters
 
             // show standard seats
 
@@ -183,7 +183,7 @@ public class TheatreLogic
                 seatIcon = "☐";
             }
 
-            if (selectedSeatIndex == i)
+            if (selectedSeat == i)
             {
                 Console.BackgroundColor = ConsoleColor.Yellow;
                 Console.ForegroundColor = ConsoleColor.Black;
@@ -191,7 +191,7 @@ public class TheatreLogic
 
             MenuLogic.ColorString($" {seatIcon} ", seatColor, newLine: false);
 
-            if (i != 0 && (i + 1) % theatre.Width == 0) // new line if theathre width reached
+            if (i % theatre.Width == 0) // new line if theathre width reached
             {
                 Console.WriteLine();
                 charIndex++;
@@ -212,6 +212,13 @@ public class TheatreLogic
             }
         }
 
+
+        // Continue by adding the functionaliry for the creator and non creator
+        // TODO
+        // - Add color standard & luxury seats by indexing nums
+        // - Add button functionality
+        // - Add selected seats & seat price (change depend on menu type)
+        // - Make sure data selected preserved and updated
 
     }
 

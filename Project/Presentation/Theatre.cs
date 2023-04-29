@@ -11,7 +11,6 @@ public static class Theatre
             size = 10000;
         }
         var help = TL.ShowSeats(theatre, size);
-        ReservationLogic RL = new ReservationLogic();
 
         if (help != null)
         {
@@ -41,7 +40,7 @@ public static class Theatre
         }
     }
 
-    public static void WhatTheather()
+    public static void WhatTheatre()
     {
         string Question = "What theatre room would you like to change?";
         List<string> Options = new List<string>();

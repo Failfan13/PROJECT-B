@@ -6,9 +6,10 @@ public static class Reservation
     static private TheatreLogic TheatreLogic = new();
     static public ReservationModel CurrReservation = null;
 
-    public static void EditReservation(bool AsAdmim = false)
+    public static void EditReservation(bool AsAdmin = false)
     {
         ReservationLogic ReservationLogic = new ReservationLogic();
+        AccountsLogic AccountsLogic = new AccountsLogic();
         int awnser;
         string reservationDate;
         MovieModel reservationMovie;
@@ -115,7 +116,7 @@ public static class Reservation
     }
 
     public static void FilterMenu(List<MovieModel> filteredList = null, bool IsEdited = false)
-//  public static void NoFilterMenu(bool IsEdited = false)
+    //  public static void NoFilterMenu(bool IsEdited = false)
     {
 
         var movies = new MoviesLogic().AllMovies();
@@ -129,14 +130,14 @@ public static class Reservation
             movies = filteredList;
         }
 
-    //    MenuLogic.Question(Question, Movies, Actions);
-  //  }
-//
-    //public static void FilteredMenu(List<MovieModel> movies, bool IsEdited = false)
-    //{
-     //   List<string> Movies = new List<string>();
-     //   List<Action> Actions = new List<Action>();
-     //   string Question = "which movie would you like to see?";
+        //    MenuLogic.Question(Question, Movies, Actions);
+        //  }
+        //
+        //public static void FilteredMenu(List<MovieModel> movies, bool IsEdited = false)
+        //{
+        //   List<string> Movies = new List<string>();
+        //   List<Action> Actions = new List<Action>();
+        //   string Question = "which movie would you like to see?";
 
         Movies.Add("Use Filter");
         Actions.Add(() => Filter.Main());
@@ -252,7 +253,7 @@ Would you still like to order for this timeslot?";
         List<string> options = new List<string>() { "Yes", "No" };
         List<Action> actions = new List<Action>();
 
-        actions.Add(() => goTo());
+        actions.Add(() => returnTo());
         actions.Add(() => FilterMenu());
 
         MenuLogic.Question(question, options, actions);

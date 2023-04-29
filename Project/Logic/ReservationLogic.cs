@@ -94,7 +94,7 @@ public class ReservationLogic
     public void MakeReservation(TimeSlotModel timeSlot, List<SeatModel> Seats, Dictionary<int, int> snacks = null!, string format = "", bool IsEdited = false)
     {
         Snacks.Continue = false;
-        int? AccountId = null;
+        int AccountId = -1;
         ReservationModel ress = null;
         DateTime currDate = DateTime.Now;
         try
@@ -108,7 +108,7 @@ public class ReservationLogic
         }
         catch (System.Exception)
         {   // not logged in
-            AccountId = null;
+            AccountId = -1;
         }
 
         // if this reservation is made by an edit, use the id of the current reservation

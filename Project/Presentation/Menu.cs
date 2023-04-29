@@ -17,7 +17,7 @@ static class Menu
         }
 
         Options.Add("Make a Reservation");
-        Actions.Add(() => Reservation.NoFilterMenu());
+        Actions.Add(() => Reservation.FilterMenu());
 
         if (AccountsLogic.CurrentAccount != null)
         {

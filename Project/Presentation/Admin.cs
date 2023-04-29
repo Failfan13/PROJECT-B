@@ -31,4 +31,25 @@ public static class Admin
 
         MenuLogic.Question(Question, Options, Actions);
     }
+
+    // public static void View()
+    // {
+    //     if (AccountsLogic.CurrentAccount == null || AccountsLogic.CurrentAccount.Admin == false)
+    //     {
+    //         Menu.Start();
+    //     }
+
+    //     string Question = "What would you like to do?";
+    //     List<string> Options = new List<string>();
+    //     List<Action> Actions = new List<Action>();
+
+    //     Options.Add("View users");
+    //     Actions.Add(() => User.SelectUser());
+
+
+    //     MenuLogic.Question(Question, Options, Actions);
+
+    // }
+
+
 }

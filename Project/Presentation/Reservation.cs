@@ -3,7 +3,7 @@ public static class Reservation
 
     static private MoviesLogic MoviesLogic = new();
     static private TimeSlotsLogic TimeSlotsLogic = new();
-    static private TheatherLogic TheatherLogic = new();
+    static private TheatreLogic TheatreLogic = new();
     static public ReservationModel CurrReservation = null;
 
     public static void EditReservation(bool AsAdmin = false)
@@ -13,12 +13,20 @@ public static class Reservation
         int awnser;
         string reservationDate;
         MovieModel reservationMovie;
-        int currAcc = AccountsLogic.CurrentAccount.Id;
+        int currAccId = AccountsLogic.CurrentAccount!.Id;
 
         // admin logged in ask account
         if (AsAdmin)
         {
-            currAcc = AccountsLogic.GetAccountIdFromList();
+            currAccId = AccountsLogic.GetAccountIdFromList();
+        }
+
+        if (!ReservationLogic.Reservations.Any(r => r.AccountId == currAccId))
+        {
+            Console.Clear();
+            Console.WriteLine("No reservations found for this account\n");
+            QuestionLogic.AskEnter();
+            return;
         }
 
         string Question = "Which reservation would you like to edit?";
@@ -26,7 +34,7 @@ public static class Reservation
         // List all reservations with date, time & movie name
         foreach (ReservationModel reservation in ReservationLogic.Reservations)
         {
-            if (currAcc == reservation.AccountId || AsAdmin)
+            if (currAccId == reservation.AccountId || AsAdmin)
             {
                 reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
                 var timeslotVar = TimeSlotsLogic.GetById(reservation.TimeSlotId);
@@ -34,14 +42,13 @@ public static class Reservation
 
                 Options.Add($"{reservationDate} - {reservationMovie.Title}");
             }
-
         }
 
         awnser = MenuLogic.Question(Question, Options);
         // Set current reservation field
         try
         {
-            CurrReservation = ReservationLogic.Reservations[awnser];
+            CurrReservation = ReservationLogic.Reservations.FindAll(r => r.AccountId == currAccId)[awnser];
         }
         catch (System.IndexOutOfRangeException)
         {
@@ -55,8 +62,8 @@ public static class Reservation
 
         foreach (SeatModel seat in CurrSeat)
         {
-            var TheatherSeat = CurrTimeSlot.Theater.Seats.FirstOrDefault(s => s.Id == seat.Id);
-            TheatherSeat.Reserved = false;
+            var TheatreSeat = CurrTimeSlot.Theatre.Seats.FirstOrDefault(s => s.Id == seat.Id);
+            TheatreSeat.Reserved = false;
         }
 
         TimeSlotsLogic.UpdateList(CurrTimeSlot);
@@ -75,8 +82,10 @@ public static class Reservation
             };
         // Actions reservations actions
         List<Action> actions = new();
+        
         TimeSlotModel timeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSlotId);
         var movieid = timeSlot.MovieId;
+        
         // choose all
         actions.Add(() => Reservation.NoFilterMenu(true));
 
@@ -84,12 +93,12 @@ public static class Reservation
         actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movieid, true));
 
         // choose seats
-        actions.Add(() => Theater.SelectSeats(timeSlot, true));
+        actions.Add(() => Theatre.SelectSeats(CurrTimeSlot, true));
 
         // Change snack
-        actions.Add(() => Snacks.Start(timeSlot, CurrReservation.Seats, true));
+        actions.Add(() => Snacks.Start(CurrTimeSlot, CurrReservation.Seats, true));
 
-        actions.Add(() => Format.Start(timeSlot, CurrReservation.Seats));
+        actions.Add(() => Format.Start(CurrTimeSlot, CurrReservation.Seats));
 
         // Apply discount NEEDS CORRECT FUNTION
         actions.Add(() => Promo.Start());
@@ -105,8 +114,8 @@ public static class Reservation
         actions.Add(() => UserLogin.Start());
 
         MenuLogic.Question(question, options, actions);
+        ReservationLogic.UpdateList(CurrReservation);
     }
-
 
     public static void NoFilterMenu(bool IsEdited = false)
     {
@@ -351,14 +360,14 @@ This will reset all your progress for this reservation";
         MenuLogic.Question(Question, Options, Actions);
     }
 
-    public static void FormatPrompt(Action goTo)
+    public static void FormatPrompt(Action returnTo)
     {
         string question = $@"This movie timeslot requires a special viewing method, 
 Would you still like to order for this timeslot?";
         List<string> options = new List<string>() { "Yes", "No" };
         List<Action> actions = new List<Action>();
 
-        actions.Add(() => goTo());
+        actions.Add(() => returnTo());
         actions.Add(() => NoFilterMenu());
 
         MenuLogic.Question(question, options, actions);

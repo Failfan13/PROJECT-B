@@ -46,5 +46,43 @@
     "account_id": 2,
     "date_time": "2023-04-23T20:24:37.4578364+02:00",
     "format": ""
+  },
+  {
+    "id": 3,
+    "timeslot_id": 8,
+    "seats": [
+      {
+        "id": 3,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false,
+        "luxury": false
+      },
+      {
+        "id": 4,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false,
+        "luxury": false
+      },
+      {
+        "id": 5,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false,
+        "luxury": false
+      },
+      {
+        "id": 6,
+        "price": 10,
+        "reserved": true,
+        "handicapped": false,
+        "luxury": false
+      }
+    ],
+    "snacks": null,
+    "account_id": -1,
+    "date_time": "2023-04-25T11:47:38.389569+02:00",
+    "format": ""
   }
 ]

@@ -4,12 +4,13 @@ static class UserLogin
 
     public static void Start()
     {
-        string Question = "What would you like to do?";
-        List<string> Options = new List<string>() {
-            "Login"
-         };
+        string Question = @$"Currently logged in as: {AccountsLogic.CurrentAccount!.FullName} 
+with the e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}
+
+What would you like to do?";
+        List<string> Options = new List<string>() { };
         List<Action> Actions = new List<Action>();
-        Actions.Add(() => Login());
+
         if (AccountsLogic.CurrentAccount == null)
         {
             Options.Add("Create new account");
@@ -20,10 +21,7 @@ static class UserLogin
             Options.Add("Change password");
             Actions.Add(() => ChangePassword());
 
-            Options.Add("Change reservations");
-            Actions.Add(() => Reservation.EditReservation());
-
-            Options.Add("Change advertation settings");
+            Options.Add("Change advertisement settings");
             Actions.Add(() => ChangeAdvertation());
         }
 
@@ -36,7 +34,6 @@ static class UserLogin
     public static void CreateNewUser()
     {
         EmailLogic EmailLogic = new EmailLogic();
-        bool CorrectEmail = false;
         bool CorrectName = false;
         bool CorrectPass = false;
         string pass = "";
@@ -53,7 +50,7 @@ static class UserLogin
         while (!CorrectName)
         {
             Console.WriteLine("Please enter your full name:");
-            Name = Console.ReadLine();
+            Name = Console.ReadLine()!;
             if (Name != "")
             {
                 CorrectName = true;
@@ -68,9 +65,9 @@ static class UserLogin
         while (!CorrectPass)
         {
             Console.WriteLine("Please enter your password:");
-            string pass1 = Console.ReadLine();
+            string pass1 = Console.ReadLine()!;
             Console.WriteLine("Please enter your password again:");
-            string pass2 = Console.ReadLine();
+            string pass2 = Console.ReadLine()!;
             if (pass1 == pass2 && pass1 != "")
             {
                 pass = pass1;
@@ -104,44 +101,51 @@ Thank you.";
         {
             Console.Clear();
             Console.WriteLine("Please enter your email address");
-            string email = Console.ReadLine();
+            string email = Console.ReadLine()!;
             Console.WriteLine("Please enter your password");
-            string password = Console.ReadLine();
-            AccountModel acc = accountsLogic.CheckLogin(email, password);
+            string password = Console.ReadLine()!;
+            AccountModel acc = accountsLogic.CheckLogin(email, password)!;
             if (acc != null)
             {
+                Console.Clear();
                 Logger.SystemLog("Logged in");
                 Console.WriteLine("Welcome back " + acc.FullName);
-                Console.WriteLine("Your email number is " + acc.EmailAddress);
 
-                //Write some code to go back to the menu
-                Start();
+                QuestionLogic.AskEnter();
+                Menu.Start();
             }
             else
             {
                 Console.WriteLine("No account found with that email and password");
-                Start();
+                QuestionLogic.AskEnter();
+                Menu.Start();
             }
         }
         else
         {
-            Console.WriteLine($"You are logged in with: {AccountsLogic.CurrentAccount.EmailAddress}.\nDo you want to log out? Y/N");
-            string awnser = Console.ReadLine();
-            if (awnser.ToLower() == "y")
-            {
-                accountsLogic.LogOut();
-            }
-            else
-            {
-                Menu.Start();
-            }
+            Menu.Start();
+        }
+    }
+
+    public static void Logout()
+    {
+        Console.Clear();
+        Console.WriteLine($"You are logged in with: {AccountsLogic.CurrentAccount!.EmailAddress}.\nDo you want to log out? Y/N");
+        string awnser = Console.ReadLine()!;
+        if (awnser.ToLower() == "y")
+        {
+            accountsLogic.LogOut();
+        }
+        else
+        {
+            Menu.Start();
         }
     }
     public static void ChangePassword()
     {
         Console.WriteLine("Please enter old password");
-        string oldpws = Console.ReadLine();
-        if (accountsLogic.CheckLogin(AccountsLogic.CurrentAccount.EmailAddress, oldpws) == null)
+        string oldpws = Console.ReadLine()!;
+        if (accountsLogic.CheckLogin(AccountsLogic.CurrentAccount!.EmailAddress, oldpws) == null)
         {
             Console.WriteLine("Wrong password");
             ChangePassword();
@@ -149,15 +153,15 @@ Thank you.";
         else
         {
             Console.WriteLine("Please enter new password");
-            string newpassword = Console.ReadLine();
+            string newpassword = Console.ReadLine()!;
             accountsLogic.NewPassword(newpassword);
         }
     }
 
     public static void ChangeAdvertation()
     {
-        Console.WriteLine($"Would you like to {(AccountsLogic.CurrentAccount.AdMails ? "still" : "")} receive ad-mails? (y/n)");
-        string adChoice = Console.ReadLine();
+        Console.WriteLine($"Would you like to {(AccountsLogic.CurrentAccount!.AdMails ? "still" : "")} receive ad-mails? (y/n)");
+        string adChoice = Console.ReadLine()!;
 
         if (adChoice.ToLower() == "n") AccountsLogic.CurrentAccount.AdMails = false;
 
@@ -188,7 +192,7 @@ Thank you.";
                     if (existingEmail == "")
                     {
                         Console.WriteLine("Please enter your email address");
-                        email = Console.ReadLine();
+                        email = Console.ReadLine()!;
                     }
                     else
                     {
@@ -230,7 +234,7 @@ To unsubscribe from these emails, please log into your account and turn off the 
             while (!CorrectEmail)
             {
                 Console.WriteLine("Please enter your email address:");
-                Email = Console.ReadLine();
+                Email = Console.ReadLine()!;
                 CorrectEmail = EmailLogic.ValidateEmail(Email);
                 Console.Clear();
                 if (CorrectEmail == false) Console.WriteLine("Invalid email address");

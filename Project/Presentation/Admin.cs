@@ -11,8 +11,8 @@ public static class Admin
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        Options.Add("Change Theather");
-        Actions.Add(() => Theater.WhatTheather());
+        Options.Add("Change Theatre");
+        Actions.Add(() => Theatre.WhatTheatre());
 
         Options.Add("Change Movies");
         Actions.Add(() => Movies.ChangeMoviesMenu());

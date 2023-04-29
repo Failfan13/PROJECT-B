@@ -1,58 +1,58 @@
 using System;
-public class TheatherLogic
+public class TheatreLogic
 {
-    private List<TheaterModel> _theathers;
+    private List<TheatreModel> _theatres;
 
-    public TheatherLogic()
+    public TheatreLogic()
     {
-        _theathers = TheaterAccess.LoadAll();
+        _theatres = TheatreAccess.LoadAll();
     }
 
-    public void UpdateList(TheaterModel theather)
+    public void UpdateList(TheatreModel theatre)
     {
         //Find if there is already an model with the same id
-        int index = _theathers.FindIndex(s => s.Id == theather.Id);
+        int index = _theatres.FindIndex(s => s.Id == theatre.Id);
 
         if (index != -1)
         {
             //update existing model
-            _theathers[index] = theather;
-            Logger.LogDataChange<TheaterModel>(theather.Id, "Updated");
+            _theatres[index] = theatre;
+            Logger.LogDataChange<TheatreModel>(theatre.Id, "Updated");
         }
         else
         {
             //add new model
-            _theathers.Add(theather);
-            Logger.LogDataChange<TheaterModel>(theather.Id, "Added");
+            _theatres.Add(theatre);
+            Logger.LogDataChange<TheatreModel>(theatre.Id, "Added");
         }
-        TheaterAccess.WriteAll(_theathers);
+        TheatreAccess.WriteAll(_theatres);
 
     }
 
-    public TheaterModel? GetById(int id)
+    public TheatreModel? GetById(int id)
     {
-        return _theathers.Find(i => i.Id == id);
+        return _theatres.Find(i => i.Id == id);
     }
     public int GetNewestId()
     {
-        return (_theathers.OrderByDescending(item => item.Id).First().Id) + 1;
+        return (_theatres.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
-    public List<TheaterModel> AllTheaters()
+    public List<TheatreModel> AllTheatres()
     {
-        return _theathers;
+        return _theatres;
     }
 
-    public void UpdateToTheater(TimeSlotModel timeSlot)
+    public void UpdateToTheatre(TimeSlotModel timeSlot)
     {
-        TheaterModel? theater = GetById(timeSlot.Theater.Id);
-        if (theater != null)
+        TheatreModel? theatre = GetById(timeSlot.Theatre.Id);
+        if (theatre != null)
         {
-            timeSlot.Theater = theater;
+            timeSlot.Theatre = theatre;
         }
     }
     
-    public TheaterModel MakeTheather(int width, int height, int OldId = -1)
+    public TheatreModel MakeTheatre(int width, int height, int OldId = -1)
     {
         List<SeatModel> Seats = new List<SeatModel>();
 
@@ -91,28 +91,28 @@ public class TheatherLogic
             newId = OldId;
         }
 
-        TheaterModel theater = new TheaterModel(newId, Seats, width, height);
+        TheatreModel theatre = new TheatreModel(newId, Seats, width, height);
 
-        return theater;
+        return theatre;
     }
     // Class to store to values from the function below
     public class Helper
     {
-        public TheaterModel Theather { get; set; }
+        public TheatreModel Theatre { get; set; }
         public List<SeatModel> Seats { get; set; }
 
-        public Helper(TheaterModel theater, List<SeatModel> seats)
+        public Helper(TheatreModel theatre, List<SeatModel> seats)
         {
-            Theather = theater;
+            Theatre = theatre;
             Seats = seats;
         }
     }
 
-    // Function to show seats based on a theather model
+    // Function to show seats based on a Theatre model
     // MaxLength is used to limit seat selection
-    public Helper? ShowSeats(TheaterModel theater, int MaxLength = 1000)
+    public Helper? ShowSeats(TheatreModel theatre, int MaxLength = 1000)
     {
-        var AllSeats = theater.Seats;
+        var AllSeats = theatre.Seats;
         List<SeatModel> selectedSeats = new List<SeatModel>();
 
         int i = 1;
@@ -154,10 +154,10 @@ public class TheatherLogic
                     Console.ForegroundColor = ConsoleColor.Green;
                 }
 
-                Console.Write($" {seat.SeatRow(theater.Width)} ");
+                Console.Write($" {seat.SeatRow(theatre.Width)} ");
                 Console.ResetColor();
 
-                if (i == theater.Width)
+                if (i == theatre.Width)
                 {
                     Console.WriteLine();
                     i = 0;
@@ -166,7 +166,7 @@ public class TheatherLogic
             }
 
             Console.WriteLine();
-            Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.SeatRow(theater.Width)}"))}");
+            Console.WriteLine($"Selected Seats: {string.Join(", ", selectedSeats.Select(s => $"{s.SeatRow(theatre.Width)}"))}");
 
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Green;
@@ -191,10 +191,10 @@ public class TheatherLogic
             switch (keyInfo.Key)
             {
                 case ConsoleKey.UpArrow:
-                    selectedSeatIndex = Math.Max(0, selectedSeatIndex - theater.Width);
+                    selectedSeatIndex = Math.Max(0, selectedSeatIndex - theatre.Width);
                     break;
                 case ConsoleKey.DownArrow:
-                    selectedSeatIndex = Math.Min(AllSeats.Count - 1, selectedSeatIndex + theater.Width);
+                    selectedSeatIndex = Math.Min(AllSeats.Count - 1, selectedSeatIndex + theatre.Width);
                     break;
                 case ConsoleKey.LeftArrow:
                     selectedSeatIndex = Math.Max(0, selectedSeatIndex - 1);
@@ -229,7 +229,7 @@ public class TheatherLogic
                     else
                     {
                         Console.Clear();
-                        Console.WriteLine($"You have selected {selectedSeats.Count} seats: {string.Join(", ", selectedSeats.Select(s => $"{s.SeatRow(theater.Width)}"))}");
+                        Console.WriteLine($"You have selected {selectedSeats.Count} seats: {string.Join(", ", selectedSeats.Select(s => $"{s.SeatRow(theatre.Width)}"))}");
                         Console.WriteLine("Press Y to confirm or any other key to cancel:");
 
                         ConsoleKeyInfo confirmKeyInfo = Console.ReadKey(true);
@@ -240,7 +240,7 @@ public class TheatherLogic
                             {
                                 seat.Reserved = true;
                             }
-                            foreach (SeatModel seat in theater.Seats)
+                            foreach (SeatModel seat in theatre.Seats)
                             {
                                 foreach (var seats in selectedSeats)
                                 {
@@ -250,7 +250,7 @@ public class TheatherLogic
                                     }
                                 }
                             }
-                            return new Helper(theater, selectedSeats);
+                            return new Helper(theatre, selectedSeats);
                         }
                         else
                         {
@@ -264,38 +264,38 @@ public class TheatherLogic
         }
     }
 
-    public void BlockSeats(TheaterModel theater, Action returnTo = null!)
+    public void BlockSeats(TheatreModel theatre, Action returnTo = null!)
     {
-        TheatherLogic TL = new TheatherLogic();
-        var Help = ShowSeats(theater);
+        TheatreLogic TL = new TheatreLogic();
+        var Help = ShowSeats(theatre);
         if (Help != null)
         {
-            UpdateList(Help.Theather);
+            UpdateList(Help.Theatre);
         }
 
         returnTo();
     }
 
-    public void UnBlockSeats(TheaterModel theater, Action returnTo = null!)
+    public void UnBlockSeats(TheatreModel theatre, Action returnTo = null!)
     {
-        TheatherLogic TL = new TheatherLogic();
-        foreach (var seat in theater.Seats)
+        TheatreLogic TL = new TheatreLogic();
+        foreach (var seat in theatre.Seats)
         {
             seat.Reserved = false;
         }
-        UpdateList(theater);
+        UpdateList(theatre);
         Console.WriteLine("All seats have been unblocked");
         QuestionLogic.AskEnter();
 
         returnTo();
     }
 
-    public void ChangeTheaterSize(TheaterModel theater, Action returnTo = null!)
+    public void ChangeTheatreSize(TheatreModel theatre, Action returnTo = null!)
     {
-        TheatherLogic TL = new TheatherLogic();
-        int width = (int)QuestionLogic.AskNumber("Enter the width of the theater");
-        int height = (int)QuestionLogic.AskNumber("Enter the height of the theater");
-        MakeTheather(width, height, theater.Id);
+        TheatreLogic TL = new TheatreLogic();
+        int width = (int)QuestionLogic.AskNumber("Enter the width of the Theatre");
+        int height = (int)QuestionLogic.AskNumber("Enter the height of the Theatre");
+        MakeTheatre(width, height, theatre.Id);
 
         returnTo();
     }

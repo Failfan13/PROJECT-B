@@ -40,7 +40,8 @@ public static class Reservation
                 var timeslotVar = TimeSlotsLogic.GetById(reservation.TimeSLotId);
                 reservationMovie = MoviesLogic.GetById(timeslotVar.MovieId);
 
-                Options.Add($"{reservationDate} - {reservationMovie.Title}");
+                if (reservationMovie != null && reservationDate != null)
+                    Options.Add($"{reservationDate} - {reservationMovie.Title}");
             }
         }
 
@@ -109,7 +110,7 @@ public static class Reservation
 
         // Return to Login menu
         options.Add("Return");
-        actions.Add(() => UserLogin.Start());
+        actions.Add(() => Menu.Start());
 
         MenuLogic.Question(question, options, actions);
         ReservationLogic.UpdateList(CurrReservation);

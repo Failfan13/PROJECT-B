@@ -40,7 +40,8 @@ public static class Reservation
                 var timeslotVar = TimeSlotsLogic.GetById(reservation.TimeSlotId);
                 reservationMovie = MoviesLogic.GetById(timeslotVar.MovieId);
 
-                Options.Add($"{reservationDate} - {reservationMovie.Title}");
+                if (reservationMovie != null && reservationDate != null)
+                    Options.Add($"{reservationDate} - {reservationMovie.Title}");
             }
         }
 
@@ -87,7 +88,7 @@ public static class Reservation
         var movieid = timeSlot.MovieId;
         
         // choose all
-        actions.Add(() => Reservation.NoFilterMenu(true));
+        actions.Add(() => Reservation.FilterMenu(true));
 
         //choose time & seats
         actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movieid, true));
@@ -111,20 +112,35 @@ public static class Reservation
 
         // Return to Login menu
         options.Add("Return");
-        actions.Add(() => UserLogin.Start());
+        actions.Add(() => Menu.Start());
 
         MenuLogic.Question(question, options, actions);
         ReservationLogic.UpdateList(CurrReservation);
     }
 
-    public static void NoFilterMenu(bool IsEdited = false)
+    public static void FilterMenu(List<MovieModel> filteredList = null, bool IsEdited = false)
+    //  public static void NoFilterMenu(bool IsEdited = false)
     {
-        Filter.CatIds = new List<int>();
+
         var movies = new MoviesLogic().AllMovies();
 
         string Question = "which movie would you like to see?";
         List<string> Movies = new List<string>();
         List<Action> Actions = new List<Action>();
+
+        if (filteredList != null)
+        {
+            movies = filteredList;
+        }
+
+        //    MenuLogic.Question(Question, Movies, Actions);
+        //  }
+        //
+        //public static void FilteredMenu(List<MovieModel> movies, bool IsEdited = false)
+        //{
+        //   List<string> Movies = new List<string>();
+        //   List<Action> Actions = new List<Action>();
+        //   string Question = "which movie would you like to see?";
 
         Movies.Add("Use Filter");
         Actions.Add(() => Filter.Main());
@@ -141,21 +157,8 @@ public static class Reservation
         MenuLogic.Question(Question, Movies, Actions);
     }
 
-    public static void FilteredMenu(List<MovieModel> movies, bool IsEdited = false)
-    {
-        List<string> Movies = new List<string>();
-        List<Action> Actions = new List<Action>();
-        string Question = "which movie would you like to see?";
 
-        Movies.Add("Use Filter");
-        Actions.Add(() => Filter.Main());
-
-        foreach (MovieModel movie in movies)
-        {
-            Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));
-        }
-        Movies.Add("Return");
-        Actions.Add(() => Menu.Start());
+    public static void FilterMenu(bool IsEdited) => FilterMenu(null, IsEdited);
 
         MenuLogic.Question(Question, Movies, Actions);
     }
@@ -267,6 +270,7 @@ public static class Reservation
 
         TotalPriceModel TotalRess = ReservationLogic.GetTotalRess(Ress);
         AccountsLogic AccountsLogic = new();
+
         EmailLogic EmailLogic = new EmailLogic();
 
         double FinalPrice = 0.00;
@@ -330,7 +334,9 @@ public static class Reservation
         FinalPrice += TotalRess.FinalPrice;
         Console.Write("\nThe total cost of your order will be:");
         Console.Write($"€ " + FinalPrice + (FinalPrice.ToString().Contains(".") ? "" : ",-"));
+        body += $"€" + FinalPrice + (priceString.Contains(".") ? "" : ",-") + "\n";
         Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {Ress.Id}\n");
+        body += $"\nIMPORTANT\nYour order number is: {ress.Id}";
 
         if (AccountId != -1)
         {
@@ -340,6 +346,7 @@ public static class Reservation
         {
             email = UserLogin.AskEmail();
         }
+
         EmailLogic.SendEmail(email, subject, body);
 
         UserLogin.SignUpMails();
@@ -354,7 +361,7 @@ This will reset all your progress for this reservation";
         List<string> Options = new List<string>() { "Yes", "No" };
         List<Action> Actions = new List<Action>() { };
 
-        Actions.Add(() => Reservation.NoFilterMenu(true));
+        Actions.Add(() => Reservation.FilterMenu(true));
         Actions.Add(() => returnTo());
 
         MenuLogic.Question(Question, Options, Actions);
@@ -368,7 +375,7 @@ Would you still like to order for this timeslot?";
         List<Action> actions = new List<Action>();
 
         actions.Add(() => returnTo());
-        actions.Add(() => NoFilterMenu());
+        actions.Add(() => FilterMenu());
 
         MenuLogic.Question(question, options, actions);
     }

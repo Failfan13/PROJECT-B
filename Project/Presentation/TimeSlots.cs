@@ -10,7 +10,13 @@ static class TimeSlots
         MoviesLogic ML = new MoviesLogic();
         TheatreLogic TL = new TheatreLogic();
 
-        Console.ReadKey();
+        if (Filter.AppliedFilters != null && Filter.AppliedFilters.ReleaseDate != null)
+        {
+            tsms = tsms.FindAll(d => d.Start.Date == Filter.AppliedFilters.ReleaseDate.Date);
+        }
+
+
+        Console.Clear();
         if (tsms?.Count == 0) // Movie exists but there is no timeslot for it
         {
             Console.WriteLine("There are no timeslots for that movie.\nPress Enter to return");

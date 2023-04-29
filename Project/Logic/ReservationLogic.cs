@@ -114,6 +114,7 @@ public class ReservationLogic
         // if this reservation is made by an edit, use the id of the current reservation
         if (IsEdited)
         {
+            // Make the new Reservation and update the Theather timeslot for the seats
             ress = new ReservationModel(Reservation.CurrReservation.Id, timeSlot.Id, Seats, snacks, AccountId, currDate, format);
             UpdateReservation(Reservation.CurrReservation.Id, ress);
 
@@ -130,7 +131,6 @@ public class ReservationLogic
             UpdateList(ress);
         }
 
-        // Make the new Reservation and update the Theatre timeslot for the seats
         TimeSlotsLogic TL = new TimeSlotsLogic();
         TL.UpdateList(timeSlot);
     }

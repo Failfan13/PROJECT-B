@@ -11,7 +11,6 @@ public static class Theatre
             size = 10000;
         }
         var help = TL.ShowSeats(theatre, size);
-        ReservationLogic RL = new ReservationLogic();
 
         if (help != null)
         {
@@ -20,6 +19,7 @@ public static class Theatre
             string Question = "Would you like to order snacks?";
             List<string> Options = new List<string>() { "Yes", "No" };
             List<Action> Actions = new List<Action>();
+            ReservationLogic RL = new ReservationLogic();
 
             if (FormatsLogic.GetByFormat(TimeSlot.Format) != null)
             {
@@ -42,13 +42,13 @@ public static class Theatre
 
     public static void WhatTheatre()
     {
-        string Question = "What would you like to change?";
+        string Question = "What theatre room would you like to change?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
         foreach (var item in TL.AllTheatres())
         {
-            Options.Add($"{item.Id}");
+            Options.Add($"Theatre room {item.Id}");
             Actions.Add(() => EditMenu(item));
         }
 

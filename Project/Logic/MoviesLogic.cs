@@ -47,10 +47,49 @@ public class MoviesLogic : Order<MovieModel>
     {
         return _movies.Find(i => i.Id == id);
     }
+
     public MovieModel? FindTitle(string movieName)
     {
         return _movies.Find(i => i.Title.ToLower() == movieName.ToLower());
     }
+
+    public List<MovieModel> GetByTitle(string name)
+    {
+        return _movies.Where(i => i.Title.ToLower().Contains(name.ToLower())).ToList();
+    }
+    
+    public List<MovieModel> GetByPrice(double price, List<MovieModel> movies = null)
+    {
+        TimeSlotsLogic tsl = new TimeSlotsLogic();
+        if (movies == null)
+        {
+            movies = _movies;
+        }
+
+        return movies.Where(i => tsl.GetByMovieId(i.Id).Any(t => t.Theatre.Seats.Min(s => s.Price) + i.Price <= price)).ToList();
+    }
+    
+    public List<MovieModel> GetByTimeSlots(DateTime date, List<MovieModel> movies = null)
+    {
+        TimeSlotsLogic tsl = new TimeSlotsLogic();
+        if (movies == null)
+        {
+            movies = _movies;
+        }
+
+        return movies.Where(i => tsl.GetByDate(date).Any(x => x.MovieId == i.Id)).ToList();
+    }
+    
+    public List<MovieModel> GetByCategories(List<CategoryModel> categories, List<MovieModel> movies = null)
+    {
+        if (movies == null)
+        {
+            movies = _movies;
+        }
+
+        return movies.Where(i => categories.All(x => i.Categories.Any(y => y.Id == x.Id))).ToList();
+    }
+
     public override int GetNewestId()
     {
         return (_movies.OrderByDescending(item => item.Id).First().Id) + 1;
@@ -120,6 +159,11 @@ public class MoviesLogic : Order<MovieModel>
         }
 
         return FilteredList;
+    }
+
+    public static void FilterOnMovieName(string input)
+    {
+        Console.ReadKey();
     }
 
     public void ChangeTitle(MovieModel movie, string NewTitle)

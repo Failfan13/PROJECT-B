@@ -94,7 +94,7 @@ public class ReservationLogic
     public void MakeReservation(TimeSlotModel timeSlot, List<SeatModel> Seats, Dictionary<int, int> snacks = null!, string format = "", bool IsEdited = false)
     {
         Snacks.Continue = false;
-        int AccountId = -1;
+        int? AccountId = null;
         ReservationModel ress = null;
         DateTime currDate = DateTime.Now;
         try
@@ -108,12 +108,13 @@ public class ReservationLogic
         }
         catch (System.Exception)
         {   // not logged in
-            AccountId = -1;
+            AccountId = null;
         }
 
         // if this reservation is made by an edit, use the id of the current reservation
         if (IsEdited)
         {
+            // Make the new Reservation and update the Theather timeslot for the seats
             ress = new ReservationModel(Reservation.CurrReservation.Id, timeSlot.Id, Seats, snacks, AccountId, currDate, format);
             UpdateReservation(Reservation.CurrReservation.Id, ress);
 
@@ -130,7 +131,6 @@ public class ReservationLogic
             UpdateList(ress);
         }
 
-        // Make the new Reservation and update the Theatre timeslot for the seats
         TimeSlotsLogic TL = new TimeSlotsLogic();
         TL.UpdateList(timeSlot);
     }

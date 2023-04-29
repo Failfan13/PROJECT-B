@@ -26,24 +26,9 @@
   {
     "id": 2,
     "layoutSpecs": {
-      "pathwaysIndex": [
-        1,
-        5
-      ],
-      "blockedSeats": [
-        1,
-        10,
-        20,
-        30,
-        40,
-        50
-      ],
-      "handicapSeats": [
-        15,
-        23,
-        55,
-        122
-      ]
+      "pathwaysIndex": [],
+      "blockedSeats": [],
+      "handicapSeats": []
     },
     "outerSeatPrice": 9,
     "middSeatPrice": 9,

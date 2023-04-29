@@ -8,14 +8,14 @@ public class SeatModel
     [JsonPropertyName("handicapped")]
     public bool Handicapped { get; set; }
 
-    [JsonPropertyName("luxury")]
-    public bool Luxury { get; set; }
+    [JsonPropertyName("seatType")]
+    public string SeatType { get; set; }
 
     [JsonConstructor]
-    public SeatModel(int id, bool handicapped = false, bool luxury = false)
+    public SeatModel(int id, bool handicapped = false, string seatType = "basic")
     {
         Id = id;
         Handicapped = handicapped;
-        Luxury = luxury;
+        SeatType = seatType;
     }
 }

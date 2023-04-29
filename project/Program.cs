@@ -14,4 +14,5 @@ TheatreLogic theatreLogic = new TheatreLogic();
 
 //theatreLogic.ShowSeats(tmsm, true);
 // Theatre.MakeNewTheatre();
-theatreLogic.ShowSeats(theatreLogic.GetById(2)!, tmsm!);
+//theatreLogic.ShowSeats(theatreLogic.GetById(2)!, tmsm!);
+Console.WriteLine(theatreLogic.AddPathway());

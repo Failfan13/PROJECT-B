@@ -110,17 +110,20 @@ public class TheatreLogic
     public string SeatNumber(int width, int seatNum)
     {
         List<char> letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToList();
-        var Seat = (seatNum % width) + 1;
-        var Row = (Math.Floor((double)(seatNum / width)));
+        var seat = (seatNum % width);
+        var row = (Math.Floor((double)(seatNum / width)));
+        if (seatNum % width == 0) row -= 1;
 
-        return $"{Seat}{letters[(int)Row]}";
+        return $"{seat}{letters[(int)row]}";
     }
 
     public void ShowLegend() // Legend for theatre model
     {
         Console.WriteLine();
-        MenuLogic.ColorString("■", ConsoleColor.Yellow, newLine: false);
-        Console.Write(" Taken seat\n");
+        MenuLogic.ColorString("☐", ConsoleColor.Black, newLine: false);
+        Console.Write(" Not reservable\n");
+        MenuLogic.ColorString("■", ConsoleColor.Green, newLine: false);
+        Console.Write(" Selected seat\n");
         MenuLogic.ColorString("■", ConsoleColor.Red, newLine: false);
         Console.Write(" Taken seat\n");
         MenuLogic.ColorString("■", ConsoleColor.White, newLine: false);
@@ -131,95 +134,255 @@ public class TheatreLogic
         Console.Write(" Luxury seat\n");
         MenuLogic.ColorString("■", ConsoleColor.Blue, newLine: false);
         Console.Write(" Handicap seat\n");
-        MenuLogic.ColorString("☐", ConsoleColor.Black, newLine: false);
-        Console.Write(" Not selectable (empty)\n");
     }
 
-    public void ShowSeats(TheatreModel theatre, TimeSlotModel timeSlot = null!)
+    public void ShowSeats(TheatreModel theatre, TimeSlotModel timeSlot = null!, bool select = false)
     {
         Console.Clear();
         //load predefined data for model
-        List<int> pathways = theatre.LayoutSpecs.PathwayIndexes;
+        List<Tuple<int, int>> pathways = theatre.LayoutSpecs.PathwayIndexes;
         List<int> blockedSeats = theatre.LayoutSpecs.BlockedSeatIndexes;
         List<int> handicaped = theatre.LayoutSpecs.HandiSeatIndexes;
         List<SeatModel> reservedSeats = timeSlot.Theatre.Seats;
 
-        List<SeatModel> selectedSeats = new List<SeatModel>();
+        List<int> selectedSeats = new List<int>();
         int selectedSeat = 1;
-
-        // screen position
-        Console.Write("   ");
-        Console.Write($"{new String('▁', (int)theatre.Width / 3)}");
-        Console.Write($"{new String('▂', (int)theatre.Width / 2)}");
-        Console.Write($"{new String('▃', (int)theatre.Width / 2)}");
-        Console.Write($"{new String('▅', (int)theatre.Width / 3)}");
-        Console.Write($"{new String('▃', (int)theatre.Width / 2)}");
-        Console.Write($"{new String('▂', (int)theatre.Width / 2)}");
-        Console.WriteLine($"{new String('▁', (int)theatre.Width / 3)}");
-        MenuLogic.ColorString($"{new String(' ', (int)(theatre.Width * 1.45))}screen\n");
 
         //show seats
         int seatAmount = theatre.Width * theatre.Height;
-        int charIndex = 0;
 
-        for (int i = 1; i < seatAmount + 1; i++)
+        while (true)
         {
-            ConsoleColor seatColor = ConsoleColor.White;
-            string seatIcon = "▮";
+            int charIndex = 0; // letter indexing
 
-            if (i == 1 || (i - 1) % theatre.Width == 0) MenuLogic.ColorString($"{(char)(charIndex + 65)} ", newLine: false); // Adds row letters
+            // screen position
+            Console.Write("   ");
+            Console.Write($"{new String('▁', (int)theatre.Width / 3)}");
+            Console.Write($"{new String('▂', (int)theatre.Width / 2)}");
+            Console.Write($"{new String('▃', (int)theatre.Width / 2)}");
+            Console.Write($"{new String('▅', (int)theatre.Width / 3)}");
+            Console.Write($"{new String('▃', (int)theatre.Width / 2)}");
+            Console.Write($"{new String('▂', (int)theatre.Width / 2)}");
+            Console.WriteLine($"{new String('▁', (int)theatre.Width / 3)}");
+            MenuLogic.ColorString($"{new String(' ', (int)(theatre.Width * 1.45))}SCREEN\n");
 
-            // show standard seats
-
-            // show luxury seats
-
-            if (reservedSeats.Exists(s => s.Id == i)) seatColor = ConsoleColor.Red; // reserved seats
-
-            if (theatre.LayoutSpecs.HandiSeatIndexes.Exists(s => s == i)) seatColor = ConsoleColor.Blue; // handicaped seats
-
-            if (blockedSeats.Exists(s => s == i)) // blocked seats
+            for (int i = 1; i < seatAmount + 1; i++)
             {
-                seatColor = ConsoleColor.Black;
-                seatIcon = "☐";
+                ConsoleColor seatColor = ConsoleColor.White;
+                string seatIcon = "▮";
+
+                // Adds row letters
+                if (i == 1 || (i - 1) % theatre.Width == 0) MenuLogic.ColorString($"{(char)(charIndex + 65)} ", newLine: false);
+
+                // Coloring seats
+                switch (i)
+                {
+                    case var x when selectedSeat == x: // Curr selected seat
+                        Console.BackgroundColor = ConsoleColor.Yellow;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        break;
+                    case var x when reservedSeats.Exists(s => s.Id == x): // Reserved seat
+                        seatColor = ConsoleColor.Red;
+                        break;
+                    case var x when blockedSeats.Exists(s => s == x): // Blocked seat
+                        seatColor = ConsoleColor.Black;
+                        seatIcon = "☐";
+                        break;
+                    case var x when handicaped.Exists(s => s == x): // Handicaped
+                        seatColor = ConsoleColor.Blue;
+                        break;
+                    case var x when selectedSeats.Contains(x): // All selected
+                        seatColor = ConsoleColor.Green;
+                        break;
+                    // needs standard & luxury
+                    default:
+                        break;
+                }
+
+                // Prints seat icons in color
+                MenuLogic.ColorString($" {seatIcon} ", seatColor, newLine: false);
+
+                // new line if theathre width reached
+                if (i % theatre.Width == 0)
+                {
+                    Console.WriteLine();
+                    charIndex++;
+                }
             }
 
-            if (selectedSeat == i)
+            // Adds column numbers
+            Console.Write("\n  ");
+            for (int i = 1; i < (theatre.Width + 1); i++)
             {
-                Console.BackgroundColor = ConsoleColor.Yellow;
-                Console.ForegroundColor = ConsoleColor.Black;
+                if (i.ToString().Length == 1)
+                {
+                    MenuLogic.ColorString($" {i} ", newLine: false);
+                }
+                else
+                {
+                    MenuLogic.ColorString($" {i}", newLine: false);
+                }
             }
 
-            MenuLogic.ColorString($" {seatIcon} ", seatColor, newLine: false);
+            // Show selected numbers seats & price total
+            Console.WriteLine($"\n\nSelected Seats: {string.Join(", ", selectedSeats.Select(s => $"{SeatNumber(theatre.Width, s)}"))}");
 
-            if (i % theatre.Width == 0) // new line if theathre width reached
+            // Legend
+            ShowLegend();
+
+            ConsoleKeyInfo keyPressed = Console.ReadKey(true);
+            if (select)
+            {//selectedSeat = SelectableSeat(selectedSeat, theatre.Width, seatAmount, 'L', blockedSeats);
+             //selectedSeat = SelectableSeat(selectedSeat, theatre.Width, seatAmount, 'R', blockedSeats);
+             //selectedSeat = SelectableSeat(selectedSeat, theatre.Width, seatAmount, 'U', blockedSeats);\
+             //selectedSeat = SelectableSeat(selectedSeat, theatre.Width, seatAmount, 'D', blockedSeats);
+
+                // case ConsoleKey.Enter:
+                //     if (selectedSeats.Count >= 8) // check if more then 9 selected
+                //     {
+                //         // forward to 9 or more seats
+                //         return;
+                //     }
+                //     else if (selectedSeats.Contains(selectedSeat))
+                //     {
+                //         selectedSeats.Remove(selectedSeat);
+                //     }
+                //     else if (!selectedSeats.Contains(selectedSeat))
+                //     {
+                //         selectedSeats.Add(selectedSeat);
+                //     }
+                //     break;
+
+            }
+            else // for configuring theatre
             {
-                Console.WriteLine();
-                charIndex++;
+                switch (keyPressed.Key)
+                {
+                    // Keys & next available seats
+                    case ConsoleKey.LeftArrow: // Left
+                        selectedSeat = Math.Clamp(selectedSeat -= 1, 1, seatAmount);
+                        break;
+                    case ConsoleKey.RightArrow: // Right
+                        Math.Clamp(selectedSeat++, 1, seatAmount);
+                        break;
+                    case ConsoleKey.UpArrow: // Up
+                        selectedSeat = Math.Clamp(selectedSeat - theatre.Width, 1, seatAmount);
+                        break;
+                    case ConsoleKey.DownArrow: // Down
+                        selectedSeat = Math.Clamp(selectedSeat + theatre.Width, 1, seatAmount);
+                        break;
+                    case ConsoleKey.B: // Block seat
+                        if (!blockedSeats.Contains(selectedSeat) &&
+                            !reservedSeats.Exists(s => s.Id == selectedSeat)) blockedSeats.Add(selectedSeat);
+                        break;
+                    case ConsoleKey.A: // Unblock seat
+                        blockedSeats.Remove(selectedSeat);
+                        break;
+                    case ConsoleKey.P: // Add pathway -> pathway menu
+                        pathways.Add(AddPathway());
+                        break;
+                    case ConsoleKey.R: // Remove pathway -> pathway menu
+                        RemovePathway();
+                        break;
+                    case var x when x == ConsoleKey.S || // Save settings and quit
+                        x == ConsoleKey.Escape ||
+                        x == ConsoleKey.Q:
+                        return;
+                    default:
+                        break;
+                }
+                //MenuLogic.ClearFromTop(13); // clears console after lines
+                Console.Clear(); // tempo
             }
         }
-        // Adds column numbers
-        Console.WriteLine("");
-        Console.Write("  ");
-        for (int i = 1; i < (theatre.Width + 1); i++)
-        {
-            if (i.ToString().Length == 1)
-            {
-                MenuLogic.ColorString($" {i} ", newLine: false);
-            }
-            else
-            {
-                MenuLogic.ColorString($" {i}", newLine: false);
-            }
-        }
-
-
-        // Continue by adding the functionaliry for the creator and non creator
         // TODO
         // - Add color standard & luxury seats by indexing nums
-        // - Add button functionality
-        // - Add selected seats & seat price (change depend on menu type)
         // - Make sure data selected preserved and updated
+        // - Add and remove pathway menu & implement in theatre model --
 
     }
 
+    public Tuple<int, int> AddPathway()
+    {
+        string input = "";
+        Console.Clear();
+
+        Console.WriteLine($"Here you can add your pathways to the theatre!\n\nPlease enter the requested information below");
+        MenuLogic.ColorString(new String('˭', 59));
+
+        Console.WriteLine("Enter the direction for the pathway");
+        MenuLogic.ColorString(">>", newLine: false);
+        Console.WriteLine($" Enter a letter or number, row will be placed after input"); // command the user
+
+        while (true)
+        {
+            input = Console.ReadLine()!;
+            if (Int32.TryParse(input, out int x) || input.Length == 1) // second condition check if input is letter in alphabet & range
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Invalid input, please try again");
+                MenuLogic.ClearLastLines(2, true);
+            }
+        }
+
+        // return new Tuple<int, int>(x, y);
+        return null;
+    }
+    public void RemovePathway()
+    {
+        Console.WriteLine("sussy");
+        // return new Tuple<int, int>(x, y);
+        return;
+    }
+
+    private static int SelectableSeat(int currSelectedSeat, int width, int seatAmount, char direction, List<int> blockedSeats)
+    {
+        int logicalIndex = currSelectedSeat;
+        bool selectable = false;
+
+        while (!selectable && logicalIndex >= 1 && logicalIndex <= seatAmount)
+        {
+            switch (direction)
+            {
+                case 'L': // Left
+                    if (blockedSeats.Contains(logicalIndex - 1)) logicalIndex -= 1;
+                    else
+                    {
+                        logicalIndex--;
+                        return Math.Clamp(logicalIndex, 1, seatAmount);
+                    }
+                    break;
+                case 'R': // Right
+                    if (blockedSeats.Contains(logicalIndex + 1)) logicalIndex += 1;
+                    else
+                    {
+                        logicalIndex++;
+                        return Math.Clamp(logicalIndex, 1, seatAmount);
+                    }
+                    break;
+                case 'U': // Up
+                    if (blockedSeats.Contains(logicalIndex - width)) logicalIndex -= width;
+                    else
+                    {
+                        logicalIndex -= width;
+                        return Math.Clamp(logicalIndex, 1, seatAmount);
+                    }
+                    break;
+                case 'D': // Down
+                    if (blockedSeats.Contains(logicalIndex + width)) logicalIndex += width;
+                    else
+                    {
+                        logicalIndex += width;
+                        return Math.Clamp(logicalIndex, 1, seatAmount);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        return logicalIndex;
+    }
 }

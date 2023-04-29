@@ -9,27 +9,27 @@
         {
           "id": 2,
           "handicapped": false,
-          "luxury": false
+          "seatType": false
         },
         {
           "id": 8,
           "handicapped": false,
-          "luxury": false
+          "seatType": false
         },
         {
           "id": 18,
           "handicapped": false,
-          "luxury": false
+          "seatType": false
         },
         {
           "id": 144,
           "handicapped": false,
-          "luxury": false
+          "seatType": false
         },
         {
           "id": 108,
           "handicapped": false,
-          "luxury": true
+          "seatType": true
         }
       ]
     },

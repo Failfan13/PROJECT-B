@@ -223,8 +223,8 @@ Press [ ");
             Console.Write(" ] Key to add pathway\r\nPress [ ");
             MenuLogic.ColorString("R", newLine: false);
             Console.Write(" ] Key to remove pathway\r\nPress [ ");
-            MenuLogic.ColorString("Q", newLine: false);
-            Console.Write(" ] Key to quit\r\n");
+            MenuLogic.ColorString("S", newLine: false);
+            Console.Write(" ] Key to save\r\n");
             MenuLogic.ColorString(new String('‗', 59));
 
             TL.ShowSeats(TL.GetById(2)!, TSL.GetById(0)!);

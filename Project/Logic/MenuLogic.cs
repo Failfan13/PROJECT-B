@@ -80,18 +80,46 @@ public static class MenuLogic
 
     public static void ClearLastLines(int linesToClear, bool threadDelay = false)
     {
-        if (threadDelay) Thread.Sleep(3000);
+        try
+        {
+            if (threadDelay) Thread.Sleep(3000);
 
-        linesToClear += 1; // adds new input to clear
-        // current cursor position
-        int currentLine = Console.CursorTop + 1; // sets top one line lower for input
+            linesToClear += 1; // adds new input to clear
+            // current cursor position
+            int currentLine = Console.CursorTop + 1; // sets top one line lower for input
 
-        Console.SetCursorPosition(0, currentLine - linesToClear);
+            Console.SetCursorPosition(0, currentLine - linesToClear);
 
-        // Clear lines replace with empty strings
-        Console.Write(new string(' ', Console.WindowWidth * linesToClear));
+            // Clear lines replace with empty strings
+            Console.Write(new string(' ', Console.WindowWidth * linesToClear));
 
-        Console.SetCursorPosition(0, currentLine - linesToClear);
+            Console.SetCursorPosition(0, currentLine - linesToClear);
+        }
+        catch (System.ArgumentOutOfRangeException) // more then amount of lines to clear
+        {
+            return;
+        }
+    }
+
+    public static void ClearFromTop(int fromTop, bool threadDelay = false)
+    {
+        try
+        {
+            if (threadDelay) Thread.Sleep(3000);
+            // current cursor position
+            int currentLine = fromTop; // sets top one line lower for input
+
+            Console.SetCursorPosition(0, currentLine);
+
+            // Clear lines replace with empty strings
+            Console.Write(new string(' ', Console.WindowWidth * (Console.WindowHeight - fromTop)));
+
+            Console.SetCursorPosition(0, currentLine);
+        }
+        catch (System.ArgumentOutOfRangeException) // more then amount of lines to clear
+        {
+            return;
+        }
     }
 
     public static void ColorString(string str, ConsoleColor color = ConsoleColor.DarkBlue, bool newLine = true)

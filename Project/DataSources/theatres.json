@@ -3,11 +3,12 @@
     "id": 0,
     "layoutSpecs": {
       "pathwaysIndex": [],
-      "nulledSeats": []
+      "blockedSeats": [],
+      "handicapSeats": []
     },
-    "outerSeatPrice": 0,
-    "middSeatPrice": 0,
-    "innerSeatPrice": 0,
+    "baseSeatPrice": 0,
+    "stanSeatPrice": 0,
+    "luxeSeatPrice": 0,
     "roomWidth": 10,
     "roomHeight": 10
   },
@@ -15,24 +16,34 @@
     "id": 1,
     "layoutSpecs": {
       "pathwaysIndex": [],
-      "nulledSeats": []
+      "blockedSeats": [],
+      "handicapSeats": []
     },
-    "outerSeatPrice": 0,
-    "middSeatPrice": 0,
-    "innerSeatPrice": 0,
+    "baseSeatPrice": 0,
+    "stanSeatPrice": 0,
+    "luxeSeatPrice": 0,
     "roomWidth": 5,
     "roomHeight": 5
   },
   {
     "id": 2,
     "layoutSpecs": {
-      "pathwaysIndex": [],
+      "pathwaysIndex": [
+        {
+          "Item1": "column",
+          "Item2": 10
+        }
+      ],
       "blockedSeats": [],
-      "handicapSeats": []
+      "handicapSeats": [
+        35,
+        95,
+        96
+      ]
     },
-    "outerSeatPrice": 9,
-    "middSeatPrice": 9,
-    "innerSeatPrice": 10,
+    "baseSeatPrice": 0,
+    "stanSeatPrice": 0,
+    "luxeSeatPrice": 0,
     "roomWidth": 15,
     "roomHeight": 15
   }

@@ -39,7 +39,7 @@ public class TheatreModel
     public class SeatBuilderHelper
     {
         [JsonPropertyName("pathwaysIndex")]
-        public List<Tuple<int, int>> PathwayIndexes { get; set; } = new List<Tuple<int, int>>() { };
+        public List<Tuple<string, int>> PathwayIndexes { get; set; } = new List<Tuple<string, int>>() { };
 
         [JsonPropertyName("blockedSeats")]
         public List<int> BlockedSeatIndexes { get; set; } = new List<int>() { };

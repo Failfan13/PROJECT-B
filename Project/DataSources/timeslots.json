@@ -8,28 +8,39 @@
       "reservedSeats": [
         {
           "id": 2,
-          "handicapped": false,
           "seatType": "basic"
         },
         {
           "id": 8,
-          "handicapped": false,
           "seatType": "basic"
         },
         {
           "id": 18,
-          "handicapped": false,
           "seatType": "standard"
         },
         {
           "id": 144,
-          "handicapped": false,
           "seatType": "luxury"
         },
         {
           "id": 108,
-          "handicapped": false,
           "seatType": "basic"
+        },
+        {
+          "id": 47,
+          "seatType": "basic"
+        },
+        {
+          "id": 48,
+          "seatType": "basic"
+        },
+        {
+          "id": 49,
+          "seatType": "basic"
+        },
+        {
+          "id": 139,
+          "seatType": "handicap"
         }
       ]
     },

@@ -40,10 +40,6 @@ static class Menu
             Actions.Add(() => UserLogin.Logout());
         }
 
-        // Movies.AddNewMovie();
-        TheatreLogic room = new TheatreLogic();
-        room.MakeTheatre(10, 10, 10);
-
 
         // // adding movies to check new functions
         // List<CategoryModel> genres = new List<CategoryModel>();

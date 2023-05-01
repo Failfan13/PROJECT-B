@@ -32,13 +32,24 @@
         {
           "Item1": "column",
           "Item2": 10
+        },
+        {
+          "Item1": "column",
+          "Item2": 6
         }
       ],
-      "blockedSeats": [],
+      "blockedSeats": [
+        26,
+        55
+      ],
       "handicapSeats": [
-        35,
-        95,
-        96
+        123,
+        138,
+        139,
+        124,
+        128,
+        129,
+        108
       ]
     },
     "baseSeatPrice": 0,

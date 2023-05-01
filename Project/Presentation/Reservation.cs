@@ -161,9 +161,11 @@ public static class Reservation
     {
         Console.Clear();
         ReservationLogic ReservationLogic = new ReservationLogic();
+        TheatreLogic TL = new TheatreLogic();
         AccountsLogic AccountsLogic = new();
         EmailLogic EmailLogic = new EmailLogic();
         double FinalPrice = 0.00;
+        TheatreModel theatre = TL.GetById(ress.TimeSLotId)!;
 
         string subject = "Order summary";
         string body = "";
@@ -174,12 +176,22 @@ public static class Reservation
         body += "Order overview:\n";
         Console.WriteLine("\nSeats:");
         body += $"\nChosen seats:\n\n";
-        foreach (SeatModel seat in ress.Seats)
+        if (theatre != null)
         {
-            //Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theatre.Width)}\tPrice: €{seat.Price}");
-            //body += $"Nr: {seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theatre.Width)}\tPrice: €{seat.Price}\n";
-            //FinalPrice += seat.Price;
+            foreach (SeatModel seat in ress.Seats)
+            {
+                var seatPrice = (seat.SeatType) switch
+                {
+                    "basic" => theatre.BasicSeatPrice,
+                    "standard" => theatre.StandardSeatPrice,
+                    "premium" => theatre.LuxurySeatPrice,
+                    _ => 0.00
+                };
+                Console.WriteLine($"Seat: {TL.SeatNumber(theatre.Width, seat.Id)} - SeatType: {seat.SeatType}\tPrice: €{seatPrice}");
+                FinalPrice += seatPrice;
+            }
         }
+
 
         // Snack data
         if (ress.Snacks != null)

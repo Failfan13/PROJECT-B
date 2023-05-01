@@ -129,4 +129,5 @@ public static class MenuLogic
         else Console.Write(str); // used inline
         Console.ResetColor();
     }
+    public static string BoldString(string str) => $"\x1b[1m{str}\x1b[0m";
 }

@@ -11,39 +11,39 @@
           "seatType": "basic"
         },
         {
-          "id": 8,
-          "seatType": "basic"
-        },
-        {
-          "id": 18,
+          "id": 50,
           "seatType": "standard"
         },
         {
-          "id": 144,
-          "seatType": "luxury"
+          "id": 65,
+          "seatType": "standard"
         },
         {
-          "id": 108,
+          "id": 22,
           "seatType": "basic"
         },
         {
-          "id": 47,
-          "seatType": "basic"
+          "id": 23,
+          "seatType": "standard"
         },
         {
-          "id": 48,
-          "seatType": "basic"
+          "id": 24,
+          "seatType": "standard"
         },
         {
-          "id": 49,
-          "seatType": "basic"
+          "id": 34,
+          "seatType": "standard"
         },
         {
-          "id": 139,
-          "seatType": "handicap"
+          "id": 33,
+          "seatType": "standard"
+        },
+        {
+          "id": 32,
+          "seatType": "basic"
         }
       ]
     },
-    "format": ""
+    "format": "imax"
   }
 ]

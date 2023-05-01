@@ -4,18 +4,13 @@ public static class Theatre
     public static void SelectSeats(TimeSlotModel TimeSlot, bool IsEdited = false)
     {
         TimeSlotsLogic TS = new TimeSlotsLogic();
-        var theatre = TimeSlot.Theatre;
-        var size = 9;
-        if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin)
-        {
-            size = 10000;
-        }
-        var help = TL;//.ShowSeats(theatre, size);
         ReservationLogic RL = new ReservationLogic();
+        var theatre = TL.GetById(TimeSlot.Theatre.TheatreId)!;
+        var help = TL.ShowSeats(theatre, TimeSlot);
 
         if (help != null)
         {
-            var selectedSeats = help;//.Seats;
+            var selectedSeats = help;
 
             string Question = "Would you like to order snacks?";
             List<string> Options = new List<string>() { "Yes", "No" };
@@ -23,13 +18,13 @@ public static class Theatre
 
             if (FormatsLogic.GetByFormat(TimeSlot.Format) != null)
             {
-                // Actions.Add(() => Snacks.Start(TimeSlot, selectedSeats, IsEdited));
-                // Actions.Add(() => Format.Start(TimeSlot, selectedSeats));
+                Actions.Add(() => Snacks.Start(TimeSlot, selectedSeats, IsEdited));
+                Actions.Add(() => Format.Start(TimeSlot, selectedSeats));
             }
             else
             {
-                // Actions.Add(() => Snacks.Start(TimeSlot, selectedSeats, IsEdited));
-                // Actions.Add(() => RL.MakeReservation(TimeSlot, selectedSeats, IsEdited: IsEdited));
+                Actions.Add(() => Snacks.Start(TimeSlot, selectedSeats, IsEdited));
+                Actions.Add(() => RL.MakeReservation(TimeSlot, selectedSeats, IsEdited: IsEdited));
             }
 
             MenuLogic.Question(Question, Options, Actions);
@@ -66,14 +61,14 @@ public static class Theatre
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        Options.Add("Change size");
-        // Actions.Add(() => TL.ChangeTheatreSize(theatre, () => Theatre.EditMenu(theatre, returnTo)));
+        Options.Add("Change theatre configuration");
+        // Actions.Add(() => TL.ReconfigureTheatre(theatre, () => Theatre.EditMenu(theatre, returnTo)));
 
-        // Options.Add("Block seats");
-        // Actions.Add(() => TL.BlockSeats(theatre, () => Theatre.EditMenu(theatre, returnTo)));
+        Options.Add("Block a seat");
+        // Actions.Add(() => TL.BlockSeat(theatre, () => Theatre.EditMenu(theatre, returnTo)));
 
-        // Options.Add("Unblock seats");
-        // Actions.Add(() => TL.UnBlockSeats(theatre, () => Theatre.EditMenu(theatre, returnTo)));
+        Options.Add("Unblock a seats");
+        // Actions.Add(() => TL.UnBlockSeat(theatre, () => Theatre.EditMenu(theatre, returnTo)));
 
         Options.Add("\nReturn");
         if (returnTo != null)
@@ -198,7 +193,7 @@ public static class Theatre
             }
         }
 
-        //TheatreModel newTheatre = TL.MakeTheatre(width, height, baseSeatPrice, stanSeatPrice, luxeSeatPrice);
+        TheatreModel newTheatre = TL.MakeTheatre(width, height, baseSeatPrice, stanSeatPrice, luxeSeatPrice);
 
         Console.WriteLine("\nWould you like to change seat configuration? (y/n)");
         ConsoleKeyInfo inputKey = Console.ReadKey(true);
@@ -227,16 +222,7 @@ Press [ ");
             Console.Write(" ] Key to save\r\n");
             MenuLogic.ColorString(new String('‗', 59));
 
-            TL.ShowSeats(TL.GetById(2)!, TSL.GetById(0)!);
+            TL.ShowSeats(newTheatre);
         }
-
-
-        // To draw theatre and remove the seats are not needed
-        // These seat indexes need to be added to theatre model
-
-        // The show seats will need to able to be added as new theatre or choose seats from it
-
-        // Also make new theatre model will need to check if previous theatre is not empty
-        // otherwise save as that id
     }
 }

@@ -6,9 +6,9 @@
       "blockedSeats": [],
       "handicapSeats": []
     },
-    "baseSeatPrice": 0,
-    "stanSeatPrice": 0,
-    "luxeSeatPrice": 0,
+    "baseSeatPrice": 9,
+    "stanSeatPrice": 10,
+    "luxeSeatPrice": 11,
     "roomWidth": 10,
     "roomHeight": 10
   },
@@ -28,16 +28,7 @@
   {
     "id": 2,
     "layoutSpecs": {
-      "pathwaysIndex": [
-        {
-          "Item1": "column",
-          "Item2": 10
-        },
-        {
-          "Item1": "column",
-          "Item2": 6
-        }
-      ],
+      "pathwaysIndex": [],
       "blockedSeats": [
         26,
         55

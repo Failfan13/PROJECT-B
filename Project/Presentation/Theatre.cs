@@ -74,8 +74,8 @@ Press [ ");
 
         foreach (var item in TL.AllTheatres())
         {
-            Options.Add($"{item.Id}");
-            Actions.Add(() => EditMenu(item));
+            Options.Add($"Room: {item.Id} - Width: {item.Width}, Height: {item.Height}");
+            Actions.Add(() => EditMenu(item, () => Menu.Start()));
         }
 
         Options.Add("\nReturn");
@@ -93,13 +93,13 @@ Press [ ");
         List<Action> Actions = new List<Action>();
 
         Options.Add("Change theatre configuration");
-        // Actions.Add(() => TL.ReconfigureTheatre(theatre, () => Theatre.EditMenu(theatre, returnTo)));
+        Actions.Add(() => Theatre.ConfigureTheatre(theatre, () => Theatre.EditMenu(theatre, returnTo)));
 
         Options.Add("Block a seat");
-        // Actions.Add(() => TL.BlockSeat(theatre, () => Theatre.EditMenu(theatre, returnTo)));
+        Actions.Add(() => Theatre.BlockSeat(theatre, () => Theatre.EditMenu(theatre, returnTo)));
 
         Options.Add("Unblock a seats");
-        // Actions.Add(() => TL.UnBlockSeat(theatre, () => Theatre.EditMenu(theatre, returnTo)));
+        Actions.Add(() => Theatre.UnBlockSeat(theatre, () => Theatre.EditMenu(theatre, returnTo)));
 
         Options.Add("\nReturn");
         if (returnTo != null)
@@ -110,7 +110,7 @@ Press [ ");
         MenuLogic.Question(Question, Options, Actions);
     }
 
-    public static void MakeNewTheatre()
+    public static int MakeNewTheatre()
     {
         int width = 0;
         int height = 0;
@@ -231,29 +231,75 @@ Press [ ");
         // Y key to config menu
         if (inputKey.Key == ConsoleKey.Y)
         {
-            // Colored instruction menu
-            MenuLogic.ClearLastLines(12);
-            Console.Write(@$"In the following screen you can change the seat configuration
+            ConfigureTheatre(newTheatre);
+        }
+        return newTheatre.Id;
+    }
+
+    public static void ConfigureTheatre(TheatreModel newTheatre, Action returnTo = null!)
+    {
+        Console.Clear();
+        Console.Write(@$"In the following screen you can change the seat configuration
 Press the following buttons to apply changes:
          
 Press [ ");
-            MenuLogic.ColorString("↑ → ↓ ←", newLine: false);
-            Console.Write(" ] Keys to move around the menu\r\nPress [ ");
-            MenuLogic.ColorString("Enter", newLine: false);
-            Console.Write(" ] Key to select a seat\r\nPress [ ");
-            MenuLogic.ColorString("B", newLine: false);
-            Console.Write(" ] Key to block or unblock seatr\nPress [ ");
-            MenuLogic.ColorString("H", newLine: false);
-            Console.Write(" ] Key to add or remove handicap seat\r\nPress [ ");
-            MenuLogic.ColorString("P", newLine: false);
-            Console.Write(" ] Key to add pathway\r\nPress [ ");
-            MenuLogic.ColorString("R", newLine: false);
-            Console.Write(" ] Key to remove pathway\r\nPress [ ");
-            MenuLogic.ColorString("S", newLine: false);
-            Console.Write(" ] Key to save\r\n");
-            MenuLogic.ColorString(new String('‗', 59));
+        MenuLogic.ColorString("↑ → ↓ ←", newLine: false);
+        Console.Write(" ] Keys to move around the menu\r\nPress [ ");
+        MenuLogic.ColorString("B", newLine: false);
+        Console.Write(" ] Key to block or unblock seatr\nPress [ ");
+        MenuLogic.ColorString("H", newLine: false);
+        Console.Write(" ] Key to add or remove handicap seat\r\nPress [ ");
+        MenuLogic.ColorString("P", newLine: false);
+        Console.Write(" ] Key to add pathway\r\nPress [ ");
+        MenuLogic.ColorString("R", newLine: false);
+        Console.Write(" ] Key to remove pathway\r\nPress [ ");
+        MenuLogic.ColorString("S", newLine: false);
+        Console.Write(" ] Key to save\r\n");
+        MenuLogic.ColorString(new String('‗', 59));
 
-            TL.ShowSeats(newTheatre);
+        TL.ShowSeats(newTheatre);
+
+        if (returnTo != null) returnTo();
+    }
+
+    public static void BlockSeat(TheatreModel theatre, Action returnTo = null!)
+    {
+        Console.Clear();
+        Console.Write(@$"From here you will be able to block a singe seat
+        
+Please fill in the following fields");
+        MenuLogic.ColorString(new String('‗', 59));
+
+        Console.WriteLine("Enter a seat to block in the theatre");
+        MenuLogic.ColorString(">>", newLine: false);
+        Console.WriteLine($" Enter a seatId number between 1 and {theatre.Width * theatre.Height}"); // command the user
+        string input = Console.ReadLine()!;
+        TL.BlockSeat(theatre, input);
+
+        if (returnTo != null) returnTo();
+    }
+
+    public static void UnBlockSeat(TheatreModel theatre, Action returnTo = null!)
+    {
+        TheatreLogic TL = new TheatreLogic();
+        Console.Clear();
+        Console.Write(@$"From here you will be able to unblock a singe seat");
+        MenuLogic.ColorString(new String('‗', 59));
+
+        string question = "Choose a seat to unblock";
+        List<string> options = new List<string>();
+        List<Action> actions = new List<Action>();
+
+        foreach (int seatNum in theatre.LayoutSpecs.BlockedSeatIndexes)
+        {
+            options.Add($"SeatId: {seatNum.ToString()} SeatNum: {TL.SeatNumber(theatre.Width, seatNum)}");
+            actions.Add(() => TL.BlockSeat(theatre, seatNum));
         }
+        options.Add("\nReturn");
+        actions.Add(() => returnTo());
+
+        MenuLogic.Question(question, options, actions);
+
+        if (returnTo != null) returnTo();
     }
 }

@@ -107,7 +107,7 @@ public static class Reservation
 
         // Return to Login menu
         options.Add("Return");
-        actions.Add(() => UserLogin.Start());
+        actions.Add(() => Menu.Start());
 
         MenuLogic.Question(question, options, actions);
         ReservationLogic.UpdateList(CurrReservation);

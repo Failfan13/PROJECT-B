@@ -149,6 +149,7 @@ public class TheatreLogic
         List<Tuple<string, int>> seatTypes = GetSeatTypes(theatre.Width, theatre.Height);
         List<SeatModel> reservedSeats = new List<SeatModel>();
 
+
         if (timeSlot != null)
         {
             reservedSeats = timeSlot.Theatre.Seats;
@@ -166,6 +167,12 @@ public class TheatreLogic
             // Console.Clear();
             int heightCounter = 0;
             int widthCounter = 0;
+
+            // Sort lists
+            pathways.Sort();
+            blockedSeats.Sort();
+            handicaped.Sort();
+            selectedSeats.Sort();
 
             // screen position
             Console.Write("   ");
@@ -393,7 +400,7 @@ public class TheatreLogic
                 }
             }
             if (timeSlot != null) MenuLogic.ClearFromTop(7);
-            else MenuLogic.ClearLastLines(10);
+            else MenuLogic.ClearFromTop(10);
         }
 
         List<SeatModel> returnSelectedSeats = new List<SeatModel>();
@@ -590,8 +597,38 @@ public class TheatreLogic
         if (inpKey.Key != ConsoleKey.R) Contact.start();
     }
 
-    internal object ShowSeats(TimeSlotModel.Helper theatre, TimeSlotModel timeSlot)
+    public void BlockSeat<T>(TheatreModel theatre, T seatIndex) // block and unblock seat
     {
-        throw new NotImplementedException();
+        int seatNumber = 0;
+
+        if (typeof(T) == typeof(int))
+        {
+            seatNumber = Convert.ToInt32(seatIndex);
+        }
+        else if (typeof(T) == typeof(string))
+        {
+            try
+            {
+                seatNumber = Convert.ToInt32(seatIndex);
+                if (seatNumber < 1 || seatNumber > (theatre.Width * theatre.Height)) return; // out of range seats
+            }
+            catch (System.Exception)
+            {
+                return;
+            }
+        }
+        else return;
+
+        if (theatre.LayoutSpecs.BlockedSeatIndexes.Contains(seatNumber))
+        {
+            theatre.LayoutSpecs.BlockedSeatIndexes.Remove(seatNumber);
+        }
+        else
+        {
+            theatre.LayoutSpecs.BlockedSeatIndexes.Add(seatNumber);
+        }
+
+        UpdateList(theatre);
     }
+
 }

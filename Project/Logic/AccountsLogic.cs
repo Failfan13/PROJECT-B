@@ -18,7 +18,7 @@ public class AccountsLogic
 
     public static string UserName()
     {
-        return AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FullName : null;
+        return AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FullName : null!;
     }
 
     public static int? UserId()
@@ -93,6 +93,7 @@ public class AccountsLogic
 
     public void NewPassword(string newpassword)
     {
+        if (CurrentAccount == null) return;
         CurrentAccount.Password = newpassword;
         UpdateList(CurrentAccount);
     }

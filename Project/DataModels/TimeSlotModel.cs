@@ -20,6 +20,7 @@ public class TimeSlotModel
 
     [JsonConstructor]
     public TimeSlotModel() : this(0, 0, new DateTime(), new Helper(), "") { }
+    public TimeSlotModel(int id, int movieid, DateTime start, TheatreModel theatre, string format) : this(id, movieid, start, new Helper(theatre.Id), format) { }
     public TimeSlotModel(int id, int movieid, DateTime start, Helper theatre, string format)
     {
         Id = id;
@@ -32,7 +33,7 @@ public class TimeSlotModel
     public void Info()
     {
         MoviesLogic tempMLogic = new MoviesLogic();
-        MovieModel movie = tempMLogic.GetById(MovieId);
+        MovieModel movie = tempMLogic.GetById(MovieId)!;
         Console.WriteLine($"Start:\t\t{Start}");
         Console.WriteLine($"Theatre:\t{Theatre}");
         Console.WriteLine($"Format:\t\t{Format}");
@@ -50,6 +51,7 @@ public class TimeSlotModel
 
         [JsonConstructor]
         public Helper() : this(0, null!) { }
+        public Helper(int theatreId) : this(theatreId, null!) { }
         public Helper(int theatreId, List<SeatModel> seats)
         {
             TheatreId = theatreId;

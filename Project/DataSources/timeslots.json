@@ -65,6 +65,18 @@
         {
           "id": 19,
           "seatType": "basic"
+        },
+        {
+          "id": 52,
+          "seatType": "basic"
+        },
+        {
+          "id": 53,
+          "seatType": "standard"
+        },
+        {
+          "id": 54,
+          "seatType": "standard"
         }
       ]
     },

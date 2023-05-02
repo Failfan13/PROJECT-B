@@ -55,16 +55,15 @@ public class MovieModel
         Price = price;
         Categories = categories;
         Formats = formats;
-        Reviews = new ReviewHelper();
     }
 
     public class ReviewHelper
     {
         [JsonPropertyName("amount")]
-        public int Amount { get; set; }
+        public int Amount { get; private set; }
 
         [JsonPropertyName("stars")]
-        public double Stars { get; set; }
+        public double Stars { get; private set; }
 
         [JsonConstructor]
         public ReviewHelper() // default constructor
@@ -110,7 +109,6 @@ public class MovieModel
         }
         Console.WriteLine($"Formats:   \t{string.Join(", ", Formats)}");
     }
-
 }
 
 

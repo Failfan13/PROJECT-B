@@ -193,4 +193,30 @@ public class MoviesLogic : Order<MovieModel>
         movie.ReleaseDate = NewDate;
         UpdateList(movie);
     }
+
+    public List<ReservationModel> PastMovies()
+    {
+        TimeSlotsLogic TL = new TimeSlotsLogic();
+        ReservationLogic RL = new ReservationLogic();
+
+        try
+        {
+            return RL.Reservations.FindAll(r => r.AccountId == AccountsLogic.CurrentAccount!.Id && r.DateTime < DateTime.Now);
+        }
+        catch (System.Exception)
+        {
+            return new List<ReservationModel>();
+        }
+    }
+
+    public void AddNewReview(MovieModel currMovie)
+    {
+        Console.WriteLine("Add new review by entering a rating between 1 and 5 (can be specific bv 4.75)");
+        string input = Console.ReadLine()!;
+
+        // if (double.TryParse(input, out double rating))
+        // {
+        //     currMovie.Reviews = MovieModel.ReviewHelper(rating);
+        // }
+    }
 }

@@ -216,5 +216,29 @@ static class Movies
         QuestionLogic.AskEnter();
         ChangeMovieMenu(movie);
     }
+
+    public static void AddReviewMenu()
+    {
+        TimeSlotsLogic TL = new TimeSlotsLogic();
+
+        Console.Clear();
+
+        string question = "What movie would you like to add a review for?";
+        List<string> options = new List<string>();
+        List<Action> actions = new List<Action>();
+
+        foreach (ReservationModel pastReservation in MoviesLogic.PastMovies())
+        {
+            try
+            {
+                options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSLotId)!.MovieId)!.Title} Watched on: {pastReservation.DateTime}");
+                //actions.Add(() => MoviesLogic.AddNewReview(pastMovie.MovieId));
+            }
+            catch (System.Exception) { }
+        }
+
+        MenuLogic.Question(question, options, actions);
+        Menu.Start(); // needs to go to add review section
+    }
 }
 

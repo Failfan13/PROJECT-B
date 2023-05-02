@@ -17,7 +17,7 @@ static class Menu
         }
 
         Options.Add("Make a Reservation");
-        Actions.Add(() => Reservation.NoFilterMenu());
+        Actions.Add(() => Reservation.FilterMenu());
 
         if (AccountsLogic.CurrentAccount != null)
         {
@@ -63,6 +63,9 @@ static class Menu
             Console.WriteLine($"Admin {AccountsLogic.CurrentAccount.Admin}\n");
             Options.Add("Change data");
             Actions.Add(() => Admin.Start());
+
+            Options.Add("Change user data");
+            Actions.Add(() => User.SelectUser());
         }
 
         Options.Add("\nExit app");

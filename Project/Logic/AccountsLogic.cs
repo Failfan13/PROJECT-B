@@ -116,6 +116,13 @@ public class AccountsLogic
 
         return ReturnId;
     }
+
+    public void DeleteUser(int id)
+    {
+        _accounts.RemoveAll(i => i.Id == id);
+        AccountsAccess.WriteAll(_accounts);
+        Logger.LogDataChange<AccountModel>(id, "Deleted");
+    }
 }
 
 

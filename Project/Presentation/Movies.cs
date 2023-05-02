@@ -232,7 +232,7 @@ static class Movies
             try
             {
                 options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSLotId)!.MovieId)!.Title} Watched on: {pastReservation.DateTime}");
-                //actions.Add(() => MoviesLogic.AddNewReview(pastMovie.MovieId));
+                //actions.Add(() => MoviesLogic.AddNewReview(pastMovie.MovieId, pastReservation));
             }
             catch (System.Exception) { }
         }

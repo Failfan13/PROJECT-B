@@ -55,15 +55,16 @@ public class MovieModel
         Price = price;
         Categories = categories;
         Formats = formats;
+        Reviews = new ReviewHelper();
     }
 
     public class ReviewHelper
     {
         [JsonPropertyName("amount")]
-        public int Amount { get; private set; }
+        public int Amount { get; set; }
 
         [JsonPropertyName("stars")]
-        public double Stars { get; private set; }
+        public double Stars { get; set; }
 
         [JsonConstructor]
         public ReviewHelper() // default constructor
@@ -71,16 +72,16 @@ public class MovieModel
             Amount = 0;
             Stars = 0;
         }
-        public ReviewHelper(double newReviewStars) // add to current
-        {
-            Amount += 1;
-            Stars = ((Stars * (Amount - 1)) + newReviewStars) / Amount; // average stars
-        }
-        public ReviewHelper(int amount, double stars) // set specific
-        {
-            Amount = amount;
-            Stars = stars;
-        }
+        // public ReviewHelper(double newReviewStars) // add to current
+        // {
+        //     Amount += 1;
+        //     Stars = ((Stars * (Amount - 1)) + newReviewStars) / Amount; // average stars
+        // }
+        // public ReviewHelper(int amount, double stars) // set specific
+        // {
+        //     Amount = amount;
+        //     Stars = stars;
+        // }
     }
 
     public void Info()

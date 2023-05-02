@@ -209,14 +209,36 @@ public class MoviesLogic : Order<MovieModel>
         }
     }
 
-    public void AddNewReview(MovieModel currMovie)
+    public void AddNewReview(int MovieId, ReservationModel pastReservation)
     {
+        MovieModel Movie = GetById(MovieId)!;
+
+        if (Movie == null) return;
+
         Console.WriteLine("Add new review by entering a rating between 1 and 5 (can be specific bv 4.75)");
         string input = Console.ReadLine()!;
 
-        // if (double.TryParse(input, out double rating))
-        // {
-        //     currMovie.Reviews = MovieModel.ReviewHelper(rating);
-        // }
+        Console.WriteLine("Would you like to add a message to the review (y/n)");
+        ConsoleKeyInfo messageInput = Console.ReadKey();
+
+        if (messageInput.Key == ConsoleKey.Y)
+        {
+            Console.WriteLine("Enter your message");
+            string message = Console.ReadLine()!;
+            SaveReview(message, pastReservation); // saves message to CSV
+        }
+
+        if (double.TryParse(input, out double rating))
+        {
+            Movie.Reviews.Amount++; // add one rating
+            Movie.Reviews.Stars = ((Movie.Reviews.Stars * (Movie.Reviews.Amount - 1)) + rating) / Movie.Reviews.Amount; // average stars
+        }
+
+        UpdateList(Movie);
+    }
+
+    public void SaveReview(string message, ReservationModel pastReservation)
+    {
+        // to csv
     }
 }

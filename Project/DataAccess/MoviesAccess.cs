@@ -19,4 +19,15 @@ static class MoviesAccess
         File.WriteAllText(path, json);
     }
 
+
+    public static void WriteReview()
+    {
+        path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/reviews.csv"));
+
+        using StreamWriter writer = new StreamWriter(path, true)
+        {
+
+        };
+    }
+
 }

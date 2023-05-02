@@ -6,6 +6,21 @@ public static class Theatre
         TimeSlotsLogic TS = new TimeSlotsLogic();
         ReservationLogic RL = new ReservationLogic();
         var theatre = TL.GetById(TimeSlot.Theatre.TheatreId)!;
+
+        // Colored instruction menu
+        Console.Clear();
+        Console.Write(@$"In the following screen you can change the seat configuration
+Press the following buttons to apply changes:
+         
+Press [ ");
+        MenuLogic.ColorString("↑ → ↓ ←", newLine: false);
+        Console.Write(" ] Keys to move around the menu\r\nPress [ ");
+        MenuLogic.ColorString("Enter", newLine: false);
+        Console.Write(" ] Key to select or unselect a seat\r\nPress [ ");
+        MenuLogic.ColorString("S", newLine: false);
+        Console.Write(" ] Key to save current selection\r\n");
+        MenuLogic.ColorString(new String('‗', 59));
+
         var help = TL.ShowSeats(theatre, TimeSlot);
 
         if (help != null)
@@ -33,6 +48,22 @@ public static class Theatre
         {
             Menu.Start();
         }
+    }
+    public static void DeselectCurrentSeats(TimeSlotModel timeSlot, ReservationModel currReservation)
+    {
+        TimeSlotsLogic TSL = new TimeSlotsLogic();
+        ReservationLogic RL = new ReservationLogic();
+
+        List<SeatModel> seatsToRemove = currReservation.Seats;
+
+        currReservation.Seats = new List<SeatModel>();
+
+        foreach (SeatModel seat in seatsToRemove)
+        {
+            timeSlot.Theatre.Seats.RemoveAll(s => s.Id == seat.Id);
+        }
+        TSL.UpdateList(timeSlot);
+        RL.UpdateList(currReservation);
     }
 
     public static void WhatTheatre()
@@ -210,10 +241,10 @@ Press [ ");
             Console.Write(" ] Keys to move around the menu\r\nPress [ ");
             MenuLogic.ColorString("Enter", newLine: false);
             Console.Write(" ] Key to select a seat\r\nPress [ ");
-            MenuLogic.ColorString("E", newLine: false);
-            Console.Write(" ] Key to remove seat position\r\nPress [ ");
-            MenuLogic.ColorString("A", newLine: false);
-            Console.Write(" ] Key to add seat position\r\nPress [ ");
+            MenuLogic.ColorString("B", newLine: false);
+            Console.Write(" ] Key to block or unblock seatr\nPress [ ");
+            MenuLogic.ColorString("H", newLine: false);
+            Console.Write(" ] Key to add or remove handicap seat\r\nPress [ ");
             MenuLogic.ColorString("P", newLine: false);
             Console.Write(" ] Key to add pathway\r\nPress [ ");
             MenuLogic.ColorString("R", newLine: false);

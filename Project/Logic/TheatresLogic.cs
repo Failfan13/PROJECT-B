@@ -129,7 +129,7 @@ public class TheatreLogic
         Console.Write(" Available seat\n\n");
         MenuLogic.ColorString("☐", ConsoleColor.Yellow, newLine: false);
         Console.Write(" Standard seat\n");
-        MenuLogic.ColorString("☐", ConsoleColor.Cyan, newLine: false);
+        MenuLogic.ColorString("☐", ConsoleColor.Blue, newLine: false);
         Console.Write(" Luxury seat\n");
         MenuLogic.ColorString("☐", ConsoleColor.Magenta, newLine: false);
         Console.Write(" Handicap seat\n");
@@ -163,7 +163,7 @@ public class TheatreLogic
         bool runMenu = true;
         while (runMenu)
         {
-            Console.Clear();
+            // Console.Clear();
             int heightCounter = 0;
             int widthCounter = 0;
 
@@ -391,9 +391,9 @@ public class TheatreLogic
                     default:
                         break;
                 }
-                if (timeSlot != null) MenuLogic.ClearFromTop(13);
-                else MenuLogic.ClearLastLines(10);
             }
+            if (timeSlot != null) MenuLogic.ClearFromTop(7);
+            else MenuLogic.ClearLastLines(10);
         }
 
         List<SeatModel> returnSelectedSeats = new List<SeatModel>();

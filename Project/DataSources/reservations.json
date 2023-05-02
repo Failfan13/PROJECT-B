@@ -1,105 +1,36 @@
 [
   {
     "id": 1,
-    "timeslot_id": 4,
+    "timeslot_id": 0,
     "seats": [
       {
-        "id": 5,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false,
-        "luxury": false
+        "id": 38,
+        "seatType": "standard"
       },
       {
-        "id": 15,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false,
-        "luxury": false
+        "id": 48,
+        "seatType": "standard"
+      },
+      {
+        "id": 58,
+        "seatType": "standard"
+      },
+      {
+        "id": 68,
+        "seatType": "standard"
+      },
+      {
+        "id": 78,
+        "seatType": "standard"
       }
     ],
-    "snacks": null,
+    "snacks": {
+      "1": 1,
+      "2": 1,
+      "3": 2
+    },
     "account_id": 2,
-    "date_time": "2023-04-23T20:24:20.9829399+02:00",
-    "format": ""
-  },
-  {
-    "id": 2,
-    "timeslot_id": 2,
-    "seats": [
-      {
-        "id": 2,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false,
-        "luxury": false
-      },
-      {
-        "id": 12,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false,
-        "luxury": false
-      }
-    ],
-    "snacks": null,
-    "account_id": 2,
-    "date_time": "2023-04-23T20:24:37.4578364+02:00",
-    "format": ""
-  },
-  {
-    "id": 3,
-    "timeslot_id": 8,
-    "seats": [
-      {
-        "id": 3,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false,
-        "luxury": false
-      },
-      {
-        "id": 4,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false,
-        "luxury": false
-      },
-      {
-        "id": 5,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false,
-        "luxury": false
-      },
-      {
-        "id": 6,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false,
-        "luxury": false
-      }
-    ],
-    "snacks": null,
-    "account_id": -1,
-    "date_time": "2023-04-25T11:47:38.389569+02:00",
-    "format": ""
-  },
-  {
-    "id": 4,
-    "timeslot_id": 4,
-    "seats": [
-      {
-        "id": 19,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false,
-        "luxury": false
-      }
-    ],
-    "snacks": null,
-    "account_id": 1,
-    "date_time": "2023-04-25T20:25:42.2929167+02:00",
-    "format": ""
+    "date_time": "2023-05-02T01:24:37.7361651+02:00",
+    "format": "imax"
   }
 ]

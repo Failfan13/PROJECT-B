@@ -31,19 +31,43 @@
           "seatType": "standard"
         },
         {
-          "id": 34,
+          "id": 38,
           "seatType": "standard"
         },
         {
-          "id": 33,
+          "id": 48,
           "seatType": "standard"
         },
         {
-          "id": 32,
+          "id": 58,
+          "seatType": "standard"
+        },
+        {
+          "id": 68,
+          "seatType": "standard"
+        },
+        {
+          "id": 78,
+          "seatType": "standard"
+        },
+        {
+          "id": 18,
+          "seatType": "basic"
+        },
+        {
+          "id": 28,
+          "seatType": "standard"
+        },
+        {
+          "id": 29,
+          "seatType": "basic"
+        },
+        {
+          "id": 19,
           "seatType": "basic"
         }
       ]
     },
-    "format": "imax"
+    "format": ""
   }
 ]

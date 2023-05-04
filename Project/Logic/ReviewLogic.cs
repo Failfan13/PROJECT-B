@@ -76,21 +76,47 @@ public class ReviewLogic
     public void ViewReviews(bool specUser = false, bool specMovie = false)
     {
         List<ReviewModel> reviews = AllReviews();
+        AccountsLogic AL = new AccountsLogic();
+        MoviesLogic ML = new MoviesLogic();
+
+        Console.Clear();
+
+        string question = "";
+        List<string> options = new List<string>();
+        List<Action> actions = new List<Action>();
 
         switch ((specUser, specMovie))
         {
             case (false, false):
+                ShowAvailableReviews(reviews);
                 break;
             case (true, false):
+                question = "Select the user you would like to edit reviews for";
+                foreach (AccountModel user in AL.GetAllAccounts())
+                {
+                    options.Add(user.FullName);
+                    actions.Add(() => ShowAvailableReviews(reviews.FindAll(r => r.AccountId == user.Id)));
+                }
                 break;
             case (false, true):
+                ShowAvailableMovies(reviews);
                 break;
             case (true, true):
+                question = "Select the user and movie you would like to edit reviews for";
+                foreach (AccountModel user in AL.GetAllAccounts())
+                {
+                    options.Add(user.FullName);
+                    actions.Add(() => ShowAvailableMovies(reviews.FindAll(r => r.AccountId == user.Id)));
+                }
                 break;
         }
+
+        MenuLogic.Question(question, options, actions);
+
+        Movies.EditReviewsMenu();
     }
 
-    public void EditReview(List<ReviewModel> reviews)
+    public void ShowAvailableReviews(List<ReviewModel> reviews)
     {
         AccountsLogic AL = new AccountsLogic();
 
@@ -101,7 +127,8 @@ public class ReviewLogic
         foreach (ReviewModel review in reviews)
         {
             options.Add(@$"From user {review.AccountId} - {AL.GetById(review.AccountId)!.FullName}, Date: {review.reviewDate}, Review score {review.Rating},
-Message: {review.Review}");
+Message: {review.Review}
+");
             actions.Add(() => EditReview(review));
         }
 
@@ -111,6 +138,25 @@ Message: {review.Review}");
         MenuLogic.Question(question, options, actions);
 
         Movies.EditReviewsMenu();
+    }
+
+    public void ShowAvailableMovies(List<ReviewModel> reviews)
+    {
+        MoviesLogic ML = new MoviesLogic();
+
+        string question = "Select the movie you would like to edit reviews for";
+        List<string> options = new List<string>();
+        List<Action> actions = new List<Action>();
+
+        foreach (MovieModel movie in ML.AllMovies())
+        {
+            options.Add(movie.Title);
+            actions.Add(() => ShowAvailableReviews(reviews.FindAll(r => r.MovieId == movie.Id)));
+        }
+
+        MenuLogic.Question(question, options, actions);
+
+        ShowAvailableReviews(reviews);
     }
 
     public void EditReview(ReviewModel review)

@@ -261,9 +261,9 @@ static class Movies
         options.Add("All reviews");
         actions.Add(() => RL.ViewReviews(false, false));
         options.Add("All revies for specific movie");
-        actions.Add(() => RL.ViewReviews(true, false));
-        options.Add("All reviews for specific user");
         actions.Add(() => RL.ViewReviews(false, true));
+        options.Add("All reviews for specific user");
+        actions.Add(() => RL.ViewReviews(true, false));
         options.Add("All reviews for specific user and movie");
         actions.Add(() => RL.ViewReviews(true, true));
 

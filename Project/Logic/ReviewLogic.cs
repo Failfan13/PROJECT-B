@@ -56,7 +56,7 @@ public class ReviewLogic
         return movie;
     }
 
-    public void SaveReview(string message, double reviewScore, ReservationModel pastReservation)
+    public void SaveNewReview(string message, double reviewScore, ReservationModel pastReservation)
     {
         TimeSlotsLogic TL = new TimeSlotsLogic();
         ReviewModel review = null!;
@@ -68,6 +68,7 @@ public class ReviewLogic
         {
             return;
         }
+        review.reviewDate = DateTime.Now;
 
         _reviews.Add(review);
         UpdateReviews();

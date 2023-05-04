@@ -300,7 +300,7 @@ static class Movies
         }
 
         if (double.TryParse(input, out double rating))
-            RL.SaveReview(message, rating, pastReservation); // saves message to CSV
+            RL.SaveNewReview(message, rating, pastReservation); // saves message to CSV
 
         ML.UpdateList(Movie);
     }

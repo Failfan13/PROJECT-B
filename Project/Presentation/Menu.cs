@@ -24,8 +24,11 @@ static class Menu
             Options.Add("Change a reservation");
             Actions.Add(() => Reservation.EditReservation());
 
-            Options.Add("Add review for past reservation");
-            Actions.Add(() => Movies.AddReviewMenu());
+            if (AccountsLogic.CurrentAccount.Admin == false)
+            {
+                Options.Add("Add review for past reservation");
+                Actions.Add(() => Movies.AddReviewMenu());
+            }
 
             // Options.Add("See all reservations");
             // Actions.Add(() => Reservation.AllReservations());
@@ -36,9 +39,6 @@ static class Menu
 
         Options.Add("Contact");
         Actions.Add(() => Contact.start());
-
-        Options.Add("View ratings");
-        Actions.Add(() => Movies.EditReviewsMenu());
 
         if (AccountsLogic.CurrentAccount != null)
         {
@@ -75,6 +75,9 @@ static class Menu
 
             Options.Add("Change user data");
             Actions.Add(() => User.SelectUser());
+
+            Options.Add("View ratings");
+            Actions.Add(() => Movies.EditReviewsMenu());
         }
 
         Options.Add("\nExit app");

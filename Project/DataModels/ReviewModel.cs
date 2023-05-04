@@ -23,7 +23,6 @@ public class ReviewModel
     {
         MovieId = movieId;
         AccountId = accountId;
-        reviewDate = DateTime.Now;
         Rating = rating;
         Review = CutReviewMessage(review);
     }

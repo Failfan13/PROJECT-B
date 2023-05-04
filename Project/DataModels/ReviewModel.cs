@@ -10,16 +10,20 @@ public class ReviewModel
     [Name("accountId")]
     public int AccountId { get; set; }
 
+    [Name("reviewDate")]
+    public DateTime reviewDate { get; set; }
+
     [Name("rating")]
-    public int Rating { get; set; }
+    public double Rating { get; set; }
 
     [Name("review")]
     public string Review { get; set; }
 
-    public ReviewModel(int movieId, int accountId, int rating, string review)
+    public ReviewModel(int movieId, int accountId, double rating, string review)
     {
         MovieId = movieId;
         AccountId = accountId;
+        reviewDate = DateTime.Now;
         Rating = rating;
         Review = CutReviewMessage(review);
     }

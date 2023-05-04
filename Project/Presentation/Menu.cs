@@ -24,6 +24,9 @@ static class Menu
             Options.Add("Change a reservation");
             Actions.Add(() => Reservation.EditReservation());
 
+            Options.Add("Add review for past reservation");
+            Actions.Add(() => Movies.AddReviewMenu());
+
             // Options.Add("See all reservations");
             // Actions.Add(() => Reservation.AllReservations());
 
@@ -34,6 +37,9 @@ static class Menu
         Options.Add("Contact");
         Actions.Add(() => Contact.start());
 
+        Options.Add("View ratings");
+        Actions.Add(() => Movies.EditReviewsMenu());
+
         if (AccountsLogic.CurrentAccount != null)
         {
             Options.Add("\nLogout");
@@ -41,8 +47,7 @@ static class Menu
         }
 
         // Movies.AddNewMovie();
-        TheatreLogic room = new TheatreLogic();
-        room.MakeTheatre(10, 10);
+
 
 
         // // adding movies to check new functions

@@ -11,7 +11,6 @@ public class MoviesLogic : Order<MovieModel>
     static private CategoryLogic CategoryLogic = new CategoryLogic();
 
     private List<MovieModel> _movies;
-    private List<ReviewModel> _reviews;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -20,9 +19,7 @@ public class MoviesLogic : Order<MovieModel>
     public MoviesLogic()
     {
         _movies = MoviesAccess.LoadAll();
-        _reviews = ReviewsAccess.LoadReviews();
     }
-
 
     public override void UpdateList(MovieModel movie)
     {
@@ -42,10 +39,7 @@ public class MoviesLogic : Order<MovieModel>
             Logger.LogDataChange<MovieModel>(movie.Id, "Added");
         }
 
-        _movies = UpdateReviews(_movies);
-
         MoviesAccess.WriteAll(_movies);
-
     }
 
     public override MovieModel? GetById(int id)
@@ -199,33 +193,7 @@ public class MoviesLogic : Order<MovieModel>
         UpdateList(movie);
     }
 
-    public List<ReviewModel> AllReviews()
-    {
-        return _reviews;
-    }
-
-    public List<MovieModel> UpdateReviews(List<MovieModel> movies)
-    {
-        for (int i = 0; i < movies.Count; i++)
-        {
-            movies[i] = UpdateReview(movies[i]);
-        }
-        return movies;
-    }
-
-    private MovieModel UpdateReview(MovieModel movie)
-    {
-        List<ReviewModel> reviews = AllReviews().FindAll(r => r.MovieId == movie.Id);
-
-        foreach (ReviewModel review in reviews)
-        {
-            movie.Reviews.Amount++;
-            movie.Reviews.Stars = Math.Round(((movie.Reviews.Stars * movie.Reviews.Amount - 1) + review.Rating) / movie.Reviews.Amount, 2);
-        }
-
-        return movie;
-    }
-
+    // this account's reservations after the current date
     public List<ReservationModel> PastMovies()
     {
         TimeSlotsLogic TL = new TimeSlotsLogic();
@@ -239,38 +207,5 @@ public class MoviesLogic : Order<MovieModel>
         {
             return new List<ReservationModel>();
         }
-    }
-
-    public void AddNewReview(int MovieId, ReservationModel pastReservation)
-    {
-        MovieModel Movie = GetById(MovieId)!;
-
-        if (Movie == null) return;
-
-        Console.WriteLine("Add new review by entering a rating between 1 and 5 (can be specific bv 4.75)");
-        string input = Console.ReadLine()!;
-
-        Console.WriteLine("Would you like to add a message to the review (y/n)");
-        ConsoleKeyInfo messageInput = Console.ReadKey();
-
-        if (messageInput.Key == ConsoleKey.Y)
-        {
-            Console.WriteLine("Enter your message");
-            string message = Console.ReadLine()!;
-            SaveReview(message, pastReservation); // saves message to CSV
-        }
-
-        if (double.TryParse(input, out double rating))
-        {
-            Movie.Reviews.Amount++; // add one rating
-            Movie.Reviews.Stars = ((Movie.Reviews.Stars * (Movie.Reviews.Amount - 1)) + rating) / Movie.Reviews.Amount; // average stars
-        }
-
-        UpdateList(Movie);
-    }
-
-    public void SaveReview(string message, ReservationModel pastReservation)
-    {
-        // update csv reviews
     }
 }

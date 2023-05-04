@@ -220,8 +220,15 @@ static class Movies
     public static void AddReviewMenu()
     {
         TimeSlotsLogic TL = new TimeSlotsLogic();
+        ReviewLogic RL = new ReviewLogic();
 
         Console.Clear();
+
+        if (MoviesLogic.PastMovies().Count == 0)
+        {
+            Console.WriteLine("You have no past reservations");
+            return;
+        }
 
         string question = "What movie would you like to add a review for?";
         List<string> options = new List<string>();
@@ -232,13 +239,70 @@ static class Movies
             try
             {
                 options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSLotId)!.MovieId)!.Title} Watched on: {pastReservation.DateTime}");
-                //actions.Add(() => MoviesLogic.AddNewReview(pastMovie.MovieId, pastReservation));
+                actions.Add(() => AddNewReview(TL.GetById(pastReservation.TimeSLotId)!.MovieId, pastReservation));
             }
             catch (System.Exception) { }
         }
 
         MenuLogic.Question(question, options, actions);
         Menu.Start(); // needs to go to add review section
+    }
+
+    public static void EditReviewsMenu()
+    {
+        ReviewLogic RL = new ReviewLogic();
+
+        Console.Clear();
+
+        string question = "What would you like to do?";
+        List<string> options = new List<string>();
+        List<Action> actions = new List<Action>();
+
+        options.Add("All reviews");
+        actions.Add(() => RL.ViewReviews(false, false));
+        options.Add("All revies for specific movie");
+        actions.Add(() => RL.ViewReviews(true, false));
+        options.Add("All reviews for specific user");
+        actions.Add(() => RL.ViewReviews(false, true));
+        options.Add("All reviews for specific user and movie");
+        actions.Add(() => RL.ViewReviews(true, true));
+
+        options.Add("Return");
+        actions.Add(() => Menu.Start());
+
+        MenuLogic.Question(question, options, actions);
+        Admin.Start();
+    }
+
+    // Questions user for new review
+    public static void AddNewReview(int MovieId, ReservationModel pastReservation)
+    {
+        MoviesLogic ML = new MoviesLogic();
+        ReviewLogic RL = new ReviewLogic();
+
+        MovieModel Movie = ML.GetById(MovieId)!;
+
+        if (Movie == null) return;
+
+        Console.Clear();
+        Console.WriteLine("Add new review by entering a rating between 1 and 5 (can be specific bv 4.75)");
+        string input = Console.ReadLine()!;
+
+        Console.WriteLine("Would you like to add a message to the review (y/n)");
+        ConsoleKeyInfo messageInput = Console.ReadKey();
+
+
+        string message = "";
+        if (messageInput.Key == ConsoleKey.Y)
+        {
+            Console.WriteLine("Enter your message");
+            message = Console.ReadLine()!;
+        }
+
+        if (double.TryParse(input, out double rating))
+            RL.SaveReview(message, rating, pastReservation); // saves message to CSV
+
+        ML.UpdateList(Movie);
     }
 }
 

@@ -72,16 +72,6 @@ public class MovieModel
             Amount = 0;
             Stars = 0;
         }
-        // public ReviewHelper(double newReviewStars) // add to current
-        // {
-        //     Amount += 1;
-        //     Stars = ((Stars * (Amount - 1)) + newReviewStars) / Amount; // average stars
-        // }
-        // public ReviewHelper(int amount, double stars) // set specific
-        // {
-        //     Amount = amount;
-        //     Stars = stars;
-        // }
     }
 
     public void Info()

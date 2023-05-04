@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "B/JlP4mOuBXOAmMV5K8Vk+a1dhRXM3n3ovo65uxcjvuEFWmNTkDOUg4hYDrQ0DrwV3VPY1MHk1wI6j3Qz7LEWg==",
+  "dgSpecHash": "Kq0z+PmnJv3fZgxrrv0H/+LzI33M0y+0PRpvdq8udolb2ovBdFGmLdJOyLKMkXM71rAEr/4Q7IRyBvH5vwqhOw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\Project.csproj",
+  "projectFilePath": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\erikm\\.nuget\\packages\\csvhelper\\30.0.1\\csvhelper.30.0.1.nupkg.sha512",
     "C:\\Users\\erikm\\.nuget\\packages\\mailkit\\3.6.0\\mailkit.3.6.0.nupkg.sha512",
     "C:\\Users\\erikm\\.nuget\\packages\\mimekit\\3.6.0\\mimekit.3.6.0.nupkg.sha512",
     "C:\\Users\\erikm\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",

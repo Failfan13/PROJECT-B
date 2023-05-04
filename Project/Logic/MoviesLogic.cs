@@ -11,6 +11,7 @@ public class MoviesLogic : Order<MovieModel>
     static private CategoryLogic CategoryLogic = new CategoryLogic();
 
     private List<MovieModel> _movies;
+    private List<ReviewModel> _reviews;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -239,6 +240,6 @@ public class MoviesLogic : Order<MovieModel>
 
     public void SaveReview(string message, ReservationModel pastReservation)
     {
-        // to csv
+        // update csv reviews
     }
 }

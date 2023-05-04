@@ -68,7 +68,6 @@ public class ReviewLogic
         {
             return;
         }
-        review.reviewDate = DateTime.Now;
 
         _reviews.Add(review);
         UpdateReviews();
@@ -127,7 +126,7 @@ public class ReviewLogic
 
         foreach (ReviewModel review in reviews)
         {
-            options.Add(@$"From user {review.AccountId} - {AL.GetById(review.AccountId)!.FullName}, Date: {review.reviewDate}, Review score {review.Rating},
+            options.Add(@$"From user {review.AccountId} - {AL.GetById(review.AccountId)!.FullName}, Date: {review.ReviewDate}, Review score {review.Rating},
 Message: {review.Review}
 ");
             actions.Add(() => EditReview(review));

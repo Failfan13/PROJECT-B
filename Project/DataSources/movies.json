@@ -15,7 +15,11 @@
     ],
     "Formats": [
       "standard"
-    ]
+    ],
+    "reviews": {
+      "amount": 0,
+      "stars": 0
+    }
   },
   {
     "id": 1,
@@ -41,7 +45,11 @@
     ],
     "Formats": [
       "standard"
-    ]
+    ],
+    "reviews": {
+      "amount": 0,
+      "stars": 0
+    }
   },
   {
     "id": 2,
@@ -63,7 +71,11 @@
     ],
     "Formats": [
       "standard"
-    ]
+    ],
+    "reviews": {
+      "amount": 0,
+      "stars": 0
+    }
   },
   {
     "id": 3,
@@ -76,6 +88,10 @@
     "categories": [],
     "Formats": [
       "standard"
-    ]
+    ],
+    "reviews": {
+      "amount": 0,
+      "stars": 0
+    }
   }
 ]

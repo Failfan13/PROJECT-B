@@ -18,16 +18,4 @@ static class MoviesAccess
         string json = JsonSerializer.Serialize(accounts, options);
         File.WriteAllText(path, json);
     }
-
-
-    public static void WriteReview()
-    {
-        path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/reviews.csv"));
-
-        using StreamWriter writer = new StreamWriter(path, true)
-        {
-
-        };
-    }
-
 }

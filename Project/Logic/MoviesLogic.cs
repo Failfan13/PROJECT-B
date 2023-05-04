@@ -20,6 +20,7 @@ public class MoviesLogic : Order<MovieModel>
     public MoviesLogic()
     {
         _movies = MoviesAccess.LoadAll();
+        _reviews = ReviewsAccess.LoadReviews();
     }
 
 
@@ -40,6 +41,9 @@ public class MoviesLogic : Order<MovieModel>
             _movies.Add(movie);
             Logger.LogDataChange<MovieModel>(movie.Id, "Added");
         }
+
+        _movies = UpdateReviews(_movies);
+
         MoviesAccess.WriteAll(_movies);
 
     }
@@ -193,6 +197,33 @@ public class MoviesLogic : Order<MovieModel>
     {
         movie.ReleaseDate = NewDate;
         UpdateList(movie);
+    }
+
+    public List<ReviewModel> AllReviews()
+    {
+        return _reviews;
+    }
+
+    public List<MovieModel> UpdateReviews(List<MovieModel> movies)
+    {
+        for (int i = 0; i < movies.Count; i++)
+        {
+            movies[i] = UpdateReview(movies[i]);
+        }
+        return movies;
+    }
+
+    private MovieModel UpdateReview(MovieModel movie)
+    {
+        List<ReviewModel> reviews = AllReviews().FindAll(r => r.MovieId == movie.Id);
+
+        foreach (ReviewModel review in reviews)
+        {
+            movie.Reviews.Amount++;
+            movie.Reviews.Stars = Math.Round(((movie.Reviews.Stars * movie.Reviews.Amount - 1) + review.Rating) / movie.Reviews.Amount, 2);
+        }
+
+        return movie;
     }
 
     public List<ReservationModel> PastMovies()

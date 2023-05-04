@@ -1,7 +1,7 @@
 using CsvHelper;
 using System.Globalization;
 
-static class ReviewAccess
+static class ReviewsAccess
 {
     static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/reviews.csv"));
 

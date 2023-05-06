@@ -49,7 +49,6 @@ public class AccountsLogic
             Logger.LogDataChange<AccountModel>(acc.Id, "Added");
         }
         AccountsAccess.WriteAll(_accounts);
-
     }
 
     public AccountModel? GetById(int id)
@@ -59,7 +58,14 @@ public class AccountsLogic
 
     public int GetNewestId()
     {
-        return (_accounts.OrderByDescending(item => item.Id).First().Id) + 1;
+        if (_accounts.Count == 0)
+        {
+            return 1;
+        }
+        else
+        {
+            return _accounts.Max(a => a.Id) + 1;
+        }
     }
 
     public AccountModel? CheckLogin(string email, string password)
@@ -109,8 +115,157 @@ public class AccountsLogic
 
         return ReturnId;
     }
+
+    // method so user can sumbit complaint
+    public static void AddComplaint(AccountModel account)
+    {
+        Console.Clear();
+
+        if (account.Complaints.Count < 3)
+        {
+            Console.WriteLine("Please enter your complaint:\n");
+
+            string complaint = Console.ReadLine();
+            account.Complaints.Add(complaint);
+
+            AccountsLogic temp = UserLogin.GetAccountsLogicInstance();
+            temp.UpdateList(account);
+
+            Console.Clear();
+            Console.WriteLine("Your complaint has been sent. We will get back to you as soon as possible\nPress any key to return");
+            Console.ReadKey();
+        }
+        else
+        {
+            Console.WriteLine("You have reached maximum amount of tickets you can submit.\nPlease get in touch with our customer service for further assitance\nPress any key to return");
+            Console.ReadKey();
+            Contact.contact();
+        }
+    }
+    // Method to display menu for admin to manage complaints.
+    public static void AdminSelectionComplaints()
+    {
+        // function so admin can search for an account by email.
+        Console.Clear();
+        Console.WriteLine("Enter your email address (press space to cancel):");
+
+        string email = "";
+        while (true)
+        {
+            ConsoleKeyInfo key = Console.ReadKey(true);
+
+            if (key.Key == ConsoleKey.Spacebar)
+            {
+                Admin.Start();
+            }
+            else if (key.Key == ConsoleKey.Enter)
+            {
+                break;
+            }
+            else if (key.Key == ConsoleKey.Backspace)
+            {
+                if (email.Length > 0)
+                {
+                    email = email.Substring(0, email.Length - 1);
+                    Console.Write("\b \b");
+                }
+            }
+            else if (Char.IsLetterOrDigit(key.KeyChar) || key.KeyChar == '.' || key.KeyChar == '@')
+            {
+                email += key.KeyChar;
+                Console.Write(key.KeyChar);
+            }
+        }
+
+        // search email and if found assign fetch the account.
+        AccountModel account = null;
+        Console.Clear();
+        foreach (AccountModel accounts in AccountsAccess.LoadAll())
+        {
+            if (accounts.EmailAddress == email)
+            {
+                account = accounts;
+            }
+        }
+        
+        // if account was found print all complaints else could not be found
+        if (account != null)
+        {
+            if (account.Complaints.Count > 0)
+            {
+
+            // creating the menu 
+            string Question = $"Select a complaint to modify or delete from user {account.FullName}, {account.EmailAddress}";
+
+            List<string> Options = new List<string>();
+            List<Action> Actions = new List<Action>();
+            
+            for (int i = 0; i < account.Complaints.Count; i++)
+            {
+                Options.Add($"{i + 1}: {account.Complaints[i]}\n");
+                int index = i; // capture the index in a local variable
+                Actions.Add(() => AccountsLogic.choose(account, index)); // pass the index to choose method
+            }            
+                MenuLogic.Question(Question, Options, Actions);
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.WriteLine("This user has submitted no complaints");
+                Console.ReadKey();
+            }
+        }
+        else
+        {
+            Console.WriteLine("Account could not be found");
+            Console.ReadKey();
+        }
+    }
+
+    // in-between method to determine what as been selected in previous screen.
+    public static void choose(AccountModel account, int index)
+    {
+        Console.Clear();
+        string Question = "Select what you would like to do\n";
+        List<string> Options = new List<string>()
+        {
+            "Delete","Modify","Return"
+        };
+        List<Action> Actions = new List<Action>();
+        Actions.Add(() => Delete(account, index));
+
+        Actions.Add(() => Modify(account, index));
+
+        Actions.Add(() => AdminSelectionComplaints());
+    
+        MenuLogic.Question(Question, Options, Actions);
+    }
+
+    // Deletes complaint
+    public static void Delete(AccountModel account, int index)
+    {
+        Console.WriteLine($"The complaint '{account.Complaints[index]}' has been deleted.");
+        account.Complaints.RemoveAt(index);
+        AccountsLogic temp = UserLogin.GetAccountsLogicInstance();
+        temp.UpdateList(account);
+        Console.ReadKey();
+    }
+    // Modify complaint
+    public static void Modify(AccountModel account, int index)
+    {
+        Console.Write($"Enter new complaint (current complaint: {account.Complaints[index]}): ");
+        string newComplaint = Console.ReadLine();
+        if (!string.IsNullOrEmpty(newComplaint))
+        {
+            account.Complaints[index] = newComplaint;
+            Console.WriteLine("Complaint updated successfully.");
+        }
+        else
+        {
+            Console.WriteLine("Invalid input.");
+        }
+        AccountsLogic temp = UserLogin.GetAccountsLogicInstance();
+        temp.UpdateList(account);
+        Console.ReadKey();
+    }
 }
-
-
-
-

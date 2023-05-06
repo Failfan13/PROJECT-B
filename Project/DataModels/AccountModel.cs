@@ -17,6 +17,9 @@ public class AccountModel
     [JsonPropertyName("admin")]
     public bool Admin { get; set; }
 
+    [JsonPropertyName("complaints")]
+    public List<string> Complaints { get; set; }
+
     public AccountModel(int id, string emailAddress, string password, string fullName)
     {
         Id = id;
@@ -24,8 +27,8 @@ public class AccountModel
         Password = password;
         FullName = fullName;
         Admin = false;
+        Complaints = new List<string>();
     }
-
 }
 
 

@@ -10,601 +10,701 @@
           "id": 0,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 1,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 2,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 3,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 4,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 5,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 6,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 7,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 8,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 9,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 10,
           "price": 10,
-          "reserved": true,
-          "handicapped": false
+          "reserved": false,
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 11,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 12,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 13,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 14,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 15,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 16,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 17,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 18,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 19,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 20,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 21,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 22,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 23,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 24,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 25,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 26,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 27,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 28,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 29,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 30,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 31,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 32,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 33,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 34,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 35,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 36,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 37,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 38,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 39,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 40,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 41,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 42,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 43,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 44,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 45,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 46,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 47,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 48,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 49,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 50,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 51,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 52,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 53,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 54,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 55,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 56,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 57,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 58,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 59,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 60,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 61,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 62,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 63,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 64,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 65,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 66,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 67,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 68,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 69,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 70,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 71,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 72,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 73,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 74,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 75,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 76,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 77,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 78,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 79,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 80,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 81,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 82,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 83,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 84,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 85,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 86,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 87,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 88,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 89,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 90,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 91,
           "price": 10,
           "reserved": false,
-          "handicapped": true
+          "handicapped": true,
+          "luxury": false
         },
         {
           "id": 92,
           "price": 10,
           "reserved": false,
-          "handicapped": true
+          "handicapped": true,
+          "luxury": false
         },
         {
           "id": 93,
           "price": 10,
           "reserved": false,
-          "handicapped": true
+          "handicapped": true,
+          "luxury": false
         },
         {
           "id": 94,
           "price": 10,
           "reserved": false,
-          "handicapped": true
+          "handicapped": true,
+          "luxury": false
         },
         {
           "id": 95,
           "price": 10,
           "reserved": false,
-          "handicapped": true
+          "handicapped": true,
+          "luxury": false
         },
         {
           "id": 96,
           "price": 10,
           "reserved": false,
-          "handicapped": true
+          "handicapped": true,
+          "luxury": false
         },
         {
           "id": 97,
           "price": 10,
           "reserved": false,
-          "handicapped": true
+          "handicapped": true,
+          "luxury": false
         },
         {
           "id": 98,
           "price": 10,
           "reserved": false,
-          "handicapped": true
+          "handicapped": true,
+          "luxury": false
         },
         {
           "id": 99,
           "price": 10,
           "reserved": false,
-          "handicapped": true
+          "handicapped": true,
+          "luxury": false
         }
       ],
       "width": 10,
@@ -622,601 +722,701 @@
           "id": 0,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 1,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 2,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 3,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 4,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 5,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 6,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 7,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 8,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 9,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 10,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 11,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 12,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 13,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 14,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 15,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 16,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 17,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 18,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 19,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 20,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 21,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 22,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 23,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 24,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 25,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 26,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 27,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 28,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 29,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 30,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 31,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 32,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 33,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 34,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 35,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 36,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 37,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 38,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 39,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 40,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 41,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 42,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 43,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 44,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 45,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 46,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 47,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 48,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 49,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 50,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 51,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 52,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 53,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 54,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 55,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 56,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 57,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 58,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 59,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 60,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 61,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 62,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 63,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 64,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 65,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 66,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 67,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 68,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 69,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 70,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 71,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 72,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 73,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 74,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 75,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 76,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 77,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 78,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 79,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 80,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 81,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 82,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 83,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 84,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 85,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 86,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 87,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 88,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 89,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 90,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 91,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 92,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 93,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 94,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 95,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 96,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 97,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 98,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 99,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         }
       ],
       "width": 10,
@@ -1234,601 +1434,701 @@
           "id": 0,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 1,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 2,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 3,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 4,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 5,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 6,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 7,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 8,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 9,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 10,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 11,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 12,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 13,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 14,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 15,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 16,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 17,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 18,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 19,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 20,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 21,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 22,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 23,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 24,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 25,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 26,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 27,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 28,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 29,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 30,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 31,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 32,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 33,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 34,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 35,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 36,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 37,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 38,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 39,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 40,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 41,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 42,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 43,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 44,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 45,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 46,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 47,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 48,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 49,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 50,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 51,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 52,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 53,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 54,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 55,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 56,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 57,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 58,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 59,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 60,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 61,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 62,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 63,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 64,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 65,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 66,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 67,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 68,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 69,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 70,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 71,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 72,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 73,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 74,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 75,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 76,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 77,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 78,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 79,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 80,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 81,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 82,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 83,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 84,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 85,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 86,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 87,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 88,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 89,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 90,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 91,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 92,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 93,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 94,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 95,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 96,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 97,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 98,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 99,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         }
       ],
       "width": 10,
@@ -1846,601 +2146,701 @@
           "id": 0,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 1,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 2,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 3,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 4,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 5,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 6,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 7,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 8,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 9,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 10,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 11,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 12,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 13,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 14,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 15,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 16,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 17,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 18,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 19,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 20,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 21,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 22,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 23,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 24,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 25,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 26,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 27,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 28,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 29,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 30,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 31,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 32,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 33,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 34,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 35,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 36,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 37,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 38,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 39,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 40,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 41,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 42,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 43,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 44,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 45,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 46,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 47,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 48,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 49,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 50,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 51,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 52,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 53,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 54,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 55,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 56,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 57,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 58,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 59,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 60,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 61,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 62,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 63,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 64,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 65,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 66,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 67,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 68,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 69,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 70,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 71,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 72,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 73,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 74,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 75,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 76,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 77,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 78,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 79,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 80,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 81,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 82,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 83,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 84,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 85,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 86,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 87,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 88,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 89,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 90,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 91,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 92,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 93,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 94,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 95,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 96,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 97,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 98,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 99,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         }
       ],
       "width": 10,
@@ -2458,601 +2858,701 @@
           "id": 0,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 1,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 2,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 3,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 4,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 5,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 6,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 7,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 8,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 9,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 10,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 11,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 12,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 13,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 14,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 15,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 16,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 17,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 18,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 19,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 20,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 21,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 22,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 23,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 24,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 25,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 26,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 27,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 28,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 29,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 30,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 31,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 32,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 33,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 34,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 35,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 36,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 37,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 38,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 39,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 40,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 41,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 42,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 43,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 44,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 45,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 46,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 47,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 48,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 49,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 50,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 51,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 52,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 53,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 54,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 55,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 56,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 57,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 58,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 59,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 60,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 61,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 62,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 63,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 64,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 65,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 66,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 67,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 68,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 69,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 70,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 71,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 72,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 73,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 74,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 75,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 76,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 77,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 78,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 79,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 80,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 81,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 82,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 83,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 84,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 85,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 86,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 87,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 88,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 89,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 90,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 91,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 92,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 93,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 94,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 95,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 96,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 97,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 98,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 99,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         }
       ],
       "width": 10,
@@ -3070,601 +3570,701 @@
           "id": 0,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 1,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 2,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 3,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 4,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 5,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 6,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 7,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 8,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 9,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 10,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 11,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 12,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 13,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 14,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 15,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 16,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 17,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 18,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 19,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 20,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 21,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 22,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 23,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 24,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 25,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 26,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 27,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 28,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 29,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 30,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 31,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 32,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 33,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 34,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 35,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 36,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 37,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 38,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 39,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 40,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 41,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 42,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 43,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 44,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 45,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 46,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 47,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 48,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 49,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 50,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 51,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 52,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 53,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 54,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 55,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 56,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 57,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 58,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 59,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 60,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 61,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 62,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 63,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 64,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 65,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 66,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 67,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 68,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 69,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 70,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 71,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 72,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 73,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 74,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 75,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 76,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 77,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 78,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 79,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 80,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 81,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 82,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 83,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 84,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 85,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 86,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 87,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 88,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 89,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 90,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 91,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 92,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 93,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 94,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 95,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 96,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 97,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 98,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 99,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         }
       ],
       "width": 10,
@@ -3682,601 +4282,701 @@
           "id": 0,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 1,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 2,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 3,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 4,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 5,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 6,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 7,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 8,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 9,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 10,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 11,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 12,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 13,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 14,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 15,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 16,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 17,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 18,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 19,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 20,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 21,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 22,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 23,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 24,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 25,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 26,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 27,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 28,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 29,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 30,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 31,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 32,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 33,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 34,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 35,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 36,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 37,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 38,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 39,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 40,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 41,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 42,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 43,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 44,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 45,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 46,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 47,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 48,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 49,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 50,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 51,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 52,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 53,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 54,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 55,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 56,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 57,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 58,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 59,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 60,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 61,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 62,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 63,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 64,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 65,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 66,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 67,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 68,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 69,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 70,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 71,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 72,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 73,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 74,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 75,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 76,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 77,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 78,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 79,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 80,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 81,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 82,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 83,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 84,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 85,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 86,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 87,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 88,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 89,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 90,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 91,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 92,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 93,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 94,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 95,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 96,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 97,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 98,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 99,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         }
       ],
       "width": 10,
@@ -4294,601 +4994,701 @@
           "id": 0,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 1,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 2,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 3,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 4,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 5,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 6,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 7,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 8,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 9,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 10,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 11,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 12,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 13,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 14,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 15,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 16,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 17,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 18,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 19,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 20,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 21,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 22,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 23,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 24,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 25,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 26,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 27,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 28,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 29,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 30,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 31,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 32,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 33,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 34,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 35,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 36,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 37,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 38,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 39,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 40,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 41,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 42,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 43,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 44,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 45,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 46,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 47,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 48,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 49,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 50,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 51,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 52,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 53,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 54,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 55,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 56,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 57,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 58,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 59,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 60,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 61,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 62,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 63,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 64,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 65,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 66,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 67,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 68,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 69,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 70,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 71,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 72,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 73,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 74,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 75,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 76,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 77,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 78,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 79,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 80,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 81,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 82,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 83,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 84,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 85,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 86,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 87,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 88,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 89,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 90,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 91,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 92,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 93,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 94,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 95,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 96,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 97,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 98,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 99,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         }
       ],
       "width": 10,
@@ -4906,601 +5706,701 @@
           "id": 0,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 1,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 2,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 3,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 4,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 5,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 6,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 7,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 8,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 9,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 10,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 11,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 12,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 13,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 14,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 15,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 16,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 17,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 18,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 19,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 20,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 21,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 22,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 23,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 24,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 25,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 26,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 27,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 28,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 29,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 30,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 31,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 32,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 33,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 34,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 35,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 36,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 37,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 38,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 39,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 40,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 41,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 42,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 43,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 44,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 45,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 46,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 47,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 48,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 49,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 50,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 51,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 52,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 53,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 54,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 55,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 56,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 57,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 58,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 59,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 60,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 61,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 62,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 63,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 64,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 65,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 66,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 67,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 68,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 69,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 70,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 71,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 72,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 73,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 74,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 75,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 76,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 77,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 78,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 79,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 80,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 81,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 82,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 83,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 84,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 85,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 86,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 87,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 88,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 89,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 90,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 91,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 92,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 93,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 94,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 95,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 96,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 97,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 98,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 99,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         }
       ],
       "width": 10,
@@ -5518,601 +6418,701 @@
           "id": 0,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 1,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 2,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 3,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 4,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 5,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 6,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 7,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 8,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 9,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 10,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 11,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 12,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 13,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 14,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 15,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 16,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 17,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 18,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 19,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 20,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 21,
           "price": 10,
           "reserved": true,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 22,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 23,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 24,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 25,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 26,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 27,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 28,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 29,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 30,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 31,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 32,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 33,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 34,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 35,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 36,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 37,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 38,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 39,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 40,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 41,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 42,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 43,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 44,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 45,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 46,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 47,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 48,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 49,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 50,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 51,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 52,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 53,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 54,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 55,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 56,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 57,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 58,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 59,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 60,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 61,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 62,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 63,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 64,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 65,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 66,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 67,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 68,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 69,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 70,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 71,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 72,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 73,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 74,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 75,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 76,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 77,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 78,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 79,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 80,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 81,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 82,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 83,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 84,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 85,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 86,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 87,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 88,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 89,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 90,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 91,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 92,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 93,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 94,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 95,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 96,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 97,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 98,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         },
         {
           "id": 99,
           "price": 10,
           "reserved": false,
-          "handicapped": false
+          "handicapped": false,
+          "luxury": false
         }
       ],
       "width": 10,

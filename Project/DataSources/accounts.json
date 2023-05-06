@@ -1,44 +1,54 @@
 [
   {
     "id": 1,
-    "emailAddress": "n@b.c",
-    "password": "xyz",
-    "fullName": "Nikola Tesla",
-    "admin": false
-  },
-  {
-    "id": 2,
-    "emailAddress": "t@b.c",
-    "password": "xyz",
-    "fullName": "Thomas Edison",
-    "admin": false
-  },
-  {
-    "id": 3,
-    "emailAddress": "max@cris",
-    "password": "123",
-    "fullName": "max",
-    "admin": true
-  },
-  {
-    "id": 4,
-    "emailAddress": "max@cris.nl",
-    "password": "123",
-    "fullName": "Max Geurtsen",
-    "admin": true
-  },
-  {
-    "id": 5,
     "emailAddress": "1",
     "password": "1",
     "fullName": "1",
-    "admin": false
+    "admin": false,
+    "complaints": [
+      "er was alleen maar pepsi en iedereen vindt coca cola lekker!!!",
+      "Slechte bioscoop en de medewerkers zijn gemeen!!",
+      "Hebben geen eens kitkat wouw"
+    ]
   },
   {
-    "id": 6,
+    "id": 2,
     "emailAddress": "2",
     "password": "2",
     "fullName": "2",
-    "admin": false
+    "admin": true,
+    "complaints": [
+      "stom"
+    ]
+  },
+  {
+    "id": 3,
+    "emailAddress": "3",
+    "password": "3",
+    "fullName": "3",
+    "admin": false,
+    "complaints": [
+      "popcorn was vies"
+    ]
+  },
+  {
+    "id": 4,
+    "emailAddress": "4",
+    "password": "4",
+    "fullName": "4",
+    "admin": false,
+    "complaints": [
+      "Kom hier nooit meer, m\u0026ms 10 euro per zak"
+    ]
+  },
+  {
+    "id": 5,
+    "emailAddress": "5",
+    "password": "5",
+    "fullName": "5",
+    "admin": false,
+    "complaints": [
+      "Kon beter"
+    ]
   }
 ]

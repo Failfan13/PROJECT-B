@@ -50,6 +50,9 @@ public static class Admin
         Options.Add("Change Categories");
         Actions.Add(() => Category.Start());
 
+        Options.Add("Manage Complaints");
+        Actions.Add(() => AccountsLogic.AdminSelectionComplaints());
+
         Options.Add("Change Reservations");
         Actions.Add(() => Reservation.EditReservation(true));
 
@@ -66,5 +69,6 @@ public static class Admin
         Actions.Add(() => Menu.Start());
 
         MenuLogic.Question(Question, Options, Actions);
+
     }
 }

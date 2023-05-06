@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+<<<<<<< HEAD
     "emailAddress": "n@b.c",
     "password": "xyz",
     "fullName": "Nikola Tesla",
@@ -33,18 +34,64 @@
   },
   {
     "id": 5,
+=======
+>>>>>>> e1b3c74 (klachten indienen)
     "emailAddress": "1",
     "password": "1",
     "fullName": "1",
     "admin": false,
+<<<<<<< HEAD
     "adMails": false
+=======
+    "complaints": [
+      "er was alleen maar pepsi en iedereen vindt coca cola lekker!!!",
+      "Slechte bioscoop en de medewerkers zijn gemeen!!",
+      "Hebben geen eens kitkat wouw"
+    ]
+>>>>>>> e1b3c74 (klachten indienen)
   },
   {
-    "id": 6,
+    "id": 2,
     "emailAddress": "2",
     "password": "2",
     "fullName": "2",
     "admin": true,
+<<<<<<< HEAD
     "adMails": false
+=======
+    "complaints": [
+      "stom"
+    ]
+  },
+  {
+    "id": 3,
+    "emailAddress": "3",
+    "password": "3",
+    "fullName": "3",
+    "admin": false,
+    "complaints": [
+      "popcorn was vies"
+    ]
+  },
+  {
+    "id": 4,
+    "emailAddress": "4",
+    "password": "4",
+    "fullName": "4",
+    "admin": false,
+    "complaints": [
+      "Kom hier nooit meer, m\u0026ms 10 euro per zak"
+    ]
+  },
+  {
+    "id": 5,
+    "emailAddress": "5",
+    "password": "5",
+    "fullName": "5",
+    "admin": false,
+    "complaints": [
+      "Kon beter"
+    ]
+>>>>>>> e1b3c74 (klachten indienen)
   }
 ]

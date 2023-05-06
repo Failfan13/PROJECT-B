@@ -1,3 +1,7 @@
+using System.IO;
+using System.Linq;
+using System.Text.Json;
+
 public static class Contact
 {
     public static void start()
@@ -65,8 +69,6 @@ public static class Contact
         Actions.Add(() => Contact.start());
 
         MenuLogic.Question(Question, Options, Actions);
-
-        
     }
 
     public static void running()
@@ -89,25 +91,43 @@ public static class Contact
 
     public static void Notrunning()
     {
-        Console.Clear();
-        Console.WriteLine("Please enter your complaint:");
-        Console.WriteLine();
-        string complaint = Console.ReadLine();
-
-        // complaint is een string met de klacht. csv? json? 
+        if (AccountsLogic.CurrentAccount != null)
+        {
+            Console.Clear();
+            // Console.WriteLine("Please enter your complaint:\n");
+            // string complaint = Console.ReadLine();
+                        
+            if (AccountsLogic.CurrentAccount != null)
+            {
+                AccountsLogic.AddComplaint(AccountsLogic.CurrentAccount);
+            }
         
-        Console.Clear();
-        Console.WriteLine("Your complaint has been sent. We will get back to you as soon as possible");
-        Console.WriteLine();
-        Console.WriteLine("Press any key to return");
-        Console.ReadKey();
-        Menu.Start();
+            // Console.Clear();
+            // Console.WriteLine("Your complaint has been sent. We will get back to you as soon as possible\n");
+            // Console.WriteLine("Press any key to return");
+            // Console.ReadKey();
+            Menu.Start();
+        }
+        else
+        {
+            Console.Clear();
+            string Question = "You are currently not logged in. It is required to be logged in to enter a complaint\nDo you want to login??";
+            List<string> Options = new List<string>()
+            {
+                "Yes","No"
+            };
+            List<Action> Actions = new List<Action>();
+            Actions.Add(() => UserLogin.Start());
+            Actions.Add(() => Contact.start());
+
+            MenuLogic.Question(Question, Options, Actions);
+        }
     }
 
     public static void emergencycall()
     {
         Console.Clear();
-        Console.WriteLine("The emergency services is getting called");
+        Console.WriteLine("The emergency services are getting called");
         Console.ReadKey();
     }
 }

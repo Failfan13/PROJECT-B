@@ -126,6 +126,11 @@ public class ReviewLogic
         Movies.EditReviewsMenu();
     }
 
+    public List<ReviewModel> UserPastReviews(int accountId)
+    {
+        return AllReviews().FindAll(r => r.AccountId == accountId);
+    }
+
     public void ShowAvailableReviews(List<ReviewModel> reviews)
     {
         AccountsLogic AL = new AccountsLogic();

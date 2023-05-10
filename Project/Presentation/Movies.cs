@@ -222,11 +222,17 @@ static class Movies
         TimeSlotsLogic TL = new TimeSlotsLogic();
         ReviewLogic RL = new ReviewLogic();
 
+        List<ReviewModel> pastReviews = RL.UserPastReviews(AccountsLogic.CurrentAccount!.Id);
+
+        List<ReservationModel> pastMoviesNoReview = MoviesLogic.PastMovies().FindAll(
+            m => !pastReviews.Any(r => r.MovieId == TL.GetById(m.TimeSLotId)!.MovieId));
+
         Console.Clear();
 
-        if (MoviesLogic.PastMovies().Count == 0)
+        if (pastMoviesNoReview.Count == 0)
         {
             Console.WriteLine("You have no past reservations");
+            QuestionLogic.AskEnter();
             return;
         }
 
@@ -234,14 +240,17 @@ static class Movies
         List<string> options = new List<string>();
         List<Action> actions = new List<Action>();
 
-        foreach (ReservationModel pastReservation in MoviesLogic.PastMovies())
+        foreach (ReservationModel pastReservation in pastMoviesNoReview)
         {
             try
             {
                 options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSLotId)!.MovieId)!.Title} Watched on: {pastReservation.DateTime}");
                 actions.Add(() => AddNewReview(TL.GetById(pastReservation.TimeSLotId)!.MovieId, pastReservation));
             }
-            catch (System.Exception) { }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         MenuLogic.Question(question, options, actions);
@@ -293,7 +302,7 @@ static class Movies
             Console.WriteLine("Add new review by entering a rating between 1 and 5 (can be specific bv 4.75)");
             string input = Console.ReadLine()!.Replace(',', '.');
 
-            if (double.TryParse(input, out double newRating) && rating >= 1 && rating <= 5)
+            if (double.TryParse(input, out double newRating) && newRating >= 1 && newRating <= 5)
             {
                 rating = newRating;
                 break;

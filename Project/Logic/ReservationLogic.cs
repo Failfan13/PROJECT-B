@@ -78,7 +78,7 @@ public class ReservationLogic
         try
         {
             ReservationModel currRess = GetById(ressId)!;
-            currRess.TimeSLotId = newRess.TimeSLotId;
+            currRess.TimeSlotId = newRess.TimeSlotId;
             currRess.Seats = newRess.Seats;
             if (newRess.Snacks != null) currRess.Snacks = newRess.Snacks;
             if (newRess.Format != "") currRess.Format = newRess.Format;

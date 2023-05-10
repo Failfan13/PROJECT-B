@@ -83,10 +83,10 @@ public static class Reservation
             };
         // Actions reservations actions
         List<Action> actions = new();
-        
+
         TimeSlotModel timeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSlotId);
         var movieid = timeSlot.MovieId;
-        
+
         // choose all
         actions.Add(() => Reservation.FilterMenu(true));
 
@@ -158,10 +158,10 @@ public static class Reservation
     }
 
 
-    public static void FilterMenu(bool IsEdited) => FilterMenu(null, IsEdited);
+    public static void FilterMenu(bool IsEdited) => FilterMenu(null!, IsEdited);
 
-        MenuLogic.Question(Question, Movies, Actions);
-    }
+    //     MenuLogic.Question(Question, Movies, Actions);
+    // }
 
     // Show total order amount
     // public static void TotalReservationCost(ReservationModel Ress)
@@ -268,10 +268,14 @@ public static class Reservation
         ReservationLogic ReservationLogic = new ReservationLogic();
         TimeSlotsLogic TimeSlotsLogic = new();
 
-        TotalPriceModel TotalRess = ReservationLogic.GetTotalRess(Ress);
+        TotalPriceModel TotalRess = ReservationLogic.GetTotalRess(ress);
         AccountsLogic AccountsLogic = new();
 
         EmailLogic EmailLogic = new EmailLogic();
+
+        string subject = "Order summary";
+        string body = "";
+        string email = "";
 
         double FinalPrice = 0.00;
 
@@ -282,8 +286,8 @@ public static class Reservation
             string DiscountCode = PromoLogic.GetById(promoId)!.Code;
             TotalRess = ReservationLogic.ApplyDiscount(DiscountCode, TotalRess);
 
-            Ress.DiscountCode = DiscountCode;
-            ReservationLogic.UpdateList(Ress);
+            ress.DiscountCode = DiscountCode;
+            ReservationLogic.UpdateList(ress);
         }
 
         Console.Clear();
@@ -295,15 +299,15 @@ public static class Reservation
         Console.WriteLine("\nSeats:");
         foreach (SeatModel seat in TotalRess.Seats)
         {
-            Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(Ress.TimeSlotId).Theater.Width)}\tPrice: €{seat.Price}");
+            Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSlotId).Theatre.Width)}\tPrice: €{seat.Price}");
         }
 
         // Snack data
-        if (Ress.Snacks != null)
+        if (ress.Snacks != null)
         {
             Console.WriteLine("\nSnacks:");
 
-            int MaxLength = Ress.GetSnacks().Max(snack => snack.Name.Length);
+            int MaxLength = ress.GetSnacks().Max(snack => snack.Name.Length);
             foreach (KeyValuePair<SnackModel, int> keyValue in TotalRess.Snacks)
             {
                 int Tabs = (int)Math.Ceiling((MaxLength - keyValue.Key.Name.Length) / 8.0);
@@ -313,20 +317,20 @@ public static class Reservation
         }
 
         // Format data
-        if (FormatsLogic.GetByFormat(Ress.Format) != null) // Same list in MovieLogic _formats
+        if (FormatsLogic.GetByFormat(ress.Format) != null) // Same list in MovieLogic _formats
         {
-            FormatDetails? formatDt = FormatsLogic.GetByFormat(Ress.Format);
+            FormatDetails? formatDt = FormatsLogic.GetByFormat(ress.Format);
 
             string required = formatDt.Item;
             double requiredPrice = formatDt.Price;
 
-            Console.WriteLine($"\nThe ordered movie plays in {Ress.Format} format therefore there is an extra fee");
+            Console.WriteLine($"\nThe ordered movie plays in {ress.Format} format therefore there is an extra fee");
             if (required != "")
             {
                 Console.Write("Requirements:");
-                Console.WriteLine($"\n{required}x{Ress.Seats.Count}\tPrice: €{requiredPrice * Ress.Seats.Count}");
+                Console.WriteLine($"\n{required}x{ress.Seats.Count}\tPrice: €{requiredPrice * ress.Seats.Count}");
 
-                FinalPrice += requiredPrice * Ress.Seats.Count;
+                FinalPrice += requiredPrice * ress.Seats.Count;
             }
         }
 
@@ -334,8 +338,8 @@ public static class Reservation
         FinalPrice += TotalRess.FinalPrice;
         Console.Write("\nThe total cost of your order will be:");
         Console.Write($"€ " + FinalPrice + (FinalPrice.ToString().Contains(".") ? "" : ",-"));
-        body += $"€" + FinalPrice + (priceString.Contains(".") ? "" : ",-") + "\n";
-        Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {Ress.Id}\n");
+        body += $"€" + FinalPrice + (FinalPrice.ToString().Contains(".") ? "" : ",-") + "\n";
+        Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {ress.Id}\n");
         body += $"\nIMPORTANT\nYour order number is: {ress.Id}";
 
         if (AccountId != -1)

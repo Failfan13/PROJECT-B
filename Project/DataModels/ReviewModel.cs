@@ -25,16 +25,6 @@ public class ReviewModel
         AccountId = accountId;
         Rating = rating;
         ReviewDate = (reviewDate != default) ? reviewDate : DateTime.Now;
-        Review = CutReviewMessage(review);
+        Review = ReviewLogic.CutReviewMessage(review);
     }
-
-    private string CutReviewMessage(string reviewMsg)
-    {
-        if (reviewMsg.Length > 255)
-        {
-            return reviewMsg.Substring(0, 255);
-        }
-        return reviewMsg;
-    }
-
 }

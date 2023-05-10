@@ -7,6 +7,16 @@ public class ReviewLogic
         _reviews = ReviewsAccess.LoadReviews();
     }
 
+    public static string CutReviewMessage(string reviewMsg)
+    {
+        if (reviewMsg.Length > 255)
+        {
+            return reviewMsg.Substring(0, 255);
+        }
+        return reviewMsg;
+    }
+
+
     public List<ReviewModel> AllReviews()
     {
         return _reviews;
@@ -202,10 +212,12 @@ Message: {review.Review}
     {
         Console.Clear();
 
-        Console.WriteLine("Enter the new review score");
+        Console.WriteLine("Enter the new review score (1-5)");
 
         if (!double.TryParse(Console.ReadLine()!, out double score))
-            review.Rating = score;
+        {
+            if (score >= 1 || score <= 5) review.Rating = score; // score more then 1 less then 5
+        }
 
         _reviews[oldReviewIndex] = review;
         UpdateReviews();

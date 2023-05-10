@@ -2286,7 +2286,7 @@
         {
           "id": 18,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false,
           "luxury": false
         },
@@ -2356,7 +2356,7 @@
         {
           "id": 28,
           "price": 10,
-          "reserved": false,
+          "reserved": true,
           "handicapped": false,
           "luxury": false
         },

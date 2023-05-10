@@ -282,11 +282,25 @@ static class Movies
 
         MovieModel Movie = ML.GetById(MovieId)!;
 
+        double rating = 0;
+
         if (Movie == null) return;
 
         Console.Clear();
-        Console.WriteLine("Add new review by entering a rating between 1 and 5 (can be specific bv 4.75)");
-        string input = Console.ReadLine()!;
+
+        while (true)
+        {
+            Console.WriteLine("Add new review by entering a rating between 1 and 5 (can be specific bv 4.75)");
+            string input = Console.ReadLine()!.Replace(',', '.');
+
+            if (double.TryParse(input, out double newRating) && rating >= 1 && rating <= 5)
+            {
+                rating = newRating;
+                break;
+            }
+            Console.WriteLine("Review must be between 1 and 5");
+        }
+
 
         Console.WriteLine("Would you like to add a message to the review (y/n)");
         ConsoleKeyInfo messageInput = Console.ReadKey();
@@ -295,13 +309,14 @@ static class Movies
         string message = "";
         if (messageInput.Key == ConsoleKey.Y)
         {
-            Console.WriteLine("Enter your message");
+            Console.WriteLine("\nEnter your message (max 255 characters): ");
             message = Console.ReadLine()!;
+            message = ReviewLogic.CutReviewMessage(message); // cuts message to size
         }
 
-        if (double.TryParse(input, out double rating))
-            RL.SaveNewReview(message, rating, pastReservation); // saves message to CSV
+        RL.SaveNewReview(message, rating, pastReservation); // saves message to CSV
 
+        RL.UpdateMovieReviews(ML.AllMovies());
         ML.UpdateList(Movie);
     }
 }

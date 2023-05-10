@@ -43,7 +43,7 @@ public static class Reservation
                     reservationMovie = MoviesLogic.GetById(timeslotVar!.MovieId)!;
 
                     if (reservationMovie != null && reservationDate != null)
-                    Options.Add($"{reservationDate} - {reservationMovie.Title}");
+                        Options.Add($"{reservationDate} - {reservationMovie.Title}");
                 }
                 catch { }
             }
@@ -78,7 +78,7 @@ public static class Reservation
             };
         List<Action> actions = new();
         // TimeSlotModel timeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSLotId);
-        var movieid = CurrTimeSlot.MovieId;
+        var movieId = CurrTimeSlot.MovieId;
         // choose all
         actions.Add(() => Reservation.FilterMenu(true));
 

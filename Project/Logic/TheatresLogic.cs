@@ -54,6 +54,14 @@ public class TheatreLogic
         return _theatres.Find(i => i.Id == id);
     }
 
+    public bool GetById(int id, out TheatreModel theatre)
+    {
+        var foundTheatre = _theatres.Find(i => i.Id == id);
+        theatre = foundTheatre!;
+        if (foundTheatre == null) return false;
+        return true;
+    }
+
     public bool ExistingId(int id) => AllTheatres().Exists(i => i.Id == id);
 
     public int GetNewestId()
@@ -629,6 +637,25 @@ public class TheatreLogic
         }
 
         UpdateList(theatre);
+    }
+
+    public double PriceOfSeatType(string type, int theatreId)
+    {
+        TheatreLogic TheatreLogic = new TheatreLogic();
+
+        if (TheatreLogic.GetById(theatreId, out TheatreModel? theatre))
+        {
+            switch (type)
+            {
+                case "standard":
+                    return theatre.StandardSeatPrice;
+                case "luxury":
+                    return theatre.LuxurySeatPrice;
+                default:
+                    return theatre.BasicSeatPrice;
+            }
+        }
+        return 0;
     }
 
 }

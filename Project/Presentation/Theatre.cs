@@ -30,7 +30,6 @@ Press [ ");
             string Question = "Would you like to order snacks?";
             List<string> Options = new List<string>() { "Yes", "No" };
             List<Action> Actions = new List<Action>();
-            ReservationLogic RL = new ReservationLogic();
 
             if (FormatsLogic.GetByFormat(TimeSlot.Format) != null)
             {

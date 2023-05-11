@@ -1,3 +1,4 @@
+using System.Globalization;
 static class Movies
 {
     static private MoviesLogic MoviesLogic = new MoviesLogic();
@@ -302,7 +303,9 @@ static class Movies
             Console.WriteLine("Add new review by entering a rating between 1 and 5 (can be specific bv 4.75)");
             string input = Console.ReadLine()!.Replace(',', '.');
 
-            if (double.TryParse(input, out double newRating) && newRating >= 1 && newRating <= 5)
+
+            if (double.TryParse(input, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out double newRating) && newRating >= 1 && newRating <= 5)
+            
             {
                 rating = newRating;
                 break;

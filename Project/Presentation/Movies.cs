@@ -1,3 +1,4 @@
+using System.Globalization;
 static class Movies
 {
     static private MoviesLogic MoviesLogic = new MoviesLogic();
@@ -215,6 +216,120 @@ static class Movies
         Console.WriteLine($"Release date  is now: {NewReleaseDate.Date}");
         QuestionLogic.AskEnter();
         ChangeMovieMenu(movie);
+    }
+
+    public static void AddReviewMenu()
+    {
+        TimeSlotsLogic TL = new TimeSlotsLogic();
+        ReviewLogic RL = new ReviewLogic();
+
+        List<ReviewModel> pastReviews = RL.UserPastReviews(AccountsLogic.CurrentAccount!.Id);
+
+        List<ReservationModel> pastMoviesNoReview = MoviesLogic.PastMovies().FindAll(
+            m => !pastReviews.Any(r => r.MovieId == TL.GetById(m.TimeSLotId)!.MovieId));
+
+        Console.Clear();
+
+        if (pastMoviesNoReview.Count == 0)
+        {
+            Console.WriteLine("You have no past reservations");
+            QuestionLogic.AskEnter();
+            return;
+        }
+
+        string question = "What movie would you like to add a review for?";
+        List<string> options = new List<string>();
+        List<Action> actions = new List<Action>();
+
+        foreach (ReservationModel pastReservation in pastMoviesNoReview)
+        {
+            try
+            {
+                options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSLotId)!.MovieId)!.Title} Watched on: {pastReservation.DateTime}");
+                actions.Add(() => AddNewReview(TL.GetById(pastReservation.TimeSLotId)!.MovieId, pastReservation));
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        MenuLogic.Question(question, options, actions);
+        Menu.Start(); // needs to go to add review section
+    }
+
+    public static void EditReviewsMenu()
+    {
+        ReviewLogic RL = new ReviewLogic();
+
+        Console.Clear();
+
+        string question = "What would you like to do?";
+        List<string> options = new List<string>();
+        List<Action> actions = new List<Action>();
+
+        options.Add("All reviews");
+        actions.Add(() => RL.ViewReviews(false, false));
+        options.Add("All revies for specific movie");
+        actions.Add(() => RL.ViewReviews(false, true));
+        options.Add("All reviews for specific user");
+        actions.Add(() => RL.ViewReviews(true, false));
+        options.Add("All reviews for specific user and movie");
+        actions.Add(() => RL.ViewReviews(true, true));
+
+        options.Add("Return");
+        actions.Add(() => Menu.Start());
+
+        MenuLogic.Question(question, options, actions);
+        Admin.Start();
+    }
+
+    // Questions user for new review
+    public static void AddNewReview(int MovieId, ReservationModel pastReservation)
+    {
+        MoviesLogic ML = new MoviesLogic();
+        ReviewLogic RL = new ReviewLogic();
+
+        MovieModel Movie = ML.GetById(MovieId)!;
+
+        double rating = 0;
+
+        if (Movie == null) return;
+
+        Console.Clear();
+
+        while (true)
+        {
+            Console.WriteLine("Add new review by entering a rating between 1 and 5 (can be specific bv 4.75)");
+            string input = Console.ReadLine()!.Replace(',', '.');
+
+
+            if (double.TryParse(input, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out double newRating) && newRating >= 1 && newRating <= 5)
+            
+            {
+                rating = newRating;
+                break;
+            }
+            Console.WriteLine("Review must be between 1 and 5");
+        }
+
+
+        Console.WriteLine("Would you like to add a message to the review (y/n)");
+        ConsoleKeyInfo messageInput = Console.ReadKey();
+
+
+        string message = "";
+        if (messageInput.Key == ConsoleKey.Y)
+        {
+            Console.WriteLine("\nEnter your message (max 255 characters): ");
+            message = Console.ReadLine()!;
+            message = ReviewLogic.CutReviewMessage(message); // cuts message to size
+        }
+
+        RL.SaveNewReview(message, rating, pastReservation); // saves message to CSV
+
+        RL.UpdateMovieReviews(ML.AllMovies());
+        ML.UpdateList(Movie);
     }
 }
 

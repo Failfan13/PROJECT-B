@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "CsvHelper/30.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/CsvHelper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/CsvHelper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "MailKit/3.6.0": {
         "type": "package",
         "dependencies": {
@@ -135,6 +148,30 @@
     }
   },
   "libraries": {
+    "CsvHelper/30.0.1": {
+      "sha512": "rcZtgbWR+As4G3Vpgx0AMNmShGuQLFjkHAPIIflzrfkJCx8/AOd4m96ZRmiU1Wi39qS5UVjV0P8qdgqOo5Cwyg==",
+      "type": "package",
+      "path": "csvhelper/30.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "csvhelper.30.0.1.nupkg.sha512",
+        "csvhelper.nuspec",
+        "lib/net45/CsvHelper.dll",
+        "lib/net45/CsvHelper.xml",
+        "lib/net47/CsvHelper.dll",
+        "lib/net47/CsvHelper.xml",
+        "lib/net5.0/CsvHelper.dll",
+        "lib/net5.0/CsvHelper.xml",
+        "lib/net6.0/CsvHelper.dll",
+        "lib/net6.0/CsvHelper.xml",
+        "lib/netstandard2.0/CsvHelper.dll",
+        "lib/netstandard2.0/CsvHelper.xml",
+        "lib/netstandard2.1/CsvHelper.dll",
+        "lib/netstandard2.1/CsvHelper.xml"
+      ]
+    },
     "MailKit/3.6.0": {
       "sha512": "P7sL/bWj6girXBYlmZmCQnS6Y0DHMe947iiH+Dzl3vlJJiFUcnhxJei/gnrIARuaFUpPoYoFjVqguHwOT4Myzg==",
       "type": "package",
@@ -337,6 +374,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "CsvHelper >= 30.0.1",
       "MailKit >= 3.6.0"
     ]
   },
@@ -346,11 +384,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\Project.csproj",
+      "projectUniqueName": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj",
       "projectName": "Project",
-      "projectPath": "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\Project.csproj",
+      "projectPath": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj",
       "packagesPath": "C:\\Users\\erikm\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\obj\\",
+      "outputPath": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\erikm\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -377,6 +415,10 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
+          "CsvHelper": {
+            "target": "Package",
+            "version": "[30.0.1, )"
+          },
           "MailKit": {
             "target": "Package",
             "version": "[3.6.0, )"

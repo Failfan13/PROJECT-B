@@ -27,11 +27,11 @@ public class MovieModel
     [JsonPropertyName("categories")]
     public List<CategoryModel> Categories { get; set; }
 
-    [JsonPropertyName("Formats")]
-    private List<string> _formats;
+    [JsonPropertyName("formats")]
+    private List<string>? _formats;
     public List<string> Formats
     {
-        get => _formats;
+        get => _formats!;
         set
         {
             if (!value.Contains("standard")) value.Add("standard");
@@ -39,6 +39,10 @@ public class MovieModel
         }
     }
 
+    [JsonPropertyName("reviews")]
+    public ReviewHelper Reviews { get; set; }
+
+    [JsonConstructor]
     public MovieModel(int id, string title, DateTime releaseDate, string director, string description,
         int duration, double price, List<CategoryModel> categories, List<string> formats)
     {
@@ -51,6 +55,23 @@ public class MovieModel
         Price = price;
         Categories = categories;
         Formats = formats;
+        Reviews = new ReviewHelper();
+    }
+
+    public class ReviewHelper
+    {
+        [JsonPropertyName("amount")]
+        public int Amount { get; set; }
+
+        [JsonPropertyName("stars")]
+        public double Stars { get; set; }
+
+        [JsonConstructor]
+        public ReviewHelper() // default constructor
+        {
+            Amount = 0;
+            Stars = 0;
+        }
     }
 
     public void Info()
@@ -79,7 +100,6 @@ public class MovieModel
         }
         Console.WriteLine($"Formats:   \t{string.Join(", ", Formats)}");
     }
-
 }
 
 

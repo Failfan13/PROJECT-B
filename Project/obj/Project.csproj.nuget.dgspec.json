@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\Project.csproj": {}
+    "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\Project.csproj": {
+    "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\Project.csproj",
+        "projectUniqueName": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj",
         "projectName": "Project",
-        "projectPath": "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\Project.csproj",
+        "projectPath": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj",
         "packagesPath": "C:\\Users\\erikm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\erikm\\Documents\\Opdrachten\\OODP\\Project\\PROJECT-B\\Project\\obj\\",
+        "outputPath": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\erikm\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,6 +38,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[30.0.1, )"
+            },
             "MailKit": {
               "target": "Package",
               "version": "[3.6.0, )"

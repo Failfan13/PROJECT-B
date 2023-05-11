@@ -65,7 +65,7 @@ public class ReservationLogic
         string Question = "Do you want to use your Admin Id or a User Id?";
         List<string> Options = new List<string>() { "Admin", "User" };
         List<Action> Actions = new List<Action>();
-        Actions.Add(() => returner = AccountsLogic.CurrentAccount.Id);
+        Actions.Add(() => returner = AccountsLogic.CurrentAccount!.Id);
         Actions.Add(() => returner = AL.GetAccountIdFromList());
 
         MenuLogic.Question(Question, Options, Actions);
@@ -95,7 +95,7 @@ public class ReservationLogic
     {
         Snacks.Continue = false;
         int AccountId = -1;
-        ReservationModel ress = null;
+        ReservationModel ress = null!;
         DateTime currDate = DateTime.Now;
         try
         {

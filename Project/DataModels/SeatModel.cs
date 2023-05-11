@@ -5,34 +5,29 @@ public class SeatModel
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
-    [JsonPropertyName("price")]
-    public double Price { get; set; }
-
-    [JsonPropertyName("reserved")]
-    public bool Reserved { get; set; }
-
-    [JsonPropertyName("handicapped")]
-    public bool Handicapped { get; set; }
-
-    [JsonPropertyName("luxury")]
-    public bool Luxury { get; set; }
-
+    [JsonPropertyName("seatType")]
+    public string SeatType { get; set; }
 
     [JsonConstructor]
-    public SeatModel(int id, double price, bool reserved = false, bool handicapped = false, bool luxury = false)
+    public SeatModel(int id, string seatType = "basic")
     {
         Id = id;
-        Price = price;
-        Reserved = reserved;
-        Handicapped = handicapped;
-        Luxury = luxury;
+        SeatType = checkSeatType(seatType);
     }
-    public string SeatRow(int width)
-    {
-        List<char> letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToList();
-        var Seat = (Id % width) + 1;
-        var Row = (Math.Floor((double)(Id / width)));
 
-        return $"{Seat}{letters[(int)Row]}";
+    public string checkSeatType(string seatType)
+    {
+        if (AllSeatTypes().Contains(seatType)) return seatType;
+        else return "basic";
+    }
+
+    public List<string> AllSeatTypes()
+    {
+        return new List<string> {
+            "basic",
+            "standard",
+            "luxury",
+            "handicap"
+        };
     }
 }

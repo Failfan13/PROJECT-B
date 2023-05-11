@@ -6,7 +6,7 @@ static class TimeSlots
     public static void ShowAllTimeSlotsForMovie(int movieid, bool IsEdited = false)
     {
         TimeSlotsLogic timeSlotsLogic = new TimeSlotsLogic();
-        List<TimeSlotModel>? tsms = timeSlotsLogic.GetByMovieId(movieid);
+        List<TimeSlotModel> tsms = timeSlotsLogic.GetByMovieId(movieid)!;
         MoviesLogic ML = new MoviesLogic();
         TheatreLogic TL = new TheatreLogic();
 
@@ -17,7 +17,7 @@ static class TimeSlots
 
 
         Console.Clear();
-        if (tsms?.Count == 0) // Movie exists but there is no timeslot for it
+        if (tsms.Count == 0) // Movie exists but there is no timeslot for it
         {
             Console.WriteLine("There are no timeslots for that movie.\nPress Enter to return");
             string? a = Console.ReadLine();
@@ -50,10 +50,10 @@ static class TimeSlots
     {
         TimeSlotsLogic timeSlotsLogic = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
-        List<TimeSlotModel>? tsms = timeSlotsLogic.GetByMovieId(movieid);
+        List<TimeSlotModel> tsms = timeSlotsLogic.GetByMovieId(movieid)!;
 
         Console.Clear();
-        if (tsms?.Count == 0) // Movie exists but there is no timeslot for it
+        if (tsms.Count == 0) // Movie exists but there is no timeslot for it
         {
             Console.WriteLine("There are no timeslots for that movie.\nPress Enter to return");
             string? a = Console.ReadLine();
@@ -79,12 +79,12 @@ static class TimeSlots
     {
         TimeSlotsLogic TimeSlotsLogic = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
-        MovieModel? movie = ML.GetById(movieid);
+        MovieModel movie = ML.GetById(movieid)!;
         TimeSlotModel TM = new TimeSlotModel();
         TheatreLogic TL = new TheatreLogic();
 
         TM.MovieId = movie.Id;
-        TM.Theatre.Id = TL.GetNewestId();
+        TM.Theatre.TheatreId = TL.GetNewestId();
 
         Console.Clear();
 
@@ -93,7 +93,7 @@ static class TimeSlots
         Console.WriteLine("Would you like to change the seat layout? (y/n)");
         if (Console.ReadLine() == "y")
         {
-            Theatre.EditMenu(TM.Theatre);
+            TL.ShowSeats(TL.GetById(TM.Theatre.TheatreId)!);
         }
 
         Console.WriteLine("Would you like to add a new format? (y/n)");
@@ -102,22 +102,22 @@ static class TimeSlots
             Format.ChangeFormats(TM);
         }
 
-        TimeSlotsLogic.NewTimeSlot(TM.MovieId, TM.Start, TM.Theatre, TM.Format);
+        //TimeSlotsLogic.NewTimeSlot(TM.MovieId, TM.Start, TM.Theatre, TM.Format);
     }
 
     public static void EditTimeSlot(int movieid, bool IsEdited = false)
     {
         TimeSlotsLogic TimeSlotsLogic = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
-        List<TimeSlotModel>? tsms = TimeSlotsLogic.GetByMovieId(movieid);
-        TimeSlotModel? tsm = null;
+        List<TimeSlotModel> tsms = TimeSlotsLogic.GetByMovieId(movieid)!;
+        TimeSlotModel tsm = null!;
 
         List<string> Options = new List<string>();
         int? awnser;
 
         awnser = TimeSlots.SelectTimeSlot(movieid, IsEdited);
 
-        if (awnser != null) tsm = tsms?[(int)awnser]; // if SelectTimeSlot returned null
+        if (awnser != null) tsm = tsms[(int)awnser]; // if SelectTimeSlot returned null
 
         EditTimeSlotChangeMenu(tsm, IsEdited);
     }
@@ -133,21 +133,21 @@ static class TimeSlots
 
         Options.Add("Change start time");
         Actions.Add(() => TimeSlotStartTime(tsm, () => EditTimeSlotChangeMenu(tsm)));
-        Options.Add("Change Theatre arrangement");
-        Actions.Add(() => Theatre.EditMenu(tsm.Theatre, () => EditTimeSlotChangeMenu(tsm)));
+        // Add remove seat from theatre & reservation
+        // Add seat to theatre & reservation
         Options.Add("Change view format");
         Actions.Add(() => Format.ChangeFormats(tsm, () => EditTimeSlotChangeMenu(tsm)));
 
         Options.Add("Return");
         Actions.Add(() => Parallel.Invoke(
-            () => TheatreLogic.UpdateToTheatre(tsm),
+            //() => TheatreLogic.UpdateList(TheatreLogic.GetById(tsm.Theatre.TheatreId)!),
             () => TimeSlotsLogic.UpdateList(tsm)
         ));
 
         MenuLogic.Question(Question, Options, Actions);
     }
 
-    private static void TimeSlotStartTime(TimeSlotModel tsm, Action returnTo = null)
+    private static void TimeSlotStartTime(TimeSlotModel tsm, Action returnTo = null!)
     {
         TimeSlotsLogic TimeSlotsLogic = new TimeSlotsLogic();
         tsm.Start = DateTime.MinValue;
@@ -157,10 +157,10 @@ static class TimeSlots
             try
             {
                 Console.WriteLine("Enter a new start date: dd/mm/yy");
-                string date = Console.ReadLine().Replace(" ", "");
+                string date = Console.ReadLine()!.Replace(" ", "");
 
                 Console.WriteLine("Enter a new start time: hh:mm");
-                string time = Console.ReadLine().Replace(" ", "");
+                string time = Console.ReadLine()!.Replace(" ", "");
 
                 tsm.Start = DateTime.ParseExact((date + " " + time), "dd/MM/yy HH:mm", CultureInfo.InvariantCulture);
             }

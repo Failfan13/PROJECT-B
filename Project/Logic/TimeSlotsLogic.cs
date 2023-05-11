@@ -20,7 +20,6 @@ class TimeSlotsLogic
         _timeslots = TimeSlotAccess.LoadAll();
     }
 
-
     public void UpdateList(TimeSlotModel ts)
     {
         //Find if there is already an model with the same id
@@ -75,28 +74,29 @@ class TimeSlotsLogic
         return (_timeslots.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
-
     public void NewTimeSlot(int movieid, DateTime start, TheatreModel theatre, string format)
     {
         int NewID = GetNewestId();
         TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, theatre, format);
+    }
+    public void NewTimeSlot(int movieid, DateTime start)
+    {
+        int NewID = GetNewestId();
+        TheatreLogic TL = new TheatreLogic();
 
-    //public void NewTimeSlot(int movieid, DateTime start)
-    //{
-        //int NewID = GetNewestId();
-        //var Theatre = new TheatreLogic();
+        // create new theatre menu & return new theatre ID
+        int newTheatreId = Theatre.MakeNewTheatre();
 
-        // Creating the Theatre for every timeslot, 
-        //Console.WriteLine("Please give the height of the Theatre");
-        //int height = int.Parse(Console.ReadLine());
-        //Console.WriteLine("Please give the width of the Theatre");
-        //int width = int.Parse(Console.ReadLine());
-
-        //TheatreModel realth = Theatre.MakeTheatre(width,height);
-
-        //TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, realth);
-
-        UpdateList(timeslot);
+        try
+        {
+            TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, TL.GetById(newTheatreId)!, "");
+            UpdateList(timeslot);
+        }
+        catch (System.Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            Thread.Sleep(5000);
+        }
     }
 
     public List<TimeSlotModel> AllTimeSlots()

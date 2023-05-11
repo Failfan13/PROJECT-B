@@ -4,7 +4,7 @@ public static class Reservation
     static private MoviesLogic MoviesLogic = new();
     static private TimeSlotsLogic TimeSlotsLogic = new();
     static private TheatreLogic TheatreLogic = new();
-    static public ReservationModel CurrReservation = null;
+    static public ReservationModel CurrReservation = null!;
 
     public static void EditReservation(bool AsAdmin = false)
     {
@@ -36,12 +36,16 @@ public static class Reservation
         {
             if (currAccId == reservation.AccountId || AsAdmin)
             {
-                reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
-                var timeslotVar = TimeSlotsLogic.GetById(reservation.TimeSLotId);
-                reservationMovie = MoviesLogic.GetById(timeslotVar.MovieId);
+                try
+                {
+                    reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
+                    var timeslotVar = TimeSlotsLogic.GetById(reservation.TimeSLotId);
+                    reservationMovie = MoviesLogic.GetById(timeslotVar!.MovieId)!;
 
-                if (reservationMovie != null && reservationDate != null)
-                    Options.Add($"{reservationDate} - {reservationMovie.Title}");
+                    if (reservationMovie != null && reservationDate != null)
+                        Options.Add($"{reservationDate} - {reservationMovie.Title}");
+                }
+                catch { }
             }
         }
 
@@ -57,18 +61,9 @@ public static class Reservation
             return;
         }
 
-        // Make seats from reservation open again
+        // set current seats & reservation timeslot
         var CurrSeat = CurrReservation.Seats;
-        var CurrTimeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSLotId);
-
-        foreach (SeatModel seat in CurrSeat)
-        {
-            var TheatreSeat = CurrTimeSlot.Theatre.Seats.FirstOrDefault(s => s.Id == seat.Id);
-            TheatreSeat.Reserved = false;
-        }
-
-        TimeSlotsLogic.UpdateList(CurrTimeSlot);
-
+        var CurrTimeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSLotId)!;
 
         // Edit reservations menu
         string question = "Choose a reservation you want to edit from the menu.";
@@ -81,18 +76,20 @@ public static class Reservation
                 "Choose format",
                 "Apply discount"
             };
-        // Actions reservations actions
         List<Action> actions = new();
         // TimeSlotModel timeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSLotId);
-        var movieid = CurrTimeSlot.MovieId;
+        var movieId = CurrTimeSlot.MovieId;
         // choose all
         actions.Add(() => Reservation.FilterMenu(true));
 
-        //choose time & seats
-        actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movieid, true));
+        // change time & seats
+        actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movieId, true));
 
-        // choose seats
-        actions.Add(() => Theatre.SelectSeats(CurrTimeSlot, true));
+        // change seats
+        actions.Add(() => Parallel.Invoke(
+            () => Theatre.DeselectCurrentSeats(CurrTimeSlot, CurrReservation),
+            () => Theatre.SelectSeats(CurrTimeSlot, true))
+        );
 
         // Change snack
         actions.Add(() => Snacks.Start(CurrTimeSlot, CurrReservation.Seats, true));
@@ -162,8 +159,11 @@ public static class Reservation
     {
         Console.Clear();
         ReservationLogic ReservationLogic = new ReservationLogic();
+        TheatreLogic TL = new TheatreLogic();
+        AccountsLogic AccountsLogic = new();
         EmailLogic EmailLogic = new EmailLogic();
         double FinalPrice = 0.00;
+        TheatreModel theatre = TL.GetById(ress.TimeSLotId)!;
 
         string subject = "Order summary";
         string body = "";
@@ -174,12 +174,22 @@ public static class Reservation
         body += "Order overview:\n";
         Console.WriteLine("\nSeats:");
         body += $"\nChosen seats:\n\n";
-        foreach (SeatModel seat in ress.Seats)
+        if (theatre != null)
         {
-            Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theatre.Width)}\tPrice: €{seat.Price}");
-            body += $"Nr: {seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSLotId).Theatre.Width)}\tPrice: €{seat.Price}\n";
-            FinalPrice += seat.Price;
+            foreach (SeatModel seat in ress.Seats)
+            {
+                var seatPrice = (seat.SeatType) switch
+                {
+                    "basic" => theatre.BasicSeatPrice,
+                    "standard" => theatre.StandardSeatPrice,
+                    "premium" => theatre.LuxurySeatPrice,
+                    _ => 0.00
+                };
+                Console.WriteLine($"Seat: {TL.SeatNumber(theatre.Width, seat.Id)} - SeatType: {seat.SeatType}\tPrice: €{seatPrice}");
+                FinalPrice += seatPrice;
+            }
         }
+
 
         // Snack data
         if (ress.Snacks != null)
@@ -190,7 +200,7 @@ public static class Reservation
             foreach (KeyValuePair<int, int> keyValue in ress.Snacks)
             {
                 var Snack = new SnacksLogic().GetById(keyValue.Key);
-                int Tabs = (int)Math.Ceiling((MaxLength - Snack.Name.Length) / 8.0);
+                int Tabs = (int)Math.Ceiling((MaxLength - Snack!.Name.Length) / 8.0);
                 var price = (Snack.Price) * keyValue.Value;
                 Console.WriteLine($"{keyValue.Value}x{Snack.Name}\t{new string('\t', Tabs)}Price: €{price}");
                 body += $"{keyValue.Value}x {Snack.Name}\t{new string('\t', Tabs)}Price: €{price}\n";
@@ -201,9 +211,9 @@ public static class Reservation
         // Format data
         if (FormatsLogic.GetByFormat(ress.Format) != null) // Same list in MovieLogic _formats
         {
-            FormatDetails? formatDt = FormatsLogic.GetByFormat(ress.Format);
+            FormatDetails formatDt = FormatsLogic.GetByFormat(ress.Format)!;
 
-            string required = formatDt.Item;
+            string required = formatDt.Item!;
             double requiredPrice = formatDt.Price;
 
             Console.WriteLine($"\nThe ordered movie plays in {ress.Format} format therefore there is an extra fee");
@@ -228,6 +238,15 @@ public static class Reservation
 
         email = UserLogin.AskEmail();
 
+
+        if (AccountId != -1)
+        {
+            email = AccountsLogic.GetById(AccountId)!.EmailAddress;
+        }
+        else
+        {
+            email = UserLogin.AskEmail();
+        }
         EmailLogic.SendEmail(email, subject, body);
 
         UserLogin.SignUpMails();

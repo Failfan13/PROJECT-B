@@ -77,4 +77,57 @@ public static class MenuLogic
         // no action, return the index of the option
         return selectedOption;
     }
+
+    public static void ClearLastLines(int linesToClear, bool threadDelay = false)
+    {
+        try
+        {
+            if (threadDelay) Thread.Sleep(3000);
+
+            linesToClear += 1; // adds new input to clear
+            // current cursor position
+            int currentLine = Console.CursorTop + 1; // sets top one line lower for input
+
+            Console.SetCursorPosition(0, currentLine - linesToClear);
+
+            // Clear lines replace with empty strings
+            Console.Write(new string(' ', Console.WindowWidth * linesToClear));
+
+            Console.SetCursorPosition(0, currentLine - linesToClear);
+        }
+        catch (System.ArgumentOutOfRangeException) // more then amount of lines to clear
+        {
+            return;
+        }
+    }
+
+    public static void ClearFromTop(int fromTop, bool threadDelay = false)
+    {
+        try
+        {
+            if (threadDelay) Thread.Sleep(3000);
+            // current cursor position
+            int currentLine = fromTop; // sets top one line lower for input
+
+            Console.SetCursorPosition(0, currentLine);
+
+            // Clear lines replace with empty strings
+            Console.Write(new string(' ', Console.WindowWidth * (Console.WindowHeight - fromTop)));
+
+            Console.SetCursorPosition(0, currentLine);
+        }
+        catch (System.ArgumentOutOfRangeException) // more then amount of lines to clear
+        {
+            return;
+        }
+    }
+
+    public static void ColorString(string str, ConsoleColor color = ConsoleColor.DarkBlue, bool newLine = true)
+    {
+        Console.ForegroundColor = color;
+        if (newLine) Console.WriteLine(str); // takes whole line
+        else Console.Write(str); // used inline
+        Console.ResetColor();
+    }
+    public static string BoldString(string str) => $"\x1b[1m{str}\x1b[0m";
 }

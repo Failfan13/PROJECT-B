@@ -46,6 +46,7 @@ static class Menu
             Actions.Add(() => UserLogin.Logout());
         }
 
+
         // Movies.AddNewMovie();
 
 

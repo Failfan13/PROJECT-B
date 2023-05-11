@@ -72,7 +72,7 @@ public class ReviewLogic
         ReviewModel review = null!;
         try
         {
-            review = new ReviewModel(TL.GetById(pastReservation.TimeSLotId)!.MovieId, AccountsLogic.CurrentAccount!.Id, reviewScore, message);
+            review = new ReviewModel(TL.GetById(pastReservation.TimeSlotId)!.MovieId, AccountsLogic.CurrentAccount!.Id, reviewScore, message);
         }
         catch (System.Exception)
         {

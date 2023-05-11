@@ -18,5 +18,4 @@ static class MoviesAccess
         string json = JsonSerializer.Serialize(accounts, options);
         File.WriteAllText(path, json);
     }
-
 }

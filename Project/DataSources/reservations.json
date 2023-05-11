@@ -7,7 +7,8 @@
         "id": 10,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": {
@@ -16,7 +17,8 @@
       "3": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T16:09:34.9773108+02:00"
+    "date_time": "2023-03-31T16:09:34.9773108+02:00",
+    "format": null
   },
   {
     "id": 2,
@@ -26,7 +28,8 @@
         "id": 0,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": {
@@ -34,7 +37,8 @@
       "2": 2
     },
     "account_id": 4,
-    "date_time": "2023-03-31T19:28:31.0164436+02:00"
+    "date_time": "2023-03-31T19:28:31.0164436+02:00",
+    "format": null
   },
   {
     "id": 3,
@@ -44,31 +48,36 @@
         "id": 10,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 11,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 12,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 13,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 14,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": {
@@ -76,7 +85,8 @@
       "1": 1
     },
     "account_id": 2,
-    "date_time": "2023-03-31T20:01:32.9848765+02:00"
+    "date_time": "2023-03-31T20:01:32.9848765+02:00",
+    "format": null
   },
   {
     "id": 4,
@@ -86,30 +96,35 @@
         "id": 0,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 1,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 2,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 3,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": null,
     "account_id": 1,
-    "date_time": "2023-03-31T20:04:03.6364957+02:00"
+    "date_time": "2023-03-31T20:04:03.6364957+02:00",
+    "format": null
   },
   {
     "id": 5,
@@ -119,19 +134,22 @@
         "id": 12,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 13,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 14,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": {
@@ -140,7 +158,8 @@
       "2": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:06:35.2027284+02:00"
+    "date_time": "2023-03-31T17:06:35.2027284+02:00",
+    "format": null
   },
   {
     "id": 6,
@@ -150,19 +169,22 @@
         "id": 5,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 6,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 7,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": {
@@ -171,7 +193,8 @@
       "2": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:07:03.6944268+02:00"
+    "date_time": "2023-03-31T17:07:03.6944268+02:00",
+    "format": null
   },
   {
     "id": 7,
@@ -181,25 +204,29 @@
         "id": 31,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 32,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 33,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 34,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": {
@@ -208,7 +235,8 @@
       "2": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:08:03.5927828+02:00"
+    "date_time": "2023-03-31T17:08:03.5927828+02:00",
+    "format": null
   },
   {
     "id": 8,
@@ -218,25 +246,29 @@
         "id": 13,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 14,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 15,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 16,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": {
@@ -244,7 +276,8 @@
       "1": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:09:46.6971198+02:00"
+    "date_time": "2023-03-31T17:09:46.6971198+02:00",
+    "format": null
   },
   {
     "id": 9,
@@ -254,25 +287,29 @@
         "id": 30,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 31,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 32,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 33,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": {
@@ -280,7 +317,8 @@
       "2": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:10:10.9494494+02:00"
+    "date_time": "2023-03-31T17:10:10.9494494+02:00",
+    "format": null
   },
   {
     "id": 10,
@@ -290,25 +328,29 @@
         "id": 50,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 51,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 52,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 53,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": {
@@ -318,7 +360,8 @@
       "3": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:13:19.3442274+02:00"
+    "date_time": "2023-03-31T17:13:19.3442274+02:00",
+    "format": null
   },
   {
     "id": 11,
@@ -328,25 +371,29 @@
         "id": 60,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 61,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 62,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 63,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": {
@@ -354,7 +401,8 @@
       "2": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:14:18.5209844+02:00"
+    "date_time": "2023-03-31T17:14:18.5209844+02:00",
+    "format": null
   },
   {
     "id": 12,
@@ -364,25 +412,29 @@
         "id": 60,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 61,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 62,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 63,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": {
@@ -391,7 +443,8 @@
       "2": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:14:48.5168754+02:00"
+    "date_time": "2023-03-31T17:14:48.5168754+02:00",
+    "format": null
   },
   {
     "id": 13,
@@ -401,18 +454,21 @@
         "id": 1,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 2,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": null,
     "account_id": null,
-    "date_time": "0001-01-01T00:00:00"
+    "date_time": "0001-01-01T00:00:00",
+    "format": null
   },
   {
     "id": 2,
@@ -422,18 +478,21 @@
         "id": 1,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 2,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": null,
     "account_id": 4,
-    "date_time": "0001-01-01T00:00:00"
+    "date_time": "0001-01-01T00:00:00",
+    "format": null
   },
   {
     "id": 3,
@@ -443,18 +502,21 @@
         "id": 1,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 2,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": null,
     "account_id": null,
-    "date_time": "2023-03-31T17:16:40.6728531+02:00"
+    "date_time": "2023-03-31T17:16:40.6728531+02:00",
+    "format": null
   },
   {
     "id": 15,
@@ -464,19 +526,22 @@
         "id": 45,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 46,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       },
       {
         "id": 47,
         "price": 10,
         "reserved": true,
-        "handicapped": false
+        "handicapped": false,
+        "luxury": false
       }
     ],
     "snacks": {
@@ -484,68 +549,7 @@
       "2": 1
     },
     "account_id": null,
-    "date_time": "2023-03-31T17:55:19.5168472+02:00"
-  },
-  {
-    "id": 16,
-    "timeslot_id": 0,
-    "seats": [
-      {
-        "id": 4,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false
-      },
-      {
-        "id": 5,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false
-      }
-    ],
-    "snacks": {
-      "0": 1
-    },
-    "account_id": 2,
-    "date_time": "2023-04-23T20:24:37.4578364+02:00",
-    "format": ""
-  },
-  {
-    "id": 3,
-    "timeslot_id": 8,
-    "seats": [
-      {
-        "id": 3,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false,
-        "luxury": false
-      },
-      {
-        "id": 4,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false,
-        "luxury": false
-      },
-      {
-        "id": 5,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false,
-        "luxury": false
-      },
-      {
-        "id": 6,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false,
-        "luxury": false
-      }
-    ],
-    "snacks": null,
-    "account_id": -1,
-    "date_time": "2023-04-25T11:47:38.389569+02:00",
-    "format": ""
+    "date_time": "2023-03-31T17:55:19.5168472+02:00",
+    "format": null
   }
 ]

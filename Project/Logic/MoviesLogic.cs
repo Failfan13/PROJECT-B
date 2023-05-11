@@ -21,7 +21,6 @@ public class MoviesLogic : Order<MovieModel>
         _movies = MoviesAccess.LoadAll();
     }
 
-
     public override void UpdateList(MovieModel movie)
     {
         //Find if there is already an model with the same id
@@ -39,8 +38,8 @@ public class MoviesLogic : Order<MovieModel>
             _movies.Add(movie);
             Logger.LogDataChange<MovieModel>(movie.Id, "Added");
         }
-        MoviesAccess.WriteAll(_movies);
 
+        MoviesAccess.WriteAll(_movies);
     }
 
     public override MovieModel? GetById(int id)
@@ -192,5 +191,21 @@ public class MoviesLogic : Order<MovieModel>
     {
         movie.ReleaseDate = NewDate;
         UpdateList(movie);
+    }
+
+    // this account's reservations after the current date
+    public List<ReservationModel> PastMovies()
+    {
+        TimeSlotsLogic TL = new TimeSlotsLogic();
+        ReservationLogic RL = new ReservationLogic();
+
+        try
+        {
+            return RL.Reservations.FindAll(r => r.AccountId == AccountsLogic.CurrentAccount!.Id && r.DateTime < DateTime.Now);
+        }
+        catch (System.Exception)
+        {
+            return new List<ReservationModel>();
+        }
     }
 }

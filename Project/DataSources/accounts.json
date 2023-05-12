@@ -44,7 +44,7 @@
     "emailAddress": "2",
     "password": "2",
     "fullName": "2",
-    "admin": false,
-    "adMails": true
+    "admin": true,
+    "adMails": false
   }
 ]

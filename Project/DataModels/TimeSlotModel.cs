@@ -19,7 +19,7 @@ public class TimeSlotModel
     public string Format { get; set; }
 
     [JsonConstructor]
-    public TimeSlotModel() : this(0, 0, new DateTime(), new Helper(), "") { }
+    public TimeSlotModel(int id) : this(id, 0, new DateTime(), new Helper(), "") { }
     public TimeSlotModel(int id, int movieid, DateTime start, TheatreModel theatre, string format) : this(id, movieid, start, new Helper(theatre.Id), format) { }
     public TimeSlotModel(int id, int movieid, DateTime start, Helper theatre, string format)
     {
@@ -38,6 +38,11 @@ public class TimeSlotModel
         Console.WriteLine($"Theatre:\t{Theatre}");
         Console.WriteLine($"Format:\t\t{Format}");
         movie.Info();
+    }
+    public int NewId()
+    {
+        TimeSlotsLogic TL = new TimeSlotsLogic();
+        return TL.GetNewestId();
     }
 
     // Helps to deserialize theatre info

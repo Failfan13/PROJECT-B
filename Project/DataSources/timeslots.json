@@ -97,5 +97,15 @@
       "reservedSeats": null
     },
     "format": "standard"
+  },
+  {
+    "id": 3,
+    "movieid": 0,
+    "start": "2012-12-12T22:22:00",
+    "theatre": {
+      "id": 0,
+      "reservedSeats": null
+    },
+    "format": ""
   }
 ]

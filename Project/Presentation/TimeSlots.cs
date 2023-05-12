@@ -84,7 +84,6 @@ static class TimeSlots
         TheatreLogic TL = new TheatreLogic();
 
         TM.MovieId = movie.Id;
-        TM.Theatre.TheatreId = TL.GetNewestId();
 
         Console.Clear();
 

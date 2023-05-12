@@ -139,18 +139,8 @@ public static class Reservation
             movies = filteredList;
         }
 
-        //    MenuLogic.Question(Question, Movies, Actions);
-        //  }
-        //
-        //public static void FilteredMenu(List<MovieModel> movies, bool IsEdited = false)
-        //{
-        //   List<string> Movies = new List<string>();
-        //   List<Action> Actions = new List<Action>();
-        //   string Question = "which movie would you like to see?";
-
         Movies.Add("Use Filter");
         Actions.Add(() => Filter.Main());
-
 
         foreach (MovieModel movie in movies)
         {

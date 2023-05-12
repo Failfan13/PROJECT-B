@@ -10,52 +10,52 @@ static class Menu
         List<string> Options = new List<string>() { };
         List<Action> Actions = new List<Action>();
 
+        // Login
         if (AccountsLogic.CurrentAccount == null)
         {
             Options.Add("Login / new account");
             Actions.Add(() => UserLogin.Start());
         }
-
-        Options.Add("Make a Reservation");
-        Actions.Add(() => Reservation.FilterMenu());
-
-        if (AccountsLogic.CurrentAccount != null)
+        else // show account name
         {
+            Question = "Welcome back " + AccountsLogic.CurrentAccount.FullName + "\n" + Question;
+        }
+
+        // Make reservation
+        if (AccountsLogic.CurrentAccount == null || !AccountsLogic.CurrentAccount.Admin)
+        {
+            Options.Add("Make a Reservation");
+            Actions.Add(() => Reservation.FilterMenu());
+        }
+
+        // Reservation options
+        if (AccountsLogic.CurrentAccount != null && !AccountsLogic.CurrentAccount.Admin)
+        {
+            Options.Add("See all reservations");
+            //Actions.Add(() => Reservation.AllReservations());
+            Actions.Add(() => Console.WriteLine("No Work bruh"));
+
             Options.Add("Change a reservation");
             Actions.Add(() => Reservation.EditReservation());
 
-            if (AccountsLogic.CurrentAccount.Admin == false)
-            {
-                Options.Add("Add review for past reservation");
-                Actions.Add(() => Movies.AddReviewMenu());
-            }
-
-            // Options.Add("See all reservations");
-            // Actions.Add(() => Reservation.AllReservations());
-
-            Options.Add("Account settings");
-            Actions.Add(() => UserLogin.Start());
+            Options.Add("Review past reservation");
+            Actions.Add(() => Movies.AddReviewMenu());
         }
 
-        Options.Add("Contact");
-        Actions.Add(() => Contact.start());
-
-        if (AccountsLogic.CurrentAccount != null)
+        // Contact
+        if (AccountsLogic.CurrentAccount == null || !AccountsLogic.CurrentAccount.Admin)
         {
-            Options.Add("\nLogout");
-            Actions.Add(() => UserLogin.Logout());
+            Options.Add("\nContact");
+            Actions.Add(() => Contact.start());
         }
 
-        // Only see if logged in
-        if (AccountsLogic.CurrentAccount != null)
-        {
-            Console.WriteLine($"Name:{AccountsLogic.CurrentAccount.FullName}\n");
-        }
-
-        // Only see if logged in and admin
+        // Admin data
         if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
         {
             Console.WriteLine($"Admin {AccountsLogic.CurrentAccount.Admin}\n");
+            Options.Add("Add data");
+            Actions.Add(() => Admin.Start());
+
             Options.Add("Change data");
             Actions.Add(() => Admin.Start());
 
@@ -64,6 +64,16 @@ static class Menu
 
             Options.Add("View ratings");
             Actions.Add(() => Movies.EditReviewsMenu());
+        }
+
+        // Logout & account settings
+        if (AccountsLogic.CurrentAccount != null)
+        {
+            Options.Add("\nLogout");
+            Actions.Add(() => UserLogin.Logout());
+
+            Options.Add("Account settings");
+            Actions.Add(() => UserLogin.Start());
         }
 
         Options.Add("\nExit app");

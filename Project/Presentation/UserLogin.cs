@@ -13,6 +13,8 @@ What would you like to do?";
 
         if (AccountsLogic.CurrentAccount == null)
         {
+            Options.Add("Login");
+            Actions.Add(() => Login());
             Options.Add("Create new account");
             Actions.Add(() => CreateNewUser());
         }

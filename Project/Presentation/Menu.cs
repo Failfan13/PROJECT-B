@@ -12,8 +12,8 @@ static class Menu
 
         if (AccountsLogic.CurrentAccount == null)
         {
-            Options.Add("Login");
-            Actions.Add(() => UserLogin.Login());
+            Options.Add("Login / new account");
+            Actions.Add(() => UserLogin.Start());
         }
 
         Options.Add("Make a Reservation");
@@ -45,21 +45,6 @@ static class Menu
             Options.Add("\nLogout");
             Actions.Add(() => UserLogin.Logout());
         }
-
-
-        // Movies.AddNewMovie();
-
-
-
-        // // adding movies to check new functions
-        // List<CategoryModel> genres = new List<CategoryModel>();
-        // DateTime start = new DateTime(2000, 1, 1);
-        // MovieModel movie = new MovieModel(0, "Batman", start, "geronimo", "Batman and the joker", 69, 20, genres);
-
-
-        // foreach (MovieModel film in movie.AllMovies()
-
-
 
         // Only see if logged in
         if (AccountsLogic.CurrentAccount != null)

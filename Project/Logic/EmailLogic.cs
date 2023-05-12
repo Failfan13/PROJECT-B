@@ -67,7 +67,8 @@ public class EmailLogic
 
     public bool ValidateEmail(string email)
     {
-        if (email.Contains("@") && email.Contains(".")) return true;
+        if (email.Contains("@.")) return true;
+        else if (email.Contains("@") && email.Contains(".")) return true;
         return false;
     }
 }

@@ -226,7 +226,7 @@ static class Movies
         List<ReviewModel> pastReviews = RL.UserPastReviews(AccountsLogic.CurrentAccount!.Id);
 
         List<ReservationModel> pastMoviesNoReview = MoviesLogic.PastMovies().FindAll(
-            m => !pastReviews.Any(r => r.MovieId == TL.GetById(m.TimeSLotId)!.MovieId));
+            m => !pastReviews.Any(r => r.MovieId == TL.GetById(m.TimeSlotId)!.MovieId));
 
         Console.Clear();
 
@@ -245,8 +245,8 @@ static class Movies
         {
             try
             {
-                options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSLotId)!.MovieId)!.Title} Watched on: {pastReservation.DateTime}");
-                actions.Add(() => AddNewReview(TL.GetById(pastReservation.TimeSLotId)!.MovieId, pastReservation));
+                options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSlotId)!.MovieId)!.Title} Watched on: {pastReservation.DateTime}");
+                actions.Add(() => AddNewReview(TL.GetById(pastReservation.TimeSlotId)!.MovieId, pastReservation));
             }
             catch (System.Exception ex)
             {
@@ -305,7 +305,7 @@ static class Movies
 
 
             if (double.TryParse(input, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out double newRating) && newRating >= 1 && newRating <= 5)
-            
+
             {
                 rating = newRating;
                 break;

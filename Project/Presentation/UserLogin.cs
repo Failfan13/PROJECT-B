@@ -4,15 +4,22 @@ static class UserLogin
 
     public static void Start()
     {
-        string Question = @$"Currently logged in as: {AccountsLogic.CurrentAccount!.FullName} 
-with the e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}
+        string Question = "";
 
-What would you like to do?";
+        if (AccountsLogic.CurrentAccount != null)
+        {
+            Question = @$"Currently logged in as: {AccountsLogic.CurrentAccount!.FullName} 
+with the e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}\n";
+        }
+
+        Question += "What would you like to do?";
         List<string> Options = new List<string>() { };
         List<Action> Actions = new List<Action>();
 
         if (AccountsLogic.CurrentAccount == null)
         {
+            Options.Add("Login");
+            Actions.Add(() => Login());
             Options.Add("Create new account");
             Actions.Add(() => CreateNewUser());
         }

@@ -6,15 +6,15 @@ public static class Promo
     public static int Start()
     {
         Console.Clear();
-        string wantPromo;
         int codeId;
 
         Console.WriteLine("Do you have a Promo code?(Y/N)");
-        wantPromo = Console.ReadKey().Key.ToString();
+        string wantPromo = Console.ReadKey().Key.ToString();
 
         if (wantPromo != "Y") return -1;
 
         codeId = EnterPromoCode();
+
         if (codeId != 0)
         {
             return codeId;

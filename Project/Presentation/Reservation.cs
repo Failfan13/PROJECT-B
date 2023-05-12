@@ -273,6 +273,7 @@ public static class Reservation
         PromoLogic PromoLogic = new();
         ReservationLogic ReservationLogic = new ReservationLogic();
         TimeSlotsLogic TimeSlotsLogic = new();
+        TheatreLogic TheatreLogic = new();
 
         TotalPriceModel TotalRess = ReservationLogic.GetTotalRess(ress);
         AccountsLogic AccountsLogic = new();
@@ -286,6 +287,7 @@ public static class Reservation
         double FinalPrice = 0.00;
 
         int promoId = Promo.Start();
+        int theatreId = TimeSlotsLogic.GetById(ress.TimeSlotId)!.Theatre.TheatreId;
 
         if (promoId != -1)
         {
@@ -303,12 +305,14 @@ public static class Reservation
 
         // Seat Data
         Console.WriteLine("\nSeats:");
-        foreach (SeatModel seat in TotalRess.Seats)
+        for (int i = 0; i < TotalRess.Seats.Count(); i++)
         {
-            //Console.WriteLine($"{seat.SeatRow(TimeSlotsLogic.GetById(ress.TimeSlotId).Theatre.Width)}\tPrice: €{seat.Price}");
-            Console.WriteLine("Temp fix");
-        }
+            Console.Write($"{TheatreLogic.SeatNumber(TheatreLogic.GetById(theatreId)!.Width, (int)TotalRess.Seats[i][0])}");
 
+            SeatModel currSeat = ress.Seats.Find(seat => seat.Id == (int)TotalRess.Seats[i][0])!;
+            Console.Write($"\tType: {currSeat!.SeatType}");
+            Console.WriteLine($"\tPrice: €{TotalRess.Seats[i][1]}");
+        }
 
         // Snack data
         if (ress.Snacks != null)
@@ -370,7 +374,7 @@ public static class Reservation
         }
         EmailLogic.SendEmail(email, subject, body);
 
-        UserLogin.SignUpMails();
+        UserLogin.SignUpMails(email);
 
         QuestionLogic.AskEnter();
     }

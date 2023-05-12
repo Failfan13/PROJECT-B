@@ -52,6 +52,22 @@ public class ReservationModel
 
 }
 
+public class TotalPriceModel
+{
+    public MovieModel Movie { get; set; }
+    public int TheatreId { get; set; }
+    public double[][] Seats { get; set; }
+    public Dictionary<SnackModel, int> Snacks { get; set; }
+    public double FinalPrice { get; set; }
+
+    public TotalPriceModel(MovieModel movie, int theatreId, double[][] seats, Dictionary<SnackModel, int> snacks)
+    {
+        Movie = movie;
+        TheatreId = theatreId;
+        Seats = seats;
+        Snacks = snacks;
+    }
+}
 
 
 

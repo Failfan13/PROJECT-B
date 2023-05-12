@@ -657,5 +657,4 @@ public class TheatreLogic
         }
         return 0;
     }
-
 }

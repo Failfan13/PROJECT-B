@@ -658,4 +658,31 @@ public class TheatreLogic
         return 0;
     }
 
+    public int DupeTheatreToNew(int oldTheatreId)
+    {
+        TheatreModel oldTheatre = AllTheatres().Find(t => t.Id == oldTheatreId)!;
+
+        if (oldTheatre == null) return -1;
+
+        TheatreModel newTheatre = DeepCopy(oldTheatre);
+        newTheatre.Id = GetNewestId();
+        _theatres.Add(newTheatre);
+
+        return newTheatre.Id;
+    }
+
+    private TheatreModel DeepCopy(TheatreModel oldTheatre)
+    {
+        TheatreModel newTheatre = new TheatreModel();
+        newTheatre.Id = oldTheatre.Id;
+        newTheatre.Description = $"*Copy Room {oldTheatre.Id}";
+        newTheatre.BasicSeatPrice = oldTheatre.BasicSeatPrice;
+        newTheatre.LuxurySeatPrice = oldTheatre.LuxurySeatPrice;
+        newTheatre.StandardSeatPrice = oldTheatre.StandardSeatPrice;
+        newTheatre.Width = oldTheatre.Width;
+        newTheatre.Height = oldTheatre.Height;
+        newTheatre.LayoutSpecs = oldTheatre.LayoutSpecs;
+
+        return newTheatre;
+    }
 }

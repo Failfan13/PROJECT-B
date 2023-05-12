@@ -66,16 +66,23 @@ Press [ ");
         RL.UpdateList(currReservation);
     }
 
-    public static void WhatTheatre()
+    public static int WhatTheatre(bool IsEdited = false)
     {
-        string Question = "What theatre room would you like to change?";
+        int selectedRoom = -1;
+
+        string Question = "What theatre room would you like to add?";
+
+        if (IsEdited) Question = "What theatre room would you like to change?";
+
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
         foreach (var item in TL.AllTheatres())
         {
-            Options.Add($"Room: {item.Id} - Width: {item.Width}, Height: {item.Height}");
-            Actions.Add(() => EditMenu(item, () => Menu.Start()));
+            Options.Add($"Room: {item.Id} - Width: {item.Width}, Height: {item.Height} {item.Description}");
+
+            if (IsEdited) Actions.Add(() => EditMenu(item, () => Menu.Start()));
+            else Actions.Add(() => selectedRoom = item.Id);
         }
 
         Options.Add("\nReturn");
@@ -83,7 +90,9 @@ Press [ ");
 
         MenuLogic.Question(Question, Options, Actions);
 
+        return selectedRoom;
     }
+
     public static void EditMenu(TheatreModel theatre, Action returnTo = null!)
     {
         TheatreLogic TL = new TheatreLogic();

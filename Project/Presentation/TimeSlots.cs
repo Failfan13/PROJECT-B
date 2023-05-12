@@ -75,30 +75,37 @@ static class TimeSlots
         return null;
     }
 
-    public static void NewTimeSlot(int movieid, bool IsEdited = false)
+    public static void NewTimeSlot(int movieId, bool IsEdited = false)
     {
         TimeSlotsLogic TimeSlotsLogic = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
-        MovieModel movie = ML.GetById(movieid)!;
-        TimeSlotModel TM = new TimeSlotModel(TimeSlotsLogic.GetNewestId());
         TheatreLogic TL = new TheatreLogic();
 
-        TM.MovieId = movie.Id;
-        TM.Theatre.TheatreId = TL.GetNewestId();
+        // make new timeslot
+        TimeSlotModel TM = new TimeSlotModel(TimeSlotsLogic.GetNewestId());
+        // Get room to add
+        int newTheatreId = Theatre.WhatTheatre();
+
+        TM.MovieId = movieId;
+        TM.Theatre.TheatreId = newTheatreId;
 
         Console.Clear();
 
-        TimeSlotStartTime(TM, null, true);
-
+        TimeSlotStartTime(TM, newTimeSlot: true);
         Console.WriteLine("Would you like to change the seat layout? (y/n)");
-        if (Console.ReadLine() == "y")
+        if (Console.ReadKey().KeyChar == 'y')
         {
-            TL.ShowSeats(TL.GetById(TM.Theatre.TheatreId)!);
+            TM.Theatre.TheatreId = TL.DupeTheatreToNew(newTheatreId);
+            if (TL.AllTheatres().Any(t => t.Id == TM.Theatre.TheatreId))
+            {
+                TL.ShowSeats(TL.GetById(TM.Theatre.TheatreId)!);
+            }
         }
 
         Console.WriteLine("Would you like to add a new format? (y/n)");
-        if (Console.ReadLine() == "y")
+        if (Console.ReadKey().KeyChar == 'y')
         {
+            TimeSlotsLogic.UpdateList(TM);
             Format.ChangeFormats(TM);
         }
 
@@ -148,7 +155,7 @@ static class TimeSlots
         Options.Add("Return");
         Actions.Add(() => WhatMovieEditTimeSlot());
 
-         MenuLogic.Question(Question, Options, Actions);
+        MenuLogic.Question(Question, Options, Actions);
 
     }
 

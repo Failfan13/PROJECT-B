@@ -55,8 +55,8 @@ public class TimeSlotModel
         public List<SeatModel> Seats { get; set; }
 
         [JsonConstructor]
-        public Helper() : this(0, null!) { }
-        public Helper(int theatreId) : this(theatreId, null!) { }
+        public Helper() : this(0, new List<SeatModel>()) { }
+        public Helper(int theatreId) : this(theatreId, new List<SeatModel>()) { }
         public Helper(int theatreId, List<SeatModel> seats)
         {
             TheatreId = theatreId;

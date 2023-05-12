@@ -5,6 +5,9 @@ public class TheatreModel
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
+    [JsonPropertyName("description")]
+    public string Description { get; set; } = "";
+
     [JsonPropertyName("layoutSpecs")]
     public SeatBuilderHelper LayoutSpecs { get; set; } = new SeatBuilderHelper();
 

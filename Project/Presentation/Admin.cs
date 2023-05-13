@@ -50,7 +50,7 @@ public static class Admin
         Options.Add("Change Categories");
         Actions.Add(() => Category.Start());
 
-        Options.Add("Manage Complaints");
+        Options.Add("Change Complaints");
         Actions.Add(() => AccountsLogic.AdminSelectionComplaints());
 
         Options.Add("Change Reservations");

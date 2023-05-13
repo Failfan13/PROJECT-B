@@ -11,11 +11,11 @@ public static class Contact
         string Question = "Select an option\n";
         List<string> Options = new List<string>()
         {
-            "Customer service","Nuisance","Emergency"
+            "Customer service","Complaint","Emergency"
         };
         List<Action> Actions = new List<Action>();
         Actions.Add(() => Contact.contact());
-        Actions.Add(() => Contact.Nuisance());
+        Actions.Add(() => Contact.Complaint());
         Actions.Add(() => Contact.Emergency());
 
         // Return to Login menu
@@ -38,7 +38,7 @@ public static class Contact
         Contact.start();
     }
 
-    public static void Nuisance()
+    public static void Complaint()
     {
         // creating a selection menu for contact
         Console.Clear();
@@ -50,7 +50,7 @@ public static class Contact
         List<Action> Actions = new List<Action>();
         Actions.Add(() => Contact.running());
         Actions.Add(() => Contact.Notrunning());
-        Actions.Add(() => Contact.Emergency());
+        Actions.Add(() => Contact.start());
 
         MenuLogic.Question(Question, Options, Actions);
     }
@@ -73,20 +73,15 @@ public static class Contact
 
     public static void running()
     {
-        Menu.Start();
-        // creating a selection menu for contact
         Console.Clear();
-        string Question = "Are you currently in a running movie?";
-        List<string> Options = new List<string>()
-        {
-            "Yes","No","Return"
-        };
-        List<Action> Actions = new List<Action>();
-        Actions.Add(() => Contact.running());
-        Actions.Add(() => Contact.Notrunning());
-        Actions.Add(() => Contact.Emergency());
-
-        MenuLogic.Question(Question, Options, Actions);
+        Console.WriteLine("PLease enter the room number and if applicalbe the corresponding row number.\n");
+        string place = Console.ReadLine();
+        
+        Console.Clear();
+        Console.WriteLine("An employee is on their way!");
+        Console.ReadKey();
+        
+        Menu.Start();
     }
 
     public static void Notrunning()

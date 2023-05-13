@@ -106,7 +106,7 @@ static class TimeSlots
         if (Console.ReadKey().KeyChar == 'y')
         {
             TimeSlotsLogic.UpdateList(TM);
-            Format.ChangeFormats(TM);
+            Format.ViewFormatMenu(ML.GetById(TM.MovieId)!, TM);
         }
 
         TimeSlotsLogic.UpdateList(TM);

@@ -145,6 +145,46 @@ public class TheatreLogic
         Console.Write(" Walk paths\n");
     }
 
+    public void ShowControls(bool configure = false)
+    {
+        if (configure)
+        {
+            Console.Clear();
+            Console.Write(@$"In the following screen you can change the seat configuration
+Press the following buttons to apply changes:
+         
+Press [ ");
+            MenuLogic.ColorString("↑ → ↓ ←", newLine: false);
+            Console.Write(" ] Keys to move around the menu\r\nPress [ ");
+            MenuLogic.ColorString("B", newLine: false);
+            Console.Write(" ] Key to block or unblock seatr\nPress [ ");
+            MenuLogic.ColorString("H", newLine: false);
+            Console.Write(" ] Key to add or remove handicap seat\r\nPress [ ");
+            MenuLogic.ColorString("P", newLine: false);
+            Console.Write(" ] Key to add pathway\r\nPress [ ");
+            MenuLogic.ColorString("R", newLine: false);
+            Console.Write(" ] Key to remove pathway\r\nPress [ ");
+            MenuLogic.ColorString("S", newLine: false);
+            Console.Write(" ] Key to save\r\n");
+            MenuLogic.ColorString(new String('‗', 59));
+        }
+        else
+        {
+            Console.Clear();
+            Console.Write(@$"In the following screen you can change the seat configuration
+Press the following buttons to apply changes:
+         
+Press [ ");
+            MenuLogic.ColorString("↑ → ↓ ←", newLine: false);
+            Console.Write(" ] Keys to move around the menu\r\nPress [ ");
+            MenuLogic.ColorString("Enter", newLine: false);
+            Console.Write(" ] Key to select or unselect a seat\r\nPress [ ");
+            MenuLogic.ColorString("S", newLine: false);
+            Console.Write(" ] Key to save current selection\r\n");
+            MenuLogic.ColorString(new String('‗', 59));
+        }
+    }
+
     public List<SeatModel> ShowSeats(TheatreModel theatre, TimeSlotModel timeSlot = null!)
     {
         // load logics
@@ -156,7 +196,6 @@ public class TheatreLogic
         List<int> handicaped = theatre.LayoutSpecs.HandiSeatIndexes;
         List<Tuple<string, int>> seatTypes = GetSeatTypes(theatre.Width, theatre.Height);
         List<SeatModel> reservedSeats = new List<SeatModel>();
-
 
         if (timeSlot != null)
         {
@@ -172,6 +211,9 @@ public class TheatreLogic
         bool runMenu = true;
         while (runMenu)
         {
+            // Show controls
+            ShowControls(timeSlot == null);
+
             // Console.Clear();
             int heightCounter = 0;
             int widthCounter = 0;
@@ -407,8 +449,8 @@ public class TheatreLogic
                         break;
                 }
             }
-            if (timeSlot != null) MenuLogic.ClearFromTop(7);
-            else MenuLogic.ClearFromTop(10);
+            // if (timeSlot != null) MenuLogic.ClearFromTop(7);
+            // else MenuLogic.ClearFromTop(10);
         }
 
         List<SeatModel> returnSelectedSeats = new List<SeatModel>();

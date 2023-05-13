@@ -126,4 +126,49 @@ The total price for the extra requirements will be: {formatDt?.Item} x {Seats.Co
 
         ChangeFormats(formatModel);
     }
+
+    public static void ViewFormatMenu(MovieModel movie = null!)
+    {
+        bool finishCategory = false;
+
+        Console.Clear();
+
+        string Qeustion = "What would you like to do?";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
+
+        if (!FormatsLogic._swapFormats)
+        {
+            Options.Add("Swap Mode, Currently: Adding viewformat");
+        }
+        else
+        {
+            Options.Add("Swap Mode, Currently: Removing viewformat");
+        }
+        Actions.Add(() => FormatsLogic.SwapMode());
+
+        if (!FormatsLogic._swapFormats)
+        {
+            foreach (var form in FormatsLogic.AllFormats().Where(c => !movie.Formats.Contains(c)))
+            {
+                Options.Add(form);
+                Actions.Add(() => FormatsLogic.AddFormatToMovie(movie, form));
+            }
+        }
+        else
+        {
+            foreach (var form in movie.Formats)
+            {
+                Options.Add(form);
+                Actions.Add(() => FormatsLogic.RemoveFormatFromMovie(movie, form));
+            }
+        }
+
+        Options.Add("\nFinish");
+        Actions.Add(() => finishCategory = true);
+
+        MenuLogic.Question(Qeustion, Options, Actions);
+
+        if (!finishCategory) ViewFormatMenu(movie);
+    }
 }

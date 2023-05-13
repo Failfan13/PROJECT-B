@@ -112,7 +112,7 @@ static class TimeSlots
         TimeSlotsLogic.UpdateList(TM);
     }
 
-    public static void WhatMovieEditTimeSlot()
+    public static void WhatMovieTimeSlot(bool isEdited = false)
     {
         var movies = new MoviesLogic().AllMovies();
 
@@ -123,7 +123,8 @@ static class TimeSlots
         foreach (MovieModel movie in movies)
         {
             Movies.Add(movie.Title);
-            Actions.Add(() => TimeSlots.EditTimeSlot(movie.Id, false));
+            if (isEdited) Actions.Add(() => TimeSlots.EditTimeSlot(movie.Id, false));
+            else Actions.Add(() => TimeSlots.NewTimeSlot(movie.Id));
         }
 
         Movies.Add("Return");
@@ -153,7 +154,7 @@ static class TimeSlots
         Actions.Add(() => NewTimeSlot(movieid, IsEdited));
 
         Options.Add("Return");
-        Actions.Add(() => WhatMovieEditTimeSlot());
+        Actions.Add(() => WhatMovieTimeSlot());
 
         MenuLogic.Question(Question, Options, Actions);
 

@@ -6,6 +6,7 @@ public class CategoryLogic
 {
     static private MoviesLogic MoviesLogic = new MoviesLogic();
     private List<CategoryModel> _categories;
+    public bool _swapCategory = false;
 
     //Static properties are shared across all instances of the class
     //This can be used to get the current logged in account from anywhere in the program
@@ -55,6 +56,19 @@ public class CategoryLogic
     {
         return _categories;
     }
+
+    public void AddCategoryToMovie(MovieModel movie, CategoryModel category)
+    {
+        movie.Categories.Add(category);
+        MoviesLogic.UpdateList(movie);
+    }
+
+    public void RemoveCategoryFromMovie(MovieModel movie, CategoryModel category)
+    {
+        movie.Categories.Remove(category);
+        MoviesLogic.UpdateList(movie);
+    }
+
     public void AddCategory(MovieModel movie) // Adds category to movie
     {
         Console.Clear();
@@ -115,4 +129,6 @@ public class CategoryLogic
             Console.WriteLine("Not Admin");
         }
     }
+
+    public void SwapMode() => _swapCategory = !_swapCategory;
 }

@@ -6,20 +6,20 @@ public static class Admin
         List<string> Options = new List<string>() { };
         List<Action> Actions = new List<Action>();
 
-        Options.Add("Add new Theatre");
-        Actions.Add(() => Theatre.MakeNewTheatre());
-
         Options.Add("Add new Movie");
         Actions.Add(() => Movies.AddNewMovie());
 
-        Options.Add("Add new Tileslot");
-        //Actions.Add(() => TimeSlots.ChangeTimeSlotsMenu());
+        Options.Add("Add new TimeSlot");
+        Actions.Add(() => TimeSlots.WhatMovieTimeSlot());
+
+        Options.Add("Add new Theatre");
+        Actions.Add(() => Theatre.MakeNewTheatre());
 
         Options.Add("Add new Categories");
-        //Actions.Add(() => Category.AddNewCategory());
+        Actions.Add(() => Category.NewCatMenu());
 
         Options.Add("Add new Reservation for user");
-        //Actions.Add(() => Reservation.AddNewReservation());
+        Actions.Add(() => Reservation.FilterMenu());
 
         Options.Add("\nReturn");
         Actions.Add(() => Menu.Start());
@@ -45,7 +45,7 @@ public static class Admin
         Actions.Add(() => Movies.ChangeMoviesMenu());
 
         Options.Add("Change Tileslots");
-        //Actions.Add(() => TimeSlots.ChangeTimeSlotsMenu());
+        Actions.Add(() => TimeSlots.WhatMovieTimeSlot(isEdited: true));
 
         Options.Add("Change Categories");
         Actions.Add(() => Category.Start());
@@ -54,7 +54,7 @@ public static class Admin
         Actions.Add(() => Reservation.EditReservation(true));
 
         Options.Add("Change TimeSlots");
-        Actions.Add(() => TimeSlots.WhatMovieEditTimeSlot());
+        Actions.Add(() => TimeSlots.WhatMovieTimeSlot(isEdited: true));
 
         Options.Add("\nReturn");
         Actions.Add(() => Menu.Start());

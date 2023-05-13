@@ -57,7 +57,7 @@ static class Menu
             Actions.Add(() => Admin.Start());
 
             Options.Add("Change data");
-            Actions.Add(() => Admin.Start());
+            Actions.Add(() => Admin.ChangeData());
 
             Options.Add("Change user data");
             Actions.Add(() => User.SelectUser());

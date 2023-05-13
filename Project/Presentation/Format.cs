@@ -133,6 +133,14 @@ The total price for the extra requirements will be: {formatDt?.Item} x {Seats.Co
 
         Console.Clear();
 
+        if (movie.Formats.Count <= 1)
+        {
+            Console.WriteLine("There are no formats to add or remove");
+            tsm.Format = "standard";
+            QuestionLogic.AskEnter();
+            return;
+        }
+
         string Qeustion = "What format would you like to add / remove?\nNote that only 1 format can be added at a time";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();

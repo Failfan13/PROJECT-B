@@ -6,8 +6,8 @@ public class TheatreModel : ICloneable
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
-    [JsonPropertyName("description")]
-    public string Description { get; set; } = "";
+    [JsonPropertyName("copyRoomId")]
+    public int CopyRoomId { get; set; } = -1;
 
     [JsonPropertyName("layoutSpecs")]
     public SeatBuilderHelper LayoutSpecs { get; set; } = new SeatBuilderHelper();

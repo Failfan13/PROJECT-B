@@ -54,6 +54,8 @@ public static class Theatre
 
     public static int WhatTheatre(bool IsEdited = false)
     {
+        TheatreLogic TL = new TheatreLogic();
+
         int selectedRoom = -1;
 
         string Question = "What theatre room would you like to add?";
@@ -65,7 +67,7 @@ public static class Theatre
 
         foreach (var item in TL.AllTheatres())
         {
-            Options.Add($"Room: {item.Id} - Width: {item.Width}, Height: {item.Height} {item.Description}");
+            Options.Add($"Room: {item.Id} - Width: {item.Width}, Height: {item.Height}{(item.CopyRoomId != -1 ? $" - Copy Room: {item.CopyRoomId}" : "")}");
 
             if (IsEdited) Actions.Add(() => EditMenu(item, () => Menu.Start()));
             else Actions.Add(() => selectedRoom = item.Id);

@@ -710,6 +710,8 @@ Press [ ");
         newTheatre = (TheatreModel)oldTheatre.DeepClone();
 
         newTheatre.Id = GetNewestId();
+        newTheatre.CopyRoomId = oldTheatre.Id;
+
         _theatres.Add(newTheatre);
         return newTheatre.Id;
     }

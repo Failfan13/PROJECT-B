@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
+using System.Text.Json;
 
-public class TheatreModel
+public class TheatreModel : ICloneable
 {
     [JsonPropertyName("id")]
     public int Id { get; set; }
@@ -49,5 +50,15 @@ public class TheatreModel
 
         [JsonPropertyName("handicapSeats")]
         public List<int> HandiSeatIndexes { get; set; } = new List<int>() { };
+    }
+
+    public object Clone()
+    {
+        return this.MemberwiseClone();
+    }
+
+    public object DeepClone()
+    {
+        return JsonSerializer.Deserialize<TheatreModel>(JsonSerializer.Serialize(this, this.GetType()))!;
     }
 }

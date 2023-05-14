@@ -268,20 +268,14 @@ public static class Reservation
         TotalPriceModel TotalRess = ReservationLogic.GetTotalRess(ress);
         AccountsLogic AccountsLogic = new();
 
-        EmailLogic EmailLogic = new EmailLogic();
-
-        string subject = "Order summary";
-        string body = "";
-        string email = "";
-
         double FinalPrice = 0.00;
-
         int promoId = Promo.Start();
+        string DiscountCode = "";
         int theatreId = TimeSlotsLogic.GetById(ress.TimeSlotId)!.Theatre.TheatreId;
 
         if (promoId != -1)
         {
-            string DiscountCode = PromoLogic.GetById(promoId)!.Code;
+            DiscountCode = PromoLogic.GetById(promoId)!.Code;
             TotalRess = ReservationLogic.ApplyDiscount(DiscountCode, TotalRess);
 
             ress.DiscountCode = DiscountCode;
@@ -305,7 +299,7 @@ public static class Reservation
         }
 
         // Snack data
-        if (ress.Snacks != null)
+        if (ress.Snacks != null && ress.Snacks.Count > 0)
         {
             Console.WriteLine("\nSnacks:");
 
@@ -340,9 +334,63 @@ public static class Reservation
         FinalPrice += TotalRess.FinalPrice;
         Console.Write("\nThe total cost of your order will be:");
         Console.Write($"€ " + FinalPrice + (FinalPrice.ToString().Contains(".") ? "" : ",-"));
-        body += $"€" + FinalPrice + (FinalPrice.ToString().Contains(".") ? "" : ",-") + "\n";
         Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {ress.Id}\n");
-        body += $"\nIMPORTANT\nYour order number is: {ress.Id}";
+
+        // Send email
+        EmailLogic EmailLogic = new EmailLogic();
+
+        string subject = "Confirmation order Cinema";
+        string body = "";
+        string email = "";
+
+        body += @$"Thank you for your order!
+Below you will find your order details
+
+Order details:
+
+Movie: {TotalRess.Movie.Title}
+
+Movie time: {TimeSlotsLogic.GetById(ress.TimeSlotId)!.Start}
+
+Seats: 
+";
+
+        foreach (var seat in TotalRess.Seats)
+        {
+            body += $"{TheatreLogic.SeatNumber(TheatreLogic.GetById(theatreId)!.Width, (int)seat[0])} \n";
+        }
+
+        if (ress.Snacks != null && ress.Snacks.Count > 0)
+        {
+            body += $"\nSnacks:\n";
+            foreach (var snack in TotalRess.Snacks)
+            {
+                body += $"{snack.Value}x{snack.Key.Name} \n";
+            }
+        }
+
+        if (FormatsLogic.GetByFormat(ress.Format) != null)
+        {
+            FormatDetails formatDt = FormatsLogic.GetByFormat(ress.Format)!;
+
+            string required = formatDt.Item!;
+            double requiredPrice = formatDt.Price;
+
+            body += @$"The ordered movie plays in {ress.Format} format therefore there is an extra fee";
+
+            if (required != "")
+            {
+                body += $"\nRequirements:";
+                body += $"\n{required}x{ress.Seats.Count} \tPrice: €{requiredPrice * ress.Seats.Count}";
+            }
+        }
+
+        body += @$"
+The total cost of your order is: €{FinalPrice.ToString() + (FinalPrice.ToString().Contains(".") ? "" : ",-")}
+
+IMPORTANT
+Your order number is: {ress.Id}
+";
 
         if (AccountId != -1)
         {
@@ -353,15 +401,6 @@ public static class Reservation
             email = UserLogin.AskEmail();
         }
 
-
-        if (AccountId != -1)
-        {
-            email = AccountsLogic.GetById(AccountId)!.EmailAddress;
-        }
-        else
-        {
-            email = UserLogin.AskEmail();
-        }
         EmailLogic.SendEmail(email, subject, body);
 
         UserLogin.SignUpMails(email);

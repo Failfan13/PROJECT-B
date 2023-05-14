@@ -83,7 +83,7 @@
     "movieid": 0,
     "start": "2023-12-12T22:22:00",
     "theatre": {
-      "id": 3,
+      "id": 1,
       "reservedSeats": []
     },
     "format": ""
@@ -93,7 +93,7 @@
     "movieid": 0,
     "start": "2022-12-12T22:22:00",
     "theatre": {
-      "id": 3,
+      "id": 1,
       "reservedSeats": []
     },
     "format": "standard"
@@ -113,7 +113,7 @@
     "movieid": 0,
     "start": "2010-10-10T10:20:00",
     "theatre": {
-      "id": 3,
+      "id": 1,
       "reservedSeats": []
     },
     "format": "standard"

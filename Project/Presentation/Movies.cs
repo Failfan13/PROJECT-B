@@ -85,7 +85,7 @@ static class Movies
     public static void ChangeMoviesMenu()
     {
         Console.Clear();
-        List<MovieModel> movies = MoviesLogic.AllMovies();
+        List<MovieModel> movies = MoviesLogic.AllMovies(true);
         string Question = "What movie would you like to change?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();

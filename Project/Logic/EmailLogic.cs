@@ -82,7 +82,7 @@ public class EmailLogic
         MoviesLogic ML = new MoviesLogic();
 
         // Every movie more then 0 follower
-        foreach (MovieModel movie in ML.AllMovies().Where(m => m.Followers.Count > 0))
+        foreach (MovieModel movie in ML.AllMovies(true).Where(m => m.Followers.Count > 0))
         {
             // send notice when date reached and date within 7 days
             if (movie.ReleaseDate.Date >= DateTime.Now.AddDays(-7) &&

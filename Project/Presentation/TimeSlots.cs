@@ -116,6 +116,11 @@ static class TimeSlots
     {
         var movies = new MoviesLogic().AllMovies();
 
+        if (isEdited)
+        {
+            movies = new MoviesLogic().AllMovies(true);
+        }
+
         string Question = "which movie would you like to change the timeslots for?";
         List<string> Movies = new List<string>();
         List<Action> Actions = new List<Action>();

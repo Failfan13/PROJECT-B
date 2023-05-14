@@ -163,7 +163,7 @@ Message: {review.Review}
         List<string> options = new List<string>();
         List<Action> actions = new List<Action>();
 
-        foreach (MovieModel movie in ML.AllMovies())
+        foreach (MovieModel movie in ML.AllMovies(true))
         {
             options.Add(movie.Title);
             actions.Add(() => ShowAvailableReviews(reviews.FindAll(r => r.MovieId == movie.Id)));

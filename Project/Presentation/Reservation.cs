@@ -125,7 +125,6 @@ public static class Reservation
     }
 
     public static void FilterMenu(List<MovieModel> filteredList = null, bool IsEdited = false)
-    //  public static void NoFilterMenu(bool IsEdited = false)
     {
 
         var movies = new MoviesLogic().AllMovies();

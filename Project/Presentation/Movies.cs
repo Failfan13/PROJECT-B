@@ -314,5 +314,43 @@ static class Movies
         RL.UpdateMovieReviews(ML.AllMovies());
         ML.UpdateList(Movie);
     }
+
+    public static void UpAndComingReleases()
+    {
+        MoviesLogic ML = new MoviesLogic();
+
+        Console.Clear();
+
+        string Question = "What would you like to do?";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
+
+        foreach (MovieModel movie in ML.UnreleasedMovies())
+        {
+            // Movie title
+            if (AccountsLogic.CurrentAccount == null) Options.Add($"Title: {movie.Title}");
+            else Options.Add($"Title: {movie.Title}");
+            Actions.Add(() => ML.GetMovieDetails(movie, () => UpAndComingReleases()));
+
+            // Follow or unfollow
+            if (AccountsLogic.CurrentAccount != null && !movie.Followers.Any(f => f == AccountsLogic.CurrentAccount.Id))
+            {
+                Options.Add($"~Follow");
+                Actions.Add(() => ML.FollowMovie(movie));
+            }
+            else if (movie.Followers.Any(f => f == AccountsLogic.CurrentAccount.Id))
+            {
+                Options.Add($"~Unfollow");
+                Actions.Add(() => ML.UnfollowMovie(movie));
+            }
+        }
+
+        Options.Add("Return");
+        Actions.Add(() => Menu.Start());
+
+        MenuLogic.Question(Question, Options, Actions);
+
+        Menu.Start();
+    }
 }
 

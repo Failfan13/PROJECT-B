@@ -2,14 +2,15 @@ using System.IO;
 
 static class LocationAccess
 {
-    public static void Writer(string data, string path)
+    private static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/locations.csv"));
+    public static void Writer(string data)
     {
-    // Overwrite the file with the new data
-    File.WriteAllText(path, data);
+        // Overwrite the file with the new data
+        File.WriteAllText(path, data);
     }
-    
 
-    public static List<string> ReadDataList(string path)
+
+    public static List<string> ReadDataList()
     {
         List<string> lines = new List<string>();
 

@@ -1,7 +1,5 @@
 public static class LocationsLogic
 {
-    private static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/locations.csv"));
-
     public static void NewLocation()
     {
         string location = "";
@@ -16,20 +14,20 @@ public static class LocationsLogic
 
         string newdata = $"Location: {location}, description: {description}, phonenumber: {number}, email: {email} ";
 
-        List<string> data = LocationAccess.ReadDataList(path); // Read the data into a List<string>
+        List<string> data = LocationAccess.ReadDataList(); // Read the data into a List<string>
 
         data.Add(newdata);
 
         string newDataString = string.Join("\n", data); // Join the data list using newline character
 
-        LocationAccess.Writer(newDataString, path); // Write the data to the CSV file
+        LocationAccess.Writer(newDataString); // Write the data to the CSV file
     }
 
     public static void RemoveLocation()
     {
         Console.Clear();
         List<string> data = new List<string>();
-        data = LocationAccess.ReadDataList(path);
+        data = LocationAccess.ReadDataList();
 
         // selection menu
         if (data.Count > 0)
@@ -41,11 +39,11 @@ public static class LocationsLogic
             foreach (string location in data)
             {
                 Options.Add($"{location}");
-                Actions.Add(() => LocationsLogic.Delete(data,location));
+                Actions.Add(() => LocationsLogic.Delete(data, location));
             }
-                Options.Add($"Return");
-                Actions.Add(() => Admin.ChangeData());
-        
+            Options.Add($"Return");
+            Actions.Add(() => Admin.ChangeData());
+
             // lists all users and returns there id;
             MenuLogic.Question(Question, Options, Actions);
         }
@@ -61,8 +59,8 @@ public static class LocationsLogic
         Console.Clear();
         data.Remove(location);
 
-        string newDataString = string.Join("\n", data); 
-        LocationAccess.Writer(newDataString, path); 
+        string newDataString = string.Join("\n", data);
+        LocationAccess.Writer(newDataString);
         Console.WriteLine("Location has been deleted");
         Console.ReadKey();
     }

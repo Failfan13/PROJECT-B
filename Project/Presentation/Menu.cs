@@ -45,6 +45,8 @@ static class Menu
         // Contact
         if (AccountsLogic.CurrentAccount == null || !AccountsLogic.CurrentAccount.Admin)
         {
+            Options.Add("Movie Releases");
+            Actions.Add(() => Movies.UpAndComingReleases());
             Options.Add("\nContact");
             Actions.Add(() => Contact.start());
         }

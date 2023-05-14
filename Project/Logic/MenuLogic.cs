@@ -27,7 +27,15 @@ public static class MenuLogic
                     Console.BackgroundColor = ConsoleColor.White;
                 }
 
-                Console.WriteLine(options[i]);
+                // SHOW OPTIONS  //  if option contains '~' print options after
+                // -- if next option doesnt contain '~' print
+                if (i + 1 < options.Count && options[i].Contains('~') && !options[i + 1].Contains('~'))
+                    Console.WriteLine(" - " + options[i].ToString().Trim('~'));
+                // -- if next option contains '~' print
+                else if (i + 1 < options.Count && options[i + 1].Contains('~'))
+                    Console.Write(options[i].ToString().Trim('~'));
+                // -- normally
+                else Console.WriteLine(options[i]);
 
                 Console.ResetColor();
             }
@@ -46,21 +54,22 @@ public static class MenuLogic
             {
                 Menu.Start();
             }
-            else if (key.Key == ConsoleKey.UpArrow)
+
+            // Key press directions
+            switch (key.Key)
             {
-                selectedOption--;
-                if (selectedOption < 0)
-                {
-                    selectedOption = options.Count - 1;
-                }
-            }
-            else if (key.Key == ConsoleKey.DownArrow)
-            {
-                selectedOption++;
-                if (selectedOption >= options.Count)
-                {
-                    selectedOption = 0;
-                }
+                case ConsoleKey.UpArrow:
+                    selectedOption = findNextOption(options, selectedOption, "up");
+                    break;
+                case ConsoleKey.DownArrow:
+                    selectedOption = findNextOption(options, selectedOption, "down");
+                    break;
+                case ConsoleKey.LeftArrow:
+                    selectedOption = findNextOption(options, selectedOption, "left");
+                    break;
+                case ConsoleKey.RightArrow:
+                    selectedOption = findNextOption(options, selectedOption, "right");
+                    break;
             }
         } while (key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.X);
 
@@ -78,6 +87,86 @@ public static class MenuLogic
         return selectedOption;
     }
 
+    private static int findNextOption(List<string> options, int currentOption, string towards)
+    {
+        int newOptionIndex = 0;
+        bool up = false;
+        bool down = false;
+        bool right = false;
+        bool left = false;
+
+        switch (towards)
+        {
+            case "up":
+                up = true;
+                break;
+            case "down":
+                down = true;
+                break;
+            case "left":
+                left = true;
+                break;
+            case "right":
+                right = true;
+                break;
+        }
+
+        // Add next index
+        if (up || left) newOptionIndex = currentOption -= 1;
+        else newOptionIndex = currentOption += 1;
+
+        // Check if index in range && set to begin or end depending
+        int nextNotNull = MoveInOptions(options, newOptionIndex);
+        if (nextNotNull != newOptionIndex) return nextNotNull;
+
+        // Directional ~ check
+        // LEFT
+        if (left && options[newOptionIndex].Contains('~') && options[currentOption].Contains('~'))
+        {
+            return newOptionIndex;
+        }
+        // RIGHT
+        else if (right && options[newOptionIndex].Contains('~') && options[currentOption].Contains('~'))
+        {
+            return newOptionIndex;
+        }
+        // UP
+        else if (up && options[newOptionIndex].Contains('~'))
+        {
+            while (true)
+            {
+                newOptionIndex--;
+                newOptionIndex = MoveInOptions(options, newOptionIndex);
+
+                if (!options[newOptionIndex].Contains('~')) break;
+            }
+        }
+        // DOWN
+        else if (down && options[newOptionIndex].Contains('~'))
+        {
+            while (true)
+            {
+                newOptionIndex++;
+                newOptionIndex = MoveInOptions(options, newOptionIndex);
+
+                if (!options[newOptionIndex].Contains('~')) break;
+            }
+        }
+        return newOptionIndex;
+    }
+
+    private static int MoveInOptions(List<string> options, int currentOption)
+    {
+        if (currentOption >= options.Count)
+        {
+            return 0;
+        }
+        else if (currentOption < 0)
+        {
+            return options.Count - 1;
+        }
+        return currentOption;
+    }
     public static void ClearLastLines(int linesToClear, bool threadDelay = false)
     {
         try
@@ -85,7 +174,7 @@ public static class MenuLogic
             if (threadDelay) Thread.Sleep(3000);
 
             linesToClear += 1; // adds new input to clear
-            // current cursor position
+                               // current cursor position
             int currentLine = Console.CursorTop + 1; // sets top one line lower for input
 
             Console.SetCursorPosition(0, currentLine - linesToClear);

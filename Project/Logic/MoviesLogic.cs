@@ -230,6 +230,8 @@ public class MoviesLogic : Order<MovieModel>
 
     public void GetMovieDetails(MovieModel movie, Action returnTo)
     {
+        Console.Clear();
+
         movie.Info();
 
         QuestionLogic.AskEnter();
@@ -239,10 +241,12 @@ public class MoviesLogic : Order<MovieModel>
     public void FollowMovie(MovieModel movie)
     {
         movie.Followers.Add(AccountsLogic.CurrentAccount!.Id);
+        UpdateList(movie);
     }
 
     public void UnfollowMovie(MovieModel movie)
     {
         movie.Followers.Remove(AccountsLogic.CurrentAccount!.Id);
+        UpdateList(movie);
     }
 }

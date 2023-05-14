@@ -338,7 +338,7 @@ static class Movies
                 Options.Add($"~Follow");
                 Actions.Add(() => ML.FollowMovie(movie));
             }
-            else if (movie.Followers.Any(f => f == AccountsLogic.CurrentAccount.Id))
+            else if (movie.Followers.Any(f => f == AccountsLogic.CurrentAccount!.Id))
             {
                 Options.Add($"~Unfollow");
                 Actions.Add(() => ML.UnfollowMovie(movie));
@@ -350,7 +350,7 @@ static class Movies
 
         MenuLogic.Question(Question, Options, Actions);
 
-        Menu.Start();
+        UpAndComingReleases();
     }
 }
 

@@ -21,8 +21,14 @@ public static class MenuLogic
 
             for (int i = 0; i < options.Count; i++)
             {
+                Action recolorSelection = () => Console.Write("");
+
                 if (i == selectedOption)
                 {
+                    recolorSelection = () => Parallel.Invoke(
+                        () => Console.ForegroundColor = ConsoleColor.Black,
+                        () => Console.BackgroundColor = ConsoleColor.White
+                    );
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.BackgroundColor = ConsoleColor.White;
                 }
@@ -30,7 +36,12 @@ public static class MenuLogic
                 // SHOW OPTIONS  //  if option contains '~' print options after
                 // -- if next option doesnt contain '~' print
                 if (i + 1 < options.Count && options[i].Contains('~') && !options[i + 1].Contains('~'))
-                    Console.WriteLine(" - " + options[i].ToString().Trim('~'));
+                {
+                    Console.ResetColor();
+                    Console.Write(" - ");
+                    recolorSelection();
+                    Console.WriteLine(options[i].ToString().Trim('~'));
+                }
                 // -- if next option contains '~' print
                 else if (i + 1 < options.Count && options[i + 1].Contains('~'))
                     Console.Write(options[i].ToString().Trim('~'));

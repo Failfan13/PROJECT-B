@@ -71,4 +71,59 @@ public class EmailLogic
         else if (email.Contains("@") && email.Contains(".")) return true;
         return false;
     }
+
+    public void CheckReleasedMovie()
+    {
+        MoviesLogic ML = new MoviesLogic();
+
+        foreach (MovieModel movie in ML.AllMovies())
+        {
+            if (movie.ReleaseDate < DateTime.Now)
+            {
+                return;
+            }
+            else
+            {
+                NotifyFollowers(movie);
+            }
+        }
+    }
+
+    private void NotifyFollowers(MovieModel movie)
+    {
+        AccountsLogic AccountsLogic = new AccountsLogic();
+        AccountModel account = null!;
+        Tuple<string, string> message = null!;
+
+        foreach (int AccountId in movie.Followers)
+        {
+            try
+            {
+                account = AccountsLogic.GetById(AccountId)!;
+                message = NewMovieMessage(movie, account);
+
+                SendEmail(account.EmailAddress, message.Item1, message.Item2);
+            }
+            catch (System.Exception)
+            {
+                continue;
+            }
+        }
+    }
+
+    public Tuple<string, string> NewMovieMessage(MovieModel movie, AccountModel account)
+    {
+        string subject = $"The movie {movie.Title} has been released";
+        string body = @$"Hey {account.FullName.Split(' ').First()},
+
+We saw you were interested in the movie {movie.Title}, and we thought you might be pleased
+to know that the movie has been released on {movie.ReleaseDate}.
+
+You are now able to order the tickets for this movie.
+
+Regards,
+Project-B Team-E";
+
+        return new Tuple<string, string>(subject, body);
+    }
 }

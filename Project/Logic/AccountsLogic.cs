@@ -175,16 +175,9 @@ public class AccountsLogic
             "Delete complaint","Modify complaint"
         };
         List<Action> Actions = new List<Action>();
-        if (complaintIndex == -1)
-        {
-            Actions.Add(() => DeleteComplaint(account));
-            Actions.Add(() => ModifyComplaint(account));
-        }
-        else
-        {
-            Actions.Add(() => DeleteComplaint(account, complaintIndex));
-            Actions.Add(() => ModifyComplaint(account, complaintIndex));
-        }
+
+        Actions.Add(() => DeleteComplaint(account, complaintIndex));
+        Actions.Add(() => ModifyComplaint(account, complaintIndex));
 
 
         Options.Add("Return");
@@ -193,7 +186,7 @@ public class AccountsLogic
     }
 
     // Deletes complaint
-    public static void DeleteComplaint(AccountModel account, int ComplaintIndex = -1)
+    public static void DeleteComplaint(AccountModel account, int ComplaintIndex)
     {
         AccountsLogic AL = new AccountsLogic();
 
@@ -217,6 +210,8 @@ public class AccountsLogic
             account.Complaints.RemoveAt(ComplaintIndex);
             AL.UpdateList(account);
         }
+
+        Contact.ViewAllComplaints(account);
     }
 
     // Modify complaint
@@ -241,7 +236,8 @@ public class AccountsLogic
         else // edit complaint
         {
             Console.Clear();
-            account.Complaints[ComplaintIndex] = ModifyComplaint(account.Complaints[ComplaintIndex]);
+            string newComplaint = ModifyComplaint(account.Complaints[ComplaintIndex]);
+            account.Complaints[ComplaintIndex] = account.Complaints[ComplaintIndex].Split(':').First() + ":" + newComplaint;
             AL.UpdateList(account);
         }
     }

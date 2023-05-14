@@ -135,6 +135,8 @@ public static class Contact
     {
         AccountsLogic AL = new AccountsLogic();
 
+        Console.Clear();
+
         if (account == null)
         {
             foreach (var acc in AL.GetAllAccounts().Where(a => a.Complaints.Count > 0))
@@ -155,10 +157,10 @@ public static class Contact
             List<string> Options = new List<string>();
             List<Action> Actions = new List<Action>();
 
-            for (int i = 0; i < account.Complaints.Count; i++)
+            foreach (var complaint in account.Complaints)
             {
-                Options.Add(account.Complaints[i].ToString());
-                Actions.Add(() => AccountsLogic.EditComplaint(account, i));
+                Options.Add(complaint.ToString());
+                Actions.Add(() => AccountsLogic.EditComplaint(account, account.Complaints.IndexOf(complaint)));
             }
 
             Options.Add("Return");

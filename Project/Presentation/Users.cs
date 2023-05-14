@@ -36,7 +36,7 @@ public static class User
         Options.Add("Delete user");
         Actions.Add(() => DeleteUser(account));
 
-        Options.Add("ViewCompaints");
+        Options.Add("View Compaints");
         Actions.Add(() => Contact.ViewComplaints(account));
 
         Options.Add("\nReturn");

@@ -129,7 +129,17 @@ public static class Contact
         }
     }
 
-    public static void ViewComplaints(AccountModel account) => ViewAllComplaints(account);
+    public static void ViewComplaints(AccountModel account)
+    {
+        if (account.Complaints.Count == 0)
+        {
+            Console.Clear();
+            Console.WriteLine("There are no complaints");
+            QuestionLogic.AskEnter();
+        }
+
+        ViewAllComplaints(account);
+    }
 
     public static void ViewAllComplaints(AccountModel account = null!)
     {

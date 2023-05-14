@@ -775,7 +775,10 @@
           "reserved": false,
           "handicapped": true,
           "luxury": false
+<<<<<<< HEAD
 >>>>>>> e1b3c74 (klachten indienen)
+=======
+>>>>>>> 2102162e91a53d7a1cc5f239908ac626c7f5a0a0
         }
       ]
     },

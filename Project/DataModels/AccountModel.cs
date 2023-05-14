@@ -22,6 +22,9 @@ public class AccountModel
     [JsonPropertyName("complaints")]
     public List<string> Complaints { get; set; }
 
+    [JsonPropertyName("complaints")]
+    public List<string> Complaints { get; set; }
+
     public AccountModel(int id, string emailAddress, string password, string fullName)
     {
         Id = id;

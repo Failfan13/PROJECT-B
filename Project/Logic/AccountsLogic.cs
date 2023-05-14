@@ -201,7 +201,6 @@ public class AccountsLogic
                 account = accounts;
             }
         }
-
         // if account was found print all complaints else could not be found
         if (account != null)
         {
@@ -251,7 +250,6 @@ public class AccountsLogic
         Actions.Add(() => Modify(account, index));
 
         Actions.Add(() => AdminSelectionComplaints());
-
         MenuLogic.Question(Question, Options, Actions);
     }
 

@@ -249,4 +249,15 @@ public class MoviesLogic : Order<MovieModel>
         movie.Followers.Remove(AccountsLogic.CurrentAccount!.Id);
         UpdateList(movie);
     }
+
+    public void RemoveFollower(MovieModel movie, int AccountId)
+    {
+        movie.Followers.Remove(AccountId);
+        UpdateList(movie);
+    }
+
+    public void ChangeAds(MovieModel movie)
+    {
+        movie.Ads = !movie.Ads;
+    }
 }

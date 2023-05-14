@@ -4,6 +4,11 @@ using MailKit;
 using MimeKit;
 public class EmailLogic
 {
+    public EmailLogic()
+    {
+        CheckReleasedMovie();
+    }
+
     public void SendAllEmail(string subject, string body) => this.SendEmail("", subject, body);
     public void SendEmail(string to, string subject, string body)
     {
@@ -76,13 +81,12 @@ public class EmailLogic
     {
         MoviesLogic ML = new MoviesLogic();
 
-        foreach (MovieModel movie in ML.AllMovies())
+        // Every movie more then 0 follower
+        foreach (MovieModel movie in ML.AllMovies().Where(m => m.Followers.Count > 0))
         {
-            if (movie.ReleaseDate < DateTime.Now)
-            {
-                return;
-            }
-            else
+            // send notice when date reached and date within 7 days
+            if (movie.ReleaseDate.Date >= DateTime.Now.AddDays(-7) &&
+            movie.ReleaseDate.Date < DateTime.Now)
             {
                 NotifyFollowers(movie);
             }
@@ -91,6 +95,7 @@ public class EmailLogic
 
     private void NotifyFollowers(MovieModel movie)
     {
+        MoviesLogic ML = new MoviesLogic();
         AccountsLogic AccountsLogic = new AccountsLogic();
         AccountModel account = null!;
         Tuple<string, string> message = null!;
@@ -108,6 +113,7 @@ public class EmailLogic
             {
                 continue;
             }
+            ML.RemoveFollower(movie, AccountId);
         }
     }
 

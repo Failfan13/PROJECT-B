@@ -45,6 +45,9 @@ public class MovieModel
     [JsonPropertyName("reviews")]
     public ReviewHelper Reviews { get; set; }
 
+    [JsonPropertyName("ads")]
+    public bool Ads { get; set; } = false;
+
     [JsonConstructor]
     public MovieModel(int id, string title, DateTime releaseDate, string director, string description,
         int duration, double price, List<CategoryModel> categories, List<string> formats)

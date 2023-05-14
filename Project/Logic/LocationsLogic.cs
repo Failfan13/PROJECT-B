@@ -1,45 +1,56 @@
 public static class LocationsLogic
 {
+    private static List<LocationModel> _locations;
+
+    static LocationsLogic()
+    {
+        _locations = LocationsAccess.ReadDataList();
+    }
+
+    public static List<LocationModel> AllLocations()
+    {
+        return _locations;
+    }
+
+    public static void UpdateLocations()
+    {
+        _locations.Sort();
+
+        LocationsAccess.Writer(_locations);
+    }
+
     public static void NewLocation()
     {
         string location = "";
         string description = "";
-        string number = "";
-        string email = "";
+        string gmapsLink = "";
 
         location = QuestionLogic.AskString("Please enter the location");
         description = QuestionLogic.AskString("Please enter the cinema description");
-        number = QuestionLogic.AskString("Please enter the cinema phone number");
-        email = QuestionLogic.AskString("Please enter the cinema email address");
+        gmapsLink = QuestionLogic.AskString("Please enter the google maps link");
 
-        string newdata = $"Location: {location}, description: {description}, phonenumber: {number}, email: {email} ";
+        LocationModel newLocation = new LocationModel(location, description, gmapsLink);
 
-        List<string> data = LocationAccess.ReadDataList(); // Read the data into a List<string>
+        _locations.Add(newLocation);
 
-        data.Add(newdata);
-
-        string newDataString = string.Join("\n", data); // Join the data list using newline character
-
-        LocationAccess.Writer(newDataString); // Write the data to the CSV file
+        UpdateLocations();
     }
 
     public static void RemoveLocation()
     {
         Console.Clear();
-        List<string> data = new List<string>();
-        data = LocationAccess.ReadDataList();
 
         // selection menu
-        if (data.Count > 0)
+        if (AllLocations().Count > 0)
         {
             string Question = "Which location would you like to delete?\n";
             List<string> Options = new List<string>();
             List<Action> Actions = new List<Action>();
 
-            foreach (string location in data)
+            foreach (LocationModel location in AllLocations())
             {
-                Options.Add($"{location}");
-                Actions.Add(() => LocationsLogic.Delete(data, location));
+                Options.Add($"{location.Name}");
+                Actions.Add(() => LocationsLogic.Remove(location));
             }
             Options.Add($"Return");
             Actions.Add(() => Admin.ChangeData());
@@ -50,18 +61,18 @@ public static class LocationsLogic
         else
         {
             Console.WriteLine("There are no Locations to delete");
-            Console.ReadKey();
+            QuestionLogic.AskEnter();
         }
     }
 
-    public static void Delete(List<string> data, string location)
+    public static void Remove(LocationModel location)
     {
         Console.Clear();
-        data.Remove(location);
 
-        string newDataString = string.Join("\n", data);
-        LocationAccess.Writer(newDataString);
+        _locations.Remove(location);
+
         Console.WriteLine("Location has been deleted");
-        Console.ReadKey();
+        UpdateLocations();
+        QuestionLogic.AskEnter();
     }
 }

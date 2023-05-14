@@ -1,29 +1,40 @@
-using System.IO;
+using CsvHelper;
+using System.Globalization;
 
-static class LocationAccess
+static class LocationsAccess
 {
     private static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/locations.csv"));
-    public static void Writer(string data)
+
+    private static void FileExistance()
     {
-        // Overwrite the file with the new data
-        File.WriteAllText(path, data);
+        if (!File.Exists(path))
+        {
+            File.Create(path);
+        }
+    }
+
+    public static void Writer(List<LocationModel> data)
+    {
+        FileExistance();
+        using (var writer = new StreamWriter(path))
+        {
+            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+                csv.WriteRecords(data);
+            }
+        }
     }
 
 
-    public static List<string> ReadDataList()
+    public static List<LocationModel> ReadDataList()
     {
-        List<string> lines = new List<string>();
-
-        // Read the data from the CSV file
-        using (StreamReader reader = new StreamReader(path))
+        FileExistance();
+        using (var reader = new StreamReader(path))
         {
-            string line;
-            while ((line = reader.ReadLine()) != null)
+            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
-                lines.Add(line);
-            }
+                return csv.GetRecords<LocationModel>().ToList();
+            };
         }
-
-        return lines;
     }
 }

@@ -48,6 +48,11 @@ static class Menu
             Options.Add("\nContact");
             Actions.Add(() => Contact.start());
         }
+        else
+        {
+            Options.Add("\nContact");
+            Actions.Add(() => Contact.start());
+        }
 
         // Admin data
         if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)

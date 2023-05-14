@@ -1,8 +1,6 @@
 [
   {
     "id": 1,
-<<<<<<< HEAD
-<<<<<<< HEAD
     "emailAddress": "n@b.c",
     "password": "xyz",
     "fullName": "Nikola Tesla",
@@ -35,29 +33,16 @@
   },
   {
     "id": 5,
-=======
->>>>>>> e1b3c74 (klachten indienen)
-=======
->>>>>>> 2102162e91a53d7a1cc5f239908ac626c7f5a0a0
     "emailAddress": "1",
     "password": "1",
     "fullName": "1",
     "admin": false,
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "adMails": false
-=======
-=======
->>>>>>> 2102162e91a53d7a1cc5f239908ac626c7f5a0a0
+    "adMails": false,
     "complaints": [
       "er was alleen maar pepsi en iedereen vindt coca cola lekker!!!",
       "Slechte bioscoop en de medewerkers zijn gemeen!!",
       "Hebben geen eens kitkat wouw"
     ]
-<<<<<<< HEAD
->>>>>>> e1b3c74 (klachten indienen)
-=======
->>>>>>> 2102162e91a53d7a1cc5f239908ac626c7f5a0a0
   },
   {
     "id": 2,
@@ -65,12 +50,7 @@
     "password": "2",
     "fullName": "2",
     "admin": true,
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "adMails": false
-=======
-=======
->>>>>>> 2102162e91a53d7a1cc5f239908ac626c7f5a0a0
+    "adMails": false,
     "complaints": [
       "stom"
     ]
@@ -104,9 +84,5 @@
     "complaints": [
       "Kon beter"
     ]
-<<<<<<< HEAD
->>>>>>> e1b3c74 (klachten indienen)
-=======
->>>>>>> 2102162e91a53d7a1cc5f239908ac626c7f5a0a0
   }
 ]

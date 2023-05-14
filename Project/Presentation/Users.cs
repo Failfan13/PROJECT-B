@@ -1,7 +1,7 @@
 public static class User
 {
     static private AccountsLogic accounts = new AccountsLogic();
-    
+
 
     public static void SelectUser()
     {
@@ -12,24 +12,32 @@ public static class User
         foreach (AccountModel acc in allAccounts)
         {
             Options.Add(acc.FullName);
-            Actions.Add(() => info(acc.Id));
+            Actions.Add(() => Info(acc));
         }
 
         MenuLogic.Question(Question, Options, Actions);
-    } 
-
-    public static void info(int userID)
+    }
+    public static void Info(int userID)
     {
-        AccountModel account = accounts.GetById(userID);
+        AccountModel account = accounts.GetById(userID)!;
+        if (account != null) Info(account);
+    }
+
+    public static void Info(AccountModel account)
+    {
+        Console.Clear();
         string Question = $"user Info: \n-------------------------- \nID: {account.Id}\nName: {account.FullName} \nEmail: {account.EmailAddress} \nAdmin: {account.Admin}\n--------------------------\nWhat would you like to do?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
         Options.Add("Edit user");
-        Actions.Add(() => EditUser(userID));
+        Actions.Add(() => EditUser(account));
 
         Options.Add("Delete user");
         Actions.Add(() => DeleteUser(account));
+
+        Options.Add("ViewCompaints");
+        Actions.Add(() => Contact.ViewComplaints(account));
 
         Options.Add("\nReturn");
         Actions.Add(() => SelectUser());
@@ -38,9 +46,8 @@ public static class User
     }
 
 
-    public static void EditUser(int userID){
-
-        AccountModel account = accounts.GetById(userID);
+    public static void EditUser(AccountModel account)
+    {
         string Question = "What would you like to do?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
@@ -50,12 +57,12 @@ public static class User
 
         Options.Add("Change Email");
         Actions.Add(() => ChangeEmail(account));
-        
+
         Options.Add("Change password");
         Actions.Add(() => ChangePass(account));
 
         Options.Add("\nReturn");
-        Actions.Add(() => info(userID));
+        Actions.Add(() => Info(account));
 
         MenuLogic.Question(Question, Options, Actions);
     }
@@ -66,7 +73,7 @@ public static class User
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        account.FullName = QuestionLogic.AskString(Question);        
+        account.FullName = QuestionLogic.AskString(Question);
         AccountsLogic aa = new AccountsLogic();
         aa.UpdateList(account);
     }
@@ -90,23 +97,24 @@ public static class User
             {
                 Console.WriteLine("Passwords do not match");
             }
-        }        
+        }
         AccountsLogic aa = new AccountsLogic();
         aa.UpdateList(account);
     }
-    
+
     public static void ChangeEmail(AccountModel account)
     {
         string Question = "What is the new email?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        account.EmailAddress = QuestionLogic.AskString(Question);        
+        account.EmailAddress = QuestionLogic.AskString(Question);
         AccountsLogic aa = new AccountsLogic();
         aa.UpdateList(account);
     }
 
-    public static void DeleteUser(AccountModel account){
+    public static void DeleteUser(AccountModel account)
+    {
         string Question = "Are you sure you want to delete this user?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
@@ -121,7 +129,7 @@ public static class User
         }
         else
         {
-            info(account.Id);
+            Info(account);
         }
         MenuLogic.Question(Question, Options, Actions);
     }

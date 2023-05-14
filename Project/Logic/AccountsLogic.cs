@@ -139,6 +139,7 @@ public class AccountsLogic
         if (account.Complaints.Count < 10)
         {
             account.Complaints.Add(complaintMsg);
+            UpdateList(account);
         }
         else
         {

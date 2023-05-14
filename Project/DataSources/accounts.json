@@ -5,7 +5,8 @@
     "password": "xyz",
     "fullName": "Nikola Tesla",
     "admin": false,
-    "adMails": false
+    "adMails": false,
+    "complaints": []
   },
   {
     "id": 2,
@@ -13,7 +14,8 @@
     "password": "xyz",
     "fullName": "Thomas Edison",
     "admin": false,
-    "adMails": true
+    "adMails": true,
+    "complaints": []
   },
   {
     "id": 3,
@@ -21,7 +23,8 @@
     "password": "123",
     "fullName": "max",
     "admin": true,
-    "adMails": false
+    "adMails": false,
+    "complaints": []
   },
   {
     "id": 4,
@@ -29,7 +32,8 @@
     "password": "123",
     "fullName": "Max Geurtsen",
     "admin": true,
-    "adMails": true
+    "adMails": true,
+    "complaints": []
   },
   {
     "id": 5,
@@ -39,9 +43,16 @@
     "admin": false,
     "adMails": false,
     "complaints": [
-      "er was alleen maar pepsi en iedereen vindt coca cola lekker!!!",
-      "Slechte bioscoop en de medewerkers zijn gemeen!!",
-      "Hebben geen eens kitkat wouw"
+      "User: Complaint against user or seat number: {place}",
+      "Employee: An employee smoked the zaza",
+      "other: Cinema is fk stupid bruh",
+      "User: There was a user doing the griddy",
+      "User: Complaint in room: 4 Seat: ",
+      "User: Complaint in room: 6 Seat: A6",
+      "other: s",
+      "other: s",
+      "other: s",
+      "Employee: sss"
     ]
   },
   {
@@ -61,6 +72,7 @@
     "password": "3",
     "fullName": "3",
     "admin": false,
+    "adMails": false,
     "complaints": [
       "popcorn was vies"
     ]
@@ -71,6 +83,7 @@
     "password": "4",
     "fullName": "4",
     "admin": false,
+    "adMails": false,
     "complaints": [
       "Kom hier nooit meer, m\u0026ms 10 euro per zak"
     ]
@@ -81,6 +94,7 @@
     "password": "5",
     "fullName": "5",
     "admin": false,
+    "adMails": false,
     "complaints": [
       "Kon beter"
     ]

@@ -50,7 +50,7 @@ public static class Contact
         List<Action> Actions = new List<Action>();
         Actions.Add(() => AddComplaint("User"));
         Actions.Add(() => AddComplaint("Employee"));
-        Actions.Add(() => AddComplaint("other"));
+        Actions.Add(() => AddComplaint("Other"));
 
         Options.Add("Return");
         Actions.Add(() => Start());
@@ -64,34 +64,42 @@ public static class Contact
     {
         bool ongoingMovie = false;
 
-        string Question = "Are you currently watching a movie?";
-        List<string> Options = new List<string>()
+        if (type == "User")
         {
+            string Question = "Are you currently watching a movie?";
+            List<string> Options = new List<string>()
+            {
             "Yes","No"
-        };
-        List<Action> Actions = new List<Action>();
-        Actions.Add(() => ongoingMovie = true);
-        Actions.Add(() => ongoingMovie = false);
+            };
+            List<Action> Actions = new List<Action>();
+            Actions.Add(() => ongoingMovie = true);
+            Actions.Add(() => ongoingMovie = false);
 
-        Options.Add("Return");
-        Actions.Add(() => ComplaintMenu());
+            Options.Add("Return");
+            Actions.Add(() => ComplaintMenu());
 
-        MenuLogic.Question(Question, Options, Actions);
-
+            MenuLogic.Question(Question, Options, Actions);
+        }
 
         if (ongoingMovie) // movie is ongoing
         {
             Console.Clear();
-            Console.WriteLine("PLease enter the room number and if applicalbe the corresponding row number.\n");
+            Console.WriteLine("Please enter the room number");
             string place = Console.ReadLine()!;
+
+            Console.WriteLine("if applicable the corresponding row number");
+            string seat = Console.ReadLine()!;
 
             Console.Clear();
             Console.WriteLine("An employee is on their way!");
             QuestionLogic.AskEnter();
 
-            place = $"Complaint against user on row or specified seat: {place}";
+            place = type + $": Complaint in room: {place} Seat: {seat}";
 
-            AL.AddComplaint(type, place);
+            if (AccountsLogic.CurrentAccount != null)
+            {
+                AL.AddComplaint(type, place);
+            }
             Start();
         }
         else if (!ongoingMovie) // movie is not ongoing
@@ -100,29 +108,25 @@ public static class Contact
 
             if (AccountsLogic.CurrentAccount == null)
             {
-                Console.WriteLine("To use this feature, you must be logged in.\n");
+                Console.WriteLine("To use this feature, you must be logged in.");
                 QuestionLogic.AskEnter();
                 Menu.Start();
             }
             else
             {
-                Console.WriteLine("Please enter your complaint:\n");
+                Console.WriteLine("Please enter your complaint:");
                 string complaint = Console.ReadLine()!;
+
+                complaint = type + $": {complaint}";
 
                 AL.AddComplaint(type, complaint);
 
-                Console.WriteLine("Your complaint has been sent. We will get back to you as soon as possible\nPress any key to return");
+                Console.Clear();
+                Console.WriteLine("Your complaint has been sent. We will get back to you as soon as possible");
                 QuestionLogic.AskEnter();
                 Start();
             }
         }
-    }
-
-    public static void emergencycall()
-    {
-        Console.Clear();
-        Console.WriteLine("The emergency services are getting called");
-        Console.ReadKey();
     }
 
     public static void ViewComplaints(AccountModel account) => ViewAllComplaints(account);
@@ -142,6 +146,8 @@ public static class Contact
                 }
                 Console.WriteLine("\n");
             }
+
+            QuestionLogic.AskEnter();
         }
         else
         {
@@ -166,15 +172,28 @@ public static class Contact
     {
         // creating a selection menu for contact
         Console.Clear();
-        string Question = "Is there an emergency?";
+        string Question = "Is there an emergency?/n/nDeclaring emergency without cause is punishable";
         List<string> Options = new List<string>()
         {
             "Yes","No"
         };
         List<Action> Actions = new List<Action>();
-        Actions.Add(() => Contact.emergencycall());
+        Actions.Add(() => Contact.EmergencyCall());
         Actions.Add(() => Start());
 
         MenuLogic.Question(Question, Options, Actions);
+
+        Menu.Start();
     }
+
+    public static void EmergencyCall()
+    {
+        Console.Clear();
+        Console.WriteLine("Enter the room number");
+        string roomNumber = Console.ReadLine()!;
+
+        Console.Write("Emergency services have been called towards room: " + roomNumber);
+        Console.WriteLine("\nPlease locate towards the emergency exit and await peramedic arrival");
+    }
+
 }

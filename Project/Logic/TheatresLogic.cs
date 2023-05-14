@@ -123,6 +123,10 @@ public class TheatreLogic
         var row = (Math.Floor((double)(seatNum / width)));
         if (seatNum % width == 0) row -= 1;
 
+        if (seat == 0)
+        {
+            return $"{width}{letters[(int)row]}";
+        }
         return $"{seat}{letters[(int)row]}";
     }
 

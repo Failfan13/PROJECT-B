@@ -253,7 +253,7 @@ public class ReservationLogic
 
         for (int i = 0; i < Ress.Seats.Count(); i++)
         {
-            double seatPrice = TL2.PriceOfSeatType(Ress.Seats[i].SeatType, theatreId);
+            double seatPrice = TL2.PriceOfSeatType(Ress.Seats[i].Type, theatreId);
             finalPrice += seatPrice;
             seats[i] = new double[] { Ress.Seats[i].Id, seatPrice };
         }

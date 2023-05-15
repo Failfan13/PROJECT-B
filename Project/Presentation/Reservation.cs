@@ -147,14 +147,14 @@ public static class Reservation
         {
 
             //checks if the movie category is 18+ and if the user is not an adult so adult movies are not shown to underaged users
-            DateTime dateOfBirth = DateTime.ParseExact( AccountsLogic.CurrentAccount.DateOfBirth, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+            DateTime dateOfBirth = DateTime.ParseExact(AccountsLogic.CurrentAccount.DateOfBirth, "dd-MM-yyyy", CultureInfo.InvariantCulture);
             int age = DateTime.Today.Year - dateOfBirth.Year;
-            if(movie.Categories.Any(i => i.Name == "18+" && age < 18 ))
-                {
-                    continue;
-                }
+            if (movie.Categories.Any(i => i.Name == "18+" && age < 18))
+            {
+                continue;
+            }
             Movies.Add(movie.Title);
-            Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));            
+            Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));
         }
         Movies.Add("Return");
         Actions.Add(() => Menu.Start());
@@ -204,7 +204,7 @@ public static class Reservation
             Console.Write($"{TheatreLogic.SeatNumber(TheatreLogic.GetById(theatreId)!.Width, (int)TotalRess.Seats[i][0])}");
 
             SeatModel currSeat = ress.Seats.Find(seat => seat.Id == (int)TotalRess.Seats[i][0])!;
-            Console.Write($"\tType: {currSeat!.SeatType}");
+            Console.Write($"\tType: {currSeat!.Type}");
             Console.WriteLine($"\tPrice: €{TotalRess.Seats[i][1]}");
         }
 

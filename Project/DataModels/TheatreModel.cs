@@ -12,14 +12,8 @@ public class TheatreModel : ICloneable
     [JsonPropertyName("layoutSpecs")]
     public SeatBuilderHelper LayoutSpecs { get; set; } = new SeatBuilderHelper();
 
-    [JsonPropertyName("baseSeatPrice")]
-    public double BasicSeatPrice { get; set; }
-
-    [JsonPropertyName("stanSeatPrice")]
-    public double StandardSeatPrice { get; set; }
-
-    [JsonPropertyName("luxeSeatPrice")]
-    public double LuxurySeatPrice { get; set; }
+    [JsonPropertyName("seatPrices")]
+    public SeatPriceHelper SeatPrices { get; set; }
 
     [JsonPropertyName("roomWidth")]
     public int Width { get; set; }
@@ -33,9 +27,10 @@ public class TheatreModel : ICloneable
     public TheatreModel(int id, double SeatPrice, int width, int height)
     {
         Id = id;
-        BasicSeatPrice = SeatPrice;
-        StandardSeatPrice = SeatPrice * 1.5;
-        LuxurySeatPrice = SeatPrice * 2;
+        SeatPrices = new SeatPriceHelper();
+        SeatPrices.Basic = SeatPrice;
+        SeatPrices.Standard = SeatPrice * 1.5;
+        SeatPrices.Luxury = SeatPrice * 2;
         Width = width;
         Height = height;
     }
@@ -50,6 +45,18 @@ public class TheatreModel : ICloneable
 
         [JsonPropertyName("handicapSeats")]
         public List<int> HandiSeatIndexes { get; set; } = new List<int>() { };
+    }
+
+    public class SeatPriceHelper
+    {
+        [JsonPropertyName("baseSeatPrice")]
+        public double Basic { get; set; }
+
+        [JsonPropertyName("stanSeatPrice")]
+        public double Standard { get; set; }
+
+        [JsonPropertyName("luxeSeatPrice")]
+        public double Luxury { get; set; }
     }
 
     public object Clone()

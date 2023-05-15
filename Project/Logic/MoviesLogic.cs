@@ -67,7 +67,7 @@ public class MoviesLogic : Order<MovieModel>
             movies = _movies;
         }
 
-        return movies.Where(i => tsl.GetByMovieId(i.Id).Any(t => t.Theatre.Seats.Min(s => TL.PriceOfSeatType(s.SeatType, t.Theatre.TheatreId)) + i.Price <= price)).ToList();
+        return movies.Where(i => tsl.GetByMovieId(i.Id).Any(t => t.Theatre.Seats.Min(s => TL.PriceOfSeatType(s.Type, t.Theatre.TheatreId)) + i.Price <= price)).ToList();
     }
 
     public List<MovieModel> GetByTimeSlots(DateTime date, List<MovieModel> movies = null)

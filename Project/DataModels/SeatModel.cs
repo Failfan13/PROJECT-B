@@ -5,14 +5,14 @@ public class SeatModel
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
-    [JsonPropertyName("seatType")]
-    public string SeatType { get; set; }
+    [JsonPropertyName("Type")]
+    public string Type { get; set; }
 
     [JsonConstructor]
-    public SeatModel(int id, string seatType = "basic")
+    public SeatModel(int id, string Type = "basic")
     {
         Id = id;
-        SeatType = checkSeatType(seatType);
+        Type = checkSeatType(Type);
     }
 
     public string checkSeatType(string seatType)

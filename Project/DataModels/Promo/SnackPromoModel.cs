@@ -6,13 +6,13 @@ public class SnackPromoModel : PricePromoModel
     [JsonPropertyName("snackId")]
     public int SnackId { get; set; }
 
-    [JsonPropertyName("snack")]
-    public string Snack { get; set; }
+    [JsonPropertyName("snackName")]
+    public string SnackName { get; set; }
 
-    public SnackPromoModel(int snackId, string snack, double discount, bool flat = true)
+    public SnackPromoModel(int snackId, string snackName, double discount, bool flat = true)
         : base(discount, flat)
     {
         SnackId = snackId;
-        Snack = snack;
+        SnackName = snackName;
     }
 }

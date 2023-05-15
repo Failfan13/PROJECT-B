@@ -97,11 +97,11 @@ public class TheatreLogic
 
         if (midSeatPrice != 0)
         {
-            theatre.StandardSeatPrice = midSeatPrice;
+            theatre.SeatPrices.Standard = midSeatPrice;
         }
         if (innSeatPrice != 0)
         {
-            theatre.LuxurySeatPrice = innSeatPrice;
+            theatre.SeatPrices.Luxury = innSeatPrice;
         }
 
         AddTheatre(theatre);
@@ -694,11 +694,11 @@ Press [ ");
             switch (type)
             {
                 case "standard":
-                    return theatre.StandardSeatPrice;
+                    return theatre.SeatPrices.Standard;
                 case "luxury":
-                    return theatre.LuxurySeatPrice;
+                    return theatre.SeatPrices.Luxury;
                 default:
-                    return theatre.BasicSeatPrice;
+                    return theatre.SeatPrices.Standard;
             }
         }
         return 0;

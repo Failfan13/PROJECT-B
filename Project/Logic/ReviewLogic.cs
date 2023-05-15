@@ -58,8 +58,8 @@ public class ReviewLogic
         {
             double reviewStars = Math.Round(reviews.Average(r => r.Rating), 2);
 
-            movie.Reviews.Amount = reviews.Count;
-            movie.Reviews.Stars = reviewStars;
+            movie.Reviews.ReviewAmount = reviews.Count;
+            movie.Reviews.ReviewStars = reviewStars;
         }
         catch (System.Exception) { }
 

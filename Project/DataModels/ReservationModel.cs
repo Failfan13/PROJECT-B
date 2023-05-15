@@ -6,7 +6,10 @@ public class ReservationModel
     [JsonPropertyName("id")]
     public int Id { get; set; }
 
-    [JsonPropertyName("timeslot_id")]
+    [JsonPropertyName("accountId")]
+    public int? AccountId { get; set; }
+
+    [JsonPropertyName("timeslotId")]
     public int TimeSlotId { get; set; }
 
     [JsonPropertyName("seats")]
@@ -15,10 +18,7 @@ public class ReservationModel
     [JsonPropertyName("snacks")]
     public Dictionary<int, int>? Snacks { get; set; }
 
-    [JsonPropertyName("account_id")]
-    public int? AccountId { get; set; }
-
-    [JsonPropertyName("date_time")]
+    [JsonPropertyName("dateTime")]
     public DateTime DateTime { get; set; }
 
     [JsonPropertyName("format")]

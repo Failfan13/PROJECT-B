@@ -9,7 +9,7 @@ public class MovieModel
     [JsonPropertyName("title")]
     public string Title { get; set; }
 
-    [JsonPropertyName("release_date")]
+    [JsonPropertyName("releaseDate")]
     public DateTime ReleaseDate { get; set; }
 
     [JsonPropertyName("director")]
@@ -67,17 +67,17 @@ public class MovieModel
 
     public class ReviewHelper
     {
-        [JsonPropertyName("amount")]
-        public int Amount { get; set; }
+        [JsonPropertyName("reviewAmount")]
+        public int ReviewAmount { get; set; }
 
-        [JsonPropertyName("stars")]
-        public double Stars { get; set; }
+        [JsonPropertyName("reviewStars")]
+        public double ReviewStars { get; set; }
 
         [JsonConstructor]
         public ReviewHelper() // default constructor
         {
-            Amount = 0;
-            Stars = 0;
+            ReviewAmount = 0;
+            ReviewStars = 0;
         }
     }
 

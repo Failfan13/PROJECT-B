@@ -209,7 +209,7 @@ public static class Reservation
             Console.Write($"{TheatreLogic.SeatNumber(TheatreLogic.GetById(theatreId)!.Width, (int)TotalRess.Seats[i][0])}");
 
             SeatModel currSeat = ress.Seats.Find(seat => seat.Id == (int)TotalRess.Seats[i][0])!;
-            Console.Write($"\tType: {currSeat!.SeatType}");
+            Console.Write($"\tType: {currSeat!.Type}");
             Console.WriteLine($"\tPrice: €{TotalRess.Seats[i][1]}");
         }
 

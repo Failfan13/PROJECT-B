@@ -6,6 +6,7 @@ public class SeatPromoModel : PricePromoModel
 
     [JsonPropertyName("seatType")]
     public string SeatType { get; set; }
+
     [JsonPropertyName("seatAmount")]
     public string SeatAmount { get; set; }
 

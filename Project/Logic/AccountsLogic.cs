@@ -84,10 +84,10 @@ public class AccountsLogic
         Logger.SystemLog("Logged out");
     }
 
-    public void NewAccount(string email, string name, string password)
+    public void NewAccount(string email, string name, string password, string date)
     {
         int NewID = GetNewestId();
-        AccountModel account = new AccountModel(NewID, email, password, name);
+        AccountModel account = new AccountModel(NewID, email, password, name, date);
         UpdateList(account);
     }
 

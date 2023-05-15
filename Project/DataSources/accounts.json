@@ -4,47 +4,59 @@
     "emailAddress": "n@b.c",
     "password": "xyz",
     "fullName": "Nikola Tesla",
+    "dateofbirth": null,
     "admin": false,
-    "adMails": false
+    "adMails": false,
+    "adult": false
   },
   {
     "id": 2,
     "emailAddress": "t@b.c",
     "password": "xyz",
     "fullName": "Thomas Edison",
+    "dateofbirth": null,
     "admin": false,
-    "adMails": true
+    "adMails": true,
+    "adult": false
   },
   {
     "id": 3,
     "emailAddress": "max@cris",
     "password": "123",
     "fullName": "max",
+    "dateofbirth": null,
     "admin": true,
-    "adMails": false
+    "adMails": false,
+    "adult": false
   },
   {
     "id": 4,
     "emailAddress": "max@cris.nl",
     "password": "123",
     "fullName": "Max Geurtsen",
+    "dateofbirth": null,
     "admin": true,
-    "adMails": true
+    "adMails": true,
+    "adult": false
   },
   {
     "id": 5,
     "emailAddress": "1",
     "password": "1",
     "fullName": "1",
+    "dateofbirth": null,
     "admin": false,
-    "adMails": false
+    "adMails": false,
+    "adult": false
   },
   {
     "id": 6,
     "emailAddress": "2",
     "password": "2",
     "fullName": "2",
+    "dateofbirth": null,
     "admin": true,
-    "adMails": false
+    "adMails": false,
+    "adult": true
   }
 ]

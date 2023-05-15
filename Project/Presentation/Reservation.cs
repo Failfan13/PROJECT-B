@@ -1,3 +1,4 @@
+using System.Globalization;
 public static class Reservation
 {
 
@@ -144,8 +145,16 @@ public static class Reservation
 
         foreach (MovieModel movie in movies)
         {
+
+            //checks if the movie category is 18+ and if the user is not an adult so adult movies are not shown to underaged users
+            DateTime dateOfBirth = DateTime.ParseExact( AccountsLogic.CurrentAccount.DateOfBirth, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+            int age = DateTime.Today.Year - dateOfBirth.Year;
+            if(movie.Categories.Any(i => i.Name == "18+" && age < 18 ))
+                {
+                    continue;
+                }
             Movies.Add(movie.Title);
-            Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));
+            Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));            
         }
         Movies.Add("Return");
         Actions.Add(() => Menu.Start());

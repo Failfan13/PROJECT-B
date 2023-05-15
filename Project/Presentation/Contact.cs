@@ -4,10 +4,13 @@ public static class Contact
     {
         Console.Clear();
         Console.WriteLine("CONTACT INFO HERE\n");
-        Console.WriteLine("Press any key to return to the menu");
-        Console.ReadLine();
 
-        LocationsLogic.ViewAllLocations();
+        Console.WriteLine("Test bericht, wil je alle locaties zien? (y/n)");
+
+        if (Console.ReadKey().Key == ConsoleKey.Y)
+        {
+            LocationsLogic.ViewAllLocations();
+        }
 
         Menu.Start();
     }

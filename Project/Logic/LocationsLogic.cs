@@ -27,7 +27,7 @@ public static class LocationsLogic
         string gmapsUrl = "";
 
         location = QuestionLogic.AskString("Enter the location name");
-        address = QuestionLogic.AskString("Enter the address");
+        address = QuestionLogic.AskString("Enter the address").Replace(',', ' ');
         description = QuestionLogic.AskString("Paste the cinema description");
         gmapsUrl = QuestionLogic.AskString("Paste the google maps link");
 
@@ -111,7 +111,12 @@ public static class LocationsLogic
         Actions.Add(() => ViewMapLocation(location));
         Actions.Add(() => ViewLocationDetails(location));
 
+        Options.Add("Return");
+        Actions.Add(() => Contact.Start());
+
         MenuLogic.Question(Question, Options, Actions);
+
+        Contact.Start();
     }
 
     private static void ViewMapLocation(LocationModel location)

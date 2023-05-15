@@ -4,8 +4,10 @@
     "emailAddress": "n@b.c",
     "password": "xyz",
     "fullName": "Nikola Tesla",
+    "dateofbirth": null,
     "admin": false,
     "adMails": false,
+    "adult": false,
     "complaints": []
   },
   {
@@ -13,8 +15,10 @@
     "emailAddress": "t@b.c",
     "password": "xyz",
     "fullName": "Thomas Edison",
+    "dateofbirth": null,
     "admin": false,
     "adMails": true,
+    "adult": false,
     "complaints": []
   },
   {
@@ -22,8 +26,10 @@
     "emailAddress": "max@cris",
     "password": "123",
     "fullName": "max",
+    "dateofbirth": null,
     "admin": true,
     "adMails": false,
+    "adult": false,
     "complaints": []
   },
   {
@@ -31,8 +37,10 @@
     "emailAddress": "max@cris.nl",
     "password": "123",
     "fullName": "Max Geurtsen",
+    "dateofbirth": null,
     "admin": true,
     "adMails": true,
+    "adult": false,
     "complaints": []
   },
   {
@@ -40,63 +48,21 @@
     "emailAddress": "1",
     "password": "1",
     "fullName": "1",
+    "dateofbirth": null,
     "admin": false,
     "adMails": false,
-    "complaints": [
-      "User: Complaint against user or seat number: {place}",
-      "Employee: An employee smoked the zaza",
-      "other: Cinema is fk stupid bruh",
-      "User: There was a user doing the griddy",
-      "User: Complaint in room: 4 Seat: ",
-      "User: Complaint in room: 6 Seat: A6",
-      "other: s",
-      "other: s",
-      "other: s",
-      "Employee: sss"
-    ]
+    "adult": false,
+    "complaints": []
   },
   {
     "id": 2,
     "emailAddress": "2",
     "password": "2",
     "fullName": "2",
+    "dateofbirth": null,
     "admin": true,
     "adMails": false,
-    "complaints": [
-      "stom"
-    ]
-  },
-  {
-    "id": 3,
-    "emailAddress": "3",
-    "password": "3",
-    "fullName": "3",
-    "admin": false,
-    "adMails": false,
-    "complaints": [
-      "popcorn was vies"
-    ]
-  },
-  {
-    "id": 4,
-    "emailAddress": "4",
-    "password": "4",
-    "fullName": "4",
-    "admin": false,
-    "adMails": false,
-    "complaints": [
-      "Kom hier nooit meer, m\u0026ms 10 euro per zak"
-    ]
-  },
-  {
-    "id": 5,
-    "emailAddress": "5",
-    "password": "5",
-    "fullName": "5",
-    "admin": false,
-    "adMails": false,
-    "complaints": [
-      "Kon beter"
-    ]
+    "adult": false,
+    "complaints": []
   }
 ]

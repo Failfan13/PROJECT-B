@@ -1,3 +1,4 @@
+using System.Globalization;
 static class UserLogin
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
@@ -15,8 +16,7 @@ static class UserLogin
 
         if (AccountsLogic.CurrentAccount != null)
         {
-            Question = @$"Currently logged in as: {AccountsLogic.CurrentAccount!.FullName} 
-with the e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}\n";
+            Question = @$"Currently logged in as: {AccountsLogic.CurrentAccount!.FullName} e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}";
         }
 
         Question += "What would you like to do?";
@@ -50,9 +50,11 @@ with the e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}\n";
         EmailLogic EmailLogic = new EmailLogic();
         bool CorrectName = false;
         bool CorrectPass = false;
+        bool CorrectDate = false;
         string pass = "";
         string Email = "";
         string Name = "";
+        string Date = "";
 
         string subject = "";
         string body = "";
@@ -76,6 +78,28 @@ with the e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}\n";
         }
 
         Console.Clear();
+        while (!CorrectDate)
+        {
+            Console.WriteLine("Please enter your date of birth (dd-mm-yyyy):");
+            string input = Console.ReadLine();
+            DateTime dateOfBirth;
+            bool isValidDate = DateTime.TryParseExact(input, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateOfBirth);
+
+            if (isValidDate)
+            {
+                Console.WriteLine("Valid date: " + dateOfBirth.ToShortDateString());
+                Date = dateOfBirth.ToShortDateString();
+                CorrectDate = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid date");
+            }
+
+        }
+
+        Console.Clear();
+
         while (!CorrectPass)
         {
             Console.WriteLine("Please enter your password:");
@@ -106,7 +130,7 @@ Thank you.";
 
         EmailLogic.SendEmail(Email, subject, body);
 
-        accountsLogic.NewAccount(Email, Name, pass);
+        accountsLogic.NewAccount(Email, Name, pass, Date);
     }
 
     public static void Login()

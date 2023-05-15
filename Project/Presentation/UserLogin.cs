@@ -9,8 +9,7 @@ static class UserLogin
 
         if (AccountsLogic.CurrentAccount != null)
         {
-            Question = @$"Currently logged in as: {AccountsLogic.CurrentAccount!.FullName} 
-with the e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}\n";
+            Question = @$"Currently logged in as: {AccountsLogic.CurrentAccount!.FullName} e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}";
         }
 
         Question += "What would you like to do?";

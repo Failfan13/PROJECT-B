@@ -46,7 +46,7 @@ static class Menu
         if (AccountsLogic.CurrentAccount == null || !AccountsLogic.CurrentAccount.Admin)
         {
             Options.Add("\nContact");
-            Actions.Add(() => Contact.start());
+            Actions.Add(() => Contact.Start());
         }
 
         // Admin data

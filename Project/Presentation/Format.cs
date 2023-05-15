@@ -126,4 +126,102 @@ The total price for the extra requirements will be: {formatDt?.Item} x {Seats.Co
 
         ChangeFormats(formatModel);
     }
+
+    public static void ViewFormatMenu(MovieModel movie, TimeSlotModel tsm)
+    {
+        bool finishFormat = false;
+
+        Console.Clear();
+
+        if (movie.Formats.Count <= 1)
+        {
+            Console.WriteLine("There are no formats to add or remove");
+            tsm.Format = "standard";
+            QuestionLogic.AskEnter();
+            return;
+        }
+
+        string Qeustion = "What format would you like to add / remove?\nNote that only 1 format can be added at a time";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
+
+        if (!FormatsLogic._swapFormats)
+        {
+            Options.Add("Swap Mode, Currently: Adding viewformat");
+        }
+        else
+        {
+            Options.Add("Swap Mode, Currently: Removing viewformat");
+        }
+        Actions.Add(() => FormatsLogic.SwapMode());
+
+        if (!FormatsLogic._swapFormats)
+        {
+            foreach (var form in movie.Formats.Where(f => f != "standard"))
+            {
+                Options.Add(form);
+                Actions.Add(() => FormatsLogic.AddFormatToTimeslot(movie, tsm, form));
+            }
+        }
+        else
+        {
+            if (tsm.Format != "standard")
+            {
+                Options.Add(tsm.Format);
+                Actions.Add(() => FormatsLogic.RemoveFormatFromTimeslot(movie, tsm, tsm.Format));
+            }
+        }
+
+        Options.Add("\nFinish");
+        Actions.Add(() => finishFormat = true);
+
+        MenuLogic.Question(Qeustion, Options, Actions);
+
+        if (!finishFormat) ViewFormatMenu(movie, tsm);
+    }
+
+    public static void ViewFormatMenu(MovieModel movie)
+    {
+        bool finishFormat = false;
+
+        Console.Clear();
+
+        string Qeustion = "What would you like to do?";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
+
+        if (!FormatsLogic._swapFormats)
+        {
+            Options.Add("Swap Mode, Currently: Adding viewformat");
+        }
+        else
+        {
+            Options.Add("Swap Mode, Currently: Removing viewformat");
+        }
+        Actions.Add(() => FormatsLogic.SwapMode());
+
+        if (!FormatsLogic._swapFormats)
+        {
+            foreach (var form in FormatsLogic.AllFormats().Where(c => !movie.Formats.Contains(c)))
+            {
+                Options.Add(form);
+                Actions.Add(() => FormatsLogic.AddFormatToMovie(movie, form));
+            }
+        }
+        else
+        {
+            foreach (var form in movie.Formats.Where(f => f == "standard"))
+            {
+                Options.Add(form);
+                Actions.Add(() => FormatsLogic.RemoveFormatFromMovie(movie, form));
+            }
+        }
+
+        Options.Add("\nFinish");
+        Actions.Add(() => finishFormat = true);
+
+        MenuLogic.Question(Qeustion, Options, Actions);
+
+        if (!finishFormat) ViewFormatMenu(movie);
+    }
 }

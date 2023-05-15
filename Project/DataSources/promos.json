@@ -1,0 +1,46 @@
+[
+  {
+    "id": 2,
+    "code": "TEST20",
+    "active": true,
+    "Condition": null
+  },
+  {
+    "id": 3,
+    "code": "TEST22",
+    "active": false,
+    "Condition": null
+  },
+  {
+    "id": 4,
+    "code": "SUSSY",
+    "active": true,
+    "Condition": {
+      "movieDict": [
+        {
+          "movieId": 2,
+          "title": "jaws",
+          "specific": true,
+          "discount": 3,
+          "flat": false
+        }
+      ],
+      "snackDict": [
+        {
+          "snackId": 0,
+          "snack": "Coca Cola",
+          "discount": 30,
+          "flat": true
+        }
+      ],
+      "seatDict": [
+        {
+          "seatType": "normal",
+          "seatAmount": "2",
+          "discount": 3,
+          "flat": false
+        }
+      ]
+    }
+  }
+]

@@ -2,6 +2,33 @@ public static class Admin
 {
     public static void Start()
     {
+        string Question = "Make a choice from the menu\n";
+        List<string> Options = new List<string>() { };
+        List<Action> Actions = new List<Action>();
+
+        Options.Add("Add new Movie");
+        Actions.Add(() => Movies.AddNewMovie());
+
+        Options.Add("Add new TimeSlot");
+        Actions.Add(() => TimeSlots.WhatMovieTimeSlot());
+
+        Options.Add("Add new Theatre");
+        Actions.Add(() => Theatre.MakeNewTheatre());
+
+        Options.Add("Add new Categories");
+        Actions.Add(() => Category.NewCatMenu());
+
+        Options.Add("Add new Reservation for user");
+        Actions.Add(() => Reservation.FilterMenu());
+
+        Options.Add("\nReturn");
+        Actions.Add(() => Menu.Start());
+
+        MenuLogic.Question(Question, Options, Actions);
+    }
+
+    public static void ChangeData()
+    {
         if (AccountsLogic.CurrentAccount == null || AccountsLogic.CurrentAccount.Admin == false)
         {
             Menu.Start();
@@ -17,8 +44,8 @@ public static class Admin
         Options.Add("Change Movies");
         Actions.Add(() => Movies.ChangeMoviesMenu());
 
-        // Options.Add("Change Tileslots");
-        // Actions.Add(() => TimeSlots.ChangeTimeSlotsMenu());
+        Options.Add("Change Tileslots");
+        Actions.Add(() => TimeSlots.WhatMovieTimeSlot(isEdited: true));
 
         Options.Add("Change Categories");
         Actions.Add(() => Category.Start());
@@ -26,30 +53,18 @@ public static class Admin
         Options.Add("Change Reservations");
         Actions.Add(() => Reservation.EditReservation(true));
 
+        Options.Add("Change TimeSlots");
+        Actions.Add(() => TimeSlots.WhatMovieTimeSlot(isEdited: true));
+
+        Options.Add("Add Cinema Location");
+        Actions.Add(() => LocationsLogic.NewLocation());
+
+        Options.Add("Remove Cinema Location");
+        Actions.Add(() => LocationsLogic.RemoveLocation());
+
         Options.Add("\nReturn");
         Actions.Add(() => Menu.Start());
 
         MenuLogic.Question(Question, Options, Actions);
     }
-
-    // public static void View()
-    // {
-    //     if (AccountsLogic.CurrentAccount == null || AccountsLogic.CurrentAccount.Admin == false)
-    //     {
-    //         Menu.Start();
-    //     }
-
-    //     string Question = "What would you like to do?";
-    //     List<string> Options = new List<string>();
-    //     List<Action> Actions = new List<Action>();
-
-    //     Options.Add("View users");
-    //     Actions.Add(() => User.SelectUser());
-
-
-    //     MenuLogic.Question(Question, Options, Actions);
-
-    // }
-
-
 }

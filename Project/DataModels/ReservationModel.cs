@@ -7,7 +7,7 @@ public class ReservationModel
     public int Id { get; set; }
 
     [JsonPropertyName("timeslot_id")]
-    public int TimeSLotId { get; set; }
+    public int TimeSlotId { get; set; }
 
     [JsonPropertyName("seats")]
     public List<SeatModel> Seats { get; set; }
@@ -24,10 +24,13 @@ public class ReservationModel
     [JsonPropertyName("format")]
     public string Format { get; set; }
 
+    [JsonPropertyName("discountCode")]
+    public string DiscountCode { get; set; } = "";
+
     public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime, string format)
     {
         Id = id;
-        TimeSLotId = timeSlotId;
+        TimeSlotId = timeSlotId;
         AccountId = accountId;
         DateTime = dateTime;
         Seats = seats;
@@ -49,6 +52,22 @@ public class ReservationModel
 
 }
 
+public class TotalPriceModel
+{
+    public MovieModel Movie { get; set; }
+    public int TheatreId { get; set; }
+    public double[][] Seats { get; set; }
+    public Dictionary<SnackModel, int> Snacks { get; set; }
+    public double FinalPrice { get; set; }
+
+    public TotalPriceModel(MovieModel movie, int theatreId, double[][] seats, Dictionary<SnackModel, int> snacks)
+    {
+        Movie = movie;
+        TheatreId = theatreId;
+        Seats = seats;
+        Snacks = snacks;
+    }
+}
 
 
 

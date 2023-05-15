@@ -14,28 +14,33 @@ static class Movies
 
     public static void AddNewMovie()
     {
-        bool CorrectDate = true;
+        DateTime releaseDate = new DateTime();
+        CategoryLogic categoryLogic = new CategoryLogic();
 
-        int Duration = 0;
-        string Title = "";
-        string Director = "";
-        string Description = "";
-        DateTime ReleaseDate = new DateTime();
-        double Price = 0;
-        List<CategoryModel> Categories = new List<CategoryModel> { };
-        List<string> Formats = new List<string> { };
+        List<string> formats = new List<string>();
+        List<CategoryModel> categories = new List<CategoryModel>();
+
+        string title = "";
+        bool correctDate = false;
+        int duration = 0;
+        string director = "";
+        string description = "";
+        double price = 0;
 
         Console.Clear();
-        Title = QuestionLogic.AskString("What is the title of the movie?");
 
+        // sets title
+        title = QuestionLogic.AskString("What is the title of the movie?");
+
+        // sets release date
         Console.Clear();
-        while (CorrectDate)
+        while (!correctDate)
         {
             Console.WriteLine("What is the release date of the movie? (dd/mm/yyyy): ");
             try
             {
-                ReleaseDate = Convert.ToDateTime(Console.ReadLine());
-                CorrectDate = false;
+                releaseDate = Convert.ToDateTime(Console.ReadLine());
+                correctDate = true;
             }
             catch (System.Exception)
             {
@@ -43,40 +48,16 @@ static class Movies
             }
         }
 
-        Description = QuestionLogic.AskString("What is the description of the movie? ");
-        Director = QuestionLogic.AskString("Who is the director of the movie?: ");
-        Duration = (int)QuestionLogic.AskNumber("What is the duration? (minutes)");
-        Price = (int)QuestionLogic.AskNumber("How expensive is the movie?: ");
+        description = QuestionLogic.AskString("What is the description of the movie? ");
+        director = QuestionLogic.AskString("Who is the director of the movie?: ");
+        duration = (int)QuestionLogic.AskNumber("What is the duration? (minutes)");
+        price = (int)QuestionLogic.AskNumber("How expensive is the movie?: ");
 
-        bool nomorecategories = false;
-        do
-        {
-            int anothercat = (int)QuestionLogic.AskNumber("Add another category?");
-            if (anothercat == 1)
-            {
-                List<CategoryModel> cats = CategoryLogic.AllCategories();
-                Console.Clear();
-                foreach (CategoryModel c in cats)
-                {
-                    Console.WriteLine($"{c.Id} {c.Name}");
-                }
-                int categorytoadd = (int)QuestionLogic.AskNumber("What category do you want to add");
-                CategoryModel category = CategoryLogic.GetById(categorytoadd);
-                if (!Categories.Contains(category))
-                {
-                    Categories.Add(category);
-                }
-            }
-            else if (anothercat == 2)
-                nomorecategories = true;
-        }
-        while (nomorecategories != false);
+        MovieModel movie = MoviesLogic.NewMovie(title, releaseDate, director, description, duration, price, categories, formats);
 
-        MovieModel movie = MoviesLogic.NewMovie(Title, ReleaseDate, Director, Description, Duration, Price, Categories, Formats);
+        Category.CategoryMenu(movie);
 
-        Format.ChangeFormats(movie);
-
-        TimeSlots.NewTimeSlot(movie.Id);
+        Format.ViewFormatMenu(movie);
 
         Console.Clear();
         Console.WriteLine("New movie added!");
@@ -84,10 +65,12 @@ static class Movies
         Console.WriteLine($"Release Date: {movie.ReleaseDate.Date}");
         Console.WriteLine($"Director: {movie.Director}");
         Console.WriteLine($"Price: {movie.Price}");
-        Console.WriteLine($"Categories: {string.Join(", ", movie.Categories)}");
+        Console.WriteLine($"Categories: {string.Join(", ", movie.Categories.Select(c => c.Name))}");
         Console.WriteLine($"Formats: {string.Join(", ", movie.Formats)}");
 
-        //Menu.Start();
+        QuestionLogic.AskEnter();
+
+        Admin.Start();
     }
 
     public static void ChangeMoviesMenu()
@@ -226,7 +209,7 @@ static class Movies
         List<ReviewModel> pastReviews = RL.UserPastReviews(AccountsLogic.CurrentAccount!.Id);
 
         List<ReservationModel> pastMoviesNoReview = MoviesLogic.PastMovies().FindAll(
-            m => !pastReviews.Any(r => r.MovieId == TL.GetById(m.TimeSLotId)!.MovieId));
+            m => !pastReviews.Any(r => r.MovieId == TL.GetById(m.TimeSlotId)!.MovieId));
 
         Console.Clear();
 
@@ -245,8 +228,8 @@ static class Movies
         {
             try
             {
-                options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSLotId)!.MovieId)!.Title} Watched on: {pastReservation.DateTime}");
-                actions.Add(() => AddNewReview(TL.GetById(pastReservation.TimeSLotId)!.MovieId, pastReservation));
+                options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSlotId)!.MovieId)!.Title} Watched on: {pastReservation.DateTime}");
+                actions.Add(() => AddNewReview(TL.GetById(pastReservation.TimeSlotId)!.MovieId, pastReservation));
             }
             catch (System.Exception ex)
             {
@@ -305,7 +288,7 @@ static class Movies
 
 
             if (double.TryParse(input, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out double newRating) && newRating >= 1 && newRating <= 5)
-            
+
             {
                 rating = newRating;
                 break;

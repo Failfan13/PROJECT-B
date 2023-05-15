@@ -47,10 +47,16 @@ public class MoviesLogic : Order<MovieModel>
         return _movies.Find(i => i.Id == id);
     }
 
+    public MovieModel? FindTitle(string movieName)
+    {
+        return _movies.Find(i => i.Title.ToLower() == movieName.ToLower());
+    }
+
     public List<MovieModel> GetByTitle(string name)
     {
         return _movies.Where(i => i.Title.ToLower().Contains(name.ToLower())).ToList();
     }
+    
     public List<MovieModel> GetByPrice(double price, List<MovieModel> movies = null)
     {
         TimeSlotsLogic tsl = new TimeSlotsLogic();
@@ -63,6 +69,7 @@ public class MoviesLogic : Order<MovieModel>
 
         return movies.Where(i => tsl.GetByMovieId(i.Id).Any(t => t.Theatre.Seats.Min(s => TL.PriceOfSeatType(s.SeatType, t.Theatre.TheatreId)) + i.Price <= price)).ToList();
     }
+    
     public List<MovieModel> GetByTimeSlots(DateTime date, List<MovieModel> movies = null)
     {
         TimeSlotsLogic tsl = new TimeSlotsLogic();
@@ -73,6 +80,7 @@ public class MoviesLogic : Order<MovieModel>
 
         return movies.Where(i => tsl.GetByDate(date).Any(x => x.MovieId == i.Id)).ToList();
     }
+    
     public List<MovieModel> GetByCategories(List<CategoryModel> categories, List<MovieModel> movies = null)
     {
         if (movies == null)

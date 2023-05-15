@@ -1,5 +1,7 @@
 public static class FormatsLogic
 {
+    private static MoviesLogic ML = new MoviesLogic();
+    public static bool _swapFormats = false;
     private static Dictionary<string, FormatDetails> _formats = new() {
         {"imax", new FormatDetails { Item = "", Price = 10 } },
         {"imax 3d", new FormatDetails { Item = "3D Glasses", Price = 15 } },
@@ -28,6 +30,32 @@ public static class FormatsLogic
     public static List<string> AllFormats()
     {
         return _formats.Keys.ToList();
+    }
+
+    public static void SwapMode() => _swapFormats = !_swapFormats;
+
+    public static void AddFormatToMovie(MovieModel movie, string format)
+    {
+        movie.Formats.Add(format);
+        ML.UpdateList(movie);
+    }
+
+    public static void RemoveFormatFromMovie(MovieModel movie, string format)
+    {
+        movie.Formats.Remove(format);
+        ML.UpdateList(movie);
+    }
+
+    public static void AddFormatToTimeslot(MovieModel movie, TimeSlotModel tsm, string format)
+    {
+        tsm.Format = format;
+        ML.UpdateList(movie);
+    }
+
+    public static void RemoveFormatFromTimeslot(MovieModel movie, TimeSlotModel tsm, string format)
+    {
+        tsm.Format = "standard";
+        ML.UpdateList(movie);
     }
 
 }

@@ -72,7 +72,7 @@ public class ReviewLogic
         ReviewModel review = null!;
         try
         {
-            review = new ReviewModel(TL.GetById(pastReservation.TimeSLotId)!.MovieId, AccountsLogic.CurrentAccount!.Id, reviewScore, message);
+            review = new ReviewModel(TL.GetById(pastReservation.TimeSlotId)!.MovieId, AccountsLogic.CurrentAccount!.Id, reviewScore, message);
         }
         catch (System.Exception)
         {
@@ -141,7 +141,7 @@ public class ReviewLogic
 
         foreach (ReviewModel review in reviews)
         {
-            options.Add(@$"From user {review.AccountId} - {AL.GetById(review.AccountId)!.FullName}, Date: {review.ReviewDate}, Review score {review.Rating},
+            options.Add(@$"From user: {review.AccountId} - {AL.GetById(review.AccountId)!.FullName}, Date: {review.ReviewDate}, Review score: {review.Rating},
 Message: {review.Review}
 ");
             actions.Add(() => EditReview(review));

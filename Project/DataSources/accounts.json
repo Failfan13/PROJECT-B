@@ -55,68 +55,8 @@
     "password": "2",
     "fullName": "2",
     "dateofbirth": null,
-    "admin": false,
-    "adMails": true,
-    "adult": false
-  },
-  {
-    "id": 7,
-    "emailAddress": "3@3.com",
-    "password": "88",
-    "fullName": "sadas",
-    "dateofbirth": "",
-    "admin": false,
+    "admin": true,
     "adMails": false,
-    "adult": false
-  },
-  {
-    "id": 8,
-    "emailAddress": "1212@1212.com",
-    "password": "12",
-    "fullName": "12",
-    "dateofbirth": "12-12-1912",
-    "admin": false,
-    "adMails": false,
-    "adult": false
-  },
-  {
-    "id": 9,
-    "emailAddress": "9@9.com",
-    "password": "9",
-    "fullName": "9",
-    "dateofbirth": "19-12-1921",
-    "admin": false,
-    "adMails": false,
-    "adult": false
-  },
-  {
-    "id": 10,
-    "emailAddress": "10@10.com",
-    "password": "10",
-    "fullName": "10",
-    "dateofbirth": "10-10-1910",
-    "admin": false,
-    "adMails": false,
-    "adult": false
-  },
-  {
-    "id": 11,
-    "emailAddress": "test17@17.com",
-    "password": "17",
-    "fullName": "im 17",
-    "dateofbirth": "14-05-2006",
-    "admin": false,
-    "adMails": false,
-    "adult": false
-  },
-  {
-    "id": 12,
-    "emailAddress": "test18@18.com",
-    "password": "18",
-    "fullName": "im 18",
-    "dateofbirth": "12-12-2004",
-    "admin": false,
-    "adMails": false,
-    "adult": false
+    "adult": true
   }
 ]

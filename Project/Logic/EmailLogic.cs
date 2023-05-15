@@ -40,9 +40,9 @@ public class EmailLogic
             {
                 try //uncomment to send email
                 {
-                    // client.Connect("smtp.gmail.com", 465, true);
-                    // client.Authenticate("Hsr.ProjectB.TeamE@gmail.com", "igtmcrhmlfymuagb");
-                    // client.Send(message);
+                    client.Connect("smtp.gmail.com", 465, true);
+                    client.Authenticate("Hsr.ProjectB.TeamE@gmail.com", "fbfmimakrvojgpvs");
+                    client.Send(message);
 
                     Console.WriteLine($"Email sent: {email.Address}");
                 }
@@ -52,8 +52,8 @@ public class EmailLogic
                 }
                 finally
                 {
-                    // client.Disconnect(true);
-                    // client.Dispose();
+                    client.Disconnect(true);
+                    client.Dispose();
                 }
             }
         }
@@ -67,7 +67,8 @@ public class EmailLogic
 
     public bool ValidateEmail(string email)
     {
-        if (email.Contains("@") && email.Contains(".")) return true;
+        if (email.Contains("@.")) return true;
+        else if (email.Contains("@") && email.Contains(".")) return true;
         return false;
     }
 }

@@ -14,6 +14,9 @@ static class Menu
         {
             Options.Add("Login");
             Actions.Add(() => UserLogin.Login());
+
+            Options.Add("Create new account");
+            Actions.Add(() => UserLogin.CreateNewUser());
         }
 
         Options.Add("Make a Reservation");

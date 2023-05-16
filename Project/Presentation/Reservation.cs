@@ -145,10 +145,15 @@ public static class Reservation
 
         foreach (MovieModel movie in movies)
         {
-
+            int age;
             //checks if the movie category is 18+ and if the user is not an adult so adult movies are not shown to underaged users
-            DateTime dateOfBirth = DateTime.ParseExact( AccountsLogic.CurrentAccount.DateOfBirth, "dd-MM-yyyy", CultureInfo.InvariantCulture);
-            int age = DateTime.Today.Year - dateOfBirth.Year;
+            if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.DateOfBirth != null)
+            {
+                DateTime dateOfBirth = DateTime.ParseExact( AccountsLogic.CurrentAccount.DateOfBirth, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                age = DateTime.Today.Year - dateOfBirth.Year;
+            }
+            else 
+            {age = 1;}
             if(movie.Categories.Any(i => i.Name == "18+" && age < 18 ))
                 {
                     continue;

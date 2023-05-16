@@ -4,12 +4,8 @@
     "timeslot_id": 0,
     "seats": [
       {
-
         "id": 10,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false,
-        "luxury": false
+        "seatType": "basic"
       }
     ],
     "snacks": {
@@ -19,26 +15,28 @@
     },
     "account_id": null,
     "date_time": "2023-03-31T16:09:34.9773108+02:00",
-    "format": null
+    "format": null,
+    "discountCode": ""
   },
   {
     "id": 2,
-    "timeslot_id": 7,
+    "timeslot_id": 1,
     "seats": [
       {
-        "id": 0,
-        "price": 10,
-        "reserved": true,
-        "handicapped": false,
-        "luxury": false
+        "id": 1,
+        "seatType": "basic"
+      },
+      {
+        "id": 2,
+        "seatType": "basic"
       }
     ],
     "snacks": {
-      "1": 2,
-      "2": 2
+      "0": 1
     },
-    "account_id": 4,
-    "date_time": "2023-03-31T19:28:31.0164436+02:00",
-    "format": null
+    "account_id": -1,
+    "date_time": "2023-05-16T10:31:28.1715062+02:00",
+    "format": "",
+    "discountCode": ""
   }
 ]

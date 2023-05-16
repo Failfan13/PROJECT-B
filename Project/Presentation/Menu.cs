@@ -59,11 +59,14 @@ static class Menu
             Options.Add("Change data");
             Actions.Add(() => Admin.ChangeData());
 
-            Options.Add("Change user data");
+            Options.Add("\nView user data");
             Actions.Add(() => User.SelectUser());
 
             Options.Add("View ratings");
             Actions.Add(() => Movies.EditReviewsMenu());
+
+            Options.Add("View all complaints");
+            Actions.Add(() => Contact.ViewAllComplaints());
         }
 
         // Logout & account settings

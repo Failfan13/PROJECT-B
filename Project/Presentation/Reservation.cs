@@ -147,7 +147,7 @@ public static class Reservation
         {
             int age;
             //checks if the movie category is 18+ and if the user is not an adult so adult movies are not shown to underaged users
-            if (AccountsLogic.CurrentAccount != null)
+            if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.DateOfBirth != null)
             {
                 DateTime dateOfBirth = DateTime.ParseExact( AccountsLogic.CurrentAccount.DateOfBirth, "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 age = DateTime.Today.Year - dateOfBirth.Year;

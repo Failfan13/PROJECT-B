@@ -3,6 +3,13 @@ static class UserLogin
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
 
+
+    // need access for Contact.cs and Accountslogic.cs
+    public static AccountsLogic GetAccountsLogicInstance()
+    {
+        return accountsLogic;
+    }
+
     public static void Start()
     {
         string Question = "";

@@ -46,7 +46,7 @@ static class Menu
         if (AccountsLogic.CurrentAccount == null || !AccountsLogic.CurrentAccount.Admin)
         {
             Options.Add("\nContact");
-            Actions.Add(() => Contact.start());
+            Actions.Add(() => Contact.Start());
         }
 
         // Admin data
@@ -59,11 +59,14 @@ static class Menu
             Options.Add("Change data");
             Actions.Add(() => Admin.ChangeData());
 
-            Options.Add("Change user data");
+            Options.Add("\nView user data");
             Actions.Add(() => User.SelectUser());
 
             Options.Add("View ratings");
             Actions.Add(() => Movies.EditReviewsMenu());
+
+            Options.Add("View all complaints");
+            Actions.Add(() => Contact.ViewAllComplaints());
         }
 
         // Logout & account settings

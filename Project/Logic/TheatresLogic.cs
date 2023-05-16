@@ -648,7 +648,7 @@ Press [ ");
 
         Console.WriteLine("\nEnter any key to continue to contact page or R to return to seat scedule");
         ConsoleKeyInfo inpKey = Console.ReadKey();
-        if (inpKey.Key != ConsoleKey.R) Contact.start();
+        if (inpKey.Key != ConsoleKey.R) Contact.Start();
     }
 
     public void BlockSeat<T>(TheatreModel theatre, T seatIndex) // block and unblock seat

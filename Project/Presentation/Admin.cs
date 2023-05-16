@@ -66,5 +66,6 @@ public static class Admin
         Actions.Add(() => Menu.Start());
 
         MenuLogic.Question(Question, Options, Actions);
+
     }
 }

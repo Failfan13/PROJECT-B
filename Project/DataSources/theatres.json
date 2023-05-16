@@ -1,6 +1,7 @@
 [
   {
     "id": 0,
+    "copyRoomId": -1,
     "layoutSpecs": {
       "pathwaysIndex": [
         {
@@ -26,6 +27,7 @@
   },
   {
     "id": 1,
+    "copyRoomId": -1,
     "layoutSpecs": {
       "pathwaysIndex": [],
       "blockedSeats": [],
@@ -39,6 +41,7 @@
   },
   {
     "id": 2,
+    "copyRoomId": -1,
     "layoutSpecs": {
       "pathwaysIndex": [],
       "blockedSeats": [

@@ -59,6 +59,8 @@ static class UserLogin
         string subject = "";
         string body = "";
 
+        int newAccountId = -1;
+
         Console.Clear();
         Email = AskEmail();
 
@@ -80,10 +82,10 @@ static class UserLogin
         Console.Clear();
         while (!CorrectDate)
         {
-            Console.WriteLine("Please enter your date of birth (dd-mm-yyyy):");
+            Console.WriteLine("Please enter your date of birth (dd/mm/yyyy):");
             string input = Console.ReadLine();
             DateTime dateOfBirth;
-            bool isValidDate = DateTime.TryParseExact(input, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateOfBirth);
+            bool isValidDate = DateTime.TryParseExact(input, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateOfBirth);
 
             if (isValidDate)
             {
@@ -130,11 +132,19 @@ Thank you.";
 
         EmailLogic.SendEmail(Email, subject, body);
 
-        accountsLogic.NewAccount(Email, Name, pass, Date);
+        newAccountId = accountsLogic.NewAccount(Email, Name, pass, Date);
+
+        Login(newAccountId);
     }
 
-    public static void Login()
+    public static void Login(int accountId = -1)
     {
+        if (accountsLogic.UserById(accountId, out AccountModel account))
+        {
+            AccountsLogic.CurrentAccount = account;
+            return;
+        }
+
         if (AccountsLogic.CurrentAccount == null)
         {
             Console.Clear();

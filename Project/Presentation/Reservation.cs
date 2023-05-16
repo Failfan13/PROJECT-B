@@ -128,6 +128,7 @@ public static class Reservation
     public static void FilterMenu(List<MovieModel> filteredList = null, bool IsEdited = false)
     //  public static void NoFilterMenu(bool IsEdited = false)
     {
+        bool ofAge = AccountsLogic.CheckOfAge();
 
         var movies = new MoviesLogic().AllMovies();
 
@@ -143,24 +144,24 @@ public static class Reservation
         Movies.Add("Use Filter");
         Actions.Add(() => Filter.Main());
 
-        foreach (MovieModel movie in movies)
+        // if account is not of age
+        if (ofAge)
         {
-            int age;
-            //checks if the movie category is 18+ and if the user is not an adult so adult movies are not shown to underaged users
-            if (AccountsLogic.CurrentAccount != null)
+            foreach (MovieModel movie in movies)
             {
-                DateTime dateOfBirth = DateTime.ParseExact( AccountsLogic.CurrentAccount.DateOfBirth, "dd-MM-yyyy", CultureInfo.InvariantCulture);
-                age = DateTime.Today.Year - dateOfBirth.Year;
+                Movies.Add(movie.Title);
+                Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));
             }
-            else 
-            {age = 1;}
-            if(movie.Categories.Any(i => i.Name == "18+" && age < 18 ))
-                {
-                    continue;
-                }
-            Movies.Add(movie.Title);
-            Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));            
         }
+        else
+        {
+            foreach (MovieModel movie in movies.FindAll(m => !m.Categories.Any(c => c.Id == 6)))
+            {
+                Movies.Add(movie.Title);
+                Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));
+            }
+        }
+
         Movies.Add("Return");
         Actions.Add(() => Menu.Start());
 

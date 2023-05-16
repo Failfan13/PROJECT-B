@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using System.Globalization;
 
 
 //This class is not static so later on we can use inheritance and interfaces
@@ -56,6 +57,18 @@ public class AccountsLogic
         return _accounts.Find(i => i.Id == id);
     }
 
+    public bool UserById(int id, out AccountModel account)
+    {
+        var foundAccount = GetById(id);
+        if (foundAccount != null)
+        {
+            account = GetById(id);
+            return true;
+        }
+        account = null!;
+        return false;
+    }
+
     public List<AccountModel> GetAllAccounts()
     {
         return _accounts;
@@ -89,11 +102,12 @@ public class AccountsLogic
         Logger.SystemLog("Logged out");
     }
 
-    public void NewAccount(string email, string name, string password, string date)
+    public int NewAccount(string email, string name, string password, string date)
     {
-        int NewID = GetNewestId();
-        AccountModel account = new AccountModel(NewID, email, password, name, date);
+        int NewId = GetNewestId();
+        AccountModel account = new AccountModel(NewId, email, password, name, date);
         UpdateList(account);
+        return NewId;
     }
 
     public void NewPassword(string newpassword)
@@ -252,5 +266,15 @@ public class AccountsLogic
     public AccountModel GetByEmail(string email)
     {
         return _accounts.Find(i => i.EmailAddress == email)!;
+    }
+
+    public static bool CheckOfAge()
+    {
+        if (CurrentAccount == null) return false;
+        else if (CurrentAccount.DateOfBirth == null) return false;
+
+        string date = CurrentAccount.DateOfBirth;
+        DateTime dateOfBirth = DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+        return DateTime.Today.Year - dateOfBirth.Year >= 18;
     }
 }

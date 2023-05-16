@@ -14,12 +14,13 @@ public static class Contact
         string Question = "Select an option\n";
         List<string> Options = new List<string>()
         {
-            "Contact information","Make a Complaint","Emergency"
+            "Contact information","Make a Complaint","Emergency","See locations"
         };
         List<Action> Actions = new List<Action>();
         Actions.Add(() => Contact.contact());
         Actions.Add(() => Contact.ComplaintMenu());
         Actions.Add(() => Contact.Emergency());
+        Actions.Add(() => Locations());
 
         // Return to Login menu
         Options.Add("Return");
@@ -173,9 +174,6 @@ public static class Contact
                 Options.Add(complaint.ToString());
                 Actions.Add(() => AccountsLogic.EditComplaint(account, account.Complaints.IndexOf(complaint)));
             }
-          
-            Options.Add("See locations");
-            Actions.Add(() => Locations());
 
             Options.Add("Return");
             Actions.Add(() => User.Info(account));
@@ -205,6 +203,7 @@ public static class Contact
   
     public static void Locations()
     {
+        Console.Clear();
         Console.WriteLine("CONTACT INFO HERE\n");
         Console.WriteLine("Test bericht, wil je alle locaties zien? (y/n)");
 

@@ -22,14 +22,16 @@ public static class LocationsLogic
     public static void NewLocation()
     {
         string location = "";
+        string address = "";
         string description = "";
-        string gmapsLink = "";
+        string gmapsUrl = "";
 
-        location = QuestionLogic.AskString("Please enter the location");
-        description = QuestionLogic.AskString("Please enter the cinema description");
-        gmapsLink = QuestionLogic.AskString("Please enter the google maps link");
+        location = QuestionLogic.AskString("Enter the location name");
+        address = QuestionLogic.AskString("Enter the address").Replace(',', ' ');
+        description = QuestionLogic.AskString("Paste the cinema description");
+        gmapsUrl = QuestionLogic.AskString("Paste the google maps link");
 
-        LocationModel newLocation = new LocationModel(location, description, gmapsLink);
+        LocationModel newLocation = new LocationModel(location, address, description, gmapsUrl);
 
         _locations.Add(newLocation);
 
@@ -73,6 +75,68 @@ public static class LocationsLogic
 
         Console.WriteLine("Location has been deleted");
         UpdateLocations();
+        QuestionLogic.AskEnter();
+    }
+
+    public static void ViewAllLocations()
+    {
+        Console.Clear();
+
+        string Question = "Which location would you like to view?\n";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
+
+        foreach (LocationModel location in AllLocations())
+        {
+            Options.Add($"{location.Name}");
+            Actions.Add(() => ViewLocationMenu(location));
+        }
+
+        Options.Add($"Return");
+        Actions.Add(() => Contact.Start());
+
+        MenuLogic.Question(Question, Options, Actions);
+
+        Contact.Start();
+    }
+
+    public static void ViewLocationMenu(LocationModel location)
+    {
+        string Question = "What would you like to view?\n";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
+
+        Options.Add("Location on google maps");
+        Options.Add("Location details");
+        Actions.Add(() => ViewMapLocation(location));
+        Actions.Add(() => ViewLocationDetails(location));
+
+        Options.Add("Return");
+        Actions.Add(() => Contact.Start());
+
+        MenuLogic.Question(Question, Options, Actions);
+
+        Contact.Start();
+    }
+
+    private static void ViewMapLocation(LocationModel location)
+    {
+        if (OpenWebsiteLogic.ValidUrl(location.GmapsUrl))
+        {
+            OpenWebsiteLogic.OpenWebBrowser(location.GmapsUrl);
+        }
+        else
+        {
+            Console.Clear();
+            Console.WriteLine($"The google maps link is invalid\n\nThe address is: {location.Address}");
+            QuestionLogic.AskEnter();
+        }
+    }
+
+    private static void ViewLocationDetails(LocationModel location)
+    {
+        Console.Clear();
+        Console.WriteLine($"Location: {location.Name}\nAddress: {location.Address}\nDescription: {location.Description}");
         QuestionLogic.AskEnter();
     }
 }

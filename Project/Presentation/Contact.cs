@@ -4,6 +4,7 @@ using System.Text.Json;
 
 public static class Contact
 {
+
     private static AccountsLogic AL = new AccountsLogic();
 
     public static void Start()
@@ -13,12 +14,13 @@ public static class Contact
         string Question = "Select an option\n";
         List<string> Options = new List<string>()
         {
-            "Contact information","Make a Complaint","Emergency"
+            "Contact information","Make a Complaint","Emergency","See locations"
         };
         List<Action> Actions = new List<Action>();
         Actions.Add(() => Contact.contact());
         Actions.Add(() => Contact.ComplaintMenu());
         Actions.Add(() => Contact.Emergency());
+        Actions.Add(() => Locations());
 
         // Return to Login menu
         Options.Add("Return");
@@ -184,6 +186,7 @@ public static class Contact
     {
         // creating a selection menu for contact
         Console.Clear();
+
         string Question = "Is there an emergency?/n/nDeclaring emergency without cause is punishable";
         List<string> Options = new List<string>()
         {
@@ -197,6 +200,20 @@ public static class Contact
 
         Menu.Start();
     }
+  
+    public static void Locations()
+    {
+        Console.Clear();
+        Console.WriteLine("CONTACT INFO HERE\n");
+        Console.WriteLine("Test bericht, wil je alle locaties zien? (y/n)");
+
+        if (Console.ReadKey().Key == ConsoleKey.Y)
+        {
+            LocationsLogic.ViewAllLocations();
+        }
+
+        Menu.Start();
+    }
 
     public static void EmergencyCall()
     {
@@ -206,6 +223,7 @@ public static class Contact
 
         Console.Write("Emergency services have been called towards room: " + roomNumber);
         Console.WriteLine("\nPlease locate towards the emergency exit and await peramedic arrival");
+
     }
 
 }

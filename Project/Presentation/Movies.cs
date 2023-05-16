@@ -26,6 +26,7 @@ static class Movies
         string director = "";
         string description = "";
         double price = 0;
+        bool ads = false;
 
         Console.Clear();
 
@@ -53,6 +54,13 @@ static class Movies
         duration = (int)QuestionLogic.AskNumber("What is the duration? (minutes)");
         price = (int)QuestionLogic.AskNumber("How expensive is the movie?: ");
 
+        Console.WriteLine("Would you like to turn on ads? (y/n)");
+        ads = (Console.ReadKey().KeyChar == 'y') switch
+        {
+            true => true,
+            false => false
+        };
+
         MovieModel movie = MoviesLogic.NewMovie(title, releaseDate, director, description, duration, price, categories, formats);
 
         Category.CategoryMenu(movie);
@@ -67,6 +75,7 @@ static class Movies
         Console.WriteLine($"Price: {movie.Price}");
         Console.WriteLine($"Categories: {string.Join(", ", movie.Categories.Select(c => c.Name))}");
         Console.WriteLine($"Formats: {string.Join(", ", movie.Formats)}");
+        Console.WriteLine($"Ads: {movie.Ads}");
 
         QuestionLogic.AskEnter();
 
@@ -76,7 +85,7 @@ static class Movies
     public static void ChangeMoviesMenu()
     {
         Console.Clear();
-        List<MovieModel> movies = MoviesLogic.AllMovies();
+        List<MovieModel> movies = MoviesLogic.AllMovies(true);
         string Question = "What movie would you like to change?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
@@ -103,7 +112,8 @@ static class Movies
             "Change title", "Change Director",
             "Change Releasedate", "Change Description",
             "Change Duration", "Change Price",
-            "Change Categories", "Change Formats"
+            "Change Ads", "Change Categories",
+            "Change Formats"
         };
 
         List<Action> Actions = new List<Action>() { };
@@ -113,6 +123,7 @@ static class Movies
         Actions.Add(() => ChangeDescription(movie));
         Actions.Add(() => ChangeDuration(movie));
         Actions.Add(() => ChangePrice(movie));
+        Actions.Add(() => ChangeAds(movie));
         Actions.Add(() => ChangeCategory(movie));
         Actions.Add(() => Format.ChangeFormats(movie, () => ChangeMovieMenu(movie)));
 
@@ -124,6 +135,7 @@ static class Movies
 
     public static void ChangeCategory(MovieModel movie)
     {
+        Console.Clear();
         string Question = "What would you like to do?";
         List<string> Options = new List<string>() { "Add a category", "Remove a category" };
         List<Action> Actions = new List<Action>();
@@ -163,6 +175,7 @@ static class Movies
     }
     private static void ChangeDuration(MovieModel movie)
     {
+        Console.Clear();
         int NewDuration = (int)QuestionLogic.AskNumber("What do you want to change the duration of this movie to? (please enter the ammount of minutes)");
         MoviesLogic.ChangeDuration(movie, NewDuration);
         Console.WriteLine($"Duration is now: {NewDuration} minutes");
@@ -171,12 +184,27 @@ static class Movies
     }
     private static void ChangePrice(MovieModel movie)
     {
+        Console.Clear();
         double NewPrice = QuestionLogic.AskNumber("What do you want to change the price of this movie to?");
         MoviesLogic.ChangePrice(movie, NewPrice);
         Console.WriteLine($"Price is now: {NewPrice}");
         QuestionLogic.AskEnter();
         ChangeMovieMenu(movie);
     }
+
+    private static void ChangeAds(MovieModel movie)
+    {
+        Console.Clear();
+        if (movie.Ads) Console.WriteLine("Would you like to turn on ads? (y/n)");
+        else Console.WriteLine("Would you like to turn off ads? (y/n)");
+
+        if (Console.ReadKey().KeyChar == 'y')
+        {
+            MoviesLogic.ChangeAds(movie);
+        }
+        ChangeMovieMenu(movie);
+    }
+
     private static void ChangeReleaseDate(MovieModel movie)
     {
         Console.Clear();
@@ -313,6 +341,46 @@ static class Movies
 
         RL.UpdateMovieReviews(ML.AllMovies());
         ML.UpdateList(Movie);
+    }
+
+    public static void UpAndComingReleases()
+    {
+        MoviesLogic ML = new MoviesLogic();
+
+        Console.Clear();
+
+        string Question = "What would you like to do?";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
+
+        foreach (MovieModel movie in ML.UnreleasedMovies())
+        {
+            // Skip if ads off
+            if (movie.Ads == false) continue;
+            // Movie title
+            if (AccountsLogic.CurrentAccount == null) Options.Add($"Title: {movie.Title}");
+            else Options.Add($"Title: {movie.Title}");
+            Actions.Add(() => ML.GetMovieDetails(movie, () => UpAndComingReleases()));
+
+            // Follow or unfollow
+            if (AccountsLogic.CurrentAccount != null && !movie.Followers.Any(f => f == AccountsLogic.CurrentAccount.Id))
+            {
+                Options.Add($"~Follow");
+                Actions.Add(() => ML.FollowMovie(movie));
+            }
+            else if (movie.Followers.Any(f => f == AccountsLogic.CurrentAccount!.Id))
+            {
+                Options.Add($"~Unfollow");
+                Actions.Add(() => ML.UnfollowMovie(movie));
+            }
+        }
+
+        Options.Add("Return");
+        Actions.Add(() => Menu.Start());
+
+        MenuLogic.Question(Question, Options, Actions);
+
+        UpAndComingReleases();
     }
 }
 

@@ -56,7 +56,7 @@ public class MoviesLogic : Order<MovieModel>
     {
         return _movies.Where(i => i.Title.ToLower().Contains(name.ToLower())).ToList();
     }
-    
+
     public List<MovieModel> GetByPrice(double price, List<MovieModel> movies = null)
     {
         TimeSlotsLogic tsl = new TimeSlotsLogic();
@@ -69,7 +69,7 @@ public class MoviesLogic : Order<MovieModel>
 
         return movies.Where(i => tsl.GetByMovieId(i.Id).Any(t => t.Theatre.Seats.Min(s => TL.PriceOfSeatType(s.SeatType, t.Theatre.TheatreId)) + i.Price <= price)).ToList();
     }
-    
+
     public List<MovieModel> GetByTimeSlots(DateTime date, List<MovieModel> movies = null)
     {
         TimeSlotsLogic tsl = new TimeSlotsLogic();
@@ -80,7 +80,7 @@ public class MoviesLogic : Order<MovieModel>
 
         return movies.Where(i => tsl.GetByDate(date).Any(x => x.MovieId == i.Id)).ToList();
     }
-    
+
     public List<MovieModel> GetByCategories(List<CategoryModel> categories, List<MovieModel> movies = null)
     {
         if (movies == null)
@@ -105,9 +105,18 @@ public class MoviesLogic : Order<MovieModel>
         return movie;
     }
 
-    public List<MovieModel> AllMovies()
+    public List<MovieModel> AllMovies(bool includeUnreleased = false)
     {
-        return _movies;
+        if (includeUnreleased)
+        {
+            return _movies;
+        }
+        return _movies.FindAll(i => i.ReleaseDate < DateTime.Now);
+    }
+
+    public List<MovieModel> UnreleasedMovies()
+    {
+        return _movies.FindAll(i => i.ReleaseDate > DateTime.Now);
     }
 
     public static void AddFormat(MovieModel movie, string format)
@@ -217,5 +226,38 @@ public class MoviesLogic : Order<MovieModel>
         {
             return new List<ReservationModel>();
         }
+    }
+
+    public void GetMovieDetails(MovieModel movie, Action returnTo)
+    {
+        Console.Clear();
+
+        movie.Info();
+
+        QuestionLogic.AskEnter();
+        returnTo();
+    }
+
+    public void FollowMovie(MovieModel movie)
+    {
+        movie.Followers.Add(AccountsLogic.CurrentAccount!.Id);
+        UpdateList(movie);
+    }
+
+    public void UnfollowMovie(MovieModel movie)
+    {
+        movie.Followers.Remove(AccountsLogic.CurrentAccount!.Id);
+        UpdateList(movie);
+    }
+
+    public void RemoveFollower(MovieModel movie, int AccountId)
+    {
+        movie.Followers.Remove(AccountId);
+        UpdateList(movie);
+    }
+
+    public void ChangeAds(MovieModel movie)
+    {
+        movie.Ads = !movie.Ads;
     }
 }

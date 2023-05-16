@@ -39,8 +39,14 @@ public class MovieModel
         }
     }
 
+    [JsonPropertyName("followers")]
+    public List<int> Followers { get; set; }
+
     [JsonPropertyName("reviews")]
     public ReviewHelper Reviews { get; set; }
+
+    [JsonPropertyName("ads")]
+    public bool Ads { get; set; } = false;
 
     [JsonConstructor]
     public MovieModel(int id, string title, DateTime releaseDate, string director, string description,
@@ -55,6 +61,7 @@ public class MovieModel
         Price = price;
         Categories = categories;
         Formats = formats;
+        Followers = new List<int>();
         Reviews = new ReviewHelper();
     }
 

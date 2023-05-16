@@ -4,6 +4,11 @@ using MailKit;
 using MimeKit;
 public class EmailLogic
 {
+    public EmailLogic()
+    {
+        CheckReleasedMovie();
+    }
+
     public void SendAllEmail(string subject, string body) => this.SendEmail("", subject, body);
     public void SendEmail(string to, string subject, string body)
     {
@@ -70,5 +75,61 @@ public class EmailLogic
         if (email.Contains("@.")) return true;
         else if (email.Contains("@") && email.Contains(".")) return true;
         return false;
+    }
+
+    public void CheckReleasedMovie()
+    {
+        MoviesLogic ML = new MoviesLogic();
+
+        // Every movie more then 0 follower
+        foreach (MovieModel movie in ML.AllMovies(true).Where(m => m.Followers.Count > 0))
+        {
+            // send notice when date reached and date within 7 days
+            if (movie.ReleaseDate.Date >= DateTime.Now.AddDays(-7) &&
+            movie.ReleaseDate.Date < DateTime.Now)
+            {
+                NotifyFollowers(movie);
+            }
+        }
+    }
+
+    private void NotifyFollowers(MovieModel movie)
+    {
+        MoviesLogic ML = new MoviesLogic();
+        AccountsLogic AccountsLogic = new AccountsLogic();
+        AccountModel account = null!;
+        Tuple<string, string> message = null!;
+
+        foreach (int AccountId in movie.Followers)
+        {
+            try
+            {
+                account = AccountsLogic.GetById(AccountId)!;
+                message = NewMovieMessage(movie, account);
+
+                SendEmail(account.EmailAddress, message.Item1, message.Item2);
+            }
+            catch (System.Exception)
+            {
+                continue;
+            }
+            ML.RemoveFollower(movie, AccountId);
+        }
+    }
+
+    public Tuple<string, string> NewMovieMessage(MovieModel movie, AccountModel account)
+    {
+        string subject = $"The movie {movie.Title} has been released";
+        string body = @$"Hey {account.FullName.Split(' ').First()},
+
+We saw you were interested in the movie {movie.Title}, and we thought you might be pleased
+to know that the movie has been released on {movie.ReleaseDate}.
+
+You are now able to order the tickets for this movie.
+
+Regards,
+Project-B Team-E";
+
+        return new Tuple<string, string>(subject, body);
     }
 }

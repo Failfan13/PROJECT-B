@@ -14,6 +14,8 @@ public static class User
             Options.Add(acc.FullName);
             Actions.Add(() => Info(acc));
         }
+        Options.Add("return");
+        Actions.Add(() => Menu.Start());
 
         MenuLogic.Question(Question, Options, Actions);
     }

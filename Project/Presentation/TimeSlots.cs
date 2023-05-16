@@ -102,7 +102,7 @@ static class TimeSlots
             }
         }
 
-        Console.WriteLine("Would you like to add a new format? (y/n)");
+        Console.WriteLine("\nWould you like to add a new format? (y/n)");
         if (Console.ReadKey().KeyChar == 'y')
         {
             TimeSlotsLogic.UpdateList(TM);

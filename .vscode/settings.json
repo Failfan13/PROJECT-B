@@ -1,3 +1,12 @@
 {
- "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "connectString": "postgres://postgres:.:F8v!K9kBV69HL@db.hjeahgjdjzczyynonskt.supabase.co:6543/postgres",
+            "name": "ProjDB"
+        }
+    ]
 }

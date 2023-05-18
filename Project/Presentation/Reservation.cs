@@ -143,7 +143,6 @@ public static class Reservation
         Movies.Add("Use Filter");
         Actions.Add(() => Filter.Main());
 
-        // if account is not of age
         if (ofAge)
         {
             foreach (MovieModel movie in movies)

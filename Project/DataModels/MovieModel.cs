@@ -1,6 +1,9 @@
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using Postgrest.Attributes;
 using Postgrest.Models;
 
+// [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 [Table("Movies")]
 public class MovieModel : BaseModel
 {
@@ -8,16 +11,16 @@ public class MovieModel : BaseModel
     public int Id { get; set; }
 
     [Column("title")]
-    public string Title { get; set; } = "";
+    public string Title { get; set; }
 
     [Column("releaseDate")]
     public DateTime ReleaseDate { get; set; }
 
     [Column("director")]
-    public string Director { get; set; } = "";
+    public string Director { get; set; }
 
     [Column("description")]
-    public string Description { get; set; } = "";
+    public string Description { get; set; }
 
     [Column("duration")]
     public int Duration { get; set; }
@@ -26,20 +29,19 @@ public class MovieModel : BaseModel
     public double Price { get; set; }
 
     [Column("categories")]
-    public List<CategoryModel> Categories { get; set; } = new List<CategoryModel>();
+    public List<CategoryModel> Categories { get; set; }
 
     [Column("formats")]
-    public List<string> Formats { get; set; } = new List<string>();
+    public List<string> Formats { get; set; }
 
     [Column("followers")]
-    public List<int> Followers { get; set; } = new List<int>();
+    public List<int> Followers { get; set; }
 
     [Column("ads")]
     public bool Ads { get; set; } = false;
 
     [Column("reviews")]
-    public ReviewHelper Reviews { get; set; } = new ReviewHelper();
-
+    public ReviewHelper Reviews { get; set; }
 
     public MovieModel NewMovieModel(string title, DateTime releaseDate, string director, string description,
         int duration, double price)
@@ -51,18 +53,23 @@ public class MovieModel : BaseModel
         Duration = duration;
         Price = price;
         Ads = false;
+        Categories = new List<CategoryModel>();
+        Formats = new List<string>();
+        Followers = new List<int>();
+        Reviews = new ReviewHelper();
         return this;
     }
 
     public class ReviewHelper
     {
-        [Column("reviewAmount")]
+        [JsonPropertyName("ReviewAmount")]
         public int ReviewAmount { get; set; }
 
-        [Column("reviewStars")]
+        [JsonPropertyName("ReviewStars")]
         public double ReviewStars { get; set; }
 
-        public ReviewHelper() // default constructor
+        [JsonConstructor]
+        public ReviewHelper()
         {
             ReviewAmount = 0;
             ReviewStars = 0;

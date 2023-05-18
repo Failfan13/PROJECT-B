@@ -24,44 +24,5 @@
     "luxeSeatPrice": 11,
     "roomWidth": 10,
     "roomHeight": 10
-  },
-  {
-    "id": 1,
-    "copyRoomId": -1,
-    "layoutSpecs": {
-      "pathwaysIndex": [],
-      "blockedSeats": [],
-      "handicapSeats": []
-    },
-    "baseSeatPrice": 0,
-    "stanSeatPrice": 0,
-    "luxeSeatPrice": 0,
-    "roomWidth": 5,
-    "roomHeight": 5
-  },
-  {
-    "id": 2,
-    "copyRoomId": -1,
-    "layoutSpecs": {
-      "pathwaysIndex": [],
-      "blockedSeats": [
-        26,
-        55
-      ],
-      "handicapSeats": [
-        123,
-        138,
-        139,
-        124,
-        128,
-        129,
-        108
-      ]
-    },
-    "baseSeatPrice": 0,
-    "stanSeatPrice": 0,
-    "luxeSeatPrice": 0,
-    "roomWidth": 15,
-    "roomHeight": 15
   }
 ]

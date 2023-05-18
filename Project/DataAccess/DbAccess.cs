@@ -1,4 +1,3 @@
-using Npgsql;
 using Postgrest.Models;
 using System.Data.SQLite;
 using System.Data.SqlClient;
@@ -15,7 +14,7 @@ static class DbAccess
     }
 
     // gets Client
-    public static Supabase.Client Start()
+    private static Supabase.Client Start()
     {
         var options = new Supabase.SupabaseOptions
         {
@@ -33,6 +32,12 @@ static class DbAccess
         var models = result.Models;
 
         return (List<T>)Convert.ChangeType(models, typeof(List<T>));
+    }
+
+    // insert new data
+    public static async Task InsertData<T>(T model) where T : BaseModel, new()
+    {
+        await _supabase.From<T>().Insert(model);
     }
 
 }

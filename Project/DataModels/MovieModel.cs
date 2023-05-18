@@ -26,29 +26,26 @@ public class MovieModel : BaseModel
     public double Price { get; set; }
 
     [Column("categories")]
-    public List<CategoryModel> Categories { get; set; } //= new List<CategoryModel>();
+    public List<CategoryModel> Categories { get; set; } = new List<CategoryModel>();
 
     [Column("formats")]
-    public List<string> Formats { get; set; } //= new List<string>();
+    public List<string> Formats { get; set; } = new List<string>();
 
     [Column("reviews")]
-    public ReviewHelper Reviews { get; set; } //= null!;
+    public ReviewHelper Reviews { get; set; } = new ReviewHelper();
 
-    // New movie model
-    public MovieModel NewMovieModel(int id, string title, DateTime releaseDate, string director, string description,
-        int duration, double price, List<CategoryModel> categories, List<string> formats)
+
+    public MovieModel NewMovieModel(string title, DateTime releaseDate, string director, string description,
+        int duration, double price, List<CategoryModel> categories = null!, List<string> formats = null!)
     {
-        Id = id;
         Title = title;
         ReleaseDate = releaseDate;
         Director = director;
         Description = description;
         Duration = duration;
         Price = price;
-        Categories = categories;
-        Formats = formats;
-        Reviews = new ReviewHelper();
-
+        if (categories != null) Categories = categories;
+        if (formats != null) Formats = formats;
         return this;
     }
 
@@ -66,6 +63,7 @@ public class MovieModel : BaseModel
             ReviewStars = 0;
         }
     }
+
 
     public void Info()
     {
@@ -94,6 +92,22 @@ public class MovieModel : BaseModel
         Console.WriteLine($"Formats:   \t{string.Join(", ", Formats)}");
     }
 }
+
+// public class NewMovieModel
+// {
+//     public static MovieModel NewModel(string title, DateTime releaseDate, string director, string description, int duration, double price)
+//     {
+//         MovieModel m = new MovieModel();
+//         m.Title = title;
+//         m.ReleaseDate = releaseDate;
+//         m.Director = director;
+//         m.Description = description;
+//         m.Duration = duration;
+//         m.Price = price;
+//         return m;
+//     }
+// }
+
 
 
 

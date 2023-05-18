@@ -40,4 +40,17 @@ static class DbAccess
         await _supabase.From<T>().Insert(model);
     }
 
+    public static async Task ExecuteNonQuery()
+    {
+        var sussy = await _supabase.Rpc("getnewestid", null!);
+
+        Console.WriteLine(sussy.Content);
+    }
+
+    public static async Task<T> ExecuteQuery<T>(string funcName, Dictionary<string, object>? parameters = null)
+    {
+        var result = await _supabase.Rpc(funcName, parameters!);
+
+        return (T)Convert.ChangeType(result.Content, typeof(T))!;
+    }
 }

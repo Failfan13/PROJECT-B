@@ -5,4 +5,8 @@ System.Threading.Thread.CurrentThread.CurrentCulture = ci;
 // Show unicode characters
 Console.OutputEncoding = System.Text.Encoding.Unicode;
 
-Menu.Start();
+//Menu.Start();
+
+// await DbAccess.ExecuteNonQuery().ConfigureAwait(false);
+
+Console.WriteLine(DbLogic.GetNewestId());

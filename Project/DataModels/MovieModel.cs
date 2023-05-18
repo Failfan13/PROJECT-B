@@ -76,7 +76,6 @@ public class MovieModel : BaseModel
         }
     }
 
-
     public void Info()
     {
         string cats = "";
@@ -104,23 +103,3 @@ public class MovieModel : BaseModel
         Console.WriteLine($"Formats:   \t{string.Join(", ", Formats)}");
     }
 }
-
-// public class NewMovieModel
-// {
-//     public static MovieModel NewModel(string title, DateTime releaseDate, string director, string description, int duration, double price)
-//     {
-//         MovieModel m = new MovieModel();
-//         m.Title = title;
-//         m.ReleaseDate = releaseDate;
-//         m.Director = director;
-//         m.Description = description;
-//         m.Duration = duration;
-//         m.Price = price;
-//         return m;
-//     }
-// }
-
-
-
-
-

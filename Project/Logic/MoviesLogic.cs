@@ -18,7 +18,12 @@ public class MoviesLogic : Order<MovieModel>
 
     public MoviesLogic()
     {
-        _movies = MoviesAccess.LoadAll();
+        _movies = LoaderOpt().Result;
+    }
+
+    private async Task<List<MovieModel>> LoaderOpt()
+    {
+        return await DbAccess.LoadAll<MovieModel>();
     }
 
     public override void UpdateList(MovieModel movie)
@@ -99,9 +104,11 @@ public class MoviesLogic : Order<MovieModel>
     public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript,
         int duration, double price, List<CategoryModel> categories, List<string> formats)
     {
-        int NewID = GetNewestId();
         MovieModel movie = new();
-        movie = movie.NewMovieModel(NewID, title, releaseDate, director, desript, duration, price, categories, formats);
+        movie.NewMovieModel(title, releaseDate, director, desript, duration, price);
+        movie.Categories = categories;
+        movie.Formats = formats;
+        //movie = movie.NewMovieModel(NewID, title, releaseDate, director, desript, duration, price, categories, formats);
         UpdateList(movie);
         return movie;
     }

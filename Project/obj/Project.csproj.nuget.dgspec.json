@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj": {}
+    "C:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj": {}
   },
   "projects": {
-    "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj": {
+    "C:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj",
+        "projectUniqueName": "C:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj",
         "projectName": "Project",
-        "projectPath": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj",
+        "projectPath": "C:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj",
         "packagesPath": "C:\\Users\\erikm\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\obj\\",
+        "outputPath": "C:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\erikm\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -45,6 +45,18 @@
             "MailKit": {
               "target": "Package",
               "version": "[3.6.0, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[8.0.0-preview.4, )"
+            },
+            "System.Data.SQLite": {
+              "target": "Package",
+              "version": "[1.0.117, )"
+            },
+            "supabase-csharp": {
+              "target": "Package",
+              "version": "[0.10.0, )"
             }
           },
           "imports": [

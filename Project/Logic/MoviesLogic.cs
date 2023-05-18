@@ -100,7 +100,8 @@ public class MoviesLogic : Order<MovieModel>
         int duration, double price, List<CategoryModel> categories, List<string> formats)
     {
         int NewID = GetNewestId();
-        MovieModel movie = new MovieModel(NewID, title, releaseDate, director, desript, duration, price, categories, formats);
+        MovieModel movie = new();
+        movie = movie.NewMovieModel(NewID, title, releaseDate, director, desript, duration, price, categories, formats);
         UpdateList(movie);
         return movie;
     }

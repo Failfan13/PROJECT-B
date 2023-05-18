@@ -19,16 +19,16 @@ public class AccountModel
     public string Password { get; set; }
 
     [JsonPropertyName("admin")]
-    public bool Admin { get; set; }
+    public bool Admin { get; set; } = false;
 
     [JsonPropertyName("adMails")]
-    public bool AdMails { get; set; }
+    public bool AdMails { get; set; } = false;
 
     [JsonPropertyName("adult")]
-    public bool Adult { get; set; }
+    public bool Adult { get; set; } = false;
 
     [JsonPropertyName("complaints")]
-    public List<string> Complaints { get; set; }
+    public List<string> Complaints { get; set; } = new List<string>();
 
     public AccountModel(int id, string emailAddress, string password, string fullName, string dateofbirth)
     {
@@ -37,10 +37,6 @@ public class AccountModel
         Password = password;
         FullName = fullName;
         DateOfBirth = dateofbirth;
-        Admin = false;
-        AdMails = false;
-        Adult = false;
-        Complaints = new List<string>();
     }
 }
 

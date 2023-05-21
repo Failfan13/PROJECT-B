@@ -5,111 +5,88 @@ using System.Text.Json;
 using System.Globalization;
 
 
-//This class is not static so later on we can use inheritance and interfaces
 public class AccountsLogic
 {
     private List<AccountModel> _accounts;
-
-
-    //Static properties are shared across all instances of the class
-    //This can be used to get the current logged in account from anywhere in the program
-    //private set, so this can only be set by the class itself
-    //public static AccountModel? CurrentAccount { get; private set; }
     public static AccountModel? CurrentAccount { get; set; }
+    private DbLogic DbLogic = new DbLogic();
 
-    public static string UserName()
+    // all existing accounts
+    public List<AccountModel> GetAllAccounts()
     {
-        return AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FullName : null!;
+        return DbLogic.GetAll<AccountModel>();
+    }
+    // pass model to update
+    public void UpdateList(AccountModel account)
+    {
+        DbLogic.UpdateItem(account);
     }
 
+    // get currect account userId
     public static int? UserId()
     {
         return AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.Id : null;
     }
 
-    public AccountsLogic()
-    {
-        _accounts = AccountsAccess.LoadAll();
-    }
-
-    public void UpdateList(AccountModel acc)
-    {
-        //Find if there is already an model with the same id
-        int index = _accounts.FindIndex(s => s.Id == acc.Id);
-
-        if (index != -1)
-        {
-            //update existing model
-            _accounts[index] = acc;
-            Logger.LogDataChange<AccountModel>(acc.Id, "Updated");
-        }
-        else
-        {
-            //add new model
-            _accounts.Add(acc);
-            Logger.LogDataChange<AccountModel>(acc.Id, "Added");
-        }
-        AccountsAccess.WriteAll(_accounts);
-    }
-
+    // gets the account by associated id
     public AccountModel? GetById(int id)
     {
-        return _accounts.Find(i => i.Id == id);
+        return DbLogic.GetById<AccountModel>(id);
     }
+    // kan verbetert worden door andere GetById te gebruiken
 
+    // Zelfde als hiervoor
     public bool UserById(int id, out AccountModel account)
     {
         var foundAccount = GetById(id);
         if (foundAccount != null)
         {
-            account = GetById(id);
+            account = foundAccount;
             return true;
         }
         account = null!;
         return false;
     }
 
-    public List<AccountModel> GetAllAccounts()
+    // Logs in is exists otherwise sets to null
+    public AccountModel LogIn(string email, string password)
     {
-        return _accounts;
+        var loginDetails = new Dictionary<string, string>(){
+            {"email_address", email},
+            {"password", password}
+        };
+        CurrentAccount = DbLogic.LoginAs<AccountModel>(loginDetails);
+        Logger.SystemLog("Logged in");
+        return CurrentAccount;
     }
 
-    public int GetNewestId()
-    {
-        if (_accounts.Count == 0)
-        {
-            return 1;
-        }
-        else
-        {
-            return _accounts.Max(a => a.Id) + 1;
-        }
-    }
-
+    // checks for the login
     public AccountModel? CheckLogin(string email, string password)
     {
         if (email == null || password == null)
         {
             return null;
         }
-        CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
+        CurrentAccount = LogIn(email, password);
         return CurrentAccount;
     }
 
+    // logout from current account
     public void LogOut()
     {
         CurrentAccount = null;
         Logger.SystemLog("Logged out");
     }
 
-    public int NewAccount(string email, string name, string password, string date)
+    // creates a new account
+    public void NewAccount(string email, string name, string password, string date)
     {
-        int NewId = GetNewestId();
-        AccountModel account = new AccountModel(NewId, email, password, name, date);
+        AccountModel account = new AccountModel();
+        account.NewAccountModel(email, password, name, date);
         UpdateList(account);
-        return NewId;
     }
 
+    // Changes the password
     public void NewPassword(string newpassword)
     {
         if (CurrentAccount == null) return;
@@ -117,6 +94,7 @@ public class AccountsLogic
         UpdateList(CurrentAccount);
     }
 
+    // menu with accounts
     public int GetAccountIdFromList()
     {
         int ReturnId = -1;
@@ -124,9 +102,9 @@ public class AccountsLogic
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        foreach (AccountModel acc in _accounts)
+        foreach (AccountModel acc in GetAllAccounts())
         {
-            Options.Add(acc.FullName);
+            Options.Add(acc.FirstName + " " + acc.LastName);
             Actions.Add(() => ReturnId = acc.Id);
         }
 
@@ -138,8 +116,7 @@ public class AccountsLogic
 
     public void DeleteUser(int id)
     {
-        _accounts.RemoveAll(i => i.Id == id);
-        AccountsAccess.WriteAll(_accounts);
+        DbLogic.RemoveItemById<AccountModel>(id);
         Logger.LogDataChange<AccountModel>(id, "Deleted");
     }
 

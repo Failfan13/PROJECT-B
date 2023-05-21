@@ -11,7 +11,7 @@ public static class User
         List<Action> Actions = new List<Action>();
         foreach (AccountModel acc in allAccounts)
         {
-            Options.Add(acc.FullName);
+            Options.Add(acc.FirstName + " " + acc.LastName);
             Actions.Add(() => Info(acc));
         }
         Options.Add("return");
@@ -28,7 +28,7 @@ public static class User
     public static void Info(AccountModel account)
     {
         Console.Clear();
-        string Question = $"user Info: \n-------------------------- \nID: {account.Id}\nName: {account.FullName} \nEmail: {account.EmailAddress} \nAdmin: {account.Admin}\n--------------------------\nWhat would you like to do?";
+        string Question = $"user Info: \n-------------------------- \nID: {account.Id}\nName: {account.FirstName + " " + account.LastName} \nEmail: {account.EmailAddress} \nAdmin: {account.Admin}\n--------------------------\nWhat would you like to do?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
@@ -75,7 +75,7 @@ public static class User
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        account.FullName = QuestionLogic.AskString(Question);
+        account.FirstName = QuestionLogic.AskString(Question);
         AccountsLogic aa = new AccountsLogic();
         aa.UpdateList(account);
     }

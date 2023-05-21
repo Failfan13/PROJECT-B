@@ -1,42 +1,52 @@
-﻿using System.Text.Json.Serialization;
+﻿using Postgrest.Attributes;
+using Postgrest.Models;
 
-
-public class AccountModel
+[Table("accounts")]
+public class AccountModel : BaseModel2
 {
-    [JsonPropertyName("id")]
+    [PrimaryKey("id, false")]
     public int Id { get; set; }
 
-    [JsonPropertyName("fullName")]
-    public string FullName { get; set; }
+    [Column("first_name")]
+    public string FirstName { get; set; }
 
-    [JsonPropertyName("dateofbirth")]
+    [Column("last_name")]
+    public string LastName { get; set; }
+
+    [Column("date_of_birth")]
     public string DateOfBirth { get; set; }
 
-    [JsonPropertyName("emailAddress")]
+    [Column("email_address")]
     public string EmailAddress { get; set; }
 
-    [JsonPropertyName("password")]
+    [Column("password")]
     public string Password { get; set; }
 
-    [JsonPropertyName("admin")]
-    public bool Admin { get; set; } = false;
+    [Column("admin")]
+    public bool Admin { get; set; }
 
-    [JsonPropertyName("adMails")]
-    public bool AdMails { get; set; } = false;
+    [Column("ad_mails")]
+    public bool AdMails { get; set; }
 
-    [JsonPropertyName("adult")]
-    public bool Adult { get; set; } = false;
+    [Column("adult")]
+    public bool Adult { get; set; }
 
-    [JsonPropertyName("complaints")]
-    public List<string> Complaints { get; set; } = new List<string>();
+    [Column("complaints")]
+    public List<string> Complaints { get; set; }
 
-    public AccountModel(int id, string emailAddress, string password, string fullName, string dateofbirth)
+    public AccountModel NewAccountModel(string emailAddress, string password, string fullName, string dateofbirth)
     {
-        Id = id;
         EmailAddress = emailAddress;
         Password = password;
-        FullName = fullName;
+        string name = fullName;
+        FirstName = name.Split(' ')[0];
+        LastName = name.Split(' ')[1];
         DateOfBirth = dateofbirth;
+        Admin = false;
+        AdMails = false;
+        Adult = false;
+        Complaints = new List<string>();
+        return this;
     }
 }
 

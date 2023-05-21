@@ -104,7 +104,7 @@ public class ReviewLogic
                 question = "Select the user you would like to edit reviews for";
                 foreach (AccountModel user in AL.GetAllAccounts())
                 {
-                    options.Add(user.FullName);
+                    options.Add(user.FirstName + " " + user.LastName);
                     actions.Add(() => ShowAvailableReviews(reviews.FindAll(r => r.AccountId == user.Id)));
                 }
                 break;
@@ -115,7 +115,7 @@ public class ReviewLogic
                 question = "Select the user and movie you would like to edit reviews for";
                 foreach (AccountModel user in AL.GetAllAccounts())
                 {
-                    options.Add(user.FullName);
+                    options.Add(user.FirstName + " " + user.LastName);
                     actions.Add(() => ShowAvailableMovies(reviews.FindAll(r => r.AccountId == user.Id)));
                 }
                 break;
@@ -141,7 +141,7 @@ public class ReviewLogic
 
         foreach (ReviewModel review in reviews)
         {
-            options.Add(@$"From user: {review.AccountId} - {AL.GetById(review.AccountId)!.FullName}, Date: {review.ReviewDate}, Review score: {review.Rating},
+            options.Add(@$"From user: {review.AccountId} - {AL.GetById(review.AccountId)!.FirstName + " " + AL.GetById(review.AccountId)!.LastName}, Date: {review.ReviewDate}, Review score: {review.Rating},
 Message: {review.Review}
 ");
             actions.Add(() => EditReview(review));

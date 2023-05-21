@@ -16,7 +16,7 @@ static class UserLogin
 
         if (AccountsLogic.CurrentAccount != null)
         {
-            Question = @$"Currently logged in as: {AccountsLogic.CurrentAccount!.FullName} e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}";
+            Question = @$"Currently logged in as: {AccountsLogic.CurrentAccount!.FirstName + " " + AccountsLogic.CurrentAccount!.LastName} e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}";
         }
 
         Question += "What would you like to do?";
@@ -48,6 +48,7 @@ static class UserLogin
     public static void CreateNewUser()
     {
         EmailLogic EmailLogic = new EmailLogic();
+        AccountsLogic AccountsLogic = new AccountsLogic();
         bool CorrectName = false;
         bool CorrectPass = false;
         bool CorrectDate = false;
@@ -58,8 +59,6 @@ static class UserLogin
 
         string subject = "";
         string body = "";
-
-        int newAccountId = -1;
 
         Console.Clear();
         Email = AskEmail();
@@ -132,19 +131,13 @@ Thank you.";
 
         EmailLogic.SendEmail(Email, subject, body);
 
-        newAccountId = accountsLogic.NewAccount(Email, Name, pass, Date);
+        AccountsLogic.NewAccount(Email, Name, pass, Date);
 
-        Login(newAccountId);
+        AccountsLogic.LogIn(Email, pass);
     }
 
-    public static void Login(int accountId = -1)
+    public static void Login()
     {
-        if (accountsLogic.UserById(accountId, out AccountModel account))
-        {
-            AccountsLogic.CurrentAccount = account;
-            return;
-        }
-
         if (AccountsLogic.CurrentAccount == null)
         {
             Console.Clear();
@@ -157,7 +150,7 @@ Thank you.";
             {
                 Console.Clear();
                 Logger.SystemLog("Logged in");
-                Console.WriteLine("Welcome back " + acc.FullName);
+                Console.WriteLine("Welcome back " + acc.FirstName);
 
                 QuestionLogic.AskEnter();
                 Menu.Start();
@@ -259,7 +252,7 @@ Thank you.";
             }
 
             subject = "Subscribed to ad-mails";
-            body = @$"Hello {(AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FullName : "Guest")},
+            body = @$"Hello {(AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FirstName : "Guest")},
     
 Thank you for subscribing to the cinema ads.
 

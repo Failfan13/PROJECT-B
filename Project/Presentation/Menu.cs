@@ -18,7 +18,7 @@ static class Menu
         }
         else // show account name
         {
-            Question = "Welcome back " + AccountsLogic.CurrentAccount.FullName + "\n" + Question;
+            Question = "Welcome back " + AccountsLogic.CurrentAccount.FirstName + "\n" + Question;
         }
 
         // Make reservation

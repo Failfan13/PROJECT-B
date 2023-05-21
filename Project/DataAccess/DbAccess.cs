@@ -31,13 +31,7 @@ static class DbAccess
         var result = await _supabase.From<T>().Get();
         var models = result.Models;
 
-        return (List<T>)Convert.ChangeType(models, typeof(List<T>));
-    }
-
-    // insert new data
-    public static async Task InsertData<T>(T model) where T : BaseModel, new()
-    {
-        await _supabase.From<T>().Insert(model);
+        return models;//(List<T>)Convert.ChangeType(models, typeof(List<T>));
     }
 
     public static async Task ExecuteNonQuery()
@@ -52,5 +46,53 @@ static class DbAccess
         var result = await _supabase.Rpc(funcName, parameters!);
 
         return (T)Convert.ChangeType(result.Content, typeof(T))!;
+    }
+
+    // insert new data
+    public static async Task InsertData<T>(T model) where T : BaseModel2, new()
+    {
+        await _supabase.From<T>().Insert(model);
+    }
+
+    public static async void UpdateItem<T>(T changedModel) where T : BaseModel2, new()
+    {
+        await _supabase.From<T>().Upsert(changedModel);
+    }
+
+    public static async Task<bool> ItemExists<T>(T model) where T : BaseModel2, new()
+    {
+        List<T> result = (List<T>)Convert.ChangeType(await _supabase.From<T>().Match(model).Single(), typeof(List<T>))!;
+
+        return result.Count > 0;
+    }
+
+    public static async void RemoveItem<T>(T model) where T : BaseModel2, new()
+    {
+        await _supabase.From<T>().Delete(model);
+    }
+
+    public static async void RemoveItemById<T>(int id) where T : BaseModel2, new()
+    {
+        await _supabase.From<T>()
+            .Where(x => x.Id == id)
+            .Delete();
+    }
+
+    public static async Task<T> GetById<T>(int id) where T : BaseModel2, new()
+    {
+        var result = await _supabase.From<T>()
+            .Where(x => x.Id == id)
+            .Single();
+
+        return result!;
+    }
+
+    public static async Task<T> Login<T>(Dictionary<string, string> loginDetails) where T : BaseModel, new()
+    {
+        var result = await _supabase.From<T>()
+            .Match(loginDetails)
+            .Single();
+
+        return result!;
     }
 }

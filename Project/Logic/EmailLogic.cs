@@ -120,7 +120,7 @@ public class EmailLogic
     public Tuple<string, string> NewMovieMessage(MovieModel movie, AccountModel account)
     {
         string subject = $"The movie {movie.Title} has been released";
-        string body = @$"Hey {account.FullName.Split(' ').First()},
+        string body = @$"Hey {account.FirstName},
 
 We saw you were interested in the movie {movie.Title}, and we thought you might be pleased
 to know that the movie has been released on {movie.ReleaseDate}.

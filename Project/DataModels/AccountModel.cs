@@ -2,9 +2,9 @@
 using Postgrest.Models;
 
 [Table("accounts")]
-public class AccountModel : BaseModel2
+public class AccountModel : BaseModel
 {
-    [PrimaryKey("id, false")]
+    [PrimaryKey("id")]
     public int Id { get; set; }
 
     [Column("first_name")]
@@ -14,7 +14,7 @@ public class AccountModel : BaseModel2
     public string LastName { get; set; }
 
     [Column("date_of_birth")]
-    public string DateOfBirth { get; set; }
+    public DateTime DateOfBirth { get; set; }
 
     [Column("email_address")]
     public string EmailAddress { get; set; }
@@ -22,30 +22,24 @@ public class AccountModel : BaseModel2
     [Column("password")]
     public string Password { get; set; }
 
-    [Column("admin")]
+    [Column("admin_rights")]
     public bool Admin { get; set; }
 
     [Column("ad_mails")]
     public bool AdMails { get; set; }
 
-    [Column("adult")]
-    public bool Adult { get; set; }
-
     [Column("complaints")]
     public List<string> Complaints { get; set; }
 
-    public AccountModel NewAccountModel(string emailAddress, string password, string fullName, string dateofbirth)
+    public AccountModel NewAccountModel(string emailAddress, string password, string fullName, DateTime dateofbirth)
     {
         EmailAddress = emailAddress;
         Password = password;
-        string name = fullName;
-        FirstName = name.Split(' ')[0];
-        LastName = name.Split(' ')[1];
+        string[] name = fullName.Split(' ');
+        FirstName = name[0];
+        if (name.Length > 1)
+            LastName = string.Join(" ", name.Skip(1));
         DateOfBirth = dateofbirth;
-        Admin = false;
-        AdMails = false;
-        Adult = false;
-        Complaints = new List<string>();
         return this;
     }
 }

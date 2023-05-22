@@ -66,7 +66,7 @@ public class ReservationLogic
         List<string> Options = new List<string>() { "Admin", "User" };
         List<Action> Actions = new List<Action>();
         Actions.Add(() => returner = AccountsLogic.CurrentAccount!.Id);
-        Actions.Add(() => returner = AL.GetAccountIdFromList());
+        Actions.Add(() => returner = AL.GetAccountIdFromList().Result);
 
         MenuLogic.Question(Question, Options, Actions);
 
@@ -135,10 +135,10 @@ public class ReservationLogic
         TL.UpdateList(timeSlot);
     }
 
-    public void ChangeUserId(ReservationModel Ress)
+    public async void ChangeUserId(ReservationModel Ress)
     {
         AccountsLogic AL = new AccountsLogic();
-        int newUserId = AL.GetAccountIdFromList();
+        int newUserId = await AL.GetAccountIdFromList();
 
         Ress.AccountId = newUserId;
         UpdateList(Ress);

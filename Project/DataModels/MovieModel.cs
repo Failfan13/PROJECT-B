@@ -4,7 +4,7 @@ using Postgrest.Attributes;
 using Postgrest.Models;
 
 // [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-[Table("Movies")]
+[Table("movies")]
 public class MovieModel : BaseModel
 {
     [PrimaryKey("id, false")]
@@ -13,7 +13,7 @@ public class MovieModel : BaseModel
     [Column("title")]
     public string Title { get; set; }
 
-    [Column("releaseDate")]
+    [Column("release_date")]
     public DateTime ReleaseDate { get; set; }
 
     [Column("director")]

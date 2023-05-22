@@ -7,7 +7,7 @@ public static class Reservation
     static private TheatreLogic TheatreLogic = new();
     static public ReservationModel CurrReservation = null!;
 
-    public static void EditReservation(bool AsAdmin = false)
+    public async static Task EditReservation(bool AsAdmin = false)
     {
         ReservationLogic ReservationLogic = new ReservationLogic();
         AccountsLogic AccountsLogic = new AccountsLogic();
@@ -19,7 +19,7 @@ public static class Reservation
         // admin logged in ask account
         if (AsAdmin)
         {
-            currAccId = AccountsLogic.GetAccountIdFromList();
+            currAccId = await AccountsLogic.GetAccountIdFromList();
         }
 
         if (!ReservationLogic.Reservations.Any(r => r.AccountId == currAccId))
@@ -127,7 +127,7 @@ public static class Reservation
 
     public static void FilterMenu(List<MovieModel> filteredList = null, bool IsEdited = false)
     {
-        bool ofAge = AccountsLogic.CheckOfAge();
+        bool ofAge = false;//AccountsLogic.CheckOfAge();
 
         var movies = new MoviesLogic().AllMovies();
 
@@ -170,7 +170,7 @@ public static class Reservation
     public static void FilterMenu(bool IsEdited) => FilterMenu(null!, IsEdited);
 
     // Show total order amount
-    public static void TotalReservationCost(ReservationModel ress, int AccountId = -1)
+    public async static void TotalReservationCost(ReservationModel ress, int AccountId = -1)
     {
         Console.Clear();
 
@@ -308,7 +308,8 @@ Your order number is: {ress.Id}
 
         if (AccountId != -1)
         {
-            email = AccountsLogic.GetById(AccountId).EmailAddress;
+            var account = await AccountsLogic.GetById(AccountId)!;
+            email = account.EmailAddress;
         }
         else
         {

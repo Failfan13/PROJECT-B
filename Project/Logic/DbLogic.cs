@@ -3,36 +3,87 @@ using Postgrest.Models;
 
 public class DbLogic
 {
-    public List<T> GetAll<T>() where T : BaseModel, new()
+    private static Supabase.Client _supabase = DbAccess.GetClient();
+
+    public static async Task<List<T>> GetAll<T>() where T : BaseModel, new()
     {
-        return (List<T>)Convert.ChangeType(DbAccess.LoadAll<T>(), typeof(List<T>));
+        var result = await _supabase.From<T>().Get();
+
+        return result.Models;
     }
 
-    public void UpdateItem<T>(T model) where T : BaseModel2, new()
+    // insert new data
+    public static async Task InsertItem<T>(T model) where T : BaseModel, new()
     {
-        DbAccess.UpdateItem<T>(model);
+        await _supabase.From<T>().Insert(model);
     }
 
-    public void RemoveItem<T>(T model) where T : BaseModel2, new()
+    // update an item
+    public static async Task UpdateItem<T>(T changedModel) where T : BaseModel, new()
     {
-        DbAccess.RemoveItem<T>(model);
+        await changedModel.Update<T>();
     }
 
-    public void RemoveItemById<T>(int id) where T : BaseModel2, new()
+    // update or add an item
+    public static async Task UpsertItem<T>(T changedModel) where T : BaseModel, new()
     {
-        DbAccess.RemoveItemById<T>(id);
+        await _supabase.From<T>().Upsert(changedModel);
     }
 
-    public T GetById<T>(int id) where T : BaseModel2, new()
+    // remove an item
+    public static async Task RemoveItem<T>(T model) where T : BaseModel, new()
     {
-        return (T)Convert.ChangeType(DbAccess.GetById<T>(id), typeof(T))!;
+        await _supabase.From<T>().Delete(model);
     }
 
-    //--------Accounts Logic--------
-
-    public T LoginAs<T>(Dictionary<string, string> loginDetails) where T : BaseModel, new()
+    // remove an item by auto generated id
+    public static async Task RemoveItemById<T>(int id) where T : BaseModel, new()
     {
-        return (T)Convert.ChangeType(DbAccess.Login<T>(loginDetails), typeof(T))!;
+        await _supabase.From<T>()
+            .Where(x => (x as DbIndex).Id == id)
+            .Delete();
     }
 
+    // check if exists
+    public static async Task<bool> ItemExists<T>(T model) where T : BaseModel, new()
+    {
+        List<T> result = (List<T>)Convert.ChangeType(await _supabase.From<T>().Match(model).Single(), typeof(List<T>))!;
+
+        return result.Count > 0;
+    }
+
+    // get item by id
+    public static async Task<T> GetById<T>(int id) where T : BaseModel, new()
+    {
+        var result = await _supabase.From<T>()
+            .Where(x => (x as DbIndex).Id == id)
+            .Single();
+
+        return result!;
+    }
+
+    // get account by login details
+    public static async Task<T> LoginAs<T>(Dictionary<string, string> loginDetails) where T : BaseModel, new()
+    {
+        var result = await _supabase.From<T>()
+            .Match(loginDetails)
+            .Single();
+
+        return result!;
+    }
+
+    // get account by email
+    public static async Task<T> GetByEmail<T>(string emailAddress) where T : BaseModel, new()
+    {
+        var eDict = new Dictionary<string, string>
+        {
+            {"email", emailAddress}
+        };
+
+        var result = await _supabase.From<T>()
+            .Match(eDict)
+            .Single();
+
+        return result!;
+    }
 }

@@ -50,9 +50,9 @@ public static class Contact
             "User complaint","Employee complaint", "other"
         };
         List<Action> Actions = new List<Action>();
-        Actions.Add(() => AddComplaint("User"));
-        Actions.Add(() => AddComplaint("Employee"));
-        Actions.Add(() => AddComplaint("Other"));
+        Actions.Add(async () => await AddComplaint("User"));
+        Actions.Add(async () => await AddComplaint("Employee"));
+        Actions.Add(async () => await AddComplaint("Other"));
 
         Options.Add("Return");
         Actions.Add(() => Start());
@@ -62,7 +62,7 @@ public static class Contact
         Start();
     }
 
-    private static void AddComplaint(string type)
+    private async static Task AddComplaint(string type)
     {
         bool ongoingMovie = false;
 
@@ -100,7 +100,7 @@ public static class Contact
 
             if (AccountsLogic.CurrentAccount != null)
             {
-                AL.AddComplaint(type, place);
+                await AL.AddComplaint(type, place);
             }
             Start();
         }
@@ -121,7 +121,7 @@ public static class Contact
 
                 complaint = type + $": {complaint}";
 
-                AL.AddComplaint(type, complaint);
+                await AL.AddComplaint(type, complaint);
 
                 Console.Clear();
                 Console.WriteLine("Your complaint has been sent. We will get back to you as soon as possible");
@@ -131,7 +131,7 @@ public static class Contact
         }
     }
 
-    public static void ViewComplaints(AccountModel account)
+    public async static Task ViewComplaints(AccountModel account)
     {
         if (account.Complaints.Count == 0)
         {
@@ -140,10 +140,10 @@ public static class Contact
             QuestionLogic.AskEnter();
         }
 
-        ViewAllComplaints(account);
+        await ViewAllComplaints(account);
     }
 
-    public static void ViewAllComplaints(AccountModel account = null!)
+    public async static Task ViewAllComplaints(AccountModel account = null!)
     {
         AccountsLogic AL = new AccountsLogic();
 
@@ -151,7 +151,7 @@ public static class Contact
 
         if (account == null)
         {
-            foreach (var acc in AL.GetAllAccounts().Where(a => a.Complaints.Count > 0))
+            foreach (var acc in (await AL.GetAllAccounts()).Where(a => a.Complaints.Count > 0))
             {
                 Console.Write("UserId:" + acc.Id + "\n");
                 foreach (var complaint in acc.Complaints)
@@ -172,7 +172,7 @@ public static class Contact
             foreach (var complaint in account.Complaints)
             {
                 Options.Add(complaint.ToString());
-                Actions.Add(() => AccountsLogic.EditComplaint(account, account.Complaints.IndexOf(complaint)));
+                Actions.Add(async () => await AccountsLogic.EditComplaint(account, account.Complaints.IndexOf(complaint)));
             }
 
             Options.Add("Return");
@@ -200,7 +200,7 @@ public static class Contact
 
         Menu.Start();
     }
-  
+
     public static void Locations()
     {
         Console.Clear();

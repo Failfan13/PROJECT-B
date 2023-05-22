@@ -16,7 +16,9 @@ static class UserLogin
 
         if (AccountsLogic.CurrentAccount != null)
         {
-            Question = @$"Currently logged in as: {AccountsLogic.CurrentAccount!.FirstName + " " + AccountsLogic.CurrentAccount!.LastName} e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}";
+            Question = @$"Currently logged in as: {AccountsLogic.CurrentAccount!.FirstName + " " + AccountsLogic.CurrentAccount!.LastName} 
+e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}
+";
         }
 
         Question += "What would you like to do?";
@@ -28,24 +30,29 @@ static class UserLogin
             Options.Add("Login");
             Actions.Add(() => Login());
             Options.Add("Create new account");
-            Actions.Add(() => CreateNewUser());
+            Actions.Add(async () => await CreateNewUser());
         }
         else
         {
             Options.Add("Change password");
-            Actions.Add(() => ChangePassword());
+            Actions.Add(async () => await ChangePassword());
 
             Options.Add("Change advertisement settings");
-            Actions.Add(() => ChangeAdvertation());
+            Actions.Add(async () => await ChangeAdvertation());
+
+            Options.Add("Delete account");
+            Actions.Add(() => User.DeleteUser());
         }
 
         Options.Add("Return to main menu");
         Actions.Add(() => Menu.Start());
 
         MenuLogic.Question(Question, Options, Actions);
+
+        Start();
     }
 
-    public static void CreateNewUser()
+    public async static Task CreateNewUser()
     {
         EmailLogic EmailLogic = new EmailLogic();
         AccountsLogic AccountsLogic = new AccountsLogic();
@@ -55,7 +62,7 @@ static class UserLogin
         string pass = "";
         string Email = "";
         string Name = "";
-        string Date = "";
+        DateTime Date = DateTime.Now;
 
         string subject = "";
         string body = "";
@@ -83,13 +90,12 @@ static class UserLogin
         {
             Console.WriteLine("Please enter your date of birth (dd/mm/yyyy):");
             string input = Console.ReadLine();
-            DateTime dateOfBirth;
-            bool isValidDate = DateTime.TryParseExact(input, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateOfBirth);
 
-            if (isValidDate)
+            if (DateTime.TryParseExact(input, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,
+                out DateTime dateOfBirth))
             {
                 Console.WriteLine("Valid date: " + dateOfBirth.ToShortDateString());
-                Date = dateOfBirth.ToShortDateString();
+                Date = dateOfBirth;
                 CorrectDate = true;
             }
             else
@@ -131,12 +137,14 @@ Thank you.";
 
         EmailLogic.SendEmail(Email, subject, body);
 
-        AccountsLogic.NewAccount(Email, Name, pass, Date);
+        var acc = await AccountsLogic.NewAccount(Email, Name, pass, Date);
 
-        AccountsLogic.LogIn(Email, pass);
+        AccountsLogic.LogIn(Email, pass).Wait();
+
+        Menu.Start();
     }
 
-    public static void Login()
+    public static void Login() // Without .Result not working
     {
         if (AccountsLogic.CurrentAccount == null)
         {
@@ -145,14 +153,11 @@ Thank you.";
             string email = Console.ReadLine()!;
             Console.WriteLine("Please enter your password");
             string password = Console.ReadLine()!;
-            AccountModel acc = accountsLogic.CheckLogin(email, password)!;
+            AccountModel acc = Task.Run(() => accountsLogic.CheckLogin(email, password)).Result;
             if (acc != null)
             {
                 Console.Clear();
                 Logger.SystemLog("Logged in");
-                Console.WriteLine("Welcome back " + acc.FirstName);
-
-                QuestionLogic.AskEnter();
                 Menu.Start();
             }
             else
@@ -162,10 +167,7 @@ Thank you.";
                 Menu.Start();
             }
         }
-        else
-        {
-            Menu.Start();
-        }
+        Menu.Start();
     }
 
     public static void Logout()
@@ -182,36 +184,51 @@ Thank you.";
             Menu.Start();
         }
     }
-    public static void ChangePassword()
+
+    public async static Task ChangePassword()
     {
         Console.WriteLine("Please enter old password");
         string oldpws = Console.ReadLine()!;
-        if (accountsLogic.CheckLogin(AccountsLogic.CurrentAccount!.EmailAddress, oldpws) == null)
+        if (AccountsLogic.CurrentAccount!.Password != oldpws)
         {
             Console.WriteLine("Wrong password");
-            ChangePassword();
+            await ChangePassword();
         }
         else
         {
             Console.WriteLine("Please enter new password");
             string newpassword = Console.ReadLine()!;
-            accountsLogic.NewPassword(newpassword);
+            await accountsLogic.NewPassword(newpassword);
         }
     }
 
-    public static void ChangeAdvertation()
+    public async static Task ChangeAdvertation()
     {
-        Console.WriteLine($"Would you like to {(AccountsLogic.CurrentAccount!.AdMails ? "still" : "")} receive ad-mails? (y/n)");
-        string adChoice = Console.ReadLine()!;
+        Console.WriteLine($"Would you like to{(AccountsLogic.CurrentAccount!.AdMails ? " still " : " ")}receive ad-mails? (y/n)");
+        string adChoice = Console.ReadLine()!.ToLower();
 
-        if (adChoice.ToLower() == "n") AccountsLogic.CurrentAccount.AdMails = false;
+        if (adChoice == "y")
+        {
+            AccountsLogic.CurrentAccount.AdMails = true;
+            Console.WriteLine("The ad-mails" + (AccountsLogic.CurrentAccount.AdMails ? " will be " : " are already ") + "enabled");
+        }
+        else if (adChoice == "n")
+        {
+            AccountsLogic.CurrentAccount.AdMails = false;
+            Console.WriteLine("The ad-mails" + (AccountsLogic.CurrentAccount.AdMails ? " will be " : " are already ") + "disabled");
+        }
 
-        Console.WriteLine("The ad-mails will be " + (AccountsLogic.CurrentAccount.AdMails ? "enabled" : "disabled"));
-
-        Start();
+        try
+        {
+            await DbLogic.UpdateItem<AccountModel>(AccountsLogic.CurrentAccount);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
 
-    public static void SignUpMails(string existingEmail = "")
+    public async static void SignUpMails(string existingEmail = "")
     {
         EmailLogic EmailLogic = new EmailLogic();
         AccountsLogic AccountsLogic = new AccountsLogic();
@@ -246,9 +263,9 @@ Thank you.";
             }
             else
             {
-                var account = AccountsLogic.GetById(AccountsLogic.CurrentAccount.Id);
-                account.AdMails = true;
-                email = account.EmailAddress;
+                AccountsLogic.CurrentAccount.AdMails = true;
+                await DbLogic.UpdateItem<AccountModel>(AccountsLogic.CurrentAccount);
+                email = AccountsLogic.CurrentAccount.EmailAddress;
             }
 
             subject = "Subscribed to ad-mails";
@@ -262,8 +279,8 @@ To unsubscribe from these emails, please log into your account and turn off the 
 
             EmailLogic.SendEmail(email, subject, body);
         }
-        return;
     }
+
     public static string AskEmail()
     {
         EmailLogic EmailLogic = new EmailLogic();

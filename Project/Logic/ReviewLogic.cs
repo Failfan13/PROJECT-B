@@ -102,7 +102,7 @@ public class ReviewLogic
                 break;
             case (true, false):
                 question = "Select the user you would like to edit reviews for";
-                foreach (AccountModel user in AL.GetAllAccounts())
+                foreach (AccountModel user in AL.GetAllAccounts().Result)
                 {
                     options.Add(user.FirstName + " " + user.LastName);
                     actions.Add(() => ShowAvailableReviews(reviews.FindAll(r => r.AccountId == user.Id)));
@@ -113,7 +113,7 @@ public class ReviewLogic
                 break;
             case (true, true):
                 question = "Select the user and movie you would like to edit reviews for";
-                foreach (AccountModel user in AL.GetAllAccounts())
+                foreach (AccountModel user in AL.GetAllAccounts().Result)
                 {
                     options.Add(user.FirstName + " " + user.LastName);
                     actions.Add(() => ShowAvailableMovies(reviews.FindAll(r => r.AccountId == user.Id)));
@@ -131,9 +131,11 @@ public class ReviewLogic
         return AllReviews().FindAll(r => r.AccountId == accountId);
     }
 
-    public void ShowAvailableReviews(List<ReviewModel> reviews)
+    public async void ShowAvailableReviews(List<ReviewModel> reviews)
     {
         AccountsLogic AL = new AccountsLogic();
+
+        AccountModel reviewAccount = null!;
 
         string question = "Select the review you would like to edit";
         List<string> options = new List<string>();
@@ -141,7 +143,8 @@ public class ReviewLogic
 
         foreach (ReviewModel review in reviews)
         {
-            options.Add(@$"From user: {review.AccountId} - {AL.GetById(review.AccountId)!.FirstName + " " + AL.GetById(review.AccountId)!.LastName}, Date: {review.ReviewDate}, Review score: {review.Rating},
+            reviewAccount = await AL.GetById(review.AccountId)!;
+            options.Add(@$"From user: {review.AccountId} - {reviewAccount.FirstName + " " + reviewAccount.LastName}, Date: {review.ReviewDate}, Review score: {review.Rating},
 Message: {review.Review}
 ");
             actions.Add(() => EditReview(review));

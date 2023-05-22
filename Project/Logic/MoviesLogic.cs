@@ -23,7 +23,7 @@ public class MoviesLogic : Order<MovieModel>
 
     private async Task<List<MovieModel>> LoaderOpt()
     {
-        return await DbAccess.LoadAll<MovieModel>();
+        return await DbLogic.GetAll<MovieModel>();
     }
 
     public override void UpdateList(MovieModel movie)

@@ -3,9 +3,9 @@ public static class User
     static private AccountsLogic accounts = new AccountsLogic();
 
 
-    public static void SelectUser()
+    public async static void SelectUser()
     {
-        List<AccountModel> allAccounts = accounts.GetAllAccounts();
+        List<AccountModel> allAccounts = await accounts.GetAllAccounts();
         string Question = "Which user would you like to view?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
@@ -19,9 +19,9 @@ public static class User
 
         MenuLogic.Question(Question, Options, Actions);
     }
-    public static void Info(int userID)
+    public async static void Info(int userID)
     {
-        AccountModel account = accounts.GetById(userID)!;
+        AccountModel account = await accounts.GetById(userID)!;
         if (account != null) Info(account);
     }
 
@@ -36,10 +36,10 @@ public static class User
         Actions.Add(() => EditUser(account));
 
         Options.Add("Delete user");
-        Actions.Add(() => DeleteUser(account));
+        Actions.Add(async () => await DeleteUser(account));
 
         Options.Add("View Compaints");
-        Actions.Add(() => Contact.ViewComplaints(account));
+        Actions.Add(async () => await Contact.ViewComplaints(account));
 
         Options.Add("\nReturn");
         Actions.Add(() => SelectUser());
@@ -55,13 +55,13 @@ public static class User
         List<Action> Actions = new List<Action>();
 
         Options.Add("Change name");
-        Actions.Add(() => ChangeName(account));
+        Actions.Add(async () => await ChangeName(account));
 
         Options.Add("Change Email");
-        Actions.Add(() => ChangeEmail(account));
+        Actions.Add(async () => await ChangeEmail(account));
 
         Options.Add("Change password");
-        Actions.Add(() => ChangePass(account));
+        Actions.Add(async () => await ChangePass(account));
 
         Options.Add("\nReturn");
         Actions.Add(() => Info(account));
@@ -69,7 +69,7 @@ public static class User
         MenuLogic.Question(Question, Options, Actions);
     }
 
-    public static void ChangeName(AccountModel account)
+    public async static Task ChangeName(AccountModel account)
     {
         string Question = "What is the new name?";
         List<string> Options = new List<string>();
@@ -77,10 +77,10 @@ public static class User
 
         account.FirstName = QuestionLogic.AskString(Question);
         AccountsLogic aa = new AccountsLogic();
-        aa.UpdateList(account);
+        await aa.UpdateList(account);
     }
 
-    public static void ChangePass(AccountModel account)
+    public async static Task ChangePass(AccountModel account)
     {
         string Question = "What is the new password?";
         string Question2 = "Confirm password";
@@ -101,10 +101,10 @@ public static class User
             }
         }
         AccountsLogic aa = new AccountsLogic();
-        aa.UpdateList(account);
+        await aa.UpdateList(account);
     }
 
-    public static void ChangeEmail(AccountModel account)
+    public async static Task ChangeEmail(AccountModel account)
     {
         string Question = "What is the new email?";
         List<string> Options = new List<string>();
@@ -112,11 +112,30 @@ public static class User
 
         account.EmailAddress = QuestionLogic.AskString(Question);
         AccountsLogic aa = new AccountsLogic();
-        aa.UpdateList(account);
+        await aa.UpdateList(account);
     }
 
-    public static void DeleteUser(AccountModel account)
+    public static void DeleteUser()
     {
+        if (AccountsLogic.CurrentAccount == null) return;
+
+        var userWrite = AccountsLogic.CurrentAccount.DateOfBirth.Date.ToShortDateString();
+        Console.Clear();
+        Console.WriteLine($"To delete the account please write: {userWrite}");
+        var answer = Console.ReadLine();
+
+        if (answer == userWrite.ToString())
+        {
+            DbLogic.RemoveItem<AccountModel>(AccountsLogic.CurrentAccount);
+            AccountsLogic.CurrentAccount = null;
+            Menu.Start();
+        }
+    }
+
+    public async static Task DeleteUser(AccountModel account)
+    {
+        AccountsLogic AL = new AccountsLogic();
+
         string Question = "Are you sure you want to delete this user?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
@@ -124,9 +143,7 @@ public static class User
         string confdelete = QuestionLogic.AskString(Question);
         if (confdelete == "yes")
         {
-            AccountsLogic aa = new AccountsLogic();
-            aa.DeleteUser(account.Id);
-            aa.UpdateList(account);
+            await AL.DeleteUser(account.Id);
             SelectUser();
         }
         else

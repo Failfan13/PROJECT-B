@@ -10,14 +10,14 @@ public class EmailLogic
     }
 
     public void SendAllEmail(string subject, string body) => this.SendEmail("", subject, body);
-    public void SendEmail(string to, string subject, string body)
+    public async void SendEmail(string to, string subject, string body)
     {
         MimeMessage message = new MimeMessage();
         List<MailboxAddress> emailAddresses = new List<MailboxAddress>();
 
         if (!to.Contains("@"))
         {
-            foreach (AccountModel email in GetAllAccounts())
+            foreach (AccountModel email in await GetAllAccounts())
             {
                 emailAddresses.Add(MailboxAddress.Parse(email.EmailAddress));
             }
@@ -64,10 +64,10 @@ public class EmailLogic
         }
     }
 
-    public List<AccountModel> GetAllAccounts()
+    public async Task<List<AccountModel>> GetAllAccounts()
     {
         AccountsLogic AccountsLogic = new AccountsLogic();
-        return AccountsLogic.GetAllAccounts().FindAll(a => a.AdMails == true);
+        return (await AccountsLogic.GetAllAccounts()).FindAll(a => a.AdMails == true);
     }
 
     public bool ValidateEmail(string email)
@@ -82,18 +82,18 @@ public class EmailLogic
         MoviesLogic ML = new MoviesLogic();
 
         // Every movie more then 0 follower
-        foreach (MovieModel movie in ML.AllMovies(true).Where(m => m.Followers.Count > 0))
-        {
-            // send notice when date reached and date within 7 days
-            if (movie.ReleaseDate.Date >= DateTime.Now.AddDays(-7) &&
-            movie.ReleaseDate.Date < DateTime.Now)
-            {
-                NotifyFollowers(movie);
-            }
-        }
+        // foreach (MovieModel movie in ML.AllMovies(true).Where(m => m.Followers.Count > 0))
+        // {
+        //     // send notice when date reached and date within 7 days
+        //     if (movie.ReleaseDate.Date >= DateTime.Now.AddDays(-7) &&
+        //     movie.ReleaseDate.Date < DateTime.Now)
+        //     {
+        //         NotifyFollowers(movie);
+        //     }
+        // }
     }
 
-    private void NotifyFollowers(MovieModel movie)
+    private async void NotifyFollowers(MovieModel movie)
     {
         MoviesLogic ML = new MoviesLogic();
         AccountsLogic AccountsLogic = new AccountsLogic();
@@ -104,7 +104,7 @@ public class EmailLogic
         {
             try
             {
-                account = AccountsLogic.GetById(AccountId)!;
+                account = await AccountsLogic.GetById(AccountId)!;
                 message = NewMovieMessage(movie, account);
 
                 SendEmail(account.EmailAddress, message.Item1, message.Item2);

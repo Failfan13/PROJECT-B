@@ -36,7 +36,7 @@ static class Menu
             Actions.Add(() => Console.WriteLine("No Work bruh"));
 
             Options.Add("Change a reservation");
-            Actions.Add(() => Reservation.EditReservation());
+            Actions.Add(async () => await Reservation.EditReservation());
 
             Options.Add("Review past reservation");
             Actions.Add(() => Movies.AddReviewMenu());
@@ -68,7 +68,7 @@ static class Menu
             Actions.Add(() => Movies.EditReviewsMenu());
 
             Options.Add("View all complaints");
-            Actions.Add(() => Contact.ViewAllComplaints());
+            Actions.Add(async () => await Contact.ViewAllComplaints());
         }
 
         // Logout & account settings

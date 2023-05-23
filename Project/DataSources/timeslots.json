@@ -92,6 +92,42 @@
         {
           "id": 2,
           "seatType": "basic"
+        },
+        {
+          "id": 45,
+          "seatType": "luxury"
+        },
+        {
+          "id": 46,
+          "seatType": "luxury"
+        },
+        {
+          "id": 55,
+          "seatType": "luxury"
+        },
+        {
+          "id": 56,
+          "seatType": "luxury"
+        },
+        {
+          "id": 51,
+          "seatType": "basic"
+        },
+        {
+          "id": 61,
+          "seatType": "basic"
+        },
+        {
+          "id": 71,
+          "seatType": "basic"
+        },
+        {
+          "id": 81,
+          "seatType": "basic"
+        },
+        {
+          "id": 59,
+          "seatType": "basic"
         }
       ]
     },
@@ -113,7 +149,16 @@
     "start": "2011-11-11T11:11:00",
     "theatre": {
       "id": 0,
-      "reservedSeats": []
+      "reservedSeats": [
+        {
+          "id": 11,
+          "seatType": "basic"
+        },
+        {
+          "id": 21,
+          "seatType": "basic"
+        }
+      ]
     },
     "format": ""
   },

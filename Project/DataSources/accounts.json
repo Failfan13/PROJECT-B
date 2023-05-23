@@ -45,7 +45,7 @@
   },
   {
     "id": 5,
-    "emailAddress": "1",
+    "emailAddress": "mmsb01@sc.co",
     "password": "1",
     "fullName": "1",
     "dateofbirth": null,
@@ -60,7 +60,7 @@
     "password": "2",
     "fullName": "2",
     "dateofbirth": null,
-    "admin": true,
+    "admin": false,
     "adMails": false,
     "adult": false,
     "complaints": []

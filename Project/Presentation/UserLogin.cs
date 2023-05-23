@@ -136,11 +136,10 @@ If this wasent a mistake, please contact the administrator.
 Thank you.";
 
         EmailLogic.SendEmail(Email, subject, body);
-
-        var acc = await AccountsLogic.NewAccount(Email, Name, pass, Date);
+        
+        AccountsLogic.NewAccount(Email, Name, pass, Date);
 
         AccountsLogic.LogIn(Email, pass).Wait();
-
         Menu.Start();
     }
 

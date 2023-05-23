@@ -32,8 +32,7 @@ static class Menu
         if (AccountsLogic.CurrentAccount != null && !AccountsLogic.CurrentAccount.Admin)
         {
             Options.Add("See all reservations");
-            //Actions.Add(() => Reservation.AllReservations());
-            Actions.Add(() => Console.WriteLine("No Work bruh"));
+            Actions.Add(() => ReservationLogic.MenuReservation());
 
             Options.Add("Change a reservation");
             Actions.Add(() => Reservation.EditReservation());

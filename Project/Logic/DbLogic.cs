@@ -62,8 +62,10 @@ public class DbLogic
         return result!;
     }
 
+    // ----------- AccountLogic ---------- //
+
     // get account by login details
-    public static async Task<T> LoginAs<T>(Dictionary<string, string> loginDetails) where T : BaseModel, new()
+    public static async Task<T> LoginAs<T>(Dictionary<string, string> loginDetails) where T : AccountModel, new()
     {
         var result = await _supabase.From<T>()
             .Match(loginDetails)
@@ -73,7 +75,7 @@ public class DbLogic
     }
 
     // get account by email
-    public static async Task<T> GetByEmail<T>(string emailAddress) where T : BaseModel, new()
+    public static async Task<T> GetByEmail<T>(string emailAddress) where T : AccountModel, new()
     {
         var eDict = new Dictionary<string, string>
         {

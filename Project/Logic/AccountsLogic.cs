@@ -18,7 +18,7 @@ public class AccountsLogic
     // pass model to update
     public async Task UpdateList(AccountModel account)
     {
-        await DbLogic.UpdateItem(account);
+        await DbLogic.UpsertItem(account);
     }
 
     // get currect account userId

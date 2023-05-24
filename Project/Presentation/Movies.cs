@@ -140,7 +140,7 @@ static class Movies
         List<string> Options = new List<string>() { "Add a category", "Remove a category" };
         List<Action> Actions = new List<Action>();
 
-        Actions.Add(() => CategoryLogic.AddCategory(movie));
+        Actions.Add(() => CategoryLogic.AddCategoryToMovie(movie));
         Actions.Add(() => CategoryLogic.RemoveCategory(movie));
 
         MenuLogic.Question(Question, Options, Actions);

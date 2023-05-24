@@ -143,7 +143,7 @@ public static class Filter
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        foreach (CategoryModel category in CategoryLogic.AllCategories())
+        foreach (CategoryModel category in CategoryLogic.GetAllCategories().Result)
         {
             Options.Add(category.Name);
             Actions.Add(() => Filter.AppliedFilters.Categories.Add(category));

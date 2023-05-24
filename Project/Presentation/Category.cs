@@ -16,8 +16,7 @@ public static class Category
     public static void NewCatMenu()
     {
         string newCat = QuestionLogic.AskString("What name should the new category have?");
-        CategoryModel newCatModel = new CategoryModel();
-        CL.NewCategory(newCatModel.NewCategoryModel(newCat));
+        CL.NewCategory(newCat);
     }
     public static void RemoveCatMenu()
     {

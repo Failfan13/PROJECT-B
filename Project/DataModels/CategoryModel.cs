@@ -4,7 +4,7 @@ using Postgrest.Models;
 [Table("categories")]
 public class CategoryModel : BaseModel
 {
-    [PrimaryKey("id")]
+    [PrimaryKey("id", false)]
     public int Id { get; set; }
 
     [Column("name")]

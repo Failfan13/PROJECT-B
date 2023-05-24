@@ -5,7 +5,7 @@ public static class User
 
     public async static void SelectUser()
     {
-        List<AccountModel> allAccounts = await accounts.GetAllAccounts();
+        List<AccountModel> allAccounts = accounts.GetAllAccounts().Result;
         string Question = "Which user would you like to view?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();

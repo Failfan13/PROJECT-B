@@ -138,7 +138,7 @@ public class AccountsLogic
             // Get Email
             if (inputIdOrMail.Contains("@")) account = await DbLogic.GetByEmail<AccountModel>(inputIdOrMail);
             // Get Id
-            else if (int.TryParse(inputIdOrMail, out int id)) account = await DbLogic.GetById<AccountModel>(id)!;
+            //else if (int.TryParse(inputIdOrMail, out int id)) account = await DbLogic.GetById<AccountModel>(id)!;///////////////////
             // No account found
             else return;
 

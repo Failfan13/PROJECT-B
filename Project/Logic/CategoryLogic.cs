@@ -32,12 +32,33 @@ public class CategoryLogic
     {
         return await DbLogic.GetById<CategoryModel>(id);
     }
+
+    public async Task<CategoryModel> NewCategory(CategoryModel category)
+    {
+        await DbLogic.UpsertItem<CategoryModel>(category);
+        return category;
+    }
+
     public async Task<CategoryModel> NewCategory(string name)
     {
         CategoryModel category = new CategoryModel();
         category = category.NewCategoryModel(name);
         await DbLogic.UpsertItem<CategoryModel>(category);
         return category;
+    }
+
+    public async Task UpdateCategory(CategoryModel category) //Adds or changes category to list of categories
+    {
+        await UpdateList(category);
+    }
+
+    public void DeleteCategory(int CategoryInt) // Deletes category from list of categories
+    {
+        // account exists and is admin
+        if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
+        {
+            DbLogic.RemoveItemById<CategoryModel>(CategoryInt);
+        }
     }
 
     public void AddCategoryToMovie(MovieModel movie, CategoryModel category)
@@ -52,65 +73,50 @@ public class CategoryLogic
         MoviesLogic.UpdateList(movie);
     }
 
-    public async Task AddCategoryToMovie(MovieModel movie) // Adds category to movie
-    {
-        Console.Clear();
-        List<CategoryModel> AllCategories = await GetAllCategories();
-        List<int> catids = new List<int> { };
+    public void SwapMode() => _swapCategory = !_swapCategory;
 
-        foreach (CategoryModel cm in AllCategories)
-        {
-            Console.WriteLine($"{cm.Id} {cm.Name}");
-        }
-        int catid = (int)QuestionLogic.AskNumber("What Category do you want to add?\nPlease enter the number");
-        CategoryModel category = await GetById(catid)!;
-        if (!movie.Categories.Contains(category))
-        {
-            movie.Categories.Add(category);
-        }
-        MoviesLogic.UpdateList(movie);
-        Console.Clear();
-        Console.WriteLine("Current movie info:");
-        movie.Info();
-        QuestionLogic.AskEnter();
-        Movies.ChangeMovieMenu(movie);
-    }
-    public async Task RemoveCategory(MovieModel movie) // Removes category to movie
+    public void AddRemoveCategoryMovie(MovieModel movie)
     {
-        Console.Clear();
-        foreach (CategoryModel cm in movie.Categories)
-        {
-            Console.WriteLine($"{cm.Id} {cm.Name}");
-        }
-        int catid = (int)QuestionLogic.AskNumber("What Category do you want to remove?");
-        movie.Categories.Remove(await GetById(catid)!);
-        MoviesLogic.UpdateList(movie);
-        Console.Clear();
-        Console.WriteLine("Current movie info:");
-        movie.Info();
-        QuestionLogic.AskEnter();
-        Movies.ChangeMovieMenu(movie);
-    }
+        bool finishCategory = false;
 
-    public async Task CreateNewCategory(CategoryModel category) //Adds or changes category to list of categories
-    {
-        await UpdateList(category);
-    }
+        Console.Clear();
 
-    public async Task DeleteCategory(int CategoryInt) // Deletes category from list of categories
-    {
-        try
+        string Qeustion = "What would you like to do?";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
+
+        if (!_swapCategory)
         {
-            if (AccountsLogic.CurrentAccount.Admin == true)
+            Options.Add("Swap Mode, Currently: Adding category");
+        }
+        else
+        {
+            Options.Add("Swap Mode, Currently: Removing category");
+        }
+        Actions.Add(() => SwapMode());
+
+        if (!_swapCategory)
+        {
+            foreach (CategoryModel cat in GetAllCategories().Result.Where(cg => !movie.Categories.Any(c => c.Name == cg.Name)))
             {
-                await DbLogic.RemoveItemById<CategoryModel>(CategoryInt);
+                Options.Add(cat.Name);
+                Actions.Add(() => movie.Categories.Add(cat));
             }
         }
-        catch (System.Exception)
+        else
         {
-            Console.WriteLine("Not Admin");
+            foreach (CategoryModel cat in movie.Categories)
+            {
+                Options.Add(cat.Name);
+                Actions.Add(() => movie.Categories.Remove(cat));
+            }
         }
-    }
 
-    public void SwapMode() => _swapCategory = !_swapCategory;
+        Options.Add($"\nFinish {(_swapCategory ? "Removing" : "Adding")} categories");
+        Actions.Add(() => finishCategory = true);
+
+        MenuLogic.Question(Qeustion, Options, Actions);
+
+        if (!finishCategory) AddRemoveCategoryMovie(movie);
+    }
 }

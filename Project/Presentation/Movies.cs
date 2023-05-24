@@ -135,15 +135,8 @@ static class Movies
 
     public static void ChangeCategory(MovieModel movie)
     {
-        Console.Clear();
-        string Question = "What would you like to do?";
-        List<string> Options = new List<string>() { "Add a category", "Remove a category" };
-        List<Action> Actions = new List<Action>();
-
-        Actions.Add(() => CategoryLogic.AddCategoryToMovie(movie));
-        Actions.Add(() => CategoryLogic.RemoveCategory(movie));
-
-        MenuLogic.Question(Question, Options, Actions);
+        CategoryLogic CL = new CategoryLogic();
+        CL.AddRemoveCategoryMovie(movie);
     }
 
     private static void ChangeTitle(MovieModel movie)

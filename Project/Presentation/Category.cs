@@ -17,7 +17,7 @@ public static class Category
     {
         string newCat = QuestionLogic.AskString("What name should the new category have?");
         CategoryModel newCatModel = new CategoryModel();
-        CL.CreateNewCategory(newCatModel.NewCategoryModel(newCat));
+        CL.NewCategory(newCatModel.NewCategoryModel(newCat));
     }
     public static void RemoveCatMenu()
     {
@@ -28,7 +28,7 @@ public static class Category
         foreach (CategoryModel cat in CL.GetAllCategories().Result)
         {
             Options.Add(cat.Name);
-            Actions.Add(async () => await CL.DeleteCategory(cat.Id));
+            Actions.Add(() => CL.DeleteCategory(cat.Id));
         }
         Options.Add("\nReturn");
         Actions.Add(() => Start());

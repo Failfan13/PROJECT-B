@@ -4,7 +4,7 @@ using Postgrest.Models;
 [Table("accounts")]
 public class AccountModel : BaseModel
 {
-    [PrimaryKey("id")]
+    [PrimaryKey("id", false)]
     public int Id { get; set; }
 
     [Column("first_name")]

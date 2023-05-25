@@ -45,6 +45,15 @@ public class TimeSlotModel
         return TL.GetNewestId();
     }
 
+    public bool TimeinPast()
+    {
+        if (Start < DateTime.Now)
+        {
+            return true;
+        }
+        return false;
+    }
+
     // Helps to deserialize theatre info
     public class Helper
     {

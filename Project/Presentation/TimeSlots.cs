@@ -30,15 +30,23 @@ static class TimeSlots
 
             foreach (TimeSlotModel time in tsms)
             {
-                if (time.Format != "" && time.Format != "standard")
-                {
-                    Options.Add($"{time.Start} -Type : {time.Format}");
-                    Actions.Add(() => Reservation.FormatPrompt(() => Theatre.SelectSeats(time, IsEdited)));
+                if(time.TimeinPast() == false) {
+
+                    if (time.Format != "" && time.Format != "standard" && time.TimeinPast() == false)
+                    {
+                        Options.Add($"{time.Start} -Type : {time.Format}");
+                        Actions.Add(() => Reservation.FormatPrompt(() => Theatre.SelectSeats(time, IsEdited)));
+                    }
+                    else
+                    {
+                        Options.Add($"{time.Start}");
+                        Actions.Add(() => Theatre.SelectSeats(time, IsEdited));
+                    }
                 }
-                else
-                {
-                    Options.Add($"{time.Start}");
-                    Actions.Add(() => Theatre.SelectSeats(time, IsEdited));
+                else{
+                    Question = "Unfortunately, the selected movie is not currently playing in any theaters.";
+                    Options.Add($"Return");
+                    Actions.Add(() => Reservation.FilterMenu());
                 }
             }
 

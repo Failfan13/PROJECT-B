@@ -16,10 +16,12 @@
     "Formats": [
       "standard"
     ],
+    "followers": [],
     "reviews": {
       "amount": 0,
       "stars": 0
-    }
+    },
+    "ads": false
   },
   {
     "id": 1,
@@ -46,10 +48,12 @@
     "Formats": [
       "standard"
     ],
+    "followers": [],
     "reviews": {
       "amount": 9,
       "stars": 2.4
-    }
+    },
+    "ads": false
   },
   {
     "id": 2,
@@ -72,10 +76,12 @@
     "Formats": [
       "standard"
     ],
+    "followers": [],
     "reviews": {
       "amount": 0,
       "stars": 0
-    }
+    },
+    "ads": false
   },
   {
     "id": 3,
@@ -89,9 +95,65 @@
     "Formats": [
       "standard"
     ],
+    "followers": [],
     "reviews": {
       "amount": 0,
       "stars": 0
-    }
+    },
+    "ads": false
+  },
+  {
+    "id": 4,
+    "title": "TEST",
+    "release_date": "2023-05-23T00:00:00",
+    "director": "Fsfs",
+    "description": "....",
+    "duration": 304,
+    "price": 23,
+    "categories": [
+      {
+        "id": 6,
+        "name": "18\u002B"
+      },
+      {
+        "id": 5,
+        "name": "Horror"
+      }
+    ],
+    "Formats": [
+      "standard",
+      "imax"
+    ],
+    "followers": [],
+    "reviews": {
+      "amount": 0,
+      "stars": 0
+    },
+    "ads": false
+  },
+  {
+    "id": 5,
+    "title": "JAJAJ",
+    "release_date": "2023-05-26T00:00:00",
+    "director": "f",
+    "description": "f",
+    "duration": 324,
+    "price": 55,
+    "categories": [
+      {
+        "id": 1,
+        "name": "action"
+      }
+    ],
+    "Formats": [
+      "standard",
+      "imax"
+    ],
+    "followers": [],
+    "reviews": {
+      "amount": 0,
+      "stars": 0
+    },
+    "ads": false
   }
 ]

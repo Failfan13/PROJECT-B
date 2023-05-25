@@ -103,3 +103,25 @@ D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\PROJECT-B\Project\bin\Debug\net
 D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\PROJECT-B\Project\bin\Debug\net6.0\Project.pdb
 D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\PROJECT-B\Project\obj\Debug\net6.0\Project.genruntimeconfig.cache
 D:\OneDrive - Hogeschool Rotterdam\OP3\PROJECT-B\PROJECT-B\Project\obj\Debug\net6.0\ref\Project.dll
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\bin\Debug\net6.0\Project.exe
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\bin\Debug\net6.0\Project.deps.json
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\bin\Debug\net6.0\Project.runtimeconfig.json
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\bin\Debug\net6.0\Project.dll
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\bin\Debug\net6.0\Project.pdb
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\bin\Debug\net6.0\CsvHelper.dll
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\bin\Debug\net6.0\MailKit.dll
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\bin\Debug\net6.0\MimeKit.dll
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\obj\Debug\net6.0\Project.csproj.AssemblyReference.cache
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\obj\Debug\net6.0\Project.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\obj\Debug\net6.0\Project.AssemblyInfoInputs.cache
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\obj\Debug\net6.0\Project.AssemblyInfo.cs
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\obj\Debug\net6.0\Project.csproj.CoreCompileInputs.cache
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\obj\Debug\net6.0\Project.csproj.CopyComplete
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\obj\Debug\net6.0\Project.dll
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\obj\Debug\net6.0\refint\Project.dll
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\obj\Debug\net6.0\Project.pdb
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\obj\Debug\net6.0\Project.genruntimeconfig.cache
+C:\Users\mmsb0\OneDrive\Documents\GitHub\PROJECT-B\Project\obj\Debug\net6.0\ref\Project.dll

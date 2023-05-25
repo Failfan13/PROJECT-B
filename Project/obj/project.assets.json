@@ -379,19 +379,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\erikm\\.nuget\\packages\\": {}
+    "C:\\Users\\mmsb0\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj",
+      "projectUniqueName": "C:\\Users\\mmsb0\\OneDrive\\Documents\\GitHub\\PROJECT-B\\Project\\Project.csproj",
       "projectName": "Project",
-      "projectPath": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj",
-      "packagesPath": "C:\\Users\\erikm\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\obj\\",
+      "projectPath": "C:\\Users\\mmsb0\\OneDrive\\Documents\\GitHub\\PROJECT-B\\Project\\Project.csproj",
+      "packagesPath": "C:\\Users\\mmsb0\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mmsb0\\OneDrive\\Documents\\GitHub\\PROJECT-B\\Project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\erikm\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\mmsb0\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -440,7 +440,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.407\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.405\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -214,3 +214,5 @@ timestamp,type,id,action,user_id
 2023-05-16 11:24:13,AccountModel,7,Added,
 2023-05-16 11:26:04,AccountModel,8,Added,
 2023-05-16 11:28:22,AccountModel,9,Added,
+2023-05-25 08:49:32,MovieModel,4,Added,2
+2023-05-25 08:49:53,MovieModel,4,Updated,2

@@ -40,7 +40,7 @@ static class Movies
             Console.WriteLine("What is the release date of the movie? (dd/mm/yyyy): ");
             try
             {
-                releaseDate = Convert.ToDateTime(Console.ReadLine());
+                releaseDate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 correctDate = true;
             }
             catch (System.Exception)
@@ -215,7 +215,7 @@ static class Movies
             Console.WriteLine("What is the release date of the movie? (dd/mm/yyyy): ");
             try
             {
-                NewReleaseDate = Convert.ToDateTime(Console.ReadLine());
+                NewReleaseDate = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 CorrectDate = false;
             }
             catch (System.Exception)

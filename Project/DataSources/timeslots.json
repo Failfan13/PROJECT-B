@@ -113,7 +113,16 @@
     "start": "2011-11-11T11:11:00",
     "theatre": {
       "id": 0,
-      "reservedSeats": []
+      "reservedSeats": [
+        {
+          "id": 11,
+          "seatType": "basic"
+        },
+        {
+          "id": 12,
+          "seatType": "basic"
+        }
+      ]
     },
     "format": ""
   },

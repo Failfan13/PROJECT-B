@@ -25,18 +25,19 @@ public class ReservationLogic
     {
         //Find if there is already an model with the same id
         int index = Reservations.FindIndex(s => s.Id == ress.Id);
+        var MV = GetMovieFromRess(ress);
 
         if (index != -1)
         {
             //update existing model
             Reservations[index] = ress;
-            Logger.LogDataChange<ReservationModel>(ress.Id, "Updated");
+            Logger.LogDataChange<ReservationModel>(MV.Id, "Updated");
         }
         else
         {
             //add new model
             Reservations.Add(ress);
-            Logger.LogDataChange<ReservationModel>(ress.Id, "Added");
+            Logger.LogDataChange<ReservationModel>(MV.Id, "Added");
         }
         ReservationAccess.WriteAll(Reservations);
 

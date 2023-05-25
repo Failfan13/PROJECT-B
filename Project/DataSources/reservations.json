@@ -37,8 +37,43 @@
       "1": 2,
       "2": 2
     },
-    "account_id": 4,
-    "date_time": "2023-03-31T19:28:31.0164436+02:00",
-    "format": null
+    "account_id": -1,
+    "date_time": "2023-05-16T10:31:28.1715062+02:00",
+    "format": "",
+    "discountCode": ""
+  },
+  {
+    "id": 3,
+    "timeslot_id": 3,
+    "seats": [
+      {
+        "id": 21,
+        "seatType": "basic"
+      },
+      {
+        "id": 22,
+        "seatType": "basic"
+      }
+    ],
+    "snacks": null,
+    "account_id": 1,
+    "date_time": "2023-05-25T13:13:26.0286483+02:00",
+    "format": "",
+    "discountCode": ""
+  },
+  {
+    "id": 4,
+    "timeslot_id": 1,
+    "seats": [
+      {
+        "id": 11,
+        "seatType": "basic"
+      }
+    ],
+    "snacks": {},
+    "account_id": 1,
+    "date_time": "2023-05-25T13:14:50.3521453+02:00",
+    "format": "",
+    "discountCode": ""
   }
 ]

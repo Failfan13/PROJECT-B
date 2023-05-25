@@ -14,13 +14,13 @@ public static class Contact
         string Question = "Select an option\n";
         List<string> Options = new List<string>()
         {
-            "Contact information","Make a Complaint","Emergency","See locations"
+            "Contact information","Make a Complaint","Emergency","Cinema locations"
         };
         List<Action> Actions = new List<Action>();
         Actions.Add(() => Contact.contact());
         Actions.Add(() => Contact.ComplaintMenu());
         Actions.Add(() => Contact.Emergency());
-        Actions.Add(() => Locations());
+        Actions.Add(() => LocationsLogic.ViewAllLocations());
 
         // Return to Login menu
         Options.Add("Return");
@@ -197,20 +197,6 @@ public static class Contact
         Actions.Add(() => Start());
 
         MenuLogic.Question(Question, Options, Actions);
-
-        Menu.Start();
-    }
-
-    public static void Locations()
-    {
-        Console.Clear();
-        Console.WriteLine("CONTACT INFO HERE\n");
-        Console.WriteLine("Test bericht, wil je alle locaties zien? (y/n)");
-
-        if (Console.ReadKey().Key == ConsoleKey.Y)
-        {
-            LocationsLogic.ViewAllLocations();
-        }
 
         Menu.Start();
     }

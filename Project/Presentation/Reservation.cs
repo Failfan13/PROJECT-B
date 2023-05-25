@@ -41,7 +41,7 @@ public static class Reservation
                 {
                     reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
                     var timeslotVar = TimeSlotsLogic.GetById(reservation.TimeSlotId);
-                    reservationMovie = MoviesLogic.GetById(timeslotVar.MovieId);
+                    reservationMovie = MoviesLogic.GetById(timeslotVar.MovieId).Result;
 
                     if (reservationMovie != null && reservationDate != null)
                         Options.Add($"{reservationDate} - {reservationMovie.Title}");

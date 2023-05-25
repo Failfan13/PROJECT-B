@@ -51,7 +51,7 @@ The total price for the extra requirements will be: {formatDt?.Item} x {Seats.Co
         if (formatModel is TimeSlotModel)
         {
             TimeSlotModel? model = formatModel as TimeSlotModel;
-            MovieModel movieFormats = MoviesLogic.GetById(model!.MovieId)!;
+            MovieModel movieFormats = MoviesLogic.GetById(model!.MovieId)!.Result;
             if (movieFormats.Formats.Any())
             {
                 foreach (var format in movieFormats.Formats)

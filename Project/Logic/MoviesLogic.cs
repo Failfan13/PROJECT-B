@@ -5,61 +5,65 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-public class MoviesLogic : Order<MovieModel>
+public class MoviesLogic
 {
 
-    static private CategoryLogic CategoryLogic = new CategoryLogic();
-
-    private List<MovieModel> _movies;
-
-    //Static properties are shared across all instances of the class
-    //This can be used to get the current logged in account from anywhere in the program
-    //private set, so this can only be set by the class itself
-
-    public MoviesLogic()
-    {
-        _movies = LoaderOpt().Result;
-    }
-
-    private async Task<List<MovieModel>> LoaderOpt()
+    public async Task<List<MovieModel>> GetAllMovies()
     {
         return await DbLogic.GetAll<MovieModel>();
     }
-
-    public override void UpdateList(MovieModel movie)
+    // pass model to update
+    public async Task UpdateList(MovieModel movie)
     {
-        //Find if there is already an model with the same id
-        int index = _movies.FindIndex(s => s.Id == movie.Id);
-
-        if (index != -1)
-        {
-            //update existing model
-            _movies[index] = movie;
-            Logger.LogDataChange<MovieModel>(movie.Id, "Updated");
-        }
-        else
-        {
-            //add new model
-            _movies.Add(movie);
-            Logger.LogDataChange<MovieModel>(movie.Id, "Added");
-        }
-
-        MoviesAccess.WriteAll(_movies);
+        await DbLogic.UpdateItem(movie);
     }
 
-    public override MovieModel? GetById(int id)
+    public async Task UpsertList(MovieModel movie)
     {
-        return _movies.Find(i => i.Id == id);
+        await DbLogic.UpsertItem(movie);
+    }
+
+    public async Task<MovieModel>? GetById(int id)
+    {
+        return await DbLogic.GetById<MovieModel>(id);
+    }
+
+    public async Task<MovieModel> NewMovie(MovieModel movie)
+    {
+        await DbLogic.InsertItem<MovieModel>(movie);
+        return movie;
+    }
+
+    public async Task<MovieModel> NewMovie(string title, DateTime releaseDate, string director, string description, int duration, double price)
+    {
+        MovieModel movie = new MovieModel();
+        movie = movie.NewMovieModel(title, releaseDate, director, description, duration, price);
+        await DbLogic.UpsertItem<MovieModel>(movie);
+        return movie;
+    }
+
+    public async Task UpdateMovie(MovieModel movie) //Adds or changes category to list of categories
+    {
+        await UpdateList(movie);
+    }
+
+    public void DeleteMovie(int MovieInt) // Deletes category from list of categories
+    {
+        // account exists and is admin
+        if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
+        {
+            DbLogic.RemoveItemById<MovieModel>(MovieInt);
+        }
     }
 
     public MovieModel? FindTitle(string movieName)
     {
-        return _movies.Find(i => i.Title.ToLower() == movieName.ToLower());
+        return GetAllMovies().Result.Find(i => i.Title.ToLower() == movieName.ToLower());
     }
 
     public List<MovieModel> GetByTitle(string name)
     {
-        return _movies.Where(i => i.Title.ToLower().Contains(name.ToLower())).ToList();
+        return GetAllMovies().Result.Where(i => i.Title.ToLower().Contains(name.ToLower())).ToList();
     }
 
     public List<MovieModel> GetByPrice(double price, List<MovieModel> movies = null)
@@ -69,7 +73,7 @@ public class MoviesLogic : Order<MovieModel>
 
         if (movies == null)
         {
-            movies = _movies;
+            movies = GetAllMovies().Result;
         }
 
         return movies.Where(i => tsl.GetByMovieId(i.Id).Any(t => t.Theatre.Seats.Min(s => TL.PriceOfSeatType(s.Type, t.Theatre.TheatreId)) + i.Price <= price)).ToList();
@@ -80,7 +84,7 @@ public class MoviesLogic : Order<MovieModel>
         TimeSlotsLogic tsl = new TimeSlotsLogic();
         if (movies == null)
         {
-            movies = _movies;
+            movies = GetAllMovies().Result;
         }
 
         return movies.Where(i => tsl.GetByDate(date).Any(x => x.MovieId == i.Id)).ToList();
@@ -90,15 +94,10 @@ public class MoviesLogic : Order<MovieModel>
     {
         if (movies == null)
         {
-            movies = _movies;
+            movies = GetAllMovies().Result;
         }
 
         return movies.Where(i => categories.All(x => i.Categories.Any(y => y.Id == x.Id))).ToList();
-    }
-
-    public override int GetNewestId()
-    {
-        return (_movies.OrderByDescending(item => item.Id).First().Id) + 1;
     }
 
     public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript,
@@ -108,8 +107,8 @@ public class MoviesLogic : Order<MovieModel>
         movie.NewMovieModel(title, releaseDate, director, desript, duration, price);
         movie.Categories = categories;
         movie.Formats = formats;
-        //movie = movie.NewMovieModel(NewID, title, releaseDate, director, desript, duration, price, categories, formats);
-        UpdateList(movie);
+
+        NewMovie(movie);
         return movie;
     }
 
@@ -117,43 +116,35 @@ public class MoviesLogic : Order<MovieModel>
     {
         if (includeUnreleased)
         {
-            return _movies;
+            return GetAllMovies().Result;
         }
-        return _movies.FindAll(i => i.ReleaseDate < DateTime.Now);
+        return GetAllMovies().Result.FindAll(i => i.ReleaseDate < DateTime.Now);
     }
 
     public List<MovieModel> UnreleasedMovies()
     {
-        return _movies.FindAll(i => i.ReleaseDate > DateTime.Now);
+        return GetAllMovies().Result.FindAll(i => i.ReleaseDate > DateTime.Now);
     }
 
-    public static void AddFormat(MovieModel movie, string format)
+    public void AddFormat(MovieModel movie, string format)
     {
         if (!movie.Formats.Contains(format))
+        {
             movie.Formats.Add(format);
+            UpdateList(movie);
+        }
+
     }
 
-    public static void RemoveFormat(MovieModel movie, string format)
+    public void RemoveFormat(MovieModel movie, string format)
     {
         if (movie.Formats.Contains(format))
+        {
             movie.Formats.Remove(format);
+            UpdateList(movie);
+        }
     }
 
-    public void RemoveMovie(int MovieInt)
-    {
-        try
-        {
-            if (AccountsLogic.CurrentAccount.Admin == true)
-            {
-                _movies.Remove(GetById(MovieInt));
-                MoviesAccess.WriteAll(_movies);
-            }
-        }
-        catch (System.Exception)
-        {
-            Console.WriteLine("Not Admin");
-        }
-    }
     public List<MovieModel> FilterOnCategories(List<int> CatIds)
     {
         List<MovieModel> FilteredList = new List<MovieModel>();

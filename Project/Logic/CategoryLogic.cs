@@ -100,7 +100,7 @@ public class CategoryLogic
             foreach (CategoryModel cat in GetAllCategories().Result.Where(cg => !movie.Categories.Any(c => c.Name == cg.Name)))
             {
                 Options.Add(cat.Name);
-                Actions.Add(() => movie.Categories.Add(cat));
+                Actions.Add(() => AddCategoryToMovie(movie, cat));
             }
         }
         else
@@ -108,7 +108,7 @@ public class CategoryLogic
             foreach (CategoryModel cat in movie.Categories)
             {
                 Options.Add(cat.Name);
-                Actions.Add(() => movie.Categories.Remove(cat));
+                Actions.Add(() => RemoveCategoryFromMovie(movie, cat));
             }
         }
 

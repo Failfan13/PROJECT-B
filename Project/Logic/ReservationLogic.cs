@@ -122,7 +122,6 @@ public class ReservationLogic
             Console.WriteLine("Reservation edited");
             QuestionLogic.AskEnter();
             Menu.Start();
-            //Reservation.TotalReservationCost(ress, AccountId, IsEdited);
         }
         else
         {
@@ -245,7 +244,7 @@ public class ReservationLogic
         double finalPrice = 0.0;
 
         // Movie verify
-        movie = ML.GetById(TL.GetById(Ress.TimeSlotId)!.MovieId)!;
+        movie = GetMovieFromRess(Ress);
         finalPrice += movie.Price;
 
         // Seat verify
@@ -278,6 +277,6 @@ public class ReservationLogic
         TimeSlotsLogic TL = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
 
-        return ML.GetById(TL.GetById(ress.TimeSlotId)!.MovieId)!;
+        return ML.GetById(TL.GetById(ress.TimeSlotId)!.MovieId)!.Result;
     }
 }

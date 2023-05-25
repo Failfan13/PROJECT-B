@@ -54,6 +54,7 @@ static class Movies
         duration = (int)QuestionLogic.AskNumber("What is the duration? (minutes)");
         price = (int)QuestionLogic.AskNumber("How expensive is the movie?: ");
 
+        Console.Clear();
         Console.WriteLine("Would you like to turn on ads? (y/n)");
         ads = (Console.ReadKey().KeyChar == 'y') switch
         {
@@ -63,6 +64,10 @@ static class Movies
 
         MovieModel movie = MoviesLogic.NewMovie(title, releaseDate, director, description, duration, price, categories, formats);
 
+        movie = MoviesLogic.GetAllMovies().Result.Last();
+
+        if (movie == null) return;
+
         Category.CategoryMenu(movie);
 
         Format.ViewFormatMenu(movie);
@@ -70,7 +75,7 @@ static class Movies
         Console.Clear();
         Console.WriteLine("New movie added!");
         Console.WriteLine($"Title: {movie.Title}");
-        Console.WriteLine($"Release Date: {movie.ReleaseDate.Date}");
+        Console.WriteLine($"Release Date: {movie.ReleaseDate.Date.ToShortDateString()}");
         Console.WriteLine($"Director: {movie.Director}");
         Console.WriteLine($"Price: {movie.Price}");
         Console.WriteLine($"Categories: {string.Join(", ", movie.Categories.Select(c => c.Name))}");
@@ -249,7 +254,7 @@ static class Movies
         {
             try
             {
-                options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSlotId)!.MovieId)!.Title} Watched on: {pastReservation.DateTime}");
+                options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSlotId)!.MovieId)!.Result.Title} Watched on: {pastReservation.DateTime}");
                 actions.Add(() => AddNewReview(TL.GetById(pastReservation.TimeSlotId)!.MovieId, pastReservation));
             }
             catch (System.Exception ex)
@@ -294,7 +299,7 @@ static class Movies
         MoviesLogic ML = new MoviesLogic();
         ReviewLogic RL = new ReviewLogic();
 
-        MovieModel Movie = ML.GetById(MovieId)!;
+        MovieModel Movie = ML.GetById(MovieId)!.Result;
 
         double rating = 0;
 

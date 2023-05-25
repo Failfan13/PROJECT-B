@@ -24,7 +24,7 @@ static class TimeSlots
         }
         else
         {
-            string Question = $"Availible timeslots for {ML.GetById(movieid)?.Title}";
+            string Question = $"Availible timeslots for {ML.GetById(movieid)?.Result.Title}";
             List<string> Options = new List<string>();
             List<Action> Actions = new List<Action>();
 
@@ -60,7 +60,7 @@ static class TimeSlots
         }
         else
         {
-            string Question = $"Availible timeslots for {ML.GetById(movieid)?.Title}";
+            string Question = $"Availible timeslots for {ML.GetById(movieid)?.Result.Title}";
             List<string> Options = new List<string>();
             List<Action> Actions = new List<Action>();
 
@@ -106,7 +106,7 @@ static class TimeSlots
         if (Console.ReadKey().KeyChar == 'y')
         {
             TimeSlotsLogic.UpdateList(TM);
-            Format.ViewFormatMenu(ML.GetById(TM.MovieId)!, TM);
+            Format.ViewFormatMenu(ML.GetById(TM.MovieId)!.Result, TM);
         }
 
         TimeSlotsLogic.UpdateList(TM);

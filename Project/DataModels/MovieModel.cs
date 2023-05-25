@@ -7,7 +7,7 @@ using Postgrest.Models;
 [Table("movies")]
 public class MovieModel : BaseModel
 {
-    [PrimaryKey("id, false")]
+    [PrimaryKey("id", false)]
     public int Id { get; set; }
 
     [Column("title")]
@@ -38,7 +38,7 @@ public class MovieModel : BaseModel
     public List<int> Followers { get; set; }
 
     [Column("ads")]
-    public bool Ads { get; set; } = false;
+    public bool Ads { get; set; }
 
     [Column("reviews")]
     public ReviewHelper Reviews { get; set; }

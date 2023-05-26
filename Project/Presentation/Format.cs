@@ -1,22 +1,57 @@
 // Format/formats will be the extra options as IMAX, 3D, REX etc.
 public static class Format
 {
-    public static void Start(TimeSlotModel tsm, List<SeatModel> Seats) => Start(tsm, Seats, null!, false);
-    public static void Start(TimeSlotModel tsm, List<SeatModel> Seats, Dictionary<int, int> snacks = null!, bool IsEdited = false)
+    public static void Start(TimeSlotModel tsm, List<SeatModel> seats, bool isEdited = false) => Start(tsm, seats, null!, IsEdited: isEdited);
+    public static void Start(TimeSlotModel tsm, List<SeatModel> seats, Dictionary<int, int> snacks = null!, bool IsEdited = false)
     {
         ReservationLogic ReservationLogic = new ReservationLogic();
         Console.Clear();
         FormatDetails? formatDt = FormatsLogic.GetByFormat(tsm.Format);
 
-        Console.WriteLine(@$"For this movie there are certain viewing formats available, For the timeslot you choose
+        if (!IsEdited)
+        {
+            Console.WriteLine(@$"For this movie there are certain viewing formats available, For the timeslot you choose
 The following format is applied: {tsm.Format}
 
 {(formatDt?.Item != "" ? @$"The movie format will require: {formatDt?.Item} for the optimal viewing experience
-The total price for the extra requirements will be: {formatDt?.Item} x {Seats.Count()} - Price: € {formatDt?.Price * Seats.Count()}" : "")}");
+The total price for the extra requirements will be: {formatDt?.Item} x {seats.Count()} - Price: € {formatDt?.Price * seats.Count()}" : "")}");
 
-        QuestionLogic.AskEnter();
+            QuestionLogic.AskEnter();
+        }
+        else
+        {
+            ChangeReservationFormat(tsm.Format, tsm);
+        }
 
-        new ReservationLogic().MakeReservation(tsm, Seats, snacks, tsm.Format, IsEdited);
+        new ReservationLogic().MakeReservation(tsm, seats, snacks, tsm.Format, IsEdited);
+    }
+
+    public static void ChangeReservationFormat(object formatModel, TimeSlotModel tsm)
+    {
+        MoviesLogic ML = new MoviesLogic();
+
+        string Question = "Would you like to change viewing methods?";
+        List<string> Options = new List<string>() { };
+        List<Action> Actions = new List<Action>();
+
+        if (tsm.Format != "standard")
+        {
+            Options.Add("standard");
+            Actions.Add(() => tsm.Format = "standard");
+            Options.Add(tsm.Format);
+            Actions.Add(() => Console.WriteLine());
+        }
+        else
+        {
+            Console.WriteLine("The format cannot be changed");
+            QuestionLogic.AskEnter();
+            return;
+        }
+
+        Options.Add("Return");
+        Actions.Add(() => ChangeFormats(formatModel));
+
+        MenuLogic.Question(Question, Options, Actions);
     }
 
     public static void ChangeFormats(object formatModel, Action returnTo = null!)

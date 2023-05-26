@@ -219,7 +219,7 @@ public class MoviesLogic
 
         try
         {
-            return RL.Reservations.FindAll(r => r.AccountId == AccountsLogic.CurrentAccount!.Id && r.DateTime < DateTime.Now);
+            return RL.GetAllReservations().Result.FindAll(r => r.AccountId == AccountsLogic.CurrentAccount!.Id && r.DateTime < DateTime.Now);
         }
         catch (System.Exception)
         {

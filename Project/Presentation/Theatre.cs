@@ -20,7 +20,7 @@ public static class Theatre
             if (FormatsLogic.GetByFormat(TimeSlot.Format) != null)
             {
                 Actions.Add(() => Snacks.Start(TimeSlot, selectedSeats, IsEdited));
-                Actions.Add(() => Format.Start(TimeSlot, selectedSeats));
+                Actions.Add(() => Format.Start(TimeSlot, selectedSeats, IsEdited));
             }
             else
             {

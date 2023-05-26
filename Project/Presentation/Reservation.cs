@@ -11,6 +11,8 @@ public static class Reservation
     {
         ReservationLogic ReservationLogic = new ReservationLogic();
         AccountsLogic AccountsLogic = new AccountsLogic();
+        List<ReservationModel> allReservations = ReservationLogic.GetAllReservations().Result;
+        List<ReservationModel> userFilteredReservations = new List<ReservationModel>();
         int awnser;
         string reservationDate;
         MovieModel reservationMovie;
@@ -19,10 +21,14 @@ public static class Reservation
         // admin logged in ask account
         if (AsAdmin)
         {
-            currAccId = await AccountsLogic.GetAccountIdFromList();
+            currAccId = AccountsLogic.GetAccountIdFromList();
         }
 
-        if (!ReservationLogic.Reservations.Any(r => r.AccountId == currAccId))
+        // filter for user
+        userFilteredReservations = allReservations.FindAll(r => r.AccountId == currAccId);
+
+        // no reservations found
+        if (userFilteredReservations.Count == 0)
         {
             Console.Clear();
             Console.WriteLine("No reservations found for this account\n");
@@ -32,8 +38,10 @@ public static class Reservation
 
         string Question = "Which reservation would you like to edit?";
         List<string> Options = new List<string>();
+        List<string> Actions = new List<string>();
+
         // List all reservations with date, time & movie name
-        foreach (ReservationModel reservation in ReservationLogic.Reservations)
+        foreach (ReservationModel reservation in userFilteredReservations)
         {
             if (currAccId == reservation.AccountId || AsAdmin)
             {
@@ -44,21 +52,25 @@ public static class Reservation
                     reservationMovie = MoviesLogic.GetById(timeslotVar.MovieId).Result;
 
                     if (reservationMovie != null && reservationDate != null)
+                    {
                         Options.Add($"{reservationDate} - {reservationMovie.Title}");
+                    }
                 }
                 catch { }
             }
         }
 
         awnser = MenuLogic.Question(Question, Options);
+
         // Set current reservation field
         try
         {
-            CurrReservation = ReservationLogic.Reservations.FindAll(r => r.AccountId == currAccId)[awnser];
+            CurrReservation = userFilteredReservations[awnser];
         }
         catch (System.IndexOutOfRangeException)
         {
             Console.WriteLine("No existing reservation found");
+            QuestionLogic.AskEnter();
             return;
         }
 
@@ -106,7 +118,7 @@ public static class Reservation
         // Change snack
         actions.Add(() => Snacks.Start(CurrTimeSlot, CurrReservation.Seats, true));
 
-        actions.Add(() => Format.Start(CurrTimeSlot, CurrReservation.Seats));
+        actions.Add(() => Format.Start(CurrTimeSlot, CurrReservation.Seats, true));
 
         // Apply discount NEEDS CORRECT FUNTION
         actions.Add(() => Promo.Start());

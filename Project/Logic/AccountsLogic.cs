@@ -81,14 +81,14 @@ public class AccountsLogic
     }
 
     // menu with accounts
-    public async Task<int> GetAccountIdFromList()
+    public int GetAccountIdFromList()
     {
         int ReturnId = -1;
         string Question = "What user do you want to use?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        foreach (AccountModel acc in await GetAllAccounts())
+        foreach (AccountModel acc in GetAllAccounts().Result)
         {
             Options.Add(acc.FirstName + " " + acc.LastName);
             Actions.Add(() => ReturnId = acc.Id);

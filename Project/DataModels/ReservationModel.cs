@@ -1,41 +1,42 @@
-using System.Text.Json.Serialization;
+using Postgrest.Attributes;
+using Postgrest.Models;
 
-
-public class ReservationModel
+[Table("reservations")]
+public class ReservationModel : BaseModel
 {
-    [JsonPropertyName("id")]
+    [PrimaryKey("id", false)]
     public int Id { get; set; }
 
-    [JsonPropertyName("accountId")]
+    [Column("account_id")]
     public int? AccountId { get; set; }
 
-    [JsonPropertyName("timeslotId")]
+    [Column("timeslot_id")]
     public int TimeSlotId { get; set; }
 
-    [JsonPropertyName("seats")]
+    [Column("seats")]
     public List<SeatModel> Seats { get; set; }
 
-    [JsonPropertyName("snacks")]
+    [Column("snacks")]
     public Dictionary<int, int>? Snacks { get; set; }
 
-    [JsonPropertyName("dateTime")]
+    [Column("date_time")]
     public DateTime DateTime { get; set; }
 
-    [JsonPropertyName("format")]
+    [Column("format")]
     public string Format { get; set; }
 
-    [JsonPropertyName("discountCode")]
+    [Column("discount_code")]
     public string DiscountCode { get; set; } = "";
 
-    public ReservationModel(int id, int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime, string format)
+    public ReservationModel NewReservationModel(int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime, string format)
     {
-        Id = id;
         TimeSlotId = timeSlotId;
         AccountId = accountId;
         DateTime = dateTime;
         Seats = seats;
         Snacks = snacks;
         Format = format;
+        return this;
     }
 
     public List<SnackModel> GetSnacks()

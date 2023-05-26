@@ -1,63 +1,53 @@
 public class ReservationLogic
 {
-    public List<ReservationModel> Reservations;
-
-    //Total reservation cost
-    private double _totalOrder = 0.0;
-    //Increases totalOrder
-    public double TotalOrder
+    public async Task<List<ReservationModel>> GetAllReservations()
     {
-        get => Math.Round(_totalOrder, 2);
-        set => _totalOrder += value;
+        return await DbLogic.GetAll<ReservationModel>();
     }
-    //Decreases totalOder
-    public double TotalOrderDecr
+    // pass model to update
+    public async Task UpdateList(ReservationModel ress)
     {
-        set => _totalOrder -= value;
+        await DbLogic.UpdateItem(ress);
     }
 
-    public ReservationLogic()
+    public async Task UpsertList(ReservationModel ress)
     {
-        Reservations = ReservationAccess.LoadAll();
+        await DbLogic.UpsertItem(ress);
     }
 
-    public void UpdateList(ReservationModel ress)
+    public async Task<ReservationModel>? GetById(int id)
     {
-        //Find if there is already an model with the same id
-        int index = Reservations.FindIndex(s => s.Id == ress.Id);
+        return await DbLogic.GetById<ReservationModel>(id);
+    }
 
-        if (index != -1)
+    public async Task<ReservationModel> NewReservation(ReservationModel ress)
+    {
+        await DbLogic.InsertItem<ReservationModel>(ress);
+        return ress;
+    }
+
+    public async Task<ReservationModel> NewReservation(int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime, string format)
+    {
+        ReservationModel ress = new ReservationModel();
+        ress = ress.NewReservationModel(timeSlotId, seats, snacks, accountId, dateTime, format);
+        await DbLogic.UpsertItem<ReservationModel>(ress);
+        return ress;
+    }
+
+    public async Task UpdateReservation(ReservationModel ress) //Adds or changes category to list of categories
+    {
+        await UpdateList(ress);
+    }
+
+    public void DeleteReservation(int ressInt) // Deletes category from list of categories
+    {
+        // account exists and is admin
+        if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
         {
-            //update existing model
-            Reservations[index] = ress;
-            Logger.LogDataChange<ReservationModel>(ress.Id, "Updated");
+            DbLogic.RemoveItemById<MovieModel>(ressInt);
         }
-        else
-        {
-            //add new model
-            Reservations.Add(ress);
-            Logger.LogDataChange<ReservationModel>(ress.Id, "Added");
-        }
-        ReservationAccess.WriteAll(Reservations);
-
     }
 
-    public ReservationModel? GetById(int id)
-    {
-        return Reservations.Find(i => i.Id == id);
-    }
-    public int GetNewestId()
-    {
-        try
-        {
-            return (Reservations.OrderByDescending(item => item.Id).First().Id) + 1;
-        }
-        catch (System.Exception)
-        {
-            return 1;
-        }
-
-    }
     private int AsAdminId()
     {
         AccountsLogic AL = new AccountsLogic();
@@ -66,68 +56,59 @@ public class ReservationLogic
         List<string> Options = new List<string>() { "Admin", "User" };
         List<Action> Actions = new List<Action>();
         Actions.Add(() => returner = AccountsLogic.CurrentAccount!.Id);
-        Actions.Add(() => returner = AL.GetAccountIdFromList().Result);
+        Actions.Add(() => returner = AL.GetAccountIdFromList());
 
         MenuLogic.Question(Question, Options, Actions);
 
         return returner;
     }
 
-    public bool UpdateReservation(int ressId, ReservationModel newRess)
-    {
-        try
-        {
-            ReservationModel currRess = GetById(ressId)!;
-            currRess.TimeSlotId = newRess.TimeSlotId;
-            currRess.Seats = newRess.Seats;
-            if (newRess.Snacks != null) currRess.Snacks = newRess.Snacks;
-            if (newRess.Format != "") currRess.Format = newRess.Format;
-            UpdateList(currRess);
-            return true;
-        }
-        catch (System.Exception)
-        {
-            return false;
-        }
-    }
-
-    public void MakeReservation(TimeSlotModel timeSlot, List<SeatModel> Seats, Dictionary<int, int> snacks = null!, string format = "", bool IsEdited = false)
+    public async void MakeReservation(TimeSlotModel timeSlot, List<SeatModel> Seats, Dictionary<int, int> snacks = null!, string format = "", bool IsEdited = false)
     {
         Snacks.Continue = false;
         int AccountId = -1;
-        ReservationModel ress = null!;
+        ReservationModel ress = new ReservationModel();
         DateTime currDate = DateTime.Now;
-        try
-        {
-            AccountId = AccountsLogic.CurrentAccount!.Id;
-            if (AccountsLogic.CurrentAccount.Admin)
-            {
-                // asks if you want to use your own ID or that of an user
-                AccountId = AsAdminId();
-            }
-        }
-        catch (System.Exception)
-        {   // not logged in
-            AccountId = -1;
-        }
 
         // if this reservation is made by an edit, use the id of the current reservation
         if (IsEdited)
         {
             // Make the new Reservation and update the Theather timeslot for the seats
-            ress = new ReservationModel(Reservation.CurrReservation.Id, timeSlot.Id, Seats, snacks, AccountId, currDate, format);
-            UpdateReservation(Reservation.CurrReservation.Id, ress);
+            if (Reservation.CurrReservation.AccountId == null) return;
+            AccountId = (int)Reservation.CurrReservation.AccountId;
+            ress = ress.NewReservationModel(timeSlot.Id, Seats, snacks, AccountId, currDate, format);
+            ress.Id = Reservation.CurrReservation.Id;
 
-            Console.Clear();
+            await UpdateList(ress) // hij update formats niet na changes
+
             Console.WriteLine("Reservation edited");
             QuestionLogic.AskEnter();
-            Menu.Start();
+            Console.ReadKey();
+
+            Console.Clear();
+            //Console.WriteLine("Reservation edited");
+            //QuestionLogic.AskEnter();
+            //Menu.Start();
         }
         else
         {
-            ress = new ReservationModel(GetNewestId(), timeSlot.Id, Seats, snacks, AccountId, currDate, format);
+            try
+            {
+                AccountId = AccountsLogic.CurrentAccount!.Id;
+                if (AccountsLogic.CurrentAccount.Admin)
+                {
+                    // asks if you want to use your own ID or that of an user
+                    AccountId = AsAdminId();
+                }
+            }
+            catch (System.Exception)
+            {   // not logged in
+                AccountId = -1;
+            }
+
+            ress = ress.NewReservationModel(timeSlot.Id, Seats, snacks, AccountId, currDate, format);
             Reservation.TotalReservationCost(ress, AccountId);
-            UpdateList(ress);
+            await NewReservation(ress);
         }
 
         TimeSlotsLogic TL = new TimeSlotsLogic();
@@ -137,7 +118,7 @@ public class ReservationLogic
     public async void ChangeUserId(ReservationModel Ress)
     {
         AccountsLogic AL = new AccountsLogic();
-        int newUserId = await AL.GetAccountIdFromList();
+        int newUserId = AL.GetAccountIdFromList();
 
         Ress.AccountId = newUserId;
         UpdateList(Ress);

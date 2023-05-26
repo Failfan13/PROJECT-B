@@ -53,7 +53,7 @@ static class Logger
         MoviesLogic ML = new();
         var MVS = ML.AllMovies(true);
         List<List<int>> LogData = new();
-        var Logs = Logger.GetLogDataChange<ReservationModel>();
+        var Logs = GetLogDataChange<ReservationModel>();
         foreach (MovieModel M in MVS)
         {
             LogData.Add(new List<int>{M.Id, 0, 0, 0});
@@ -68,17 +68,21 @@ static class Logger
                 {
                     if (I[0].ToString() == l["id"])
                     {
-                        switch(l["action"])
+                        if (I[0].ToString() == l["id"])
                         {
-                            case "Added":
+                            Console.WriteLine($"{l["action"]}");
+                            if (l["action"] == "Added")
+                            {
                                 I[1] += 1;
-                                break;
-                            case "Updated":
+                            }
+                            else if (l["action"] == "Updated")
+                            {
                                 I[2] += 1;
-                                break;
-                            case "Removed":
+                            }
+                            else if (l["action"] == "Removed")
+                            {
                                 I[3] += 1;
-                                break;
+                            }
                         }
                     }
                 }

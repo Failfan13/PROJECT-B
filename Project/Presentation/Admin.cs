@@ -113,13 +113,10 @@ public static class Admin
         string Report = $"In the period from {StartDate.Day} to {EndDate.Day}/{EndDate.Month}/{EndDate.Year} the following happened:";
         foreach (var M in RLog)
         {
-            string mName = ML.GetById(M[0]);
-            Report += $"\n ";
+            Report += $"\n{ML.GetById(M[0]).Title}:\n{M[1]} reservation(s) have been made\n";
+            Report += $"{M[2]} reservation(s) have been updated\n{M[3]} reservation(s) have been removed\n";
         }
+        Console.WriteLine(Report);
 
-        Console.WriteLine($"In the period from {StartDate.Day} to {EndDate.Day}/{EndDate.Month}/{EndDate.Year} the following happened:");
-        Console.WriteLine($"{RLog[0]} reservation(s) have been made");
-        Console.WriteLine($"{RLog[1]} update(s) have been made to reservations");
-        Console.WriteLine($"{RLog[2]} reservation(s) have been removed");
     }
 }

@@ -20,12 +20,6 @@ public class ReservationLogic
         return await DbLogic.GetById<ReservationModel>(id);
     }
 
-    public async Task<ReservationModel> NewReservation(ReservationModel ress)
-    {
-        await DbLogic.InsertItem<ReservationModel>(ress);
-        return ress;
-    }
-
     public async Task<ReservationModel> NewReservation(int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime, string format)
     {
         ReservationModel ress = new ReservationModel();
@@ -53,17 +47,17 @@ public class ReservationLogic
         AccountsLogic AL = new AccountsLogic();
         int returner = -1;
         string Question = "Do you want to use your Admin Id or a User Id?";
-        List<string> Options = new List<string>() { "Admin", "User" };
+        List<string> Options = new List<string>() { "User", "Admin" };
         List<Action> Actions = new List<Action>();
-        Actions.Add(() => returner = AccountsLogic.CurrentAccount!.Id);
         Actions.Add(() => returner = AL.GetAccountIdFromList());
+        Actions.Add(() => returner = AccountsLogic.CurrentAccount!.Id);
 
         MenuLogic.Question(Question, Options, Actions);
 
         return returner;
     }
 
-    public async void MakeReservation(TimeSlotModel timeSlot, List<SeatModel> Seats, Dictionary<int, int> snacks = null!, string format = "standard", bool IsEdited = false)
+    public async Task MakeReservation(TimeSlotModel timeSlot, List<SeatModel> Seats, Dictionary<int, int> snacks = null!, string format = "standard", bool IsEdited = false)
     {
         Snacks.Continue = false;
         int AccountId = -1;
@@ -73,7 +67,7 @@ public class ReservationLogic
         // if this reservation is made by an edit, use the id of the current reservation
         if (IsEdited)
         {
-            // Make the new Reservation and update the Theather timeslot for the seats
+            // update curr reservation with old + new data
             if (Reservation.CurrReservation.AccountId == null) return;
             ress = Reservation.CurrReservation;
             ress.TimeSlotId = timeSlot.Id;
@@ -81,12 +75,11 @@ public class ReservationLogic
             ress.Snacks = snacks;
             ress.Format = format;
 
-            UpdateList(Reservation.CurrReservation);
-
             Console.Clear();
             Console.WriteLine("Reservation edited");
             QuestionLogic.AskEnter();
-            Menu.Start();
+
+            await UpdateList(Reservation.CurrReservation);
         }
         else
         {
@@ -104,14 +97,18 @@ public class ReservationLogic
                 AccountId = -1;
             }
 
+            // new reservation model
             ress = ress.NewReservationModel(timeSlot.Id, Seats, snacks, AccountId, currDate, format);
-            Reservation.TotalReservationCost(ress, AccountId);
 
-            NewReservation(ress);
+            // insert new reservation
+            ress = DbLogic.InsertItem<ReservationModel>(ress).Result;
+
+            // update total
+            Reservation.TotalReservationCost(ress, AccountId);
         }
 
-        TimeSlotsLogic TL = new TimeSlotsLogic();
-        TL.UpdateList(timeSlot);
+        // TimeSlotsLogic TL = new TimeSlotsLogic();
+        // TL.UpdateList(timeSlot);
     }
 
     public async void ChangeUserId(ReservationModel Ress)
@@ -120,7 +117,7 @@ public class ReservationLogic
         int newUserId = AL.GetAccountIdFromList();
 
         Ress.AccountId = newUserId;
-        UpdateList(Ress);
+        await UpdateList(Ress);
     }
 
     public TotalPriceModel ApplyDiscount(string DiscountCode, TotalPriceModel Ress)

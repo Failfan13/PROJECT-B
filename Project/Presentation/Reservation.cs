@@ -7,7 +7,7 @@ public static class Reservation
     static private TheatreLogic TheatreLogic = new();
     static public ReservationModel CurrReservation = null!;
 
-    public async static Task EditReservation(bool AsAdmin = false)
+    public static void EditReservation(bool AsAdmin = false)
     {
         ReservationLogic ReservationLogic = new ReservationLogic();
         AccountsLogic AccountsLogic = new AccountsLogic();
@@ -95,8 +95,8 @@ public static class Reservation
                 "Choose time & seats",
                 "Choose seats",
                 "Change side snack",
-                "Choose format",
-                "Change discount code"
+                //"Choose format", // will not be interchangable
+                //"Change discount code" // will not be interchangable
             };
         List<Action> actions = new();
 
@@ -118,11 +118,11 @@ public static class Reservation
         // Change snack
         actions.Add(() => Snacks.Start(CurrTimeSlot, CurrReservation.Seats, true));
 
-        // Change format
-        actions.Add(() => Format.Start(CurrTimeSlot, CurrReservation.Seats, true));
+        // // Change format  // will not be interchangeable
+        // actions.Add(() => Format.Start(CurrTimeSlot, CurrReservation.Seats, true));
 
-        // Apply discount NEEDS CORRECT FUNTION
-        actions.Add(() => Promo.Start());
+        // // Apply discount // will not be interchangable
+        // actions.Add(() => Promo.Start());
 
         if (AccountsLogic.CurrentAccount.Admin && CurrReservation.AccountId == null)
         {
@@ -206,7 +206,7 @@ public static class Reservation
             TotalRess = ReservationLogic.ApplyDiscount(DiscountCode, TotalRess);
 
             ress.DiscountCode = DiscountCode;
-            ReservationLogic.UpdateList(ress);
+            await ReservationLogic.UpdateList(ress);
         }
 
         Console.Clear();
@@ -321,8 +321,15 @@ Your order number is: {ress.Id}
 
         if (AccountId != -1)
         {
-            var account = await AccountsLogic.GetById(AccountId)!;
-            email = account.EmailAddress;
+            try
+            {
+                var account = AccountsLogic.GetById(AccountId)!.Result!;
+                email = account.EmailAddress;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
         else
         {

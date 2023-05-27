@@ -36,7 +36,7 @@ static class Menu
             Actions.Add(() => Console.WriteLine("No Work bruh"));
 
             Options.Add("Change a reservation");
-            Actions.Add(async () => await Reservation.EditReservation());
+            Actions.Add(() => Reservation.EditReservation());
 
             Options.Add("Review past reservation");
             Actions.Add(() => Movies.AddReviewMenu());

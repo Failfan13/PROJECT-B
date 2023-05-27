@@ -17,8 +17,15 @@ static class Snacks
     {
 
         Continue = true;
+
+        // current ress snacks null make new list otherwise use existing
         if (IsEdited)
         {
+            if (Reservation.CurrReservation.Snacks == null)
+            {
+                Reservation.CurrReservation.Snacks = new Dictionary<int, int>();
+            }
+
             SnacksLogic.CurrentResSnacks = Reservation.CurrReservation.Snacks;
         }
         string Question = "Make a Snack choice:";
@@ -68,7 +75,7 @@ static class Snacks
         }
         else
         {
-            Actions.Add(() => new ReservationLogic().MakeReservation(timeSlot, seats, SnacksLogic.GetSelectedSnacks(), "", IsEdited));
+            Actions.Add(async () => await new ReservationLogic().MakeReservation(timeSlot, seats, SnacksLogic.GetSelectedSnacks(), "", IsEdited).ConfigureAwait(false));
         }
 
 

@@ -63,7 +63,7 @@ public class ReservationLogic
         return returner;
     }
 
-    public async void MakeReservation(TimeSlotModel timeSlot, List<SeatModel> Seats, Dictionary<int, int> snacks = null!, string format = "", bool IsEdited = false)
+    public async void MakeReservation(TimeSlotModel timeSlot, List<SeatModel> Seats, Dictionary<int, int> snacks = null!, string format = "standard", bool IsEdited = false)
     {
         Snacks.Continue = false;
         int AccountId = -1;
@@ -75,20 +75,18 @@ public class ReservationLogic
         {
             // Make the new Reservation and update the Theather timeslot for the seats
             if (Reservation.CurrReservation.AccountId == null) return;
-            AccountId = (int)Reservation.CurrReservation.AccountId;
-            ress = ress.NewReservationModel(timeSlot.Id, Seats, snacks, AccountId, currDate, format);
-            ress.Id = Reservation.CurrReservation.Id;
+            ress = Reservation.CurrReservation;
+            ress.TimeSlotId = timeSlot.Id;
+            ress.Seats = Seats;
+            ress.Snacks = snacks;
+            ress.Format = format;
 
-            await UpdateList(ress) // hij update formats niet na changes
-
-            Console.WriteLine("Reservation edited");
-            QuestionLogic.AskEnter();
-            Console.ReadKey();
+            UpdateList(Reservation.CurrReservation);
 
             Console.Clear();
-            //Console.WriteLine("Reservation edited");
-            //QuestionLogic.AskEnter();
-            //Menu.Start();
+            Console.WriteLine("Reservation edited");
+            QuestionLogic.AskEnter();
+            Menu.Start();
         }
         else
         {
@@ -108,7 +106,8 @@ public class ReservationLogic
 
             ress = ress.NewReservationModel(timeSlot.Id, Seats, snacks, AccountId, currDate, format);
             Reservation.TotalReservationCost(ress, AccountId);
-            await NewReservation(ress);
+
+            NewReservation(ress);
         }
 
         TimeSlotsLogic TL = new TimeSlotsLogic();

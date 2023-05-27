@@ -118,6 +118,7 @@ public static class Reservation
         // Change snack
         actions.Add(() => Snacks.Start(CurrTimeSlot, CurrReservation.Seats, true));
 
+        // Change format
         actions.Add(() => Format.Start(CurrTimeSlot, CurrReservation.Seats, true));
 
         // Apply discount NEEDS CORRECT FUNTION

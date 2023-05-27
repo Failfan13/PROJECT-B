@@ -15,7 +15,6 @@ static class TimeSlots
             tsms = tsms.FindAll(d => d.Start.Date == Filter.AppliedFilters.ReleaseDate.Date);
         }
 
-
         Console.Clear();
         if (tsms.Count == 0) // Movie exists but there is no timeslot for it
         {

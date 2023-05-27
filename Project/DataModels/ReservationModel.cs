@@ -26,7 +26,7 @@ public class ReservationModel : BaseModel
     public string Format { get; set; }
 
     [Column("discount_code")]
-    public string DiscountCode { get; set; } = "";
+    public string DiscountCode { get; set; }
 
     public ReservationModel NewReservationModel(int timeSlotId, List<SeatModel> seats, Dictionary<int, int> snacks, int? accountId, DateTime dateTime, string format)
     {

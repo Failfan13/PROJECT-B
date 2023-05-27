@@ -13,8 +13,9 @@ static class Snacks
     }
 
     // Start request to user
-    public static void Start(TimeSlotModel TimeSlot, List<SeatModel> Seats, bool IsEdited = false)
+    public static void Start(TimeSlotModel timeSlot, List<SeatModel> seats, bool IsEdited = false)
     {
+
         Continue = true;
         if (IsEdited)
         {
@@ -61,13 +62,13 @@ static class Snacks
         }
 
         Options.Add($"Add to reservation");
-        if (FormatsLogic.GetByFormat(TimeSlot.Format) != null)
+        if (FormatsLogic.GetByFormat(timeSlot.Format) != null)
         {
-            Actions.Add(() => Format.Start(TimeSlot, Seats, SnacksLogic.GetSelectedSnacks(), IsEdited));
+            Actions.Add(() => Format.Start(timeSlot, seats, SnacksLogic.GetSelectedSnacks(), IsEdited));
         }
         else
         {
-            Actions.Add(() => new ReservationLogic().MakeReservation(TimeSlot, Seats, SnacksLogic.GetSelectedSnacks(), "", IsEdited));
+            Actions.Add(() => new ReservationLogic().MakeReservation(timeSlot, seats, SnacksLogic.GetSelectedSnacks(), "", IsEdited));
         }
 
 
@@ -85,7 +86,7 @@ static class Snacks
 
         if (Continue)
         {
-            Start(TimeSlot, Seats, IsEdited);
+            Start(timeSlot, seats, IsEdited);
         }
     }
 }

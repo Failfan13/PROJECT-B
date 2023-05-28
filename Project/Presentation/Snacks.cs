@@ -96,4 +96,137 @@ static class Snacks
             Start(timeSlot, seats, IsEdited);
         }
     }
+
+    public async static void NewSnackMenu()
+    {
+        Console.Clear();
+
+        string name = "";
+        string price = "";
+        double newPrice = 0;
+
+        Console.WriteLine("Welcome to the snack creator menu\n\nPlease follow the instructions below");
+
+        Console.WriteLine("Enter the name of the new snack");
+        name = Console.ReadLine()!;
+        Console.WriteLine("\nEnter the price of the new snack");
+        price = Console.ReadLine()!;
+
+        // try parse price otherwise default
+        if (double.TryParse(price, out double resultPrice))
+        {
+            newPrice = resultPrice;
+        }
+
+        // new snack model
+        SnackModel newSnack = new SnackModel()
+        {
+            Name = name,
+            Price = newPrice
+        };
+
+        // upload new snack
+        await SnacksLogic.NewSnack(newSnack);
+    }
+
+    public static void ChangeSnackMenu()
+    {
+        Console.Clear();
+
+        string Question = "What would you like to do?";
+        List<string> Options = new List<string>() { "Change snack", "Remove snack" };
+        List<Action> Actions = new List<Action>();
+
+        Actions.Add(() => ChangeSnack());
+
+        Actions.Add(() => RemoveSnack());
+
+        Options.Add("Return");
+        Actions.Add(() => Admin.ChangeData());
+
+        MenuLogic.Question(Question, Options, Actions);
+    }
+
+    private static void ChangeSnack()
+    {
+        // part 1 What snack
+        List<SnackModel> snacks = SnacksLogic.GetAllSnacks().Result;
+
+        Console.Clear();
+
+        string Question = "What snack do you want to change?";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
+
+        foreach (SnackModel snack in snacks)
+        {
+            Options.Add(snack.Name);
+        }
+
+        Options.Add("Return");
+        Actions.Add(() => ChangeSnackMenu());
+
+        int snackIndex = MenuLogic.Question(Question, Options, Actions);
+
+        // part 2 What to change
+
+        Question = "What would you like to change it to?";
+        Options.Clear();
+        Actions.Clear();
+
+        Options.Add("Change name");
+        Actions.Add(async () => await ChangeName(snacks[snackIndex]));
+
+        Options.Add("Change price");
+        Actions.Add(async () => await ChangePrice(snacks[snackIndex]));
+
+        Options.Add("Return");
+        Actions.Add(() => ChangeSnack());
+
+        MenuLogic.Question(Question, Options, Actions);
+    }
+
+    private async static Task ChangeName(SnackModel snack)
+    {
+        Console.Clear();
+        Console.WriteLine($"The old name: {snack.Name}\n\nEnter the new name: ");
+        snack.Name = Console.ReadLine()!;
+
+        await SnacksLogic.UpdateList(snack);
+    }
+
+    private async static Task ChangePrice(SnackModel snack)
+    {
+        Console.Clear();
+        Console.WriteLine($"The old price: {snack.Price}\n\nEnter the new price: ");
+
+        if (double.TryParse(Console.ReadLine()!, out double resultPrice))
+        {
+            snack.Price = resultPrice;
+        }
+
+        await SnacksLogic.UpdateList(snack);
+    }
+
+    private static void RemoveSnack()
+    {
+        List<SnackModel> snacks = SnacksLogic.GetAllSnacks().Result;
+
+        Console.Clear();
+
+        string Question = "What snack do you want to change?";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
+
+        foreach (SnackModel snack in snacks)
+        {
+            Options.Add(snack.Name);
+            Actions.Add(async () => await SnacksLogic.DeleteSnack(snack.Id));
+        }
+
+        Options.Add("Return");
+        Actions.Add(() => ChangeSnackMenu());
+
+        MenuLogic.Question(Question, Options, Actions);
+    }
 }

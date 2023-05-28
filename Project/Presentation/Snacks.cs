@@ -161,24 +161,26 @@ static class Snacks
         foreach (SnackModel snack in snacks)
         {
             Options.Add(snack.Name);
+            Actions.Add(() => ChangeSnack(snack));
         }
 
         Options.Add("Return");
         Actions.Add(() => ChangeSnackMenu());
 
-        int snackIndex = MenuLogic.Question(Question, Options, Actions);
+        MenuLogic.Question(Question, Options, Actions);
+    }
 
-        // part 2 What to change
-
-        Question = "What would you like to change it to?";
-        Options.Clear();
-        Actions.Clear();
+    private static void ChangeSnack(SnackModel snack)
+    {
+        string Question = "What would you like to change it to?";
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
 
         Options.Add("Change name");
-        Actions.Add(async () => await ChangeName(snacks[snackIndex]));
+        Actions.Add(async () => await ChangeName(snack));
 
         Options.Add("Change price");
-        Actions.Add(async () => await ChangePrice(snacks[snackIndex]));
+        Actions.Add(async () => await ChangePrice(snack));
 
         Options.Add("Return");
         Actions.Add(() => ChangeSnack());

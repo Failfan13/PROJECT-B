@@ -15,6 +15,9 @@ public static class Admin
         Options.Add("Add new Theatre");
         Actions.Add(() => Theatre.MakeNewTheatre());
 
+        Options.Add("Add new Snack");
+        Actions.Add(() => Snacks.NewSnackMenu());
+
         Options.Add("Add new Categories");
         Actions.Add(() => Category.NewCatMenu());
 
@@ -49,6 +52,9 @@ public static class Admin
 
         Options.Add("Change Tileslots");
         Actions.Add(() => TimeSlots.WhatMovieTimeSlot(isEdited: true));
+
+        Options.Add("Change Snacks");
+        Actions.Add(() => Snacks.ChangeSnackMenu());
 
         Options.Add("Change Categories");
         Actions.Add(() => Category.Start());

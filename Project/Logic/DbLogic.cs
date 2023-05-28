@@ -68,6 +68,15 @@ public class DbLogic
         return result!;
     }
 
+    public static Task<List<T>> GetAllById<T>(int id) where T : BaseModel, new()
+    {
+        var result = _supabase.From<T>()
+            .Where(x => (x as DbIndex).Id == id)
+            .Get();
+
+        return Task.FromResult(result.Result.Models);
+    }
+
     // ----------- AccountLogic ---------- //
 
     // get account by login details

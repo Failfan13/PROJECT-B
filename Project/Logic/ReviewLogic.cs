@@ -1,58 +1,70 @@
 public class ReviewLogic
 {
-    private List<ReviewModel> _reviews;
-
-    public ReviewLogic()
+    public async Task<List<ReviewModel>> GetAllReviews()
     {
-        _reviews = ReviewsAccess.LoadReviews();
+        return await DbLogic.GetAll<ReviewModel>();
+    }
+    // pass model to update
+    public async Task UpdateList(ReviewModel review)
+    {
+        await DbLogic.UpdateItem(review);
     }
 
-    public static string CutReviewMessage(string reviewMsg)
+    public async Task UpsertList(ReviewModel review)
     {
-        if (reviewMsg.Length > 255)
+        await DbLogic.UpsertItem(review);
+    }
+
+    public async Task<ReviewModel>? GetById(int id)
+    {
+        return await DbLogic.GetById<ReviewModel>(id);
+    }
+
+    public async Task<ReviewModel> NewReview(ReviewModel review)
+    {
+        await DbLogic.InsertItem<ReviewModel>(review);
+        return review;
+    }
+
+    public async Task<ReviewModel> NewReview(int movieId, int accountId, double rating, string review, DateTime date = default)
+    {
+        ReviewModel reviewModel = new ReviewModel();
+        reviewModel = reviewModel.NewReviewModel(movieId, accountId, rating, review, date);
+        await DbLogic.UpsertItem<ReviewModel>(reviewModel);
+        return reviewModel;
+    }
+
+    public async Task UpdateReview(ReviewModel review) //Adds or changes category to list of categories
+    {
+        await UpdateList(review);
+    }
+
+    public void DeleteReview(int reviewInt) // Deletes category from list of categories
+    {
+        // account exists and is admin
+        if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
         {
-            return reviewMsg.Substring(0, 255);
-        }
-        return reviewMsg;
-    }
-
-
-    public List<ReviewModel> AllReviews()
-    {
-        return _reviews;
-    }
-
-    private List<ReviewModel> SortByMovieId(List<ReviewModel> reviews)
-    {
-        return reviews.OrderBy(r => r.MovieId).ToList();
-    }
-
-    public void UpdateReviews()
-    {
-        _reviews = SortByMovieId(_reviews);
-
-        MoviesLogic ML = new MoviesLogic();
-        UpdateMovieReviews(ML.AllMovies());
-
-        ReviewsAccess.WriteReviews(_reviews);
-    }
-
-    // uses one movie to update all
-    public void UpdateMovieReviews(List<MovieModel> movies)
-    {
-        MoviesLogic ML = new MoviesLogic();
-
-        for (int i = 0; i < movies.Count; i++)
-        {
-            movies[i] = UpdateMovieReview(movies[i]);
-            ML.UpdateList(movies[i]);
+            DbLogic.RemoveItemById<ReviewModel>(reviewInt);
         }
     }
 
-    // update one movie
-    private MovieModel UpdateMovieReview(MovieModel movie)
+    // // uses one review to update all
+    // public void UpdatereviewReviews(List<ReviewModel> reviews)
+    // {
+    //     ReviewLogic ML = new ReviewLogic();
+
+    //     for (int i = 0; i < reviews.Count; i++)
+    //     {
+    //         reviews[i] = UpdateMovieReview(reviews[i]);
+    //         ML.UpdateList(reviews[i]);
+    //     }
+    // }
+
+    // update movie reviews
+    private async Task UpdateMovieReview(MovieModel movie)
     {
-        List<ReviewModel> reviews = AllReviews().FindAll(r => r.MovieId == movie.Id);
+        MoviesLogic ML = new MoviesLogic();
+        List<ReviewModel> reviews = GetAllReviews().Result.FindAll(r => r.MovieId == movie.Id);
 
         try
         {
@@ -63,29 +75,43 @@ public class ReviewLogic
         }
         catch (System.Exception) { }
 
-        return movie;
+        await ML.UpdateList(movie);
     }
 
-    public void SaveNewReview(string message, double reviewScore, ReservationModel pastReservation)
+    public static string CutReviewMessage(string reviewMsg)
     {
+        if (reviewMsg.Length > 255)
+        {
+            return reviewMsg.Substring(0, 255);
+        }
+        return reviewMsg;
+    }
+    public async Task SaveNewReview(string message, double reviewScore, ReservationModel pastReservation)
+    {
+        MoviesLogic ML = new MoviesLogic();
         TimeSlotsLogic TL = new TimeSlotsLogic();
         ReviewModel review = null!;
+
         try
         {
-            review = new ReviewModel(TL.GetById(pastReservation.TimeSlotId)!.MovieId, AccountsLogic.CurrentAccount!.Id, reviewScore, message);
+            // Get movie from time slot
+            var movie = ML.GetById(TL.GetById(pastReservation.TimeSlotId)!.MovieId)!.Result;
+            if (movie == null) throw new Exception("Movie not found");
+            // Make new review
+            review = new ReviewModel();
+            await NewReview(movie.Id, AccountsLogic.CurrentAccount!.Id, reviewScore, message);
+            // Update movie review
+            await UpdateMovieReview(movie);
         }
         catch (System.Exception)
         {
             return;
         }
-
-        _reviews.Add(review);
-        UpdateReviews();
     }
 
     public void ViewReviews(bool specUser = false, bool specMovie = false)
     {
-        List<ReviewModel> reviews = AllReviews();
+        List<ReviewModel> reviews = GetAllReviews().Result;
         AccountsLogic AL = new AccountsLogic();
         MoviesLogic ML = new MoviesLogic();
 
@@ -128,7 +154,7 @@ public class ReviewLogic
 
     public List<ReviewModel> UserPastReviews(int accountId)
     {
-        return AllReviews().FindAll(r => r.AccountId == accountId);
+        return DbLogic.GetAllById<ReviewModel>(accountId).Result;
     }
 
     public async void ShowAvailableReviews(List<ReviewModel> reviews)
@@ -179,22 +205,18 @@ Message: {review.Review}
 
     public void EditReview(ReviewModel review)
     {
-        UpdateReviews();
-
         string question = "What would you like to edit?";
         List<string> options = new List<string>();
         List<Action> actions = new List<Action>();
 
-        int oldReviewIndex = AllReviews().IndexOf(review);
-
         options.Add("Edit message");
-        actions.Add(() => EditReviewMessage(review, oldReviewIndex));
+        actions.Add(() => EditReviewMessage(review));
         options.Add("Edit score");
-        actions.Add(() => EditReviewScore(review, oldReviewIndex));
+        actions.Add(() => EditReviewScore(review));
         options.Add("Edit movieId");
-        actions.Add(() => EditReviewMovieId(review, oldReviewIndex));
+        actions.Add(() => EditReviewMovieId(review));
         options.Add("Remove review");
-        actions.Add(() => RemoveReview(review, oldReviewIndex));
+        actions.Add(() => RemoveReview(review.Id));
 
         options.Add("Return");
         actions.Add(() => Movies.EditReviewsMenu());
@@ -204,7 +226,7 @@ Message: {review.Review}
         Movies.EditReviewsMenu();
     }
 
-    public void EditReviewMessage(ReviewModel review, int oldReviewIndex)
+    public async void EditReviewMessage(ReviewModel review)
     {
         Console.Clear();
 
@@ -212,11 +234,10 @@ Message: {review.Review}
 
         review.Review = Console.ReadLine()!;
 
-        _reviews[oldReviewIndex] = review;
-        UpdateReviews();
+        await UpdateList(review);
     }
 
-    public void EditReviewScore(ReviewModel review, int oldReviewIndex)
+    public async void EditReviewScore(ReviewModel review)
     {
         Console.Clear();
 
@@ -227,11 +248,10 @@ Message: {review.Review}
             if (score >= 1 || score <= 5) review.Rating = score; // score more then 1 less then 5
         }
 
-        _reviews[oldReviewIndex] = review;
-        UpdateReviews();
+        await UpdateList(review);
     }
 
-    public void EditReviewMovieId(ReviewModel review, int oldReviewIndex)
+    public async void EditReviewMovieId(ReviewModel review)
     {
         MoviesLogic ML = new MoviesLogic();
         int oldMovieId = review.MovieId;
@@ -252,13 +272,11 @@ Message: {review.Review}
 
         review.MovieId = oldMovieId;
 
-        _reviews[oldReviewIndex] = review;
-        UpdateReviews();
+        await UpdateList(review);
     }
 
-    public void RemoveReview(ReviewModel review, int oldReviewIndex)
+    public void RemoveReview(int reviewIndex)
     {
-        _reviews.RemoveAt(oldReviewIndex);
-        UpdateReviews();
+        DbLogic.RemoveItemById<ReviewModel>(reviewIndex);
     }
 }

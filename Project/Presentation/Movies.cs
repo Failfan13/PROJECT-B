@@ -294,7 +294,7 @@ static class Movies
     }
 
     // Questions user for new review
-    public static void AddNewReview(int MovieId, ReservationModel pastReservation)
+    public async static void AddNewReview(int MovieId, ReservationModel pastReservation)
     {
         MoviesLogic ML = new MoviesLogic();
         ReviewLogic RL = new ReviewLogic();
@@ -335,10 +335,7 @@ static class Movies
             message = ReviewLogic.CutReviewMessage(message); // cuts message to size
         }
 
-        RL.SaveNewReview(message, rating, pastReservation); // saves message to CSV
-
-        RL.UpdateMovieReviews(ML.AllMovies());
-        ML.UpdateList(Movie);
+        await RL.SaveNewReview(message, rating, pastReservation); // saves message to CSV
     }
 
     public static void UpAndComingReleases()

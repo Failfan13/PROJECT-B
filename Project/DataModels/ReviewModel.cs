@@ -1,30 +1,34 @@
-using CsvHelper;
-using CsvHelper.Configuration;
-using CsvHelper.Configuration.Attributes;
+using Postgrest.Attributes;
+using Postgrest.Models;
 
-public class ReviewModel
+[Table("reviews")]
+public class ReviewModel : BaseModel
 {
-    [Name("movieId")]
+    [PrimaryKey("id", false)]
+    public int Id { get; set; }
+
+    [Column("movie_id")]
     public int MovieId { get; set; }
 
-    [Name("accountId")]
+    [Column("account_id")]
     public int AccountId { get; set; }
 
-    [Name("date")]
+    [Column("date_time")]
     public DateTime ReviewDate { get; set; }
 
-    [Name("rating")]
+    [Column("rating")]
     public double Rating { get; set; }
 
-    [Name("review")]
+    [Column("review")]
     public string Review { get; set; }
 
-    public ReviewModel(int movieId, int accountId, double rating, string review, DateTime date = default)
+    public ReviewModel NewReviewModel(int movieId, int accountId, double rating, string review, DateTime date = default)
     {
         MovieId = movieId;
         AccountId = accountId;
         Rating = rating;
         ReviewDate = (date != default) ? date : DateTime.Now;
         Review = ReviewLogic.CutReviewMessage(review);
+        return this;
     }
 }

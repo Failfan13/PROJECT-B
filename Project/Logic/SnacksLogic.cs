@@ -48,13 +48,15 @@ class SnacksLogic
         await UpdateList(snack);
     }
 
-    public void DeleteSnack(int snackInt) // Deletes category from list of categories
+    public Task DeleteSnack(int snackInt) // Deletes category from list of categories
     {
         // account exists and is admin
         if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
         {
-            DbLogic.RemoveItemById<SnackModel>(snackInt);
+            return DbLogic.RemoveItemById<SnackModel>(snackInt);
         }
+
+        return null!;
     }
 
     public void SwapMode()

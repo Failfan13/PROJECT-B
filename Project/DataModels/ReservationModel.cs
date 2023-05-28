@@ -46,7 +46,14 @@ public class ReservationModel : BaseModel
 
         foreach (var item in Snacks.Keys)
         {
-            snacks.Add(SL.GetById(item));
+            try
+            {
+                snacks.Add(SL.GetById(item)!.Result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
         return snacks;
     }

@@ -57,7 +57,7 @@ public static class Promo
         // where to return default
     }
 
-    public static void AddPromo(PromoModel promo = null)
+    public static void AddPromo(PromoModel promo = null!)
     {
         Console.Clear();
         string code;
@@ -170,7 +170,7 @@ public static class Promo
             Actions.Add(async () => await ChangeTotal(promo, true));
             Options.Add("Remove all previous conditions");
             Actions.Add(() => Parallel.Invoke(
-                () => PromoLogic.GetById(promo.Id).Result.Condition = null,
+                () => PromoLogic.GetById(promo.Id)!.Result.Condition = null,
                 async () => await PromoLogic.UpdateList(promo)));
             Options.Add("Return");
             Actions.Add(() => EditPromoMenu());
@@ -181,7 +181,7 @@ public static class Promo
         EditPromoMenu();
     }
 
-    private static void ChangeCode(PromoModel promo, bool isEdited = false)
+    private async static Task ChangeCode(PromoModel promo, bool isEdited = false)
     {
         Console.Clear();
         string code;
@@ -197,10 +197,7 @@ public static class Promo
             promo.Code = code;
         }
 
-        PromoLogic.UpdateList(promo);
-
-        if (isEdited) EditPromo(promo);
-        AddPromo(promo);
+        await PromoLogic.UpdateList(promo);
     }
     private async static Task ChangeMovie(PromoModel promo, bool specific = false)
     {
@@ -237,17 +234,17 @@ public static class Promo
         // if Condition has MovieDict
         try
         {
-            promo.Condition.Add("movieDict", moviePromos);
+            promo.Condition!.Add("movieDict", moviePromos);
         }
         catch
         {
-            promo.Condition["movieDict"] = moviePromos;
+            promo.Condition!["movieDict"] = moviePromos;
         }
 
         await PromoLogic.UpdateList(promo);
 
     }
-    private static void ChangeSnack(PromoModel promo, bool isEdited = false)
+    private async static Task ChangeSnack(PromoModel promo, bool isEdited = false)
     {
         Console.Clear();
         SnacksLogic SnacksLogic = new SnacksLogic();
@@ -258,9 +255,9 @@ public static class Promo
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        int MaxLength = SnacksLogic.AllSnacks().Max(snack => snack.Name.Length);
+        int MaxLength = SnacksLogic.GetAllSnacks().Result.Max(snack => snack.Name.Length);
 
-        foreach (SnackModel snack in SnacksLogic.AllSnacks()) // copy in Snack.cs DRY
+        foreach (SnackModel snack in SnacksLogic.GetAllSnacks().Result) // copy in Snack.cs DRY
         {
             int Tabs = (int)Math.Ceiling((MaxLength - snack.Name.Length) / 8.0);
             if (SnacksLogic.CurrentResSnacks.ContainsKey(snack.Id))
@@ -292,19 +289,16 @@ public static class Promo
             // if Condition has snackDict
             try
             {
-                promo.Condition.Add("snackDict", snackPromos);
+                promo.Condition!.Add("snackDict", snackPromos);
             }
             catch
             {
-                promo.Condition["snackDict"] = snackPromos;
+                promo.Condition!["snackDict"] = snackPromos;
             }
-            PromoLogic.UpdateList(promo);
+            await PromoLogic.UpdateList(promo);
         }
-
-        if (isEdited) EditPromo(promo);
-        AddPromo(promo);
     }
-    private static void ChangeSeat(PromoModel promo, bool isEdited = false)
+    private async static Task ChangeSeat(PromoModel promo, bool isEdited = false)
     {
         Console.Clear();
 
@@ -348,16 +342,13 @@ public static class Promo
         // if Condition has SeatDict
         try
         {
-            promo.Condition.Add("seatDict", SeatPromos);
+            promo.Condition!.Add("seatDict", SeatPromos);
         }
         catch
         {
-            promo.Condition["seatDict"] = SeatPromos;
+            promo.Condition!["seatDict"] = SeatPromos;
         }
-        PromoLogic.UpdateList(promo);
-
-        if (isEdited) EditPromo(promo);
-        AddPromo(promo);
+        await PromoLogic.UpdateList(promo);
     }
     private async static Task ChangeTotal(PromoModel promo, bool isEdited = false)
     {
@@ -369,11 +360,11 @@ public static class Promo
         // if Condition has priceDict
         try
         {
-            promo.Condition.Add("priceDict", pricePromos);
+            promo.Condition!.Add("priceDict", pricePromos);
         }
         catch
         {
-            promo.Condition["priceDict"] = pricePromos;
+            promo.Condition!["priceDict"] = pricePromos;
         }
 
         await PromoLogic.UpdateList(promo);

@@ -237,7 +237,15 @@ public class ReservationLogic
         // Snack verify
         if (Ress.Snacks != null)
         {
-            snacks = Ress.Snacks.ToDictionary(x => SL.GetById(x.Key), x => x.Value)!;
+            try
+            {
+                snacks = Ress.Snacks.ToDictionary(x => SL.GetById(x.Key)!.Result, x => x.Value)!;
+            }
+            catch (System.Exception)
+            {
+                snacks = new Dictionary<SnackModel, int>();
+            }
+
             foreach (var snack in snacks)
             {
                 finalPrice += snack.Key.Price * snack.Value;

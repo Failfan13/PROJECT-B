@@ -6,7 +6,7 @@ static class Snacks
 
     public static void ShowAll()
     {
-        foreach (SnackModel snack in SnacksLogic.AllSnacks())
+        foreach (SnackModel snack in SnacksLogic.GetAllSnacks().Result)
         {
             Console.WriteLine($"{snack.Id} {snack.Name}");
         }
@@ -33,7 +33,7 @@ static class Snacks
         List<Action> Actions = new List<Action>();
 
         // Get length of longest Snack string
-        int MaxLength = SnacksLogic.AllSnacks().Max(snack => snack.Name.Length);
+        int MaxLength = SnacksLogic.GetAllSnacks().Result.Max(snack => snack.Name.Length);
 
         if (SnacksLogic._addRemove)
         {
@@ -45,7 +45,7 @@ static class Snacks
         }
         Actions.Add(() => SnacksLogic.SwapMode());
 
-        foreach (SnackModel snack in SnacksLogic.AllSnacks())
+        foreach (SnackModel snack in SnacksLogic.GetAllSnacks().Result)
         {
             int Tabs = (int)Math.Ceiling((MaxLength - snack.Name.Length) / 8.0);
             if (SnacksLogic.CurrentResSnacks.ContainsKey(snack.Id))
@@ -85,7 +85,7 @@ static class Snacks
             var Snack = SnacksLogic.GetById(KeyValue.Key);
             for (int i = 0; i < KeyValue.Value; i++)
             {
-                CurrentPrice += Snack.Price;
+                CurrentPrice += Snack!.Result.Price;
             }
         }
 

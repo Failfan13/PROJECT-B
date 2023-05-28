@@ -330,7 +330,7 @@ static class Movies
         string message = "";
         if (messageInput.Key == ConsoleKey.Y)
         {
-            Console.WriteLine("\nEnter your message (max 255 characters): ");
+            Console.WriteLine("\nEnter your message (max 155 characters): ");
             message = Console.ReadLine()!;
             message = ReviewLogic.CutReviewMessage(message); // cuts message to size
         }

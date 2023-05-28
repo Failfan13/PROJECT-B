@@ -19,7 +19,7 @@ public class ReviewModel : BaseModel
     [Column("rating")]
     public double Rating { get; set; }
 
-    [Column("review")]
+    [Column("message")]
     public string Review { get; set; }
 
     public ReviewModel NewReviewModel(int movieId, int accountId, double rating, string review, DateTime date = default)

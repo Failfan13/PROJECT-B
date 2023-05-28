@@ -21,6 +21,9 @@ public static class Admin
         Options.Add("Add new Reservation for user");
         Actions.Add(() => Reservation.FilterMenu());
 
+        Options.Add("Add promotion");
+        Actions.Add(() => Promo.AddPromo());
+
         Options.Add("\nReturn");
         Actions.Add(() => Menu.Start());
 
@@ -55,6 +58,9 @@ public static class Admin
 
         Options.Add("Change TimeSlots");
         Actions.Add(() => TimeSlots.WhatMovieTimeSlot(isEdited: true));
+
+        Options.Add("Change Promotions");
+        Actions.Add(() => Promo.EditPromoMenu());
 
         Options.Add("Add Cinema Location");
         Actions.Add(() => LocationsLogic.NewLocation());

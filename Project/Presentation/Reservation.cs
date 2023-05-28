@@ -197,16 +197,19 @@ public static class Reservation
 
         double FinalPrice = 0.00;
         int promoId = Promo.Start();
-        string DiscountCode = "";
+        PromoModel DiscountModel = null!;
         int theatreId = TimeSlotsLogic.GetById(ress.TimeSlotId)!.Theatre.TheatreId;
 
         if (promoId != -1)
         {
-            DiscountCode = PromoLogic.GetById(promoId)!.Code;
-            TotalRess = ReservationLogic.ApplyDiscount(DiscountCode, TotalRess);
+            DiscountModel = PromoLogic.GetById(promoId).Result;
+            if (DiscountModel != null)
+            {
+                TotalRess = ReservationLogic.ApplyDiscount(DiscountModel.Id, TotalRess).Result;
 
-            ress.DiscountCode = DiscountCode;
-            await ReservationLogic.UpdateList(ress);
+                ress.DiscountCode = DiscountModel.Code;
+                await ReservationLogic.UpdateList(ress);
+            }
         }
 
         Console.Clear();

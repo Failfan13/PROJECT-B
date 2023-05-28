@@ -120,11 +120,11 @@ public class ReservationLogic
         await UpdateList(Ress);
     }
 
-    public TotalPriceModel ApplyDiscount(string DiscountCode, TotalPriceModel Ress)
+    public async Task<TotalPriceModel> ApplyDiscount(int discountId, TotalPriceModel ress)
     {
 
         PromoLogic PL = new PromoLogic();
-        PromoModel PM = PL.GetById(PL.GetPromoId(DiscountCode))!;
+        PromoModel PM = await PL.GetById(discountId)!;
         TimeSlotsLogic TL = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
 
@@ -135,28 +135,28 @@ public class ReservationLogic
         SeatPromoModel RSPM = null!;
         List<SnackPromoModel> SP = PL.AllSnacks(PM);
 
-        if (PM == null || !PM.Active) return Ress;
+        if (PM == null || !PM.Active) return ress;
         if (SPM.Count != 0) RSPM = SPM[0];
 
         // Movie check
         if (MPM.Count() != 0)
         {
-            MoviePromoModel movie = MPM.Find(m => m.MovieId == Ress.Movie.Id && m.Specific)!;
+            MoviePromoModel movie = MPM.Find(m => m.MovieId == ress.Movie.Id && m.Specific)!;
 
             //if (movie == null) movie = MPM.Find(m => m.Title == "all")!;
 
             if (movie != null)
             {
-                double newPrice = PL.CalcAfterDiscount(Ress.Movie.Price, movie.Discount, movie.Flat);
-                Ress.FinalPrice += newPrice - Ress.Movie.Price;
-                Ress.Movie.Price = newPrice;
+                double newPrice = PL.CalcAfterDiscount(ress.Movie.Price, movie.Discount, movie.Flat);
+                ress.FinalPrice += newPrice - ress.Movie.Price;
+                ress.Movie.Price = newPrice;
             }
 
-            //if (movie == null) return Ress;
+            //if (movie == null) return ress;
         }
 
         // Seat check
-        if (SPM.Count() != 0 && Ress.Seats.Count() != 0)
+        if (SPM.Count() != 0 && ress.Seats.Count() != 0)
         {
             TheatreLogic TL2 = new TheatreLogic();
 
@@ -166,16 +166,16 @@ public class ReservationLogic
 
             if (RSPM.SeatAmount != "all") allSeats = false;
 
-            if (allSeats) loopFor = Ress.Seats.Count();
+            if (allSeats) loopFor = ress.Seats.Count();
             else loopFor = int.Parse(RSPM.SeatAmount);
 
             try // calculate price & set new price
             {
                 for (int i = 0; i < loopFor; i++)
                 {
-                    double newPrice = PL.CalcAfterDiscount(Ress.Seats[i][1], RSPM.Discount, RSPM.Flat);
-                    Ress.FinalPrice += newPrice - Ress.Seats[i][1];
-                    Ress.Seats[i][1] = newPrice;
+                    double newPrice = PL.CalcAfterDiscount(ress.Seats[i][1], RSPM.Discount, RSPM.Flat);
+                    ress.FinalPrice += newPrice - ress.Seats[i][1];
+                    ress.Seats[i][1] = newPrice;
                 }
             }
             catch (System.Exception) { } // to little seats for loopFor
@@ -189,9 +189,9 @@ public class ReservationLogic
             {
                 foreach (var snack in SP)
                 {
-                    var snackie = Ress.Snacks.FirstOrDefault(s => s.Key.Id == snack.SnackId);
+                    var snackie = ress.Snacks.FirstOrDefault(s => s.Key.Id == snack.SnackId);
                     double newPrice = PL.CalcAfterDiscount(snackie.Key.Price, snack.Discount, snack.Flat);
-                    Ress.FinalPrice += (newPrice - snackie.Key.Price) * snackie.Value;
+                    ress.FinalPrice += (newPrice - snackie.Key.Price) * snackie.Value;
                     snackie.Key.Price = newPrice;
                 }
             }
@@ -202,10 +202,10 @@ public class ReservationLogic
         if (PPM.Count != 0)
         {
             RPM = PPM[0];
-            Ress.FinalPrice = PL.CalcAfterDiscount(Ress.FinalPrice, RPM.Discount, RPM.Flat);
+            ress.FinalPrice = PL.CalcAfterDiscount(ress.FinalPrice, RPM.Discount, RPM.Flat);
         }
 
-        return Ress;
+        return ress;
     }
 
     public TotalPriceModel GetTotalRess(ReservationModel Ress)

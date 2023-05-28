@@ -7,7 +7,6 @@ using System.Text.Json;
 //This class is not static so later on we can use inheritance and interfaces
 public class MoviesLogic
 {
-
     public async Task<List<MovieModel>> GetAllMovies()
     {
         return await DbLogic.GetAll<MovieModel>();

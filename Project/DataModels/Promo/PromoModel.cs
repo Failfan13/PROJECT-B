@@ -1,23 +1,26 @@
-using System.Text.Json.Serialization;
+using Postgrest.Attributes;
+using Postgrest.Models;
 
-
-public class PromoModel
+[Table("promotions")]
+public class PromoModel : BaseModel
 {
-    [JsonPropertyName("id")]
+    [PrimaryKey("id", false)]
     public int Id { get; set; }
 
-    [JsonPropertyName("code")]
+    [Column("code")]
     public string Code { get; set; }
 
-    [JsonPropertyName("active")]
-    public bool Active { get; set; } = true;
+    [Column("active")]
+    public bool Active { get; set; }
 
-    [JsonPropertyName("condition")]
+    [Column("condition")]
     public Dictionary<string, IEnumerable<object>>? Condition { get; set; }
 
-    public PromoModel(int id, string code)
+    public PromoModel NewPromoModel(string code)
     {
-        Id = id;
         Code = code;
+        Active = true;
+        Condition = new Dictionary<string, IEnumerable<object>>();
+        return this;
     }
 }

@@ -30,9 +30,9 @@ public static class Promo
         Console.WriteLine("Enter your promo code");
         code = Console.ReadLine()!.ToUpper();
 
-        if (PromoLogic.FindPromo(code))
+        if (PromoLogic.GetPromo(code, out PromoModel promo))
         {
-            return PromoLogic.GetPromoId(code);
+            return promo.Id;
         }
         return 0;
     }
@@ -50,14 +50,14 @@ public static class Promo
         Actions.Add(() => EditPromo());
 
         Options.Add("Return");
-        Actions.Add(() => EditPromoMenu()/* where to return to*/);
+        Actions.Add(() => Admin.ChangeData());
 
         MenuLogic.Question(Question, Options, Actions);
 
         // where to return default
     }
 
-    private static void AddPromo(PromoModel promo = null)
+    public static void AddPromo(PromoModel promo = null)
     {
         Console.Clear();
         string code;
@@ -72,6 +72,9 @@ public static class Promo
             if (!corrCode) AddPromo(); // if code is not valid, ask again
 
             promo = PromoLogic.NewPromo(code);
+
+            Console.WriteLine(promo.Id);
+            Console.ReadKey();
         }
 
         if (promo.Condition == null)
@@ -82,21 +85,21 @@ public static class Promo
         List<Action> Actions = new List<Action>();
 
         Options.Add("Promo applied movie");
-        Actions.Add(() => ChangeMovie(promo, true));
+        Actions.Add(async () => await ChangeMovie(promo, true));
         Options.Add("Movie price");
-        Actions.Add(() => ChangeMovie(promo));
+        Actions.Add(async () => await ChangeMovie(promo));
         Options.Add("Driks & snacks prices");
         Actions.Add(() => ChangeSnack(promo));
         Options.Add("Seat prices");
         Actions.Add(() => ChangeSeat(promo));
         Options.Add("Total order price");
-        Actions.Add(() => ChangeTotal(promo));
+        Actions.Add(async () => await ChangeTotal(promo));
         Options.Add("Return");
-        Actions.Add(() => EditPromoMenu());
+        Actions.Add(() => Admin.Start());
 
         MenuLogic.Question(Question, Options, Actions);
 
-        EditPromoMenu();
+        Admin.Start();
     }
 
     private static void RemovePromo()
@@ -105,9 +108,9 @@ public static class Promo
         Console.WriteLine("Enter the Promo code to remove");
         string code = Console.ReadLine()!.ToUpper();
 
-        if (PromoLogic.FindPromo(code))
+        if (PromoLogic.GetPromo(code, out PromoModel promo))
         {
-            PromoLogic.RemovePromo(code);
+            DbLogic.RemoveItem<PromoModel>(promo);
         }
 
         EditPromoMenu();
@@ -118,14 +121,14 @@ public static class Promo
         Console.WriteLine("Enter the Promo code to turn");
         string code = Console.ReadLine()!.ToUpper();
 
-        if (PromoLogic.FindPromo(code))
+        if (PromoLogic.GetPromo(code, out PromoModel promo))
         {
-            PromoLogic.TurnPromo(code);
+            PromoLogic.TurnPromo(promo.Id);
         }
 
         EditPromoMenu();
     }
-    private static void EditPromo(PromoModel promo = null)
+    private static void EditPromo(PromoModel promo = null!)
     {
         Console.Clear();
         string code = "";
@@ -134,7 +137,7 @@ public static class Promo
             Console.WriteLine("Enter the Promo code to edit");
             code = Console.ReadLine()!.ToUpper();
 
-            promo = PromoLogic.GetById(PromoLogic.GetPromoId(code) + 1);
+            promo = PromoLogic.GetPromo(code);
         }
         else
         {
@@ -156,19 +159,19 @@ public static class Promo
             Options.Add("Promo code");
             Actions.Add(() => ChangeCode(promo, true));
             Options.Add("Promo applied movie");
-            Actions.Add(() => ChangeMovie(promo, true, true));
+            Actions.Add(async () => await ChangeMovie(promo, true));
             Options.Add("Movie price");
-            Actions.Add(() => ChangeMovie(promo, true));
+            Actions.Add(async () => await ChangeMovie(promo, true));
             Options.Add("Driks & snacks price");
             Actions.Add(() => ChangeSnack(promo, true));
             Options.Add("Seat price");
             Actions.Add(() => ChangeSeat(promo, true));
             Options.Add("Total order price");
-            Actions.Add(() => ChangeTotal(promo, true));
+            Actions.Add(async () => await ChangeTotal(promo, true));
             Options.Add("Remove all previous conditions");
             Actions.Add(() => Parallel.Invoke(
-                () => PromoLogic.GetById(promo.Id).Condition = null,
-                () => PromoLogic.UpdateList(promo)));
+                () => PromoLogic.GetById(promo.Id).Result.Condition = null,
+                async () => await PromoLogic.UpdateList(promo)));
             Options.Add("Return");
             Actions.Add(() => EditPromoMenu());
 
@@ -199,32 +202,35 @@ public static class Promo
         if (isEdited) EditPromo(promo);
         AddPromo(promo);
     }
-    private static void ChangeMovie(PromoModel promo, bool specific = false, bool isEdited = false)
+    private async static Task ChangeMovie(PromoModel promo, bool specific = false)
     {
         Console.Clear();
         MoviesLogic MoviesLogic = new MoviesLogic();
         // load all pre existing in movieDict
         List<MoviePromoModel> moviePromos = PromoLogic.AllMovies(promo);
         // set default moviePromo (all movies)
-        MoviePromoModel moviePromo = new MoviePromoModel(0, "all", ChangeDiscount(), ChangeFlat());
-        MovieModel movie = null;
+        MoviePromoModel moviePromo = null!;
+        MovieModel movie = null!;
 
         // specific movie for promo code
         if (specific)
         {
-            moviePromo.Specific = true;
-
             Console.WriteLine("Enter the name of the movie");
 
-            movie = MoviesLogic.FindTitle(Console.ReadLine()!);
+            movie = MoviesLogic.FindTitle(Console.ReadLine()!)!;
             if (movie == null) return;
 
             moviePromo = new MoviePromoModel(movie.Id, movie.Title, ChangeDiscount(movie.Price), ChangeFlat());
+            moviePromo.Specific = true;
 
             if (moviePromos.Any(m => m.MovieId == movie.Id))
             {
                 moviePromos.RemoveAll(m => m.MovieId == movie.Id);
             }
+        }
+        else
+        {
+            moviePromo = new MoviePromoModel(0, "all", ChangeDiscount(), ChangeFlat());
         }
 
         moviePromos.Add(moviePromo);
@@ -238,10 +244,8 @@ public static class Promo
             promo.Condition["movieDict"] = moviePromos;
         }
 
-        PromoLogic.UpdateList(promo);
+        await PromoLogic.UpdateList(promo);
 
-        if (isEdited) EditPromo(promo);
-        AddPromo(promo);
     }
     private static void ChangeSnack(PromoModel promo, bool isEdited = false)
     {
@@ -355,7 +359,7 @@ public static class Promo
         if (isEdited) EditPromo(promo);
         AddPromo(promo);
     }
-    private static void ChangeTotal(PromoModel promo, bool isEdited = false)
+    private async static Task ChangeTotal(PromoModel promo, bool isEdited = false)
     {
         double discount = ChangeDiscount();
         bool flat = ChangeFlat();
@@ -371,10 +375,8 @@ public static class Promo
         {
             promo.Condition["priceDict"] = pricePromos;
         }
-        PromoLogic.UpdateList(promo);
 
-        if (isEdited) EditPromo(promo);
-        AddPromo(promo);
+        await PromoLogic.UpdateList(promo);
     }
     private static double ChangeDiscount(double oldPrice = int.MaxValue)
     {

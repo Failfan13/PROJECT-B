@@ -2,7 +2,7 @@
 public static class Format
 {
     public static void Start(TimeSlotModel tsm, List<SeatModel> seats, bool isEdited = false) => Start(tsm, seats, null!, IsEdited: isEdited);
-    public static void Start(TimeSlotModel tsm, List<SeatModel> seats, Dictionary<int, int> snacks = null!, bool IsEdited = false)
+    public async static void Start(TimeSlotModel tsm, List<SeatModel> seats, Dictionary<int, int> snacks = null!, bool IsEdited = false)
     {
         ReservationLogic ReservationLogic = new ReservationLogic();
         Console.Clear();
@@ -17,7 +17,7 @@ The total price for the extra requirements will be: {formatDt?.Item} x {seats.Co
         QuestionLogic.AskEnter();
 
 
-        new ReservationLogic().MakeReservation(tsm, seats, snacks, tsm.Format, IsEdited);
+        await ReservationLogic.MakeReservation(tsm, seats, snacks, tsm.Format, IsEdited);
     }
 
     public static void ChangeFormats(object formatModel, Action returnTo = null!)
@@ -40,7 +40,7 @@ The total price for the extra requirements will be: {formatDt?.Item} x {seats.Co
         MenuLogic.Question(Question, Options, Actions);
     }
 
-    public static void AddViewFormat(object formatModel)
+    public async static void AddViewFormat(object formatModel)
     {
         MoviesLogic MoviesLogic = new MoviesLogic();
         TimeSlotsLogic TimeSlotsLogic = new TimeSlotsLogic();
@@ -80,13 +80,13 @@ The total price for the extra requirements will be: {formatDt?.Item} x {seats.Co
 
                 MenuLogic.Question(Question, Options, Actions);
             }
-            MoviesLogic.UpdateList(model!);
+            await MoviesLogic.UpdateList(model!).ConfigureAwait(false);
         }
 
         ChangeFormats(formatModel);
     }
 
-    public static void RemoveViewFormat(object formatModel)
+    public async static void RemoveViewFormat(object formatModel)
     {
         MoviesLogic MoviesLogic = new MoviesLogic();
         TimeSlotsLogic TimeSlotsLogic = new TimeSlotsLogic();
@@ -101,7 +101,7 @@ The total price for the extra requirements will be: {formatDt?.Item} x {seats.Co
             if (model!.Format != "")
             {
                 Options.Add(model.Format);
-                Actions.Add(() => TimeSlotsLogic.RemoveFormat(model));
+                Actions.Add(async () => await TimeSlotsLogic.RemoveFormat(model).ConfigureAwait(false));
                 MenuLogic.Question(Question, Options, Actions);
             }
         }
@@ -122,13 +122,13 @@ The total price for the extra requirements will be: {formatDt?.Item} x {seats.Co
                 Console.WriteLine("There are no formats to remove");
             }
 
-            MoviesLogic.UpdateList(model);
+            await MoviesLogic.UpdateList(model).ConfigureAwait(false);
         }
 
         ChangeFormats(formatModel);
     }
 
-    public static void ViewFormatMenu(MovieModel movie, TimeSlotModel tsm)
+    public static void ViewFormatTimeslotMenu(MovieModel movie, TimeSlotModel tsm)
     {
         bool finishFormat = false;
 
@@ -156,6 +156,7 @@ The total price for the extra requirements will be: {formatDt?.Item} x {seats.Co
         }
         Actions.Add(() => FormatsLogic.SwapMode());
 
+
         if (!FormatsLogic._swapFormats)
         {
             foreach (var form in movie.Formats.Where(f => f != "standard"))
@@ -173,15 +174,17 @@ The total price for the extra requirements will be: {formatDt?.Item} x {seats.Co
             }
         }
 
+
         Options.Add("\nFinish");
         Actions.Add(() => finishFormat = true);
 
         MenuLogic.Question(Qeustion, Options, Actions);
 
-        if (!finishFormat) ViewFormatMenu(movie, tsm);
+
+        if (!finishFormat) ViewFormatTimeslotMenu(movie, tsm);
     }
 
-    public static void ViewFormatMenu(MovieModel movie)
+    public static void ViewFormatMovieMenu(MovieModel movie)
     {
         bool finishFormat = false;
 
@@ -203,12 +206,21 @@ The total price for the extra requirements will be: {formatDt?.Item} x {seats.Co
 
         if (!FormatsLogic._swapFormats)
         {
-            foreach (var form in FormatsLogic.AllFormats().Where(c => !movie.Formats.Contains(c)))
+            try
             {
-                Options.Add(form);
-                Actions.Add(() => FormatsLogic.AddFormatToMovie(movie, form));
+                foreach (var form in FormatsLogic.AllFormats().Where(c => !movie.Formats.Contains(c)))
+                {
+                    Options.Add(form);
+                    Actions.Add(() => FormatsLogic.AddFormatToMovie(movie, form));
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
             }
         }
+
         else
         {
             foreach (var form in movie.Formats.Where(f => f == "standard"))
@@ -223,6 +235,6 @@ The total price for the extra requirements will be: {formatDt?.Item} x {seats.Co
 
         MenuLogic.Question(Qeustion, Options, Actions);
 
-        if (!finishFormat) ViewFormatMenu(movie);
+        if (!finishFormat) ViewFormatMovieMenu(movie);
     }
 }

@@ -70,7 +70,7 @@ static class Movies
 
         Category.CategoryMenu(movie);
 
-        Format.ViewFormatMenu(movie);
+        Format.ViewFormatMovieMenu(movie);
 
         Console.Clear();
         Console.WriteLine("New movie added!");

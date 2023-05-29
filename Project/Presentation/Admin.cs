@@ -50,7 +50,7 @@ public static class Admin
         Options.Add("Change Movies");
         Actions.Add(() => Movies.ChangeMoviesMenu());
 
-        Options.Add("Change Tileslots");
+        Options.Add("Change TimeSlots");
         Actions.Add(() => TimeSlots.WhatMovieTimeSlot(isEdited: true));
 
         Options.Add("Change Snacks");
@@ -61,9 +61,6 @@ public static class Admin
 
         Options.Add("Change Reservations");
         Actions.Add(() => Reservation.EditReservation(true));
-
-        Options.Add("Change TimeSlots");
-        Actions.Add(() => TimeSlots.WhatMovieTimeSlot(isEdited: true));
 
         Options.Add("Change Promotions");
         Actions.Add(() => Promo.EditPromoMenu());

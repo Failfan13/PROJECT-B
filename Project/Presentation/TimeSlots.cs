@@ -90,25 +90,16 @@ static class TimeSlots
 
         Console.Clear();
 
-        TimeSlotStartTime(TM, newTimeSlot: true);
-        Console.WriteLine("Would you like to change the seat layout? (y/n)");
-        if (Console.ReadKey().KeyChar == 'y')
-        {
-            TM.Theatre.TheatreId = TL.DupeTheatreToNew(newTheatreId);
-            if (TL.GetAllTheatres().Result.Any(t => t.Id == TM.Theatre.TheatreId))
-            {
-                TL.ShowSeats(TL.GetById(TM.Theatre.TheatreId)!.Result!);
-            }
-        }
+        await TimeSlotStartTime(TM, newTimeSlot: true);
 
         Console.WriteLine("\nWould you like to add a new format? (y/n)");
         if (Console.ReadKey().KeyChar == 'y')
         {
             //TimeSlotsLogic.UpdateList(TM);
-            Format.ViewFormatMenu(ML.GetById(TM.MovieId)!.Result, TM);
+            Format.ViewFormatTimeslotMenu(ML.GetById(TM.MovieId)!.Result, TM);
         }
 
-        await TimeSlotsLogic.UpdateList(TM);
+        await TimeSlotsLogic.NewTimeSlot(TM);
     }
 
     public static void WhatMovieTimeSlot(bool isEdited = false)
@@ -128,7 +119,7 @@ static class TimeSlots
         {
             Movies.Add(movie.Title);
             if (isEdited) Actions.Add(() => TimeSlots.EditTimeSlot(movie.Id, false));
-            else Actions.Add(() => TimeSlots.NewTimeSlot(movie.Id));
+            else Actions.Add(async () => await TimeSlots.NewTimeSlot(movie.Id).ConfigureAwait(false));
         }
 
         Movies.Add("Return");
@@ -155,7 +146,7 @@ static class TimeSlots
         }
 
         Options.Add("Add new TimeSlot");
-        Actions.Add(() => NewTimeSlot(movieid, IsEdited));
+        Actions.Add(async () => await NewTimeSlot(movieid, IsEdited).ConfigureAwait(false));
 
         Options.Add("Return");
         Actions.Add(() => WhatMovieTimeSlot());
@@ -174,22 +165,24 @@ static class TimeSlots
         List<Action> Actions = new List<Action>();
 
         Options.Add("Change start time");
-        Actions.Add(() => TimeSlotStartTime(tsm, () => EditTimeSlotChangeMenu(tsm)));
-        // Add remove seat from theatre & reservation
-        // Add seat to theatre & reservation
+        Actions.Add(async () => await TimeSlotStartTime(tsm, () => EditTimeSlotChangeMenu(tsm)));
+
         Options.Add("Change view format");
         Actions.Add(() => Format.ChangeFormats(tsm, () => EditTimeSlotChangeMenu(tsm)));
+
+        Options.Add("Remove timeslot");
+        Actions.Add(() => TimeSlotsLogic.DeleteTimeSlot(tsm.Id));
 
         Options.Add("Return");
         Actions.Add(() => Parallel.Invoke(
             //() => TheatreLogic.UpdateList(TheatreLogic.GetById(tsm.Theatre.TheatreId)!),
-            () => TimeSlotsLogic.UpdateList(tsm)
+            async () => await TimeSlotsLogic.UpdateList(tsm).ConfigureAwait(false)
         ));
 
         MenuLogic.Question(Question, Options, Actions);
     }
 
-    private static void TimeSlotStartTime(TimeSlotModel tsm, Action returnTo = null!, bool newTimeSlot = false)
+    private async static Task TimeSlotStartTime(TimeSlotModel tsm, Action returnTo = null!, bool newTimeSlot = false)
     {
         TimeSlotsLogic TimeSlotsLogic = new TimeSlotsLogic();
         tsm.Start = DateTime.MinValue;
@@ -215,7 +208,7 @@ static class TimeSlots
 
         if (!newTimeSlot)
         {
-            TimeSlotsLogic.UpdateList(tsm);
+            await TimeSlotsLogic.UpdateList(tsm).ConfigureAwait(false);
         }
 
         if (returnTo != null) returnTo();

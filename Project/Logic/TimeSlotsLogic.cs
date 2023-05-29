@@ -55,31 +55,6 @@ class TimeSlotsLogic
         }
     }
 
-    // public void NewTimeSlot(int movieid, DateTime start, TheatreModel theatre, string format)
-    // {
-    //     int NewID = GetNewestId();
-    //     TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, theatre, format);
-    // }
-    // public void NewTimeSlot(int movieid, DateTime start)
-    // {
-    //     int NewID = GetNewestId();
-    //     TheatreLogic TL = new TheatreLogic();
-
-    //     // create new theatre menu & return new theatre ID
-    //     int newTheatreId = Theatre.MakeNewTheatre();
-
-    //     try
-    //     {
-    //         TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, TL.GetById(newTheatreId)!.Result!, "");
-    //         UpdateList(timeslot);
-    //     }
-    //     catch (System.Exception ex)
-    //     {
-    //         Console.WriteLine(ex.Message);
-    //         Thread.Sleep(5000);
-    //     }
-    // }
-
     public async void AddFormat(TimeSlotModel formatModel, string format)
     {
         formatModel.Format = format;

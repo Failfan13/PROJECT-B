@@ -45,7 +45,7 @@ public static class Admin
         List<Action> Actions = new List<Action>();
 
         Options.Add("Change Theatre");
-        Actions.Add(() => Theatre.WhatTheatre());
+        Actions.Add(() => Theatre.WhatTheatre(true));
 
         Options.Add("Change Movies");
         Actions.Add(() => Movies.ChangeMoviesMenu());

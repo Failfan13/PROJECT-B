@@ -95,9 +95,9 @@ static class TimeSlots
         if (Console.ReadKey().KeyChar == 'y')
         {
             TM.Theatre.TheatreId = TL.DupeTheatreToNew(newTheatreId);
-            if (TL.AllTheatres().Any(t => t.Id == TM.Theatre.TheatreId))
+            if (TL.GetAllTheatres().Result.Any(t => t.Id == TM.Theatre.TheatreId))
             {
-                TL.ShowSeats(TL.GetById(TM.Theatre.TheatreId)!);
+                TL.ShowSeats(TL.GetById(TM.Theatre.TheatreId)!.Result!);
             }
         }
 

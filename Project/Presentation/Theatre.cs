@@ -8,7 +8,7 @@ public static class Theatre
         ReservationLogic RL = new ReservationLogic();
         var theatre = TL.GetById(timeSlot.Theatre.TheatreId)!;
 
-        var help = TL.ShowSeats(theatre, timeSlot);
+        var help = TL.ShowSeats(theatre.Result, timeSlot);
 
         if (help != null)
         {
@@ -63,7 +63,7 @@ public static class Theatre
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        foreach (var item in TL.AllTheatres())
+        foreach (var item in TL.GetAllTheatres().Result)
         {
             Options.Add($"Room: {item.Id} - Width: {item.Width}, Height: {item.Height}{(item.CopyRoomId != -1 ? $" - Copy Room: {item.CopyRoomId}" : "")}");
 
@@ -112,6 +112,7 @@ public static class Theatre
         double baseSeatPrice = 0; // basic
         double stanSeatPrice = 0; // standard
         double luxeSeatPrice = 0; // luxury
+        TheatreModel newTheatre = null!;
 
         Console.Clear();
         TheatreLogic TL = new TheatreLogic();
@@ -219,14 +220,14 @@ public static class Theatre
             }
         }
 
-        TheatreModel newTheatre = TL.MakeTheatre(width, height, baseSeatPrice, stanSeatPrice, luxeSeatPrice);
+        newTheatre = TL.NewTheatre(width, height, baseSeatPrice, stanSeatPrice, luxeSeatPrice).Result;
 
         Console.WriteLine("\nWould you like to change seat configuration? (y/n)");
         ConsoleKeyInfo inputKey = Console.ReadKey(true);
         // Y key to config menu
         if (inputKey.Key == ConsoleKey.Y)
         {
-            ConfigureTheatre(newTheatre);
+            TL.ShowSeats(newTheatre);
         }
         return newTheatre.Id;
     }

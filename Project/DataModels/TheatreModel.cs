@@ -1,50 +1,52 @@
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Postgrest.Attributes;
+using Postgrest.Models;
 
-public class TheatreModel : ICloneable
+[Table("theatres")]
+public class TheatreModel : BaseModel, ICloneable
 {
-    [JsonPropertyName("id")]
+    [PrimaryKey("id", false)]
     public int Id { get; set; }
 
-    [JsonPropertyName("copyRoomId")]
+    [Column("copy_room_id")]
     public int CopyRoomId { get; set; } = -1;
 
-    [JsonPropertyName("layoutSpecs")]
-    public SeatBuilderHelper LayoutSpecs { get; set; } = new SeatBuilderHelper();
+    [Column("layout_specs")]
+    public SeatBuilderHelper LayoutSpecs { get; set; }
 
-    [JsonPropertyName("seatPrices")]
+    [Column("seat_prices")]
     public SeatPriceHelper SeatPrices { get; set; }
 
-    [JsonPropertyName("roomWidth")]
+    [Column("room_width")]
     public int Width { get; set; }
 
-    [JsonPropertyName("roomHeight")]
+    [Column("room_height")]
     public int Height { get; set; }
 
-    [JsonConstructor]
 
-    public TheatreModel() : this(0, 0, 0, 0) { }
-    public TheatreModel(int id, double SeatPrice, int width, int height)
+    public TheatreModel NewTheatreModel(double SeatPrice, int width, int height)
     {
-        Id = id;
+        LayoutSpecs = new SeatBuilderHelper();
         SeatPrices = new SeatPriceHelper();
         SeatPrices.Basic = SeatPrice;
         SeatPrices.Standard = SeatPrice * 1.5;
         SeatPrices.Luxury = SeatPrice * 2;
         Width = width;
         Height = height;
+        return this;
     }
 
     public class SeatBuilderHelper
     {
         [JsonPropertyName("pathwaysIndex")]
-        public List<Tuple<string, int>> PathwayIndexes { get; set; } = new List<Tuple<string, int>>() { };
+        public Tuple<string, int>[] PathwayIndexes { get; set; } = new Tuple<string, int>[] { };
 
         [JsonPropertyName("blockedSeats")]
-        public List<int> BlockedSeatIndexes { get; set; } = new List<int>() { };
+        public int[] BlockedSeatIndexes { get; set; } = new int[] { };
 
         [JsonPropertyName("handicapSeats")]
-        public List<int> HandiSeatIndexes { get; set; } = new List<int>() { };
+        public int[] HandiSeatIndexes { get; set; } = new int[] { };
     }
 
     public class SeatPriceHelper

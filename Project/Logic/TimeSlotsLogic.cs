@@ -89,7 +89,7 @@ class TimeSlotsLogic
 
         try
         {
-            TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, TL.GetById(newTheatreId)!, "");
+            TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, TL.GetById(newTheatreId)!.Result!, "");
             UpdateList(timeslot);
         }
         catch (System.Exception ex)

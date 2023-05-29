@@ -221,7 +221,7 @@ public static class Reservation
         Console.WriteLine("\nSeats:");
         for (int i = 0; i < TotalRess.Seats.Count(); i++)
         {
-            Console.Write($"{TheatreLogic.SeatNumber(TheatreLogic.GetById(theatreId)!.Width, (int)TotalRess.Seats[i][0])}");
+            Console.Write($"{TheatreLogic.SeatNumber(TheatreLogic.GetById(theatreId)!.Result.Width, (int)TotalRess.Seats[i][0])}");
 
             SeatModel currSeat = ress.Seats.Find(seat => seat.Id == (int)TotalRess.Seats[i][0])!;
             Console.Write($"\tType: {currSeat!.Type}");
@@ -287,7 +287,7 @@ Seats:
 
         foreach (var seat in TotalRess.Seats)
         {
-            body += $"{TheatreLogic.SeatNumber(TheatreLogic.GetById(theatreId)!.Width, (int)seat[0])} \n";
+            body += $"{TheatreLogic.SeatNumber(TheatreLogic.GetById(theatreId)!.Result.Width, (int)seat[0])} \n";
         }
 
         if (ress.Snacks != null && ress.Snacks.Count > 0)

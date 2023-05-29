@@ -225,7 +225,7 @@ public class ReservationLogic
         finalPrice += movie.Price;
 
         // Seat verify
-        int theatreId = TL.GetById(Ress.TimeSlotId)!.Theatre.TheatreId;
+        int theatreId = TL.GetById(Ress.TimeSlotId)!.Result.Theatre.TheatreId;
 
         for (int i = 0; i < Ress.Seats.Count(); i++)
         {
@@ -262,6 +262,6 @@ public class ReservationLogic
         TimeSlotsLogic TL = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
 
-        return ML.GetById(TL.GetById(ress.TimeSlotId)!.MovieId)!.Result;
+        return ML.GetById(TL.GetById(ress.TimeSlotId)!.Result.MovieId)!.Result;
     }
 }

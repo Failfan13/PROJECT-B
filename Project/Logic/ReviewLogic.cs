@@ -87,7 +87,7 @@ public class ReviewLogic
         try
         {
             // Get movie from time slot
-            var movie = ML.GetById(TL.GetById(pastReservation.TimeSlotId)!.MovieId)!.Result;
+            var movie = ML.GetById(TL.GetById(pastReservation.TimeSlotId)!.Result.MovieId)!.Result;
             if (movie == null) throw new Exception("Movie not found");
             // Make new review
             review = new ReviewModel();

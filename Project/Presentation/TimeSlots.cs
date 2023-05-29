@@ -6,7 +6,7 @@ static class TimeSlots
     public static void ShowAllTimeSlotsForMovie(int movieid, bool IsEdited = false)
     {
         TimeSlotsLogic timeSlotsLogic = new TimeSlotsLogic();
-        List<TimeSlotModel> tsms = timeSlotsLogic.GetByMovieId(movieid)!;
+        List<TimeSlotModel> tsms = timeSlotsLogic.GetTimeslotByMovieId(movieid)!;
         MoviesLogic ML = new MoviesLogic();
         TheatreLogic TL = new TheatreLogic();
 
@@ -49,7 +49,7 @@ static class TimeSlots
     {
         TimeSlotsLogic timeSlotsLogic = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
-        List<TimeSlotModel> tsms = timeSlotsLogic.GetByMovieId(movieid)!;
+        List<TimeSlotModel> tsms = timeSlotsLogic.GetTimeslotByMovieId(movieid)!;
 
         Console.Clear();
         if (tsms.Count == 0) // Movie exists but there is no timeslot for it
@@ -74,14 +74,14 @@ static class TimeSlots
         return null;
     }
 
-    public static void NewTimeSlot(int movieId, bool IsEdited = false)
+    public async static Task NewTimeSlot(int movieId, bool IsEdited = false)
     {
         TimeSlotsLogic TimeSlotsLogic = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
         TheatreLogic TL = new TheatreLogic();
-
         // make new timeslot
-        TimeSlotModel TM = new TimeSlotModel(TimeSlotsLogic.GetNewestId());
+        TimeSlotModel TM = new TimeSlotModel();
+        TM = TM.NewTimeSlotModel();
         // Get room to add
         int newTheatreId = Theatre.WhatTheatre();
 
@@ -104,11 +104,11 @@ static class TimeSlots
         Console.WriteLine("\nWould you like to add a new format? (y/n)");
         if (Console.ReadKey().KeyChar == 'y')
         {
-            TimeSlotsLogic.UpdateList(TM);
+            //TimeSlotsLogic.UpdateList(TM);
             Format.ViewFormatMenu(ML.GetById(TM.MovieId)!.Result, TM);
         }
 
-        TimeSlotsLogic.UpdateList(TM);
+        await TimeSlotsLogic.UpdateList(TM);
     }
 
     public static void WhatMovieTimeSlot(bool isEdited = false)
@@ -141,7 +141,7 @@ static class TimeSlots
     {
         TimeSlotsLogic TimeSlotsLogic = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
-        List<TimeSlotModel> tsms = TimeSlotsLogic.GetByMovieId(movieid)!;
+        List<TimeSlotModel> tsms = TimeSlotsLogic.GetTimeslotByMovieId(movieid)!;
         TimeSlotModel tsm = null!;
 
         string Question = "What TimeSlot do you want to edit?";

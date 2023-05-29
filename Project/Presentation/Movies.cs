@@ -235,7 +235,7 @@ static class Movies
         List<ReviewModel> pastReviews = RL.UserPastReviews(AccountsLogic.CurrentAccount!.Id);
 
         List<ReservationModel> pastMoviesNoReview = MoviesLogic.PastMovies().FindAll(
-            m => !pastReviews.Any(r => r.MovieId == TL.GetById(m.TimeSlotId)!.MovieId));
+            m => !pastReviews.Any(r => r.MovieId == TL.GetById(m.TimeSlotId)!.Result.MovieId));
 
         Console.Clear();
 
@@ -254,8 +254,8 @@ static class Movies
         {
             try
             {
-                options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSlotId)!.MovieId)!.Result.Title} Watched on: {pastReservation.DateTime}");
-                actions.Add(() => AddNewReview(TL.GetById(pastReservation.TimeSlotId)!.MovieId, pastReservation));
+                options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSlotId)!.Result.MovieId)!.Result.Title} Watched on: {pastReservation.DateTime}");
+                actions.Add(() => AddNewReview(TL.GetById(pastReservation.TimeSlotId)!.Result.MovieId, pastReservation));
             }
             catch (System.Exception ex)
             {

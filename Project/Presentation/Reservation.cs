@@ -7,7 +7,7 @@ public static class Reservation
     static private TheatreLogic TheatreLogic = new();
     static public ReservationModel CurrReservation = null!;
 
-    public static void EditReservation(bool AsAdmin = false)
+    public async static void EditReservation(bool AsAdmin = false)
     {
         ReservationLogic ReservationLogic = new ReservationLogic();
         AccountsLogic AccountsLogic = new AccountsLogic();
@@ -49,7 +49,7 @@ public static class Reservation
                 {
                     reservationDate = reservation.DateTime.ToString("dd/MM/yy HH:mm");
                     var timeslotVar = TimeSlotsLogic.GetById(reservation.TimeSlotId);
-                    reservationMovie = MoviesLogic.GetById(timeslotVar.MovieId).Result;
+                    reservationMovie = MoviesLogic.GetById(timeslotVar!.Result.MovieId)!.Result;
 
                     if (reservationMovie != null && reservationDate != null)
                     {
@@ -80,12 +80,12 @@ public static class Reservation
 
         foreach (SeatModel seat in CurrSeat)
         {
-            var TheatreSeat = CurrTimeSlot.Theatre.Seats.FirstOrDefault(s => s.Id == seat.Id);
+            var TheatreSeat = CurrTimeSlot!.Result.Theatre.Seats.FirstOrDefault(s => s.Id == seat.Id);
             //TheatreSeat.Reserved = false;
         }
 
-        TimeSlotsLogic.UpdateList(CurrTimeSlot);
 
+        await TimeSlotsLogic.UpdateList(CurrTimeSlot!.Result).ConfigureAwait(false);
 
         // Edit reservations menu
         string question = "Choose a reservation you want to edit from the menu.";
@@ -100,7 +100,7 @@ public static class Reservation
             };
         List<Action> actions = new();
 
-        TimeSlotModel timeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSlotId);
+        TimeSlotModel timeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSlotId)!.Result;
         var movieId = timeSlot.MovieId;
 
         // choose all
@@ -111,12 +111,12 @@ public static class Reservation
 
         // change seats
         actions.Add(() => Parallel.Invoke(
-            () => Theatre.DeselectCurrentSeats(CurrTimeSlot, CurrReservation),
-            () => Theatre.SelectSeats(CurrTimeSlot, true))
+            () => Theatre.DeselectCurrentSeats(CurrTimeSlot.Result, CurrReservation),
+            () => Theatre.SelectSeats(CurrTimeSlot.Result, true))
         );
 
         // Change snack
-        actions.Add(() => Snacks.Start(CurrTimeSlot, CurrReservation.Seats, true));
+        actions.Add(() => Snacks.Start(CurrTimeSlot.Result, CurrReservation.Seats, true));
 
         // // Change format  // will not be interchangeable
         // actions.Add(() => Format.Start(CurrTimeSlot, CurrReservation.Seats, true));
@@ -135,7 +135,7 @@ public static class Reservation
         actions.Add(() => Menu.Start());
 
         MenuLogic.Question(question, options, actions);
-        ReservationLogic.UpdateList(CurrReservation);
+        await ReservationLogic.UpdateList(CurrReservation);
     }
 
     public static void FilterMenu(List<MovieModel> filteredList = null, bool IsEdited = false)
@@ -198,7 +198,7 @@ public static class Reservation
         double FinalPrice = 0.00;
         int promoId = Promo.Start();
         PromoModel DiscountModel = null!;
-        int theatreId = TimeSlotsLogic.GetById(ress.TimeSlotId)!.Theatre.TheatreId;
+        int theatreId = TimeSlotsLogic.GetById(ress.TimeSlotId)!.Result.Theatre.TheatreId;
 
         if (promoId != -1)
         {
@@ -280,7 +280,7 @@ Order details:
 
 Movie: {TotalRess.Movie.Title}
 
-Movie time: {TimeSlotsLogic.GetById(ress.TimeSlotId)!.Start}
+Movie time: {TimeSlotsLogic.GetById(ress.TimeSlotId)!.Result.Start}
 
 Seats: 
 ";

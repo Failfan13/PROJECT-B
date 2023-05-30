@@ -35,9 +35,6 @@ static class UserLogin
             Options.Add("Change password");
             Actions.Add(() => ChangePassword());
 
-            Options.Add("Change email");
-            Actions.Add(() => ChangeEmail());
-
             Options.Add("Change advertisement settings");
             Actions.Add(() => ChangeAdvertation());
         }
@@ -207,13 +204,6 @@ Thank you.";
             string newpassword = Console.ReadLine()!;
             accountsLogic.NewPassword(newpassword);
         }
-    }
-
-    public static void ChangeEmail()
-    {
-        Console.WriteLine("Please enter new email address");
-        string newemail = Console.ReadLine()!;
-        accountsLogic.NewEmail(newemail);
     }
 
     public static void ChangeAdvertation()

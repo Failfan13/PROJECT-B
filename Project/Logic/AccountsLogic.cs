@@ -117,13 +117,6 @@ public class AccountsLogic
         UpdateList(CurrentAccount);
     }
 
-    public void NewEmail(string newemail)
-    {
-        if (CurrentAccount == null) return;
-        CurrentAccount.EmailAddress = newemail;
-        UpdateList(CurrentAccount);
-    }
-
     public int GetAccountIdFromList()
     {
         int ReturnId = -1;

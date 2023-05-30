@@ -38,47 +38,5 @@
     "date_time": "2023-05-16T10:31:28.1715062+02:00",
     "format": "",
     "discountCode": ""
-  },
-  {
-    "id": 3,
-    "timeslot_id": 1,
-    "seats": [
-      {
-        "id": 85,
-        "seatType": "basic"
-      },
-      {
-        "id": 86,
-        "seatType": "basic"
-      },
-      {
-        "id": 95,
-        "seatType": "basic"
-      },
-      {
-        "id": 96,
-        "seatType": "basic"
-      }
-    ],
-    "snacks": null,
-    "account_id": 5,
-    "date_time": "2023-05-17T14:08:24.4997829+02:00",
-    "format": "",
-    "discountCode": ""
-  },
-  {
-    "id": 4,
-    "timeslot_id": 1,
-    "seats": [
-      {
-        "id": 59,
-        "seatType": "basic"
-      }
-    ],
-    "snacks": {},
-    "account_id": 2,
-    "date_time": "2023-05-23T15:18:02.7976755+02:00",
-    "format": "",
-    "discountCode": ""
   }
 ]

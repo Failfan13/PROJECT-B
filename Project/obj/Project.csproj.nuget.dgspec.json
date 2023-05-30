@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mmsb0\\OneDrive\\Documents\\GitHub\\PROJECT-B\\Project\\Project.csproj": {}
+    "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mmsb0\\OneDrive\\Documents\\GitHub\\PROJECT-B\\Project\\Project.csproj": {
+    "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mmsb0\\OneDrive\\Documents\\GitHub\\PROJECT-B\\Project\\Project.csproj",
+        "projectUniqueName": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj",
         "projectName": "Project",
-        "projectPath": "C:\\Users\\mmsb0\\OneDrive\\Documents\\GitHub\\PROJECT-B\\Project\\Project.csproj",
-        "packagesPath": "C:\\Users\\mmsb0\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mmsb0\\OneDrive\\Documents\\GitHub\\PROJECT-B\\Project\\obj\\",
+        "projectPath": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\Project.csproj",
+        "packagesPath": "C:\\Users\\erikm\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\erikm\\Documents\\Opdrachten Github\\PROJECT-B\\Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mmsb0\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\erikm\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -63,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.405\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.407\\RuntimeIdentifierGraph.json"
         }
       }
     }

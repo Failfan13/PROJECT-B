@@ -32,8 +32,7 @@ static class Menu
         if (AccountsLogic.CurrentAccount != null && !AccountsLogic.CurrentAccount.Admin)
         {
             Options.Add("See all reservations");
-            //Actions.Add(() => Reservation.AllReservations());
-            Actions.Add(() => Console.WriteLine("No Work bruh"));
+            Actions.Add(() => ReservationLogic.MenuReservation());
 
             Options.Add("Change a reservation");
             Actions.Add(() => Reservation.EditReservation());
@@ -69,6 +68,10 @@ static class Menu
 
             Options.Add("View all complaints");
             Actions.Add(() => Contact.ViewAllComplaints());
+
+            Options.Add("View reports");
+            Actions.Add(() => Admin.LogReport());
+
         }
 
         // Logout & account settings

@@ -68,6 +68,10 @@ static class Menu
 
             Options.Add("View all complaints");
             Actions.Add(() => Contact.ViewAllComplaints());
+
+            Options.Add("View reports");
+            Actions.Add(() => Admin.LogReport());
+
         }
 
         // Logout & account settings

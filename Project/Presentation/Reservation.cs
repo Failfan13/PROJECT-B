@@ -129,7 +129,7 @@ public static class Reservation
     {
         bool ofAge = AccountsLogic.CheckOfAge();
 
-        var movies = new MoviesLogic().AllMovies(includeUnreleased: false);
+        var movies = new MoviesLogic().AllMovies();
 
         string Question = "which movie would you like to see?";
         List<string> Movies = new List<string>();

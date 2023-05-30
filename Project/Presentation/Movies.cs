@@ -353,13 +353,19 @@ static class Movies
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
+        List<MovieModel> UpcomingMovies = ML.UnreleasedMovies().FindAll(m => m.Ads == true);
+
+        if (UpcomingMovies.Count == 0)
+        {
+            Console.WriteLine("You have no upcoming movies");
+            QuestionLogic.AskEnter();
+            return;
+        }
+
         foreach (MovieModel movie in ML.UnreleasedMovies())
         {
-            // Skip if ads off
-            if (movie.Ads == false) continue;
             // Movie title
-            if (AccountsLogic.CurrentAccount == null) Options.Add($"Title: {movie.Title}");
-            else Options.Add($"Title: {movie.Title}");
+            Options.Add($"Title: {movie.Title}");
             Actions.Add(() => ML.GetMovieDetails(movie, () => UpAndComingReleases()));
 
             // Follow or unfollow

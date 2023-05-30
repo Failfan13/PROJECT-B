@@ -35,6 +35,9 @@ static class UserLogin
             Options.Add("Change password");
             Actions.Add(() => ChangePassword());
 
+            Options.Add("Change email");
+            Actions.Add(() => ChangeEmail());
+
             Options.Add("Change advertisement settings");
             Actions.Add(() => ChangeAdvertation());
         }

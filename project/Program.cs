@@ -6,7 +6,5 @@ System.Threading.Thread.CurrentThread.CurrentCulture = ci;
 // Show unicode characters
 Console.OutputEncoding = System.Text.Encoding.Unicode;
 
-Admin.LogReportNoDate();
-
-//  Menu.Start();
+ Menu.Start();
 

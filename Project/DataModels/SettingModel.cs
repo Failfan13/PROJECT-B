@@ -2,11 +2,16 @@ using System.Text.Json.Serialization;
 
 public class SettingModel
 {
-    [JsonPropertyName("colour")]
-    public ConsoleColor Colour { get; set; }
+    [JsonPropertyName("color")]
+    public string Color { get; set; }
 
-    public SettingModel(ConsoleColor colour)
+    [JsonConstructor]
+    public SettingModel()
     {
-        Colour = colour;
+        Color = "White";
+    }
+    public SettingModel(ConsoleColor color)
+    {
+        Color = color.ToString();
     }
 }

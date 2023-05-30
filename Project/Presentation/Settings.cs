@@ -49,7 +49,7 @@ public static class Settings
         foreach (ConsoleColor colour in Enum.GetValues(typeof(ConsoleColor)))
         {
             Options.Add(colour.ToString()!);
-            Actions.Add(() => _logic.ChangeColour(colour));
+            Actions.Add(() => _logic.ChangeColor(colour));
         }
 
         Options.Add("\nReturn");

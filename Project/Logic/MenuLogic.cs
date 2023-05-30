@@ -5,6 +5,8 @@ using System.Text.Json;
 
 public static class MenuLogic
 {
+    private static SettingsLogic _logic = new SettingsLogic();
+
     public static int Question(string question, List<string> options, List<Action> actions = null, string BottomString = null)
     {
         Console.CursorVisible = false;
@@ -222,18 +224,20 @@ public static class MenuLogic
         }
     }
 
-    public static void ColorString(string str, ConsoleColor color = ConsoleColor.DarkBlue, bool newLine = true)
+    public static void ColorString(string str, ConsoleColor color = default, bool newLine = true)
     {
+        if (color == default) color = _logic.GetColor();
         Console.ForegroundColor = color;
         if (newLine) Console.WriteLine(str); // takes whole line
         else Console.Write(str); // used inline
         Console.ResetColor();
     }
 
-    public static string ColorAndReturnString(string str, ConsoleColor color = ConsoleColor.DarkBlue)
+    public static string ColorAndReturnString(string str, ConsoleColor color = default)
     {
         string newStr = "";
 
+        if (color == default) color = _logic.GetColor();
         Console.ForegroundColor = color;
         newStr = str; // used inline
         Console.ResetColor();

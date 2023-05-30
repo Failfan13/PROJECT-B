@@ -72,6 +72,8 @@ static class Menu
             Options.Add("View reports");
             Actions.Add(() => Admin.LogReport());
 
+            Options.Add("View application settings");
+            Actions.Add(() => Settings.ViewSettings());
         }
 
         // Logout & account settings

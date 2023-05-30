@@ -69,6 +69,24 @@ public static class Admin
         MenuLogic.Question(Question, Options, Actions);
 
     }
+    public static void LogReport()
+    {
+        List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
+
+        string question ="Would you like to see a report from all reservations or only reservations within a specific timeframe?";
+
+        Options.Add("All reservations");
+        Actions.Add(() => LogReportNoDate());
+
+        Options.Add("Within a specific timeframe");
+        Actions.Add(() => LogReportByDate());
+
+        Options.Add("Return");
+        Actions.Add((Menu.Start));
+
+        MenuLogic.Question(question, Options, Actions);
+    }
     public static void LogReportByDate()
     {
         MoviesLogic ML = new();
@@ -110,13 +128,32 @@ public static class Admin
             }
         }
         List<List<int>> RLog = Logger.ReportList(StartDate, EndDate);
-        string Report = $"In the period from {StartDate.Day} to {EndDate.Day}/{EndDate.Month}/{EndDate.Year} the following happened:";
+        string Report = $"In the period from {StartDate.Day}/{StartDate.Month}/{StartDate.Year} to {EndDate.Day}/{EndDate.Month}/{EndDate.Year} the following happened:";
         foreach (var M in RLog)
         {
             Report += $"\n{ML.GetById(M[0]).Title}:\n{M[1]} reservation(s) have been made\n";
             Report += $"{M[2]} reservation(s) have been updated\n{M[3]} reservation(s) have been removed\n";
         }
+        string reportPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, $"DataSources/report{StartDate.Day}-{StartDate.Month}-{StartDate.Year}_{EndDate.Day}-{EndDate.Month}-{EndDate.Year}.txt"));
+        File.WriteAllText(reportPath, Report);
         Console.WriteLine(Report);
-
+        QuestionLogic.AskEnter();
+        Menu.Start();
+    }
+    public static void LogReportNoDate()
+    {
+        MoviesLogic ML = new();
+        List<List<int>> RLog = Logger.ReportList(DateTime.ParseExact("11/11/1111", "dd/MM/yyyy", CultureInfo.InvariantCulture), DateTime.Now);
+        string Report = $"From the beginning of the logs the following has happened:";
+        foreach (var M in RLog)
+        {
+            Report += $"\n{ML.GetById(M[0]).Title}:\n{M[1]} reservation(s) have been made\n";
+            Report += $"{M[2]} reservation(s) have been updated\n{M[3]} reservation(s) have been removed\n";
+        }
+        string reportPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, $"DataSources/fullreport_{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year}.txt"));
+        File.WriteAllText(reportPath, Report);
+        Console.WriteLine(Report);
+        QuestionLogic.AskEnter();
+        Menu.Start();
     }
 }

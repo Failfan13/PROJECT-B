@@ -70,7 +70,6 @@ static class Logger
                     {
                         if (I[0].ToString() == l["id"])
                         {
-                            Console.WriteLine($"{l["action"]}");
                             if (l["action"] == "Added")
                             {
                                 I[1] += 1;

@@ -209,6 +209,14 @@ Thank you.";
         }
     }
 
+    public static void ChangeEmail()
+    {
+        Console.WriteLine(AccountsLogic.CurrentAccount!.EmailAddress);
+        Console.WriteLine("Please enter the new email");
+        string newEmail = Console.ReadLine()!;
+        accountsLogic.NewEmail(newEmail);
+    }
+
     public static void ChangeAdvertation()
     {
         Console.WriteLine($"Would you like to {(AccountsLogic.CurrentAccount!.AdMails ? "still" : "")} receive ad-mails? (y/n)");

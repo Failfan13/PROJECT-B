@@ -17,17 +17,21 @@ public class TimeSlotModel
 
     [JsonPropertyName("format")]
     public string Format { get; set; }
+    
+    [JsonPropertyName("maxseats")]
+    public int MaxSeats { get; set; }
 
     [JsonConstructor]
-    public TimeSlotModel(int id) : this(id, 0, new DateTime(), new Helper(), "") { }
-    public TimeSlotModel(int id, int movieid, DateTime start, TheatreModel theatre, string format) : this(id, movieid, start, new Helper(theatre.Id), format) { }
-    public TimeSlotModel(int id, int movieid, DateTime start, Helper theatre, string format)
+    public TimeSlotModel(int id) : this(id, 0, new DateTime(), new Helper(), "", 9) { }
+    public TimeSlotModel(int id, int movieid, DateTime start, TheatreModel theatre, string format, int maxseats) : this(id, movieid, start, new Helper(theatre.Id), format, maxseats) { }
+    public TimeSlotModel(int id, int movieid, DateTime start, Helper theatre, string format, int maxseats)
     {
         Id = id;
         MovieId = movieid;
         Start = start;
         Theatre = theatre;
         Format = format;
+        MaxSeats = maxseats;
     }
 
     public void Info()

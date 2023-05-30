@@ -77,7 +77,7 @@ class TimeSlotsLogic
     public void NewTimeSlot(int movieid, DateTime start, TheatreModel theatre, string format)
     {
         int NewID = GetNewestId();
-        TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, theatre, format);
+        TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, theatre, format, 9);
     }
     public void NewTimeSlot(int movieid, DateTime start)
     {
@@ -89,7 +89,7 @@ class TimeSlotsLogic
 
         try
         {
-            TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, TL.GetById(newTheatreId)!, "");
+            TimeSlotModel timeslot = new TimeSlotModel(NewID, movieid, start, TL.GetById(newTheatreId)!, "", 9);
             UpdateList(timeslot);
         }
         catch (System.Exception ex)
@@ -114,5 +114,11 @@ class TimeSlotsLogic
     {
         formatModel.Format = "";
         UpdateList(formatModel);
+    }
+
+    public void ChangeMaxSeats(TimeSlotModel m, int i)
+    {
+        m.MaxSeats = i;
+        UpdateList(m);
     }
 }

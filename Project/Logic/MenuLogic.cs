@@ -229,5 +229,17 @@ public static class MenuLogic
         else Console.Write(str); // used inline
         Console.ResetColor();
     }
+
+    public static string ColorAndReturnString(string str, ConsoleColor color = ConsoleColor.DarkBlue)
+    {
+        string newStr = "";
+
+        Console.ForegroundColor = color;
+        newStr = str; // used inline
+        Console.ResetColor();
+
+        return newStr;
+    }
+
     public static string BoldString(string str) => $"\x1b[1m{str}\x1b[0m";
 }

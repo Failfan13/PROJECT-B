@@ -153,7 +153,6 @@ public class TheatreLogic
     {
         if (configure)
         {
-            Console.Clear();
             Console.Write(@$"In the following screen you can change the seat configuration
 Press the following buttons to apply changes:
          
@@ -174,7 +173,7 @@ Press [ ");
         }
         else
         {
-            Console.Clear();
+            
             Console.Write(@$"In the following screen you can change the seat configuration
 Press the following buttons to apply changes:
          
@@ -214,11 +213,13 @@ Press [ ");
 
         bool runMenu = true;
         while (runMenu)
-        {
+        {  
+            Console.Clear();
             // Show controls
             ShowControls(timeSlot == null);
+            // Legend
+            ShowLegend();
 
-            // Console.Clear();
             int heightCounter = 0;
             int widthCounter = 0;
 
@@ -357,9 +358,6 @@ Press [ ");
                 Console.WriteLine($"\n\nSelected Seats: {string.Join(", ", selectedSeats.Select(s => $"{SeatNumber(theatre.Width, s)}"))}");
             }
             else Console.WriteLine(); // clearance
-
-            // Legend
-            ShowLegend();
 
             // Key mappings
             ConsoleKeyInfo keyPressed = Console.ReadKey(true);

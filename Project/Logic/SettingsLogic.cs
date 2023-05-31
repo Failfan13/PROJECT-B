@@ -1,27 +1,44 @@
 using System.Collections.Generic;
 
-public class SettingsLogic
+public static class SettingsLogic
 {
-    private SettingModel _settings = new SettingModel();
+    private static SettingModel _settings = new SettingModel();
 
-    public SettingsLogic()
+    static SettingsLogic()
     {
         _settings = SettingsAccess.Load();
     }
 
-    public ConsoleColor GetColor()
+    public static SettingModel GetSettings()
+    {
+        return _settings;
+    }
+
+    public static ConsoleColor GetColor()
     {
         return (ConsoleColor)Enum.Parse(typeof(ConsoleColor), _settings.Color);
     }
 
-    public void ChangeColor(ConsoleColor color)
+    public static ConsoleColor GetSelectColor()
     {
+        return (ConsoleColor)Enum.Parse(typeof(ConsoleColor), _settings.SelectColor);
+    }
+
+    public static void ChangeColor(ConsoleColor color)
+    {
+
         _settings.Color = color.ToString();
         Update();
     }
 
-    public void Update()
+    public static void Update()
     {
         SettingsAccess.Write(_settings);
+    }
+
+    public static void ChangeMenuColor(ConsoleColor color)
+    {
+        _settings.SelectColor = color.ToString();
+        Update();
     }
 }

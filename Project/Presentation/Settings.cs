@@ -1,7 +1,5 @@
 public static class Settings
 {
-    private static SettingsLogic _logic = new SettingsLogic();
-
     public static void Start()
     {
         string Question = "What would you like to do?";
@@ -22,7 +20,13 @@ public static class Settings
 
     public static void ViewSettings()
     {
+        Console.Clear();
+        Console.WriteLine("View the application settings below");
 
+        SettingsLogic.GetSettings().Info();
+
+        Console.WriteLine("");
+        QuestionLogic.AskEnter();
     }
 
     public static void ChangeSettings()
@@ -31,8 +35,11 @@ public static class Settings
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        Options.Add("Colour");
-        Actions.Add(() => Settings.ChangeColour());
+        Options.Add("App color");
+        Actions.Add(() => Settings.ChangeColorMenu(false));
+
+        Options.Add("Selection color");
+        Actions.Add(() => Settings.ChangeColorMenu(true));
 
         Options.Add("\nReturn");
         Actions.Add(() => Start());
@@ -40,16 +47,17 @@ public static class Settings
         MenuLogic.Question(Question, Options, Actions);
     }
 
-    public static void ChangeColour()
+    public static void ChangeColorMenu(bool isSelection)
     {
-        string Question = "What colour should the system be?";
+        string Question = "What color should the system be?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
         foreach (ConsoleColor colour in Enum.GetValues(typeof(ConsoleColor)))
         {
             Options.Add(colour.ToString()!);
-            Actions.Add(() => _logic.ChangeColor(colour));
+            if (!isSelection) Actions.Add(() => Settings.ChangeColor(colour));
+            else Actions.Add(() => SettingsLogic.ChangeMenuColor(colour));
         }
 
         Options.Add("\nReturn");
@@ -58,4 +66,12 @@ public static class Settings
         MenuLogic.Question(Question, Options, Actions);
     }
 
+    private static void ChangeColor(ConsoleColor color)
+    {
+        Console.Clear();
+        Console.WriteLine($"Change selections too {color.ToString()}? (y/n)");
+        ConsoleKeyInfo key = Console.ReadKey();
+        if (key.Key == ConsoleKey.Y) SettingsLogic.ChangeMenuColor(color);
+        SettingsLogic.ChangeColor(color);
+    }
 }

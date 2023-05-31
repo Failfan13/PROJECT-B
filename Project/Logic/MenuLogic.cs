@@ -5,7 +5,7 @@ using System.Text.Json;
 
 public static class MenuLogic
 {
-    private static SettingsLogic _logic = new SettingsLogic();
+
 
     public static int Question(string question, List<string> options, List<Action> actions = null, string BottomString = null)
     {
@@ -14,6 +14,9 @@ public static class MenuLogic
         int selectedOption = 0;
         do
         {
+
+
+            Console.ResetColor();
             // start of visual
             Console.Clear();
             Console.WriteLine("Use arrow keys to navigate and press Enter to select an option:\n");
@@ -29,10 +32,10 @@ public static class MenuLogic
                 {
                     recolorSelection = () => Parallel.Invoke(
                         () => Console.ForegroundColor = ConsoleColor.Black,
-                        () => Console.BackgroundColor = ConsoleColor.White
+                        () => Console.BackgroundColor = SettingsLogic.GetSelectColor()
                     );
                     Console.ForegroundColor = ConsoleColor.Black;
-                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.BackgroundColor = SettingsLogic.GetSelectColor();
                 }
 
                 // SHOW OPTIONS  //  if option contains '~' print options after
@@ -226,7 +229,7 @@ public static class MenuLogic
 
     public static void ColorString(string str, ConsoleColor color = default, bool newLine = true)
     {
-        if (color == default) color = _logic.GetColor();
+        if (color == default) color = SettingsLogic.GetColor();
         Console.ForegroundColor = color;
         if (newLine) Console.WriteLine(str); // takes whole line
         else Console.Write(str); // used inline
@@ -237,7 +240,7 @@ public static class MenuLogic
     {
         string newStr = "";
 
-        if (color == default) color = _logic.GetColor();
+        if (color == default) color = SettingsLogic.GetColor();
         Console.ForegroundColor = color;
         newStr = str; // used inline
         Console.ResetColor();

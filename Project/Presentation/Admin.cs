@@ -54,9 +54,6 @@ public static class Admin
         Options.Add("Change Reservations");
         Actions.Add(() => Reservation.EditReservation(true));
 
-        Options.Add("Change TimeSlots");
-        Actions.Add(() => TimeSlots.WhatMovieTimeSlot(isEdited: true));
-
         Options.Add("Add Cinema Location");
         Actions.Add(() => LocationsLogic.NewLocation());
 

@@ -71,7 +71,6 @@ static class Menu
 
             Options.Add("View reports");
             Actions.Add(() => Admin.LogReport());
-
         }
 
         // Logout & account settings
@@ -82,6 +81,12 @@ static class Menu
 
             Options.Add("Account settings");
             Actions.Add(() => UserLogin.Start());
+
+            if (AccountsLogic.CurrentAccount.Admin == true)
+            {
+                Options.Add("Application settings");
+                Actions.Add(() => Settings.Start());
+            }
         }
 
         Options.Add("\nExit app");

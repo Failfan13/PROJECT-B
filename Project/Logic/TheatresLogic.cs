@@ -447,7 +447,7 @@ Press [ ");
                         break;
                 }
             }
-            TL.UpdateList(timeSlot);
+            TL.UpdateList(timeSlot).ConfigureAwait(false);
             return returnSelectedSeats;
         }
         return null!;

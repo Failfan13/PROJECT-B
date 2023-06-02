@@ -38,7 +38,7 @@ public static class Reservation
 
         string Question = "Which reservation would you like to edit?";
         List<string> Options = new List<string>();
-        List<string> Actions = new List<string>();
+        List<Action> Actions = new List<Action>();
 
         // List all reservations with date, time & movie name
         foreach (ReservationModel reservation in userFilteredReservations)
@@ -53,39 +53,32 @@ public static class Reservation
 
                     if (reservationMovie != null && reservationDate != null)
                     {
-                        Options.Add($"{reservationDate} - {reservationMovie.Title}");
+                        Options.Add($"{reservationMovie.Title} - {reservationDate}");
+                        Actions.Add(() => CurrReservation = reservation);
                     }
                 }
                 catch { }
             }
         }
 
-        awnser = MenuLogic.Question(Question, Options);
-
-        // Set current reservation field
-        try
-        {
-            CurrReservation = userFilteredReservations[awnser];
-        }
-        catch (System.IndexOutOfRangeException)
-        {
-            Console.WriteLine("No existing reservation found");
-            QuestionLogic.AskEnter();
-            return;
-        }
+        MenuLogic.Question(Question, Options, Actions);
 
         // set current seats & reservation timeslot
         var CurrSeat = CurrReservation.Seats;
-        var CurrTimeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSlotId);
+        var CurrTimeSlot = TimeSlotsLogic.GetById(CurrReservation.TimeSlotId)!.Result;
 
-        foreach (SeatModel seat in CurrSeat)
+        try
         {
-            var TheatreSeat = CurrTimeSlot!.Result.Theatre.Seats.FirstOrDefault(s => s.Id == seat.Id);
-            //TheatreSeat.Reserved = false;
+            foreach (SeatModel seat in CurrSeat)
+            {
+                var TheatreSeat = CurrTimeSlot!.Theatre.Seats.FirstOrDefault(s => s.Id == seat.Id);
+                //TheatreSeat.Reserved = false;
+            }
         }
+        catch { }
 
 
-        await TimeSlotsLogic.UpdateList(CurrTimeSlot!.Result).ConfigureAwait(false);
+        TimeSlotsLogic.UpdateList(CurrTimeSlot).ConfigureAwait(false);
 
         // Edit reservations menu
         string question = "Choose a reservation you want to edit from the menu.";
@@ -111,12 +104,12 @@ public static class Reservation
 
         // change seats
         actions.Add(() => Parallel.Invoke(
-            () => Theatre.DeselectCurrentSeats(CurrTimeSlot.Result, CurrReservation),
-            () => Theatre.SelectSeats(CurrTimeSlot.Result, true))
+            () => Theatre.DeselectCurrentSeats(CurrTimeSlot, CurrReservation),
+            () => Theatre.SelectSeats(CurrTimeSlot, true))
         );
 
         // Change snack
-        actions.Add(() => Snacks.Start(CurrTimeSlot.Result, CurrReservation.Seats, true));
+        actions.Add(() => Snacks.Start(CurrTimeSlot, CurrReservation.Seats, true));
 
         // // Change format  // will not be interchangeable
         // actions.Add(() => Format.Start(CurrTimeSlot, CurrReservation.Seats, true));

@@ -46,8 +46,8 @@ public static class Theatre
         {
             timeSlot.Theatre.Seats.RemoveAll(s => s.Id == seat.Id);
         }
-        TSL.UpdateList(timeSlot);
-        RL.UpdateList(currReservation);
+        TSL.UpdateList(timeSlot).ConfigureAwait(false);
+        RL.UpdateList(currReservation).ConfigureAwait(false);
     }
 
     public static int WhatTheatre(bool IsEdited = false)
@@ -250,7 +250,7 @@ Please fill in the following fields");
         MenuLogic.ColorString(">>", newLine: false);
         Console.WriteLine($" Enter a seatId number between 1 and {theatre.Width * theatre.Height}"); // command the user
         string input = Console.ReadLine()!;
-        TL.BlockSeat(theatre, input);
+        TL.BlockSeat(theatre, input).ConfigureAwait(false);
 
         if (returnTo != null) returnTo();
     }
@@ -269,7 +269,7 @@ Please fill in the following fields");
         foreach (int seatNum in theatre.LayoutSpecs.BlockedSeatIndexes)
         {
             options.Add($"SeatId: {seatNum.ToString()} SeatNum: {TL.SeatNumber(theatre.Width, seatNum)}");
-            actions.Add(() => TL.BlockSeat(theatre, seatNum));
+            actions.Add(() => TL.BlockSeat(theatre, seatNum).ConfigureAwait(false));
         }
         options.Add("\nReturn");
         actions.Add(() => returnTo());

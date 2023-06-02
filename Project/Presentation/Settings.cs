@@ -27,6 +27,7 @@ public static class Settings
 
         Console.WriteLine("");
         QuestionLogic.AskEnter();
+        ChangeSettings();
     }
 
     public static void ChangeSettings()
@@ -73,5 +74,6 @@ public static class Settings
         ConsoleKeyInfo key = Console.ReadKey();
         if (key.Key == ConsoleKey.Y) SettingsLogic.ChangeMenuColor(color);
         SettingsLogic.ChangeColor(color);
+        ChangeSettings();
     }
 }

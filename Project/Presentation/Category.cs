@@ -8,15 +8,15 @@ public static class Category
         List<Action> Actions = new List<Action>();
         Actions.Add(() => NewCatMenu());
         Actions.Add(() => RemoveCatMenu());
-        Actions.Add(() => Admin.Start());
+        Actions.Add(() => Admin.ChangeData());
 
         MenuLogic.Question(Question, Options, Actions);
     }
 
-    public static void NewCatMenu()
+    public async static void NewCatMenu()
     {
         string newCat = QuestionLogic.AskString("What name should the new category have?");
-        CL.NewCategory(newCat);
+        await CL.NewCategory(newCat);
     }
     public static void RemoveCatMenu()
     {

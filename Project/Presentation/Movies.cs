@@ -101,7 +101,7 @@ static class Movies
         }
 
         Options.Add("Return");
-        Actions.Add(() => Menu.Start());
+        Actions.Add(() => Admin.ChangeData());
 
         MenuLogic.Question(Question, Options, Actions);
 

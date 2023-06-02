@@ -13,7 +13,6 @@ public static class Reservation
         AccountsLogic AccountsLogic = new AccountsLogic();
         List<ReservationModel> allReservations = ReservationLogic.GetAllReservations().Result;
         List<ReservationModel> userFilteredReservations = new List<ReservationModel>();
-        int awnser;
         string reservationDate;
         MovieModel reservationMovie;
         int currAccId = AccountsLogic.CurrentAccount!.Id;
@@ -27,18 +26,11 @@ public static class Reservation
         // filter for user
         userFilteredReservations = allReservations.FindAll(r => r.AccountId == currAccId);
 
-        // no reservations found
-        if (userFilteredReservations.Count == 0)
-        {
-            Console.Clear();
-            Console.WriteLine("No reservations found for this account\n");
-            QuestionLogic.AskEnter();
-            return;
-        }
-
         string Question = "Which reservation would you like to edit?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
+
+        int errRess = 0;
 
         // List all reservations with date, time & movie name
         foreach (ReservationModel reservation in userFilteredReservations)
@@ -57,8 +49,20 @@ public static class Reservation
                         Actions.Add(() => CurrReservation = reservation);
                     }
                 }
-                catch { }
+                catch
+                {
+                    errRess++;
+                }
             }
+        }
+
+        // no reservations found
+        if (userFilteredReservations.Count == 0 || userFilteredReservations.Count == errRess)
+        {
+            Console.Clear();
+            Console.WriteLine("No reservations found for this account\n");
+            QuestionLogic.AskEnter();
+            return;
         }
 
         MenuLogic.Question(Question, Options, Actions);

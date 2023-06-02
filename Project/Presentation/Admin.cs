@@ -51,7 +51,7 @@ public static class Admin
         Actions.Add(() => Movies.ChangeMoviesMenu());
 
         Options.Add("Change TimeSlots");
-        Actions.Add(() => TimeSlots.WhatMovieTimeSlot(isEdited: true));
+        Actions.Add(() => TimeSlots.WhatMovieTimeSlot(IsEdited: true));
 
         Options.Add("Change Snacks");
         Actions.Add(() => Snacks.ChangeSnackMenu());

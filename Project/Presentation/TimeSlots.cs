@@ -102,11 +102,11 @@ static class TimeSlots
         await TimeSlotsLogic.NewTimeSlot(TM);
     }
 
-    public static void WhatMovieTimeSlot(bool isEdited = false)
+    public static void WhatMovieTimeSlot(bool IsEdited = false)
     {
         var movies = new MoviesLogic().AllMovies();
 
-        if (isEdited)
+        if (IsEdited)
         {
             movies = new MoviesLogic().AllMovies(true);
         }
@@ -118,12 +118,13 @@ static class TimeSlots
         foreach (MovieModel movie in movies)
         {
             Movies.Add(movie.Title);
-            if (isEdited) Actions.Add(() => TimeSlots.EditTimeSlot(movie.Id, false));
+            if (IsEdited) Actions.Add(() => TimeSlots.EditTimeSlot(movie.Id, false));
             else Actions.Add(async () => await TimeSlots.NewTimeSlot(movie.Id).ConfigureAwait(false));
         }
 
         Movies.Add("Return");
-        Actions.Add(() => Admin.Start());
+        if (IsEdited) Actions.Add(() => Admin.ChangeData());
+        else Actions.Add(() => Admin.Start());
 
         MenuLogic.Question(Question, Movies, Actions);
     }
@@ -176,7 +177,8 @@ static class TimeSlots
         Options.Add("Return");
         Actions.Add(() => Parallel.Invoke(
             //() => TheatreLogic.UpdateList(TheatreLogic.GetById(tsm.Theatre.TheatreId)!),
-            async () => await TimeSlotsLogic.UpdateList(tsm).ConfigureAwait(false)
+            async () => await TimeSlotsLogic.UpdateList(tsm).ConfigureAwait(false),
+            () => WhatMovieTimeSlot()
         ));
 
         MenuLogic.Question(Question, Options, Actions);

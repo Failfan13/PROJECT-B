@@ -72,7 +72,8 @@ public static class Theatre
         }
 
         Options.Add("\nReturn");
-        Actions.Add(() => Admin.Start());
+        if (IsEdited) Actions.Add(() => Admin.ChangeData());
+        else Actions.Add(() => Admin.Start());
 
         MenuLogic.Question(Question, Options, Actions);
 

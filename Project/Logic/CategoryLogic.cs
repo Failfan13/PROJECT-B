@@ -54,6 +54,10 @@ public class CategoryLogic
     }
     public List<CategoryModel> AllCategories()
     {
+        if (_categories.Count == 0)
+        {
+            return null!;
+        }
         return _categories;
     }
 
@@ -75,6 +79,13 @@ public class CategoryLogic
         List<CategoryModel> AllCategories = this.AllCategories();
         List<int> catids = new List<int> { };
 
+        if (AllCategories == null)
+        {
+            Console.WriteLine("No categories found");
+            QuestionLogic.AskEnter();
+            return;
+        }
+
         foreach (CategoryModel cm in AllCategories)
         {
             Console.WriteLine($"{cm.Id} {cm.Name}");
@@ -95,6 +106,14 @@ public class CategoryLogic
     public void RemoveCategory(MovieModel movie) // Removes category to movie
     {
         Console.Clear();
+
+        if (movie.Categories.Count == 0)
+        {
+            Console.WriteLine("No categories found");
+            QuestionLogic.AskEnter();
+            return;
+        }
+
         foreach (CategoryModel cm in movie.Categories)
         {
             Console.WriteLine($"{cm.Id} {cm.Name}");

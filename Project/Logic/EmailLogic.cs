@@ -2,6 +2,8 @@ using System;
 using MailKit.Net.Smtp;
 using MailKit;
 using MimeKit;
+using System.Text.RegularExpressions;
+
 public class EmailLogic
 {
     public EmailLogic()
@@ -72,8 +74,14 @@ public class EmailLogic
 
     public bool ValidateEmail(string email)
     {
-        if (email.Contains("@.") || email.Contains(".@")) return false;
-        else if (email.Contains("@") && email.Contains(".")) return true;
+        var regexItem = new Regex("^[a-zA-Z0-9@. ]*$");
+
+        if (regexItem.IsMatch(email))
+        {
+            if (email.Contains("@.") || email.Contains(".@")) return false;
+            else if (email.Contains("@") && email.Contains(".")) return true;
+        }
+
         return false;
     }
 

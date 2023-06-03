@@ -90,7 +90,7 @@ static class UserLogin
             DateTime dateOfBirth;
             bool isValidDate = DateTime.TryParseExact(input, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateOfBirth);
 
-            if (isValidDate)
+            if (isValidDate && dateOfBirth < DateTime.Now)
             {
                 Console.WriteLine("Valid date: " + dateOfBirth.ToShortDateString());
                 Date = dateOfBirth.ToShortDateString();

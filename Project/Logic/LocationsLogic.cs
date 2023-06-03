@@ -14,7 +14,7 @@ public static class LocationsLogic
 
     public static void UpdateLocations()
     {
-        _locations.Sort();
+        _locations.OrderBy(l => l.Name);
 
         LocationsAccess.Writer(_locations);
     }

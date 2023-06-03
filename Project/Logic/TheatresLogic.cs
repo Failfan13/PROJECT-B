@@ -151,12 +151,13 @@ public class TheatreLogic
 
     public void ShowControls(bool configure = false)
     {
-        if (configure)
-        {
-            Console.Write(@$"In the following screen you can change the seat configuration
+        Console.Write(@$"In the following screen you can change the seat configuration
 Press the following buttons to apply changes:
          
 Press [ ");
+        if (configure)
+        {
+
             MenuLogic.ColorString("↑ → ↓ ←", newLine: false);
             Console.Write(" ] Keys to move around the menu\r\nPress [ ");
             MenuLogic.ColorString("B", newLine: false);
@@ -174,10 +175,6 @@ Press [ ");
         else
         {
             
-            Console.Write(@$"In the following screen you can change the seat configuration
-Press the following buttons to apply changes:
-         
-Press [ ");
             MenuLogic.ColorString("↑ → ↓ ←", newLine: false);
             Console.Write(" ] Keys to move around the menu\r\nPress [ ");
             MenuLogic.ColorString("Enter", newLine: false);
@@ -190,6 +187,7 @@ Press [ ");
 
     public List<SeatModel> ShowSeats(TheatreModel theatre, TimeSlotModel timeSlot = null!)
     {
+        Console.Clear();
         // load logics
         TimeSlotsLogic TL = new TimeSlotsLogic();
 
@@ -215,7 +213,7 @@ Press [ ");
         while (runMenu)
         {  
             Console.Clear();
-            // Show controls
+            /// Show controls
             ShowControls(timeSlot == null);
             // Legend
             ShowLegend();

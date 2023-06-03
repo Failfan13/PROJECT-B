@@ -14,6 +14,7 @@ public static class MenuLogic
         {
             // start of visual
             Console.Clear();
+            Console.WriteLine("Select an option");
             MenuLogic.ColorString("↑ → ↓ ← ",ConsoleColor.DarkBlue, false);
             Console.Write("Keys to navigate through the menu\n");
             MenuLogic.ColorString("Enter ",ConsoleColor.DarkBlue, false);

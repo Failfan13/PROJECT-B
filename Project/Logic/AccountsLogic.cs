@@ -92,7 +92,7 @@ public class AccountsLogic
         {
             return null;
         }
-        CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
+        CurrentAccount = _accounts.Find(i => i.EmailAddress.ToLower() == email.ToLower() && i.Password == password);
         return CurrentAccount;
     }
 

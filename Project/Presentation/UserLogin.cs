@@ -86,7 +86,7 @@ static class UserLogin
         while (!CorrectDate)
         {
             Console.WriteLine("Please enter your date of birth (dd/mm/yyyy):");
-            string input = Console.ReadLine();
+            string input = Console.ReadLine()!;
             DateTime dateOfBirth;
             bool isValidDate = DateTime.TryParseExact(input, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateOfBirth);
 

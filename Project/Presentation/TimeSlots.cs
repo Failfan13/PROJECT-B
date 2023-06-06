@@ -41,6 +41,8 @@ static class TimeSlots
                     Actions.Add(() => Theatre.SelectSeats(time, IsEdited));
                 }
             }
+            Options.Add($"Return");
+            Actions.Add(() => Reservation.FilterMenu());
 
             MenuLogic.Question(Question, Options, Actions);
         }

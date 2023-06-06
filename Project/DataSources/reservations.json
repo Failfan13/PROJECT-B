@@ -1,33 +1,18 @@
 [
   {
     "id": 1,
-    "timeslot_id": 0,
-    "seats": [
-      {
-        "id": 10,
-        "seatType": "basic"
-      }
-    ],
-    "snacks": {
-      "2": 2,
-      "1": 3,
-      "3": 1
-    },
-    "account_id": null,
-    "date_time": "2023-03-31T16:09:34.9773108+02:00",
-    "format": null,
-    "discountCode": ""
-  },
-  {
-    "id": 2,
     "timeslot_id": 1,
     "seats": [
       {
-        "id": 1,
+        "id": 12,
         "seatType": "basic"
       },
       {
-        "id": 2,
+        "id": 13,
+        "seatType": "basic"
+      },
+      {
+        "id": 14,
         "seatType": "basic"
       }
     ],
@@ -35,7 +20,7 @@
       "0": 1
     },
     "account_id": -1,
-    "date_time": "2023-05-16T10:31:28.1715062+02:00",
+    "date_time": "2023-06-06T14:36:46.830564+02:00",
     "format": "",
     "discountCode": ""
   }

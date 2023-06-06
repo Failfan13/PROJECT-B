@@ -169,7 +169,9 @@ Press [ ");
             MenuLogic.ColorString("R", newLine: false);
             Console.Write(" ] Key to remove pathway\r\nPress [ ");
             MenuLogic.ColorString("S", newLine: false);
-            Console.Write(" ] Key to save\r\n");
+            Console.Write(" ] Key to save\r\nPress [ ");
+            MenuLogic.ColorString("X", newLine: false);
+            Console.Write(" ] Key to return\r\n");
             MenuLogic.ColorString(new String('‗', 59));
         }
         else
@@ -184,7 +186,10 @@ Press [ ");
             MenuLogic.ColorString("Enter", newLine: false);
             Console.Write(" ] Key to select or unselect a seat\r\nPress [ ");
             MenuLogic.ColorString("S", newLine: false);
-            Console.Write(" ] Key to save current selection\r\n");
+            Console.Write(" ] Key to save current selection\r\nPress [ ");
+            MenuLogic.ColorString("X", newLine: false);
+            Console.Write(" ] Key to return\r\n");
+
             MenuLogic.ColorString(new String('‗', 59));
         }
     }
@@ -406,6 +411,10 @@ Press [ ");
                         }
                         runMenu = false;
                         break;
+                    case var x when x == ConsoleKey.X: // return to movie menu
+                        runMenu = false;
+                        Reservation.FilterMenu();
+                        break;
                     default:
                         break;
                 }
@@ -445,6 +454,11 @@ Press [ ");
                         pathways = RemovePathway(pathways);
                         break;
                     case var x when x == ConsoleKey.S || // Save settings and quit
+                        x == ConsoleKey.Escape ||
+                        x == ConsoleKey.Q:
+                        runMenu = false;
+                        break;
+                    case var x when x == ConsoleKey.X || // Save settings and quit
                         x == ConsoleKey.Escape ||
                         x == ConsoleKey.Q:
                         runMenu = false;

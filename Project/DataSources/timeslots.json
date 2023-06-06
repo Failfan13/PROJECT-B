@@ -92,6 +92,210 @@
         {
           "id": 2,
           "seatType": "basic"
+        },
+        {
+          "id": 22,
+          "seatType": "basic"
+        },
+        {
+          "id": 32,
+          "seatType": "basic"
+        },
+        {
+          "id": 42,
+          "seatType": "basic"
+        },
+        {
+          "id": 11,
+          "seatType": "basic"
+        },
+        {
+          "id": 21,
+          "seatType": "basic"
+        },
+        {
+          "id": 31,
+          "seatType": "basic"
+        },
+        {
+          "id": 51,
+          "seatType": "basic"
+        },
+        {
+          "id": 61,
+          "seatType": "basic"
+        },
+        {
+          "id": 71,
+          "seatType": "basic"
+        },
+        {
+          "id": 43,
+          "seatType": "standard"
+        },
+        {
+          "id": 81,
+          "seatType": "basic"
+        },
+        {
+          "id": 91,
+          "seatType": "basic"
+        },
+        {
+          "id": 41,
+          "seatType": "basic"
+        },
+        {
+          "id": 90,
+          "seatType": "basic"
+        },
+        {
+          "id": 80,
+          "seatType": "basic"
+        },
+        {
+          "id": 3,
+          "seatType": "basic"
+        },
+        {
+          "id": 6,
+          "seatType": "basic"
+        },
+        {
+          "id": 7,
+          "seatType": "basic"
+        },
+        {
+          "id": 8,
+          "seatType": "basic"
+        },
+        {
+          "id": 4,
+          "seatType": "basic"
+        },
+        {
+          "id": 9,
+          "seatType": "basic"
+        },
+        {
+          "id": 10,
+          "seatType": "basic"
+        },
+        {
+          "id": 12,
+          "seatType": "basic"
+        },
+        {
+          "id": 13,
+          "seatType": "basic"
+        },
+        {
+          "id": 14,
+          "seatType": "basic"
+        },
+        {
+          "id": 97,
+          "seatType": "basic"
+        },
+        {
+          "id": 98,
+          "seatType": "basic"
+        },
+        {
+          "id": 99,
+          "seatType": "basic"
+        },
+        {
+          "id": 30,
+          "seatType": "basic"
+        },
+        {
+          "id": 40,
+          "seatType": "basic"
+        },
+        {
+          "id": 50,
+          "seatType": "basic"
+        },
+        {
+          "id": 100,
+          "seatType": "basic"
+        },
+        {
+          "id": 86,
+          "seatType": "basic"
+        },
+        {
+          "id": 96,
+          "seatType": "basic"
+        },
+        {
+          "id": 16,
+          "seatType": "basic"
+        },
+        {
+          "id": 17,
+          "seatType": "basic"
+        },
+        {
+          "id": 18,
+          "seatType": "basic"
+        },
+        {
+          "id": 19,
+          "seatType": "basic"
+        },
+        {
+          "id": 29,
+          "seatType": "basic"
+        },
+        {
+          "id": 39,
+          "seatType": "basic"
+        },
+        {
+          "id": 49,
+          "seatType": "basic"
+        },
+        {
+          "id": 59,
+          "seatType": "basic"
+        },
+        {
+          "id": 69,
+          "seatType": "basic"
+        },
+        {
+          "id": 79,
+          "seatType": "basic"
+        },
+        {
+          "id": 89,
+          "seatType": "basic"
+        },
+        {
+          "id": 60,
+          "seatType": "basic"
+        },
+        {
+          "id": 70,
+          "seatType": "basic"
+        },
+        {
+          "id": 84,
+          "seatType": "basic"
+        },
+        {
+          "id": 85,
+          "seatType": "basic"
+        },
+        {
+          "id": 94,
+          "seatType": "basic"
+        },
+        {
+          "id": 95,
+          "seatType": "basic"
         }
       ]
     },
@@ -113,7 +317,16 @@
     "start": "2011-11-11T11:11:00",
     "theatre": {
       "id": 0,
-      "reservedSeats": []
+      "reservedSeats": [
+        {
+          "id": 11,
+          "seatType": "basic"
+        },
+        {
+          "id": 1,
+          "seatType": "basic"
+        }
+      ]
     },
     "format": ""
   },
@@ -123,7 +336,16 @@
     "start": "2011-11-11T11:11:00",
     "theatre": {
       "id": 0,
-      "reservedSeats": []
+      "reservedSeats": [
+        {
+          "id": 11,
+          "seatType": "basic"
+        },
+        {
+          "id": 21,
+          "seatType": "basic"
+        }
+      ]
     },
     "format": ""
   }

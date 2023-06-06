@@ -14,19 +14,22 @@ public static class Theatre
             var selectedSeats = help;
 
             string Question = "Would you like to order snacks?";
-            List<string> Options = new List<string>() { "Yes", "No" };
+            List<string> Options = new List<string>() { "Yes", "No", "Return"};
             List<Action> Actions = new List<Action>();
 
             if (FormatsLogic.GetByFormat(TimeSlot.Format) != null)
             {
                 Actions.Add(() => Snacks.Start(TimeSlot, selectedSeats, IsEdited));
                 Actions.Add(() => Format.Start(TimeSlot, selectedSeats));
+                Actions.Add(() => Theatre.SelectSeats(TimeSlot, true));
             }
             else
             {
                 Actions.Add(() => Snacks.Start(TimeSlot, selectedSeats, IsEdited));
                 Actions.Add(() => RL.MakeReservation(TimeSlot, selectedSeats, IsEdited: IsEdited));
-            }
+                Actions.Add(() => Theatre.SelectSeats(TimeSlot, true));
+
+            }   
 
             MenuLogic.Question(Question, Options, Actions);
         }

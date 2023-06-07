@@ -136,8 +136,8 @@ If this wasent a mistake, please contact the administrator.
 Thank you.";
 
         EmailLogic.SendEmail(Email, subject, body);
-        
-        AccountsLogic.NewAccount(Email, Name, pass, Date);
+
+        await AccountsLogic.NewAccount(Email, Name, pass, Date).ConfigureAwait(false);
 
         AccountsLogic.LogIn(Email, pass).Wait();
         Menu.Start();

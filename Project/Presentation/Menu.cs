@@ -6,9 +6,18 @@ static class Menu
     //You could edit this to show different menus depending on the user's role
     static public void Start()
     {
+        //DbAccess.GetClient();
+        bool localDb = !DbAccess.CheckClient();
+
         string Question = "Make a choice from the menu\n";
+        string Notice = "";
         List<string> Options = new List<string>() { };
         List<Action> Actions = new List<Action>();
+
+        if (localDb)
+        {
+            Notice = "The connection to the server failed, please try again later.\n";
+        }
 
         // Login
         if (AccountsLogic.CurrentAccount == null)
@@ -22,7 +31,7 @@ static class Menu
         }
 
         // Make reservation
-        if (AccountsLogic.CurrentAccount == null || !AccountsLogic.CurrentAccount.Admin)
+        if ((AccountsLogic.CurrentAccount == null || !AccountsLogic.CurrentAccount.Admin) && !localDb)
         {
             Options.Add("Make a Reservation");
             Actions.Add(() => Reservation.FilterMenu());
@@ -35,11 +44,14 @@ static class Menu
             //Actions.Add(() => Reservation.AllReservations());
             Actions.Add(() => Console.WriteLine("No Work bruh"));
 
-            Options.Add("Change a reservation");
-            Actions.Add(() => Reservation.EditReservation());
+            if (!localDb)
+            {
+                Options.Add("Change a reservation");
+                Actions.Add(() => Reservation.EditReservation());
 
-            Options.Add("Review past reservation");
-            Actions.Add(() => Movies.AddReviewMenu());
+                Options.Add("Review past reservation");
+                Actions.Add(() => Movies.AddReviewMenu());
+            }
         }
 
         // Contact
@@ -55,11 +67,14 @@ static class Menu
         if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
         {
             Console.WriteLine($"Admin {AccountsLogic.CurrentAccount.Admin}\n");
-            Options.Add("Add data");
-            Actions.Add(() => Admin.Start());
+            if (!localDb)
+            {
+                Options.Add("Add data");
+                Actions.Add(() => Admin.Start());
 
-            Options.Add("Change data");
-            Actions.Add(() => Admin.ChangeData());
+                Options.Add("Change data");
+                Actions.Add(() => Admin.ChangeData());
+            }
 
             Options.Add("\nView user data");
             Actions.Add(() => User.SelectUser());
@@ -77,14 +92,26 @@ static class Menu
             Options.Add("\nLogout");
             Actions.Add(() => UserLogin.Logout());
 
-            Options.Add("Account settings");
-            Actions.Add(() => UserLogin.Start());
+            if (!localDb)
+            {
+                Options.Add("Account settings");
+                Actions.Add(() => UserLogin.Start());
+            }
+        }
+
+        if (localDb)
+        {
+            Options.Add("\n**Failed connection details**");
+            Actions.Add(() => DbLogic.ConnFailedDetails());
         }
 
         Options.Add("\nExit app");
-        Actions.Add(() => Environment.Exit(1));
+        Actions.Add(() => Parallel.Invoke(
+            () => DbAccess.UpdateLocalWithDb().Start(),
+            () => Environment.Exit(1)
+        ));
 
-        MenuLogic.Question(Question, Options, Actions);
+        MenuLogic.Question(Question, Options, Actions, Notice: Notice);
         Menu.Start();
     }
 }

@@ -3,7 +3,7 @@ using Postgrest.Attributes;
 using Postgrest.Models;
 
 [Table("time_slots")]
-public class TimeSlotModel : BaseModel
+public class TimeSlotModel : BaseModel, IIdentity
 {
     [PrimaryKey("id", false)]
     public int Id { get; set; }

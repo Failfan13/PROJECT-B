@@ -2,7 +2,7 @@
 using Postgrest.Models;
 
 [Table("accounts")]
-public class AccountModel : BaseModel
+public class AccountModel : BaseModel, IIdentity
 {
     [PrimaryKey("id", false)]
     public int Id { get; set; }

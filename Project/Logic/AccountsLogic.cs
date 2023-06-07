@@ -40,7 +40,12 @@ public class AccountsLogic
             {"email_address", email},
             {"password", password}
         };
-        CurrentAccount = await DbLogic.LoginAs<AccountModel>(loginDetails);
+
+        var account = await DbLogic.LoginAs<AccountModel>(loginDetails);
+
+        if (account != null)
+            CurrentAccount = account;
+        else return null!;
         Logger.SystemLog("Logged in");
         return CurrentAccount;
     }

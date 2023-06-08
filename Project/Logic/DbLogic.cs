@@ -138,7 +138,7 @@ public class DbLogic
         if (_supabase != null)
         {
             var result = _supabase.From<T>()
-            .Where(x => x.Id == id)
+            .Where(x => (x as DbIndex).Id == id)
             .Single();
 
             return result!;

@@ -140,9 +140,9 @@ Thank you.";
 
         EmailLogic.SendEmail(Email, subject, body);
 
-        await AccountsLogic.NewAccount(Email, Name, pass, Date).ConfigureAwait(false);
+        AccountsLogic.NewAccount(Email, Name, pass, Date).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        AccountsLogic.LogIn(Email, pass).Wait();
+        AccountsLogic.LogIn(Email, pass).GetAwaiter().GetResult();
         Menu.Start();
     }
 

@@ -5,7 +5,7 @@ using Postgrest.Models;
 
 // [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
 [Table("movies")]
-public class MovieModel : BaseModel, IIdentity
+public class MovieModel : BaseModel
 {
     [PrimaryKey("id", false)]
     public int Id { get; set; }

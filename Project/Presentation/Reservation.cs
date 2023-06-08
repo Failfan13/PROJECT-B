@@ -210,7 +210,7 @@ public static class Reservation
                 TotalRess = ReservationLogic.ApplyDiscount(DiscountModel.Id, TotalRess).Result;
 
                 ress.DiscountCode = DiscountModel.Code;
-                await ReservationLogic.UpdateList(ress);
+                await ReservationLogic.UpdateList(ress).ConfigureAwait(false);
             }
         }
 

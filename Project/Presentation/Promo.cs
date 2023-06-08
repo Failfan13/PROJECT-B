@@ -72,9 +72,6 @@ public static class Promo
             if (!corrCode) AddPromo(); // if code is not valid, ask again
 
             promo = PromoLogic.NewPromo(code);
-
-            Console.WriteLine(promo.Id);
-            Console.ReadKey();
         }
 
         if (promo.Condition == null)
@@ -89,9 +86,9 @@ public static class Promo
         Options.Add("Movie price");
         Actions.Add(async () => await ChangeMovie(promo));
         Options.Add("Driks & snacks prices");
-        Actions.Add(() => ChangeSnack(promo));
+        Actions.Add(async () => await ChangeSnack(promo));
         Options.Add("Seat prices");
-        Actions.Add(() => ChangeSeat(promo));
+        Actions.Add(async () => await ChangeSeat(promo));
         Options.Add("Total order price");
         Actions.Add(async () => await ChangeTotal(promo));
         Options.Add("Return");
@@ -157,15 +154,15 @@ public static class Promo
                 promo.Condition = new Dictionary<string, IEnumerable<object>>();
 
             Options.Add("Promo code");
-            Actions.Add(() => ChangeCode(promo, true));
+            Actions.Add(async () => await ChangeCode(promo, true));
             Options.Add("Promo applied movie");
             Actions.Add(async () => await ChangeMovie(promo, true));
             Options.Add("Movie price");
             Actions.Add(async () => await ChangeMovie(promo, true));
             Options.Add("Driks & snacks price");
-            Actions.Add(() => ChangeSnack(promo, true));
+            Actions.Add(async () => await ChangeSnack(promo, true));
             Options.Add("Seat price");
-            Actions.Add(() => ChangeSeat(promo, true));
+            Actions.Add(async () => await ChangeSeat(promo, true));
             Options.Add("Total order price");
             Actions.Add(async () => await ChangeTotal(promo, true));
             Options.Add("Remove all previous conditions");

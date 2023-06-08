@@ -2,7 +2,7 @@ using Postgrest.Attributes;
 using Postgrest.Models;
 
 [Table("promotions")]
-public class PromoModel : BaseModel, IIdentity
+public class PromoModel : BaseModel
 {
     [PrimaryKey("id", false)]
     public int Id { get; set; }

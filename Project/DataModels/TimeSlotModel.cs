@@ -3,7 +3,7 @@ using Postgrest.Attributes;
 using Postgrest.Models;
 
 [Table("time_slots")]
-public class TimeSlotModel : BaseModel, IIdentity
+public class TimeSlotModel : BaseModel
 {
     [PrimaryKey("id", false)]
     public int Id { get; set; }
@@ -19,8 +19,8 @@ public class TimeSlotModel : BaseModel, IIdentity
 
     [Column("format")]
     public string Format { get; set; }
-// [Column("maxseats")]
-// public int Format { get; set; }
+    // [Column("maxseats")]
+    // public int Format { get; set; }
     public TimeSlotModel NewTimeSlotModel() => NewTimeSlotModel(0, new DateTime(), new Helper(), "");
     public TimeSlotModel NewTimeSlotModel(int movieid, DateTime start, TheatreModel theatre, string format) => NewTimeSlotModel(movieid, start, new Helper(theatre.Id), format);
     public TimeSlotModel NewTimeSlotModel(int movieid, DateTime start, Helper theatre, string format)

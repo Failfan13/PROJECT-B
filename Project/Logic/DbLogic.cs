@@ -117,10 +117,10 @@ public class DbLogic
     }
 
     // remove an item by auto generated id
-    public static Task RemoveItemById<T>(int id) where T : BaseModel, IIdentity, new()
+    public static Task RemoveItemById<T>(int id) where T : BaseModel, new()
     {
         return _supabase.From<T>()
-            .Where(x => x.Id == id)
+            .Where(x => (x as DbIndex).Id == id)
             .Delete();
     }
 
@@ -133,7 +133,7 @@ public class DbLogic
     }
 
     // get item by id
-    public static Task<T> GetById<T>(int id) where T : BaseModel, IIdentity, new()
+    public static Task<T> GetById<T>(int id) where T : BaseModel, new()
     {
         if (_supabase != null)
         {
@@ -182,10 +182,10 @@ public class DbLogic
         }
     }
 
-    public static Task<List<T>> GetAllById<T>(int id) where T : BaseModel, IIdentity, new()
+    public static Task<List<T>> GetAllById<T>(int id) where T : BaseModel, new()
     {
         var result = _supabase.From<T>()
-        .Where(x => x.Id == id)
+        .Where(x => (x as DbIndex).Id == id)
         .Get();
 
         return Task.FromResult(result.Result.Models);

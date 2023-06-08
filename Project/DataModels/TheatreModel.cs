@@ -4,7 +4,7 @@ using Postgrest.Attributes;
 using Postgrest.Models;
 
 [Table("theatres")]
-public class TheatreModel : BaseModel, ICloneable, IIdentity
+public class TheatreModel : BaseModel, ICloneable
 {
     [PrimaryKey("id", false)]
     public int Id { get; set; }

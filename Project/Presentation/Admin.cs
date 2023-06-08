@@ -140,7 +140,7 @@ public static class Admin
         string Report = $"In the period from {StartDate.Day}/{StartDate.Month}/{StartDate.Year} to {EndDate.Day}/{EndDate.Month}/{EndDate.Year} the following happened:";
         foreach (var M in RLog)
         {
-            Report += $"\n{ML.GetById(M[0]).Title}:\n{M[1]} reservation(s) have been made\n";
+            Report += $"\n{ML.GetById(M[0]).Result.Title}:\n{M[1]} reservation(s) have been made\n";
             Report += $"{M[2]} reservation(s) have been updated\n{M[3]} reservation(s) have been removed\n";
         }
         string reportPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, $"DataSources/report{StartDate.Day}-{StartDate.Month}-{StartDate.Year}_{EndDate.Day}-{EndDate.Month}-{EndDate.Year}.txt"));
@@ -156,7 +156,7 @@ public static class Admin
         string Report = $"From the beginning of the logs the following has happened:";
         foreach (var M in RLog)
         {
-            Report += $"\n{ML.GetById(M[0]).Title}:\n{M[1]} reservation(s) have been made\n";
+            Report += $"\n{ML.GetById(M[0]).Result.Title}:\n{M[1]} reservation(s) have been made\n";
             Report += $"{M[2]} reservation(s) have been updated\n{M[3]} reservation(s) have been removed\n";
         }
         string reportPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, $"DataSources/fullreport_{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year}.txt"));

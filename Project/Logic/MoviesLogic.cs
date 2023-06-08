@@ -275,7 +275,7 @@ public class MoviesLogic
         string stars = "";
 
         // round to nearest whole number
-        int currStars = (int)Math.Round(movie.Reviews.Stars);
+        int currStars = (int)Math.Round(movie.Reviews.ReviewStars);
 
         for (int i = 0; i < 5; i++)
         {

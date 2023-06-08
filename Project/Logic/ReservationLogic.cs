@@ -1,6 +1,6 @@
 public class ReservationLogic
 {
-    public async Task<List<ReservationModel>> GetAllReservations()
+    public static async Task<List<ReservationModel>> GetAllReservations()
     {
         return await DbLogic.GetAll<ReservationModel>();
     }
@@ -290,7 +290,8 @@ public class ReservationLogic
         TimeSlotsLogic TL = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
         // iterate through all data in
-        List<ReservationModel> reservations = ReservationAccess.LoadAll();
+        // List<ReservationModel> reservations = ReservationAccess.LoadAll();
+        List<ReservationModel> reservations = GetAllReservations().Result;
         foreach (ReservationModel reservation in reservations)
         {
             if (TL.GetById(reservation.TimeSlotId).Start  < DateTime.Now)
@@ -317,8 +318,8 @@ public class ReservationLogic
         TimeSlotsLogic TL = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
         // iterate through all data in
-        List<ReservationModel> reservations = ReservationAccess.LoadAll();
-        foreach (ReservationModel reservation in reservations)
+        // List<ReservationModel> reservations = ReservationAccess.LoadAll();
+        foreach (ReservationModel reservation in GetAllReservations().Result)
         {
             if (TL.GetById(reservation.TimeSlotId).Start >= DateTime.Now)
             {

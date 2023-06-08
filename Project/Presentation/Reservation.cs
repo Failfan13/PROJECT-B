@@ -137,6 +137,7 @@ public static class Reservation
 
     public static void FilterMenu(List<MovieModel> filteredList = null!, bool IsEdited = false)
     {
+        MoviesLogic ML = new();
         bool ofAge = false;//AccountsLogic.CheckOfAge();
 
         var movies = new MoviesLogic().AllMovies();

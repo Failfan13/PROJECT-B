@@ -17,7 +17,7 @@ The total price for the extra requirements will be: {formatDt?.Item} x {seats.Co
         QuestionLogic.AskEnter();
 
 
-        await ReservationLogic.MakeReservation(tsm, seats, snacks, tsm.Format, IsEdited);
+        ReservationLogic.MakeReservation(tsm, seats, snacks, tsm.Format, IsEdited);
     }
 
     public static void ChangeFormats(object formatModel, Action returnTo = null!)

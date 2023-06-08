@@ -265,6 +265,7 @@ public class ReservationLogic
         return ML.GetById(TL.GetById(ress.TimeSlotId)!.Result.MovieId)!.Result;
     }
 
+
     public void PreviousReservations(int user_id)
     {
         Console.Clear();

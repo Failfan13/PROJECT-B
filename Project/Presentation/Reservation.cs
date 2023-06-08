@@ -185,7 +185,7 @@ public static class Reservation
     public static void FilterMenu(bool IsEdited) => FilterMenu(null!, IsEdited);
 
     // Show total order amount
-    public async static void TotalReservationCost(ReservationModel ress, int AccountId = -1)
+    public static void TotalReservationCost(ReservationModel ress, int AccountId = -1)
     {
         Console.Clear();
 
@@ -210,7 +210,7 @@ public static class Reservation
                 TotalRess = ReservationLogic.ApplyDiscount(DiscountModel.Id, TotalRess).Result;
 
                 ress.DiscountCode = DiscountModel.Code;
-                await ReservationLogic.UpdateList(ress).ConfigureAwait(false);
+                ReservationLogic.UpdateList(ress);
             }
         }
 

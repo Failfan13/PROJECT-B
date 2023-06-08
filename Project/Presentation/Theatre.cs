@@ -26,7 +26,7 @@ public static class Theatre
             else
             {
                 Actions.Add(() => Snacks.Start(timeSlot, selectedSeats, IsEdited));
-                Actions.Add(() => RL.MakeReservation(timeSlot, selectedSeats, IsEdited: IsEdited));
+                Actions.Add(async () => await RL.MakeReservation(timeSlot, selectedSeats, IsEdited: IsEdited));
             }
 
             MenuLogic.Question(Question, Options, Actions);

@@ -75,7 +75,7 @@ static class Snacks
         }
         else
         {
-            Actions.Add(() => new ReservationLogic().MakeReservation(timeSlot, seats, SnacksLogic.GetSelectedSnacks(), "", IsEdited).ConfigureAwait(false));
+            Actions.Add(async () => await new ReservationLogic().MakeReservation(timeSlot, seats, SnacksLogic.GetSelectedSnacks(), "", IsEdited).ConfigureAwait(false));
         }
 
 

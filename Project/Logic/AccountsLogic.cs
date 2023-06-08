@@ -85,7 +85,14 @@ public class AccountsLogic
         await DbLogic.UpdateItem<AccountModel>(CurrentAccount);
     }
 
-    // menu with accounts
+    public void NewEmail(string newemail)
+    {
+        if (CurrentAccount == null) return;
+        CurrentAccount.EmailAddress = newemail;
+        UpdateList(CurrentAccount);
+    }
+
+
     public int GetAccountIdFromList()
     {
         int ReturnId = -1;

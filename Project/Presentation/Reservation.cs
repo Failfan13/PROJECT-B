@@ -135,14 +135,14 @@ public static class Reservation
         await ReservationLogic.UpdateList(CurrReservation);
     }
 
-    public static void FilterMenu(List<MovieModel> filteredList = null, bool IsEdited = false)
+    public static void FilterMenu(List<MovieModel> filteredList = null!, bool IsEdited = false)
     {
         bool ofAge = false;//AccountsLogic.CheckOfAge();
 
         var movies = new MoviesLogic().AllMovies();
 
         string Question = "which movie would you like to see?";
-        List<string> Movies = new List<string>();
+        List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
         if (filteredList != null)
@@ -150,30 +150,34 @@ public static class Reservation
             movies = filteredList;
         }
 
-        Movies.Add("Use Filter");
+        Options.Add("Use Filter");
         Actions.Add(() => Filter.Main());
 
         if (ofAge)
         {
             foreach (MovieModel movie in movies)
             {
-                Movies.Add(movie.Title);
+                Options.Add(movie.Title);
                 Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));
+                Options.Add("~details");
+                Actions.Add(() => ML.ShowMovieDetails(movie));
             }
         }
-        else
+        else // not of age
         {
             foreach (MovieModel movie in movies.FindAll(m => !m.Categories.Any(c => c.Id == 6)))
             {
-                Movies.Add(movie.Title);
+                Options.Add(movie.Title);
                 Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));
+                Options.Add("~details");
+                Actions.Add(() => ML.ShowMovieDetails(movie));
             }
         }
 
-        Movies.Add("Return");
+        Options.Add("Return");
         Actions.Add(() => Menu.Start());
 
-        MenuLogic.Question(Question, Movies, Actions);
+        MenuLogic.Question(Question, Options, Actions);
     }
 
 

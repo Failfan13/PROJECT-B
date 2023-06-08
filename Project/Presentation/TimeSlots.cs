@@ -171,8 +171,8 @@ static class TimeSlots
         Options.Add("Change view format");
         Actions.Add(() => Format.ChangeFormats(tsm, () => EditTimeSlotChangeMenu(tsm)));
 
-        Options.Add("Remove timeslot");
-        Actions.Add(() => TimeSlotsLogic.DeleteTimeSlot(tsm.Id));
+        Options.Add("Change maximum seats per reservation");
+        Actions.Add(() => ChangeMaxSeats(tsm));
 
         Options.Add("Return");
         Actions.Add(() => Parallel.Invoke(
@@ -214,5 +214,19 @@ static class TimeSlots
         }
 
         if (returnTo != null) returnTo();
+    }
+    static public void ChangeMaxSeats(TimeSlotModel tsm)
+    {
+        TimeSlotsLogic TL = new();
+        double max = QuestionLogic.AskNumber("What will be the new maximum bookable seats in 1 reservation?");
+        int _max =Convert.ToInt32(max);
+        if (_max <= 1)
+        {
+            _max = 1;
+
+        }
+        TL.ChangeMaxSeats(tsm, _max);
+        QuestionLogic.AskEnter();
+        Admin.ChangeData();
     }
 }

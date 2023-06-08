@@ -264,4 +264,77 @@ public class ReservationLogic
 
         return ML.GetById(TL.GetById(ress.TimeSlotId)!.Result.MovieId)!.Result;
     }
+
+    public static void MenuReservation()
+    {
+        Console.Clear();
+        string Question = "Select an option\n";
+        List<string> Options = new List<string>() { };
+        List<Action> Actions = new List<Action>();
+
+        // previous reservations
+        Options.Add("Previous reservations");
+        Actions.Add(() => ReservationLogic.PreviousReservations(AccountsLogic.CurrentAccount.Id));
+        // future reservations
+        Options.Add("Future reservations");
+        Actions.Add(() => ReservationLogic.CurrentReservations(AccountsLogic.CurrentAccount.Id));
+        // return
+        Options.Add("Return");
+        Actions.Add(() => Menu.Start());
+        MenuLogic.Question(Question, Options, Actions);
+    }
+
+    public static void PreviousReservations(int user_id)
+    {
+        Console.Clear();
+        TimeSlotsLogic TL = new TimeSlotsLogic();
+        MoviesLogic ML = new MoviesLogic();
+        // iterate through all data in
+        List<ReservationModel> reservations = ReservationAccess.LoadAll();
+        foreach (ReservationModel reservation in reservations)
+        {
+            if (TL.GetById(reservation.TimeSlotId).Start  < DateTime.Now)
+            {
+                try{
+                    var resMovieId = TL.GetById(reservation.TimeSlotId).MovieId;
+
+                    var resMovie = ML.GetById(resMovieId);
+      
+                    Console.WriteLine($"{resMovie.Title}, at {TL.GetById(reservation.TimeSlotId).Start}.\nOrdered on: {reservation.DateTime}\n");  
+                }
+                catch (System.Exception){
+                    continue;
+                }
+            }
+        }
+        Console.WriteLine("\nPress any key to return");
+        Console.ReadKey();
+    }
+
+    public static void CurrentReservations(int user_id)
+    {
+        Console.Clear();
+        TimeSlotsLogic TL = new TimeSlotsLogic();
+        MoviesLogic ML = new MoviesLogic();
+        // iterate through all data in
+        List<ReservationModel> reservations = ReservationAccess.LoadAll();
+        foreach (ReservationModel reservation in reservations)
+        {
+            if (TL.GetById(reservation.TimeSlotId).Start >= DateTime.Now)
+            {
+                try{
+                    var resMovieId = TL.GetById(reservation.TimeSlotId).MovieId;
+
+                    var resMovie = ML.GetById(resMovieId);
+    
+                    Console.WriteLine($"{resMovie.Title}, at {TL.GetById(reservation.TimeSlotId).Start}.\nOrdered on: {reservation.DateTime}\n");  
+                }
+                catch (System.Exception){
+                    continue;
+                }
+            }
+        }
+        Console.WriteLine("\nPress any key to return");
+        Console.ReadKey();      
+    }
 }

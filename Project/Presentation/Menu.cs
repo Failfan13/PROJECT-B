@@ -41,8 +41,7 @@ static class Menu
         if (AccountsLogic.CurrentAccount != null && !AccountsLogic.CurrentAccount.Admin)
         {
             Options.Add("See all reservations");
-            //Actions.Add(() => Reservation.AllReservations());
-            Actions.Add(() => Console.WriteLine("No Work bruh"));
+            Actions.Add(() => ReservationLogic.MenuReservation());
 
             if (!localDb)
             {
@@ -84,6 +83,9 @@ static class Menu
 
             Options.Add("View all complaints");
             Actions.Add(async () => await Contact.ViewAllComplaints());
+
+            Options.Add("View reports");
+            Actions.Add(() => Admin.LogReport());
         }
 
         // Logout & account settings
@@ -92,17 +94,14 @@ static class Menu
             Options.Add("\nLogout");
             Actions.Add(() => UserLogin.Logout());
 
-            if (!localDb)
-            {
-                Options.Add("Account settings");
-                Actions.Add(() => UserLogin.Start());
-            }
-        }
+            Options.Add("Account settings");
+            Actions.Add(() => UserLogin.Start());
 
-        if (localDb)
-        {
-            Options.Add("\n**Failed connection details**");
-            Actions.Add(() => DbLogic.ConnFailedDetails());
+            if (AccountsLogic.CurrentAccount.Admin == true)
+            {
+                Options.Add("Application settings");
+                Actions.Add(() => Settings.Start());
+            }
         }
 
         Options.Add("\nExit app");

@@ -37,6 +37,9 @@ e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}
             Options.Add("Change password");
             Actions.Add(async () => await ChangePassword());
 
+            Options.Add("Change email");
+            Actions.Add(() => ChangeEmail());
+
             Options.Add("Change advertisement settings");
             Actions.Add(async () => await ChangeAdvertation());
 
@@ -201,7 +204,15 @@ Thank you.";
         }
     }
 
-    public async static Task ChangeAdvertation()
+    public static void ChangeEmail()
+    {
+        Console.WriteLine(AccountsLogic.CurrentAccount!.EmailAddress);
+        Console.WriteLine("Please enter the new email");
+        string newEmail = Console.ReadLine()!;
+        accountsLogic.NewEmail(newEmail);
+    }
+
+    public static void ChangeAdvertation()
     {
         Console.WriteLine($"Would you like to{(AccountsLogic.CurrentAccount!.AdMails ? " still " : " ")}receive ad-mails? (y/n)");
         string adChoice = Console.ReadLine()!.ToLower();

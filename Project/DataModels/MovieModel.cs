@@ -80,11 +80,11 @@ public class MovieModel : BaseModel, IIdentity
     {
         string cats = "";
         Console.WriteLine($"Title:      \t{Title}");
-        Console.WriteLine($"Description:\t{Description}");
+        Console.WriteLine($"Description:\t{Description}\n");
         Console.WriteLine($"Duration:   \t{Duration}");
         Console.WriteLine($"Director:   \t{Director}");
         Console.WriteLine($"ReleaseDate:\t{ReleaseDate.Day}-{ReleaseDate.Month}-{ReleaseDate.Year}");
-        Console.WriteLine($"Price:   \t{Price}");
+        Console.WriteLine($"Price:   \t{Price}\n");
         if (Categories.Count != 0)
         {
             foreach (CategoryModel c in Categories)
@@ -94,12 +94,11 @@ public class MovieModel : BaseModel, IIdentity
             cats = cats.Remove(cats.Length - 1);
             cats = cats.Remove(cats.Length - 1);
             Console.WriteLine($"Categories: \t{cats}");
-            Console.Write("\n");
         }
         else
         {
             Console.WriteLine($"No categories are assinged to this movie");
         }
-        Console.WriteLine($"Formats:   \t{string.Join(", ", Formats)}");
+        Console.WriteLine($"Formats:   \t{string.Join(", ", Formats)}\n");
     }
 }

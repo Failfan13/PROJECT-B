@@ -76,4 +76,10 @@ class TimeSlotsLogic
     {
         return GetAllTimeSlots().Result.FindAll(i => i.MovieId == movieid);
     }
+
+    public void ChangeMaxSeats(TimeSlotModel m, int i)
+    {
+        m.MaxSeats = i;
+        UpdateList(m);
+    }
 }

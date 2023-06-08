@@ -258,4 +258,37 @@ public class MoviesLogic
     {
         movie.Ads = !movie.Ads;
     }
+
+    public void ShowMovieDetails(MovieModel movie)
+    {
+        Console.Clear();
+
+        movie.Info();
+
+        Console.Write($"Stars: \t\t{ShowMovieStars(movie)}\n\n");
+
+        QuestionLogic.AskEnter();
+    }
+
+    private string ShowMovieStars(MovieModel movie)
+    {
+        string stars = "";
+
+        // round to nearest whole number
+        int currStars = (int)Math.Round(movie.Reviews.Stars);
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (i < currStars)
+            {
+                stars += MenuLogic.ColorAndReturnString("★ ");
+            }
+            else
+            {
+                stars += MenuLogic.ColorAndReturnString("☆ ");
+            }
+        }
+
+        return stars;
+    }
 }

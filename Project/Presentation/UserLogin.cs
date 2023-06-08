@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Text;
 static class UserLogin
 {
     static private AccountsLogic accountsLogic = new AccountsLogic();
@@ -189,21 +190,73 @@ Thank you.";
             Menu.Start();
         }
     }
+
     public static void ChangePassword()
     {
         Console.WriteLine("Please enter old password");
-        string oldpws = Console.ReadLine()!;
-        if (accountsLogic.CheckLogin(AccountsLogic.CurrentAccount!.EmailAddress, oldpws) == null)
+        string oldPassword = ReadPassword();
+
+        if (accountsLogic.CheckLogin(AccountsLogic.CurrentAccount!.EmailAddress, oldPassword) == null)
         {
             Console.WriteLine("Wrong password");
+            Console.Clear();
             ChangePassword();
         }
-        else
+
+        Console.WriteLine("Please enter new password");
+        string newPassword = ReadPassword();
+
+        Console.WriteLine("Press the Escape (Esc) key to return to the main menu.");
+
+        while (true)
         {
-            Console.WriteLine("Please enter new password");
-            string newpassword = Console.ReadLine()!;
-            accountsLogic.NewPassword(newpassword);
+            if (Console.KeyAvailable)
+            {
+                ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
+
+                if (keyInfo.Key == ConsoleKey.Escape)
+                {
+                    Console.WriteLine("\nEsc key pressed. Returning to the main menu...");
+                    Menu.Start();
+                    return;
+                }
+            }
+
+            // Continue with the password change logic
+            accountsLogic.NewPassword(newPassword);
         }
+    }
+
+
+
+    private static string ReadPassword()
+    {
+        StringBuilder passwordBuilder = new StringBuilder();
+
+        while (true)
+        {
+            if (Console.KeyAvailable)
+            {
+                ConsoleKeyInfo keyInfo = Console.ReadKey(intercept: true);
+
+                if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    Console.WriteLine();
+                    break;
+                }
+
+                if (keyInfo.Key == ConsoleKey.Escape)
+                {
+                    Console.WriteLine("\nEsc key pressed. Returning to the main menu...");
+                    Menu.Start();
+                    Environment.Exit(0);
+                }
+
+                passwordBuilder.Append(keyInfo.KeyChar);
+            }
+        }
+
+        return passwordBuilder.ToString();
     }
 
     public static void ChangeAdvertation()

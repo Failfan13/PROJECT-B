@@ -32,6 +32,7 @@ public static class Reservation
 
         string Question = "Which reservation would you like to edit?";
         List<string> Options = new List<string>();
+        List<Action> Actions = new List<Action>();
         // List all reservations with date, time & movie name
         foreach (ReservationModel reservation in ReservationLogic.Reservations)
         {
@@ -45,12 +46,16 @@ public static class Reservation
 
                     if (reservationMovie != null && reservationDate != null)
                         Options.Add($"{reservationDate} - {reservationMovie.Title}");
+                        Actions.Add(() => Menu.Start());                        
+                        Options.Add("Return");
+                        Actions.Add(() => Menu.Start());
+
                 }
                 catch { }
             }
         }
 
-        awnser = MenuLogic.Question(Question, Options);
+        awnser = MenuLogic.Question(Question,Options,Actions);
         // Set current reservation field
         try
         {

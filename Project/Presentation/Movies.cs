@@ -258,6 +258,9 @@ static class Movies
             {
                 options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSlotId)!.MovieId)!.Title} Watched on: {pastReservation.DateTime}");
                 actions.Add(() => AddNewReview(TL.GetById(pastReservation.TimeSlotId)!.MovieId, pastReservation));
+                options.Add("Return");
+                actions.Add(() => Menu.Start());
+
             }
             catch (System.Exception ex)
             {

@@ -23,5 +23,22 @@
     "date_time": "2023-06-06T14:36:46.830564+02:00",
     "format": "",
     "discountCode": ""
+  },
+  {
+    "id": 2,
+    "timeslot_id": 1,
+    "seats": [
+      {
+        "id": 20,
+        "seatType": "basic"
+      }
+    ],
+    "snacks": {
+      "0": 1
+    },
+    "account_id": 5,
+    "date_time": "2023-06-08T16:00:42.2666777+02:00",
+    "format": "",
+    "discountCode": ""
   }
 ]

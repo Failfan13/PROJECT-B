@@ -296,6 +296,10 @@
         {
           "id": 95,
           "seatType": "basic"
+        },
+        {
+          "id": 20,
+          "seatType": "basic"
         }
       ]
     },
@@ -324,6 +328,22 @@
         },
         {
           "id": 1,
+          "seatType": "basic"
+        },
+        {
+          "id": 12,
+          "seatType": "basic"
+        },
+        {
+          "id": 22,
+          "seatType": "basic"
+        },
+        {
+          "id": 31,
+          "seatType": "basic"
+        },
+        {
+          "id": 41,
           "seatType": "basic"
         }
       ]

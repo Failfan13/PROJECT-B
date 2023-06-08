@@ -10,7 +10,7 @@ public class TheatreLogic
     {
         _theatres = TheatreAccess.LoadAll();
     }
-
+  
     public void AddTheatre(TheatreModel theatre)
     {
         // update if exists else add

@@ -39,7 +39,7 @@ public class TheatreModel : ICloneable
         Width = width;
         Height = height;
     }
-
+ 
     public class SeatBuilderHelper
     {
         [JsonPropertyName("pathwaysIndex")]

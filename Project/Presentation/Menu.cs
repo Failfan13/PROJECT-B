@@ -41,7 +41,7 @@ static class Menu
         if (AccountsLogic.CurrentAccount != null && !AccountsLogic.CurrentAccount.Admin)
         {
             Options.Add("See all reservations");
-            Actions.Add(() => ReservationLogic.MenuReservation());
+            Actions.Add(() => Reservation.MenuReservation());
 
             if (!localDb)
             {

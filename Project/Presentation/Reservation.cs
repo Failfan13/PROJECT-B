@@ -373,4 +373,25 @@ Would you still like to order for this timeslot?";
 
         MenuLogic.Question(question, options, actions);
     }
+
+    public static void MenuReservation()
+    {
+        ReservationLogic ReservationLogic = new ReservationLogic();
+
+        Console.Clear();
+        string Question = "Select an option\n";
+        List<string> Options = new List<string>() { };
+        List<Action> Actions = new List<Action>();
+
+        // previous reservations
+        Options.Add("Previous reservations");
+        Actions.Add(() => ReservationLogic.PreviousReservations(AccountsLogic.CurrentAccount.Id));
+        // future reservations
+        Options.Add("Future reservations");
+        Actions.Add(() => ReservationLogic.CurrentReservations(AccountsLogic.CurrentAccount.Id));
+        // return
+        Options.Add("Return");
+        Actions.Add(() => Menu.Start());
+        MenuLogic.Question(Question, Options, Actions);
+    }
 }

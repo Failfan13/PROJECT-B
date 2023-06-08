@@ -212,7 +212,7 @@ Thank you.";
         accountsLogic.NewEmail(newEmail);
     }
 
-    public static void ChangeAdvertation()
+    public static async Task ChangeAdvertation()
     {
         Console.WriteLine($"Would you like to{(AccountsLogic.CurrentAccount!.AdMails ? " still " : " ")}receive ad-mails? (y/n)");
         string adChoice = Console.ReadLine()!.ToLower();
@@ -230,7 +230,7 @@ Thank you.";
 
         try
         {
-            await DbLogic.UpdateItem<AccountModel>(AccountsLogic.CurrentAccount);
+            await DbLogic.UpdateItem<AccountModel>(AccountsLogic.CurrentAccount).ConfigureAwait(false);
         }
         catch (Exception e)
         {

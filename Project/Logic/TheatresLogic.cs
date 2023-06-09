@@ -95,13 +95,13 @@ public class TheatreLogic
 
     public void ShowControls(bool configure = false)
     {
-        if (configure)
-        {
-            Console.Clear();
-            Console.Write(@$"In the following screen you can change the seat configuration
+        Console.Write(@$"In the following screen you can change the seat configuration
 Press the following buttons to apply changes:
          
 Press [ ");
+        if (configure)
+        {
+
             MenuLogic.ColorString("↑ → ↓ ←", newLine: false);
             Console.Write(" ] Keys to move around the menu\r\nPress [ ");
             MenuLogic.ColorString("B", newLine: false);
@@ -118,11 +118,7 @@ Press [ ");
         }
         else
         {
-            Console.Clear();
-            Console.Write(@$"In the following screen you can change the seat configuration
-Press the following buttons to apply changes:
-         
-Press [ ");
+            
             MenuLogic.ColorString("↑ → ↓ ←", newLine: false);
             Console.Write(" ] Keys to move around the menu\r\nPress [ ");
             MenuLogic.ColorString("Enter", newLine: false);
@@ -135,6 +131,7 @@ Press [ ");
 
     public List<SeatModel> ShowSeats(TheatreModel theatre, TimeSlotModel timeSlot = null!)
     {
+        Console.Clear();
         // load logics
         TimeSlotsLogic TL = new TimeSlotsLogic();
 
@@ -164,11 +161,13 @@ Press [ ");
 
         bool runMenu = true;
         while (runMenu)
-        {
-            // Show controls
+        {  
+            Console.Clear();
+            /// Show controls
             ShowControls(timeSlot == null);
+            // Legend
+            ShowLegend();
 
-            // Console.Clear();
             int heightCounter = 0;
             int widthCounter = 0;
 
@@ -307,9 +306,6 @@ Press [ ");
                 Console.WriteLine($"\n\nSelected Seats: {string.Join(", ", selectedSeats.Select(s => $"{SeatNumber(theatre.Width, s)}"))}");
             }
             else Console.WriteLine(); // clearance
-
-            // Legend
-            ShowLegend();
 
             // Key mappings
             ConsoleKeyInfo keyPressed = Console.ReadKey(true);

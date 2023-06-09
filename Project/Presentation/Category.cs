@@ -8,15 +8,15 @@ public static class Category
         List<Action> Actions = new List<Action>();
         Actions.Add(() => NewCatMenu());
         Actions.Add(() => RemoveCatMenu());
-        Actions.Add(() => Admin.Start());
+        Actions.Add(() => Admin.ChangeData());
 
         MenuLogic.Question(Question, Options, Actions);
     }
 
-    public static void NewCatMenu()
+    public async static void NewCatMenu()
     {
         string newCat = QuestionLogic.AskString("What name should the new category have?");
-        CL.CreateNewCategory(new CategoryModel(CL.GetNewestId(), newCat));
+        await CL.NewCategory(newCat);
     }
     public static void RemoveCatMenu()
     {
@@ -24,7 +24,7 @@ public static class Category
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        foreach (CategoryModel cat in CL.AllCategories())
+        foreach (CategoryModel cat in CL.GetAllCategories().Result)
         {
             Options.Add(cat.Name);
             Actions.Add(() => CL.DeleteCategory(cat.Id));
@@ -57,7 +57,7 @@ public static class Category
 
         if (!CL._swapCategory)
         {
-            foreach (CategoryModel cat in CL.AllCategories().Where(c => !movie.Categories.Contains(c)))
+            foreach (CategoryModel cat in CL.GetAllCategories().Result.Where(c => !movie.Categories.Contains(c)))
             {
                 Options.Add(cat.Name);
                 Actions.Add(() => CL.AddCategoryToMovie(movie, cat));
@@ -91,7 +91,7 @@ public static class Category
             List<Action> Actions = new List<Action>();
 
             // show all category's not selected yet
-            foreach (var category in CL.AllCategories().Where(c => !movie.Categories.Contains(c)))
+            foreach (var category in CL.GetAllCategories().Result.Where(c => !movie.Categories.Contains(c)))
             {
                 Options.Add(category.Name);
                 Actions.Add(() => movie.Categories.Add(category));

@@ -1,15 +1,18 @@
-using System.Text.Json.Serialization;
-public class CategoryModel
+using Postgrest.Attributes;
+using Postgrest.Models;
+
+[Table("categories")]
+public class CategoryModel : BaseModel
 {
-    [JsonPropertyName("id")]
+    [PrimaryKey("id", false)]
     public int Id { get; set; }
 
-    [JsonPropertyName("name")]
-    public string Name{ get; set; }
+    [Column("name")]
+    public string Name { get; set; }
 
-    public CategoryModel(int id, string name)
+    public CategoryModel NewCategoryModel(string name)
     {
-        Id = id;
         Name = name;
+        return this;
     }
 }

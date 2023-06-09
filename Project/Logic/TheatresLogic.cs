@@ -4,115 +4,59 @@ using System.Text.RegularExpressions;
 using System.Data;
 public class TheatreLogic
 {
-    private List<TheatreModel> _theatres;
-
-    public TheatreLogic()
+    public async Task<List<TheatreModel>> GetAllTheatres()
     {
-        _theatres = TheatreAccess.LoadAll();
+        return await DbLogic.GetAll<TheatreModel>();
+    }
+    // pass model to update
+    public async Task UpdateList(TheatreModel theatre)
+    {
+        await DbLogic.UpdateItem(theatre);
     }
 
-    public void AddTheatre(TheatreModel theatre)
+    public async Task UpsertList(TheatreModel theatre)
     {
-        // update if exists else add
-        if (ExistingId(theatre.Id)) _theatres[_theatres.FindIndex(i => i.Id == theatre.Id)] = theatre;
-        else _theatres.Add(theatre);
-        UpdateList(theatre);
+        await DbLogic.UpsertItem(theatre);
     }
 
-    public void RemoveTheatre(int id)
+    public async Task<TheatreModel>? GetById(int id)
     {
-        _theatres.RemoveAll(t => t.Id == id);
-        UpdateList();
+        return await DbLogic.GetById<TheatreModel>(id);
     }
 
-    public void UpdateList() => this.UpdateList(null!);
-    public void UpdateList(TheatreModel theatre)
+    public async Task<TheatreModel> NewTheatre(TheatreModel theatre)
     {
-        if (theatre != null)
+        await DbLogic.InsertItem<TheatreModel>(theatre);
+        return theatre;
+    }
+
+    public async Task<TheatreModel> NewTheatre(int width, int height, double SeatPrice)
+    {
+        TheatreModel TheatreModel = new TheatreModel();
+        TheatreModel = TheatreModel.NewTheatreModel(SeatPrice, width, height);
+        await DbLogic.UpsertItem<TheatreModel>(TheatreModel);
+        return TheatreModel;
+    }
+    public async Task<TheatreModel> NewTheatre(int width, int height, double SeatPrice, double MidleSeatPrice, double OutSeatPrice)
+    {
+        TheatreModel theatreModel = new TheatreModel();
+        theatreModel = theatreModel.NewTheatreModel(SeatPrice, width, height);
+        theatreModel.SeatPrices.Standard = MidleSeatPrice;
+        theatreModel.SeatPrices.Luxury = OutSeatPrice;
+        return await DbLogic.InsertItem<TheatreModel>(theatreModel);
+    }
+
+    public async Task UpdateTheatre(TheatreModel theatre) //Adds or changes category to list of categories
+    {
+        await UpdateList(theatre);
+    }
+
+    public void DeleteTheatre(int theatreInt) // Deletes category from list of categories
+    {
+        // account exists and is admin
+        if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
         {
-            //Find if there is already an model with the same id
-            int index = _theatres.FindIndex(s => s.Id == theatre.Id);
-
-            if (index != -1)
-            {
-                //update existing model
-                _theatres[index] = theatre;
-                Logger.LogDataChange<TheatreModel>(theatre.Id, "Updated");
-            }
-            else
-            {
-                //add new model
-                _theatres.Add(theatre);
-                Logger.LogDataChange<TheatreModel>(theatre.Id, "Added");
-            }
-        }
-        TheatreAccess.WriteAll(_theatres);
-    }
-
-    public TheatreModel? GetById(int id)
-    {
-        return _theatres.Find(i => i.Id == id);
-    }
-
-    public bool GetById(int id, out TheatreModel theatre)
-    {
-        var foundTheatre = _theatres.Find(i => i.Id == id);
-        theatre = foundTheatre!;
-        if (foundTheatre == null) return false;
-        return true;
-    }
-
-    public bool ExistingId(int id) => AllTheatres().Exists(i => i.Id == id);
-
-    public int GetNewestId()
-    {
-        return (_theatres.OrderByDescending(item => item.Id).First().Id) + 1;
-    }
-
-    public List<TheatreModel> AllTheatres()
-    {
-        return _theatres;
-    }
-
-    public TheatreModel MakeTheatre(int width, int height, double outSeatPrice, double midSeatPrice = 0, double innSeatPrice = 0, int OldId = -1)
-    {
-        int newId = 0;
-        if (OldId == -1)
-        {
-            try
-            {
-                newId = GetNewestId();
-            }
-            catch (System.InvalidOperationException)
-            {
-                newId = 0;
-            }
-        }
-        else
-        {
-            newId = OldId;
-        }
-
-        TheatreModel theatre = new TheatreModel(newId, outSeatPrice, width, height);
-
-        if (midSeatPrice != 0)
-        {
-            theatre.StandardSeatPrice = midSeatPrice;
-        }
-        if (innSeatPrice != 0)
-        {
-            theatre.LuxurySeatPrice = innSeatPrice;
-        }
-
-        AddTheatre(theatre);
-
-        if (_theatres.Exists(i => i.Id == theatre.Id))
-        {
-            return _theatres.Find(i => i.Id == theatre.Id)!;
-        }
-        else
-        {
-            return theatre;
+            DbLogic.RemoveItemById<TheatreModel>(theatreInt);
         }
     }
 
@@ -192,11 +136,17 @@ Press [ ");
         TimeSlotsLogic TL = new TimeSlotsLogic();
 
         //load predefined data for model
-        List<Tuple<string, int>> pathways = theatre.LayoutSpecs.PathwayIndexes;
-        List<int> blockedSeats = theatre.LayoutSpecs.BlockedSeatIndexes;
-        List<int> handicaped = theatre.LayoutSpecs.HandiSeatIndexes;
+        Tuple<string, int>[] pathwaysArray = theatre.LayoutSpecs.PathwayIndexes;
+        int[] blockedSeatsArray = theatre.LayoutSpecs.BlockedSeatIndexes;
+        int[] handicapedArray = theatre.LayoutSpecs.HandiSeatIndexes;
         List<Tuple<string, int>> seatTypes = GetSeatTypes(theatre.Width, theatre.Height);
         List<SeatModel> reservedSeats = new List<SeatModel>();
+
+        // cast arrays to lists
+
+        List<Tuple<string, int>> pathways = pathwaysArray.ToList();
+        List<int> blockedSeats = blockedSeatsArray.ToList();
+        List<int> handicaped = handicapedArray.ToList();
 
         if (timeSlot != null)
         {
@@ -456,11 +406,14 @@ Press [ ");
         List<SeatModel> returnSelectedSeats = new List<SeatModel>();
 
         Console.Clear();
-        theatre.LayoutSpecs.PathwayIndexes = pathways;
-        theatre.LayoutSpecs.BlockedSeatIndexes = blockedSeats;
-        theatre.LayoutSpecs.HandiSeatIndexes = handicaped;
+        theatre.LayoutSpecs.PathwayIndexes = pathways.ToArray();
+        theatre.LayoutSpecs.BlockedSeatIndexes = blockedSeats.ToArray();
+        theatre.LayoutSpecs.HandiSeatIndexes = handicaped.ToArray();
 
-        UpdateList(theatre);
+        // UpdateList(theatre).ConfigureAwait(false);
+        Action a = new(async () => await UpdateList(theatre));
+        a.Invoke();
+
         if (timeSlot != null)
         {
             SeatModel newSeat = null!;
@@ -490,7 +443,7 @@ Press [ ");
                         break;
                 }
             }
-            TL.UpdateList(timeSlot);
+            TL.UpdateList(timeSlot).ConfigureAwait(false);
             return returnSelectedSeats;
         }
         return null!;
@@ -647,7 +600,7 @@ Press [ ");
         if (inpKey.Key != ConsoleKey.R) Contact.Start();
     }
 
-    public void BlockSeat<T>(TheatreModel theatre, T seatIndex) // block and unblock seat
+    public async Task BlockSeat<T>(TheatreModel theatre, T seatIndex) // block and unblock seat
     {
         int seatNumber = 0;
 
@@ -669,32 +622,38 @@ Press [ ");
         }
         else return;
 
-        if (theatre.LayoutSpecs.BlockedSeatIndexes.Contains(seatNumber))
+        List<int> blockedSeats = theatre.LayoutSpecs.BlockedSeatIndexes.ToList();
+
+        if (blockedSeats.Contains(seatNumber))
         {
-            theatre.LayoutSpecs.BlockedSeatIndexes.Remove(seatNumber);
+            blockedSeats.Remove(seatNumber);
         }
         else
         {
-            theatre.LayoutSpecs.BlockedSeatIndexes.Add(seatNumber);
+            blockedSeats.Add(seatNumber);
         }
 
-        UpdateList(theatre);
+        theatre.LayoutSpecs.BlockedSeatIndexes = blockedSeats.ToArray();
+
+        await UpdateList(theatre);
     }
 
     public double PriceOfSeatType(string type, int theatreId)
     {
         TheatreLogic TheatreLogic = new TheatreLogic();
 
-        if (TheatreLogic.GetById(theatreId, out TheatreModel? theatre))
+        var theatre = TheatreLogic.GetById(theatreId)!.Result;
+
+        if (theatre != null)
         {
             switch (type)
             {
                 case "standard":
-                    return theatre.StandardSeatPrice;
+                    return theatre.SeatPrices.Standard;
                 case "luxury":
-                    return theatre.LuxurySeatPrice;
+                    return theatre.SeatPrices.Luxury;
                 default:
-                    return theatre.BasicSeatPrice;
+                    return theatre.SeatPrices.Standard;
             }
         }
         return 0;
@@ -702,17 +661,15 @@ Press [ ");
 
     public int DupeTheatreToNew(int oldTheatreId)
     {
-        TheatreModel oldTheatre = AllTheatres().Find(t => t.Id == oldTheatreId)!;
+        TheatreModel oldTheatre = GetAllTheatres().Result.Find(t => t.Id == oldTheatreId)!;
         TheatreModel newTheatre = null!;
 
         if (oldTheatre == null) return -1;
 
         newTheatre = (TheatreModel)oldTheatre.DeepClone();
 
-        newTheatre.Id = GetNewestId();
         newTheatre.CopyRoomId = oldTheatre.Id;
 
-        _theatres.Add(newTheatre);
-        return newTheatre.Id;
+        return NewTheatre(newTheatre).Result.Id;
     }
 }

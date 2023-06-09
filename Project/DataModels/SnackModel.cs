@@ -1,37 +1,29 @@
-using System.Text.Json.Serialization;
+using Postgrest.Attributes;
+using Postgrest.Models;
 
-
-public class SnackModel
+[Table("snacks")]
+public class SnackModel : BaseModel
 {
-    [JsonPropertyName("id")]
+    [PrimaryKey("id", false)]
     public int Id { get; set; }
 
-    [JsonPropertyName("snack")]
+    [Column("name")]
     public string Name { get; set; }
 
-    [JsonPropertyName("sizes")]
-    public List<string> SizeList { get; set; }
-
-    [JsonPropertyName("price")]
+    [Column("price")]
     public double Price { get; set; }
 
 
-    public SnackModel(int id, string name, List<string> sizeList, double price)
+    public SnackModel NewSnackModel(string name, List<string> sizeList, double price)
     {
-        Id = id;
         Name = name;
-        SizeList = sizeList;
         Price = price;
+        return this;
     }
 
     public void Info()
     {
         Console.WriteLine($"Snack:      \t{Name}");
-        Console.WriteLine($"Sizes:");
-        foreach (var size in SizeList)
-        {
-            Console.Write($"\t{size}\n");
-        }
         Console.WriteLine($"Price:      \t{Price}");
         Console.Write("\n");
     }

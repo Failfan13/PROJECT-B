@@ -1,13 +1,14 @@
 public static class Theatre
 {
     private static TheatreLogic TL = new TheatreLogic();
-    public static void SelectSeats(TimeSlotModel TimeSlot, bool IsEdited = false)
+    public static void SelectSeats(TimeSlotModel timeSlot, bool IsEdited = false)
     {
+
         TimeSlotsLogic TS = new TimeSlotsLogic();
         ReservationLogic RL = new ReservationLogic();
-        var theatre = TL.GetById(TimeSlot.Theatre.TheatreId)!;
+        var theatre = TL.GetById(timeSlot.Theatre.TheatreId)!;
 
-        var help = TL.ShowSeats(theatre, TimeSlot);
+        var help = TL.ShowSeats(theatre.Result, timeSlot);
 
         if (help != null)
         {
@@ -17,23 +18,20 @@ public static class Theatre
             List<string> Options = new List<string>() { "Yes", "No" };
             List<Action> Actions = new List<Action>();
 
-            if (FormatsLogic.GetByFormat(TimeSlot.Format) != null)
+            if (FormatsLogic.GetByFormat(timeSlot.Format) != null)
             {
-                Actions.Add(() => Snacks.Start(TimeSlot, selectedSeats, IsEdited));
-                Actions.Add(() => Format.Start(TimeSlot, selectedSeats));
+                Actions.Add(() => Snacks.Start(timeSlot, selectedSeats, IsEdited));
+                Actions.Add(() => Format.Start(timeSlot, selectedSeats, IsEdited));
             }
             else
             {
-                Actions.Add(() => Snacks.Start(TimeSlot, selectedSeats, IsEdited));
-                Actions.Add(() => RL.MakeReservation(TimeSlot, selectedSeats, IsEdited: IsEdited));
+                Actions.Add(() => Snacks.Start(timeSlot, selectedSeats, IsEdited));
+                Actions.Add(async () => await RL.MakeReservation(timeSlot, selectedSeats, IsEdited: IsEdited));
             }
 
             MenuLogic.Question(Question, Options, Actions);
         }
-        else
-        {
-            Menu.Start();
-        }
+        Menu.Start();
     }
     public static void DeselectCurrentSeats(TimeSlotModel timeSlot, ReservationModel currReservation)
     {
@@ -48,8 +46,8 @@ public static class Theatre
         {
             timeSlot.Theatre.Seats.RemoveAll(s => s.Id == seat.Id);
         }
-        TSL.UpdateList(timeSlot);
-        RL.UpdateList(currReservation);
+        TSL.UpdateList(timeSlot).ConfigureAwait(false);
+        RL.UpdateList(currReservation).ConfigureAwait(false);
     }
 
     public static int WhatTheatre(bool IsEdited = false)
@@ -65,7 +63,7 @@ public static class Theatre
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        foreach (var item in TL.AllTheatres())
+        foreach (var item in TL.GetAllTheatres().Result)
         {
             Options.Add($"Room: {item.Id} - Width: {item.Width}, Height: {item.Height}{(item.CopyRoomId != -1 ? $" - Copy Room: {item.CopyRoomId}" : "")}");
 
@@ -74,7 +72,8 @@ public static class Theatre
         }
 
         Options.Add("\nReturn");
-        Actions.Add(() => Admin.Start());
+        if (IsEdited) Actions.Add(() => Admin.ChangeData());
+        else Actions.Add(() => Admin.Start());
 
         MenuLogic.Question(Question, Options, Actions);
 
@@ -114,6 +113,7 @@ public static class Theatre
         double baseSeatPrice = 0; // basic
         double stanSeatPrice = 0; // standard
         double luxeSeatPrice = 0; // luxury
+        TheatreModel newTheatre = null!;
 
         Console.Clear();
         TheatreLogic TL = new TheatreLogic();
@@ -221,14 +221,14 @@ public static class Theatre
             }
         }
 
-        TheatreModel newTheatre = TL.MakeTheatre(width, height, baseSeatPrice, stanSeatPrice, luxeSeatPrice);
+        newTheatre = TL.NewTheatre(width, height, baseSeatPrice, stanSeatPrice, luxeSeatPrice).Result;
 
         Console.WriteLine("\nWould you like to change seat configuration? (y/n)");
         ConsoleKeyInfo inputKey = Console.ReadKey(true);
         // Y key to config menu
         if (inputKey.Key == ConsoleKey.Y)
         {
-            ConfigureTheatre(newTheatre);
+            TL.ShowSeats(newTheatre);
         }
         return newTheatre.Id;
     }
@@ -251,7 +251,7 @@ Please fill in the following fields");
         MenuLogic.ColorString(">>", newLine: false);
         Console.WriteLine($" Enter a seatId number between 1 and {theatre.Width * theatre.Height}"); // command the user
         string input = Console.ReadLine()!;
-        TL.BlockSeat(theatre, input);
+        TL.BlockSeat(theatre, input).ConfigureAwait(false);
 
         if (returnTo != null) returnTo();
     }
@@ -270,7 +270,7 @@ Please fill in the following fields");
         foreach (int seatNum in theatre.LayoutSpecs.BlockedSeatIndexes)
         {
             options.Add($"SeatId: {seatNum.ToString()} SeatNum: {TL.SeatNumber(theatre.Width, seatNum)}");
-            actions.Add(() => TL.BlockSeat(theatre, seatNum));
+            actions.Add(() => TL.BlockSeat(theatre, seatNum).ConfigureAwait(false));
         }
         options.Add("\nReturn");
         actions.Add(() => returnTo());

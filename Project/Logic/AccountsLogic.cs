@@ -5,117 +5,93 @@ using System.Text.Json;
 using System.Globalization;
 
 
-//This class is not static so later on we can use inheritance and interfaces
 public class AccountsLogic
 {
-    private List<AccountModel> _accounts;
-
-
-    //Static properties are shared across all instances of the class
-    //This can be used to get the current logged in account from anywhere in the program
-    //private set, so this can only be set by the class itself
-    //public static AccountModel? CurrentAccount { get; private set; }
     public static AccountModel? CurrentAccount { get; set; }
+    private DbLogic DbLogic = new DbLogic();
 
-    public static string UserName()
+    // all existing accounts
+    public async Task<List<AccountModel>> GetAllAccounts()
     {
-        return AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FullName : null!;
+        return await DbLogic.GetAll<AccountModel>();
+    }
+    // pass model to update
+    public async Task UpdateList(AccountModel account)
+    {
+        await DbLogic.UpsertItem(account);
     }
 
+    // get currect account userId
     public static int? UserId()
     {
         return AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.Id : null;
     }
 
-    public AccountsLogic()
+    // gets the account by associated id
+    public async Task<AccountModel>? GetById(int id)
     {
-        _accounts = AccountsAccess.LoadAll();
+        return await DbLogic.GetById<AccountModel>(id);
     }
 
-    public void UpdateList(AccountModel acc)
+    // Logs in is exists otherwise sets to null
+    public async Task<AccountModel> LogIn(string email, string password)
     {
-        //Find if there is already an model with the same id
-        int index = _accounts.FindIndex(s => s.Id == acc.Id);
+        var loginDetails = new Dictionary<string, string>(){
+            {"email_address", email},
+            {"password", password}
+        };
 
-        if (index != -1)
-        {
-            //update existing model
-            _accounts[index] = acc;
-            Logger.LogDataChange<AccountModel>(acc.Id, "Updated");
-        }
-        else
-        {
-            //add new model
-            _accounts.Add(acc);
-            Logger.LogDataChange<AccountModel>(acc.Id, "Added");
-        }
-        AccountsAccess.WriteAll(_accounts);
-    }
+        var account = await DbLogic.LoginAs<AccountModel>(loginDetails);
 
-    public AccountModel? GetById(int id)
-    {
-        return _accounts.Find(i => i.Id == id);
-    }
-
-    public bool UserById(int id, out AccountModel account)
-    {
-        var foundAccount = GetById(id);
-        if (foundAccount != null)
-        {
-            account = GetById(id);
-            return true;
-        }
-        account = null!;
-        return false;
-    }
-
-    public List<AccountModel> GetAllAccounts()
-    {
-        return _accounts;
-    }
-
-    public int GetNewestId()
-    {
-        if (_accounts.Count == 0)
-        {
-            return 1;
-        }
-        else
-        {
-            return _accounts.Max(a => a.Id) + 1;
-        }
-    }
-
-    public AccountModel? CheckLogin(string email, string password)
-    {
-        if (email == null || password == null)
-        {
-            return null;
-        }
-        CurrentAccount = _accounts.Find(i => i.EmailAddress == email && i.Password == password);
+        if (account != null)
+            CurrentAccount = account;
+        else return null!;
+        Logger.SystemLog("Logged in");
         return CurrentAccount;
     }
 
+    // checks for the login
+    public async Task<AccountModel>? CheckLogin(string email, string password)
+    {
+        if (email == null || password == null)
+        {
+            return null!;
+        }
+        CurrentAccount = await LogIn(email, password);
+        return CurrentAccount;
+    }
+
+    // logout from current account
     public void LogOut()
     {
         CurrentAccount = null;
         Logger.SystemLog("Logged out");
     }
 
-    public int NewAccount(string email, string name, string password, string date)
+    // creates a new account
+    public async Task<AccountModel> NewAccount(string email, string name, string password, DateTime date)
     {
-        int NewId = GetNewestId();
-        AccountModel account = new AccountModel(NewId, email, password, name, date);
-        UpdateList(account);
-        return NewId;
+        AccountModel account = new AccountModel();
+        account = account.NewAccountModel(email, password, name, date);
+        await DbLogic.UpsertItem<AccountModel>(account);
+        return account;
     }
 
-    public void NewPassword(string newpassword)
+    // Changes the password
+    public async Task NewPassword(string newpassword)
     {
         if (CurrentAccount == null) return;
         CurrentAccount.Password = newpassword;
+        await DbLogic.UpdateItem<AccountModel>(CurrentAccount);
+    }
+
+    public void NewEmail(string newemail)
+    {
+        if (CurrentAccount == null) return;
+        CurrentAccount.EmailAddress = newemail;
         UpdateList(CurrentAccount);
     }
+
 
     public int GetAccountIdFromList()
     {
@@ -124,9 +100,9 @@ public class AccountsLogic
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        foreach (AccountModel acc in _accounts)
+        foreach (AccountModel acc in GetAllAccounts().Result)
         {
-            Options.Add(acc.FullName);
+            Options.Add(acc.FirstName + " " + acc.LastName);
             Actions.Add(() => ReturnId = acc.Id);
         }
 
@@ -136,15 +112,14 @@ public class AccountsLogic
         return ReturnId;
     }
 
-    public void DeleteUser(int id)
+    public async Task DeleteUser(int id)
     {
-        _accounts.RemoveAll(i => i.Id == id);
-        AccountsAccess.WriteAll(_accounts);
+        await DbLogic.RemoveItemById<AccountModel>(id);
         Logger.LogDataChange<AccountModel>(id, "Deleted");
     }
 
     // method so user can sumbit complaint
-    public void AddComplaint(string type, string complaintMsg)
+    public async Task AddComplaint(string type, string complaintMsg)
     {
         if (AccountsLogic.CurrentAccount == null) return;
 
@@ -153,7 +128,7 @@ public class AccountsLogic
         if (account.Complaints.Count < 10)
         {
             account.Complaints.Add(complaintMsg);
-            UpdateList(account);
+            await UpdateList(account);
         }
         else
         {
@@ -164,9 +139,8 @@ public class AccountsLogic
         }
     }
 
-    public static void EditComplaint(AccountModel account = null!, int complaintIndex = -1)
+    public async static Task EditComplaint(AccountModel account = null!, int complaintIndex = -1)
     {
-        AccountsLogic AL = new AccountsLogic();
         Console.Clear();
 
         if (account == null)
@@ -174,9 +148,9 @@ public class AccountsLogic
             Console.WriteLine("Enter user id or email address to edit complaint");
             string inputIdOrMail = Console.ReadLine()!;
             // Get Email
-            if (inputIdOrMail.Contains("@")) account = AL.GetByEmail(inputIdOrMail);
+            if (inputIdOrMail.Contains("@")) account = await DbLogic.GetByEmail<AccountModel>(inputIdOrMail);
             // Get Id
-            else if (int.TryParse(inputIdOrMail, out int id)) account = AL.GetById(id)!;
+            //else if (int.TryParse(inputIdOrMail, out int id)) account = await DbLogic.GetById<AccountModel>(id)!;///////////////////
             // No account found
             else return;
 
@@ -190,8 +164,8 @@ public class AccountsLogic
         };
         List<Action> Actions = new List<Action>();
 
-        Actions.Add(() => DeleteComplaint(account, complaintIndex));
-        Actions.Add(() => ModifyComplaint(account, complaintIndex));
+        Actions.Add(async () => await DeleteComplaint(account, complaintIndex));
+        Actions.Add(async () => await ModifyComplaint(account, complaintIndex));
 
 
         Options.Add("Return");
@@ -200,7 +174,7 @@ public class AccountsLogic
     }
 
     // Deletes complaint
-    public static void DeleteComplaint(AccountModel account, int ComplaintIndex)
+    public async static Task DeleteComplaint(AccountModel account, int ComplaintIndex)
     {
         AccountsLogic AL = new AccountsLogic();
 
@@ -213,7 +187,7 @@ public class AccountsLogic
             for (int i = 0; i < account.Complaints.Count; i++)
             {
                 Options.Add(account.Complaints[i].ToString());
-                Actions.Add(() => AccountsLogic.DeleteComplaint(account, i));
+                Actions.Add(async () => await AccountsLogic.DeleteComplaint(account, i));
             }
 
             MenuLogic.Question(Question, Options, Actions);
@@ -222,14 +196,14 @@ public class AccountsLogic
         {
             Console.Clear();
             account.Complaints.RemoveAt(ComplaintIndex);
-            AL.UpdateList(account);
+            await AL.UpdateList(account);
         }
 
-        Contact.ViewAllComplaints(account);
+        await Contact.ViewAllComplaints(account);
     }
 
     // Modify complaint
-    public static void ModifyComplaint(AccountModel account, int ComplaintIndex = -1)
+    public async static Task ModifyComplaint(AccountModel account, int ComplaintIndex = -1)
     {
         AccountsLogic AL = new AccountsLogic();
 
@@ -242,7 +216,7 @@ public class AccountsLogic
             for (int i = 0; i < account.Complaints.Count; i++)
             {
                 Options.Add(account.Complaints[i].ToString());
-                Actions.Add(() => AccountsLogic.ModifyComplaint(account, i));
+                Actions.Add(async () => await AccountsLogic.ModifyComplaint(account, i));
             }
 
             MenuLogic.Question(Question, Options, Actions);
@@ -252,7 +226,7 @@ public class AccountsLogic
             Console.Clear();
             string newComplaint = ModifyComplaint(account.Complaints[ComplaintIndex]);
             account.Complaints[ComplaintIndex] = account.Complaints[ComplaintIndex].Split(':').First() + ":" + newComplaint;
-            AL.UpdateList(account);
+            await AL.UpdateList(account);
         }
     }
 
@@ -263,18 +237,18 @@ public class AccountsLogic
         return Console.ReadLine()!;
     }
 
-    public AccountModel GetByEmail(string email)
+    public async Task<AccountModel> GetByEmail(string email)
     {
-        return _accounts.Find(i => i.EmailAddress == email)!;
+        return await DbLogic.GetByEmail<AccountModel>(email);
     }
 
-    public static bool CheckOfAge()
-    {
-        if (CurrentAccount == null) return false;
-        else if (CurrentAccount.DateOfBirth == null) return false;
+    // public static bool CheckOfAge()
+    // {
+    //     if (CurrentAccount == null) return false;
+    //     else if (CurrentAccount.DateOfBirth == null) return false;
 
-        string date = CurrentAccount.DateOfBirth;
-        DateTime dateOfBirth = DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-        return DateTime.Today.Year - dateOfBirth.Year >= 18;
-    }
+    //     string date = CurrentAccount.DateOfBirth;
+    //     DateTime dateOfBirth = DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+    //     return DateTime.Today.Year - dateOfBirth.Year >= 18;
+    // }
 }

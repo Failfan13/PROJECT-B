@@ -6,7 +6,9 @@ static class Menu
     //You could edit this to show different menus depending on the user's role
     static public void Start()
     {
-        string Question = "Make a choice from the menu\n";
+        
+        MenuLogic.ColorString("water", ConsoleColor.Blue, newLine: false);
+        string Question = $"Select an option.\nYou can navigate through the menu by pressing\n↑ → ↓ ← keys to move around the menu, ENTER confirms the selected option.\n";
         List<string> Options = new List<string>() { };
         List<Action> Actions = new List<Action>();
 

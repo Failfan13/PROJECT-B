@@ -54,6 +54,7 @@ static class Movies
         duration = (int)QuestionLogic.AskNumber("What is the duration? (minutes)");
         price = (int)QuestionLogic.AskNumber("How expensive is the movie?: ");
 
+        Console.Clear();
         Console.WriteLine("Would you like to turn on ads? (y/n)");
         ads = (Console.ReadKey().KeyChar == 'y') switch
         {
@@ -63,14 +64,18 @@ static class Movies
 
         MovieModel movie = MoviesLogic.NewMovie(title, releaseDate, director, description, duration, price, categories, formats);
 
+        movie = MoviesLogic.GetAllMovies().Result.Last();
+
+        if (movie == null) return;
+
         Category.CategoryMenu(movie);
 
-        Format.ViewFormatMenu(movie);
+        Format.ViewFormatMovieMenu(movie);
 
         Console.Clear();
         Console.WriteLine("New movie added!");
         Console.WriteLine($"Title: {movie.Title}");
-        Console.WriteLine($"Release Date: {movie.ReleaseDate.Date}");
+        Console.WriteLine($"Release Date: {movie.ReleaseDate.Date.ToShortDateString()}");
         Console.WriteLine($"Director: {movie.Director}");
         Console.WriteLine($"Price: {movie.Price}");
         Console.WriteLine($"Categories: {string.Join(", ", movie.Categories.Select(c => c.Name))}");
@@ -96,7 +101,7 @@ static class Movies
         }
 
         Options.Add("Return");
-        Actions.Add(() => Menu.Start());
+        Actions.Add(() => Admin.ChangeData());
 
         MenuLogic.Question(Question, Options, Actions);
 
@@ -135,15 +140,8 @@ static class Movies
 
     public static void ChangeCategory(MovieModel movie)
     {
-        Console.Clear();
-        string Question = "What would you like to do?";
-        List<string> Options = new List<string>() { "Add a category", "Remove a category" };
-        List<Action> Actions = new List<Action>();
-
-        Actions.Add(() => CategoryLogic.AddCategory(movie));
-        Actions.Add(() => CategoryLogic.RemoveCategory(movie));
-
-        MenuLogic.Question(Question, Options, Actions);
+        CategoryLogic CL = new CategoryLogic();
+        CL.AddRemoveCategoryMovie(movie);
     }
 
     private static void ChangeTitle(MovieModel movie)
@@ -237,7 +235,7 @@ static class Movies
         List<ReviewModel> pastReviews = RL.UserPastReviews(AccountsLogic.CurrentAccount!.Id);
 
         List<ReservationModel> pastMoviesNoReview = MoviesLogic.PastMovies().FindAll(
-            m => !pastReviews.Any(r => r.MovieId == TL.GetById(m.TimeSlotId)!.MovieId));
+            m => !pastReviews.Any(r => r.MovieId == TL.GetById(m.TimeSlotId)!.Result.MovieId));
 
         Console.Clear();
 
@@ -256,8 +254,8 @@ static class Movies
         {
             try
             {
-                options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSlotId)!.MovieId)!.Title} Watched on: {pastReservation.DateTime}");
-                actions.Add(() => AddNewReview(TL.GetById(pastReservation.TimeSlotId)!.MovieId, pastReservation));
+                options.Add($"Movie: {MoviesLogic.GetById(TL.GetById(pastReservation.TimeSlotId)!.Result.MovieId)!.Result.Title} Watched on: {pastReservation.DateTime}");
+                actions.Add(() => AddNewReview(TL.GetById(pastReservation.TimeSlotId)!.Result.MovieId, pastReservation));
             }
             catch (System.Exception ex)
             {
@@ -296,12 +294,12 @@ static class Movies
     }
 
     // Questions user for new review
-    public static void AddNewReview(int MovieId, ReservationModel pastReservation)
+    public async static void AddNewReview(int MovieId, ReservationModel pastReservation)
     {
         MoviesLogic ML = new MoviesLogic();
         ReviewLogic RL = new ReviewLogic();
 
-        MovieModel Movie = ML.GetById(MovieId)!;
+        MovieModel Movie = ML.GetById(MovieId)!.Result;
 
         double rating = 0;
 
@@ -332,15 +330,12 @@ static class Movies
         string message = "";
         if (messageInput.Key == ConsoleKey.Y)
         {
-            Console.WriteLine("\nEnter your message (max 255 characters): ");
+            Console.WriteLine("\nEnter your message (max 155 characters): ");
             message = Console.ReadLine()!;
             message = ReviewLogic.CutReviewMessage(message); // cuts message to size
         }
 
-        RL.SaveNewReview(message, rating, pastReservation); // saves message to CSV
-
-        RL.UpdateMovieReviews(ML.AllMovies());
-        ML.UpdateList(Movie);
+        await RL.SaveNewReview(message, rating, pastReservation); // saves message to CSV
     }
 
     public static void UpAndComingReleases()

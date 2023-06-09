@@ -1,26 +1,30 @@
-using CsvHelper;
-using CsvHelper.Configuration;
-using CsvHelper.Configuration.Attributes;
+using Postgrest.Attributes;
+using Postgrest.Models;
 
-public class LocationModel
+[Table("locations")]
+public class LocationModel : BaseModel
 {
-    [Name("name")]
+    [PrimaryKey("id", false)]
+    public int Id { get; set; }
+
+    [Column("name")]
     public string Name { get; set; }
 
-    [Name("address")]
+    [Column("address")]
     public string Address { get; set; }
 
-    [Name("description")]
+    [Column("description")]
     public string Description { get; set; }
 
-    [Name("gmapsUrl")]
+    [Column("gmaps_url")]
     public string GmapsUrl { get; set; }
 
-    public LocationModel(string name, string description, string gmapsUrl, string address)
+    public LocationModel NewLocationModel(string name, string description, string gmapsUrl, string address)
     {
         Name = name;
         Address = address;
         Description = description;
         GmapsUrl = gmapsUrl;
+        return this;
     }
 }

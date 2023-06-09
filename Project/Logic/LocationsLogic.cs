@@ -1,25 +1,25 @@
-public static class LocationsLogic
+public class LocationsLogic
 {
-    private static List<LocationModel> _locations;
-
-    static LocationsLogic()
+    public static async Task<List<LocationModel>> GetAllLocations()
     {
-        _locations = LocationsAccess.ReadDataList();
+        return await DbLogic.GetAll<LocationModel>();
+    }
+    // pass model to update
+    public static async Task UpdateList(LocationModel location)
+    {
+        await DbLogic.UpsertItem(location);
     }
 
-    public static List<LocationModel> AllLocations()
+    public static void DeleteCategory(int LocationInt) // Deletes category from list of categories
     {
-        return _locations;
+        // account exists and is admin
+        if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
+        {
+            DbLogic.RemoveItemById<LocationModel>(LocationInt);
+        }
     }
 
-    public static void UpdateLocations()
-    {
-        _locations.OrderBy(l => l.Name);
-
-        LocationsAccess.Writer(_locations);
-    }
-
-    public static void NewLocation()
+    public async static void NewLocation()
     {
         string location = "";
         string address = "";
@@ -31,25 +31,26 @@ public static class LocationsLogic
         description = QuestionLogic.AskString("Paste the cinema description");
         gmapsUrl = QuestionLogic.AskString("Paste the google maps link");
 
-        LocationModel newLocation = new LocationModel(location, address, description, gmapsUrl);
+        LocationModel newLocation = new LocationModel();
+        newLocation.NewLocationModel(location, description, gmapsUrl, address);
 
-        _locations.Add(newLocation);
-
-        UpdateLocations();
+        await UpdateList(newLocation);
     }
 
     public static void RemoveLocation()
     {
         Console.Clear();
 
+        List<LocationModel> locations = GetAllLocations().Result;
+
         // selection menu
-        if (AllLocations().Count > 0)
+        if (locations.Count > 0)
         {
             string Question = "Which location would you like to delete?\n";
             List<string> Options = new List<string>();
             List<Action> Actions = new List<Action>();
 
-            foreach (LocationModel location in AllLocations())
+            foreach (LocationModel location in locations)
             {
                 Options.Add($"{location.Name}");
                 Actions.Add(() => LocationsLogic.Remove(location));
@@ -71,10 +72,9 @@ public static class LocationsLogic
     {
         Console.Clear();
 
-        _locations.Remove(location);
+        DbLogic.RemoveItemById<LocationModel>(location.Id);
 
         Console.WriteLine("Location has been deleted");
-        UpdateLocations();
         QuestionLogic.AskEnter();
     }
 
@@ -86,9 +86,9 @@ public static class LocationsLogic
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        foreach (LocationModel location in AllLocations())
+        foreach (LocationModel location in GetAllLocations().Result)
         {
-            Options.Add($"{location.Name}");
+            Options.Add($"{location.Name} - {location.Address}");
             Actions.Add(() => ViewLocationMenu(location));
         }
 
@@ -102,14 +102,14 @@ public static class LocationsLogic
 
     public static void ViewLocationMenu(LocationModel location)
     {
-        string Question = "What would you like to view?\n";
+        string Question = ViewLocationDetails(location);
+
+        Question += "\n\nWhat would you like to do?\n";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        Options.Add("Location on google maps");
-        Options.Add("Location details");
+        Options.Add("Open google maps");
         Actions.Add(() => ViewMapLocation(location));
-        Actions.Add(() => ViewLocationDetails(location));
 
         Options.Add("Return");
         Actions.Add(() => Contact.Start());
@@ -133,10 +133,8 @@ public static class LocationsLogic
         }
     }
 
-    private static void ViewLocationDetails(LocationModel location)
+    private static string ViewLocationDetails(LocationModel location)
     {
-        Console.Clear();
-        Console.WriteLine($"Location: {location.Name}\nAddress: {location.Address}\nDescription: {location.Description}");
-        QuestionLogic.AskEnter();
+        return $"Location: {location.Name}\nAddress: {location.Address}\nDescription: {location.Description}";
     }
 }

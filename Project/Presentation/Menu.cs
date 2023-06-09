@@ -6,9 +6,19 @@ static class Menu
     //You could edit this to show different menus depending on the user's role
     static public void Start()
     {
+        //DbAccess.GetClient();
+        bool localDb = !DbAccess.CheckClient();
+
         string Question = "Make a choice from the menu\n";
+        string Notice = "";
+
         List<string> Options = new List<string>() { };
         List<Action> Actions = new List<Action>();
+
+        if (localDb)
+        {
+            Notice = "The connection to the server failed, please try again later.\n";
+        }
 
         // Login
         if (AccountsLogic.CurrentAccount == null)
@@ -18,11 +28,11 @@ static class Menu
         }
         else // show account name
         {
-            Question = "Welcome back " + AccountsLogic.CurrentAccount.FullName + "\n" + Question;
+            Question = "Welcome back " + AccountsLogic.CurrentAccount.FirstName + "\n" + Question;
         }
 
         // Make reservation
-        if (AccountsLogic.CurrentAccount == null || !AccountsLogic.CurrentAccount.Admin)
+        if ((AccountsLogic.CurrentAccount == null || !AccountsLogic.CurrentAccount.Admin) && !localDb)
         {
             Options.Add("Make a Reservation");
             Actions.Add(() => Reservation.FilterMenu());
@@ -32,13 +42,16 @@ static class Menu
         if (AccountsLogic.CurrentAccount != null && !AccountsLogic.CurrentAccount.Admin)
         {
             Options.Add("See all reservations");
-            Actions.Add(() => ReservationLogic.MenuReservation());
+            Actions.Add(() => Reservation.MenuReservation());
 
-            Options.Add("Change a reservation");
-            Actions.Add(() => Reservation.EditReservation());
+            if (!localDb)
+            {
+                Options.Add("Change a reservation");
+                Actions.Add(() => Reservation.EditReservation());
 
-            Options.Add("Review past reservation");
-            Actions.Add(() => Movies.AddReviewMenu());
+                Options.Add("Review past reservation");
+                Actions.Add(() => Movies.AddReviewMenu());
+            }
         }
 
         // Contact
@@ -54,11 +67,14 @@ static class Menu
         if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)
         {
             Console.WriteLine($"Admin {AccountsLogic.CurrentAccount.Admin}\n");
-            Options.Add("Add data");
-            Actions.Add(() => Admin.Start());
+            if (!localDb)
+            {
+                Options.Add("Add data");
+                Actions.Add(() => Admin.Start());
 
-            Options.Add("Change data");
-            Actions.Add(() => Admin.ChangeData());
+                Options.Add("Change data");
+                Actions.Add(() => Admin.ChangeData());
+            }
 
             Options.Add("\nView user data");
             Actions.Add(() => User.SelectUser());
@@ -67,7 +83,7 @@ static class Menu
             Actions.Add(() => Movies.EditReviewsMenu());
 
             Options.Add("View all complaints");
-            Actions.Add(() => Contact.ViewAllComplaints());
+            Actions.Add(async () => await Contact.ViewAllComplaints());
 
             Options.Add("View reports");
             Actions.Add(() => Admin.LogReport());
@@ -90,9 +106,12 @@ static class Menu
         }
 
         Options.Add("\nExit app");
-        Actions.Add(() => Environment.Exit(1));
+        Actions.Add(() => Parallel.Invoke(
+            () => DbAccess.UpdateLocalWithDb().Start(),
+            () => Environment.Exit(1)
+        ));
 
-        MenuLogic.Question(Question, Options, Actions);
+        MenuLogic.Question(Question, Options, Actions, Notice: Notice);
         Menu.Start();
     }
 }

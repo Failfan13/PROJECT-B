@@ -5,19 +5,26 @@ using System.Text.Json;
 
 public static class MenuLogic
 {
-
-
-    public static int Question(string question, List<string> options, List<Action> actions = null, string BottomString = null)
+    public static int Question(string question, List<string> options, List<Action> actions = null, string BottomString = null, string Notice = null)
     {
         Console.CursorVisible = false;
         ConsoleKeyInfo key;
         int selectedOption = 0;
         do
         {
-            Console.Clear();
             Console.ResetColor();
             // start of visual
-            Console.WriteLine("Use arrow keys to navigate and press Enter to select an option:\n");
+            Console.Clear();
+
+            MenuLogic.ColorString(Notice, ConsoleColor.Yellow, newLine: true);
+  
+            Console.WriteLine("Select an option");
+            MenuLogic.ColorString("↑ → ↓ ← ",ConsoleColor.DarkBlue, false);
+            Console.Write("Keys to navigate through the menu\n");
+            MenuLogic.ColorString("Enter ",ConsoleColor.DarkBlue, false);
+            Console.Write("To confirm the selected option\n");
+            MenuLogic.ColorString("X ",ConsoleColor.DarkBlue, false);
+            Console.Write("To return to the home screen\n\n");
 
             // ask question
             Console.WriteLine(question);

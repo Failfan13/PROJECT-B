@@ -1,46 +1,46 @@
-﻿using System.Text.Json.Serialization;
+﻿using Postgrest.Attributes;
+using Postgrest.Models;
 
-
-public class AccountModel
+[Table("accounts")]
+public class AccountModel : BaseModel
 {
-    [JsonPropertyName("id")]
+    [PrimaryKey("id", false)]
     public int Id { get; set; }
 
-    [JsonPropertyName("emailAddress")]
+    [Column("first_name")]
+    public string FirstName { get; set; }
+
+    [Column("last_name")]
+    public string LastName { get; set; }
+
+    [Column("date_of_birth")]
+    public DateTime DateOfBirth { get; set; }
+
+    [Column("email_address")]
     public string EmailAddress { get; set; }
 
-    [JsonPropertyName("password")]
+    [Column("password")]
     public string Password { get; set; }
 
-    [JsonPropertyName("fullName")]
-    public string FullName { get; set; }
-  
-    [JsonPropertyName("dateofbirth")]
-    public string DateOfBirth { get; set; }
-  
-    [JsonPropertyName("admin")]
+    [Column("admin_rights")]
     public bool Admin { get; set; }
-  
-    [JsonPropertyName("adMails")]
+
+    [Column("ad_mails")]
     public bool AdMails { get; set; }
-  
-    [JsonPropertyName("adult")]
-    public bool Adult { get; set; }
-  
-    [JsonPropertyName("complaints")]
+
+    [Column("complaints")]
     public List<string> Complaints { get; set; }
 
-    public AccountModel(int id, string emailAddress, string password, string fullName, string dateofbirth)
+    public AccountModel NewAccountModel(string emailAddress, string password, string fullName, DateTime dateofbirth)
     {
-        Id = id;
         EmailAddress = emailAddress;
         Password = password;
-        FullName = fullName;
+        string[] name = fullName.Split(' ');
+        FirstName = name[0];
+        if (name.Length > 1)
+            LastName = string.Join(" ", name.Skip(1));
         DateOfBirth = dateofbirth;
-        Admin = false;
-        AdMails = false;
-        Adult = false;
-        Complaints = new List<string>();
+        return this;
     }
 }
 

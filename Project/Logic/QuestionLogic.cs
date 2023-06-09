@@ -47,7 +47,7 @@ public static class QuestionLogic
 
     public static void AskEnter()
     {
-        Console.WriteLine("Press enter to return");
-        Console.ReadLine();
+        Console.WriteLine("\nPress any key to continue");
+        Console.ReadKey();
     }
 }

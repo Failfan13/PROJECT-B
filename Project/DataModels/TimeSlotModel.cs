@@ -1,52 +1,43 @@
 using System.Text.Json.Serialization;
+using Postgrest.Attributes;
+using Postgrest.Models;
 
-public class TimeSlotModel
+[Table("time_slots")]
+public class TimeSlotModel : BaseModel
 {
-
-    [JsonPropertyName("id")]
+    [PrimaryKey("id", false)]
     public int Id { get; set; }
 
-    [JsonPropertyName("movieid")]
+    [Column("movie_id")]
     public int MovieId { get; set; }
 
-    [JsonPropertyName("start")]
+    [Column("date_time")]
     public DateTime Start { get; set; }
 
-    [JsonPropertyName("theatre")]
+    [Column("theatre")]
     public Helper Theatre { get; set; } = null!;
 
-    [JsonPropertyName("format")]
+    [Column("format")]
     public string Format { get; set; }
-    
-    [JsonPropertyName("maxseats")]
-    public int MaxSeats { get; set; }
-
-    [JsonConstructor]
-    public TimeSlotModel(int id) : this(id, 0, new DateTime(), new Helper(), "", 9) { }
-    public TimeSlotModel(int id, int movieid, DateTime start, TheatreModel theatre, string format, int maxseats) : this(id, movieid, start, new Helper(theatre.Id), format, maxseats) { }
-    public TimeSlotModel(int id, int movieid, DateTime start, Helper theatre, string format, int maxseats)
+    // [Column("maxseats")]
+    // public int Format { get; set; }
+    public TimeSlotModel NewTimeSlotModel() => NewTimeSlotModel(0, new DateTime(), new Helper(), "");
+    public TimeSlotModel NewTimeSlotModel(int movieid, DateTime start, TheatreModel theatre, string format) => NewTimeSlotModel(movieid, start, new Helper(theatre.Id), format);
+    public TimeSlotModel NewTimeSlotModel(int movieid, DateTime start, Helper theatre, string format)
     {
-        Id = id;
         MovieId = movieid;
         Start = start;
         Theatre = theatre;
         Format = format;
-        MaxSeats = maxseats;
+        return this;
     }
 
     public void Info()
     {
         MoviesLogic tempMLogic = new MoviesLogic();
-        MovieModel movie = tempMLogic.GetById(MovieId)!;
         Console.WriteLine($"Start:\t\t{Start}");
         Console.WriteLine($"Theatre:\t{Theatre}");
         Console.WriteLine($"Format:\t\t{Format}");
-        movie.Info();
-    }
-    public int NewId()
-    {
-        TimeSlotsLogic TL = new TimeSlotsLogic();
-        return TL.GetNewestId();
     }
 
     // Helps to deserialize theatre info

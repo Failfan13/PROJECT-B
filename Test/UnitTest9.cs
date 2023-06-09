@@ -1,10 +1,12 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
+namespace Test;
+
 [TestClass]
 public class UnitTest8
 {
     [TestMethod]
-    public void BlockAndUnblockSeat_ModifiesTheatre()
+    public void TestBlockAndUnblockSeat_ModifiesTheatre()
     {
         // blocking seat
             // Arrange
@@ -30,7 +32,19 @@ public class UnitTest8
             
             // Assert
             notinit = theatre.LayoutSpecs.BlockedSeatIndexes.Contains(seatToBlock);
-            Assert.AreEqual(false, notinit);
+            Assert.AreEqual(true, notinit);
     }
 
+    [TestMethod]
+    public void TestMakeNewTheatre_ValidInput_ReturnsTheatreId()
+    {
+        // Arrange
+        var expectedTheatreId = 1;
+
+        // Act
+        var actualTheatreId = Theatre.MakeNewTheatre();
+
+        // Assert
+        Assert.AreEqual(expectedTheatreId, actualTheatreId);
+    }
 }

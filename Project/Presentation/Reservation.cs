@@ -256,8 +256,7 @@ public static class Reservation
         Console.Write($"€ " + FinalPrice + (FinalPrice.ToString().Contains(".") ? "" : ",-"));
         Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {ress.Id}\n");
 
-        // Send email
-        EmailLogic EmailLogic = new EmailLogic();
+        //------ Build Email ------ //
 
         string subject = "Confirmation order Cinema";
         string body = "";
@@ -312,32 +311,13 @@ IMPORTANT
 Your order number is: {ress.Id}
 ";
 
-        if (AccountId != -1)
-        {
-            email = AccountsLogic.GetById(AccountId).EmailAddress;
-        }
-        else
-        {
-            email = UserLogin.AskEmail();
-        }
+        QuestionLogic.AskEnter();
 
-        EmailLogic.SendEmail(email, subject, body);
+        AskPrintOrEmail(AccountId, email, subject, body);
 
-        string Question = "Would you like to sign up for ad-mails?";
-        List<string> Options = new List<string>() {};
-        List<Action> Actions = new List<Action>() { };
-        Options.Add("Yes");
-        Options.Add("No");
-        Actions.Add(() => UserLogin.SignUpMails(email, reservation : body)); ShowSubscriptionConfirmation();
-        Actions.Add(() => QuestionLogic.AskEnter());
-        MenuLogic.Question(Question, Options, Actions, clearConsole : true, previousText : body);
+        AskMailSignup(AccountId);
     }
 
-    private static void ShowSubscriptionConfirmation()
-{
-    Console.Clear();
-    Console.WriteLine("You have subscribed to the ad emails.");
-}
     public static void ClearReservation(Action returnTo)
     {
         Console.Clear();
@@ -364,16 +344,72 @@ Would you still like to order for this timeslot?";
 
         MenuLogic.Question(question, options, actions);
     }
-    
-    public static void AskPrint(string body)
+
+    private static void AskPrintOrEmail(int AccountId, string email, string subject, string body)
     {
-        string Question = "Would you like to print your reservation?";
-        List<string> Options = new List<string>() { "Yes", "No" };
+        AccountsLogic AccountsLogic = new AccountsLogic();
+        EmailLogic EmailLogic = new EmailLogic();
+
+        string Question = "Would you like to print your order or receive an email?";
+        List<string> Options = new List<string>() { };
         List<Action> Actions = new List<Action>() { };
 
-        Actions.Add(() => ReservationLogic.PrintRes(body));
-        Actions.Add(() => QuestionLogic.AskEnter());
+        Options.Add("E-mail");
+        Actions.Add(() =>
+        {
+            if (AccountId != -1)
+            {
+                email = AccountsLogic.GetById(AccountId).EmailAddress;
+            }
+            else
+            {
+                email = UserLogin.AskEmail();
+            }
 
-        MenuLogic.Question(Question, Options, Actions, clearConsole : true);
+            EmailLogic.SendEmail(email, subject, body);
+        });
+        Options.Add("Print");
+        Actions.Add(async () => await ReservationLogic.PrintRes(body));
+
+        MenuLogic.Question(Question, Options, Actions);
+    }
+
+    private static void AskMailSignup(int AccountId = -1)
+    {
+        EmailLogic EmailLogic = new EmailLogic();
+        AccountsLogic AccountsLogic = new AccountsLogic();
+
+        AccountModel account = null!;
+
+        if (AccountId != -1)
+            try
+            {
+                account = AccountsLogic.GetById(AccountId)!;
+                if (!account.AdMails)
+                {
+                    return;
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+
+        string Question = "Would you like to sign up for ad-mails?";
+        List<string> Options = new List<string>() { };
+        List<Action> Actions = new List<Action>() { };
+
+        Options.Add("Yes");
+        Options.Add("No");
+        Actions.Add(() =>
+        {
+            EmailLogic.SubscribeAds(account);
+            Console.Clear();
+            Console.WriteLine("You have subscribed to the ad emails.");
+            QuestionLogic.AskEnter();
+        });
+        Actions.Add(() => QuestionLogic.AskEnter());
+        MenuLogic.Question(Question, Options, Actions);
     }
 }

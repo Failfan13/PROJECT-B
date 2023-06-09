@@ -7,22 +7,16 @@ public static class MenuLogic
 {
 
 
-    public static int Question(string question, List<string> options, List<Action> actions = null, string previousText = "" , string BottomString = null, bool clearConsole = true)
+    public static int Question(string question, List<string> options, List<Action> actions = null, string BottomString = null)
     {
         Console.CursorVisible = false;
         ConsoleKeyInfo key;
         int selectedOption = 0;
         do
         {
-
-
+            Console.Clear();
             Console.ResetColor();
             // start of visual
-            if(clearConsole)
-            {
-                Console.Clear();
-                Console.WriteLine(previousText);
-            }
             Console.WriteLine("Use arrow keys to navigate and press Enter to select an option:\n");
 
             // ask question

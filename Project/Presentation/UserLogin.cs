@@ -239,33 +239,33 @@ Thank you.";
         string body;
 
         bool corrEmail = false;
-            if (AccountsLogic.CurrentAccount == null)
+        if (AccountsLogic.CurrentAccount == null)
+        {
+            while (!corrEmail)
             {
-                while (!corrEmail)
+                if (existingEmail == "")
                 {
-                    if (existingEmail == "")
-                    {
-                        Console.WriteLine("Please enter your email address");
-                        email = Console.ReadLine()!;
-                    }
-                    else
-                    {
-                        email = existingEmail;
-                    }
-                    corrEmail = EmailLogic.ValidateEmail(email);
-                    Console.Clear();
-                    if (corrEmail == false) Console.WriteLine("Invalid email address");
+                    Console.WriteLine("Please enter your email address");
+                    email = Console.ReadLine()!;
                 }
+                else
+                {
+                    email = existingEmail;
+                }
+                corrEmail = EmailLogic.ValidateEmail(email);
+                Console.Clear();
+                if (corrEmail == false) Console.WriteLine("Invalid email address");
             }
-            else
-            {
-                var account = AccountsLogic.GetById(AccountsLogic.CurrentAccount.Id);
-                account.AdMails = true;
-                email = account.EmailAddress;
-            }
+        }
+        else
+        {
+            var account = AccountsLogic.GetById(AccountsLogic.CurrentAccount.Id);
+            account.AdMails = true;
+            email = account.EmailAddress;
+        }
 
-            subject = "Subscribed to ad-mails";
-            body = @$"Hello {(AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FullName : "Guest")},
+        subject = "Subscribed to ad-mails";
+        body = @$"Hello {(AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FullName : "Guest")},
     
                 Thank you for subscribing to the cinema ads.
                 
@@ -273,10 +273,7 @@ Thank you.";
                 
                 To unsubscribe from these emails, please log into your account and turn off the add option.";
 
-            EmailLogic.SendEmail(email, subject, body);
-
-        
-        Reservation.AskPrint(reservation);
+        EmailLogic.SendEmail(email, subject, body);
     }
     public static string AskEmail()
     {

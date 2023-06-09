@@ -47,13 +47,13 @@ public static class Reservation
                     if (reservationMovie != null && reservationDate != null)
                         Options.Add($"{reservationDate} - {reservationMovie.Title}");
                         Actions.Add(() => Menu.Start());                        
-                        Options.Add("Return");
-                        Actions.Add(() => Menu.Start());
 
                 }
                 catch { }
             }
         }
+        Options.Add("Return");
+        Actions.Add(() => Menu.Start());
 
         awnser = MenuLogic.Question(Question,Options,Actions);
         // Set current reservation field

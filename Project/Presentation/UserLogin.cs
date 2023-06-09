@@ -30,7 +30,7 @@ e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}
             Options.Add("Login");
             Actions.Add(() => Login());
             Options.Add("Create new account");
-            Actions.Add(async () => await CreateNewUser());
+            Actions.Add(() => CreateNewUser());
         }
         else
         {
@@ -55,7 +55,7 @@ e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}
         Start();
     }
 
-    public async static Task CreateNewUser()
+    public static void CreateNewUser()
     {
         EmailLogic EmailLogic = new EmailLogic();
         AccountsLogic AccountsLogic = new AccountsLogic();
@@ -265,15 +265,16 @@ Thank you.";
                 Console.Clear();
                 if (corrEmail == false) Console.WriteLine("Invalid email address");
             }
-            else
-            {
-                AccountsLogic.CurrentAccount.AdMails = true;
-                await DbLogic.UpdateItem<AccountModel>(AccountsLogic.CurrentAccount);
-                email = AccountsLogic.CurrentAccount.EmailAddress;
-            }
+        }
+        else
+        {
+            AccountsLogic.CurrentAccount.AdMails = true;
+            await DbLogic.UpdateItem<AccountModel>(AccountsLogic.CurrentAccount);
+            email = AccountsLogic.CurrentAccount.EmailAddress;
+        }
 
-            subject = "Subscribed to ad-mails";
-            body = @$"Hello {(AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FirstName : "Guest")},
+        subject = "Subscribed to ad-mails";
+        body = @$"Hello {(AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FirstName : "Guest")},
     
                 Thank you for subscribing to the cinema ads.
                 
@@ -281,12 +282,8 @@ Thank you.";
                 
                 To unsubscribe from these emails, please log into your account and turn off the add option.";
 
-                You will receive deals and information about upcomming movies with this subscription.
+        EmailLogic.SendEmail(email, subject, body);
 
-                To unsubscribe from these emails, please log into your account and turn off the add option.";
-
-            EmailLogic.SendEmail(email, subject, body);
-        }
     }
 
     public static string AskEmail()

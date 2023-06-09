@@ -372,7 +372,7 @@ Would you still like to order for this timeslot?";
         {
             if (AccountId != -1)
             {
-                email = AccountsLogic.GetById(AccountId).EmailAddress;
+                email = AccountsLogic.GetById(AccountId).Result.EmailAddress;
             }
             else
             {
@@ -397,7 +397,7 @@ Would you still like to order for this timeslot?";
         if (AccountId != -1)
             try
             {
-                account = AccountsLogic.GetById(AccountId)!;
+                account = AccountsLogic.GetById(AccountId)!.Result;
                 if (!account.AdMails)
                 {
                     return;
@@ -423,6 +423,7 @@ Would you still like to order for this timeslot?";
             QuestionLogic.AskEnter();
         });
         Actions.Add(() => QuestionLogic.AskEnter());
+    }
 
     public static void MenuReservation()
     {

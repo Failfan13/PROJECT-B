@@ -12,8 +12,6 @@ public static class MenuLogic
         int selectedOption = 0;
         do
         {
-
-
             Console.ResetColor();
             // start of visual
             Console.Clear();

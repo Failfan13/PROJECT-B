@@ -268,8 +268,7 @@ public static class Reservation
         Console.Write($"€ " + FinalPrice + (FinalPrice.ToString().Contains(".") ? "" : ",-"));
         Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {ress.Id}\n");
 
-        // Send email
-        EmailLogic EmailLogic = new EmailLogic();
+        //------ Build Email ------ //
 
         string subject = "Confirmation order Cinema";
         string body = "";
@@ -324,29 +323,13 @@ IMPORTANT
 Your order number is: {ress.Id}
 ";
 
-        if (AccountId != -1)
-        {
-            try
-            {
-                var account = AccountsLogic.GetById(AccountId)!.Result!;
-                email = account.EmailAddress;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-        else
-        {
-            email = UserLogin.AskEmail();
-        }
-
-        EmailLogic.SendEmail(email, subject, body);
-
-        UserLogin.SignUpMails(email);
-
         QuestionLogic.AskEnter();
+
+        AskPrintOrEmail(AccountId, email, subject, body);
+
+        AskMailSignup(AccountId);
     }
+
     public static void ClearReservation(Action returnTo)
     {
         Console.Clear();
@@ -374,6 +357,73 @@ Would you still like to order for this timeslot?";
         MenuLogic.Question(question, options, actions);
     }
 
+
+    private static void AskPrintOrEmail(int AccountId, string email, string subject, string body)
+    {
+        AccountsLogic AccountsLogic = new AccountsLogic();
+        EmailLogic EmailLogic = new EmailLogic();
+
+        string Question = "Would you like to print your order or receive an email?";
+        List<string> Options = new List<string>() { };
+        List<Action> Actions = new List<Action>() { };
+
+        Options.Add("E-mail");
+        Actions.Add(() =>
+        {
+            if (AccountId != -1)
+            {
+                email = AccountsLogic.GetById(AccountId).EmailAddress;
+            }
+            else
+            {
+                email = UserLogin.AskEmail();
+            }
+
+            EmailLogic.SendEmail(email, subject, body);
+        });
+        Options.Add("Print");
+        Actions.Add(async () => await ReservationLogic.PrintRes(body));
+
+        MenuLogic.Question(Question, Options, Actions);
+    }
+
+    private static void AskMailSignup(int AccountId = -1)
+    {
+        EmailLogic EmailLogic = new EmailLogic();
+        AccountsLogic AccountsLogic = new AccountsLogic();
+
+        AccountModel account = null!;
+
+        if (AccountId != -1)
+            try
+            {
+                account = AccountsLogic.GetById(AccountId)!;
+                if (!account.AdMails)
+                {
+                    return;
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+
+        string Question = "Would you like to sign up for ad-mails?";
+        List<string> Options = new List<string>() { };
+        List<Action> Actions = new List<Action>() { };
+
+        Options.Add("Yes");
+        Options.Add("No");
+        Actions.Add(() =>
+        {
+            EmailLogic.SubscribeAds(account);
+            Console.Clear();
+            Console.WriteLine("You have subscribed to the ad emails.");
+            QuestionLogic.AskEnter();
+        });
+        Actions.Add(() => QuestionLogic.AskEnter());
+
     public static void MenuReservation()
     {
         ReservationLogic ReservationLogic = new ReservationLogic();
@@ -392,6 +442,7 @@ Would you still like to order for this timeslot?";
         // return
         Options.Add("Return");
         Actions.Add(() => Menu.Start());
+
         MenuLogic.Question(Question, Options, Actions);
     }
 }

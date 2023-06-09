@@ -140,4 +140,13 @@ Project-B Team-E";
 
         return new Tuple<string, string>(subject, body);
     }
+
+    public void SubscribeAds(AccountModel accountId)
+    {
+        AccountsLogic AccountsLogic = new AccountsLogic();
+
+        accountId.AdMails = true;
+
+        AccountsLogic.UpdateList(accountId);
+    }
 }

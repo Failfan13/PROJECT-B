@@ -324,4 +324,15 @@ public class ReservationLogic
         Console.WriteLine("\nPress any key to return");
         Console.ReadKey();
     }
+
+    public async static Task PrintRes(string body)
+    {
+        Console.Clear();
+        Console.WriteLine("Printing your reservation. . . .\n");
+
+        QuestionLogic.AskEnter();
+
+        await PrintRessAccess.WriteReservation(body).ConfigureAwait(false);
+
+    }
 }

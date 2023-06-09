@@ -248,28 +248,22 @@ Thank you.";
         string body;
 
         bool corrEmail = false;
-
-        Console.WriteLine("Would you like to sign up for ad-mails? (y/n)");
-        var answer = Console.ReadLine();
-        if (answer == "y")
+        if (AccountsLogic.CurrentAccount == null)
         {
-            if (AccountsLogic.CurrentAccount == null)
+            while (!corrEmail)
             {
-                while (!corrEmail)
+                if (existingEmail == "")
                 {
-                    if (existingEmail == "")
-                    {
-                        Console.WriteLine("Please enter your email address");
-                        email = Console.ReadLine()!;
-                    }
-                    else
-                    {
-                        email = existingEmail;
-                    }
-                    corrEmail = EmailLogic.ValidateEmail(email);
-                    Console.Clear();
-                    if (corrEmail == false) Console.WriteLine("Invalid email address");
+                    Console.WriteLine("Please enter your email address");
+                    email = Console.ReadLine()!;
                 }
+                else
+                {
+                    email = existingEmail;
+                }
+                corrEmail = EmailLogic.ValidateEmail(email);
+                Console.Clear();
+                if (corrEmail == false) Console.WriteLine("Invalid email address");
             }
             else
             {
@@ -281,11 +275,15 @@ Thank you.";
             subject = "Subscribed to ad-mails";
             body = @$"Hello {(AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FirstName : "Guest")},
     
-Thank you for subscribing to the cinema ads.
+                Thank you for subscribing to the cinema ads.
+                
+                You will receive deals and information about upcomming movies with this subscription.
+                
+                To unsubscribe from these emails, please log into your account and turn off the add option.";
 
-You will receive deals and information about upcomming movies with this subscription.
+                You will receive deals and information about upcomming movies with this subscription.
 
-To unsubscribe from these emails, please log into your account and turn off the add option.";
+                To unsubscribe from these emails, please log into your account and turn off the add option.";
 
             EmailLogic.SendEmail(email, subject, body);
         }

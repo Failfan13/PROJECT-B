@@ -229,7 +229,7 @@ Thank you.";
         Start();
     }
 
-    public static void SignUpMails(string existingEmail = "")
+    public static void SignUpMails(string existingEmail = "", string reservation = "")
     {
         EmailLogic EmailLogic = new EmailLogic();
         AccountsLogic AccountsLogic = new AccountsLogic();
@@ -239,11 +239,6 @@ Thank you.";
         string body;
 
         bool corrEmail = false;
-
-        Console.WriteLine("Would you like to sign up for ad-mails? (y/n)");
-        var answer = Console.ReadLine();
-        if (answer == "y")
-        {
             if (AccountsLogic.CurrentAccount == null)
             {
                 while (!corrEmail)
@@ -272,15 +267,16 @@ Thank you.";
             subject = "Subscribed to ad-mails";
             body = @$"Hello {(AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FullName : "Guest")},
     
-Thank you for subscribing to the cinema ads.
-
-You will receive deals and information about upcomming movies with this subscription.
-
-To unsubscribe from these emails, please log into your account and turn off the add option.";
+                Thank you for subscribing to the cinema ads.
+                
+                You will receive deals and information about upcomming movies with this subscription.
+                
+                To unsubscribe from these emails, please log into your account and turn off the add option.";
 
             EmailLogic.SendEmail(email, subject, body);
-        }
-        return;
+
+        
+        Reservation.AskPrint(reservation);
     }
     public static string AskEmail()
     {

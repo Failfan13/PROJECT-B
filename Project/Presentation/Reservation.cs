@@ -323,10 +323,21 @@ Your order number is: {ress.Id}
 
         EmailLogic.SendEmail(email, subject, body);
 
-        UserLogin.SignUpMails(email);
-
-        QuestionLogic.AskEnter();
+        string Question = "Would you like to sign up for ad-mails?";
+        List<string> Options = new List<string>() {};
+        List<Action> Actions = new List<Action>() { };
+        Options.Add("Yes");
+        Options.Add("No");
+        Actions.Add(() => UserLogin.SignUpMails(email, reservation : body)); ShowSubscriptionConfirmation();
+        Actions.Add(() => QuestionLogic.AskEnter());
+        MenuLogic.Question(Question, Options, Actions, clearConsole : true, previousText : body);
     }
+
+    private static void ShowSubscriptionConfirmation()
+{
+    Console.Clear();
+    Console.WriteLine("You have subscribed to the ad emails.");
+}
     public static void ClearReservation(Action returnTo)
     {
         Console.Clear();
@@ -352,5 +363,17 @@ Would you still like to order for this timeslot?";
         actions.Add(() => FilterMenu());
 
         MenuLogic.Question(question, options, actions);
+    }
+    
+    public static void AskPrint(string body)
+    {
+        string Question = "Would you like to print your reservation?";
+        List<string> Options = new List<string>() { "Yes", "No" };
+        List<Action> Actions = new List<Action>() { };
+
+        Actions.Add(() => ReservationLogic.PrintRes(body));
+        Actions.Add(() => QuestionLogic.AskEnter());
+
+        MenuLogic.Question(Question, Options, Actions, clearConsole : true);
     }
 }

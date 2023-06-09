@@ -354,4 +354,19 @@ public class ReservationLogic
         Console.WriteLine("\nPress any key to return");
         Console.ReadKey();      
     }
+
+    public static void PrintRes(string body)
+    {
+    Console.Clear();
+    Console.WriteLine("Printing your reservation. . . .\n");
+    string[] lines = body.Split('\n');
+
+    foreach (string line in lines)
+    {
+        Console.WriteLine(line);
+        Thread.Sleep(250);
+    }
+        Console.WriteLine("\nPress any key to return");
+        Console.ReadKey();
+    }
 }

@@ -23,21 +23,24 @@ static class TimeSlots
         }
         else
         {
-            string Question = $"Availible timeslots for {ML.GetById(movieid)?.Result.Title}";
+            string Question = $"Available timeslots for {ML.GetById(movieid)?.Result.Title}";
             List<string> Options = new List<string>();
             List<Action> Actions = new List<Action>();
 
             foreach (TimeSlotModel time in tsms)
             {
-                if (time.Format != "" && time.Format != "standard")
+                if (time.Start > DateTime.Now) // Only consider future time slots
                 {
-                    Options.Add($"{time.Start} -Type : {time.Format}");
-                    Actions.Add(() => Reservation.FormatPrompt(() => Theatre.SelectSeats(time, IsEdited)));
-                }
-                else
-                {
-                    Options.Add($"{time.Start}");
-                    Actions.Add(() => Theatre.SelectSeats(time, IsEdited));
+                    if (time.Format != "" && time.Format != "standard")
+                    {
+                        Options.Add($"{time.Start} - Type: {time.Format}");
+                        Actions.Add(() => Reservation.FormatPrompt(() => Theatre.SelectSeats(time, IsEdited)));
+                    }
+                    else
+                    {
+                        Options.Add($"{time.Start}");
+                        Actions.Add(() => Theatre.SelectSeats(time, IsEdited));
+                    }
                 }
             }
 

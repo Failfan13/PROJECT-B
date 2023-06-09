@@ -5,9 +5,7 @@ using System.Text.Json;
 
 public static class MenuLogic
 {
-
-
-    public static int Question(string question, List<string> options, List<Action> actions = null, string BottomString = null)
+    public static int Question(string question, List<string> options, List<Action> actions = null, string BottomString = null, string Notice = null)
     {
         Console.CursorVisible = false;
         ConsoleKeyInfo key;
@@ -19,6 +17,12 @@ public static class MenuLogic
             Console.ResetColor();
             // start of visual
             Console.Clear();
+
+            // notice affecting program
+
+            MenuLogic.ColorString(Notice, ConsoleColor.Yellow, newLine: true);
+
+            // instructions
             Console.WriteLine("Use arrow keys to navigate and press Enter to select an option:\n");
 
             // ask question

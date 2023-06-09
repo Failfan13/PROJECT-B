@@ -1,83 +1,78 @@
 using System.Text.Json.Serialization;
+using System.Text.Json;
+using Postgrest.Attributes;
+using Postgrest.Models;
 
-
-public class MovieModel
+// [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+[Table("movies")]
+public class MovieModel : BaseModel
 {
-    [JsonPropertyName("id")]
+    [PrimaryKey("id", false)]
     public int Id { get; set; }
 
-    [JsonPropertyName("title")]
+    [Column("title")]
     public string Title { get; set; }
 
-    [JsonPropertyName("release_date")]
+    [Column("release_date")]
     public DateTime ReleaseDate { get; set; }
 
-    [JsonPropertyName("director")]
+    [Column("director")]
     public string Director { get; set; }
 
-    [JsonPropertyName("description")]
+    [Column("description")]
     public string Description { get; set; }
 
-    [JsonPropertyName("duration")]
+    [Column("duration")]
     public int Duration { get; set; }
 
-    [JsonPropertyName("price")]
+    [Column("price")]
     public double Price { get; set; }
 
-    [JsonPropertyName("categories")]
+    [Column("categories")]
     public List<CategoryModel> Categories { get; set; }
 
-    [JsonPropertyName("formats")]
-    private List<string>? _formats;
-    public List<string> Formats
-    {
-        get => _formats!;
-        set
-        {
-            if (!value.Contains("standard")) value.Add("standard");
-            _formats = value;
-        }
-    }
+    [Column("formats")]
+    public List<string> Formats { get; set; }
 
-    [JsonPropertyName("followers")]
+    [Column("followers")]
     public List<int> Followers { get; set; }
 
-    [JsonPropertyName("reviews")]
+    [Column("ads")]
+    public bool Ads { get; set; }
+
+    [Column("reviews")]
     public ReviewHelper Reviews { get; set; }
 
-    [JsonPropertyName("ads")]
-    public bool Ads { get; set; } = false;
-
-    [JsonConstructor]
-    public MovieModel(int id, string title, DateTime releaseDate, string director, string description,
-        int duration, double price, List<CategoryModel> categories, List<string> formats)
+    public MovieModel NewMovieModel(string title, DateTime releaseDate, string director, string description,
+        int duration, double price)
     {
-        Id = id;
         Title = title;
         ReleaseDate = releaseDate;
         Director = director;
         Description = description;
         Duration = duration;
         Price = price;
-        Categories = categories;
-        Formats = formats;
+        Ads = false;
+        Categories = new List<CategoryModel>();
+        Formats = new List<string>();
         Followers = new List<int>();
         Reviews = new ReviewHelper();
+        return this;
     }
 
     public class ReviewHelper
     {
-        [JsonPropertyName("amount")]
-        public int Amount { get; set; }
+        [JsonPropertyName("ReviewAmount")]
+        public int ReviewAmount { get; set; }
 
-        [JsonPropertyName("stars")]
-        public double Stars { get; set; }
+        [JsonPropertyName("ReviewStars")]
+        public double ReviewStars { get; set; }
 
         [JsonConstructor]
-        public ReviewHelper() // default constructor
+        public ReviewHelper()
         {
-            Amount = 0;
-            Stars = 0;
+            ReviewAmount = 0;
+            ReviewStars = 0;
         }
     }
 
@@ -107,7 +102,3 @@ public class MovieModel
         Console.WriteLine($"Formats:   \t{string.Join(", ", Formats)}\n");
     }
 }
-
-
-
-

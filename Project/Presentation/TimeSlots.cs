@@ -6,7 +6,7 @@ static class TimeSlots
     public static void ShowAllTimeSlotsForMovie(int movieid, bool IsEdited = false)
     {
         TimeSlotsLogic timeSlotsLogic = new TimeSlotsLogic();
-        List<TimeSlotModel> tsms = timeSlotsLogic.GetByMovieId(movieid)!;
+        List<TimeSlotModel> tsms = timeSlotsLogic.GetTimeslotByMovieId(movieid)!;
         MoviesLogic ML = new MoviesLogic();
         TheatreLogic TL = new TheatreLogic();
 
@@ -14,7 +14,6 @@ static class TimeSlots
         {
             tsms = tsms.FindAll(d => d.Start.Date == Filter.AppliedFilters.ReleaseDate.Date);
         }
-
 
         Console.Clear();
         if (tsms.Count == 0) // Movie exists but there is no timeslot for it
@@ -24,7 +23,7 @@ static class TimeSlots
         }
         else
         {
-            string Question = $"Availible timeslots for {ML.GetById(movieid)?.Title}";
+            string Question = $"Availible timeslots for {ML.GetById(movieid)?.Result.Title}";
             List<string> Options = new List<string>();
             List<Action> Actions = new List<Action>();
 
@@ -50,7 +49,7 @@ static class TimeSlots
     {
         TimeSlotsLogic timeSlotsLogic = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
-        List<TimeSlotModel> tsms = timeSlotsLogic.GetByMovieId(movieid)!;
+        List<TimeSlotModel> tsms = timeSlotsLogic.GetTimeslotByMovieId(movieid)!;
 
         Console.Clear();
         if (tsms.Count == 0) // Movie exists but there is no timeslot for it
@@ -60,7 +59,7 @@ static class TimeSlots
         }
         else
         {
-            string Question = $"Availible timeslots for {ML.GetById(movieid)?.Title}";
+            string Question = $"Availible timeslots for {ML.GetById(movieid)?.Result.Title}";
             List<string> Options = new List<string>();
             List<Action> Actions = new List<Action>();
 
@@ -75,14 +74,14 @@ static class TimeSlots
         return null;
     }
 
-    public static void NewTimeSlot(int movieId, bool IsEdited = false)
+    public async static Task NewTimeSlot(int movieId, bool IsEdited = false)
     {
         TimeSlotsLogic TimeSlotsLogic = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
         TheatreLogic TL = new TheatreLogic();
-
         // make new timeslot
-        TimeSlotModel TM = new TimeSlotModel(TimeSlotsLogic.GetNewestId());
+        TimeSlotModel TM = new TimeSlotModel();
+        TM = TM.NewTimeSlotModel();
         // Get room to add
         int newTheatreId = Theatre.WhatTheatre();
 
@@ -91,32 +90,23 @@ static class TimeSlots
 
         Console.Clear();
 
-        TimeSlotStartTime(TM, newTimeSlot: true);
-        Console.WriteLine("Would you like to change the seat layout? (y/n)");
-        if (Console.ReadKey().KeyChar == 'y')
-        {
-            TM.Theatre.TheatreId = TL.DupeTheatreToNew(newTheatreId);
-            if (TL.AllTheatres().Any(t => t.Id == TM.Theatre.TheatreId))
-            {
-                TL.ShowSeats(TL.GetById(TM.Theatre.TheatreId)!);
-            }
-        }
+        await TimeSlotStartTime(TM, newTimeSlot: true);
 
         Console.WriteLine("\nWould you like to add a new format? (y/n)");
         if (Console.ReadKey().KeyChar == 'y')
         {
-            TimeSlotsLogic.UpdateList(TM);
-            Format.ViewFormatMenu(ML.GetById(TM.MovieId)!, TM);
+            //TimeSlotsLogic.UpdateList(TM);
+            Format.ViewFormatTimeslotMenu(ML.GetById(TM.MovieId)!.Result, TM);
         }
 
-        TimeSlotsLogic.UpdateList(TM);
+        await TimeSlotsLogic.NewTimeSlot(TM);
     }
 
-    public static void WhatMovieTimeSlot(bool isEdited = false)
+    public static void WhatMovieTimeSlot(bool IsEdited = false)
     {
         var movies = new MoviesLogic().AllMovies();
 
-        if (isEdited)
+        if (IsEdited)
         {
             movies = new MoviesLogic().AllMovies(true);
         }
@@ -128,12 +118,13 @@ static class TimeSlots
         foreach (MovieModel movie in movies)
         {
             Movies.Add(movie.Title);
-            if (isEdited) Actions.Add(() => TimeSlots.EditTimeSlot(movie.Id, false));
-            else Actions.Add(() => TimeSlots.NewTimeSlot(movie.Id));
+            if (IsEdited) Actions.Add(() => TimeSlots.EditTimeSlot(movie.Id, false));
+            else Actions.Add(async () => await TimeSlots.NewTimeSlot(movie.Id).ConfigureAwait(false));
         }
 
         Movies.Add("Return");
-        Actions.Add(() => Admin.Start());
+        if (IsEdited) Actions.Add(() => Admin.ChangeData());
+        else Actions.Add(() => Admin.Start());
 
         MenuLogic.Question(Question, Movies, Actions);
     }
@@ -142,7 +133,7 @@ static class TimeSlots
     {
         TimeSlotsLogic TimeSlotsLogic = new TimeSlotsLogic();
         MoviesLogic ML = new MoviesLogic();
-        List<TimeSlotModel> tsms = TimeSlotsLogic.GetByMovieId(movieid)!;
+        List<TimeSlotModel> tsms = TimeSlotsLogic.GetTimeslotByMovieId(movieid)!;
         TimeSlotModel tsm = null!;
 
         string Question = "What TimeSlot do you want to edit?";
@@ -156,7 +147,7 @@ static class TimeSlots
         }
 
         Options.Add("Add new TimeSlot");
-        Actions.Add(() => NewTimeSlot(movieid, IsEdited));
+        Actions.Add(async () => await NewTimeSlot(movieid, IsEdited).ConfigureAwait(false));
 
         Options.Add("Return");
         Actions.Add(() => WhatMovieTimeSlot());
@@ -175,25 +166,25 @@ static class TimeSlots
         List<Action> Actions = new List<Action>();
 
         Options.Add("Change start time");
-        Actions.Add(() => TimeSlotStartTime(tsm, () => EditTimeSlotChangeMenu(tsm)));
-        // Add remove seat from theatre & reservation
-        // Add seat to theatre & reservation
+        Actions.Add(async () => await TimeSlotStartTime(tsm, () => EditTimeSlotChangeMenu(tsm)));
+
         Options.Add("Change view format");
         Actions.Add(() => Format.ChangeFormats(tsm, () => EditTimeSlotChangeMenu(tsm)));
 
-        Options.Add("Change maximum seats per reservation");
-        Actions.Add(() => ChangeMaxSeats(tsm));
+        // Options.Add("Change maximum seats per reservation");
+        // Actions.Add(() => ChangeMaxSeats(tsm));
 
         Options.Add("Return");
         Actions.Add(() => Parallel.Invoke(
             //() => TheatreLogic.UpdateList(TheatreLogic.GetById(tsm.Theatre.TheatreId)!),
-            () => TimeSlotsLogic.UpdateList(tsm)
+            async () => await TimeSlotsLogic.UpdateList(tsm).ConfigureAwait(false),
+            () => WhatMovieTimeSlot()
         ));
 
         MenuLogic.Question(Question, Options, Actions);
     }
 
-    private static void TimeSlotStartTime(TimeSlotModel tsm, Action returnTo = null!, bool newTimeSlot = false)
+    private async static Task TimeSlotStartTime(TimeSlotModel tsm, Action returnTo = null!, bool newTimeSlot = false)
     {
         TimeSlotsLogic TimeSlotsLogic = new TimeSlotsLogic();
         tsm.Start = DateTime.MinValue;
@@ -219,23 +210,23 @@ static class TimeSlots
 
         if (!newTimeSlot)
         {
-            TimeSlotsLogic.UpdateList(tsm);
+            await TimeSlotsLogic.UpdateList(tsm).ConfigureAwait(false);
         }
 
         if (returnTo != null) returnTo();
     }
-    static public void ChangeMaxSeats(TimeSlotModel tsm)
-    {
-        TimeSlotsLogic TL = new();
-        double max = QuestionLogic.AskNumber("What will be the new maximum bookable seats in 1 reservation?");
-        int _max =Convert.ToInt32(max);
-        if (_max <= 1)
-        {
-            _max = 1;
+    // static public void ChangeMaxSeats(TimeSlotModel tsm)
+    // {
+    //     TimeSlotsLogic TL = new();
+    //     double max = QuestionLogic.AskNumber("What will be the new maximum bookable seats in 1 reservation?");
+    //     int _max =Convert.ToInt32(max);
+    //     if (_max <= 1)
+    //     {
+    //         _max = 1;
 
-        }
-        TL.ChangeMaxSeats(tsm, _max);
-        QuestionLogic.AskEnter();
-        Admin.ChangeData();
-    }
+    //     }
+    //     TL.ChangeMaxSeats(tsm, _max);
+    //     QuestionLogic.AskEnter();
+    //     Admin.ChangeData();
+    // }
 }

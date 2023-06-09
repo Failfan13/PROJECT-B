@@ -4,68 +4,37 @@ using System.IO;
 using System.Text.Json;
 public class PromoLogic
 {
-    private List<PromoModel> _promos;
-
-    //Static properties are shared across all instances of the class
-    //This can be used to get the current logged in account from anywhere in the program
-    //private set, so this can only be set by the class itself
-
-    public PromoLogic()
+    public async Task<List<PromoModel>> GetAllPromos()
     {
-        _promos = PromoAccess.LoadAll();
+        return await DbLogic.GetAll<PromoModel>();
+    }
+    // pass model to update
+    public async Task UpdateList(PromoModel promo)
+    {
+        await DbLogic.UpdateItem(promo);
     }
 
-    public void UpdateList(PromoModel Promo)
+    public async Task UpsertList(PromoModel promo)
     {
-        //Find if there is already an model with the same id
-        int index = _promos.FindIndex(s => s.Id == Promo.Id);
-
-        if (index != -1)
-        {
-            //update existing model
-            _promos[index] = Promo;
-            Logger.LogDataChange<PromoModel>(Promo.Id, "Updated");
-        }
-        else
-        {
-            //add new model
-            _promos.Add(Promo);
-            Logger.LogDataChange<PromoModel>(Promo.Id, "Added");
-        }
-        PromoAccess.WriteAll(_promos);
+        await DbLogic.UpsertItem(promo);
     }
 
-    public PromoModel? GetById(int id)
+    public async Task<PromoModel>? GetById(int id)
     {
-        return _promos.Find(i => i.Id == id);
-    }
-    public int GetNewestId()
-    {
-        try
-        {
-            return (_promos.OrderByDescending(item => item.Id).First().Id) + 1;
-        }
-        catch (System.Exception)
-        {
-            return 1;
-        }
+        return await DbLogic.GetById<PromoModel>(id);
     }
 
-    public int GetPromoId(string code)
+    public async Task UpdateMovie(PromoModel promo) //Adds or changes category to list of categories
     {
-        return _promos.FindIndex(i => i.Code == code) + 2;
-    }
-
-    public List<PromoModel> AllPromos()
-    {
-        return _promos;
+        await UpdateList(promo);
     }
 
     public PromoModel NewPromo(string code)
     {
         code = code.Replace(" ", "");
-        PromoModel newPromo = new PromoModel(GetNewestId(), code);
-        UpdateList(newPromo);
+        PromoModel newPromo = new PromoModel();
+        newPromo = newPromo.NewPromoModel(code);
+        newPromo = DbLogic.InsertItem<PromoModel>(newPromo).Result;
         return newPromo;
     }
 
@@ -75,35 +44,34 @@ public class PromoLogic
         return ogPrice - discount;
     }
 
-    public void RemovePromo(string code)
+    public async void TurnPromo(int id)
     {
-        PromoModel PromoModel = GetById(GetPromoId(code));
-        int index = _promos.FindIndex(i => i.Code == code);
-        _promos.RemoveAt(index);
-        PromoAccess.WriteAll(_promos);
+        PromoModel promo = await GetById(id)!;
+        promo.Active = !promo.Active;
+        await UpdateList(promo);
     }
 
-    public void TurnPromo(string code)
+    public PromoModel GetPromo(string code)
     {
-        int index = _promos.FindIndex(i => i.Code == code);
-        _promos[index].Active = !_promos[index].Active;
-        UpdateList(_promos[index]);
+        return GetAllPromos().Result.Find(i => i.Code == code)!;
+    }
+
+    public bool GetPromo(string code, out PromoModel promoModel)
+    {
+        promoModel = GetAllPromos().Result.Find(i => i.Code == code)!;
+        if (promoModel == null) return false;
+        return true;
     }
 
     public bool FindPromo(string code)
     {
-        return _promos.Exists(i => i.Code == code);
+        return GetAllPromos().Result.Any(i => i.Code == code);
     }
 
     public bool VerifyCode(string code)
     {
-        if (!FindPromo(code))
+        if (!FindPromo(code) && code.Length > 4 && code.Length <= 10)
         {
-            if (code.Length <= 4 || code.Length > 10)
-            {
-                return false;
-            }
-
             return true;
         }
 

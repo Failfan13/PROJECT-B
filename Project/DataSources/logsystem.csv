@@ -28,10 +28,4 @@ timestamp,action,user_id
 2023-05-12 15:08:23,Logged in,3
 2023-05-12 15:08:47,Logged in,3
 2023-05-12 15:41:34,Logged in,3
-2023-05-25 13:10:55,Logged in,3
-2023-05-25 13:12:48,Logged out,
-2023-05-25 13:13:11,Logged in,1
-2023-05-25 13:15:18,Logged out,
-2023-05-25 13:15:25,Logged in,3
-2023-05-25 13:16:50,Logged in,3
-2023-05-25 13:17:28,Logged in,3
+2023-05-18 15:29:37,Logged in,5

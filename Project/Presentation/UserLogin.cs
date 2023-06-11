@@ -300,8 +300,15 @@ Thank you.";
                 Email = Console.ReadLine()!;
                 CorrectEmail = EmailLogic.ValidateEmail(Email);
                 Console.Clear();
+
                 if (CorrectEmail == false) Console.WriteLine("Invalid email address");
+                else
+                {
+                    GuestAdsLogic GuestAdsLogic = new GuestAdsLogic();
+                    GuestAdsLogic.NewguestAd(Email);
+                }
             }
+
             return Email;
         }
         Email = AccountsLogic.CurrentAccount.EmailAddress;

@@ -11,12 +11,12 @@ public class GuestAdModel : BaseModel
     public DateTime dateTime { get; set; }
 
     [Column("email")]
-    public string Email { get; set; }
+    public string EmailAddress { get; set; }
 
     public GuestAdModel NewGuestAdModel(string email)
     {
         dateTime = DateTime.Now;
-        Email = email;
+        EmailAddress = email;
         return this;
     }
 }

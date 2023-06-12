@@ -333,7 +333,7 @@ Press [ ");
                         }
                         else if (selectedSeats.Count >= 8) // check if more then 9 selected
                         {
-                            MaximumSeats();
+                            MaximumSeats(timeSlot.MaxSeats);
                         }
                         else if (!selectedSeats.Contains(selectedSeat) && !reservedSeats.Exists(s => s.Id == selectedSeat))
                         {
@@ -587,10 +587,10 @@ Press [ ");
         return seatTypes;
     }
 
-    private void MaximumSeats()
+    private void MaximumSeats(int Max)
     {
         Console.Clear();
-        Console.WriteLine($@"There is a maximum of 9 seats per account.");
+        Console.WriteLine($@"There is a maximum of {Max} seats per account.");
         MenuLogic.ColorString(">>", newLine: false);
         Console.WriteLine(" Please contact the support team for more information.");
         MenuLogic.ColorString(new String('‗', 59));

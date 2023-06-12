@@ -68,21 +68,19 @@ static class Logger
                 {
                     if (I[0].ToString() == l["id"])
                     {
-                        if (I[0].ToString() == l["id"])
+                        if (l["action"] == "Added")
                         {
-                            if (l["action"] == "Added")
-                            {
-                                I[1] += 1;
-                            }
-                            else if (l["action"] == "Updated")
-                            {
-                                I[2] += 1;
-                            }
-                            else if (l["action"] == "Removed")
-                            {
-                                I[3] += 1;
-                            }
+                            I[1] += 1;
                         }
+                        else if (l["action"] == "Updated")
+                        {
+                            I[2] += 1;
+                        }
+                        else if (l["action"] == "Removed")
+                        {
+                            I[3] += 1;
+                        }
+                
                     }
                 }
 

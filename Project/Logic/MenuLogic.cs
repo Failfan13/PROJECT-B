@@ -17,13 +17,13 @@ public static class MenuLogic
             Console.Clear();
 
             MenuLogic.ColorString(Notice, ConsoleColor.Yellow, newLine: true);
-  
+
             Console.WriteLine("Select an option");
-            MenuLogic.ColorString("↑ → ↓ ← ",ConsoleColor.DarkBlue, false);
+            MenuLogic.ColorString("↑ → ↓ ← ", newLine: false);
             Console.Write("Keys to navigate through the menu\n");
-            MenuLogic.ColorString("Enter ",ConsoleColor.DarkBlue, false);
+            MenuLogic.ColorString("Enter ", newLine: false);
             Console.Write("To confirm the selected option\n");
-            MenuLogic.ColorString("X ",ConsoleColor.DarkBlue, false);
+            MenuLogic.ColorString("X ", newLine: false);
             Console.Write("To return to the home screen\n\n");
 
             // ask question

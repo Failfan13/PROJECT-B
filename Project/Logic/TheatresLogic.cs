@@ -331,7 +331,7 @@ Press [ ");
                         {
                             selectedSeats.Remove(selectedSeat);
                         }
-                        else if (selectedSeats.Count >= 8) // check if more then 9 selected
+                        else if (selectedSeats.Count >= timeSlot.MaxSeats) // check if more then 9 selected
                         {
                             MaximumSeats(timeSlot.MaxSeats);
                         }

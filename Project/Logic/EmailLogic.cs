@@ -14,12 +14,18 @@ public class EmailLogic
     public void SendAllEmail(string subject, string body) => this.SendEmail("", subject, body);
     public async void SendEmail(string to, string subject, string body)
     {
+        GuestAdsLogic AdsLogic = new GuestAdsLogic();
+
         MimeMessage message = new MimeMessage();
         List<MailboxAddress> emailAddresses = new List<MailboxAddress>();
 
         if (!to.Contains("@"))
         {
-            foreach (AccountModel email in await GetAllAccounts())
+            foreach (AccountModel email in GetAllAccounts().Result)
+            {
+                emailAddresses.Add(MailboxAddress.Parse(email.EmailAddress));
+            }
+            foreach (GuestAdModel email in AdsLogic.GetAllGuestAccounts().Result)
             {
                 emailAddresses.Add(MailboxAddress.Parse(email.EmailAddress));
             }

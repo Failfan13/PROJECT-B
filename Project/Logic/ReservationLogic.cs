@@ -99,7 +99,8 @@ public class ReservationLogic
 
             // new reservation model
             ress = ress.NewReservationModel(timeSlot.Id, Seats, snacks, AccountId, currDate, format);
-
+             int I = timeSlot.MovieId;
+            Logger.LogDataChange<ReservationModel>(I, "Added");
             // insert new reservation
             ress = DbLogic.InsertItem<ReservationModel>(ress).Result;
 

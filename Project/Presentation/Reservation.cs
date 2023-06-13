@@ -81,7 +81,8 @@ public static class Reservation
         }
         catch { }
 
-
+        int I = CurrTimeSlot.MovieId;
+        Logger.LogDataChange<ReservationModel>(I, "Updated");
         TimeSlotsLogic.UpdateList(CurrTimeSlot).ConfigureAwait(false);
 
         // Edit reservations menu

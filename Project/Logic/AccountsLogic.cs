@@ -73,6 +73,7 @@ public class AccountsLogic
     {
         AccountModel account = new AccountModel();
         account = account.NewAccountModel(email, password, name, date);
+        Logger.LogDataChange<AccountModel>(account.Id, "Added");
         await DbLogic.UpsertItem<AccountModel>(account);
         return account;
     }
@@ -82,6 +83,7 @@ public class AccountsLogic
     {
         if (CurrentAccount == null) return;
         CurrentAccount.Password = newpassword;
+        Logger.LogDataChange<AccountModel>(CurrentAccount.Id, "Changed");
         await DbLogic.UpdateItem<AccountModel>(CurrentAccount);
     }
 
@@ -89,6 +91,7 @@ public class AccountsLogic
     {
         if (CurrentAccount == null) return;
         CurrentAccount.EmailAddress = newemail;
+        Logger.LogDataChange<AccountModel>(CurrentAccount.Id, "Changed");
         UpdateList(CurrentAccount);
     }
 
@@ -114,8 +117,9 @@ public class AccountsLogic
 
     public async Task DeleteUser(int id)
     {
-        await DbLogic.RemoveItemById<AccountModel>(id);
+        
         Logger.LogDataChange<AccountModel>(id, "Deleted");
+        await DbLogic.RemoveItemById<AccountModel>(id);
     }
 
     // method so user can sumbit complaint

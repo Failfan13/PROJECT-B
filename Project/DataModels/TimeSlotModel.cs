@@ -20,7 +20,7 @@ public class TimeSlotModel : BaseModel
     [Column("format")]
     public string Format { get; set; }
 
-    [Column("maxseats")]
+    [Column("max_seats")]
     public int MaxSeats { get; set; }
 
     public TimeSlotModel NewTimeSlotModel() => NewTimeSlotModel(0, new DateTime(), new Helper(), "");

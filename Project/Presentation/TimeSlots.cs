@@ -152,6 +152,9 @@ static class TimeSlots
         Options.Add("Add new TimeSlot");
         Actions.Add(async () => await NewTimeSlot(movieid, IsEdited).ConfigureAwait(false));
 
+        Options.Add("Remove TimeSlot");
+        Actions.Add(() => TimeSlotsLogic.DeleteTimeSlot(tsm.Id));
+
         Options.Add("Return");
         Actions.Add(() => WhatMovieTimeSlot());
 

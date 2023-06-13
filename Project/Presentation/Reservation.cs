@@ -92,6 +92,7 @@ public static class Reservation
                 "Choose time & seats",
                 "Choose seats",
                 "Change side snack",
+                "Remove TimeSlot"
                 //"Choose format", // will not be interchangable
                 //"Change discount code" // will not be interchangable
             };
@@ -120,6 +121,8 @@ public static class Reservation
 
         // // Apply discount // will not be interchangable
         // actions.Add(() => Promo.Start());
+
+        actions.Add(() => TimeSlotsLogic.DeleteTimeSlot(CurrTimeSlot.Id));
 
         if (AccountsLogic.CurrentAccount.Admin && CurrReservation.AccountId == null)
         {

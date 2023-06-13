@@ -118,7 +118,7 @@ static class Movies
             "Change Releasedate", "Change Description",
             "Change Duration", "Change Price",
             "Change Ads", "Change Categories",
-            "Change Formats"
+            "Change Formats", "Remove Movie"
         };
 
         List<Action> Actions = new List<Action>() { };
@@ -131,6 +131,7 @@ static class Movies
         Actions.Add(() => ChangeAds(movie));
         Actions.Add(() => ChangeCategory(movie));
         Actions.Add(() => Format.ChangeFormats(movie, () => ChangeMovieMenu(movie)));
+        Actions.Add(() => MoviesLogic.DeleteMovie(movie.Id));
 
         Options.Add("Return");
         Actions.Add(() => ChangeMoviesMenu());

@@ -96,7 +96,7 @@ public class MoviesLogic
             movies = GetAllMovies().Result;
         }
 
-        return movies.Where(i => categories.All(x => i.Categories.Any(y => y.Id == x.Id))).ToList();
+        return movies.Where(i => categories.All(x => i.Categories.Any(y => y.Name == x.Name))).ToList();
     }
 
     public MovieModel NewMovie(string title, DateTime releaseDate, string director, string desript,

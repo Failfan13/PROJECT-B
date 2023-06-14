@@ -5,6 +5,7 @@ public static class Filter
     public static MovieModel? AppliedFilters = null; // Selected movie date stored as AppliedFilters.ReleseDate
     public static void Main(bool IsEdited = false)
     {
+        FilterLogic.CheckAppliedFilters();
         string Question = "What would you like to do?";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
@@ -148,10 +149,8 @@ public static class Filter
             Options.Add(category.Name);
             Actions.Add(() => Filter.AppliedFilters.Categories.Add(category));
         }
-
         FilterLogic.CheckAppliedFilters();
         MenuLogic.Question(Question, Options, Actions);
-
         Filter.AddFilter();
     }
     private static void FilterPrice()

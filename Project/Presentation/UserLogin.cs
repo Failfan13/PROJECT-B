@@ -10,7 +10,8 @@ static class UserLogin
         return accountsLogic;
     }
 
-    public static void Start()
+    public static void 
+    Start()
     {
         string Question = "";
 
@@ -59,9 +60,16 @@ e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}
     {
         EmailLogic EmailLogic = new EmailLogic();
         AccountsLogic AccountsLogic = new AccountsLogic();
+        List<string> AllEmails = new();
+        foreach (AccountModel acc in AccountsLogic.GetAllAccounts().Result)
+        {
+            AllEmails.Add(acc.EmailAddress);
+        }
         bool CorrectName = false;
         bool CorrectPass = false;
         bool CorrectDate = false;
+        bool UnusedEmail = false;
+
         string pass = "";
         string Email = "";
         string Name = "";
@@ -71,7 +79,14 @@ e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}
         string body = "";
 
         Console.Clear();
-        Email = AskEmail();
+        while (! UnusedEmail)
+        {
+            Email = AskEmail();
+            if (!AllEmails.Contains(Email))
+            UnusedEmail = true;
+            else
+            Console.WriteLine("Email allready in use please enter another email");
+        }
 
         Console.Clear();
         while (!CorrectName)
@@ -134,7 +149,7 @@ e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}
         
 An account with this email address has been created.
 
-If this wasent a mistake, please contact the administrator.
+If this was not a mistake, please contact the administrator.
 
 Thank you.";
 

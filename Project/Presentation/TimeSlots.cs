@@ -172,17 +172,17 @@ static class TimeSlots
         List<Action> Actions = new List<Action>();
 
         Options.Add("Change start time");
-        Actions.Add(async () => await TimeSlotStartTime(tsm, () => EditTimeSlotChangeMenu(tsm)));
+        Actions.Add(async () => TimeSlotStartTime(tsm, () => EditTimeSlotChangeMenu(tsm)).Wait());
 
         Options.Add("Change view format");
         Actions.Add(() => Format.ChangeFormats(tsm, () => EditTimeSlotChangeMenu(tsm)));
 
-        // Options.Add("Change maximum seats per reservation");
-        // Actions.Add(() => ChangeMaxSeats(tsm));
+        Options.Add("Change maximum seats per reservation");
+        Actions.Add(() => ChangeMaxSeats(tsm));
 
         Options.Add("Return");
         Actions.Add(() => Parallel.Invoke(
-            //() => TheatreLogic.UpdateList(TheatreLogic.GetById(tsm.Theatre.TheatreId)!),
+            () => TheatreLogic.UpdateList(TheatreLogic.GetById(tsm.Theatre.TheatreId).Result!),
             async () => await TimeSlotsLogic.UpdateList(tsm).ConfigureAwait(false),
             () => WhatMovieTimeSlot()
         ));
@@ -213,7 +213,13 @@ static class TimeSlots
                 Console.WriteLine("Wrong date/time format, try again");
             }
         }
-
+        Console.Clear();
+        if (tsm.Start < DateTime.Now)
+        {
+            Console.WriteLine("This date has passed already");
+            TimeSlotStartTime(tsm, returnTo, newTimeSlot);
+        }
+        QuestionLogic.AskEnter();
         if (!newTimeSlot)
         {
             await TimeSlotsLogic.UpdateList(tsm).ConfigureAwait(false);
@@ -221,18 +227,18 @@ static class TimeSlots
 
         if (returnTo != null) returnTo();
     }
-    // static public void ChangeMaxSeats(TimeSlotModel tsm)
-    // {
-    //     TimeSlotsLogic TL = new();
-    //     double max = QuestionLogic.AskNumber("What will be the new maximum bookable seats in 1 reservation?");
-    //     int _max =Convert.ToInt32(max);
-    //     if (_max <= 1)
-    //     {
-    //         _max = 1;
+    static public void ChangeMaxSeats(TimeSlotModel tsm)
+    {
+        TimeSlotsLogic TL = new();
+        double max = QuestionLogic.AskNumber("What will be the new maximum bookable seats in 1 reservation?");
+        int _max =Convert.ToInt32(max);
+        if (_max <= 1)
+        {
+            _max = 1;
 
-    //     }
-    //     TL.ChangeMaxSeats(tsm, _max);
-    //     QuestionLogic.AskEnter();
-    //     Admin.ChangeData();
-    // }
+        }
+        TL.ChangeMaxSeats(tsm, _max);
+        QuestionLogic.AskEnter();
+        Admin.ChangeData();
+    }
 }

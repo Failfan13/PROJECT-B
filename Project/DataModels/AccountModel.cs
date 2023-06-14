@@ -40,6 +40,7 @@ public class AccountModel : BaseModel
         if (name.Length > 1)
             LastName = string.Join(" ", name.Skip(1));
         DateOfBirth = dateofbirth;
+        Complaints = new List<string>{};
         return this;
     }
 }

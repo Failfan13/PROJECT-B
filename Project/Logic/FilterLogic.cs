@@ -8,6 +8,10 @@ public static class FilterLogic
         {
             MovieModel MovieModel = new MovieModel();
             Filter.AppliedFilters = MovieModel;
+            Filter.AppliedFilters.Title = "";
+            Filter.AppliedFilters.ReleaseDate = DateTime.MinValue;
+            Filter.AppliedFilters.Categories = new List<CategoryModel>{};
+            Filter.AppliedFilters.Price = 0.0;
             return false;
         }
         else if (Filter.AppliedFilters.Title == ""
@@ -25,28 +29,23 @@ public static class FilterLogic
         MoviesLogic MoviesLogic = new();
         MovieModel? filters = Filter.AppliedFilters;
         List<MovieModel> filteredMovies = MoviesLogic.AllMovies();
-
         // Check filterable properties of filter model
         if (filters.Title != "")
         {
             filteredMovies = MoviesLogic.GetByTitle(filters.Title);
         }
-
         if (filters.Price != 0.0)
         {
             filteredMovies = MoviesLogic.GetByPrice(filters.Price, filteredMovies);
         }
-
         if (filters.ReleaseDate != DateTime.MinValue)
         {
             filteredMovies = MoviesLogic.GetByTimeSlots(filters.ReleaseDate, filteredMovies);
         }
-
         if (filters.Categories.Count != 0)
         {
             filteredMovies = MoviesLogic.GetByCategories(filters.Categories, filteredMovies);
         }
-
         foreach (var p in filteredMovies)
         {
             Console.WriteLine(p.Title);

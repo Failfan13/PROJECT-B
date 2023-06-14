@@ -203,7 +203,6 @@ static class TimeSlots
                 string time = Console.ReadLine()!.Replace(" ", "");
 
                 tsm.Start = DateTime.ParseExact((date + " " + time), "dd/MM/yy HH:mm", CultureInfo.InvariantCulture);
-                QuestionLogic.AskEnter();
             }
             catch (System.Exception)
             {
@@ -211,7 +210,13 @@ static class TimeSlots
                 Console.WriteLine("Wrong date/time format, try again");
             }
         }
-
+        Console.Clear();
+        if (tsm.Start < DateTime.Now)
+        {
+            Console.WriteLine("This date has passed already");
+            TimeSlotStartTime(tsm, returnTo, newTimeSlot);
+        }
+        QuestionLogic.AskEnter();
         if (!newTimeSlot)
         {
             await TimeSlotsLogic.UpdateList(tsm).ConfigureAwait(false);

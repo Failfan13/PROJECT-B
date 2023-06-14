@@ -169,7 +169,7 @@ static class TimeSlots
         List<Action> Actions = new List<Action>();
 
         Options.Add("Change start time");
-        Actions.Add(async () => await TimeSlotStartTime(tsm, () => EditTimeSlotChangeMenu(tsm)));
+        Actions.Add(async () => TimeSlotStartTime(tsm, () => EditTimeSlotChangeMenu(tsm)).Wait());
 
         Options.Add("Change view format");
         Actions.Add(() => Format.ChangeFormats(tsm, () => EditTimeSlotChangeMenu(tsm)));
@@ -203,6 +203,7 @@ static class TimeSlots
                 string time = Console.ReadLine()!.Replace(" ", "");
 
                 tsm.Start = DateTime.ParseExact((date + " " + time), "dd/MM/yy HH:mm", CultureInfo.InvariantCulture);
+                QuestionLogic.AskEnter();
             }
             catch (System.Exception)
             {

@@ -275,24 +275,32 @@ public class ReservationLogic
         // iterate through all data in
         // List<ReservationModel> reservations = ReservationAccess.LoadAll();
         List<ReservationModel> reservations = GetAllReservations().Result;
+        bool annycheck = false;
         foreach (ReservationModel reservation in reservations)
         {
-            if (TL.GetById(reservation.TimeSlotId).Result.Start < DateTime.Now)
+            if (TL.GetById(reservation.TimeSlotId).Result != null && TL.GetById(reservation.TimeSlotId).Result.Start < DateTime.Now)
             {
-                try
-                {
-                    var resMovieId = TL.GetById(reservation.TimeSlotId).Result.MovieId;
+                if (reservation.AccountId == user_id)
+                {    
+                    try
+                    {
+                        annycheck = true;
+                        var resMovieId = TL.GetById(reservation.TimeSlotId).Result.MovieId;
 
-                    var resMovie = ML.GetById(resMovieId).Result;
+                        var resMovie = ML.GetById(resMovieId).Result;
 
-                    Console.WriteLine($"{resMovie.Title}, at {TL.GetById(reservation.TimeSlotId).Result.Start}.\nOrdered on: {reservation.DateTime}\n");
-                }
-                catch (System.Exception)
-                {
-                    continue;
+                        Console.WriteLine($"{resMovie.Title}, at {TL.GetById(reservation.TimeSlotId).Result.Start}.\nOrdered on: {reservation.DateTime}\n");
+                    }
+                    catch (System.Exception)
+                    {
+                        continue;
+                    }
                 }
             }
         }
+        
+        if (!annycheck)
+        Console.WriteLine("You have no previous reservations");
         Console.WriteLine("\nPress any key to return");
         Console.ReadKey();
     }
@@ -304,24 +312,31 @@ public class ReservationLogic
         MoviesLogic ML = new MoviesLogic();
         // iterate through all data in
         // List<ReservationModel> reservations = ReservationAccess.LoadAll();
+        bool annycheck = false;
         foreach (ReservationModel reservation in GetAllReservations().Result)
         {
-            if (TL.GetById(reservation.TimeSlotId).Result.Start >= DateTime.Now)
+            if (TL.GetById(reservation.TimeSlotId).Result != null && TL.GetById(reservation.TimeSlotId).Result.Start >= DateTime.Now)
             {
-                try
+                if (reservation.AccountId == user_id)
                 {
-                    var resMovieId = TL.GetById(reservation.TimeSlotId).Result.MovieId;
+                    try
+                    {
+                        annycheck = true;
+                        var resMovieId = TL.GetById(reservation.TimeSlotId).Result.MovieId;
 
-                    var resMovie = ML.GetById(resMovieId).Result;
+                        var resMovie = ML.GetById(resMovieId).Result;
 
-                    Console.WriteLine($"{resMovie.Title}, at {TL.GetById(reservation.TimeSlotId).Result.Start}.\nOrdered on: {reservation.DateTime}\n");
-                }
-                catch (System.Exception)
-                {
-                    continue;
+                        Console.WriteLine($"{resMovie.Title}, at {TL.GetById(reservation.TimeSlotId).Result.Start}.\nOrdered on: {reservation.DateTime}\n");
+                    }
+                    catch (System.Exception)
+                    {
+                        continue;
+                    }
                 }
             }
         }
+        if (!annycheck)
+        Console.WriteLine("You have no future reservations");
         Console.WriteLine("\nPress any key to return");
         Console.ReadKey();
     }

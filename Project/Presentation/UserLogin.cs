@@ -174,7 +174,6 @@ Thank you.";
             if (acc != null)
             {
                 Console.Clear();
-                Logger.SystemLog("Logged in");
                 Menu.Start();
             }
             else

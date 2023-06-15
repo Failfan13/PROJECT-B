@@ -48,9 +48,9 @@ public class AccountsLogic
         var account = await DbLogic.LoginAs<AccountModel>(loginDetails);
 
         if (account != null)
-            CurrentAccount = account;
+            {CurrentAccount = account;
+            Logger.SystemLog("Logged in", CurrentAccount.Id);}
         else return null!;
-        Logger.SystemLog("Logged in");
         return CurrentAccount;
     }
 
@@ -68,8 +68,9 @@ public class AccountsLogic
     // logout from current account
     public void LogOut()
     {
+        int id = CurrentAccount.Id;
         CurrentAccount = null;
-        Logger.SystemLog("Logged out");
+        Logger.SystemLog("Logged out", id);
     }
 
     // creates a new account

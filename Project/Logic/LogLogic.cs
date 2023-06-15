@@ -38,7 +38,7 @@ static class Logger
     }
 
     // system logs
-    public static void SystemLog(string action)
+    public static void SystemLog(string action, int id)
     {
         string headers = "timestamp,action,user_id";
         string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");

@@ -136,14 +136,14 @@ public static class User
     {
         AccountsLogic AL = new AccountsLogic();
 
-        string Question = "Are you sure you want to delete this user?";
+        string Question = "Are you sure you want to delete this user?\n If so enter Y";
         List<string> Options = new List<string>();
         List<Action> Actions = new List<Action>();
 
-        string confdelete = QuestionLogic.AskString(Question);
-        if (confdelete == "yes")
+        string confdelete = QuestionLogic.AskString(Question).ToUpper();
+        if (confdelete == "Y")
         {
-            await AL.DeleteUser(account.Id);
+            AL.DeleteUser(account.Id).Wait();
             SelectUser();
         }
         else

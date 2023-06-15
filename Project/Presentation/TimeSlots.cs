@@ -9,6 +9,7 @@ static class TimeSlots
         List<TimeSlotModel> tsms = timeSlotsLogic.GetTimeslotByMovieId(movieid)!;
         MoviesLogic ML = new MoviesLogic();
         TheatreLogic TL = new TheatreLogic();
+        tsms = tsms.FindAll(e => e.Start > DateTime.Now);
 
         if (Filter.AppliedFilters != null && Filter.AppliedFilters.ReleaseDate != null)
         {

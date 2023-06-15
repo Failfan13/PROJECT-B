@@ -28,6 +28,9 @@ public static class Admin
         Options.Add("Add promotion");
         Actions.Add(() => Promo.AddPromo());
 
+        Options.Add("Add Cinema Location");
+        Actions.Add(() => LocationsLogic.NewLocation());
+
         Options.Add("\nReturn");
         Actions.Add(() => Menu.Start());
 
@@ -65,9 +68,6 @@ public static class Admin
 
         Options.Add("Change Promotions");
         Actions.Add(() => Promo.EditPromoMenu());
-
-        Options.Add("Add Cinema Location");
-        Actions.Add(() => LocationsLogic.NewLocation());
 
         Options.Add("Remove Cinema Location");
         Actions.Add(() => LocationsLogic.RemoveLocation());

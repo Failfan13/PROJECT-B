@@ -74,8 +74,19 @@ public class MoviesLogic
         {
             movies = GetAllMovies().Result;
         }
-
-        return movies.Where(i => tsl.GetTimeslotByMovieId(i.Id)!.Any(t => t.Theatre.Seats.Min(s => TL.PriceOfSeatType(s.Type, t.Theatre.TheatreId)) + i.Price <= price)).ToList();
+        List<MovieModel> corrmovies = new();
+        foreach(MovieModel M in movies)
+        {
+            List<TimeSlotModel> tsms =  tsl.GetTimeslotByMovieId(M.Id);
+            foreach (TimeSlotModel t in tsms)
+            {
+                TheatreModel TH = TL.GetById(t.Theatre.TheatreId).Result;
+                if (!corrmovies.Contains(M) && TH.SeatPrices.Basic <= price)
+                corrmovies.Add(M);
+            }
+        }
+        return corrmovies;
+        // return movies.Where(i => tsl.GetTimeslotByMovieId(i.Id)!.Any(t => t.Theatre.Seats.Min(s => TL.PriceOfSeatType(s.Type, t.Theatre.TheatreId)) + i.Price <= price)).ToList();
     }
 
     public List<MovieModel> GetByTimeSlots(DateTime date, List<MovieModel> movies = null)

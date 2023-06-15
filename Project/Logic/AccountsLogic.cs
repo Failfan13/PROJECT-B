@@ -255,13 +255,10 @@ public class AccountsLogic
         return await DbLogic.GetByEmail<AccountModel>(email);
     }
 
-    // public static bool CheckOfAge()
-    // {
-    //     if (CurrentAccount == null) return false;
-    //     else if (CurrentAccount.DateOfBirth == null) return false;
-
-    //     string date = CurrentAccount.DateOfBirth;
-    //     DateTime dateOfBirth = DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-    //     return DateTime.Today.Year - dateOfBirth.Year >= 18;
-    // }
+    public static bool CheckOfAge()
+    {
+        if (CurrentAccount == null) return false;
+        else if (CurrentAccount.DateOfBirth == null) return false;
+        return DateTime.Today.Year - CurrentAccount.DateOfBirth.Year >= 18;
+    }
 }

@@ -142,7 +142,7 @@ public static class Reservation
     public static void FilterMenu(List<MovieModel> filteredList = null!, bool IsEdited = false)
     {
         MoviesLogic ML = new();
-        bool ofAge = false;//AccountsLogic.CheckOfAge();
+        bool ofAge = AccountsLogic.CheckOfAge();
 
         var movies = new MoviesLogic().AllMovies();
 
@@ -170,7 +170,7 @@ public static class Reservation
         }
         else // not of age
         {
-            foreach (MovieModel movie in movies.FindAll(m => !m.Categories.Any(c => c.Id == 6)))
+            foreach (MovieModel movie in movies.FindAll(m => !m.Categories.Any(c => c.Name == "18+")))
             {
                 Options.Add(movie.Title);
                 Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));
@@ -181,7 +181,6 @@ public static class Reservation
 
         Options.Add("Return");
         Actions.Add(() => Menu.Start());
-
         MenuLogic.Question(Question, Options, Actions);
     }
 

@@ -157,7 +157,7 @@ static class TimeSlots
         Actions.Add(() => TimeSlotsLogic.DeleteTimeSlot(tsm.Id));
 
         Options.Add("Return");
-        Actions.Add(() => WhatMovieTimeSlot());
+        Actions.Add(() => WhatMovieTimeSlot(true));
 
         MenuLogic.Question(Question, Options, Actions);
 
@@ -173,7 +173,7 @@ static class TimeSlots
         List<Action> Actions = new List<Action>();
 
         Options.Add("Change start time");
-        Actions.Add(async () => TimeSlotStartTime(tsm, () => EditTimeSlotChangeMenu(tsm)).Wait());
+        Actions.Add(() => TimeSlotStartTime(tsm, () => EditTimeSlotChangeMenu(tsm)));
 
         Options.Add("Change view format");
         Actions.Add(() => Format.ChangeFormats(tsm, () => EditTimeSlotChangeMenu(tsm)));
@@ -223,7 +223,7 @@ static class TimeSlots
         QuestionLogic.AskEnter();
         if (!newTimeSlot)
         {
-            await TimeSlotsLogic.UpdateList(tsm).ConfigureAwait(false);
+            TimeSlotsLogic.UpdateList(tsm);
         }
 
         if (returnTo != null) returnTo();
@@ -232,14 +232,14 @@ static class TimeSlots
     {
         TimeSlotsLogic TL = new();
         double max = QuestionLogic.AskNumber("What will be the new maximum bookable seats in 1 reservation?");
-        int _max =Convert.ToInt32(max);
+        int _max = Convert.ToInt32(max);
         if (_max <= 1)
         {
             _max = 1;
 
         }
         TL.ChangeMaxSeats(tsm, _max);
-        
+
         Console.WriteLine($"The maximum seats per reservation is now {_max}");
         QuestionLogic.AskEnter();
         Admin.ChangeData();

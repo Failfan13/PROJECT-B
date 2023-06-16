@@ -162,7 +162,7 @@ public class ReviewLogic
         foreach (ReviewModel review in reviews)
         {
             reviewAccount = AL.GetById(review.AccountId)!.Result;
-            options.Add(@$"From user: {review.AccountId} - {reviewAccount.FirstName + " " + reviewAccount.LastName}, Date: {review.ReviewDate}, Review score: {review.Rating},
+            options.Add(@$"For movie: {review.MovieId} From user: {review.AccountId} - {reviewAccount.FirstName + " " + reviewAccount.LastName}, Date: {review.ReviewDate}, Review score: {review.Rating},
 Message: {review.Review}
 ");
             actions.Add(() => EditReview(review));

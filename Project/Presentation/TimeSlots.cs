@@ -1,6 +1,6 @@
 using System.Globalization;
 
-static class TimeSlots
+public class TimeSlots
 {
 
     public static void ShowAllTimeSlotsForMovie(int movieid, bool IsEdited = false)

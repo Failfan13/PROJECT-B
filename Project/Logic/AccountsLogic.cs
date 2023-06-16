@@ -19,9 +19,9 @@ public class AccountsLogic
     public async Task UpdateList(AccountModel account)
     {
         if (GetById(account.Id).Result == null)
-        await DbLogic.UpsertItem(account);
+            await DbLogic.UpsertItem(account);
         else
-        await DbLogic.UpdateItem(account);
+            await DbLogic.UpdateItem(account);
 
     }
 
@@ -48,8 +48,10 @@ public class AccountsLogic
         var account = await DbLogic.LoginAs<AccountModel>(loginDetails);
 
         if (account != null)
-            {CurrentAccount = account;
-            Logger.SystemLog("Logged in", CurrentAccount.Id);}
+        {
+            CurrentAccount = account;
+            Logger.SystemLog("Logged in", CurrentAccount.Id);
+        }
         else return null!;
         return CurrentAccount;
     }
@@ -73,31 +75,68 @@ public class AccountsLogic
         Logger.SystemLog("Logged out", id);
     }
 
+    public async Task<AccountModel> NewAccount(string email, string name, string password, string date)
+    {
+        AccountModel account = new AccountModel();
+
+        DateTime newDate = DateTime.Now;
+
+        if (DateTime.TryParse(date, out newDate))
+            return NewAccount(email, name, password, newDate).Result;
+
+        return null!;
+    }
+
     // creates a new account
     public async Task<AccountModel> NewAccount(string email, string name, string password, DateTime date)
     {
+        EmailLogic emailLogic = new EmailLogic();
         AccountModel account = new AccountModel();
-        account = account.NewAccountModel(email, password, name, date);
-        Logger.LogDataChange<AccountModel>(account.Id, "Added");
-        await DbLogic.UpsertItem<AccountModel>(account);
-        return account;
+
+        bool valPassword = false;
+        bool valEmail = false;
+        bool preExist = false;
+
+        if (emailLogic.ValidateEmail(email)) valEmail = true;
+        if (ValidatePassword(password)) valPassword = true;
+
+        if (DbLogic.GetByEmail<AccountModel>(email).Result != null) preExist = true;
+
+        if (valEmail && valPassword && !preExist)
+        {
+            account = account.NewAccountModel(email, password, name, date.AddDays(1));
+            await DbLogic.InsertItem<AccountModel>(account);
+            return account;
+        }
+
+        return null!;
     }
 
     // Changes the password
     public async Task NewPassword(string newpassword)
     {
-        if (CurrentAccount == null) return;
+        if (CurrentAccount == null || !ValidatePassword(newpassword)) return;
         CurrentAccount.Password = newpassword;
-        Logger.LogDataChange<AccountModel>(CurrentAccount.Id, "Changed");
         await DbLogic.UpdateItem<AccountModel>(CurrentAccount);
+        Logger.LogDataChange<AccountModel>(CurrentAccount.Id, "Changed");
     }
 
-    public void NewEmail(string newemail)
+    public bool ValidatePassword(string password)
     {
-        if (CurrentAccount == null) return;
-        CurrentAccount.EmailAddress = newemail;
-        Logger.LogDataChange<AccountModel>(CurrentAccount.Id, "Changed");
-        UpdateList(CurrentAccount);
+        if (password.Length < 8) return false;
+        if (!password.Any(char.IsUpper)) return false;
+        if (!password.Any(char.IsLower)) return false;
+        if (!password.Any(char.IsDigit)) return false;
+        return true;
+    }
+
+    public async Task NewEmail(string newEmail)
+    {
+        EmailLogic emailLogic = new EmailLogic();
+
+        if (CurrentAccount == null || !emailLogic.ValidateEmail(newEmail)) return;
+        CurrentAccount.EmailAddress = newEmail;
+        await DbLogic.UpdateItem<AccountModel>(CurrentAccount);
     }
 
 
@@ -122,9 +161,8 @@ public class AccountsLogic
 
     public async Task DeleteUser(int id)
     {
-        
-        Logger.LogDataChange<AccountModel>(id, "Deleted");
         await DbLogic.RemoveItemById<AccountModel>(id);
+        Logger.LogDataChange<AccountModel>(id, "Deleted");
     }
 
     // method so user can sumbit complaint
@@ -135,7 +173,7 @@ public class AccountsLogic
         AccountModel account = AccountsLogic.CurrentAccount;
         if (account.Complaints == null)
         {
-            account.Complaints = new List<string>{};
+            account.Complaints = new List<string> { };
             account.Complaints.Add(complaintMsg);
             UpdateList(account).Wait();
         }

@@ -5,7 +5,7 @@ using System.Text.Json;
 
 
 //This class is not static so later on we can use inheritance and interfaces
-class TimeSlotsLogic
+public class TimeSlotsLogic
 {
     public async Task<List<TimeSlotModel>> GetAllTimeSlots()
     {

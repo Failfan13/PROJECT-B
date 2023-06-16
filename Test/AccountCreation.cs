@@ -43,10 +43,12 @@ public class AccountCreation
         }
         catch (AggregateException)
         {
+            // If login for info has an exception
             Assert.Fail();
             return;
         }
 
+        // Check if account has info
         Assert.IsTrue(AccountsLogic.CurrentAccount.Info());
     }
 
@@ -64,9 +66,12 @@ public class AccountCreation
         }
         catch (AggregateException) { }
 
+        // parse known to work date to DateTime
         DateTime date = DateTime.Parse(dateOfBirth);
 
+        // if not loggedin fail test
         if (AccountsLogic.CurrentAccount == null) Assert.Fail();
+
         // Check if data is same as input
         Assert.AreEqual(email, AccountsLogic.CurrentAccount.EmailAddress);
         Assert.AreEqual(fullName, AccountsLogic.CurrentAccount.FirstName + " " + AccountsLogic.CurrentAccount.LastName);

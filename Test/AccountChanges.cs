@@ -8,7 +8,7 @@ namespace TestAccount;
 public class AccountChanges
 {
     [TestInitialize]
-    public void TestLoginUser()
+    public void TestLoginUser() // std login
     {
         //Access logical functionality
         AccountsLogic AL = new AccountsLogic();
@@ -32,7 +32,7 @@ public class AccountChanges
         }
         catch (AggregateException) { }
 
-
+        // Check if password set is same as new password
         Assert.AreEqual(AccountsLogic.CurrentAccount.Password, newPassword);
     }
 
@@ -51,8 +51,7 @@ public class AccountChanges
         }
         catch (AggregateException) { }
 
-        Console.WriteLine(AccountsLogic.CurrentAccount);
-
+        // Check if email set is same as new email
         Assert.AreEqual(AccountsLogic.CurrentAccount.EmailAddress, newEmail);
     }
 
@@ -68,6 +67,7 @@ public class AccountChanges
         }
         catch (AggregateException) { }
 
+        // Check if account is deleted / not findable
         Assert.IsTrue(AL.GetByEmail("1033231@hr.nl").Result == null);
 
     }

@@ -48,21 +48,19 @@ static class Logger
         LogAccess.WriteLine(finalString, headers, pathSystem);
     }
 
-    public static List<List<int>> ReportList(DateTime sDate, DateTime eDate)
+    public static List<int[]> ReportList(DateTime sDate, DateTime eDate)
     {
         MoviesLogic ML = new();
         var MVS = ML.AllMovies(true);
-        List<List<int>> LogData = new();
+        List<int[]> LogData = new();
         var Logs = GetLogDataChange<ReservationModel>();
         foreach (MovieModel M in MVS)
         {
-            LogData.Add(new List<int>{M.Id, 0, 0, 0});
+            LogData.Add(new int[4]{M.Id, 0, 0, 0});
         }
         foreach (var l in Logs)
         {
-            var A = Convert.ToDateTime(l["timestamp"]) - sDate;
-            var B = Convert.ToDateTime(l["timestamp"]) - eDate;
-            if (A.TotalSeconds > 0 && B.TotalSeconds < 0)
+            if (Convert.ToDateTime(l["timestamp"]) > sDate && Convert.ToDateTime(l["timestamp"]) < eDate)
             {
                 foreach(var I in LogData)
                 {

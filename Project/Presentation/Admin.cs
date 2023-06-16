@@ -129,14 +129,17 @@ public static class Admin
             try
             {
                 EndDate = DateTime.ParseExact(Endstring, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                if (EndDate > StartDate)
                 CorrecteDate = true;
+                else
+                Console.WriteLine("The end date must be later than the start date");
             }
             catch (System.Exception)
             {
                 Console.WriteLine("Wrong date format!");
             }
         }
-        List<List<int>> RLog = Logger.ReportList(StartDate, EndDate);
+        List<int[]> RLog = Logger.ReportList(StartDate, EndDate);
         string Report = $"In the period from {StartDate.Day}/{StartDate.Month}/{StartDate.Year} to {EndDate.Day}/{EndDate.Month}/{EndDate.Year} the following happened:";
         foreach (var M in RLog)
         {
@@ -152,7 +155,7 @@ public static class Admin
     public static void LogReportNoDate()
     {
         MoviesLogic ML = new();
-        List<List<int>> RLog = Logger.ReportList(DateTime.ParseExact("11/11/1111", "dd/MM/yyyy", CultureInfo.InvariantCulture), DateTime.Now);
+        List<int[]> RLog = Logger.ReportList(DateTime.ParseExact("11/11/1111", "dd/MM/yyyy", CultureInfo.InvariantCulture), DateTime.Now);
         string Report = $"From the beginning of the logs the following has happened:";
         foreach (var M in RLog)
         {

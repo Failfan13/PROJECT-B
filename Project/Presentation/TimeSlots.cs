@@ -200,13 +200,13 @@ static class TimeSlots
         {
             try
             {
-                Console.WriteLine("Enter a new start date: dd/mm/yy");
+                Console.WriteLine("Enter a new start date: dd/mm/yyyy");
                 string date = Console.ReadLine()!.Replace(" ", "");
 
                 Console.WriteLine("Enter a new start time: hh:mm");
                 string time = Console.ReadLine()!.Replace(" ", "");
 
-                tsm.Start = DateTime.ParseExact((date + " " + time), "dd/MM/yy HH:mm", CultureInfo.InvariantCulture);
+                tsm.Start = DateTime.ParseExact((date + " " + time), "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
             }
             catch (System.Exception)
             {
@@ -239,6 +239,8 @@ static class TimeSlots
 
         }
         TL.ChangeMaxSeats(tsm, _max);
+        
+        Console.WriteLine($"The maximum seats per reservation is now {_max}");
         QuestionLogic.AskEnter();
         Admin.ChangeData();
     }

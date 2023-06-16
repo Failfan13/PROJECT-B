@@ -80,7 +80,6 @@ class TimeSlotsLogic
     public void ChangeMaxSeats(TimeSlotModel m, int i)
     {
         m.MaxSeats = i;
-        Console.WriteLine(i);
         UpdateList(m);
     }
 }

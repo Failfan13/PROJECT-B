@@ -7,8 +7,8 @@ using System.IO;
 static class DbAccess
 {
     private static Supabase.Client? _supabase = null;
-    private static string _restUrl = "https://hjeahgjdjzczyynonskt.supabase.co";
-    private static string _key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhqZWFoZ2pkanpjenl5bm9uc2t0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODQzMjQ1NzQsImV4cCI6MTk5OTkwMDU3NH0.sr1XZEzuOXsUFiB0IZb1s2i2TLFQToFV7PL66IDc-AM";
+    private static string _restUrl = "https://ksxxjlppohmiiwosokyl.supabase.co";
+    private static string _key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtzeHhqbHBwb2htaWl3b3Nva3lsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODY4NjUwOTAsImV4cCI6MjAwMjQ0MTA5MH0.DLTafRXxXxKHglclmEicEX1TyDj7i-mG0o57CdcvLaE";
 
     // Wrong string for disconnect test
     //private static string _key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlImhqZWFoZ2pkanpjenl5bm9uc2t0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODQzMjQ1NzQsImV4cCI6MTk5OTkwMDU3NH0.sr1XZEzuOXsUFiB0IZb1s2i2TLFQToFV7PL66IDc-AM";

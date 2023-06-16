@@ -87,6 +87,18 @@ public class AccountsLogic
         return null!;
     }
 
+    public async Task<AccountModel> NewAccount(string email, string name, string password, string date)
+    {
+        AccountModel account = new AccountModel();
+
+        DateTime newDate = DateTime.Now;
+
+        if (DateTime.TryParse(date, out newDate))
+            return NewAccount(email, name, password, newDate).Result;
+
+        return null!;
+    }
+
     // creates a new account
     public async Task<AccountModel> NewAccount(string email, string name, string password, DateTime date)
     {

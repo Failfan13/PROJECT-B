@@ -32,7 +32,12 @@ public class UnitTestTim
         Assert.AreEqual(actual,1);
     }
 
-        public void MakeReservationTest(int timeSlotId, int seatid, string seattype, int snackId, int snackammount, int accountId, string format)
+    [TestMethod]
+    [DataRow(19, 0, "basic", 5, 0, -1, null)]
+    [DataRow(18, -1, "basic", 99, 9999, 1, null)]
+    [DataRow(99, 10, "basic", 1, -1, 99, null)]
+    [DataRow(-1, 10, "basic", 0, 1, 25, null)]
+    public void MakeReservationTest(int timeSlotId, int seatid, string seattype, int snackId, int snackammount, int accountId, string format)
     {
         ReservationLogic RL = new();
         ReservationModel ress = new ReservationModel();

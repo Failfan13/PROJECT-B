@@ -68,13 +68,41 @@ public class AccountsLogic
         Logger.SystemLog("Logged out");
     }
 
+    public async Task<AccountModel> NewAccount(string email, string name, string password, string date)
+    {
+        AccountModel account = new AccountModel();
+
+        DateTime newDate = DateTime.Now;
+
+        if (DateTime.TryParse(date, out newDate))
+            return NewAccount(email, name, password, newDate).Result;
+
+        return null!;
+    }
+
     // creates a new account
     public async Task<AccountModel> NewAccount(string email, string name, string password, DateTime date)
     {
+        EmailLogic emailLogic = new EmailLogic();
         AccountModel account = new AccountModel();
-        account = account.NewAccountModel(email, password, name, date);
-        await DbLogic.UpsertItem<AccountModel>(account);
-        return account;
+
+        bool valPassword = false;
+        bool valEmail = false;
+        bool preExist = false;
+
+        if (emailLogic.ValidateEmail(email)) valEmail = true;
+        if (ValidatePassword(password)) valPassword = true;
+
+        if (DbLogic.GetByEmail<AccountModel>(email).Result != null) preExist = true;
+
+        if (valEmail && valPassword && !preExist)
+        {
+            account = account.NewAccountModel(email, password, name, date.AddDays(1));
+            await DbLogic.InsertItem<AccountModel>(account);
+            return account;
+        }
+
+        return null!;
     }
 
     // Changes the password
@@ -85,10 +113,20 @@ public class AccountsLogic
         await DbLogic.UpdateItem<AccountModel>(CurrentAccount);
     }
 
-    public void NewEmail(string newemail)
+    public bool ValidatePassword(string password)
+    {
+        if (password.Length < 8) return false;
+        if (!password.Any(char.IsUpper)) return false;
+        if (!password.Any(char.IsLower)) return false;
+        if (!password.Any(char.IsDigit)) return false;
+        return true;
+    }
+
+    public void NewEmail(string newEmail)
     {
         if (CurrentAccount == null) return;
-        CurrentAccount.EmailAddress = newemail;
+        if (DbLogic.GetByEmail<AccountModel>(newEmail).Result != null) return;
+        CurrentAccount.EmailAddress = newEmail;
         UpdateList(CurrentAccount);
     }
 

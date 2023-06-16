@@ -251,7 +251,7 @@ public class DbLogic
 
         var eDict = new Dictionary<string, string>
         {
-            {"email", emailAddress}
+            {"email_address", emailAddress}
         };
 
         var result = _supabase.From<T>()

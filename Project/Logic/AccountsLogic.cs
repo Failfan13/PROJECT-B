@@ -115,10 +115,10 @@ public class AccountsLogic
     // Changes the password
     public async Task NewPassword(string newpassword)
     {
-        if (CurrentAccount == null) return;
+        if (CurrentAccount == null || !ValidatePassword(newpassword)) return;
         CurrentAccount.Password = newpassword;
-        Logger.LogDataChange<AccountModel>(CurrentAccount.Id, "Changed");
         await DbLogic.UpdateItem<AccountModel>(CurrentAccount);
+        Logger.LogDataChange<AccountModel>(CurrentAccount.Id, "Changed");
     }
 
     public bool ValidatePassword(string password)
@@ -130,12 +130,13 @@ public class AccountsLogic
         return true;
     }
 
-    public void NewEmail(string newEmail)
+    public async Task NewEmail(string newEmail)
     {
-        if (CurrentAccount == null) return;
-        if (DbLogic.GetByEmail<AccountModel>(newEmail).Result != null) return;
+        EmailLogic emailLogic = new EmailLogic();
+
+        if (CurrentAccount == null || !emailLogic.ValidateEmail(newEmail)) return;
         CurrentAccount.EmailAddress = newEmail;
-        UpdateList(CurrentAccount);
+        await DbLogic.UpdateItem<AccountModel>(CurrentAccount);
     }
 
 
@@ -160,9 +161,8 @@ public class AccountsLogic
 
     public async Task DeleteUser(int id)
     {
-
-        Logger.LogDataChange<AccountModel>(id, "Deleted");
         await DbLogic.RemoveItemById<AccountModel>(id);
+        Logger.LogDataChange<AccountModel>(id, "Deleted");
     }
 
     // method so user can sumbit complaint

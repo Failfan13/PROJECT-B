@@ -101,7 +101,8 @@ public class DbLogic
     // update an item
     public static Task UpdateItem<T>(T changedModel) where T : BaseModel, new()
     {
-        return changedModel.Update<T>();
+        //return changedModel.Update<T>();
+        return _supabase.From<T>().Update(changedModel);
     }
 
     // update or add an item

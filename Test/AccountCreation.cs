@@ -37,7 +37,17 @@ public class AccountCreation
         AccountsLogic AL = new AccountsLogic();
 
         // Exception check because of logger file path (pass if exception)
-        Assert.ThrowsException<AggregateException>(() => AL.LogIn(email, password).Result);
+        try
+        {
+            AL.LogIn(email, password).Wait();
+        }
+        catch (AggregateException)
+        {
+            Assert.Fail();
+            return;
+        }
+
+        Assert.IsTrue(AccountsLogic.CurrentAccount.Info());
     }
 
     [TestMethod]

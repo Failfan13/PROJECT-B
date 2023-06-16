@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-class SnacksLogic
+public class SnacksLogic
 {
     static public bool _addRemove = true;
     public static Dictionary<int, int> CurrentResSnacks = new Dictionary<int, int>();
@@ -21,6 +21,8 @@ class SnacksLogic
 
     public async Task UpsertList(SnackModel snack)
     {
+        if (snack.Price <= 0 ) 
+        snack.Price = 1;
         await DbLogic.UpsertItem(snack);
     }
 
@@ -31,6 +33,8 @@ class SnacksLogic
 
     public async Task<SnackModel> NewSnack(SnackModel snack)
     {
+        if (snack.Price <= 0 ) 
+        snack.Price = 1;
         await DbLogic.InsertItem<SnackModel>(snack);
         return snack;
     }
@@ -39,6 +43,8 @@ class SnacksLogic
     {
         SnackModel snackModel = new SnackModel();
         snackModel = snackModel.NewSnackModel(snackName, size, price);
+        if (snackModel.Price <= 0 ) 
+        snackModel.Price = 1;
         await DbLogic.UpsertItem<SnackModel>(snackModel);
         return snackModel;
     }

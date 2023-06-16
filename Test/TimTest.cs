@@ -32,4 +32,18 @@ public class UnitTestTim
         Assert.AreEqual(actual,1);
     }
 
+        public void MakeReservationTest(int timeSlotId, int seatid, string seattype, int snackId, int snackammount, int accountId, string format)
+    {
+        ReservationLogic RL = new();
+        ReservationModel ress = new ReservationModel();
+
+        List<SeatModel> seats = new();
+        SeatModel seat = new SeatModel(seatid,seattype);
+        seats.Add(seat);
+        Dictionary<int, int> snacks = new();
+        snacks.Add(snackId, snackammount);
+        ress = ress.NewReservationModel(timeSlotId, seats, snacks, accountId, DateTime.Now, format);
+        Assert.IsNotNull(ress);   
+    }
+
 }

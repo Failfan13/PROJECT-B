@@ -95,13 +95,13 @@ public class TheatreLogic
 
     public void ShowControls(bool configure = false)
     {
-        if (configure)
-        {
-            Console.Clear();
-            Console.Write(@$"In the following screen you can change the seat configuration
+        Console.Write(@$"In the following screen you can change the seat configuration
 Press the following buttons to apply changes:
          
 Press [ ");
+        if (configure)
+        {
+
             MenuLogic.ColorString("↑ → ↓ ←", newLine: false);
             Console.Write(" ] Keys to move around the menu\r\nPress [ ");
             MenuLogic.ColorString("B", newLine: false);
@@ -118,11 +118,7 @@ Press [ ");
         }
         else
         {
-            Console.Clear();
-            Console.Write(@$"In the following screen you can change the seat configuration
-Press the following buttons to apply changes:
-         
-Press [ ");
+            
             MenuLogic.ColorString("↑ → ↓ ←", newLine: false);
             Console.Write(" ] Keys to move around the menu\r\nPress [ ");
             MenuLogic.ColorString("Enter", newLine: false);
@@ -135,6 +131,7 @@ Press [ ");
 
     public List<SeatModel> ShowSeats(TheatreModel theatre, TimeSlotModel timeSlot = null!)
     {
+        Console.Clear();
         // load logics
         TimeSlotsLogic TL = new TimeSlotsLogic();
 
@@ -164,11 +161,13 @@ Press [ ");
 
         bool runMenu = true;
         while (runMenu)
-        {
-            // Show controls
+        {  
+            Console.Clear();
+            /// Show controls
             ShowControls(timeSlot == null);
+            // Legend
+            ShowLegend();
 
-            // Console.Clear();
             int heightCounter = 0;
             int widthCounter = 0;
 
@@ -308,9 +307,6 @@ Press [ ");
             }
             else Console.WriteLine(); // clearance
 
-            // Legend
-            ShowLegend();
-
             // Key mappings
             ConsoleKeyInfo keyPressed = Console.ReadKey(true);
             if (timeSlot != null)
@@ -335,9 +331,9 @@ Press [ ");
                         {
                             selectedSeats.Remove(selectedSeat);
                         }
-                        else if (selectedSeats.Count >= 8) // check if more then 9 selected
+                        else if (selectedSeats.Count >= timeSlot.MaxSeats) // check if more then 9 selected
                         {
-                            MaximumSeats();
+                            MaximumSeats(timeSlot.MaxSeats);
                         }
                         else if (!selectedSeats.Contains(selectedSeat) && !reservedSeats.Exists(s => s.Id == selectedSeat))
                         {
@@ -591,10 +587,10 @@ Press [ ");
         return seatTypes;
     }
 
-    private void MaximumSeats()
+    private void MaximumSeats(int Max)
     {
         Console.Clear();
-        Console.WriteLine($@"There is a maximum of 9 seats per account.");
+        Console.WriteLine($@"There is a maximum of {Max} seats per account.");
         MenuLogic.ColorString(">>", newLine: false);
         Console.WriteLine(" Please contact the support team for more information.");
         MenuLogic.ColorString(new String('‗', 59));

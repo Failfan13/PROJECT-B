@@ -9,6 +9,7 @@ public class TimeSlots
         List<TimeSlotModel> tsms = timeSlotsLogic.GetTimeslotByMovieId(movieid)!;
         MoviesLogic ML = new MoviesLogic();
         TheatreLogic TL = new TheatreLogic();
+        tsms = tsms.FindAll(e => e.Start > DateTime.Now);
 
         if (Filter.AppliedFilters != null && Filter.AppliedFilters.ReleaseDate != null)
         {
@@ -23,21 +24,24 @@ public class TimeSlots
         }
         else
         {
-            string Question = $"Availible timeslots for {ML.GetById(movieid)?.Result.Title}";
+            string Question = $"Available timeslots for {ML.GetById(movieid)?.Result.Title}";
             List<string> Options = new List<string>();
             List<Action> Actions = new List<Action>();
 
             foreach (TimeSlotModel time in tsms)
             {
-                if (time.Format != "" && time.Format != "standard")
+                if (time.Start > DateTime.Now) // Only consider future time slots
                 {
-                    Options.Add($"{time.Start} -Type : {time.Format}");
-                    Actions.Add(() => Reservation.FormatPrompt(() => Theatre.SelectSeats(time, IsEdited)));
-                }
-                else
-                {
-                    Options.Add($"{time.Start}");
-                    Actions.Add(() => Theatre.SelectSeats(time, IsEdited));
+                    if (time.Format != "" && time.Format != "standard")
+                    {
+                        Options.Add($"{time.Start} - Type: {time.Format}");
+                        Actions.Add(() => Reservation.FormatPrompt(() => Theatre.SelectSeats(time, IsEdited)));
+                    }
+                    else
+                    {
+                        Options.Add($"{time.Start}");
+                        Actions.Add(() => Theatre.SelectSeats(time, IsEdited));
+                    }
                 }
             }
 
@@ -149,6 +153,9 @@ public class TimeSlots
         Options.Add("Add new TimeSlot");
         Actions.Add(async () => await NewTimeSlot(movieid, IsEdited).ConfigureAwait(false));
 
+        Options.Add("Remove TimeSlot");
+        Actions.Add(() => TimeSlotsLogic.DeleteTimeSlot(tsm.Id));
+
         Options.Add("Return");
         Actions.Add(() => WhatMovieTimeSlot());
 
@@ -166,17 +173,17 @@ public class TimeSlots
         List<Action> Actions = new List<Action>();
 
         Options.Add("Change start time");
-        Actions.Add(async () => await TimeSlotStartTime(tsm, () => EditTimeSlotChangeMenu(tsm)));
+        Actions.Add(async () => TimeSlotStartTime(tsm, () => EditTimeSlotChangeMenu(tsm)).Wait());
 
         Options.Add("Change view format");
         Actions.Add(() => Format.ChangeFormats(tsm, () => EditTimeSlotChangeMenu(tsm)));
 
-        // Options.Add("Change maximum seats per reservation");
-        // Actions.Add(() => ChangeMaxSeats(tsm));
+        Options.Add("Change maximum seats per reservation");
+        Actions.Add(() => ChangeMaxSeats(tsm));
 
         Options.Add("Return");
         Actions.Add(() => Parallel.Invoke(
-            //() => TheatreLogic.UpdateList(TheatreLogic.GetById(tsm.Theatre.TheatreId)!),
+            () => TheatreLogic.UpdateList(TheatreLogic.GetById(tsm.Theatre.TheatreId).Result!),
             async () => await TimeSlotsLogic.UpdateList(tsm).ConfigureAwait(false),
             () => WhatMovieTimeSlot()
         ));
@@ -207,7 +214,13 @@ public class TimeSlots
                 Console.WriteLine("Wrong date/time format, try again");
             }
         }
-
+        Console.Clear();
+        if (tsm.Start < DateTime.Now)
+        {
+            Console.WriteLine("This date has passed already");
+            TimeSlotStartTime(tsm, returnTo, newTimeSlot);
+        }
+        QuestionLogic.AskEnter();
         if (!newTimeSlot)
         {
             await TimeSlotsLogic.UpdateList(tsm).ConfigureAwait(false);
@@ -215,18 +228,18 @@ public class TimeSlots
 
         if (returnTo != null) returnTo();
     }
-    // static public void ChangeMaxSeats(TimeSlotModel tsm)
-    // {
-    //     TimeSlotsLogic TL = new();
-    //     double max = QuestionLogic.AskNumber("What will be the new maximum bookable seats in 1 reservation?");
-    //     int _max =Convert.ToInt32(max);
-    //     if (_max <= 1)
-    //     {
-    //         _max = 1;
+    static public void ChangeMaxSeats(TimeSlotModel tsm)
+    {
+        TimeSlotsLogic TL = new();
+        double max = QuestionLogic.AskNumber("What will be the new maximum bookable seats in 1 reservation?");
+        int _max =Convert.ToInt32(max);
+        if (_max <= 1)
+        {
+            _max = 1;
 
-    //     }
-    //     TL.ChangeMaxSeats(tsm, _max);
-    //     QuestionLogic.AskEnter();
-    //     Admin.ChangeData();
-    // }
+        }
+        TL.ChangeMaxSeats(tsm, _max);
+        QuestionLogic.AskEnter();
+        Admin.ChangeData();
+    }
 }

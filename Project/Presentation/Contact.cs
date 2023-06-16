@@ -151,7 +151,7 @@ public static class Contact
 
         if (account == null)
         {
-            foreach (var acc in (await AL.GetAllAccounts()).Where(a => a.Complaints.Count > 0))
+            foreach (var acc in (AL.GetAllAccounts().Result).Where(a => a.Complaints != null && a.Complaints.Count > 0))
             {
                 Console.Write("UserId:" + acc.Id + "\n");
                 foreach (var complaint in acc.Complaints)

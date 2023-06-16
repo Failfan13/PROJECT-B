@@ -11,6 +11,7 @@ static class Menu
 
         string Question = "Make a choice from the menu\n";
         string Notice = "";
+
         List<string> Options = new List<string>() { };
         List<Action> Actions = new List<Action>();
 

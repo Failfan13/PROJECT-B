@@ -81,7 +81,8 @@ public static class Reservation
         }
         catch { }
 
-
+        int I = CurrTimeSlot.MovieId;
+        Logger.LogDataChange<ReservationModel>(I, "Updated");
         TimeSlotsLogic.UpdateList(CurrTimeSlot).ConfigureAwait(false);
 
         // Edit reservations menu
@@ -92,6 +93,7 @@ public static class Reservation
                 "Choose time & seats",
                 "Choose seats",
                 "Change side snack",
+                "Remove TimeSlot"
                 //"Choose format", // will not be interchangable
                 //"Change discount code" // will not be interchangable
             };
@@ -121,6 +123,8 @@ public static class Reservation
         // // Apply discount // will not be interchangable
         // actions.Add(() => Promo.Start());
 
+        actions.Add(() => TimeSlotsLogic.DeleteTimeSlot(CurrTimeSlot.Id));
+
         if (AccountsLogic.CurrentAccount.Admin && CurrReservation.AccountId == null)
         {
             options.Add("Add user ID");
@@ -138,7 +142,7 @@ public static class Reservation
     public static void FilterMenu(List<MovieModel> filteredList = null!, bool IsEdited = false)
     {
         MoviesLogic ML = new();
-        bool ofAge = false;//AccountsLogic.CheckOfAge();
+        bool ofAge = AccountsLogic.CheckOfAge();
 
         var movies = new MoviesLogic().AllMovies();
 
@@ -166,7 +170,7 @@ public static class Reservation
         }
         else // not of age
         {
-            foreach (MovieModel movie in movies.FindAll(m => !m.Categories.Any(c => c.Id == 6)))
+            foreach (MovieModel movie in movies.FindAll(m => !m.Categories.Any(c => c.Name == "18+")))
             {
                 Options.Add(movie.Title);
                 Actions.Add(() => TimeSlots.ShowAllTimeSlotsForMovie(movie.Id, IsEdited));
@@ -177,7 +181,6 @@ public static class Reservation
 
         Options.Add("Return");
         Actions.Add(() => Menu.Start());
-
         MenuLogic.Question(Question, Options, Actions);
     }
 
@@ -268,8 +271,7 @@ public static class Reservation
         Console.Write($"€ " + FinalPrice + (FinalPrice.ToString().Contains(".") ? "" : ",-"));
         Console.WriteLine($"\n\nIMPORTANT\nYour order number is: {ress.Id}\n");
 
-        // Send email
-        EmailLogic EmailLogic = new EmailLogic();
+        //------ Build Email ------ //
 
         string subject = "Confirmation order Cinema";
         string body = "";
@@ -324,29 +326,13 @@ IMPORTANT
 Your order number is: {ress.Id}
 ";
 
-        if (AccountId != -1)
-        {
-            try
-            {
-                var account = AccountsLogic.GetById(AccountId)!.Result!;
-                email = account.EmailAddress;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-        else
-        {
-            email = UserLogin.AskEmail();
-        }
-
-        EmailLogic.SendEmail(email, subject, body);
-
-        UserLogin.SignUpMails(email);
-
         QuestionLogic.AskEnter();
+
+        AskPrintOrEmail(AccountId, email, subject, body);
+
+        AskMailSignup(AccountId);
     }
+
     public static void ClearReservation(Action returnTo)
     {
         Console.Clear();
@@ -374,6 +360,74 @@ Would you still like to order for this timeslot?";
         MenuLogic.Question(question, options, actions);
     }
 
+
+    private static void AskPrintOrEmail(int AccountId, string email, string subject, string body)
+    {
+        AccountsLogic AccountsLogic = new AccountsLogic();
+        EmailLogic EmailLogic = new EmailLogic();
+
+        string Question = "Would you like to print your order or receive an email?";
+        List<string> Options = new List<string>() { };
+        List<Action> Actions = new List<Action>() { };
+
+        Options.Add("E-mail");
+        Actions.Add(() =>
+        {
+            if (AccountId != -1)
+            {
+                email = AccountsLogic.GetById(AccountId).Result.EmailAddress;
+            }
+            else
+            {
+                email = UserLogin.AskEmail();
+            }
+
+            EmailLogic.SendEmail(email, subject, body);
+        });
+        Options.Add("Print");
+        Actions.Add(async () => await ReservationLogic.PrintRes(body));
+
+        MenuLogic.Question(Question, Options, Actions);
+    }
+
+    private static void AskMailSignup(int AccountId = -1)
+    {
+        EmailLogic EmailLogic = new EmailLogic();
+        AccountsLogic AccountsLogic = new AccountsLogic();
+
+        AccountModel account = null!;
+
+        if (AccountId != -1)
+            try
+            {
+                account = AccountsLogic.GetById(AccountId)!.Result;
+                if (!account.AdMails)
+                {
+                    return;
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+
+        string Question = "Would you like to sign up for ad-mails?";
+        List<string> Options = new List<string>() { };
+        List<Action> Actions = new List<Action>() { };
+
+        Options.Add("Yes");
+        Options.Add("No");
+        Actions.Add(() =>
+        {
+            EmailLogic.SubscribeAds(account);
+            Console.Clear();
+            Console.WriteLine("You have subscribed to the ad emails.");
+            QuestionLogic.AskEnter();
+        });
+        Actions.Add(() => QuestionLogic.AskEnter());
+    }
+
     public static void MenuReservation()
     {
         ReservationLogic ReservationLogic = new ReservationLogic();
@@ -392,6 +446,7 @@ Would you still like to order for this timeslot?";
         // return
         Options.Add("Return");
         Actions.Add(() => Menu.Start());
+
         MenuLogic.Question(Question, Options, Actions);
     }
 }

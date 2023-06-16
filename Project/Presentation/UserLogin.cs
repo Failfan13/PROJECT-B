@@ -10,7 +10,8 @@ static class UserLogin
         return accountsLogic;
     }
 
-    public static void Start()
+    public static void 
+    Start()
     {
         string Question = "";
 
@@ -30,7 +31,7 @@ e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}
             Options.Add("Login");
             Actions.Add(() => Login());
             Options.Add("Create new account");
-            Actions.Add(async () => await CreateNewUser());
+            Actions.Add(() => CreateNewUser());
         }
         else
         {
@@ -55,13 +56,20 @@ e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}
         Start();
     }
 
-    public async static Task CreateNewUser()
+    public static void CreateNewUser()
     {
         EmailLogic EmailLogic = new EmailLogic();
         AccountsLogic AccountsLogic = new AccountsLogic();
+        List<string> AllEmails = new();
+        foreach (AccountModel acc in AccountsLogic.GetAllAccounts().Result)
+        {
+            AllEmails.Add(acc.EmailAddress);
+        }
         bool CorrectName = false;
         bool CorrectPass = false;
         bool CorrectDate = false;
+        bool UnusedEmail = false;
+
         string pass = "";
         string Email = "";
         string Name = "";
@@ -71,7 +79,14 @@ e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}
         string body = "";
 
         Console.Clear();
-        Email = AskEmail();
+        while (! UnusedEmail)
+        {
+            Email = AskEmail();
+            if (!AllEmails.Contains(Email))
+            UnusedEmail = true;
+            else
+            Console.WriteLine("Email allready in use please enter another email");
+        }
 
         Console.Clear();
         while (!CorrectName)
@@ -134,7 +149,7 @@ e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}
         
 An account with this email address has been created.
 
-If this wasent a mistake, please contact the administrator.
+If this was not a mistake, please contact the administrator.
 
 Thank you.";
 
@@ -159,7 +174,6 @@ Thank you.";
             if (acc != null)
             {
                 Console.Clear();
-                Logger.SystemLog("Logged in");
                 Menu.Start();
             }
             else
@@ -248,47 +262,42 @@ Thank you.";
         string body;
 
         bool corrEmail = false;
-
-        Console.WriteLine("Would you like to sign up for ad-mails? (y/n)");
-        var answer = Console.ReadLine();
-        if (answer == "y")
+        if (AccountsLogic.CurrentAccount == null)
         {
-            if (AccountsLogic.CurrentAccount == null)
+            while (!corrEmail)
             {
-                while (!corrEmail)
+                if (existingEmail == "")
                 {
-                    if (existingEmail == "")
-                    {
-                        Console.WriteLine("Please enter your email address");
-                        email = Console.ReadLine()!;
-                    }
-                    else
-                    {
-                        email = existingEmail;
-                    }
-                    corrEmail = EmailLogic.ValidateEmail(email);
-                    Console.Clear();
-                    if (corrEmail == false) Console.WriteLine("Invalid email address");
+                    Console.WriteLine("Please enter your email address");
+                    email = Console.ReadLine()!;
                 }
+                else
+                {
+                    email = existingEmail;
+                }
+                corrEmail = EmailLogic.ValidateEmail(email);
+                Console.Clear();
+                if (corrEmail == false) Console.WriteLine("Invalid email address");
             }
-            else
-            {
-                AccountsLogic.CurrentAccount.AdMails = true;
-                await DbLogic.UpdateItem<AccountModel>(AccountsLogic.CurrentAccount);
-                email = AccountsLogic.CurrentAccount.EmailAddress;
-            }
-
-            subject = "Subscribed to ad-mails";
-            body = @$"Hello {(AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FirstName : "Guest")},
-    
-Thank you for subscribing to the cinema ads.
-
-You will receive deals and information about upcomming movies with this subscription.
-
-To unsubscribe from these emails, please log into your account and turn off the add option.";
-
-            EmailLogic.SendEmail(email, subject, body);
         }
+        else
+        {
+            AccountsLogic.CurrentAccount.AdMails = true;
+            await DbLogic.UpdateItem<AccountModel>(AccountsLogic.CurrentAccount);
+            email = AccountsLogic.CurrentAccount.EmailAddress;
+        }
+
+        subject = "Subscribed to ad-mails";
+        body = @$"Hello {(AccountsLogic.CurrentAccount != null ? AccountsLogic.CurrentAccount.FirstName : "Guest")},
+    
+                Thank you for subscribing to the cinema ads.
+                
+                You will receive deals and information about upcomming movies with this subscription.
+                
+                To unsubscribe from these emails, please log into your account and turn off the add option.";
+
+        EmailLogic.SendEmail(email, subject, body);
+
     }
 
     public static string AskEmail()
@@ -305,8 +314,15 @@ To unsubscribe from these emails, please log into your account and turn off the 
                 Email = Console.ReadLine()!;
                 CorrectEmail = EmailLogic.ValidateEmail(Email);
                 Console.Clear();
+
                 if (CorrectEmail == false) Console.WriteLine("Invalid email address");
+                else
+                {
+                    GuestAdsLogic GuestAdsLogic = new GuestAdsLogic();
+                    GuestAdsLogic.NewguestAd(Email);
+                }
             }
+
             return Email;
         }
         Email = AccountsLogic.CurrentAccount.EmailAddress;

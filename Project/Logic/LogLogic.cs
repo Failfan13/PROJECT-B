@@ -38,7 +38,7 @@ static class Logger
     }
 
     // system logs
-    public static void SystemLog(string action)
+    public static void SystemLog(string action, int id)
     {
         string headers = "timestamp,action,user_id";
         string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -68,21 +68,21 @@ static class Logger
                 {
                     if (I[0].ToString() == l["id"])
                     {
-                        if (I[0].ToString() == l["id"])
+                        switch (l["action"])
                         {
-                            if (l["action"] == "Added")
-                            {
+                            case "Added":
                                 I[1] += 1;
-                            }
-                            else if (l["action"] == "Updated")
-                            {
+                                break;
+                            case "Updated":
                                 I[2] += 1;
-                            }
-                            else if (l["action"] == "Removed")
-                            {
+                                break;
+                            case "removed":
                                 I[3] += 1;
-                            }
+                                break;
+                            default:
+                                break;
                         }
+                
                     }
                 }
 

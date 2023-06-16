@@ -18,7 +18,11 @@ public class AccountsLogic
     // pass model to update
     public async Task UpdateList(AccountModel account)
     {
-        await DbLogic.UpsertItem(account);
+        if (GetById(account.Id).Result == null)
+            await DbLogic.UpsertItem(account);
+        else
+            await DbLogic.UpdateItem(account);
+
     }
 
     // get currect account userId
@@ -44,9 +48,11 @@ public class AccountsLogic
         var account = await DbLogic.LoginAs<AccountModel>(loginDetails);
 
         if (account != null)
+        {
             CurrentAccount = account;
+            Logger.SystemLog("Logged in", CurrentAccount.Id);
+        }
         else return null!;
-        Logger.SystemLog("Logged in");
         return CurrentAccount;
     }
 
@@ -64,32 +70,73 @@ public class AccountsLogic
     // logout from current account
     public void LogOut()
     {
+        int id = CurrentAccount.Id;
         CurrentAccount = null;
-        Logger.SystemLog("Logged out");
+        Logger.SystemLog("Logged out", id);
+    }
+
+    public async Task<AccountModel> NewAccount(string email, string name, string password, string date)
+    {
+        AccountModel account = new AccountModel();
+
+        DateTime newDate = DateTime.Now;
+
+        if (DateTime.TryParse(date, out newDate))
+            return NewAccount(email, name, password, newDate).Result;
+
+        return null!;
     }
 
     // creates a new account
     public async Task<AccountModel> NewAccount(string email, string name, string password, DateTime date)
     {
+        EmailLogic emailLogic = new EmailLogic();
         AccountModel account = new AccountModel();
-        account = account.NewAccountModel(email, password, name, date);
-        await DbLogic.UpsertItem<AccountModel>(account);
-        return account;
+
+        bool valPassword = false;
+        bool valEmail = false;
+        bool preExist = false;
+
+        if (emailLogic.ValidateEmail(email)) valEmail = true;
+        if (ValidatePassword(password)) valPassword = true;
+
+        if (DbLogic.GetByEmail<AccountModel>(email).Result != null) preExist = true;
+
+        if (valEmail && valPassword && !preExist)
+        {
+            account = account.NewAccountModel(email, password, name, date.AddDays(1));
+            await DbLogic.InsertItem<AccountModel>(account);
+            return account;
+        }
+
+        return null!;
     }
 
     // Changes the password
     public async Task NewPassword(string newpassword)
     {
-        if (CurrentAccount == null) return;
+        if (CurrentAccount == null || !ValidatePassword(newpassword)) return;
         CurrentAccount.Password = newpassword;
         await DbLogic.UpdateItem<AccountModel>(CurrentAccount);
+        Logger.LogDataChange<AccountModel>(CurrentAccount.Id, "Changed");
     }
 
-    public void NewEmail(string newemail)
+    public bool ValidatePassword(string password)
     {
-        if (CurrentAccount == null) return;
-        CurrentAccount.EmailAddress = newemail;
-        UpdateList(CurrentAccount);
+        if (password.Length < 8) return false;
+        if (!password.Any(char.IsUpper)) return false;
+        if (!password.Any(char.IsLower)) return false;
+        if (!password.Any(char.IsDigit)) return false;
+        return true;
+    }
+
+    public async Task NewEmail(string newEmail)
+    {
+        EmailLogic emailLogic = new EmailLogic();
+
+        if (CurrentAccount == null || !emailLogic.ValidateEmail(newEmail)) return;
+        CurrentAccount.EmailAddress = newEmail;
+        await DbLogic.UpdateItem<AccountModel>(CurrentAccount);
     }
 
 
@@ -124,11 +171,16 @@ public class AccountsLogic
         if (AccountsLogic.CurrentAccount == null) return;
 
         AccountModel account = AccountsLogic.CurrentAccount;
-
-        if (account.Complaints.Count < 10)
+        if (account.Complaints == null)
+        {
+            account.Complaints = new List<string> { };
+            account.Complaints.Add(complaintMsg);
+            UpdateList(account).Wait();
+        }
+        else if (account.Complaints.Count < 10)
         {
             account.Complaints.Add(complaintMsg);
-            await UpdateList(account);
+            UpdateList(account).Wait();
         }
         else
         {
@@ -242,13 +294,10 @@ public class AccountsLogic
         return await DbLogic.GetByEmail<AccountModel>(email);
     }
 
-    // public static bool CheckOfAge()
-    // {
-    //     if (CurrentAccount == null) return false;
-    //     else if (CurrentAccount.DateOfBirth == null) return false;
-
-    //     string date = CurrentAccount.DateOfBirth;
-    //     DateTime dateOfBirth = DateTime.ParseExact(date, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-    //     return DateTime.Today.Year - dateOfBirth.Year >= 18;
-    // }
+    public static bool CheckOfAge()
+    {
+        if (CurrentAccount == null) return false;
+        else if (CurrentAccount.DateOfBirth == null) return false;
+        return DateTime.Today.Year - CurrentAccount.DateOfBirth.Year >= 18;
+    }
 }

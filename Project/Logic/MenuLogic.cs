@@ -12,18 +12,19 @@ public static class MenuLogic
         int selectedOption = 0;
         do
         {
-
-
             Console.ResetColor();
             // start of visual
             Console.Clear();
 
-            // notice affecting program
-
             MenuLogic.ColorString(Notice, ConsoleColor.Yellow, newLine: true);
 
-            // instructions
-            Console.WriteLine("Use arrow keys to navigate and press Enter to select an option:\n");
+            Console.WriteLine("Select an option");
+            MenuLogic.ColorString("↑ → ↓ ← ", newLine: false);
+            Console.Write("Keys to navigate through the menu\n");
+            MenuLogic.ColorString("Enter ", newLine: false);
+            Console.Write("To confirm the selected option\n");
+            MenuLogic.ColorString("X ", newLine: false);
+            Console.Write("To return to the home screen\n\n");
 
             // ask question
             Console.WriteLine(question);

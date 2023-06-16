@@ -10,7 +10,7 @@ public class LocationsLogic
         await DbLogic.UpsertItem(location);
     }
 
-    public static void DeleteCategory(int LocationInt) // Deletes category from list of categories
+    public static void DeleteLocation(int LocationInt)
     {
         // account exists and is admin
         if (AccountsLogic.CurrentAccount != null && AccountsLogic.CurrentAccount.Admin == true)

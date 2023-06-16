@@ -52,7 +52,16 @@ static class Movies
         description = QuestionLogic.AskString("What is the description of the movie? ");
         director = QuestionLogic.AskString("Who is the director of the movie?: ");
         duration = (int)QuestionLogic.AskNumber("What is the duration? (minutes)");
-        price = (int)QuestionLogic.AskNumber("How expensive is the movie?: ");
+        bool ispositive = false;
+
+        while(!ispositive)
+        {
+            price = (int)QuestionLogic.AskNumber("How expensive is the movie?: ");
+            if (price < 0)
+            Console.WriteLine("please enter a positive number");
+            else
+            ispositive = true;
+        }
 
         Console.Clear();
         Console.WriteLine("Would you like to turn on ads? (y/n)");
@@ -118,7 +127,7 @@ static class Movies
             "Change Releasedate", "Change Description",
             "Change Duration", "Change Price",
             "Change Ads", "Change Categories",
-            "Change Formats"
+            "Change Formats", "Remove Movie"
         };
 
         List<Action> Actions = new List<Action>() { };
@@ -131,6 +140,7 @@ static class Movies
         Actions.Add(() => ChangeAds(movie));
         Actions.Add(() => ChangeCategory(movie));
         Actions.Add(() => Format.ChangeFormats(movie, () => ChangeMovieMenu(movie)));
+        Actions.Add(() => MoviesLogic.DeleteMovie(movie.Id));
 
         Options.Add("Return");
         Actions.Add(() => ChangeMoviesMenu());
@@ -181,9 +191,19 @@ static class Movies
         ChangeMovieMenu(movie);
     }
     private static void ChangePrice(MovieModel movie)
-    {
+    { 
+        double NewPrice = 0;
         Console.Clear();
-        double NewPrice = QuestionLogic.AskNumber("What do you want to change the price of this movie to?");
+        bool positive = false;
+        while (!positive)
+        {
+            NewPrice = QuestionLogic.AskNumber("What do you want to change the price of this movie to?");
+            if (NewPrice < 0)
+            Console.WriteLine("Please enter a positive number");
+            else
+            positive = true;
+        }
+
         MoviesLogic.ChangePrice(movie, NewPrice);
         Console.WriteLine($"Price is now: {NewPrice}");
         QuestionLogic.AskEnter();

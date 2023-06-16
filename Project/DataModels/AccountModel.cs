@@ -40,7 +40,22 @@ public class AccountModel : BaseModel
         if (name.Length > 1)
             LastName = string.Join(" ", name.Skip(1));
         DateOfBirth = dateofbirth;
+        Complaints = new List<string> { };
         return this;
+    }
+
+    public bool Info()
+    {
+        Console.WriteLine("Name:" + FirstName + " " + LastName);
+        Console.WriteLine("Date of Birth:" + DateOfBirth);
+        Console.WriteLine("Email:" + EmailAddress);
+        Console.WriteLine("Password:" + Password);
+        if (Admin)
+        {
+            Console.WriteLine("Admin Rights:" + Admin);
+        }
+        Console.WriteLine("Ad Mails:" + AdMails);
+        return true;
     }
 }
 

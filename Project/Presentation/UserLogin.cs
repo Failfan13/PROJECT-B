@@ -10,7 +10,7 @@ static class UserLogin
         return accountsLogic;
     }
 
-    public static void 
+    public static void
     Start()
     {
         string Question = "";
@@ -79,13 +79,13 @@ e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}
         string body = "";
 
         Console.Clear();
-        while (! UnusedEmail)
+        while (!UnusedEmail)
         {
             Email = AskEmail();
             if (!AllEmails.Contains(Email))
-            UnusedEmail = true;
+                UnusedEmail = true;
             else
-            Console.WriteLine("Email allready in use please enter another email");
+                Console.WriteLine("Email allready in use please enter another email");
         }
 
         Console.Clear();
@@ -127,11 +127,11 @@ e-mail address: {AccountsLogic.CurrentAccount!.EmailAddress}
 
         while (!CorrectPass)
         {
-            Console.WriteLine("Please enter your password:");
+            Console.WriteLine("Please enter your password: (1 upper, 1 lower, 1 number, more then 8 characters)");
             string pass1 = Console.ReadLine()!;
             Console.WriteLine("Please enter your password again:");
             string pass2 = Console.ReadLine()!;
-            if (pass1 == pass2 && pass1 != "")
+            if (pass1 == pass2 && AccountsLogic.ValidatePassword(pass1))
             {
                 pass = pass1;
                 CorrectPass = true;

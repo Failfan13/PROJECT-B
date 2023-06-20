@@ -31,6 +31,7 @@ public class TimeSlotModel : BaseModel
         Start = start;
         Theatre = theatre;
         Format = format;
+        MaxSeats = 9;
         return this;
     }
 
